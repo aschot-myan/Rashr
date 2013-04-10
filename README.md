@@ -35,7 +35,7 @@ Supported Devices
 -HTC One V (primou)
 -HTC Desire HD (ace)
 -HTC Sensation (pyramid)
--Samsung Galaxy SIII (i9300)
+-Samsung Galaxy SIII (i9300/d2att)
 -Samsung Galaxy Note 2 (n7100)
 -Samsung Galaxy SIII Mini (golden)
 
@@ -52,6 +52,11 @@ CHANGELOG
 [Working on]
 
 -Recovery Version recognition
+
+Update [3.0]
+
+-Samsung Galaxy SIII (d2att) added.
+-Report function removed (not work correctly)
 
 Update [2.9]
 

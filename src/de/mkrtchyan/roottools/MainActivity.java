@@ -22,7 +22,6 @@ package de.mkrtchyan.roottools;
  */
 
 import java.io.File;
-import java.io.IOException;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -32,7 +31,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -42,7 +40,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -52,7 +49,7 @@ public class MainActivity extends Activity {
 //	Setting root URL to RecoveryURL
 	private static String RecoveryURL = "http://dslnexus.nazuka.net/recoveries/";
 //	Declaring needed files and folders
-	private static final File PathToRecoveryTools = new File(PathToSd + "/RecoveryTools");
+	private static final File PathToRecoveryTools = new File(PathToSd , "RecoveryTools");
 	private static final File PathToRecoveries = new File(PathToRecoveryTools ,"recoveries");
 	private static final File PathToBackup = new File(PathToRecoveryTools, "backup");
 	private static final File fBACKUP = new File(PathToBackup, "backup.img");
@@ -127,7 +124,7 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void run() {
-			report();
+//			report();
 		}
 		
 	};
@@ -172,7 +169,8 @@ public class MainActivity extends Activity {
 				cu.chmod("641", fdump);
 				MTD = true;
 			} else if (RecoveryPath.equals("")) {
-				nu.createAlertDialog(R.string.warning, R.string.report, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
+				runOnNegative.run();
+//				nu.createAlertDialog(R.string.warning, R.string.report, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
 			}
 			firstrun = true;
 		}
@@ -231,7 +229,8 @@ public class MainActivity extends Activity {
 		if (Device.equals("GT-I9100G")
 				|| Device.equals("GT-I9100")) 
 			Device = "galaxys2";
-		
+		if (Device.equals("d2att"))
+			return "/dev/block/mmcblk0p18";
 		if (Device.equals("i9300")
 				|| Device.equals("GT-I9100")
 				|| Device.equals("GT-I9100G"))
@@ -310,30 +309,27 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
-	public void report() {
-		File reportSH = new File(context.getFilesDir(), "report.sh");
-		File report = new File(PathToSd, "report");
-		reportSH.delete();
-		report.delete();
-		try {
-			report.createNewFile();
-			cu.pushFileFromRAW(reportSH, R.raw.support);
-			cu.chmod("777", reportSH);
-			cu.executeShell(reportSH.getAbsolutePath() + " " + report.getAbsolutePath());
-			Intent intent = new Intent(Intent.ACTION_SEND);
-			intent.setType("text/plain");
-			intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
-			intent.putExtra(Intent.EXTRA_SUBJECT, "Root Tools report to support new device("+ android.os.Build.MANUFACTURER+ " " + Device + ")");
-			if (!report.exists() || !report.canRead()) {
-			    Toast.makeText(this, "Attachment Error", Toast.LENGTH_SHORT).show();
-			    finish();
-			}
-			report.delete();
-			Uri uri = Uri.fromFile(report);
-			intent.putExtra(Intent.EXTRA_STREAM, uri);
-			startActivity(Intent.createChooser(intent, "Send as EMAIL"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void report() {
+//		File reportSH = new File(context.getFilesDir(), "report.sh");
+//		File report = new File(PathToSd, "report.txt");
+//		reportSH.delete();
+//		report.delete();
+//		cu.pushFileFromRAW(reportSH, R.raw.support);
+//		cu.chmod("777", reportSH);
+//		cu.executeShell(reportSH.getAbsolutePath() + " " + report.getAbsolutePath());
+//		Intent intent = new Intent(Intent.ACTION_SEND);
+//		intent.setType("text/plain");
+//		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
+//		intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
+//		intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER+ "\nDevice: " + Device + "\nBoard: " + android.os.Build.BOARD + "\nBrand: " + android.os.Build.BRAND);
+//		if (!report.exists() || !report.canRead()) {
+//		    Toast.makeText(this, "Attachment Error", Toast.LENGTH_SHORT).show();
+//		    finish();
+//		}
+//		report.delete();
+//		Uri uri = Uri.fromFile(report);
+//		intent.putExtra(Intent.EXTRA_STREAM, uri);
+//		startActivity(Intent.createChooser(intent, "Send as EMAIL"));
+//	}
+
 }
