@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="290dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="468dp" >
+
+            <Button
+                android:id="@+id/bBackup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/bTWRP"
+                android:onClick="bBackup"
+                android:text="@string/sBackup" />
+
+            <Button
+                android:id="@+id/bRestore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/bBackup"
+                android:onClick="bRestore"
+                android:text="@string/sRestore" />
+
+            <Button
+                android:id="@+id/bCleareCache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/bRestore"
+                android:onClick="bCleareCache"
+                android:text="@string/sCleareCache" />
+
+            <ImageView
+                android:id="@+id/ivCWM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/cico"
+                android:src="@drawable/cwm_ico" />
+
+            <ImageView
+                android:id="@+id/ivTWRP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bCWM"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/tico"
+                android:src="@drawable/twrp_ico" />
+
+            <Button
+                android:id="@+id/bTWRP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/ivTWRP"
+                android:onClick="Go"
+                android:tag="twrp"
+                android:text="@string/sFlashTWRP" />
+
+            <Button
+                android:id="@+id/bRebooter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/bCleareCache"
+                android:onClick="bRebooter"
+                android:text="@string/sRebooter" />
+
+            <Button
+                android:id="@+id/bCWM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/ivCWM"
+                android:onClick="Go"
+                android:tag="cwm"
+                android:text="@string/sFlashCWM" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <CheckBox
+        android:id="@+id/cbUseBinary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:clickable="false"
+        android:text="@string/usebinary"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textIsSelectable="false" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.44" >
+
+        <Button
+            android:id="@+id/bExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="bExit"
+            android:text="@string/sExit" />
+
+    </RelativeLayout>
+
+</LinearLayout>

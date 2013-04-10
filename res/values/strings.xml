@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Recovery Tools</string>
+    <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
+    <string name="sFlashTWRP">Flash TWRP Recovery</string>
+    <string name="sBackup">Backup current Recovery</string>
+    <string name="sRebooter">Rebooter</string>
+    <string name="sReboot">Reboot</string>
+    <string name="sRebootRecovery">Reboot Recovery</string>
+    <string name="sRebootBootloader">Reboot Bootloader</string>
+    <string name="sBack">&lt;--Back</string>
+    <string name="sExit">Exit</string>
+    <string name="sCleareCache">Clear downloaded recoveries</string>
+    <string name="sRestore">Restore Backup</string>
+    <string name="Downloading">Downloading....</string>
+    <string name="warning">Warning!</string>
+    <string name="noroot">"Device not Rooted. Please Root it. More information under xda-developer.com"</string>
+    <string name="positive">Yes, please</string>
+    <string name="neutral">No, thanks</string>
+    <string name="negative">Cancel</string>
+    <string name="notsupportded">Your Device is not supported by the developer yet. flash/dump_image will be used, butt not works on all devices.</string>
+    <string name="download">Download</string>
+    <string name="getdownload">Recovery IMG not found. Download now?</string>
+    <string name="notwrp">TWRP not supported</string>
+    <string name="nocwm">CWM not supported</string>
+    <string name="bakreport">Backup Report</string>
+    <string name="resreport">Restore Report</string>
+    <string name="info">Information</string>
+    <string name="flashed">Recovery flashed.</string>
+    <string name="noconnection">No network available. Download canceled!</string>
+    <string name="backupalready">Backup already exists. This will override the existing one. Continue?</string>
+    <string name="nobackup">No existing Backup found (InternalStorage/RootTools/backup/backup.img). Create one now?</string>
+    <string name="tico">TWRP ICON</string>
+    <string name="cico">Clockworkmod ICON</string>
+    <string name="xda">Open XDA-Profile</string>
+    <string name="settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="usebinary">Use flash/dump_image (only unsuported devices)</string>
+    <string name="report">Scan System and Report unsupported Device</string>
+
+</resources>
