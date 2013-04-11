@@ -26,17 +26,21 @@ Supported Devices
 
 ----- [TWRP & CWM] -----
 
--Galaxy Nexus (maguro/toro)
--Nexus 7 (grouper/tilapia)
--Nexus 4 (mako)
+-Nexus One (passion)
 -Nexus S (crespo/crespo4g)
--HTC One X (endeavoru)
--HTC One S (villec2)
--HTC One V (primou)
+-Galaxy Nexus (maguro/toro)
+-Nexus 4 (mako)
+-Nexus 7 (grouper/tilapia)
+-Nexus 10 (manta)
+
 -HTC Desire HD (ace)
 -HTC Sensation (pyramid)
--Samsung Galaxy SIII (i9300/d2att)
+-HTC One V (primou)
+-HTC One S (villec2)
+-HTC One X (endeavoru)
+
 -Samsung Galaxy Note 2 (n7100)
+-Samsung Galaxy SIII (i9300/d2att)
 -Samsung Galaxy SIII Mini (golden)
 
 ----- [CWM only] -----
@@ -52,6 +56,12 @@ CHANGELOG
 [Working on]
 
 -Recovery Version recognition
+
+Update [3.0.1]
+
+-Nexus One added
+-Nexus 10 added
+-Galaxy Nexus (toro/toroplus) added
 
 Update [3.0]
 

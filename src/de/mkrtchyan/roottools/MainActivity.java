@@ -225,12 +225,39 @@ public class MainActivity extends Activity {
 	}
 
 	public String getRecoveryPath() {
+		
+//		Nexus Devices + Same
+		
+		if (Device.equals("crespo")
+				|| Device.equals("crespo4g")
+				|| Device.equals("passion"))
+			MTD = true;
+		
+		if (Device.equals("maguro")
+				|| Device.equals("toro")
+				|| Device.equals("toroplus"))
+			return "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
+		
+		if (Device.equals("grouper") 
+				|| Device.equals("endeavoru") 
+				|| Device.equals("tilapia")) 
+			return "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
+		
+		if (Device.equals("mako"))
+			return "/dev/block/platform/msm_sdcc.1/by-name/recovery";
+		
+		if (Device.equals("manta"))
+			return "/dev/block/platform/dw_mmc.0/by-name/recovery";
+		
+//		Samsung Devices + Same
 	 
 		if (Device.equals("GT-I9100G")
 				|| Device.equals("GT-I9100")) 
 			Device = "galaxys2";
+		
 		if (Device.equals("d2att"))
 			return "/dev/block/mmcblk0p18";
+		
 		if (Device.equals("i9300")
 				|| Device.equals("GT-I9100")
 				|| Device.equals("GT-I9100G"))
@@ -238,28 +265,23 @@ public class MainActivity extends Activity {
 		
 		if (Device.equals("n7100"))
 			return "/dev/block/mmcblk0p9";
-		if (Device.equals("grouper") 
-				|| Device.equals("endeavoru") 
-				|| Device.equals("tilapia")) 
-			return "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
+		
 		if (Device.equals("golden") 
 				|| Device.equals("villec2")) 
 			return "/dev/block/mmcblk0p21";
+		
+		if (Device.equals("n7000"))
+			return "/dev/block/platform/dw_mmc/by-name/RECOVERY";
+		
+//		HTC Devices + Same
+		
 		if (Device.equals("ace") 
 				|| Device.equals("primou")) 
 			return "/dev/block/platform/msm_sdcc.2/mmcblk0p21";
+		
 		if (Device.equals("pyramid"))
 			return "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
-		if (Device.equals("n7000"))
-			return "/dev/block/platform/dw_mmc/by-name/RECOVERY";
-		if (Device.equals("maguro")
-				|| Device.equals("toro"))
-			return "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
-		if (Device.equals("mako"))
-			return "/dev/block/platform/msm_sdcc.1/by-name/recovery";
-		if (Device.equals("crespo")
-				|| Device.equals("crespo4g"))
-			MTD = true;
+		
 		return "";
 	}
 	public void getSupport() {
