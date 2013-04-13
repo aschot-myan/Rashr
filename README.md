@@ -57,6 +57,11 @@ CHANGELOG
 
 -Recovery Version recognition
 
+
+[Out of Beta]
+-Packet Name changed to de.mkrtchyan.recoverytools
+-Samsung Galaxy Mini II Support added
+
 Update [3.0.1]
 
 -Nexus One added

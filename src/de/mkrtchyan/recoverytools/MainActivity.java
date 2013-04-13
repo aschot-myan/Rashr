@@ -1,4 +1,4 @@
-package de.mkrtchyan.roottools;
+package de.mkrtchyan.recoverytools;
 
 /*
  * Copyright (c) 2013 Ashot Mkrtchyan
@@ -273,6 +273,9 @@ public class MainActivity extends Activity {
 		if (Device.equals("n7000"))
 			return "/dev/block/platform/dw_mmc/by-name/RECOVERY";
 		
+		if (Device.equals("jena"))
+			return "/dev/block/mmcblk0p12";
+		
 //		HTC Devices + Same
 		
 		if (Device.equals("ace") 
@@ -323,35 +326,21 @@ public class MainActivity extends Activity {
 	        case R.id.iProfile:
 	            cu.xdaProfile();
 	            return true;
-//	        case R.id.iReport:
-//	        	report();
-//	        	return true;
+	        case R.id.iReport:
+	        	report();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
 	
-//	public void report() {
-//		File reportSH = new File(context.getFilesDir(), "report.sh");
-//		File report = new File(PathToSd, "report.txt");
-//		reportSH.delete();
-//		report.delete();
-//		cu.pushFileFromRAW(reportSH, R.raw.support);
-//		cu.chmod("777", reportSH);
-//		cu.executeShell(reportSH.getAbsolutePath() + " " + report.getAbsolutePath());
-//		Intent intent = new Intent(Intent.ACTION_SEND);
-//		intent.setType("text/plain");
-//		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
-//		intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
-//		intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER+ "\nDevice: " + Device + "\nBoard: " + android.os.Build.BOARD + "\nBrand: " + android.os.Build.BRAND);
-//		if (!report.exists() || !report.canRead()) {
-//		    Toast.makeText(this, "Attachment Error", Toast.LENGTH_SHORT).show();
-//		    finish();
-//		}
-//		report.delete();
-//		Uri uri = Uri.fromFile(report);
-//		intent.putExtra(Intent.EXTRA_STREAM, uri);
-//		startActivity(Intent.createChooser(intent, "Send as EMAIL"));
-//	}
+	public void report() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
+		intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
+		intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER+ "\nDevice: " + Device + "\nBoard: " + android.os.Build.BOARD + "\nBrand: " + android.os.Build.BRAND);
+		startActivity(Intent.createChooser(intent, "Send as EMAIL"));
+	}
 
 }

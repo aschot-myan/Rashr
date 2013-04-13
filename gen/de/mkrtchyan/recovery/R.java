@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package de.mkrtchyan.roottools;
+package de.mkrtchyan.recovery;
 
 public final class R {
     public static final class attr {
@@ -40,6 +40,7 @@ public final class R {
         public static final int bTWRP=0x7f090003;
         public static final int cbUseBinary=0x7f09000a;
         public static final int iProfile=0x7f090012;
+        public static final int iReport=0x7f090013;
         public static final int ivCWM=0x7f090006;
         public static final int ivTWRP=0x7f090007;
         public static final int progressBar1=0x7f090000;
@@ -57,7 +58,6 @@ public final class R {
     public static final class raw {
         public static final int dump_image=0x7f040000;
         public static final int flash_image=0x7f040001;
-        public static final int support=0x7f040002;
     }
     public static final class string {
         public static final int Downloading=0x7f06000c;

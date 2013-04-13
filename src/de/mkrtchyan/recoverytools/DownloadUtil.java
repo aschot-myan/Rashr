@@ -1,4 +1,4 @@
-package de.mkrtchyan.roottools;
+package de.mkrtchyan.recoverytools;
 
 /*
  * Copyright (c) 2013 Ashot Mkrtchyan
