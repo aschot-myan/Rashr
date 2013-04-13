@@ -124,7 +124,7 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void run() {
-//			report();
+			report();
 		}
 		
 	};
@@ -169,8 +169,7 @@ public class MainActivity extends Activity {
 				cu.chmod("641", fdump);
 				MTD = true;
 			} else if (RecoveryPath.equals("")) {
-				runOnNegative.run();
-//				nu.createAlertDialog(R.string.warning, R.string.report, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
+				nu.createAlertDialog(R.string.warning, R.string.notsupportded, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
 			}
 			firstrun = true;
 		}

@@ -12,14 +12,14 @@
     <string name="sBack">&lt;--Back</string>
     <string name="sExit">Exit</string>
     <string name="sCleareCache">Clear downloaded recoveries</string>
-    <string name="sRestore">Restore Backup</string>
+    <string name="sRestore">Restore from Backup</string>
     <string name="Downloading">Downloading....</string>
     <string name="warning">Warning!</string>
     <string name="noroot">"Device not Rooted. Please Root it. More information under xda-developer.com"</string>
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
-    <string name="notsupportded">Your Device is not supported by the developer yet. flash/dump_image will be used, butt not works on all devices.</string>
+    <string name="notsupportded">Your Device is not supported by the developer yet. Scan System and Report unsupported Device?</string>
     <string name="download">Download</string>
     <string name="getdownload">Recovery IMG not found. Download now?</string>
     <string name="notwrp">TWRP not supported</string>

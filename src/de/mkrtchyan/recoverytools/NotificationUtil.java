@@ -38,7 +38,7 @@ public class NotificationUtil {
 	public NotificationUtil(Context context) {
 		this.context = context;
 	}	
-	public void createDialog(int Title, String Message , boolean isCancelable) {
+	public Dialog createDialog(int Title, String Message , boolean isCancelable) {
 		tv = new TextView(context);
 		tv.setTextSize(20);
 		tv.setText(Message);
@@ -47,8 +47,9 @@ public class NotificationUtil {
 		dialog.setContentView(tv);
 		dialog.setCancelable(isCancelable);
 		dialog.show();
+		return dialog;
 	}
-	public void createDialog(int Title, int Content, boolean isMessage, boolean isCancelable) {
+	public Dialog createDialog(int Title, int Content, boolean isMessage, boolean isCancelable) {
 		dialog = new Dialog(context);
 		dialog.setTitle(Title);
 		if (isMessage) {
@@ -61,6 +62,7 @@ public class NotificationUtil {
 		}
 		dialog.setCancelable(isCancelable);
 		dialog.show();
+		return dialog;
 	}
 	public void createToast(int Message) {
 		Toast
@@ -72,7 +74,7 @@ public class NotificationUtil {
 			.makeText(context, Message, Toast.LENGTH_LONG)
 			.show();
 	}
-	public void createAlertDialog(int Title, int Message, final Runnable runOnTrue) {
+	public AlertDialog.Builder createAlertDialog(int Title, int Message, final Runnable runOnTrue) {
 		abuilder = new AlertDialog.Builder(context);
 		abuilder
 			.setTitle(Title)
@@ -92,9 +94,10 @@ public class NotificationUtil {
 			}
 		})
 			.show();
+		return abuilder;
 	}
 	
-	public void createAlertDialog(int Title, int Message, boolean PositiveButton, final Runnable runOnTrue, boolean NeutralButton, final Runnable runOnNeutral, boolean NegativeButton , final Runnable runOnNegative) {
+	public AlertDialog.Builder createAlertDialog(int Title, int Message, boolean PositiveButton, final Runnable runOnTrue, boolean NeutralButton, final Runnable runOnNeutral, boolean NegativeButton , final Runnable runOnNegative) {
 		abuilder = new AlertDialog.Builder(context);
 		abuilder
 			.setTitle(Title)
@@ -132,5 +135,7 @@ public class NotificationUtil {
 		}
 		
 		abuilder.show();
+		
+		return abuilder;
 	}
 }
