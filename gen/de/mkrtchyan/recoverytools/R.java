@@ -26,21 +26,21 @@ public final class R {
         public static final int twrp_ico=0x7f020002;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f09000d;
+        public static final int RelativeLayout1=0x7f09000c;
         public static final int bBackup=0x7f090002;
         public static final int bCWM=0x7f090008;
         public static final int bCleareCache=0x7f090005;
-        public static final int bExit=0x7f09000c;
-        public static final int bReboot=0x7f09000e;
-        public static final int bRebootBootloader=0x7f090010;
-        public static final int bRebootRecovery=0x7f09000f;
+        public static final int bReboot=0x7f09000d;
+        public static final int bRebootBootloader=0x7f09000f;
+        public static final int bRebootRecovery=0x7f09000e;
         public static final int bRebooter=0x7f090009;
-        public static final int bRebooterBack=0x7f090011;
+        public static final int bRebooterBack=0x7f090010;
         public static final int bRestore=0x7f090004;
         public static final int bTWRP=0x7f090003;
         public static final int cbUseBinary=0x7f09000a;
-        public static final int iProfile=0x7f090012;
-        public static final int iReport=0x7f090013;
+        public static final int iExit=0x7f090013;
+        public static final int iProfile=0x7f090011;
+        public static final int iReport=0x7f090012;
         public static final int ivCWM=0x7f090006;
         public static final int ivTWRP=0x7f090007;
         public static final int progressBar1=0x7f090000;

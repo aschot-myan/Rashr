@@ -40,13 +40,15 @@ Supported Devices
 -HTC One X (endeavoru)
 
 -Samsung Galaxy Note 2 (n7100)
--Samsung Galaxy SIII (i9300/d2att)
+-Samsung Galaxy SIII (i9300/d2att/d2tmo)
 -Samsung Galaxy SIII Mini (golden)
 
 ----- [CWM only] -----
 
 -Samsung Galaxy SII (i9100/i9100G)
 -Samsung Galaxy Note (n7000)
+
+-Motorola Droid2 (droid2)
 
 
 ====================
@@ -57,6 +59,12 @@ CHANGELOG
 
 -Recovery Version recognition
 
+Update [1.0.1]
+
+-Exit Button now in menu
+-Motorola Droid2 (droid2) added [CWM ONLY]
+-Samsung Galaxy S3 Fixed
+-Samsung Galaxy S3 (d2tmo) added
 
 [Out of Beta]
 -Packet Name changed to de.mkrtchyan.recoverytools

@@ -36,7 +36,7 @@
     <string name="xda">Open XDA-Profile</string>
     <string name="settings">Settings</string>
     <string name="action_settings">Settings</string>
-    <string name="usebinary">Use flash/dump_image (only unsuported devices)</string>
-    <string name="report">Scan System and Report unsupported Device</string>
+    <string name="usebinary">Use flash/dump_image (MTD)</string>
+    <string name="report">Scan Report unsupported Device</string>
 
 </resources>

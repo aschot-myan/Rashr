@@ -4,6 +4,7 @@
         android:id="@+id/iProfile" 
         android:title="@string/xda" ></item>
     <item android:id="@+id/iReport" android:title="@string/report"></item>
+    <item android:id="@+id/iExit" android:title="@string/sExit"></item>
     
 
 </menu>

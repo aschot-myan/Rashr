@@ -53,16 +53,16 @@ public class MainActivity extends Activity {
 	private static final File PathToRecoveries = new File(PathToRecoveryTools ,"recoveries");
 	private static final File PathToBackup = new File(PathToRecoveryTools, "backup");
 	private static final File fBACKUP = new File(PathToBackup, "backup.img");
-	private static File fflash;
-	private static File fdump;
 	private static File fIMG;
 // Get device info and other
 	private static String Device = android.os.Build.DEVICE;
-	private final String RecoveryPath = getRecoveryPath();
+	private final String RecoveryPath = new Support().getRecoveryPath();
 	private static String filename;
 	private static CheckBox cbUseBinary;
-	private static boolean MTD = false;
+	private static boolean MTD = new Support().MTD;
 	private static boolean firstrun;
+	private static File fflash;
+	private static File fdump;
 	
 	Context context = this;
 	NotificationUtil nu = new NotificationUtil(context);
@@ -72,6 +72,7 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void run() {
+//			fu.flash(fIMG);
 			if (fIMG.exists()) {
 				if (!MTD){
 					cu.executeShell("dd if=" + fIMG.getAbsolutePath() + " of=" + RecoveryPath);
@@ -167,7 +168,6 @@ public class MainActivity extends Activity {
 				cu.pushFileFromRAW(fdump, R.raw.dump_image);
 				cu.chmod("641", fflash);
 				cu.chmod("641", fdump);
-				MTD = true;
 			} else if (RecoveryPath.equals("")) {
 				nu.createAlertDialog(R.string.warning, R.string.notsupportded, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
 			}
@@ -213,88 +213,24 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, RebooterActivity.class);
 		startActivity(intent);
 	}
-	public void bExit(View view) {
-		finish();
-		System.exit(0);
-	}
 //	Called from Button Methods, created to redundancy
 	public void downloadFile(String URL, File outputFile) {
 		DownloadUtil du = new DownloadUtil(context, URL, outputFile, rFlash);
 		du.execute();
 	}
 
-	public String getRecoveryPath() {
-		
-//		Nexus Devices + Same
-		
-		if (Device.equals("crespo")
-				|| Device.equals("crespo4g")
-				|| Device.equals("passion"))
-			MTD = true;
-		
-		if (Device.equals("maguro")
-				|| Device.equals("toro")
-				|| Device.equals("toroplus"))
-			return "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
-		
-		if (Device.equals("grouper") 
-				|| Device.equals("endeavoru") 
-				|| Device.equals("tilapia")) 
-			return "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
-		
-		if (Device.equals("mako"))
-			return "/dev/block/platform/msm_sdcc.1/by-name/recovery";
-		
-		if (Device.equals("manta"))
-			return "/dev/block/platform/dw_mmc.0/by-name/recovery";
-		
-//		Samsung Devices + Same
-	 
-		if (Device.equals("GT-I9100G")
-				|| Device.equals("GT-I9100")) 
-			Device = "galaxys2";
-		
-		if (Device.equals("d2att"))
-			return "/dev/block/mmcblk0p18";
-		
-		if (Device.equals("i9300")
-				|| Device.equals("GT-I9100")
-				|| Device.equals("GT-I9100G"))
-			return "/dev/block/mmcblk0p6";
-		
-		if (Device.equals("n7100"))
-			return "/dev/block/mmcblk0p9";
-		
-		if (Device.equals("golden") 
-				|| Device.equals("villec2")) 
-			return "/dev/block/mmcblk0p21";
-		
-		if (Device.equals("n7000"))
-			return "/dev/block/platform/dw_mmc/by-name/RECOVERY";
-		
-		if (Device.equals("jena"))
-			return "/dev/block/mmcblk0p12";
-		
-//		HTC Devices + Same
-		
-		if (Device.equals("ace") 
-				|| Device.equals("primou")) 
-			return "/dev/block/platform/msm_sdcc.2/mmcblk0p21";
-		
-		if (Device.equals("pyramid"))
-			return "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
-		
-		return "";
-	}
 	public void getSupport() {
 		Button bCWM = (Button) findViewById(R.id.bCWM);
 		Button bTWRP = (Button) findViewById(R.id.bTWRP);
 		
+//		TWRP unsupported devices
 		if (Device.equals("galaxys2") 
-				|| Device.equals("n7000")) {
+				|| Device.equals("n7000")
+				|| Device.equals("droid2")) {
 			bTWRP.setText(R.string.notwrp);
 			bTWRP.setClickable(false);
 		}
+		
 		if (Device.equals("")) {
 			bCWM.setText(R.string.nocwm);
 			bCWM.setClickable(false);
@@ -328,6 +264,9 @@ public class MainActivity extends Activity {
 	        case R.id.iReport:
 	        	report();
 	        	return true;
+	        case R.id.iExit:
+	        	finish();
+	    		System.exit(0);
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

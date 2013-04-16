@@ -96,7 +96,7 @@
 
     <CheckBox
         android:id="@+id/cbUseBinary"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checked="false"
         android:clickable="false"
@@ -111,21 +111,5 @@
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textIsSelectable="false" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.44" >
-
-        <Button
-            android:id="@+id/bExit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:onClick="bExit"
-            android:text="@string/sExit" />
-
-    </RelativeLayout>
 
 </LinearLayout>
