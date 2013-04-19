@@ -22,11 +22,15 @@ package de.mkrtchyan.recoverytools;
  */
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.TimeoutException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.rootcommands.Shell;
 import org.rootcommands.Toolbox;
@@ -96,5 +100,76 @@ public class CommonUtil {
 	public void xdaProfile(){
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://forum.xda-developers.com/member.php?u=5116786"));
 		context.startActivity(browserIntent);
+	}
+	
+	public void unzip(File ZipFile, File OutputFolder) { 
+		if (!OutputFolder.isDirectory()
+				|| !OutputFolder.exists())
+			OutputFolder.mkdir();
+		
+		try {
+			FileInputStream fin;
+			fin = new FileInputStream(ZipFile);
+		
+			ZipInputStream zin = new ZipInputStream(fin); 
+			ZipEntry ze = null; 
+			while ((ze = zin.getNextEntry()) != null) { 
+				if(ze.isDirectory()) { 
+					File f = new File(ze.getName()); 
+					if(!f.isDirectory()) { 
+						f.mkdirs(); 
+					}
+				} else { 
+					FileOutputStream fout = new FileOutputStream(OutputFolder.getAbsolutePath() + "/" + ze.getName()); 
+					for (int c = zin.read(); c != -1; c = zin.read()) { 
+						fout.write(c); 
+					} 
+					zin.closeEntry(); 
+					fout.close(); 
+				}
+			}
+	
+			zin.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	public void deleteFolder(File Folder, boolean AndFolder){
+		if(Folder.exists()
+				&& Folder.isDirectory()) {
+			File[] files = Folder.listFiles();
+			for(int i = 0; i < files.length; i++) {
+				files[i].delete();
+			}
+			if (AndFolder)
+				Folder.delete();
+		}
+	}
+	
+	public void mountDir(File Dir, String mode){
+		try {
+			Shell shell = Shell.startRootShell();
+			Toolbox tb = new Toolbox(shell);
+			tb.remount(Dir.getAbsolutePath(), mode);
+		} catch (RootAccessDeniedException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
+	}
+	
+	public void copy(File Source, File Destination, boolean Mount){
+		if (Mount)
+			mountDir(Destination, "RW");
+		File[] files = Source.listFiles();
+		for(int i = 0; i < files.length; i++) {
+			if (files[i].isDirectory() 
+					&& files[i].exists()){
+				if (Mount)
+					mountDir(new File("/" + files[i].getName().toString()), "RW");
+			}
+		}
+		executeShell("busybox mv -f " + Source.getAbsolutePath() + " " + Destination.getAbsolutePath());
+		if (Mount)
+			mountDir(Destination, "RO");
 	}
 }

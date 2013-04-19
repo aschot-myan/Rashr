@@ -24,8 +24,8 @@
     <string name="getdownload">Recovery IMG not found. Download now?</string>
     <string name="notwrp">TWRP not supported</string>
     <string name="nocwm">CWM not supported</string>
-    <string name="bakreport">Backup Report</string>
-    <string name="resreport">Restore Report</string>
+    <string name="bakreport">Backup process completed</string>
+    <string name="resreport">Restore process completed</string>
     <string name="info">Information</string>
     <string name="flashed">Recovery flashed.</string>
     <string name="noconnection">No network available. Download canceled!</string>
@@ -38,5 +38,13 @@
     <string name="action_settings">Settings</string>
     <string name="usebinary">Use flash/dump_image (MTD)</string>
     <string name="report">Scan Report unsupported Device</string>
+    <string name="usedd">Using dd binary. Recovery in FS: %s</string>
 
+    
+    
+    <string name="rate_title">Rate %s</string>
+    <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it? Thanks for your support!</string>
+    <string name="rate">Yes, Rate %s</string>
+    <string name="rate_later">Remind me later</string>
+    <string name="rate_cancel">No, Thanks</string>
 </resources>

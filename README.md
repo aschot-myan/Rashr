@@ -40,8 +40,9 @@ Supported Devices
 -HTC One X (endeavoru)
 
 -Samsung Galaxy Note 2 (n7100)
--Samsung Galaxy SIII (i9300/d2att/d2tmo)
+-Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
 -Samsung Galaxy SIII Mini (golden)
+-Samsung Galaxy Mini II (jena)
 
 ----- [CWM only] -----
 
@@ -59,8 +60,15 @@ CHANGELOG
 
 -Recovery Version recognition
 
+Update [1.0.2]
+
+-Samsung Galaxy S3 Verizon (d2vzw) added
+-Device recognition issues on Samsung devices fixed
+-New stuff added to support Sony and more Samsung devices (Support on concrete devices will following with next updates)
+
 Update [1.0.1]
 
+-Small bug fixed - Thanks to all to all who have reported some Device
 -Exit Button now in menu
 -Motorola Droid2 (droid2) added [CWM ONLY]
 -Samsung Galaxy S3 Fixed

@@ -21,17 +21,12 @@ package de.mkrtchyan.recoverytools;
  * SOFTWARE.
  */
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
-import org.rootcommands.Shell;
-import org.rootcommands.command.SimpleCommand;
-import org.rootcommands.util.RootAccessDeniedException;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 public class RebooterActivity extends Activity {
+	
+	CommonUtil cu = new CommonUtil(this);
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,29 +34,19 @@ public class RebooterActivity extends Activity {
 	}
 	
 	public void bReboot(View view) {
-		executeShell(new SimpleCommand("reboot"));
+		cu.executeShell("reboot");
 	}
 	
 	public void bRebootRecovery(View view) {
-		executeShell(new SimpleCommand("reboot recovery"));
+		cu.executeShell("reboot recovery");
 	}
 	
 	public void bRebootBootloader(View view) {
-		executeShell(new SimpleCommand("reboot bootloader"));
+		cu.executeShell("reboot bootloader");
 	}
 	
 	public void bRebooterBack(View view) {
 		finish();
 		System.exit(0);
-	}
-	
-	public String executeShell(SimpleCommand Command){
-		try {
-			Shell shell = Shell.startRootShell();
-			shell.add(Command).waitForFinish();
-			shell.close();
-		} catch (RootAccessDeniedException e) {} catch (IOException e) {} catch (TimeoutException e) {}
-		
-		return Command.getOutput();
 	}
 }

@@ -46,68 +46,47 @@ public class MainActivity extends Activity {
 	
 //	Get path to external storage
 	private static final String PathToSd = Environment.getExternalStorageDirectory().getPath();
-//	Setting root URL to RecoveryURL
-	private static String RecoveryURL = "http://dslnexus.nazuka.net/recoveries/";
 //	Declaring needed files and folders
 	private static final File PathToRecoveryTools = new File(PathToSd , "RecoveryTools");
 	private static final File PathToRecoveries = new File(PathToRecoveryTools ,"recoveries");
 	private static final File PathToBackup = new File(PathToRecoveryTools, "backup");
 	private static final File fBACKUP = new File(PathToBackup, "backup.img");
-	private static File fIMG;
-// Get device info and other
-	private static String Device = android.os.Build.DEVICE;
-	private final String RecoveryPath = new Support().getRecoveryPath();
-	private static String filename;
+	private static File fRECOVERY;
+	private static String SYSTEM;
 	private static CheckBox cbUseBinary;
-	private static boolean MTD = new Support().MTD;
 	private static boolean firstrun;
-	private static File fflash;
-	private static File fdump;
 	
 	Context context = this;
+	Support s = new Support();
+	FlashUtil fu = new FlashUtil(context);
 	NotificationUtil nu = new NotificationUtil(context);
 	CommonUtil cu = new CommonUtil(context);
 //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
 	Runnable rFlash = new Runnable(){
-
 		@Override
 		public void run() {
-//			fu.flash(fIMG);
-			if (fIMG.exists()) {
-				if (!MTD){
-					cu.executeShell("dd if=" + fIMG.getAbsolutePath() + " of=" + RecoveryPath);
-					nu.createDialog(R.string.info, R.string.flashed, true, true);
-				} else {
-					cu.executeShell(fflash.getAbsolutePath() + " recovery " + fIMG.getAbsolutePath());
-				}
-			}
+			fu.flash(fRECOVERY);
+			nu.createDialog(R.string.info, R.string.flashed, true, true);
 		}
 	};
 	Runnable rBackup = new Runnable(){
-	
 		@Override
 		public void run() {
-			if (!MTD){
-				nu.createDialog(R.string.bakreport, cu.executeShell("dd if=" + RecoveryPath + " of=" + PathToBackup.getAbsolutePath() + "/backup.img"), true);
-			} else {
-				nu.createDialog(R.string.bakreport, cu.executeShell(fdump.getAbsolutePath() + " recovery " + fBACKUP.getAbsolutePath()), true);
-			}
+			fu.backup();
+			nu.createDialog(R.string.info, R.string.bakreport, true, true);
 		}
 	};
 	Runnable rRestore = new Runnable(){
 		@Override
 		public void run() {
-			if (!MTD){
-				nu.createDialog(R.string.resreport, cu.executeShell("dd if=" + PathToBackup.getAbsolutePath() + "/backup.img of=" + RecoveryPath), true);
-			} else {
-				nu.createDialog(R.string.resreport, cu.executeShell(fflash.getAbsolutePath() + " recovery " + fBACKUP.getAbsolutePath()), true);
-			}
+			fu.restore();
+			nu.createDialog(R.string.info, R.string.resreport, true, true);
 		}
 	};
 	Runnable rDownload = new Runnable(){
 		@Override
 		public void run() {
-			if (fIMG.exists()) {
+			if (fRECOVERY.exists()) {
 				rFlash.run();
 			} else {
 				ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -115,18 +94,15 @@ public class MainActivity extends Activity {
 			
 				if (networkInfo != null 
 						&& networkInfo.isConnected()) {
-					downloadFile(RecoveryURL + Device + "-" + filename, fIMG);
+					downloadFile("http://dslnexus.nazuka.net/recoveries/" + fRECOVERY.getName().toString(), fRECOVERY);
 				} else {
 					nu.createDialog(R.string.warning, R.string.noconnection, true, true);
 				}
 			}
 		}};
 	Runnable runOnTrue = new Runnable() {
-
 		@Override
-		public void run() {
-			report();
-		}
+		public void run() {report();}
 		
 	};
 	Runnable runOnNegative = new Runnable() {
@@ -144,13 +120,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		cu.checkFolder(PathToRecoveryTools);
-		cu.checkFolder(PathToRecoveries);
-		cu.checkFolder(PathToBackup);
+		checkFolder();
 		
 		TextView tvInfo = (TextView) findViewById (R.id.tvInfo);
 		
-		tvInfo.setText("\nModel: " + android.os.Build.MODEL + "\nName: " + Device);
+		tvInfo.setText("\nModel: " + android.os.Build.MODEL + "\nName: " + s.Device);
 		
 		if (!firstrun){
 			
@@ -158,29 +132,35 @@ public class MainActivity extends Activity {
 				createNotification(R.drawable.ic_launcher, R.string.warning, R.string.noroot, 28);
 				finish();
 				System.exit(0);
-			} else if (MTD) {
-				cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
-				cbUseBinary.setVisibility(View.VISIBLE);
-				cbUseBinary.setChecked(true);
-				fflash = new File(context.getFilesDir(), "flash_image");
-				fdump = new File(context.getFilesDir(), "dump_image");
-				cu.pushFileFromRAW(fflash, R.raw.flash_image);
-				cu.pushFileFromRAW(fdump, R.raw.dump_image);
-				cu.chmod("641", fflash);
-				cu.chmod("641", fdump);
-			} else if (RecoveryPath.equals("")) {
-				nu.createAlertDialog(R.string.warning, R.string.notsupportded, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
 			}
+			
+//			if (s.BLM){
+//				cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
+//				cbUseBinary.setText("Using BLM Flash method");
+			
 			firstrun = true;
 		}
+		
+		cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
+		cbUseBinary.setVisibility(View.VISIBLE);
+		cbUseBinary.setChecked(true);
+		if (s.RecoveryPath.equals("")
+				&& !s.MTD) {
+			nu.createAlertDialog(R.string.warning, R.string.notsupportded, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
+		} else if (!s.RecoveryPath.equals("")){
+			cbUseBinary.setText(String.format(context.getString(R.string.usedd), "\n" + s.RecoveryPath));
+		} else if (s.MTD){
+			cbUseBinary.setText(R.string.usebinary);
+		}
+		
 		getSupport();
 	}
 
 //	Button Methods (onClick)
 	public void Go(View view){
-		filename = view.getTag().toString() + ".img";
-		fIMG = new File(PathToRecoveries, "/" + Device + "-" + filename);
-		if (fIMG.exists()){
+		SYSTEM = view.getTag().toString() + s.EXT;
+		fRECOVERY = new File(PathToRecoveries, s.Device + "-" + SYSTEM);
+		if (fRECOVERY.exists()){
 			rFlash.run();
 		} else {
 			nu.createAlertDialog(R.string.info, R.string.getdownload, rDownload);
@@ -202,12 +182,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	public void bCleareCache(View view) {
-		if(PathToRecoveries.exists()) {
-			File[] files = PathToRecoveries.listFiles();
-			for(int i=0; i<files.length; i++) {
-				files[i].delete();
-			}
-		}
+		cu.deleteFolder(PathToRecoveries, false);
 	}
 	public void bRebooter(View view) {
 		Intent intent = new Intent(this, RebooterActivity.class);
@@ -220,22 +195,19 @@ public class MainActivity extends Activity {
 	}
 
 	public void getSupport() {
-		Button bCWM = (Button) findViewById(R.id.bCWM);
-		Button bTWRP = (Button) findViewById(R.id.bTWRP);
-		
-//		TWRP unsupported devices
-		if (Device.equals("galaxys2") 
-				|| Device.equals("n7000")
-				|| Device.equals("droid2")) {
+	
+//	TWRP unsupported devices
+		if (!s.TWRP) {
+			Button bTWRP = (Button) findViewById(R.id.bTWRP);
 			bTWRP.setText(R.string.notwrp);
 			bTWRP.setClickable(false);
 		}
-		
-		if (Device.equals("")) {
+
+//	CWM unsupported devices
+		if (!s.CWM) {
+			Button bCWM = (Button) findViewById(R.id.bCWM);
 			bCWM.setText(R.string.nocwm);
 			bCWM.setClickable(false);
-			bTWRP.setText(R.string.notwrp);
-			bTWRP.setClickable(false);
 		}
 	}
 	
@@ -272,13 +244,24 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
+	private void checkFolder(){
+		cu.checkFolder(PathToRecoveryTools);
+		cu.checkFolder(PathToRecoveries);
+		cu.checkFolder(PathToBackup);
+	}
+	
 	public void report() {
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
 		intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
-		intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER+ "\nDevice: " + Device + "\nBoard: " + android.os.Build.BOARD + "\nBrand: " + android.os.Build.BRAND);
+		intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER+ "\nDevice: " + android.os.Build.DEVICE + "\nBoard: " + android.os.Build.BOARD + "\nBrand: " + android.os.Build.BRAND);
 		startActivity(Intent.createChooser(intent, "Send as EMAIL"));
 	}
+	
+//	public void onDestroy(){
+//		super.onDestroy();
+//		com.sbstrm.appirater.Appirater.appLaunched(context);
+//	}
 
 }

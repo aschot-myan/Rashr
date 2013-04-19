@@ -1,18 +1,27 @@
 package de.mkrtchyan.recoverytools;
 
+
 public class Support {
 	
-	String Device = android.os.Build.DEVICE;
-	String RecoveryPath = getRecoveryPath();
+	public String Device = android.os.Build.DEVICE;
+	public String RecoveryPath = "";
 	public boolean MTD = false;
+//	public boolean BLM = false;
+	public boolean TWRP = true;
+	public boolean CWM = true;
+	public String EXT = ".img";
 
 	public Support(){
 		
 		if (Device.equals("GT-N7000"))
 			Device = "n7000";
 		
-		if (Device.equals("GT-I9300"))
+		if (Device.equals("GT-I9300")
+				|| Device.equals("GalaxyS3"))
 			Device = "i9300";
+		
+		if (Device.equals("GT-S5369"))
+			Device = "totoro";
 		
 		if (Device.equals("GT-I9100G")
 				|| Device.equals("GT-I9100")) 
@@ -22,9 +31,18 @@ public class Support {
 				|| Device.equals("crespo4g")
 				|| Device.equals("passion"))
 			MTD = true;
+		
+//		if (Device.equals("tass")
+//				|| Device.equals("totoro")
+//				|| Device.equals("grouper")){
+//			BLM = true;
+//			EXT = ".zip";
+//		}
+		
+		RecoveryPath = getRecoveryPath();
 	}
 	
-	public String getRecoveryPath(){
+	private String getRecoveryPath(){
 		
 		String tmp = "";
 		
@@ -50,7 +68,8 @@ public class Support {
 //		Samsung Devices + Same
 		
 		if (Device.equals("d2att")
-			|| Device.equals("d2tmo"))
+			|| Device.equals("d2tmo")
+			|| Device.equals("d2vzw"))
 			tmp = "/dev/block/mmcblk0p18";
 		
 		if (Device.equals("i9300")
@@ -85,5 +104,19 @@ public class Support {
 			tmp = "/dev/block/mmcblk1p16";
 		
 		return tmp;
+	}
+	
+	public void getSupportedSystems(){
+		if (Device.equals("galaxys2") 
+				|| Device.equals("n7000")
+				|| Device.equals("droid2")) 
+			TWRP = false;
+		if (Device.equals("")
+				|| !MTD 
+//				&& !BLM 
+				&& RecoveryPath.equals("")) {
+			TWRP = false;
+			CWM = false;
+		}
 	}
 }
