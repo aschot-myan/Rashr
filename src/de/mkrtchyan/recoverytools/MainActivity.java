@@ -24,6 +24,7 @@ package de.mkrtchyan.recoverytools;
 import java.io.File;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -39,8 +40,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
-
 
 public class MainActivity extends Activity {
 	
@@ -61,6 +62,7 @@ public class MainActivity extends Activity {
 	FlashUtil fu = new FlashUtil(context);
 	NotificationUtil nu = new NotificationUtil(context);
 	CommonUtil cu = new CommonUtil(context);
+	Dialog dialog;
 //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
 	Runnable rFlash = new Runnable(){
 		@Override
@@ -236,6 +238,8 @@ public class MainActivity extends Activity {
 	        case R.id.iReport:
 	        	report();
 	        	return true;
+//	        case R.id.iLog:
+//	        	return true;
 	        case R.id.iExit:
 	        	finish();
 	    		System.exit(0);
@@ -251,17 +255,30 @@ public class MainActivity extends Activity {
 	}
 	
 	public void report() {
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
-		intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
-		intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER+ "\nDevice: " + android.os.Build.DEVICE + "\nBoard: " + android.os.Build.BOARD + "\nBrand: " + android.os.Build.BRAND);
-		startActivity(Intent.createChooser(intent, "Send as EMAIL"));
+		dialog = new Dialog(context);
+		dialog.setContentView(R.layout.comment);
+		dialog.setTitle("Commentar");
+		Button ok = (Button) dialog.findViewById(R.id.bGo);
+		ok.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				EditText text = (EditText) dialog.findViewById(R.id.editText1);
+				String comment = text.getText().toString();
+				Intent intent = new Intent(Intent.ACTION_SEND);
+				intent.setType("text/plain");
+				intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
+				intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
+				intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER + 
+						"\nDevice: " + android.os.Build.DEVICE + 
+						"\nBoard: " + android.os.Build.BOARD + 
+						"\nBrand: " + android.os.Build.BRAND +
+						"\n\n\n===========Comment==========\n" + comment +
+						"\n===========Comment==========");
+				startActivity(Intent.createChooser(intent, "Send as EMAIL"));
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
 	}
-	
-//	public void onDestroy(){
-//		super.onDestroy();
-//		com.sbstrm.appirater.Appirater.appLaunched(context);
-//	}
-
 }

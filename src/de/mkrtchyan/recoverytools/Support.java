@@ -29,7 +29,8 @@ public class Support {
 		
 		if (Device.equals("crespo")
 				|| Device.equals("crespo4g")
-				|| Device.equals("passion"))
+				|| Device.equals("passion")
+				|| Device.equals("swift"))
 			MTD = true;
 		
 //		if (Device.equals("tass")
@@ -97,6 +98,9 @@ public class Support {
 		
 		if (Device.equals("pyramid"))
 			tmp = "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
+		
+		if (Device.equals("ville"))
+			tmp = "/dev/block/mmcblk0p22";
 		
 //		Motorola Devices + Same
 		

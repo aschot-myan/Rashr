@@ -35,14 +35,4 @@
         android:text="@string/sRebootBootloader"
         android:onClick="bRebootBootloader" />
 
-    <Button
-        android:id="@+id/bRebooterBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/sBack"
-        android:onClick="bRebooterBack" />
-
 </RelativeLayout>

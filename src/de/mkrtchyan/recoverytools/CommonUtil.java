@@ -44,6 +44,8 @@ import android.net.Uri;
 public class CommonUtil {
 
 	Context context;
+	Shell shell;
+	boolean su;
 		
 	public CommonUtil(Context context) {
 		this.context = context;
@@ -79,22 +81,20 @@ public class CommonUtil {
 		}
 	}
 	
-	public String executeShell(String Command){
-		SimpleCommand command = new SimpleCommand(Command);
-		try {
-			Shell shell = Shell.startRootShell();
-			shell.add(command).waitForFinish();
-		} catch (RootAccessDeniedException e) {} catch (IOException e) {} catch (TimeoutException e) {}
+	public void chmod(File file, String mod) {
 		
-		return command.getOutput();
-	}
-	
-	public void chmod(String mod, File file) {
-		try {
-			Shell shell = Shell.startRootShell();
-			Toolbox tb = new Toolbox(shell);
-			tb.setFilePermissions(file.getAbsolutePath(), mod);
-		} catch (RootAccessDeniedException e) {} catch (IOException e) {} catch (TimeoutException e) {}
+		try{
+			if (su){
+				try {
+					shell = Shell.startRootShell();
+				} catch (RootAccessDeniedException e) {}
+			} else {
+				shell = Shell.startShell();
+		}
+		Toolbox tb = new Toolbox(shell);
+			if (tb.getFilePermissions(file.getAbsolutePath()).equals(mod))
+					tb.setFilePermissions(file.getAbsolutePath(), mod);
+		} catch (IOException e) {} catch (TimeoutException e) {}
 	}
 	
 	public void xdaProfile(){
@@ -168,8 +168,52 @@ public class CommonUtil {
 					mountDir(new File("/" + files[i].getName().toString()), "RW");
 			}
 		}
-		executeShell("busybox mv -f " + Source.getAbsolutePath() + " " + Destination.getAbsolutePath());
+		executeShell("busybox mv -f " + Source.getAbsolutePath() + " " + Destination.getAbsolutePath(), true);
 		if (Mount)
 			mountDir(Destination, "RO");
+	}
+	
+	public String executeShell(String Command, boolean su){
+//		boolean log = (Boolean) getPerf("common-util", "log", "boolean");
+//		boolean log = true;
+		SimpleCommand command = new SimpleCommand(Command);
+		try {
+			Shell shell;
+			if (su){
+				shell = Shell.startRootShell();
+			} else {
+				shell = Shell.startShell();
+			}
+			shell.add(command).waitForFinish();
+		} catch (RootAccessDeniedException e) {} catch (IOException e) {} catch (TimeoutException e) {}
+		String output = command.getOutput();
+//		String tmp = "Command:\n\n" + Command + "Output:\n\n" + output;
+//		if (su){
+//			File fLOG = new File(context.getFilesDir(), "RecoveryTools.log");
+//			if (!fLOG.exists())
+//				try {
+//					fLOG.createNewFile();
+//				} catch (IOException e1) {}
+//			try {
+//				FileOutputStream fo = context.openFileOutput(fLOG.getName().toString(), Context.MODE_APPEND);
+//				fo.write(tmp.getBytes());
+//				fo.write("\n".getBytes());
+//			} catch (FileNotFoundException e) {} catch (IOException e) {} catch (NullPointerException e) {}
+//		}
+//			
+		return output;
+	}
+
+//	public Object getPerf(String PrefName, String Key, String type){
+//		if (type.equals("boolean")){
+//			SharedPreferences prefs = context.getSharedPreferences(PrefName, context.MODE_PRIVATE);
+//			boolean pref = prefs.getBoolean(Key, false);
+//			return pref;
+//		}
+//		return true;
+//	}
+	
+	public void setPerf(){
+		
 	}
 }

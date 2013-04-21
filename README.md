@@ -36,13 +36,15 @@ Supported Devices
 -HTC Desire HD (ace)
 -HTC Sensation (pyramid)
 -HTC One V (primou)
--HTC One S (villec2)
+-HTC One S (ville/villec2)
 -HTC One X (endeavoru)
 
 -Samsung Galaxy Note 2 (n7100)
 -Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
 -Samsung Galaxy SIII Mini (golden)
 -Samsung Galaxy Mini II (jena)
+
+-LG GT540 Optimus (swift)
 
 ----- [CWM only] -----
 
@@ -59,6 +61,13 @@ CHANGELOG
 [Working on]
 
 -Recovery Version recognition
+-Samsung BLM Devices
+-Sony Devices
+
+Update [1.0.3]
+
+-LG GT540 Optimus (swift) added
+-HTC One S (ville) added
 
 Update [1.0.2]
 

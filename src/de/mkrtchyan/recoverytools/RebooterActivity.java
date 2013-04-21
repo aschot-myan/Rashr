@@ -21,6 +21,7 @@ package de.mkrtchyan.recoverytools;
  * SOFTWARE.
  */
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,19 +35,14 @@ public class RebooterActivity extends Activity {
 	}
 	
 	public void bReboot(View view) {
-		cu.executeShell("reboot");
+		cu.executeShell("reboot", true);
 	}
 	
 	public void bRebootRecovery(View view) {
-		cu.executeShell("reboot recovery");
+		cu.executeShell("reboot recovery", true);
 	}
 	
 	public void bRebootBootloader(View view) {
-		cu.executeShell("reboot bootloader");
-	}
-	
-	public void bRebooterBack(View view) {
-		finish();
-		System.exit(0);
+		cu.executeShell("reboot bootloader", true);
 	}
 }

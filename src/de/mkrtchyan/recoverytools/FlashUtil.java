@@ -26,8 +26,8 @@ public class FlashUtil {
 			fdump = new File(context.getFilesDir(), "dump_image");
 			cu.pushFileFromRAW(fflash, R.raw.flash_image);
 			cu.pushFileFromRAW(fdump, R.raw.dump_image);
-			cu.chmod("641", fflash);
-			cu.chmod("641", fdump);
+			cu.chmod(fflash, "641");
+			cu.chmod(fdump, "641");
 		}
 	}
 	
@@ -36,7 +36,7 @@ public class FlashUtil {
 		if (file.exists()) {
 			
 			if (s.MTD){
-				cu.executeShell(fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+				cu.executeShell(fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath(), true);
 			}
 //			if (s.BLM){
 //				File tmp = new File(PathToRecoveryTools, "tmp");
@@ -53,24 +53,24 @@ public class FlashUtil {
 			if (!s.MTD
 //					&& !s.BLM
 					&& !s.RecoveryPath.equals("")){
-				cu.executeShell("dd if=" + file.getAbsolutePath() + " of=" + s.RecoveryPath);
+				cu.executeShell("dd if=" + file.getAbsolutePath() + " of=" + s.RecoveryPath, true);
 			}
 		}
 	}
 	
 	public void backup() {
 		if (!s.MTD){
-			cu.executeShell("dd if=" + s.RecoveryPath + " of=" + PathToBackup.getAbsolutePath() + "/backup.img");
+			cu.executeShell("dd if=" + s.RecoveryPath + " of=" + PathToBackup.getAbsolutePath() + "/backup.img", true);
 		} else {
-			cu.executeShell(fdump.getAbsolutePath() + " recovery " + fBACKUP.getAbsolutePath());
+			cu.executeShell(fdump.getAbsolutePath() + " recovery " + fBACKUP.getAbsolutePath(), true);
 		}
 	}
 	
 	public void restore() {
 		if (!s.MTD){
-			cu.executeShell("dd if=" + PathToBackup.getAbsolutePath() + "/backup.img of=" + s.RecoveryPath);
+			cu.executeShell("dd if=" + PathToBackup.getAbsolutePath() + "/backup.img of=" + s.RecoveryPath, true);
 		} else {
-			cu.executeShell(fflash.getAbsolutePath() + " recovery " + fBACKUP.getAbsolutePath());
+			cu.executeShell(fflash.getAbsolutePath() + " recovery " + fBACKUP.getAbsolutePath(), true);
 		}
 	}
 	
