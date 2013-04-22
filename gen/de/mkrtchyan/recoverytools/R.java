@@ -39,31 +39,30 @@ public final class R {
         public static final int twrp_ico=0x7f020003;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f0c000c;
         public static final int bBackup=0x7f0c0002;
         public static final int bCWM=0x7f0c0008;
         public static final int bCleareCache=0x7f0c0005;
-        public static final int bGo=0x7f0c0017;
-        public static final int bReboot=0x7f0c000d;
-        public static final int bRebootBootloader=0x7f0c000f;
-        public static final int bRebootRecovery=0x7f0c000e;
+        public static final int bGo=0x7f0c0013;
+        public static final int bReboot=0x7f0c0014;
+        public static final int bRebootBootloader=0x7f0c0016;
+        public static final int bRebootRecovery=0x7f0c0015;
         public static final int bRebooter=0x7f0c0009;
         public static final int bRestore=0x7f0c0004;
         public static final int bTWRP=0x7f0c0003;
-        public static final int cancel=0x7f0c0013;
+        public static final int cancel=0x7f0c000f;
         public static final int cbUseBinary=0x7f0c000a;
-        public static final int editText1=0x7f0c0015;
-        public static final int iExit=0x7f0c001a;
-        public static final int iProfile=0x7f0c0018;
-        public static final int iReport=0x7f0c0019;
+        public static final int editText1=0x7f0c0011;
+        public static final int iExit=0x7f0c0019;
+        public static final int iProfile=0x7f0c0017;
+        public static final int iReport=0x7f0c0018;
         public static final int ivCWM=0x7f0c0006;
         public static final int ivTWRP=0x7f0c0007;
-        public static final int linear=0x7f0c0014;
-        public static final int message=0x7f0c0010;
+        public static final int linear=0x7f0c0010;
+        public static final int message=0x7f0c000c;
         public static final int progressBar1=0x7f0c0000;
-        public static final int rate=0x7f0c0011;
-        public static final int rateLater=0x7f0c0012;
-        public static final int textView2=0x7f0c0016;
+        public static final int rate=0x7f0c000d;
+        public static final int rateLater=0x7f0c000e;
+        public static final int textView2=0x7f0c0012;
         public static final int tvInfo=0x7f0c000b;
         public static final int tvNotRe=0x7f0c0001;
     }
@@ -77,9 +76,9 @@ public final class R {
     public static final class layout {
         public static final int activity_downloading=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int activity_rebooter=0x7f030002;
-        public static final int appirater=0x7f030003;
-        public static final int comment=0x7f030004;
+        public static final int appirater=0x7f030002;
+        public static final int dialog_comment=0x7f030003;
+        public static final int dialog_rebooter=0x7f030004;
     }
     public static final class menu {
         public static final int main_menu=0x7f0b0000;

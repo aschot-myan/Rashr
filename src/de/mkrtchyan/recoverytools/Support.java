@@ -30,6 +30,7 @@ public class Support {
 		if (Device.equals("crespo")
 				|| Device.equals("crespo4g")
 				|| Device.equals("passion")
+				|| Device.equals("saga")
 				|| Device.equals("swift"))
 			MTD = true;
 		
@@ -77,7 +78,8 @@ public class Support {
 				|| Device.equals("galaxys2"))
 			tmp = "/dev/block/mmcblk0p6";
 		
-		if (Device.equals("n7100"))
+		if (Device.equals("n7100")
+				|| Device.equals("t0ltevzw"))
 			tmp = "/dev/block/mmcblk0p9";
 		
 		if (Device.equals("golden") 

@@ -34,12 +34,13 @@ Supported Devices
 -Nexus 10 (manta)
 
 -HTC Desire HD (ace)
+-HTC Desire S (saga)
 -HTC Sensation (pyramid)
 -HTC One V (primou)
 -HTC One S (ville/villec2)
 -HTC One X (endeavoru)
 
--Samsung Galaxy Note 2 (n7100)
+-Samsung Galaxy Note 2 (n7100/t0ltevzw)
 -Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
 -Samsung Galaxy SIII Mini (golden)
 -Samsung Galaxy Mini II (jena)
@@ -63,6 +64,12 @@ CHANGELOG
 -Recovery Version recognition
 -Samsung BLM Devices
 -Sony Devices
+
+Update [1.0.4]
+
+-HTC Desire S (saga) added
+-Samsung Galaxy Note 2 (t0ltevzw) added
+-Rebooter now in dialog
 
 Update [1.0.3]
 

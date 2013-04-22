@@ -187,8 +187,9 @@ public class MainActivity extends Activity {
 		cu.deleteFolder(PathToRecoveries, false);
 	}
 	public void bRebooter(View view) {
-		Intent intent = new Intent(this, RebooterActivity.class);
-		startActivity(intent);
+		new Rebooter(context).run();
+		
+		
 	}
 //	Called from Button Methods, created to redundancy
 	public void downloadFile(String URL, File outputFile) {
@@ -256,7 +257,7 @@ public class MainActivity extends Activity {
 	
 	public void report() {
 		dialog = new Dialog(context);
-		dialog.setContentView(R.layout.comment);
+		dialog.setContentView(R.layout.dialog_comment);
 		dialog.setTitle("Commentar");
 		Button ok = (Button) dialog.findViewById(R.id.bGo);
 		ok.setOnClickListener(new View.OnClickListener() {
