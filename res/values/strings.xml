@@ -13,6 +13,7 @@
     
     <string name="info">Information</string>
     
+    <string name="kernel_to">Flashing the Recovery System on this devices will flash the Boot.img (Kernel) to Stock with custom Recovery.</string>
     <string name="flashed">Recovery flashed.</string>
     <string name="bakreport">Backup process completed</string>
     <string name="resreport">Restore process completed</string>

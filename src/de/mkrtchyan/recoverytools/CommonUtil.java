@@ -23,7 +23,6 @@ package de.mkrtchyan.recoverytools;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,9 +36,12 @@ import org.rootcommands.Toolbox;
 import org.rootcommands.command.SimpleCommand;
 import org.rootcommands.util.RootAccessDeniedException;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
+import android.widget.TextView;
 
 public class CommonUtil {
 
@@ -51,7 +53,7 @@ public class CommonUtil {
 		this.context = context;
 	}
 
-	public void pushFileFromRAW(File outputfile, int RAW) {
+	public File pushFileFromRAW(File outputfile, int RAW) {
 	    if (!outputfile.exists()){
 		    try {
 		        InputStream is = context.getResources().openRawResource(RAW);
@@ -63,6 +65,7 @@ public class CommonUtil {
 		        os.close();
 		    } catch (IOException e) {}
 	    }
+	    return outputfile;
 	}
 	
 	public boolean suRecognition() {
@@ -76,7 +79,8 @@ public class CommonUtil {
 	}
 	
 	public void checkFolder(File Folder) {
-		if (!Folder.exists()) {
+		if (!Folder.exists()
+				|| !Folder.isDirectory()) {
 			Folder.mkdir();
 		}
 	}
@@ -103,38 +107,41 @@ public class CommonUtil {
 	}
 	
 	public void unzip(File ZipFile, File OutputFolder) { 
-		if (!OutputFolder.isDirectory()
-				|| !OutputFolder.exists())
-			OutputFolder.mkdir();
 		
-		try {
-			FileInputStream fin;
-			fin = new FileInputStream(ZipFile);
+		FileInputStream fin;
+		ZipInputStream zin;
+		ZipEntry ze = null; 
 		
-			ZipInputStream zin = new ZipInputStream(fin); 
-			ZipEntry ze = null; 
+		try { 
+			fin = new FileInputStream(ZipFile); 
+			zin = new ZipInputStream(fin); 
+			
 			while ((ze = zin.getNextEntry()) != null) { 
+				Log.v("Decompress", "Unzipping " + ze.getName()); 
+	
 				if(ze.isDirectory()) { 
-					File f = new File(ze.getName()); 
-					if(!f.isDirectory()) { 
-						f.mkdirs(); 
-					}
-				} else { 
-					FileOutputStream fout = new FileOutputStream(OutputFolder.getAbsolutePath() + "/" + ze.getName()); 
+					checkFolder(new File(OutputFolder, ze.getName())); 
+				} else {
+					File file = new File(OutputFolder.getAbsolutePath(), ze.getName());
+					FileOutputStream fout = new FileOutputStream(file); 
 					for (int c = zin.read(); c != -1; c = zin.read()) { 
 						fout.write(c); 
 					} 
 					zin.closeEntry(); 
 					fout.close(); 
-				}
-			}
-	
-			zin.close();
-		} catch (FileNotFoundException e) {
+				} 
+			} 
+			zin.close(); 
+		} catch(Exception e) {
+			Log.e("Decompress", "unzip", e); 
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			Dialog dialog = new Dialog(context);
+			TextView tv = new TextView(context);
+			tv.setText(e.getMessage() +  " Filename: " +  ze.getName().toString());
+			dialog.setContentView(tv);
+			dialog.show();
 		} 
+	
 	}
 	
 	public void deleteFolder(File Folder, boolean AndFolder){

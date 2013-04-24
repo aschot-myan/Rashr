@@ -35,26 +35,28 @@ public class FlashUtil {
 			
 		if (file.exists()) {
 			
-			if (s.MTD){
-				cu.executeShell(fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath(), true);
-			}
-//			if (s.BLM){
-//				File tmp = new File(PathToRecoveryTools, "tmp");
-//				cu.checkFolder(tmp);
-//				
-//				cu.unzip(file, tmp);
-				
-//				File meta = new File(tmp, "META-INF");
-//				if (meta.exists())
-//					cu.deleteFolder(meta, true);
-				
-//				cu.copy(tmp, new File(s.RecoveryPath), true);
+//			if (s.MTD){
+//				cu.executeShell(fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath(), true);
 //			}
-			if (!s.MTD
+//			
+//			if (s.BLM){
+				File tmp = new File(PathToRecoveryTools, "tmp");
+				cu.checkFolder(tmp);
+				
+				cu.unzip(file, tmp);
+				
+				File meta = new File(tmp, "META-INF");
+				if (meta.exists())
+					cu.deleteFolder(meta, true);
+				
+				cu.copy(tmp, new File(s.RecoveryPath), true);
+//			}
+//			
+//			if (!s.MTD
 //					&& !s.BLM
-					&& !s.RecoveryPath.equals("")){
-				cu.executeShell("dd if=" + file.getAbsolutePath() + " of=" + s.RecoveryPath, true);
-			}
+//					&& !s.RecoveryPath.equals("")){
+//				cu.executeShell("dd if=" + file.getAbsolutePath() + " of=" + s.RecoveryPath, true);
+//			}
 		}
 	}
 	

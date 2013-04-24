@@ -54,6 +54,11 @@ Supported Devices
 
 -Motorola Droid2 (droid2)
 
+----- [TWRP only] -----
+
+-Sony Xperia S(nozomi/LT30p)
+-Sony Xperia Play(mint/LT26i)
+
 
 ====================
 CHANGELOG
@@ -62,8 +67,14 @@ CHANGELOG
 [Working on]
 
 -Recovery Version recognition
+-Stock Recoveries
 -Samsung BLM Devices
 -Sony Devices
+
+Update [1.0.5]
+
+-Sony Xperia S (nozomi/LT30p) added
+-Sony Xperia T (mint/LT26i) added
 
 Update [1.0.4]
 

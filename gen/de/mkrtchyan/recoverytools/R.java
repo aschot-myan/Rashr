@@ -88,8 +88,8 @@ public final class R {
         public static final int flash_image=0x7f040001;
     }
     public static final class string {
-        public static final int Downloading=0x7f050016;
-        public static final int action_settings=0x7f050027;
+        public static final int Downloading=0x7f050017;
+        public static final int action_settings=0x7f050028;
         public static final int app_name=0x7f050002;
         /**  Change the market_url for other markets i.e. Amazon App Store
     	Google Play = market://details?id=%s
@@ -98,49 +98,50 @@ public final class R {
          */
         public static final int appirator_app_title=0x7f050000;
         public static final int appirator_market_url=0x7f050001;
-        public static final int backupalready=0x7f05000e;
-        public static final int bakreport=0x7f05000c;
-        public static final int cico=0x7f050024;
-        public static final int commenthint=0x7f05001b;
-        public static final int download=0x7f050021;
-        public static final int flashed=0x7f05000b;
-        public static final int getdownload=0x7f050022;
-        public static final int go=0x7f05001d;
+        public static final int backupalready=0x7f05000f;
+        public static final int bakreport=0x7f05000d;
+        public static final int cico=0x7f050025;
+        public static final int commenthint=0x7f05001c;
+        public static final int download=0x7f050022;
+        public static final int flashed=0x7f05000c;
+        public static final int getdownload=0x7f050023;
+        public static final int go=0x7f05001e;
         public static final int info=0x7f05000a;
+        public static final int kernel_to=0x7f05000b;
         public static final int logsu=0x7f050009;
-        public static final int negative=0x7f050020;
-        public static final int neutral=0x7f05001f;
-        public static final int nobackup=0x7f05000f;
+        public static final int negative=0x7f050021;
+        public static final int neutral=0x7f050020;
+        public static final int nobackup=0x7f050010;
         public static final int noconnection=0x7f050008;
-        public static final int nocwm=0x7f05001a;
-        public static final int noroot=0x7f050017;
-        public static final int notrequired=0x7f05001c;
-        public static final int notsupportded=0x7f050018;
-        public static final int notwrp=0x7f050019;
-        public static final int positive=0x7f05001e;
-        public static final int rate=0x7f05002d;
-        public static final int rate_cancel=0x7f05002f;
-        public static final int rate_later=0x7f05002e;
-        public static final int rate_message=0x7f05002c;
-        public static final int rate_title=0x7f05002b;
-        public static final int report=0x7f050029;
-        public static final int resreport=0x7f05000d;
+        public static final int nocwm=0x7f05001b;
+        public static final int noroot=0x7f050018;
+        public static final int notrequired=0x7f05001d;
+        public static final int notsupportded=0x7f050019;
+        public static final int notwrp=0x7f05001a;
+        public static final int positive=0x7f05001f;
+        public static final int rate=0x7f05002e;
+        public static final int rate_cancel=0x7f050030;
+        public static final int rate_later=0x7f05002f;
+        public static final int rate_message=0x7f05002d;
+        public static final int rate_title=0x7f05002c;
+        public static final int report=0x7f05002a;
+        public static final int resreport=0x7f05000e;
         public static final int sBackup=0x7f050005;
-        public static final int sCleareCache=0x7f050014;
-        public static final int sExit=0x7f050013;
+        public static final int sCleareCache=0x7f050015;
+        public static final int sExit=0x7f050014;
         public static final int sFlashCWM=0x7f050003;
         public static final int sFlashTWRP=0x7f050004;
-        public static final int sReboot=0x7f050010;
-        public static final int sRebootBootloader=0x7f050012;
-        public static final int sRebootRecovery=0x7f050011;
+        public static final int sReboot=0x7f050011;
+        public static final int sRebootBootloader=0x7f050013;
+        public static final int sRebootRecovery=0x7f050012;
         public static final int sRebooter=0x7f050006;
-        public static final int sRestore=0x7f050015;
-        public static final int settings=0x7f050026;
-        public static final int tico=0x7f050023;
-        public static final int usebinary=0x7f050028;
-        public static final int usedd=0x7f05002a;
+        public static final int sRestore=0x7f050016;
+        public static final int settings=0x7f050027;
+        public static final int tico=0x7f050024;
+        public static final int usebinary=0x7f050029;
+        public static final int usedd=0x7f05002b;
         public static final int warning=0x7f050007;
-        public static final int xda=0x7f050025;
+        public static final int xda=0x7f050026;
     }
     public static final class style {
         public static final int AboutDialog=0x7f0a0002;

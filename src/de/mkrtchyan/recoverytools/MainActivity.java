@@ -46,7 +46,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	
 //	Get path to external storage
-	private static final String PathToSd = Environment.getExternalStorageDirectory().getPath();
+	private static final File PathToSd = Environment.getExternalStorageDirectory();
 //	Declaring needed files and folders
 	private static final File PathToRecoveryTools = new File(PathToSd , "RecoveryTools");
 	private static final File PathToRecoveries = new File(PathToRecoveryTools ,"recoveries");
@@ -136,9 +136,10 @@ public class MainActivity extends Activity {
 				System.exit(0);
 			}
 			
-//			if (s.BLM){
-//				cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
-//				cbUseBinary.setText("Using BLM Flash method");
+			if (s.BLM){
+				cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
+				cbUseBinary.setText("Using BLM Flash method");
+			}
 			
 			firstrun = true;
 		}
@@ -155,7 +156,7 @@ public class MainActivity extends Activity {
 			cbUseBinary.setText(R.string.usebinary);
 		}
 		
-		getSupport();
+		getSupport(); 
 	}
 
 //	Button Methods (onClick)
@@ -163,7 +164,12 @@ public class MainActivity extends Activity {
 		SYSTEM = view.getTag().toString() + s.EXT;
 		fRECOVERY = new File(PathToRecoveries, s.Device + "-" + SYSTEM);
 		if (fRECOVERY.exists()){
-			rFlash.run();
+			if (!s.KERNEL_TO) {
+				rFlash.run();
+			} else {
+				nu.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash);
+			}
+				
 		} else {
 			nu.createAlertDialog(R.string.info, R.string.getdownload, rDownload);
 		}

@@ -4,14 +4,17 @@ package de.mkrtchyan.recoverytools;
 public class Support {
 	
 	public String Device = android.os.Build.DEVICE;
-	public String RecoveryPath = "";
+	public String RecoveryPath;
+	public boolean KERNEL_TO = false;
 	public boolean MTD = false;
-//	public boolean BLM = false;
+	public boolean BLM = false;
 	public boolean TWRP = true;
 	public boolean CWM = true;
 	public String EXT = ".img";
 
 	public Support(){
+		
+//	Set Device predefined options
 		
 		if (Device.equals("GT-N7000"))
 			Device = "n7000";
@@ -27,6 +30,12 @@ public class Support {
 				|| Device.equals("GT-I9100")) 
 			Device = "galaxys2";
 		
+		if (Device.equals("nozomi")
+				|| Device.equals("mint")
+				|| Device.equals("LT30p")
+				|| Device.equals("LT26i"))
+			KERNEL_TO = true;
+		
 		if (Device.equals("crespo")
 				|| Device.equals("crespo4g")
 				|| Device.equals("passion")
@@ -35,8 +44,7 @@ public class Support {
 			MTD = true;
 		
 //		if (Device.equals("tass")
-//				|| Device.equals("totoro")
-//				|| Device.equals("grouper")){
+//				|| Device.equals("totoro")){
 //			BLM = true;
 //			EXT = ".zip";
 //		}
@@ -109,17 +117,34 @@ public class Support {
 		if (Device.equals("droid2"))
 			tmp = "/dev/block/mmcblk1p16";
 		
+//		Sony Devices + Same
+		
+		if (Device.equals("nozomi")
+				|| Device.equals("LT26i")
+				|| Device.equals("mint")
+				|| Device.equals("LT30p"))
+			tmp = "/dev/block/mmcblk0p11";
+	
+		
 		return tmp;
 	}
 	
 	public void getSupportedSystems(){
+		
 		if (Device.equals("galaxys2") 
 				|| Device.equals("n7000")
 				|| Device.equals("droid2")) 
 			TWRP = false;
+		
+		if (Device.equals("nozomi")
+				|| Device.equals("mint")
+				|| Device.equals("LT30p")
+				|| Device.equals("LT26i"))
+			CWM = false;
+			
 		if (Device.equals("")
 				|| !MTD 
-//				&& !BLM 
+				&& !BLM 
 				&& RecoveryPath.equals("")) {
 			TWRP = false;
 			CWM = false;
