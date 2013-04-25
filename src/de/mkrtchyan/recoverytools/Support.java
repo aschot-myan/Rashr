@@ -124,6 +124,11 @@ public class Support {
 				|| Device.equals("mint")
 				|| Device.equals("LT30p"))
 			tmp = "/dev/block/mmcblk0p11";
+		
+//		LG Devices + Same
+		
+		if (Device.equals("x3"))
+			tmp = "/dev/block/mmcblk0p1";
 	
 		
 		return tmp;
@@ -133,6 +138,7 @@ public class Support {
 		
 		if (Device.equals("galaxys2") 
 				|| Device.equals("n7000")
+				|| Device.equals("x3")
 				|| Device.equals("droid2")) 
 			TWRP = false;
 		

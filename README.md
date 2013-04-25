@@ -28,7 +28,7 @@ Supported Devices
 
 -Nexus One (passion)
 -Nexus S (crespo/crespo4g)
--Galaxy Nexus (maguro/toro)
+-Galaxy Nexus (maguro/toro/toroplus)
 -Nexus 4 (mako)
 -Nexus 7 (grouper/tilapia)
 -Nexus 10 (manta)
@@ -54,6 +54,8 @@ Supported Devices
 
 -Motorola Droid2 (droid2)
 
+-LG Optimus HD X4 (x3)
+
 ----- [TWRP only] -----
 
 -Sony Xperia S(nozomi/LT30p)
@@ -70,6 +72,10 @@ CHANGELOG
 -Stock Recoveries
 -Samsung BLM Devices
 -Sony Devices
+
+Update [1.0.6]
+
+-LG Optimus HD X4 (x3) CWM Only
 
 Update [1.0.5]
 
