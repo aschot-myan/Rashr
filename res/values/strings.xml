@@ -8,18 +8,16 @@
     <string name="sRebooter">Rebooter</string>
     <string name="warning">Warning!</string>
     <string name="noconnection">No network available. Download canceled!</string>
-    
     <string name="logsu">Log all su-commands</string>
-    
     <string name="info">Information</string>
-    
     <string name="kernel_to">Flashing the Recovery System on this devices will flash the Boot.img (Kernel) to Stock with custom Recovery.</string>
+    <string name="instructions">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from sdcard\n\nTWRP:\n\nMain Menu -> Install</string>
+    <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
     <string name="flashed">Recovery flashed.</string>
     <string name="bakreport">Backup process completed</string>
     <string name="resreport">Restore process completed</string>
     <string name="backupalready">Backup already exists. This will override the existing one. Continue?</string>
     <string name="nobackup">No existing Backup found (InternalStorage/RootTools/backup/backup.img). Create one now?</string>
-    
     <string name="sReboot">Reboot</string>
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
@@ -27,23 +25,18 @@
     <string name="sCleareCache">Clear downloaded recoveries</string>
     <string name="sRestore">Restore from Backup</string>
     <string name="Downloading">Downloading....</string>
-    
     <string name="noroot">"Device not Rooted. Please Root it. More information under xda-developer.com"</string>
     <string name="notsupportded">Your Device is not supported by the developer yet. Scan System and Report unsupported Device?</string>
     <string name="notwrp">TWRP not supported</string>
     <string name="nocwm">CWM not supported</string>
-    
     <string name="commenthint">Comment here, what is not working correctly (download, flash, common support or other)</string>
     <string name="notrequired">*not required</string>
     <string name="go">Go</string>
-    
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
-    
     <string name="download">Download</string>
     <string name="getdownload">Recovery IMG not found. Download now?</string>
-    
     <string name="tico">TWRP ICON</string>
     <string name="cico">Clockworkmod ICON</string>
     <string name="xda">Open XDA-Profile</string>
@@ -52,10 +45,11 @@
     <string name="usebinary">Use flash/dump_image (MTD)</string>
     <string name="report">Scan Report unsupported Device</string>
     <string name="usedd">Using dd binary. Recovery in FS: %s</string>
-    
     <string name="rate_title">Rate %s</string>
     <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it? Thanks for your support!</string>
     <string name="rate">Yes, Rate %s</string>
     <string name="rate_later">Remind me later</string>
     <string name="rate_cancel">No, Thanks</string>
+    <string name="no_function">This function is not avariable on your device</string>
+
 </resources>

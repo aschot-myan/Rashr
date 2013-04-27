@@ -3,9 +3,11 @@ package de.mkrtchyan.recoverytools;
 
 public class Support {
 	
-	public String Device = android.os.Build.DEVICE;
+	public String DEVICE = android.os.Build.DEVICE;
+	public String BOARD = android.os.Build.BOARD;
 	public String RecoveryPath;
 	public boolean KERNEL_TO = false;
+	public boolean FLASH_OVER_RECOVERY = false;
 	public boolean MTD = false;
 	public boolean BLM = false;
 	public boolean TWRP = true;
@@ -14,120 +16,162 @@ public class Support {
 
 	public Support(){
 		
-//	Set Device predefined options
+//	Set DEVICE predefined options
 		
-		if (Device.equals("GT-N7000"))
-			Device = "n7000";
+//		Galaxy Note 
+		if (DEVICE.equals("GT-N7000")
+				|| DEVICE.equals("n7000")
+				|| DEVICE.equals("galaxynote")
+				|| DEVICE.equals("N7000")
+				|| BOARD.equals("GT-N7000")
+				|| BOARD.equals("n7000")
+				|| BOARD.equals("galaxynote")
+				|| BOARD.equals("N7000")){
+			DEVICE = "n7000";
+			FLASH_OVER_RECOVERY = true;
+			EXT = ".zip";
+		}
 		
-		if (Device.equals("GT-I9300")
-				|| Device.equals("GalaxyS3"))
-			Device = "i9300";
+//		Galaxy Note 2
+		if (DEVICE.equals("t03g")
+				|| DEVICE.equals("n7100")
+				|| DEVICE.equals("GT-N7100")
+				|| BOARD.equals("t03g")
+				|| BOARD.equals("n7100")
+				|| BOARD.equals("GT-N7100"))
+			DEVICE = "n7100";
+			
+//		Galaxy S3 (international)
+		if (DEVICE.equals("GT-I9300")
+				|| DEVICE.equals("m0")
+				|| DEVICE.equals("i9300")
+				|| BOARD.equals("GT-I9300")
+				|| BOARD.equals("m0")
+				|| BOARD.equals("i9300"))
+			DEVICE = "i9300";
 		
-		if (Device.equals("GT-S5369"))
-			Device = "totoro";
+//		if (DEVICE.equals("GT-S5369"))
+//			DEVICE = "totoro";
 		
-		if (Device.equals("GT-I9100G")
-				|| Device.equals("GT-I9100")) 
-			Device = "galaxys2";
+//		Galaxy S2
+		if (DEVICE.equals("GT-I9100G")
+				|| DEVICE.equals("GT-I9100M")
+				|| DEVICE.equals("GT-I9100P")
+				|| DEVICE.equals("GT-I9100")
+				|| DEVICE.equals("galaxys2")
+				|| BOARD.equals("GT-I9100G")
+				|| BOARD.equals("GT-I9100M")
+				|| BOARD.equals("GT-I9100P")
+				|| BOARD.equals("GT-I9100")
+				|| BOARD.equals("galaxys2")){
+			FLASH_OVER_RECOVERY = true;
+			EXT = ".zip";
+			DEVICE = "galaxys2";
+		}
 		
-		if (Device.equals("nozomi")
-				|| Device.equals("mint")
-				|| Device.equals("LT30p")
-				|| Device.equals("LT26i"))
+		if (DEVICE.equals("nozomi")
+				|| DEVICE.equals("mint")
+				|| DEVICE.equals("LT30p")
+				|| DEVICE.equals("LT26i"))
 			KERNEL_TO = true;
 		
-		if (Device.equals("crespo")
-				|| Device.equals("crespo4g")
-				|| Device.equals("passion")
-				|| Device.equals("saga")
-				|| Device.equals("swift"))
+		
+		if (DEVICE.equals("crespo")
+				|| DEVICE.equals("crespo4g")
+				|| DEVICE.equals("passion")
+				|| DEVICE.equals("saga")
+				|| DEVICE.equals("swift"))
 			MTD = true;
 		
-//		if (Device.equals("tass")
-//				|| Device.equals("totoro")){
+		if (BOARD.equals("ace"))
+			DEVICE = "ace";
+		
+//		if (DEVICE.equals("tass")
+//				|| DEVICE.equals("totoro")){
 //			BLM = true;
 //			EXT = ".zip";
 //		}
 		
 		RecoveryPath = getRecoveryPath();
+		getSupportedSystems();
 	}
 	
 	private String getRecoveryPath(){
 		
 		String tmp = "";
 		
-//		Nexus Devices + Same
+//		Nexus DEVICEs + Same
 		
-		if (Device.equals("maguro")
-				|| Device.equals("toro")
-				|| Device.equals("toroplus"))
+		if (DEVICE.equals("maguro")
+				|| DEVICE.equals("toro")
+				|| DEVICE.equals("toroplus"))
 			tmp = "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
 		
-		if (Device.equals("grouper") 
-				|| Device.equals("endeavoru") 
-				|| Device.equals("tilapia")) 
+		if (DEVICE.equals("grouper") 
+				|| DEVICE.equals("endeavoru") 
+				|| DEVICE.equals("tilapia")) 
 			tmp = "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
 		
-		if (Device.equals("mako")
-				|| Device.equals("geeb"))
+		if (DEVICE.equals("mako")
+				|| DEVICE.equals("geeb"))
 			tmp = "/dev/block/platform/msm_sdcc.1/by-name/recovery";
 		
-		if (Device.equals("manta"))
+		if (DEVICE.equals("manta"))
 			tmp = "/dev/block/platform/dw_mmc.0/by-name/recovery";
 		
-//		Samsung Devices + Same
+//		Samsung DEVICEs + Same
 		
-		if (Device.equals("d2att")
-			|| Device.equals("d2tmo")
-			|| Device.equals("d2vzw"))
+		if (DEVICE.equals("d2att")
+			|| DEVICE.equals("d2tmo")
+			|| DEVICE.equals("d2vzw"))
 			tmp = "/dev/block/mmcblk0p18";
 		
-		if (Device.equals("i9300")
-				|| Device.equals("galaxys2"))
+		if (DEVICE.equals("i9300")
+				|| DEVICE.equals("galaxys2"))
 			tmp = "/dev/block/mmcblk0p6";
 		
-		if (Device.equals("n7100")
-				|| Device.equals("t0ltevzw"))
+		if (DEVICE.equals("n7100")
+				|| DEVICE.equals("t0ltevzw"))
 			tmp = "/dev/block/mmcblk0p9";
 		
-		if (Device.equals("golden") 
-				|| Device.equals("villec2")) 
+		if (DEVICE.equals("golden") 
+				|| DEVICE.equals("villec2")) 
 			tmp = "/dev/block/mmcblk0p21";
 		
-		if (Device.equals("n7000"))
+		if (DEVICE.equals("n7000"))
 			tmp = "/dev/block/platform/dw_mmc/by-name/RECOVERY";
 		
-		if (Device.equals("jena"))
+		if (DEVICE.equals("jena"))
 			tmp = "/dev/block/mmcblk0p12";
 		
-//		HTC Devices + Same
+//		HTC DEVICEs + Same
 		
-		if (Device.equals("ace") 
-				|| Device.equals("primou")) 
+		if (DEVICE.equals("ace") 
+				|| DEVICE.equals("primou")) 
 			tmp = "/dev/block/platform/msm_sdcc.2/mmcblk0p21";
 		
-		if (Device.equals("pyramid"))
+		if (DEVICE.equals("pyramid"))
 			tmp = "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
 		
-		if (Device.equals("ville"))
+		if (DEVICE.equals("ville"))
 			tmp = "/dev/block/mmcblk0p22";
 		
-//		Motorola Devices + Same
+//		Motorola DEVICEs + Same
 		
-		if (Device.equals("droid2"))
+		if (DEVICE.equals("droid2"))
 			tmp = "/dev/block/mmcblk1p16";
 		
-//		Sony Devices + Same
+//		Sony DEVICEs + Same
 		
-		if (Device.equals("nozomi")
-				|| Device.equals("LT26i")
-				|| Device.equals("mint")
-				|| Device.equals("LT30p"))
+		if (DEVICE.equals("nozomi")
+				|| DEVICE.equals("LT26i")
+				|| DEVICE.equals("mint")
+				|| DEVICE.equals("LT30p"))
 			tmp = "/dev/block/mmcblk0p11";
 		
-//		LG Devices + Same
+//		LG DEVICEs + Same
 		
-		if (Device.equals("x3"))
+		if (DEVICE.equals("x3"))
 			tmp = "/dev/block/mmcblk0p1";
 	
 		
@@ -136,19 +180,19 @@ public class Support {
 	
 	public void getSupportedSystems(){
 		
-		if (Device.equals("galaxys2") 
-				|| Device.equals("n7000")
-				|| Device.equals("x3")
-				|| Device.equals("droid2")) 
+		if (DEVICE.equals("galaxys2") 
+				|| DEVICE.equals("n7000")
+				|| DEVICE.equals("x3")
+				|| DEVICE.equals("droid2")) 
 			TWRP = false;
 		
-		if (Device.equals("nozomi")
-				|| Device.equals("mint")
-				|| Device.equals("LT30p")
-				|| Device.equals("LT26i"))
+		if (DEVICE.equals("nozomi")
+				|| DEVICE.equals("mint")
+				|| DEVICE.equals("LT30p")
+				|| DEVICE.equals("LT26i"))
 			CWM = false;
 			
-		if (Device.equals("")
+		if (DEVICE.equals("")
 				|| !MTD 
 				&& !BLM 
 				&& RecoveryPath.equals("")) {

@@ -24,11 +24,13 @@ package de.mkrtchyan.recoverytools;
 import java.io.File;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -63,34 +65,98 @@ public class MainActivity extends Activity {
 	NotificationUtil nu = new NotificationUtil(context);
 	CommonUtil cu = new CommonUtil(context);
 	Dialog dialog;
+	AlertDialog.Builder abuilder;
 //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
-	Runnable rFlash = new Runnable(){
+	Runnable rFlash = new Runnable() {
+
 		@Override
 		public void run() {
 			fu.flash(fRECOVERY);
 			nu.createDialog(R.string.info, R.string.flashed, true, true);
 		}
+		
+	};
+	Runnable rFlasher = new Runnable(){
+		@Override
+		public void run() {
+			if (fRECOVERY.exists()){
+				if (!s.KERNEL_TO 
+						&& !s.FLASH_OVER_RECOVERY) {
+					rFlash.run();
+				} else {
+					if (s.KERNEL_TO)
+						nu.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash);
+					if (s.FLASH_OVER_RECOVERY) {
+						abuilder = new AlertDialog.Builder(context);
+						abuilder
+							.setTitle(R.string.info)
+							.setMessage(R.string.flash_over_recovery)
+							.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									cu.executeShell("reboot recovery", true);
+								}
+							})
+							.setNeutralButton("Instructions", new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									Dialog d = new Dialog(context);
+									d.setTitle("Instructions");
+									TextView tv = new TextView(context);
+									tv.setTextSize(20);
+									tv.setText(R.string.instructions);
+									d.setContentView(tv);
+									d.setOnCancelListener(new DialogInterface.OnCancelListener() {
+										
+										@Override
+										public void onCancel(DialogInterface dialog) {
+											abuilder.show();
+											
+										}
+									});
+									d.show();
+								}
+							})
+							.show();
+					}
+				}
+					
+			} else {
+				nu.createAlertDialog(R.string.info, R.string.getdownload, rDownload);
+			}
+			
+		}
 	};
 	Runnable rBackup = new Runnable(){
 		@Override
 		public void run() {
-			fu.backup();
-			nu.createDialog(R.string.info, R.string.bakreport, true, true);
+			if (s.FLASH_OVER_RECOVERY 
+					|| s.BLM){
+				nu.createDialog(R.string.warning, R.string.no_function, true, true);	
+			} else {
+				fu.backup();
+				nu.createDialog(R.string.info, R.string.bakreport, true, true);
+			}
 		}
 	};
 	Runnable rRestore = new Runnable(){
 		@Override
 		public void run() {
-			fu.restore();
-			nu.createDialog(R.string.info, R.string.resreport, true, true);
+			if (s.FLASH_OVER_RECOVERY 
+					|| s.BLM){
+				nu.createDialog(R.string.warning, R.string.no_function, true, true);	
+			} else {
+				fu.restore();
+				nu.createDialog(R.string.info, R.string.resreport, true, true);
+			}
 		}
 	};
 	Runnable rDownload = new Runnable(){
 		@Override
 		public void run() {
-			if (fRECOVERY.exists()) {
-				rFlash.run();
-			} else {
+			if (!fRECOVERY.exists()) {
 				ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 				NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 			
@@ -122,11 +188,13 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		getSupport(); 
+		
 		checkFolder();
 		
 		TextView tvInfo = (TextView) findViewById (R.id.tvInfo);
 		
-		tvInfo.setText("\nModel: " + android.os.Build.MODEL + "\nName: " + s.Device);
+		tvInfo.setText("\nModel: " + android.os.Build.MODEL + "\nName: " + s.DEVICE);
 		
 		if (!firstrun){
 			
@@ -156,23 +224,13 @@ public class MainActivity extends Activity {
 			cbUseBinary.setText(R.string.usebinary);
 		}
 		
-		getSupport(); 
 	}
 
 //	Button Methods (onClick)
 	public void Go(View view){
-		SYSTEM = view.getTag().toString() + s.EXT;
-		fRECOVERY = new File(PathToRecoveries, s.Device + "-" + SYSTEM);
-		if (fRECOVERY.exists()){
-			if (!s.KERNEL_TO) {
-				rFlash.run();
-			} else {
-				nu.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash);
-			}
-				
-		} else {
-			nu.createAlertDialog(R.string.info, R.string.getdownload, rDownload);
-		}
+		SYSTEM = view.getTag().toString();
+		fRECOVERY = new File(PathToRecoveries, s.DEVICE + "-" + SYSTEM + s.EXT);
+		rFlasher.run();
 	}
 	public void bBackup(View view) {
 		
@@ -194,12 +252,10 @@ public class MainActivity extends Activity {
 	}
 	public void bRebooter(View view) {
 		new Rebooter(context).run();
-		
-		
 	}
 //	Called from Button Methods, created to redundancy
 	public void downloadFile(String URL, File outputFile) {
-		DownloadUtil du = new DownloadUtil(context, URL, outputFile, rFlash);
+		DownloadUtil du = new DownloadUtil(context, URL, outputFile, rFlasher);
 		du.execute();
 	}
 

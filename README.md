@@ -73,6 +73,13 @@ CHANGELOG
 -Samsung BLM Devices
 -Sony Devices
 
+Update [1.0.7]
+
+-Samsung Galaxy S3 device recognition fixed
+-Samsung Galaxy Note flash issues fixed (flash over recovery)
+-Samsung Galaxy Note 2 device recognition fixed 
+-Samsung Galaxy S2 flash issues fixed (flash over recovery)
+
 Update [1.0.6]
 
 -LG Optimus HD X4 (x3) CWM Only
