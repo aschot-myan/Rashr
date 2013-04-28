@@ -45,6 +45,9 @@ Supported Devices
 -Samsung Galaxy SIII Mini (golden)
 -Samsung Galaxy Mini II (jena)
 
+-Sony Xperia Z (C6603)
+
+-LG Optiomus G (geeb)
 -LG GT540 Optimus (swift)
 
 ----- [CWM only] -----
@@ -71,7 +74,13 @@ CHANGELOG
 -Recovery Version recognition
 -Stock Recoveries
 -Samsung BLM Devices
--Sony Devices
+
+Update [1.0.8]
+
+-Sony Xperia Z (C6603) added
+-LG Optiomus G (geeb) added
+-Report function optimized
+-Dialog added to remind rate the app :)
 
 Update [1.0.7]
 

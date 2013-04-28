@@ -23,6 +23,8 @@ package de.mkrtchyan.recoverytools;
 
 import java.io.File;
 
+import com.sbstrm.appirater.Appirater;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -32,6 +34,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -227,10 +231,12 @@ public class MainActivity extends Activity {
 	}
 
 //	Button Methods (onClick)
+	@SuppressWarnings("static-access")
 	public void Go(View view){
 		SYSTEM = view.getTag().toString();
 		fRECOVERY = new File(PathToRecoveries, s.DEVICE + "-" + SYSTEM + s.EXT);
 		rFlasher.run();
+		new Appirater().appLaunched(context);
 	}
 	public void bBackup(View view) {
 		
@@ -326,22 +332,35 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				EditText text = (EditText) dialog.findViewById(R.id.editText1);
-				String comment = text.getText().toString();
-				Intent intent = new Intent(Intent.ACTION_SEND);
-				intent.setType("text/plain");
-				intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
-				intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
-				intent.putExtra(Intent.EXTRA_TEXT,"Manufacture: " + android.os.Build.MANUFACTURER + 
-						"\nDevice: " + android.os.Build.DEVICE + 
-						"\nBoard: " + android.os.Build.BOARD + 
-						"\nBrand: " + android.os.Build.BRAND +
-						"\n\n\n===========Comment==========\n" + comment +
-						"\n===========Comment==========");
-				startActivity(Intent.createChooser(intent, "Send as EMAIL"));
-				dialog.dismiss();
+				try {
+					PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+					EditText text = (EditText) dialog.findViewById(R.id.editText1);
+					String comment = text.getText().toString();
+					Intent intent = new Intent(Intent.ACTION_SEND);
+					intent.setType("text/plain");
+					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
+					intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
+					intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
+							"\n\nPackage Name: " + pInfo.packageName +
+							"\nPackage VersionName: " + pInfo.versionName +
+							"\nPackage VersionCode: " + pInfo.versionCode +
+							"\n\n\nProduct Info: " + 
+							"\n\nManufacture: " + android.os.Build.MANUFACTURER + 
+							"\nDevice: " + android.os.Build.DEVICE + 
+							"\nBoard: " + android.os.Build.BOARD + 
+							"\nBrand: " + android.os.Build.BRAND +
+							"\n\n\n===========Comment==========\n" + comment +
+							"\n===========Comment==========");
+					startActivity(Intent.createChooser(intent, "Send as EMAIL"));
+					dialog.dismiss();
+				
+				} catch (NameNotFoundException e) {
+					nu.createDialog(R.string.warning, e.getMessage(), true);
+					e.printStackTrace();
+				}
 			}
 		});
+		
 		dialog.show();
 	}
 }

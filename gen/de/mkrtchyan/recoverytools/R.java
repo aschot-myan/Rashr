@@ -113,7 +113,7 @@ public final class R {
         public static final int logsu=0x7f050009;
         public static final int negative=0x7f050023;
         public static final int neutral=0x7f050022;
-        public static final int no_function=0x7f050033;
+        public static final int no_function=0x7f05002e;
         public static final int nobackup=0x7f050012;
         public static final int noconnection=0x7f050008;
         public static final int nocwm=0x7f05001d;
@@ -122,11 +122,11 @@ public final class R {
         public static final int notsupportded=0x7f05001b;
         public static final int notwrp=0x7f05001c;
         public static final int positive=0x7f050021;
-        public static final int rate=0x7f050030;
-        public static final int rate_cancel=0x7f050032;
-        public static final int rate_later=0x7f050031;
-        public static final int rate_message=0x7f05002f;
-        public static final int rate_title=0x7f05002e;
+        public static final int rate=0x7f050031;
+        public static final int rate_cancel=0x7f050033;
+        public static final int rate_later=0x7f050032;
+        public static final int rate_message=0x7f050030;
+        public static final int rate_title=0x7f05002f;
         public static final int report=0x7f05002c;
         public static final int resreport=0x7f050010;
         public static final int sBackup=0x7f050005;

@@ -43,6 +43,8 @@ public class Support {
 			
 //		Galaxy S3 (international)
 		if (DEVICE.equals("GT-I9300")
+				|| DEVICE.equals("Galaxy S3")
+				|| DEVICE.equals("GalaxyS3")
 				|| DEVICE.equals("m0")
 				|| DEVICE.equals("i9300")
 				|| BOARD.equals("GT-I9300")
@@ -69,18 +71,25 @@ public class Support {
 			DEVICE = "galaxys2";
 		}
 		
+//		Devices who kernel will be flashed to
 		if (DEVICE.equals("nozomi")
 				|| DEVICE.equals("mint")
 				|| DEVICE.equals("LT30p")
 				|| DEVICE.equals("LT26i"))
 			KERNEL_TO = true;
 		
+//		Sony Xperia Z C6603
+		
+		if (DEVICE.equals("C6603"))
+			EXT = ".tar";
+			
 		
 		if (DEVICE.equals("crespo")
 				|| DEVICE.equals("crespo4g")
 				|| DEVICE.equals("passion")
 				|| DEVICE.equals("saga")
-				|| DEVICE.equals("swift"))
+				|| DEVICE.equals("swift")
+				|| DEVICE.equals("geeb"))
 			MTD = true;
 		
 		if (BOARD.equals("ace"))
@@ -112,8 +121,7 @@ public class Support {
 				|| DEVICE.equals("tilapia")) 
 			tmp = "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
 		
-		if (DEVICE.equals("mako")
-				|| DEVICE.equals("geeb"))
+		if (DEVICE.equals("mako"))
 			tmp = "/dev/block/platform/msm_sdcc.1/by-name/recovery";
 		
 		if (DEVICE.equals("manta"))
@@ -132,6 +140,7 @@ public class Support {
 		
 		if (DEVICE.equals("n7100")
 				|| DEVICE.equals("t0ltevzw"))
+//				|| DEVICE.equals("m3"))
 			tmp = "/dev/block/mmcblk0p9";
 		
 		if (DEVICE.equals("golden") 
@@ -168,6 +177,9 @@ public class Support {
 				|| DEVICE.equals("mint")
 				|| DEVICE.equals("LT30p"))
 			tmp = "/dev/block/mmcblk0p11";
+		
+		if (DEVICE.equals("C6603"))
+			tmp = "/system/bin/recovery.tar";
 		
 //		LG DEVICEs + Same
 		
