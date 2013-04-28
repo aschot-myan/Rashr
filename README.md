@@ -50,6 +50,8 @@ Supported Devices
 -LG Optiomus G (geeb)
 -LG GT540 Optimus (swift)
 
+-ZTE Sequence (warp2)
+
 ----- [CWM only] -----
 
 -Samsung Galaxy SII (i9100/i9100G)
@@ -74,6 +76,10 @@ CHANGELOG
 -Recovery Version recognition
 -Stock Recoveries
 -Samsung BLM Devices
+
+Update [1.0.9]
+
+-ZTE Sequence (warp2) added.
 
 Update [1.0.8]
 

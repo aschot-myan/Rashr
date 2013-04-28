@@ -162,6 +162,9 @@ public class Support {
 		if (DEVICE.equals("pyramid"))
 			tmp = "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
 		
+		if (DEVICE.equals("kingdom"))
+			tmp = "/dev/block/mmcblk0p21";
+		
 		if (DEVICE.equals("ville"))
 			tmp = "/dev/block/mmcblk0p22";
 		
@@ -186,6 +189,11 @@ public class Support {
 		if (DEVICE.equals("x3"))
 			tmp = "/dev/block/mmcblk0p1";
 	
+//		ZTE DEVICEs + Same
+		
+		if (DEVICE.equals("warp2"))
+			tmp = "/dev/block/mmcblk0p13";
+			
 		
 		return tmp;
 	}
@@ -195,7 +203,8 @@ public class Support {
 		if (DEVICE.equals("galaxys2") 
 				|| DEVICE.equals("n7000")
 				|| DEVICE.equals("x3")
-				|| DEVICE.equals("droid2")) 
+				|| DEVICE.equals("droid2")
+				|| DEVICE.equals("kingdom")) 
 			TWRP = false;
 		
 		if (DEVICE.equals("nozomi")
