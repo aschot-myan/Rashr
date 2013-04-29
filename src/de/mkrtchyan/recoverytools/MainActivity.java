@@ -307,8 +307,6 @@ public class MainActivity extends Activity {
 	        case R.id.iReport:
 	        	report();
 	        	return true;
-//	        case R.id.iLog:
-//	        	return true;
 	        case R.id.iExit:
 	        	finish();
 	    		System.exit(0);
@@ -341,9 +339,9 @@ public class MainActivity extends Activity {
 					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
 					intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
 					intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
-							"\n\nPackage Name: " + pInfo.packageName +
-							"\nPackage VersionName: " + pInfo.versionName +
-							"\nPackage VersionCode: " + pInfo.versionCode +
+							"\n\nName: " + pInfo.packageName +
+							"\nVersionName: " + pInfo.versionName +
+							"\nVersionCode: " + pInfo.versionCode +
 							"\n\n\nProduct Info: " + 
 							"\n\nManufacture: " + android.os.Build.MANUFACTURER + 
 							"\nDevice: " + android.os.Build.DEVICE + 

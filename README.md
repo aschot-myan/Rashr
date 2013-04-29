@@ -33,14 +33,19 @@ Supported Devices
 -Nexus 7 (grouper/tilapia)
 -Nexus 10 (manta)
 
+-Asus Transformer Infinity (ft700t)
+
 -HTC Desire HD (ace)
 -HTC Desire S (saga)
 -HTC Sensation (pyramid)
+-HTC Fireball (fireball)
 -HTC One V (primou)
 -HTC One S (ville/villec2)
 -HTC One X (endeavoru)
+-HTC One XL (evita)
 
 -Samsung Galaxy Note 2 (n7100/t0ltevzw)
+-Samsung Galaxy Note 2 LTE (t0lte)
 -Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
 -Samsung Galaxy SIII Mini (golden)
 -Samsung Galaxy Mini II (jena)
@@ -76,6 +81,13 @@ CHANGELOG
 -Recovery Version recognition
 -Stock Recoveries
 -Samsung BLM Devices
+
+Update [1.1.0]
+
+-HTC One XL (evita) added
+-Samsung Galaxy Note 2 LTE (t0lte) added 
+-HTC Fireball (fireball) added
+-Asus Transformer Infinity (ft700t) added
 
 Update [1.0.9]
 

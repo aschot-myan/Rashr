@@ -40,6 +40,30 @@ public class Support {
 				|| BOARD.equals("n7100")
 				|| BOARD.equals("GT-N7100"))
 			DEVICE = "n7100";
+		
+		if (DEVICE.equals("t0ltexx")
+				|| DEVICE.equals("GT-N7105")
+				|| DEVICE.equals("t0ltedv")
+				|| DEVICE.equals("GT-N7105T")
+				|| DEVICE.equals("t0lteatt")
+				|| DEVICE.equals("SGH-I317")
+				|| DEVICE.equals("t0ltetmo")
+				|| DEVICE.equals("SGH-T889")
+				|| DEVICE.equals("t0ltecan")
+				|| DEVICE.equals("t0ltevl")
+				|| DEVICE.equals("SGH-I317M")
+				|| BOARD.equals("t0ltexx")
+				|| BOARD.equals("GT-N7105")
+				|| BOARD.equals("t0ltedv")
+				|| BOARD.equals("GT-N7105T")
+				|| BOARD.equals("t0lteatt")
+				|| BOARD.equals("SGH-I317")
+				|| BOARD.equals("t0ltetmo")
+				|| BOARD.equals("SGH-T889")
+				|| BOARD.equals("t0ltecan")
+				|| BOARD.equals("t0ltevl")
+				|| BOARD.equals("SGH-I317M"))
+			DEVICE = "t0lte";
 			
 //		Galaxy S3 (international)
 		if (DEVICE.equals("GT-I9300")
@@ -139,6 +163,7 @@ public class Support {
 			tmp = "/dev/block/mmcblk0p6";
 		
 		if (DEVICE.equals("n7100")
+				|| DEVICE.equals("tf700t")
 				|| DEVICE.equals("t0ltevzw"))
 //				|| DEVICE.equals("m3"))
 			tmp = "/dev/block/mmcblk0p9";
@@ -165,7 +190,9 @@ public class Support {
 		if (DEVICE.equals("kingdom"))
 			tmp = "/dev/block/mmcblk0p21";
 		
-		if (DEVICE.equals("ville"))
+		if (DEVICE.equals("ville")
+				|| DEVICE.equals("evita")
+				|| DEVICE.equals("fireball"))
 			tmp = "/dev/block/mmcblk0p22";
 		
 //		Motorola DEVICEs + Same
