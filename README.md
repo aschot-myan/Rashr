@@ -43,6 +43,7 @@ Supported Devices
 -HTC One S (ville/villec2)
 -HTC One X (endeavoru)
 -HTC One XL (evita)
+-HTC Butterfly (dlxub1)
 
 -Samsung Galaxy Note 2 (n7100/t0ltevzw)
 -Samsung Galaxy Note 2 LTE (t0lte)
@@ -81,6 +82,11 @@ CHANGELOG
 -Recovery Version recognition
 -Stock Recoveries
 -Samsung BLM Devices
+
+Update [1.1.1]
+
+-Added new Flash function, flash from local file (other recovery)
+-HTC Butterfly (dlxub1) added
 
 Update [1.1.0]
 

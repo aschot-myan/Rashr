@@ -8,90 +8,77 @@
         android:layout_width="match_parent"
         android:layout_height="290dp" >
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="468dp" >
-
-            <Button
-                android:id="@+id/bBackup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/bTWRP"
-                android:onClick="bBackup"
-                android:text="@string/sBackup" />
-
-            <Button
-                android:id="@+id/bRestore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/bBackup"
-                android:onClick="bRestore"
-                android:text="@string/sRestore" />
-
-            <Button
-                android:id="@+id/bCleareCache"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/bRestore"
-                android:onClick="bCleareCache"
-                android:text="@string/sCleareCache" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/ivCWM"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:contentDescription="@string/cico"
                 android:src="@drawable/cwm_ico" />
 
+            <Button
+                android:id="@+id/bCWM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Go"
+                android:tag="cwm"
+                android:text="@string/sFlashCWM" />
+
             <ImageView
                 android:id="@+id/ivTWRP"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/bCWM"
-                android:layout_centerHorizontal="true"
                 android:contentDescription="@string/tico"
                 android:src="@drawable/twrp_ico" />
 
             <Button
                 android:id="@+id/bTWRP"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/ivTWRP"
                 android:onClick="Go"
                 android:tag="twrp"
                 android:text="@string/sFlashTWRP" />
 
             <Button
-                android:id="@+id/bRebooter"
-                android:layout_width="wrap_content"
+                android:id="@+id/bFlashOther"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/bCleareCache"
-                android:onClick="bRebooter"
-                android:text="@string/sRebooter" />
+                android:onClick="bFlashOther"
+                android:text="@string/flash_other" />
 
             <Button
-                android:id="@+id/bCWM"
-                android:layout_width="wrap_content"
+                android:id="@+id/bBackup"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/ivCWM"
-                android:onClick="Go"
-                android:tag="cwm"
-                android:text="@string/sFlashCWM" />
-        </RelativeLayout>
+                android:onClick="bBackup"
+                android:text="@string/sBackup" />
+
+            <Button
+                android:id="@+id/bRestore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bRestore"
+                android:text="@string/sRestore" />
+
+            <Button
+                android:id="@+id/bCleareCache"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bCleareCache"
+                android:text="@string/sCleareCache" />
+
+            <Button
+                android:id="@+id/bRebooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bRebooter"
+                android:text="@string/sRebooter" />
+        </LinearLayout>
     </ScrollView>
 
     <CheckBox

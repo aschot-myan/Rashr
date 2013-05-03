@@ -23,8 +23,6 @@ package de.mkrtchyan.recoverytools;
 
 import java.io.File;
 
-import com.sbstrm.appirater.Appirater;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -47,7 +45,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.sbstrm.appirater.Appirater;
 
 public class MainActivity extends Activity {
 	
@@ -59,6 +60,8 @@ public class MainActivity extends Activity {
 	private static final File PathToBackup = new File(PathToRecoveryTools, "backup");
 	private static final File fBACKUP = new File(PathToBackup, "backup.img");
 	private static File fRECOVERY;
+	TextView tvPath;
+	ListView lvFiles;
 	private static String SYSTEM;
 	private static CheckBox cbUseBinary;
 	private static boolean firstrun;
@@ -66,6 +69,7 @@ public class MainActivity extends Activity {
 	Context context = this;
 	Support s = new Support();
 	FlashUtil fu = new FlashUtil(context);
+	FileChooser fc;
 	NotificationUtil nu = new NotificationUtil(context);
 	CommonUtil cu = new CommonUtil(context);
 	Dialog dialog;
@@ -83,6 +87,10 @@ public class MainActivity extends Activity {
 	Runnable rFlasher = new Runnable(){
 		@Override
 		public void run() {
+			try{
+			if (fc.use){
+				fRECOVERY = fc.selectedFile;
+			}} catch (Exception e) {}
 			if (fRECOVERY.exists()){
 				if (!s.KERNEL_TO 
 						&& !s.FLASH_OVER_RECOVERY) {
@@ -237,6 +245,10 @@ public class MainActivity extends Activity {
 		fRECOVERY = new File(PathToRecoveries, s.DEVICE + "-" + SYSTEM + s.EXT);
 		rFlasher.run();
 		new Appirater().appLaunched(context);
+	}
+	
+	public void bFlashOther(View view){
+		fc = new FileChooser(context, PathToSd.getAbsolutePath(), rFlasher);
 	}
 	public void bBackup(View view) {
 		

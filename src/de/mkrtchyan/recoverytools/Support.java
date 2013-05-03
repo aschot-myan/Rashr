@@ -195,6 +195,9 @@ public class Support {
 				|| DEVICE.equals("fireball"))
 			tmp = "/dev/block/mmcblk0p22";
 		
+		if (DEVICE.equals("dlxub1"))
+			tmp = "/dev/block/mmcblk0p20";
+		
 //		Motorola DEVICEs + Same
 		
 		if (DEVICE.equals("droid2"))

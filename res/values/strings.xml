@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Recovery Tools</string>
+    <string name="app_name">Recovery-Tools</string>
     <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
     <string name="sFlashTWRP">Flash TWRP Recovery</string>
+    <string name="flash_other">Flash other Recovery</string>
     <string name="sBackup">Backup current Recovery</string>
     <string name="sRebooter">Rebooter</string>
     <string name="warning">Warning!</string>
@@ -46,12 +47,9 @@
     <string name="report">Scan Report unsupported Device</string>
     <string name="usedd">Using dd binary. Recovery in FS: %s</string>
     <string name="no_function">This function is not avariable on your device</string>
-    
-    
     <string name="rate_title">Rate %s</string>
     <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it? Thanks for your support!</string>
     <string name="rate">Yes, Rate %s</string>
     <string name="rate_later">Remind me later</string>
     <string name="rate_cancel">No, Thanks</string>
-    
 </resources>
