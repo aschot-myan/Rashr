@@ -45,6 +45,7 @@ Supported Devices
 -HTC One XL (evita)
 -HTC Butterfly (dlxub1)
 
+-Samsung Galaxy S2 LTE (skyrocket)
 -Samsung Galaxy Note 2 (n7100/t0ltevzw)
 -Samsung Galaxy Note 2 LTE (t0lte)
 -Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
@@ -61,6 +62,7 @@ Supported Devices
 ----- [CWM only] -----
 
 -Samsung Galaxy SII (i9100/i9100G)
+-Samsung Galaxy S2 AT&T (SGH-I777)
 -Samsung Galaxy Note (n7000)
 
 -Motorola Droid2 (droid2)
@@ -82,6 +84,11 @@ CHANGELOG
 -Recovery Version recognition
 -Stock Recoveries
 -Samsung BLM Devices
+
+Update [1.1.2]
+
+-Samsung Galaxy S2 AT&T (SGH-I777) added
+-Samsung Galaxy S2 LTE (skyrocket) added
 
 Update [1.1.1]
 

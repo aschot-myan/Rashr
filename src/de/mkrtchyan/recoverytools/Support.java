@@ -95,6 +95,20 @@ public class Support {
 			DEVICE = "galaxys2";
 		}
 		
+//		Galaxy S2 ATT
+		
+		if (DEVICE.equals("SGH-I777")){
+			FLASH_OVER_RECOVERY = true;
+			EXT = ".zip";
+		}
+		
+//		Galaxy S2 LTE (skyrocket)
+		if (DEVICE.equals("skyrocket")
+				|| DEVICE.equals("SGH-I727")
+				|| BOARD.equals("skyrocket")
+				|| BOARD.equals("SGH-I727"))
+			DEVICE = "skyrocket";
+		
 //		Devices who kernel will be flashed to
 		if (DEVICE.equals("nozomi")
 				|| DEVICE.equals("mint")
@@ -119,11 +133,10 @@ public class Support {
 		if (BOARD.equals("ace"))
 			DEVICE = "ace";
 		
-//		if (DEVICE.equals("tass")
-//				|| DEVICE.equals("totoro")){
-//			BLM = true;
-//			EXT = ".zip";
-//		}
+//		Kindle Fire HD
+		
+//		if (DEVICE.equals(""))
+//			DEVICE = "blaze";
 		
 		RecoveryPath = getRecoveryPath();
 		getSupportedSystems();
@@ -154,8 +167,8 @@ public class Support {
 //		Samsung DEVICEs + Same
 		
 		if (DEVICE.equals("d2att")
-			|| DEVICE.equals("d2tmo")
-			|| DEVICE.equals("d2vzw"))
+				|| DEVICE.equals("d2tmo")
+				|| DEVICE.equals("d2vzw"))
 			tmp = "/dev/block/mmcblk0p18";
 		
 		if (DEVICE.equals("i9300")
@@ -192,6 +205,7 @@ public class Support {
 		
 		if (DEVICE.equals("ville")
 				|| DEVICE.equals("evita")
+				|| DEVICE.equals("skyrocket")
 				|| DEVICE.equals("fireball"))
 			tmp = "/dev/block/mmcblk0p22";
 		
@@ -223,14 +237,19 @@ public class Support {
 		
 		if (DEVICE.equals("warp2"))
 			tmp = "/dev/block/mmcblk0p13";
-			
+		
+//		Kindle Devices + Same
+		
+//		if (DEVICE.equals("D01E"))
+//			tmp = "/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery";
 		
 		return tmp;
 	}
 	
 	public void getSupportedSystems(){
 		
-		if (DEVICE.equals("galaxys2") 
+		if (DEVICE.equals("galaxys2")
+				|| DEVICE.equals("SGH-I777")
 				|| DEVICE.equals("n7000")
 				|| DEVICE.equals("x3")
 				|| DEVICE.equals("droid2")

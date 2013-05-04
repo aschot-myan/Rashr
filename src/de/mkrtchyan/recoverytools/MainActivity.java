@@ -359,7 +359,7 @@ public class MainActivity extends Activity {
 							"\nDevice: " + android.os.Build.DEVICE + 
 							"\nBoard: " + android.os.Build.BOARD + 
 							"\nBrand: " + android.os.Build.BRAND +
-							"\n\n\n===========Comment==========\n" + comment +
+							"\nModel: " + android.os.Build.MODEL +							"\n\n\n===========Comment==========\n" + comment +
 							"\n===========Comment==========");
 					startActivity(Intent.createChooser(intent, "Send as EMAIL"));
 					dialog.dismiss();
