@@ -18,8 +18,8 @@
                 android:id="@+id/ivCWM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/cico"
-                android:src="@drawable/cwm_ico" />
+                android:src="@drawable/cwm_ico"
+                android:contentDescription="@string/empty" />
 
             <Button
                 android:id="@+id/bCWM"
@@ -33,8 +33,8 @@
                 android:id="@+id/ivTWRP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/tico"
-                android:src="@drawable/twrp_ico" />
+                android:src="@drawable/twrp_ico"
+                android:contentDescription="@string/empty" />
 
             <Button
                 android:id="@+id/bTWRP"
@@ -87,9 +87,8 @@
         android:layout_height="wrap_content"
         android:checked="false"
         android:clickable="false"
-        android:text="@string/usebinary"
         android:textSize="20sp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/tvInfo"
@@ -97,6 +96,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:visibility="visible" />
 
 </LinearLayout>

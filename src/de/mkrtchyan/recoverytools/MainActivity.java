@@ -22,6 +22,7 @@ package de.mkrtchyan.recoverytools;
  */
 
 import java.io.File;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -45,7 +46,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sbstrm.appirater.Appirater;
@@ -57,11 +57,9 @@ public class MainActivity extends Activity {
 //	Declaring needed files and folders
 	private static final File PathToRecoveryTools = new File(PathToSd , "RecoveryTools");
 	private static final File PathToRecoveries = new File(PathToRecoveryTools ,"recoveries");
-	private static final File PathToBackup = new File(PathToRecoveryTools, "backup");
-	private static final File fBACKUP = new File(PathToBackup, "backup.img");
+	private static final File PathToBackups = new File(PathToRecoveryTools, "backups");
+	private static File fBACKUP;
 	private static File fRECOVERY;
-	TextView tvPath;
-	ListView lvFiles;
 	private static String SYSTEM;
 	private static CheckBox cbUseBinary;
 	private static boolean firstrun;
@@ -69,11 +67,14 @@ public class MainActivity extends Activity {
 	Context context = this;
 	Support s = new Support();
 	FlashUtil fu = new FlashUtil(context);
-	FileChooser fc;
+	FileChooser fcFlashOther;
+	FileChooser fcRestore;
 	NotificationUtil nu = new NotificationUtil(context);
 	CommonUtil cu = new CommonUtil(context);
 	Dialog dialog;
 	AlertDialog.Builder abuilder;
+	String bakname, resname;
+	
 //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
 	Runnable rFlash = new Runnable() {
 
@@ -88,9 +89,11 @@ public class MainActivity extends Activity {
 		@Override
 		public void run() {
 			try{
-			if (fc.use){
-				fRECOVERY = fc.selectedFile;
-			}} catch (Exception e) {}
+				if (fcFlashOther.use){
+					fRECOVERY = fcFlashOther.selectedFile;
+				}
+			} catch (Exception e) {/* Continue with TWRP and CWM Button */}
+			
 			if (fRECOVERY.exists()){
 				if (!s.KERNEL_TO 
 						&& !s.FLASH_OVER_RECOVERY) {
@@ -148,7 +151,7 @@ public class MainActivity extends Activity {
 					|| s.BLM){
 				nu.createDialog(R.string.warning, R.string.no_function, true, true);	
 			} else {
-				fu.backup();
+				fu.backup(fBACKUP);
 				nu.createDialog(R.string.info, R.string.bakreport, true, true);
 			}
 		}
@@ -160,7 +163,9 @@ public class MainActivity extends Activity {
 					|| s.BLM){
 				nu.createDialog(R.string.warning, R.string.no_function, true, true);	
 			} else {
-				fu.restore();
+				if (fcRestore.use)
+					fBACKUP = fcRestore.selectedFile;
+				fu.flash(fBACKUP);
 				nu.createDialog(R.string.info, R.string.resreport, true, true);
 			}
 		}
@@ -174,7 +179,7 @@ public class MainActivity extends Activity {
 			
 				if (networkInfo != null 
 						&& networkInfo.isConnected()) {
-					downloadFile("http://dslnexus.nazuka.net/recoveries/" + fRECOVERY.getName().toString(), fRECOVERY);
+					downloadFile(String.format(context.getString(R.string.DOWNLOAD_URL), fRECOVERY.getName().toString()), fRECOVERY);
 				} else {
 					nu.createDialog(R.string.warning, R.string.noconnection, true, true);
 				}
@@ -216,24 +221,18 @@ public class MainActivity extends Activity {
 				System.exit(0);
 			}
 			
-			if (s.BLM){
-				cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
-				cbUseBinary.setText("Using BLM Flash method");
-			}
-			
 			firstrun = true;
 		}
 		
 		cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
-		cbUseBinary.setVisibility(View.VISIBLE);
 		cbUseBinary.setChecked(true);
 		if (s.RecoveryPath.equals("")
 				&& !s.MTD) {
 			nu.createAlertDialog(R.string.warning, R.string.notsupportded, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
 		} else if (!s.RecoveryPath.equals("")){
-			cbUseBinary.setText(String.format(context.getString(R.string.usedd), "\n" + s.RecoveryPath));
+			cbUseBinary.setText(String.format(context.getString(R.string.using_dd), "\n" + s.RecoveryPath));
 		} else if (s.MTD){
-			cbUseBinary.setText(R.string.usebinary);
+			cbUseBinary.setText(R.string.using_mtd);
 		}
 		
 	}
@@ -248,21 +247,49 @@ public class MainActivity extends Activity {
 	}
 	
 	public void bFlashOther(View view){
-		fc = new FileChooser(context, PathToSd.getAbsolutePath(), rFlasher);
+		fcFlashOther = new FileChooser(context, PathToSd.getAbsolutePath(), rFlasher);
 	}
 	public void bBackup(View view) {
 		
-		if (fBACKUP.exists()) {
-			nu.createAlertDialog(R.string.warning, R.string.backupalready, rBackup);
-		} else {
-			rBackup.run();
-		}
+		final Dialog dialog = new Dialog(context);
+		dialog.setTitle("Set name of Backup");
+		dialog.setContentView(R.layout.dialog_renamer);
+		Button dobackup = (Button) dialog.findViewById(R.id.bGoBackup);
+		final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
+		dobackup.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String Name = "";
+				if (!etFileName.getText().toString().equals("")) {
+					Name = etFileName.getText().toString();
+				} else {
+					Calendar c = Calendar.getInstance();
+					Name = Calendar.DATE
+							+ "-" + c.get(Calendar.MONTH)
+							+ "-" + c.get(Calendar.YEAR)
+							+ "-" + c.get(Calendar.HOUR)
+							+ ":" + c.get(Calendar.MINUTE)
+							+ "-" + c.get(Calendar.AM_PM);
+				}
+				
+				fBACKUP = new File(PathToBackups, Name);
+					
+				if (fBACKUP.exists()) {
+					nu.createAlertDialog(R.string.warning, R.string.backupalready, rBackup);
+				} else {
+					rBackup.run();
+				}
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
 	}
 	public void bRestore(View view) {
-		if (!fBACKUP.exists()) {
+		if (PathToBackups.list().length < 1) {
 			nu.createAlertDialog(R.string.warning, R.string.nobackup, rBackup);
 		} else {
-			rRestore.run();
+			fcRestore = new FileChooser(context, PathToBackups.getAbsolutePath(), rRestore);
 		}
 	}
 	public void bCleareCache(View view) {
@@ -330,7 +357,7 @@ public class MainActivity extends Activity {
 	private void checkFolder(){
 		cu.checkFolder(PathToRecoveryTools);
 		cu.checkFolder(PathToRecoveries);
-		cu.checkFolder(PathToBackup);
+		cu.checkFolder(PathToBackups);
 	}
 	
 	public void report() {
@@ -344,12 +371,12 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				try {
 					PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-					EditText text = (EditText) dialog.findViewById(R.id.editText1);
+					EditText text = (EditText) dialog.findViewById(R.id.etFileName);
 					String comment = text.getText().toString();
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("text/plain");
-					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"ashotmkrtchyan1995@gmail.com"});
-					intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report to support new Device");
+					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {context.getString(R.string.REPORT_to_EMAIL)});
+					intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.EMAIL_SUBJECT));
 					intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
 							"\n\nName: " + pInfo.packageName +
 							"\nVersionName: " + pInfo.versionName +
@@ -359,7 +386,8 @@ public class MainActivity extends Activity {
 							"\nDevice: " + android.os.Build.DEVICE + 
 							"\nBoard: " + android.os.Build.BOARD + 
 							"\nBrand: " + android.os.Build.BRAND +
-							"\nModel: " + android.os.Build.MODEL +							"\n\n\n===========Comment==========\n" + comment +
+							"\nModel: " + android.os.Build.MODEL +
+							"\n\n\n===========Comment==========\n" + comment +
 							"\n===========Comment==========");
 					startActivity(Intent.createChooser(intent, "Send as EMAIL"));
 					dialog.dismiss();

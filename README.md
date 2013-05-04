@@ -85,6 +85,11 @@ CHANGELOG
 -Stock Recoveries
 -Samsung BLM Devices
 
+Update [1.1.3]
+
+-Some optimizations while flash and backup
+-Added multi-backup/multi-restore funktion
+
 Update [1.1.2]
 
 -Samsung Galaxy S2 AT&T (SGH-I777) added

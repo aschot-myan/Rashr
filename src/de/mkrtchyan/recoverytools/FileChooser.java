@@ -34,7 +34,7 @@ public class FileChooser extends Dialog {
 		this.context = context;
 		this.runAtChoose = runAtChoose;
 		setContentView(R.layout.dialog_file_chooser);
-		setTitle("File Chooser");
+		setTitle(R.string.file_chooser);
 		
 		tvPath = (TextView) findViewById(R.id.tvPath);
 		lvFiles = (ListView) findViewById(R.id.lvFiles);
@@ -52,7 +52,7 @@ public class FileChooser extends Dialog {
 						currentPath = selectedFile;
 						reload();
 					} else {
-						Toast.makeText(context, "Directory empty: " + selectedFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, String.format(context.getString(R.string.empty_dir), selectedFile.getAbsolutePath()), Toast.LENGTH_SHORT).show();
 						currentPath = Start;
 						reload();
 					}
@@ -76,7 +76,7 @@ public class FileChooser extends Dialog {
 		AlertDialog.Builder abuilder = new AlertDialog.Builder(context);
 		abuilder
 			.setTitle(R.string.warning)
-			.setMessage("Flash" + selectedFile.getName() + ". Are you sure?")
+			.setMessage(String.format(context.getString(R.string.choose_message), selectedFile.getName()))
 			.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
 				
 				@Override
@@ -104,5 +104,9 @@ public class FileChooser extends Dialog {
 				}
 			})
 			.show();
+	}
+	
+	public Dialog getDialog() {
+		return this;
 	}
 }
