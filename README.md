@@ -74,6 +74,8 @@ Supported Devices
 -Sony Xperia S(nozomi/LT30p)
 -Sony Xperia Play(mint/LT26i)
 
+-Kindle Fire HD 7" (tate)
+
 
 ====================
 CHANGELOG
@@ -85,10 +87,14 @@ CHANGELOG
 -Stock Recoveries
 -Samsung BLM Devices
 
+Update [1.1.4]
+
+-Kindle Fire HD 7" (tate) added
+
 Update [1.1.3]
 
 -Some optimizations while flash and backup
--Added multi-backup/multi-restore funktion
+-Added multi-backup/multi-restore function
 
 Update [1.1.2]
 

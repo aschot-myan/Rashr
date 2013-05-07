@@ -6,6 +6,7 @@ public class Support {
 	public String DEVICE = android.os.Build.DEVICE;
 	public String BOARD = android.os.Build.BOARD;
 	public String RecoveryPath;
+	public boolean KINDLE = false;
 	public boolean KERNEL_TO = false;
 	public boolean FLASH_OVER_RECOVERY = false;
 	public boolean MTD = false;
@@ -17,6 +18,11 @@ public class Support {
 	public Support(){
 		
 //	Set DEVICE predefined options
+		
+//		Kindle Fire HD 7"
+		
+		if (DEVICE.equals("D01E"))
+			DEVICE = "kfhd7";
 		
 //		Galaxy Note 
 		if (DEVICE.equals("GT-N7000")
@@ -133,11 +139,6 @@ public class Support {
 		if (BOARD.equals("ace"))
 			DEVICE = "ace";
 		
-//		Kindle Fire HD
-		
-//		if (DEVICE.equals(""))
-//			DEVICE = "blaze";
-		
 		RecoveryPath = getRecoveryPath();
 		getSupportedSystems();
 	}
@@ -238,11 +239,6 @@ public class Support {
 		if (DEVICE.equals("warp2"))
 			tmp = "/dev/block/mmcblk0p13";
 		
-//		Kindle Devices + Same
-		
-//		if (DEVICE.equals("D01E"))
-//			tmp = "/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery";
-		
 		return tmp;
 	}
 	
@@ -259,6 +255,7 @@ public class Support {
 		if (DEVICE.equals("nozomi")
 				|| DEVICE.equals("mint")
 				|| DEVICE.equals("LT30p")
+				|| DEVICE.equals("kfhd7")
 				|| DEVICE.equals("LT26i"))
 			CWM = false;
 			
