@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="Go"
-                android:tag="cwm"
+                android:tag="clockwork"
                 android:text="@string/sFlashCWM" />
 
             <ImageView
@@ -52,18 +52,11 @@
                 android:text="@string/flash_other" />
 
             <Button
-                android:id="@+id/bBackup"
+                android:id="@+id/bBackupMgr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="bBackup"
-                android:text="@string/sBackup" />
-
-            <Button
-                android:id="@+id/bRestore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bRestore"
-                android:text="@string/sRestore" />
+                android:onClick="bBackupMgr"
+                android:text="@string/sBackupMgr" />
 
             <Button
                 android:id="@+id/bCleareCache"

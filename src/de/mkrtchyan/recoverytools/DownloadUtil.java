@@ -29,81 +29,121 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 public class DownloadUtil extends AsyncTask<Void, Integer, Boolean> {
 	
 	Context context;
-	Dialog dialog;
+	String exString = "";
+	ProgressDialog dialog;
+	boolean first_start = true;
 	Runnable AfterDownload;
-	private static String URL;
-	private static File outputFile;
-	public static boolean output;
-	NotificationUtil nu = new NotificationUtil(context);
+	String URL;
+	File outputFile;
+	NotificationUtil nu;
 	
 	
-	public DownloadUtil(Context context, String URLAdress, File outputfile, Runnable AfterDownload) {
+	
+	public DownloadUtil(Context context, String URL, File outputFile, Runnable AfterDownload) {
 		this.context = context;
-		URL = URLAdress;
-		outputFile = outputfile;
+		this.URL = URL;
+		this.outputFile = outputFile;
 		this.AfterDownload = AfterDownload;
+		nu = new NotificationUtil(context);
 	}
 	
 	protected void onPreExecute(){
-		dialog = new Dialog(context);
-		dialog.setContentView(R.layout.activity_downloading);
-		dialog.setTitle(R.string.app_name);
+		
+		dialog = new ProgressDialog(context);
+		dialog.setTitle(R.string.Downloading);
+		dialog.setMessage(URL);
 		dialog.setCancelable(false);
-		dialog.show();
 	}
 	
 	protected Boolean doInBackground(Void... params) throws NullPointerException {
 		
-		try {
-			URL url = new URL(URL);
-								
-			URLConnection ucon = url.openConnection();
-
-			ucon.setDoOutput(true);
-			ucon.connect();
-
-			FileOutputStream fileOutput = new FileOutputStream(outputFile);
+		if (!outputFile.exists()) {
+			ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		
+			if (networkInfo != null 
+					&& networkInfo.isConnected()) {
+				try {
+					URL url = new URL(URL);
 					
-			InputStream inputStream = ucon.getInputStream();
-			
-			byte[] buffer = new byte[1024];
-			int bufferLength = 0;
+					URLConnection ucon = url.openConnection();
+		
+					ucon.setDoOutput(true);
+					ucon.connect();
+		
+					FileOutputStream fileOutput = new FileOutputStream(outputFile);
 					
-			while ((bufferLength = inputStream.read(buffer)) > 0 ) {
-				fileOutput.write(buffer, 0, bufferLength);
-			}
-			
-			fileOutput.close();
 							
-			output = true;
-
-		} catch (MalformedURLException e) {
-			
-			System.out.println(e.toString());
-			e.printStackTrace();
-			output = false;
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println(e.toString());
-			output = false;
+					InputStream inputStream = ucon.getInputStream();
+					
+					byte[] buffer = new byte[2048];
+					int fullLenght = ucon.getContentLength();
+						
+					int bufferLength = 0;
+					int downloaded = 0;
+							
+					while ((bufferLength = inputStream.read(buffer)) > 0 ) {
+						fileOutput.write(buffer, 0, bufferLength);
+						downloaded += bufferLength;
+						publishProgress(downloaded, fullLenght);
+					}
+					
+					fileOutput.close();
+		
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					exString = "MalformedURLException:\n\n" + e.getMessage() + "\n";
+					return false;
+				} catch (IOException e) {
+					e.printStackTrace();
+					exString = exString + "IOException:\n\n" + e.getMessage();
+					return false;
+				}
+			} else { 
+				return false;
+			}
 		}
-		return output;
+		return true;
 	}
 	
     @Override
 	protected void onProgressUpdate(Integer... progress) {
 		super.onProgressUpdate(progress);
+		if (first_start) {
+			if (progress[1] >= 0) {
+				dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			} else {
+				dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			}
+			dialog.show();
+			dialog.setMax(progress[1]);
+			first_start = false;
+		}
+		dialog.setProgress(progress[0]);
 	}
 	
 	protected void onPostExecute(Boolean success) {
-		AfterDownload.run();
+		
 		dialog.dismiss();
+		
+		if (success) {
+			AfterDownload.run();
+		} else {
+			outputFile.delete();
+			if (!exString.equals("")) {
+				nu.createDialog(R.string.error, String.format(exString, R.string.failed_download), true);
+			} else {
+				nu.createDialog(R.string.warning, R.string.noconnection, true, true);
+			}
+		}
 	 }
 }

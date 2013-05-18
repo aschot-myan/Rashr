@@ -1,11 +1,18 @@
 package de.mkrtchyan.recoverytools;
 
+import java.io.File;
+
+
 
 public class Support {
 	
 	public String DEVICE = android.os.Build.DEVICE;
 	public String BOARD = android.os.Build.BOARD;
 	public String RecoveryPath;
+	public String SYSTEM;
+	public String VERSION;
+	public String EXT = ".img";
+	public String HOST_URL = "http://dslnexus.nazuka.net/recoveries";
 	public boolean KINDLE = false;
 	public boolean KERNEL_TO = false;
 	public boolean FLASH_OVER_RECOVERY = false;
@@ -13,14 +20,19 @@ public class Support {
 	public boolean BLM = false;
 	public boolean TWRP = true;
 	public boolean CWM = true;
-	public String EXT = ".img";
+	public boolean TWRP_OFFICIAL = true;
+	public boolean CWM_OFFICIAL = true;
+	
 
 	public Support(){
 		
 //	Set DEVICE predefined options
 		
-//		Kindle Fire HD 7"
+//		Asus Transformer Infinity
+		if (DEVICE.equals("tf700t"))
+			EXT = ".blob";
 		
+//		Kindle Fire HD 7"
 		if (DEVICE.equals("D01E"))
 			DEVICE = "kfhd7";
 		
@@ -46,7 +58,7 @@ public class Support {
 				|| BOARD.equals("n7100")
 				|| BOARD.equals("GT-N7100"))
 			DEVICE = "n7100";
-		
+//		Galaxy Note 2 LTE
 		if (DEVICE.equals("t0ltexx")
 				|| DEVICE.equals("GT-N7105")
 				|| DEVICE.equals("t0ltedv")
@@ -82,9 +94,6 @@ public class Support {
 				|| BOARD.equals("i9300"))
 			DEVICE = "i9300";
 		
-//		if (DEVICE.equals("GT-S5369"))
-//			DEVICE = "totoro";
-		
 //		Galaxy S2
 		if (DEVICE.equals("GT-I9100G")
 				|| DEVICE.equals("GT-I9100M")
@@ -102,32 +111,37 @@ public class Support {
 		}
 		
 //		Galaxy S2 ATT
-		
-		if (DEVICE.equals("SGH-I777")){
+		if (DEVICE.equals("SGH-I777")
+				|| DEVICE.equals("galaxys2att")
+				|| BOARD.equals("SGH-777")
+				|| BOARD.equals("galaxys2att")){
+			DEVICE = "galaxys2att";
 			FLASH_OVER_RECOVERY = true;
 			EXT = ".zip";
 		}
 		
 //		Galaxy S2 LTE (skyrocket)
-		if (DEVICE.equals("skyrocket")
-				|| DEVICE.equals("SGH-I727")
+		if (DEVICE.equals("SGH-I727")
 				|| BOARD.equals("skyrocket")
 				|| BOARD.equals("SGH-I727"))
 			DEVICE = "skyrocket";
-		
-//		Devices who kernel will be flashed to
-		if (DEVICE.equals("nozomi")
-				|| DEVICE.equals("mint")
-				|| DEVICE.equals("LT30p")
-				|| DEVICE.equals("LT26i"))
-			KERNEL_TO = true;
 		
 //		Sony Xperia Z C6603
 		
 		if (DEVICE.equals("C6603"))
 			EXT = ".tar";
 			
+//		Sony Xperia S
 		
+		if (DEVICE.equals("LT26i"))
+			DEVICE = "nozomi";
+		
+//		Sony Xperia T
+		
+		if (DEVICE.equals("LT30p"))
+			DEVICE = "mint";
+		
+//		MTD Devices
 		if (DEVICE.equals("crespo")
 				|| DEVICE.equals("crespo4g")
 				|| DEVICE.equals("passion")
@@ -138,6 +152,12 @@ public class Support {
 		
 		if (BOARD.equals("ace"))
 			DEVICE = "ace";
+		
+//		Devices who kernel will be flashed to
+		if (DEVICE.equals("nozomi")
+				|| DEVICE.equals("mint"))
+			KERNEL_TO = true;
+		
 		
 		RecoveryPath = getRecoveryPath();
 		getSupportedSystems();
@@ -266,5 +286,159 @@ public class Support {
 			TWRP = false;
 			CWM = false;
 		}
+		
+	}
+	
+	public void getVersion(String SYSTEM) {
+		
+		this.SYSTEM = SYSTEM;
+		
+		if (SYSTEM.equals("clockwork")) {
+			
+//		CLOCKWORKMOD touch supported devices
+			if (DEVICE.equals("ace")
+					|| DEVICE.equals("crespo")
+					|| DEVICE.equals("crespo4g")
+					|| DEVICE.equals("d2att")
+					|| DEVICE.equals("d2tmo")
+					|| DEVICE.equals("endeavoru")
+					|| DEVICE.equals("evita")
+					|| DEVICE.equals("fireball")
+					|| DEVICE.equals("galaxys2")
+					|| DEVICE.equals("grouper")
+					|| DEVICE.equals("i9300")
+					|| DEVICE.equals("maguro")
+					|| DEVICE.equals("mako")
+					|| DEVICE.equals("manta")
+					|| DEVICE.equals("n7100")
+					|| DEVICE.equals("pyramid")
+					|| DEVICE.equals("saga")
+					|| DEVICE.equals("skyrocket")
+					|| DEVICE.equals("t0lte")
+					|| DEVICE.equals("tilapia")
+					|| DEVICE.equals("toro")
+					|| DEVICE.equals("toroplus")
+					|| DEVICE.equals("ville")
+					|| DEVICE.equals("warp2"))
+				VERSION = "-touch";
+			
+//			Newest Clockworkmod version for devices
+			
+			if (DEVICE.equals("droid2"))
+				VERSION = VERSION + "-5.0.2.0";
+			
+			if (DEVICE.equals("pyramid"))
+				VERSION = VERSION + "-5.8.0.9";
+			
+			if (DEVICE.equals("ace")
+					|| DEVICE.equals("saga")
+					|| DEVICE.equals("galaxys2"))
+				VERSION = VERSION + "-5.8.1.5";
+			
+			if (DEVICE.equals("endeavoru"))
+				VERSION = VERSION + "-5.8.4.0";
+			
+			if (DEVICE.equals("primou"))
+				VERSION = VERSION + "-5.8.4.5";
+			
+			if (DEVICE.equals("n7000"))
+				VERSION = VERSION + "-6.0.1.2";
+			
+			if (DEVICE.equals("golden")
+					|| DEVICE.equals("warp2"))
+				VERSION = VERSION + "-6.0.2.7";
+			
+			if (DEVICE.equals("crespo")
+					|| DEVICE.equals("crespo4g")
+					|| DEVICE.equals("d2att")
+					|| DEVICE.equals("d2tmo")
+					|| DEVICE.equals("dlxub1")
+					|| DEVICE.equals("evita")
+					|| DEVICE.equals("fireball")
+					|| DEVICE.equals("grouper")
+					|| DEVICE.equals("i9300")
+					|| DEVICE.equals("maguro")
+					|| DEVICE.equals("mako")
+					|| DEVICE.equals("manta")
+					|| DEVICE.equals("n7100")
+					|| DEVICE.equals("skyrocket")
+					|| DEVICE.equals("t0lte")
+					|| DEVICE.equals("tilapia")
+					|| DEVICE.equals("toro")
+					|| DEVICE.equals("toroplus")
+					|| DEVICE.equals("ville"))
+				VERSION = VERSION + "-6.0.3.1";
+			
+			if (VERSION.equals(""))
+				CWM_OFFICIAL = false;
+			
+//			HOST_URL = "http://download2.clockworkmod.com/recoveries";
+		}
+		
+		if (SYSTEM.equals("twrp")) {
+			
+			if (DEVICE.equals("ace")
+					|| DEVICE.equals("crespo")
+					|| DEVICE.equals("crespo4g")
+					|| DEVICE.equals("d2att")
+					|| DEVICE.equals("d2tmo")
+					|| DEVICE.equals("d2vzw")
+					|| DEVICE.equals("endeavoru")
+					|| DEVICE.equals("evita")
+					|| DEVICE.equals("fireball")
+					|| DEVICE.equals("geeb")
+					|| DEVICE.equals("golden")
+					|| DEVICE.equals("grouper")
+					|| DEVICE.equals("i9300")
+					|| DEVICE.equals("maguro")
+					|| DEVICE.equals("mako")
+					|| DEVICE.equals("manta")
+					|| DEVICE.equals("mint")
+					|| DEVICE.equals("nozomi")
+					|| DEVICE.equals("passion")
+					|| DEVICE.equals("primou")
+					|| DEVICE.equals("pyramid")
+					|| DEVICE.equals("skyrocket")
+					|| DEVICE.equals("t0lte")
+					|| DEVICE.equals("t0lteatt")
+					|| DEVICE.equals("t0ltetmo")
+					|| DEVICE.equals("t0ltevzw")
+					|| DEVICE.equals("tilapia")
+					|| DEVICE.equals("toro")
+					|| DEVICE.equals("toroplus")
+					|| DEVICE.equals("ville")
+					|| DEVICE.equals("villec2"))
+				VERSION = "-2.5.0.0";
+			
+			if (DEVICE.equals("dlxub1")
+					|| DEVICE.equals("n7100")
+					|| DEVICE.equals("saga"))
+				VERSION = "-2.5.0.1";
+			
+			if (VERSION.equals(""))
+				TWRP_OFFICIAL = false;
+			
+//			HOST_URL = "http://techerrata.com/get/twrp2/" + DEVICE;
+		}
+	}
+	
+	public File constructFile(File Path) {
+		
+		File file = null;
+		if (SYSTEM.equals("clockwork"))
+			if (CWM_OFFICIAL) {
+				file = new File(Path, "recovery-" + SYSTEM + VERSION + "-" + DEVICE + EXT);
+			} else {
+				file = new File(Path, DEVICE + "-cwm" +  EXT);
+			}
+			
+		if (SYSTEM.equals("twrp")) 
+			if (TWRP_OFFICIAL) {
+				file = new File(Path, "openrecovery-" + SYSTEM + VERSION + "-" + DEVICE + EXT);
+			} else {
+				file = new File(Path, DEVICE + "-twrp" +  EXT);
+			}
+			
+		return file;
 	}
 }

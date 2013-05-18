@@ -22,7 +22,6 @@ package de.mkrtchyan.recoverytools;
  */
 
 import java.io.File;
-import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -35,8 +34,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -55,25 +52,25 @@ public class MainActivity extends Activity {
 //	Get path to external storage
 	private static final File PathToSd = Environment.getExternalStorageDirectory();
 //	Declaring needed files and folders
-	private static final File PathToRecoveryTools = new File(PathToSd , "RecoveryTools");
+	private static final File PathToRecoveryTools = new File(PathToSd , "Recovery-Tools");
 	private static final File PathToRecoveries = new File(PathToRecoveryTools ,"recoveries");
-	private static final File PathToBackups = new File(PathToRecoveryTools, "backups");
-	private static File fBACKUP;
-	private static File fRECOVERY;
-	private static String SYSTEM;
-	private static CheckBox cbUseBinary;
-	private static boolean firstrun;
 	
-	Context context = this;
+	private static File fRECOVERY;
+//	Declaring Views
+	private static TextView tvInfo;
+	private static CheckBox cbUseBinary;
+	private static MenuItem iLog, iShowLogs;
+//	Declaring other vars
+	private static boolean firstrun = true;
+	Context mContext = this;
+//	Declaring needed objects
+	NotificationUtil nu = new NotificationUtil(mContext);
+	CommonUtil cu = new CommonUtil(mContext);
+	FlashUtil fu = new FlashUtil(mContext);
 	Support s = new Support();
-	FlashUtil fu = new FlashUtil(context);
+	
 	FileChooser fcFlashOther;
-	FileChooser fcRestore;
-	NotificationUtil nu = new NotificationUtil(context);
-	CommonUtil cu = new CommonUtil(context);
-	Dialog dialog;
-	AlertDialog.Builder abuilder;
-	String bakname, resname;
+
 	
 //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
 	Runnable rFlash = new Runnable() {
@@ -102,7 +99,7 @@ public class MainActivity extends Activity {
 					if (s.KERNEL_TO)
 						nu.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash);
 					if (s.FLASH_OVER_RECOVERY) {
-						abuilder = new AlertDialog.Builder(context);
+						final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
 						abuilder
 							.setTitle(R.string.info)
 							.setMessage(R.string.flash_over_recovery)
@@ -113,15 +110,15 @@ public class MainActivity extends Activity {
 									cu.executeShell("reboot recovery", true);
 								}
 							})
-							.setNeutralButton("Instructions", new DialogInterface.OnClickListener() {
+							.setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									Dialog d = new Dialog(context);
-									d.setTitle("Instructions");
-									TextView tv = new TextView(context);
+									Dialog d = new Dialog(mContext);
+									d.setTitle(R.string.instructions);
+									TextView tv = new TextView(mContext);
 									tv.setTextSize(20);
-									tv.setText(R.string.instructions);
+									tv.setText(R.string.instruction);
 									d.setContentView(tv);
 									d.setOnCancelListener(new DialogInterface.OnCancelListener() {
 										
@@ -144,76 +141,39 @@ public class MainActivity extends Activity {
 			
 		}
 	};
-	Runnable rBackup = new Runnable(){
-		@Override
-		public void run() {
-			if (s.FLASH_OVER_RECOVERY 
-					|| s.BLM){
-				nu.createDialog(R.string.warning, R.string.no_function, true, true);	
-			} else {
-				fu.backup(fBACKUP);
-				nu.createDialog(R.string.info, R.string.bakreport, true, true);
-			}
-		}
-	};
-	Runnable rRestore = new Runnable(){
-		@Override
-		public void run() {
-			if (s.FLASH_OVER_RECOVERY 
-					|| s.BLM){
-				nu.createDialog(R.string.warning, R.string.no_function, true, true);	
-			} else {
-				if (fcRestore.use)
-					fBACKUP = fcRestore.selectedFile;
-				fu.flash(fBACKUP);
-				nu.createDialog(R.string.info, R.string.resreport, true, true);
-			}
-		}
-	};
+	
 	Runnable rDownload = new Runnable(){
 		@Override
 		public void run() {
-			if (!fRECOVERY.exists()) {
-				ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-				NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-			
-				if (networkInfo != null 
-						&& networkInfo.isConnected()) {
-					downloadFile(String.format(context.getString(R.string.DOWNLOAD_URL), fRECOVERY.getName().toString()), fRECOVERY);
-				} else {
-					nu.createDialog(R.string.warning, R.string.noconnection, true, true);
-				}
-			}
+			downloadFile(s.HOST_URL + "/" + fRECOVERY.getName().toString(), fRECOVERY);
 		}};
 	Runnable runOnTrue = new Runnable() {
 		@Override
-		public void run() {report();}
-		
+		public void run() {report(null);}
 	};
 	Runnable runOnNegative = new Runnable() {
-
 		@Override
 		public void run() {
 			createNotification(R.drawable.ic_launcher, R.string.warning, R.string.notsupportded, 28);
 			finish();
 			System.exit(0);
 		}
-		
 	};
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		getSupport(); 
+		getSupport();
 		
-		checkFolder();
+		cu.checkFolder(PathToRecoveryTools);
+		cu.checkFolder(PathToRecoveries);
 		
-		TextView tvInfo = (TextView) findViewById (R.id.tvInfo);
+		tvInfo = (TextView) findViewById (R.id.tvInfo);
 		
 		tvInfo.setText("\nModel: " + android.os.Build.MODEL + "\nName: " + s.DEVICE);
 		
-		if (!firstrun){
+		if (firstrun){
 			
 			if (!cu.suRecognition()) {
 				createNotification(R.drawable.ic_launcher, R.string.warning, R.string.noroot, 28);
@@ -221,7 +181,7 @@ public class MainActivity extends Activity {
 				System.exit(0);
 			}
 			
-			firstrun = true;
+			firstrun = false;
 		}
 		
 		cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
@@ -230,7 +190,7 @@ public class MainActivity extends Activity {
 				&& !s.MTD) {
 			nu.createAlertDialog(R.string.warning, R.string.notsupportded, true, runOnTrue, false, new Runnable(){public void run() {}}, true, runOnNegative);
 		} else if (!s.RecoveryPath.equals("")){
-			cbUseBinary.setText(String.format(context.getString(R.string.using_dd), "\n" + s.RecoveryPath));
+			cbUseBinary.setText(String.format(mContext.getString(R.string.using_dd), "\n" + s.RecoveryPath));
 		} else if (s.MTD){
 			cbUseBinary.setText(R.string.using_mtd);
 		}
@@ -238,70 +198,28 @@ public class MainActivity extends Activity {
 	}
 
 //	Button Methods (onClick)
-	@SuppressWarnings("static-access")
 	public void Go(View view){
-		SYSTEM = view.getTag().toString();
-		fRECOVERY = new File(PathToRecoveries, s.DEVICE + "-" + SYSTEM + s.EXT);
-		rFlasher.run();
-		new Appirater().appLaunched(context);
-	}
-	
-	public void bFlashOther(View view){
-		fcFlashOther = new FileChooser(context, PathToSd.getAbsolutePath(), rFlasher);
-	}
-	public void bBackup(View view) {
+		s.getVersion(view.getTag().toString());
 		
-		final Dialog dialog = new Dialog(context);
-		dialog.setTitle("Set name of Backup");
-		dialog.setContentView(R.layout.dialog_renamer);
-		Button dobackup = (Button) dialog.findViewById(R.id.bGoBackup);
-		final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
-		dobackup.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				String Name = "";
-				if (!etFileName.getText().toString().equals("")) {
-					Name = etFileName.getText().toString();
-				} else {
-					Calendar c = Calendar.getInstance();
-					Name = Calendar.DATE
-							+ "-" + c.get(Calendar.MONTH)
-							+ "-" + c.get(Calendar.YEAR)
-							+ "-" + c.get(Calendar.HOUR)
-							+ ":" + c.get(Calendar.MINUTE)
-							+ "-" + c.get(Calendar.AM_PM);
-				}
-				
-				fBACKUP = new File(PathToBackups, Name);
-					
-				if (fBACKUP.exists()) {
-					nu.createAlertDialog(R.string.warning, R.string.backupalready, rBackup);
-				} else {
-					rBackup.run();
-				}
-				dialog.dismiss();
-			}
-		});
-		dialog.show();
+		fRECOVERY = s.constructFile(PathToRecoveries);
+		rFlasher.run();
+		Appirater.appLaunched(mContext);
 	}
-	public void bRestore(View view) {
-		if (PathToBackups.list().length < 1) {
-			nu.createAlertDialog(R.string.warning, R.string.nobackup, rBackup);
-		} else {
-			fcRestore = new FileChooser(context, PathToBackups.getAbsolutePath(), rRestore);
-		}
+	public void bFlashOther(View view){
+		fcFlashOther = new FileChooser(mContext, PathToSd.getAbsolutePath(), rFlasher);
+	}
+	public void bBackupMgr(View view) {
+		startActivity(new Intent(this, BackupManagerActivity.class));
 	}
 	public void bCleareCache(View view) {
 		cu.deleteFolder(PathToRecoveries, false);
 	}
 	public void bRebooter(View view) {
-		new Rebooter(context).run();
+		new Rebooter(mContext).run();
 	}
 //	Called from Button Methods, created to redundancy
 	public void downloadFile(String URL, File outputFile) {
-		DownloadUtil du = new DownloadUtil(context, URL, outputFile, rFlasher);
-		du.execute();
+		new DownloadUtil(mContext, URL, outputFile, rFlasher).execute();
 	}
 
 	public void getSupport() {
@@ -338,45 +256,56 @@ public class MainActivity extends Activity {
 	    return true;
 	}
 	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    super.onPrepareOptionsMenu(menu);
+	    iShowLogs = menu.findItem(R.id.iShowLogs);
+	    iShowLogs.setVisible(cu.getBooleanPerf("common_util", "log"));
+	    iLog = menu.findItem(R.id.iLog);
+	    iLog.setChecked(cu.getBooleanPerf("common_util", "log"));
+	    return true;
+	}
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case R.id.iProfile:
 	            cu.xdaProfile();
 	            return true;
-	        case R.id.iReport:
-	        	report();
-	        	return true;
 	        case R.id.iExit:
 	        	finish();
 	    		System.exit(0);
+	    		return true;
+	        case R.id.iLog:
+	        	if (cu.getBooleanPerf("common_util", "log")){
+	        		iLog.setChecked(false);
+	        		cu.setBooleanPerf("common_util", "log", false);
+	        	} else {
+	        		iLog.setChecked(true);
+	        		cu.setBooleanPerf("common_util", "log", true);
+	        	}
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
 	
-	private void checkFolder(){
-		cu.checkFolder(PathToRecoveryTools);
-		cu.checkFolder(PathToRecoveries);
-		cu.checkFolder(PathToBackups);
-	}
 	
-	public void report() {
-		dialog = new Dialog(context);
-		dialog.setContentView(R.layout.dialog_comment);
-		dialog.setTitle("Commentar");
-		Button ok = (Button) dialog.findViewById(R.id.bGo);
+	public void report(MenuItem Item) {
+		final Dialog reportDialog = nu.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
+		Button ok = (Button) reportDialog.findViewById(R.id.bGo);
 		ok.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				try {
 					PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-					EditText text = (EditText) dialog.findViewById(R.id.etFileName);
+					EditText text = (EditText) reportDialog.findViewById(R.id.etCommentar);
 					String comment = text.getText().toString();
+
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("text/plain");
-					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {context.getString(R.string.REPORT_to_EMAIL)});
-					intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.EMAIL_SUBJECT));
+					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {mContext.getString(R.string.REPORT_to_EMAIL)});
+					intent.putExtra(Intent.EXTRA_SUBJECT, mContext.getString(R.string.EMAIL_SUBJECT));
 					intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
 							"\n\nName: " + pInfo.packageName +
 							"\nVersionName: " + pInfo.versionName +
@@ -390,15 +319,21 @@ public class MainActivity extends Activity {
 							"\n\n\n===========Comment==========\n" + comment +
 							"\n===========Comment==========");
 					startActivity(Intent.createChooser(intent, "Send as EMAIL"));
-					dialog.dismiss();
-				
+					reportDialog.dismiss();
 				} catch (NameNotFoundException e) {
-					nu.createDialog(R.string.warning, e.getMessage(), true);
 					e.printStackTrace();
 				}
 			}
 		});
 		
-		dialog.show();
+		reportDialog.show();
+	}
+	
+	public void showLogs(MenuItem item) {
+		
+		Dialog dialog = nu.createDialog(R.string.su_logs_title, R.layout.dialog_su_logs, false, true);
+		TextView Log = (TextView) dialog.findViewById(R.id.tvSuLogs);
+		
+		Log.setText(fu.cu.SuLog);
 	}
 }

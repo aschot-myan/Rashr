@@ -36,18 +36,17 @@ import org.rootcommands.Toolbox;
 import org.rootcommands.command.SimpleCommand;
 import org.rootcommands.util.RootAccessDeniedException;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
-import android.widget.TextView;
+
 
 public class CommonUtil {
 
 	Context context;
 	Shell shell;
-	boolean su;
+	public String SuLog = "";
 		
 	public CommonUtil(Context context) {
 		this.context = context;
@@ -85,7 +84,7 @@ public class CommonUtil {
 		}
 	}
 	
-	public void chmod(File file, String mod) {
+	public void chmod(File file, String mod, boolean su) {
 		
 		try{
 			if (su){
@@ -96,7 +95,7 @@ public class CommonUtil {
 				shell = Shell.startShell();
 		}
 		Toolbox tb = new Toolbox(shell);
-			if (tb.getFilePermissions(file.getAbsolutePath()).equals(mod))
+			if (!tb.getFilePermissions(file.getAbsolutePath()).equals(mod))
 					tb.setFilePermissions(file.getAbsolutePath(), mod);
 		} catch (IOException e) {} catch (TimeoutException e) {}
 	}
@@ -117,7 +116,6 @@ public class CommonUtil {
 			zin = new ZipInputStream(fin); 
 			
 			while ((ze = zin.getNextEntry()) != null) { 
-				Log.v("Decompress", "Unzipping " + ze.getName()); 
 	
 				if(ze.isDirectory()) { 
 					checkFolder(new File(OutputFolder, ze.getName())); 
@@ -132,15 +130,7 @@ public class CommonUtil {
 				} 
 			} 
 			zin.close(); 
-		} catch(Exception e) {
-			Log.e("Decompress", "unzip", e); 
-			e.printStackTrace();
-			Dialog dialog = new Dialog(context);
-			TextView tv = new TextView(context);
-			tv.setText(e.getMessage() +  " Filename: " +  ze.getName().toString());
-			dialog.setContentView(tv);
-			dialog.show();
-		} 
+		} catch(Exception e) {} 
 	
 	}
 	
@@ -161,7 +151,7 @@ public class CommonUtil {
 			Shell shell = Shell.startRootShell();
 			Toolbox tb = new Toolbox(shell);
 			tb.remount(Dir.getAbsolutePath(), mode);
-		} catch (RootAccessDeniedException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
+		} catch (RootAccessDeniedException e) {} catch (IOException e) {}
 	}
 	
 	public void copy(File Source, File Destination, boolean Mount){
@@ -181,8 +171,6 @@ public class CommonUtil {
 	}
 	
 	public String executeShell(String Command, boolean su){
-//		boolean log = (Boolean) getPerf("common-util", "log", "boolean");
-//		boolean log = true;
 		SimpleCommand command = new SimpleCommand(Command);
 		try {
 			Shell shell;
@@ -194,33 +182,29 @@ public class CommonUtil {
 			shell.add(command).waitForFinish();
 		} catch (RootAccessDeniedException e) {} catch (IOException e) {} catch (TimeoutException e) {}
 		String output = command.getOutput();
-//		String tmp = "Command:\n\n" + Command + "Output:\n\n" + output;
-//		if (su){
-//			File fLOG = new File(context.getFilesDir(), "RecoveryTools.log");
-//			if (!fLOG.exists())
-//				try {
-//					fLOG.createNewFile();
-//				} catch (IOException e1) {}
-//			try {
-//				FileOutputStream fo = context.openFileOutput(fLOG.getName().toString(), Context.MODE_APPEND);
-//				fo.write(tmp.getBytes());
-//				fo.write("\n".getBytes());
-//			} catch (FileNotFoundException e) {} catch (IOException e) {} catch (NullPointerException e) {}
-//		}
-//			
+		if (getBooleanPerf("common_util", "log")){
+			if (!SuLog.equals("")) {
+				SuLog = SuLog + 
+					"\n\nCommand:\n" + Command + 
+					"\n\nOutput:\n" +  output;
+			} else {
+				SuLog = "Command:\n" + Command + 
+						"\n\nOutput:\n" +  output;
+			}
+		}
+			
 		return output;
 	}
 
-//	public Object getPerf(String PrefName, String Key, String type){
-//		if (type.equals("boolean")){
-//			SharedPreferences prefs = context.getSharedPreferences(PrefName, context.MODE_PRIVATE);
-//			boolean pref = prefs.getBoolean(Key, false);
-//			return pref;
-//		}
-//		return true;
-//	}
+	public boolean getBooleanPerf(String PrefName, String key){
+		SharedPreferences prefs = context.getSharedPreferences(context.getPackageName() + "." + PrefName, Context.MODE_PRIVATE);
+		boolean pref = prefs.getBoolean(key, false);
+		return pref;
+	}
 	
-	public void setPerf(){
-		
+	public void setBooleanPerf(String PrefName, String key, Boolean value) {
+		SharedPreferences.Editor editor = context.getSharedPreferences(context.getPackageName() + "." + PrefName, Context.MODE_PRIVATE).edit();
+		editor.putBoolean(key, value);
+		editor.commit();
 	}
 }

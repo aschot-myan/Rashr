@@ -3,7 +3,7 @@
     package="de.mkrtchyan.recoverytools"
     android:installLocation="auto"
     android:versionCode="15"
-    android:versionName="1.1.4" >
+    android:versionName="1.2.0" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -29,6 +29,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="de.mkrtchyan.recoverytools.BackupManagerActivity"
+            android:label="@string/title_activity_backup_manager" >
         </activity>
     </application>
 

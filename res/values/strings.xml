@@ -10,69 +10,60 @@
     <string name="sRebooter">Rebooter</string>
     <string name="sRestore">Restore from Backup</string>
     <string name="sCleareCache">Clear downloaded recoveries</string>
-    
     <string name="report">Scan Report unsupported Device</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Profile</string>
-    
     <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.com</string>
     <string name="EMAIL_SUBJECT">Recovery-Tools report to support new Device</string>
     <string name="rename">If you want set a custom name to the backup type it in the text field. If not the current time will be set.</string>
-    
-    
-    
     <string name="sReboot">Reboot</string>
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
-    
-    
-    
     <string name="file_chooser">File Chooser</string>
     <string name="empty_dir">Directory empty: %s</string>
     <string name="choose_message">Flash %s. Are you sure?</string>
-    
-    
-    
     <string name="rate_title">Rate %s</string>
     <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it? Thanks for your support!</string>
     <string name="rate">Yes, Rate %s</string>
     <string name="rate_later">Remind me later</string>
     <string name="rate_cancel">No, Thanks</string>
-    
-    
     <string name="empty"></string>
     <string name="info">Information</string>
     <string name="flashed">Recovery flashed.</string>
     <string name="warning">Warning!</string>
     <string name="kernel_to">Flashing the Recovery System on this devices will flash the Boot.img (Kernel) to Stock with custom Recovery.</string>
     <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
-    <string name="instructions">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from sdcard\n\nTWRP:\n\nMain Menu -> Install</string>
+    <string name="instructions">Instructions</string>
+    <string name="instruction">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from sdcard\n\nTWRP:\n\nMain Menu -> Install</string>
     <string name="getdownload">Recovery IMG not found. Download now?</string>
     <string name="no_function">This function is not avariable on your device</string>
-  
     <string name="bakreport">Backup process completed</string>
     <string name="resreport">Restore process completed</string>
     <string name="backupalready">Backup already exists. This will override the existing one. Continue?</string>
-    <string name="nobackup">No existing Backup found (InternalStorage/RootTools/backup/backup.img). Create one now?</string>
-  
-    <string name="DOWNLOAD_URL">http://dslnexus.nazuka.net/recoveries/%s</string>
+    <string name="nobackup">No existing Backup found (InternalStorage/Recovery-Tools/backups/). Create one now?</string>
     <string name="noconnection">No network available. Download canceled!</string>
-    
+    <string name="failed_download">Oh no, a problem is occurred. Please restart the download.\n\n%s</string>
+    <string name="error">Error</string>
     <string name="notsupportded">Your Device is not supported by the developer yet. Scan System and Report unsupported Device?</string>
     <string name="noroot">"Device not Rooted. Please Root it. More information under xda-developer.com"</string>
     <string name="notwrp">TWRP not supported</string>
     <string name="nocwm">CWM not supported</string>
-    
     <string name="using_dd">Using dd binary. Recovery in FS: %s</string>
     <string name="using_mtd">Use flash/dump_image (MTD)</string>
-    
     <string name="download">Download</string>
-    <string name="Downloading">Downloading....</string>
-    
+    <string name="Downloading">Downloading&#8230;</string>
+    <string name="commentar">Commentar</string>
     <string name="commenthint">Comment here, what is not working correctly (download, flash, common support or other)</string>
-    
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
-    
+    <string name="su_logs_title">Executed su-Commands of this session</string>
+    <string name="log">Log SU-Commands</string>
+    <string name="showlog">Show Logs</string>
+    <string name="action_settings">tasdasdasdkjaskdjbahskdjb</string>
+    <string name="title_activity_backup_manager">Backup-Manager</string>
+    <string name="sDeleteBackup">Delete Backup</string>
+    <string name="sBackupMgr">Open Backup Manager</string>
+    <string name="setname">Set name of Backup</string>
+
 </resources>

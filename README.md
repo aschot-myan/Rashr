@@ -62,7 +62,7 @@ Supported Devices
 ----- [CWM only] -----
 
 -Samsung Galaxy SII (i9100/i9100G)
--Samsung Galaxy S2 AT&T (SGH-I777)
+-Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
 -Samsung Galaxy Note (n7000)
 
 -Motorola Droid2 (droid2)
@@ -83,9 +83,19 @@ CHANGELOG
 
 [Working on]
 
--Recovery Version recognition
 -Stock Recoveries
 -Samsung BLM Devices
+
+Update [1.2.0]
+
+-Asus Transformer Infinity fixed
+-Samsung Galaxy S2 AT&T (SGH-I727) fixed
+-Download optimized(better fail dettention)
+-Clean up codes
+-Recovery Version recognition
+-Report function fixed
+-SU-Commands logging function.
+-New Backup Manager to create, delete and restore backups.
 
 Update [1.1.4]
 
