@@ -84,13 +84,14 @@ public class RecoveryTools extends Activity {
 	Runnable rFlasher = new Runnable(){
 		@Override
 		public void run() {
-
-			if (fcFlashOther.use){
-				if (fcFlashOther.selectedFile.getName().endsWith(s.EXT)) {
-					fRECOVERY = fcFlashOther.selectedFile;
-				} else {
-					fRECOVERY = null;
-					nu.createDialog(R.string.warning, String.format(mContext.getString(R.string.wrong_format), s.EXT), true);
+			if (fcFlashOther != null) {
+				if (fcFlashOther.use){
+					if (fcFlashOther.selectedFile.getName().endsWith(s.EXT)) {
+						fRECOVERY = fcFlashOther.selectedFile;
+					} else {
+						fRECOVERY = null;
+						nu.createDialog(R.string.warning, String.format(mContext.getString(R.string.wrong_format), s.EXT), true);
+					}
 				}
 			}
 			

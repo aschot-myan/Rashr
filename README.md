@@ -92,6 +92,10 @@ CHANGELOG
 -Stock Recoveries
 -Samsung BLM Devices
 
+Update [1.2.2]
+
+-Fix CWM & TWRP button
+
 Update [1.2.1]
 
 -Custom Recovery from SD fix (Check if format is correct)
