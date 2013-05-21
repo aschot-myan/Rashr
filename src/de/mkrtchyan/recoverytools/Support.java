@@ -2,15 +2,25 @@ package de.mkrtchyan.recoverytools;
 
 import java.io.File;
 
+import org.rootcommands.util.RootAccessDeniedException;
+
+import android.os.Environment;
+
 
 
 public class Support {
-	
+	/*
+	 * This class content all device specified informations to provide
+	 * all informations for all other classes for example:
+	 * What kind of partition and where is the recovery partition in the
+	 * FileSystem
+	 */
+	CommonUtil cu = new CommonUtil();
 	public String DEVICE = android.os.Build.DEVICE;
 	public String BOARD = android.os.Build.BOARD;
 	public String RecoveryPath;
 	public String SYSTEM;
-	public String VERSION;
+	public String VERSION = "";
 	public String EXT = ".img";
 	public String HOST_URL = "http://dslnexus.nazuka.net/recoveries";
 	public boolean KINDLE = false;
@@ -19,8 +29,10 @@ public class Support {
 	public boolean MTD = false;
 	public boolean BLM = false;
 	public boolean TWRP = true;
-	public boolean CWM = true;
+	public boolean TWRP_INSTALLED = false;
 	public boolean TWRP_OFFICIAL = true;
+	public boolean CWM = true;
+	public boolean CWM_INSTALLED = false;
 	public boolean CWM_OFFICIAL = true;
 	
 
@@ -47,7 +59,6 @@ public class Support {
 				|| BOARD.equals("N7000")){
 			DEVICE = "n7000";
 			FLASH_OVER_RECOVERY = true;
-			EXT = ".zip";
 		}
 		
 //		Galaxy Note 2
@@ -106,7 +117,6 @@ public class Support {
 				|| BOARD.equals("GT-I9100")
 				|| BOARD.equals("galaxys2")){
 			FLASH_OVER_RECOVERY = true;
-			EXT = ".zip";
 			DEVICE = "galaxys2";
 		}
 		
@@ -117,7 +127,6 @@ public class Support {
 				|| BOARD.equals("galaxys2att")){
 			DEVICE = "galaxys2att";
 			FLASH_OVER_RECOVERY = true;
-			EXT = ".zip";
 		}
 		
 //		Galaxy S2 LTE (skyrocket)
@@ -125,6 +134,13 @@ public class Support {
 				|| BOARD.equals("skyrocket")
 				|| BOARD.equals("SGH-I727"))
 			DEVICE = "skyrocket";
+		
+//		Samsung GalaxyS Captivate (SGH-I897)
+		if (DEVICE.equals("SGH-I897")
+				|| DEVICE.equals("captivate")) {
+			DEVICE.equals("captivate");
+			FLASH_OVER_RECOVERY = true;
+		}
 		
 //		Sony Xperia Z C6603
 		
@@ -147,7 +163,8 @@ public class Support {
 				|| DEVICE.equals("passion")
 				|| DEVICE.equals("saga")
 				|| DEVICE.equals("swift")
-				|| DEVICE.equals("geeb"))
+				|| DEVICE.equals("geeb")
+				|| DEVICE.equals("thunderc"))
 			MTD = true;
 		
 		if (BOARD.equals("ace"))
@@ -158,6 +175,8 @@ public class Support {
 				|| DEVICE.equals("mint"))
 			KERNEL_TO = true;
 		
+		if (FLASH_OVER_RECOVERY)
+			EXT = ".zip";
 		
 		RecoveryPath = getRecoveryPath();
 		getSupportedSystems();
@@ -189,7 +208,8 @@ public class Support {
 		
 		if (DEVICE.equals("d2att")
 				|| DEVICE.equals("d2tmo")
-				|| DEVICE.equals("d2vzw"))
+				|| DEVICE.equals("d2vzw")
+				|| DEVICE.equals("SCH-i929"))
 			tmp = "/dev/block/mmcblk0p18";
 		
 		if (DEVICE.equals("i9300")
@@ -269,14 +289,19 @@ public class Support {
 				|| DEVICE.equals("n7000")
 				|| DEVICE.equals("x3")
 				|| DEVICE.equals("droid2")
-				|| DEVICE.equals("kingdom")) 
+				|| DEVICE.equals("kingdom")
+				|| DEVICE.equals("SGH-I897")
+				|| DEVICE.equals("thunderc")
+				|| DEVICE.equals("SCH-i929")) 
 			TWRP = false;
 		
 		if (DEVICE.equals("nozomi")
 				|| DEVICE.equals("mint")
 				|| DEVICE.equals("LT30p")
 				|| DEVICE.equals("kfhd7")
-				|| DEVICE.equals("LT26i"))
+				|| DEVICE.equals("LT26i")
+				|| DEVICE.equals("thunderc")
+				|| DEVICE.equals("SCH-i929"))
 			CWM = false;
 			
 		if (DEVICE.equals("")
@@ -305,6 +330,7 @@ public class Support {
 					|| DEVICE.equals("evita")
 					|| DEVICE.equals("fireball")
 					|| DEVICE.equals("galaxys2")
+					|| DEVICE.equals("golden")
 					|| DEVICE.equals("grouper")
 					|| DEVICE.equals("i9300")
 					|| DEVICE.equals("maguro")
@@ -319,10 +345,14 @@ public class Support {
 					|| DEVICE.equals("toro")
 					|| DEVICE.equals("toroplus")
 					|| DEVICE.equals("ville")
-					|| DEVICE.equals("warp2"))
+					|| DEVICE.equals("warp2")
+					|| DEVICE.equals("p990"))
 				VERSION = "-touch";
 			
 //			Newest Clockworkmod version for devices
+			
+			if (DEVICE.equals("SGH-I897"))
+				VERSION = VERSION + "-2.5.1.2";
 			
 			if (DEVICE.equals("droid2"))
 				VERSION = VERSION + "-5.0.2.0";
@@ -366,13 +396,18 @@ public class Support {
 					|| DEVICE.equals("tilapia")
 					|| DEVICE.equals("toro")
 					|| DEVICE.equals("toroplus")
-					|| DEVICE.equals("ville"))
+					|| DEVICE.equals("ville")
+					|| DEVICE.equals("p990"))
 				VERSION = VERSION + "-6.0.3.1";
 			
 			if (VERSION.equals(""))
 				CWM_OFFICIAL = false;
 			
-//			HOST_URL = "http://download2.clockworkmod.com/recoveries";
+//			if (CWM_OFFICIAL) {
+//				HOST_URL = "http://download2.clockworkmod.com/recoveries";
+//			} else {
+				HOST_URL = "http://dslnexus.nazuka.net/recoveries";
+//			}
 		}
 		
 		if (SYSTEM.equals("twrp")) {
@@ -407,7 +442,8 @@ public class Support {
 					|| DEVICE.equals("toro")
 					|| DEVICE.equals("toroplus")
 					|| DEVICE.equals("ville")
-					|| DEVICE.equals("villec2"))
+					|| DEVICE.equals("villec2")
+					|| DEVICE.equals("p990"))
 				VERSION = "-2.5.0.0";
 			
 			if (DEVICE.equals("dlxub1")
@@ -418,6 +454,11 @@ public class Support {
 			if (VERSION.equals(""))
 				TWRP_OFFICIAL = false;
 			
+			if (TWRP_OFFICIAL) {
+				HOST_URL = "http://jrummy16.com/jrummy/goodies/recoveries/twrp/" + DEVICE;
+			} else {
+				HOST_URL = "http://dslnexus.nazuka.net/recoveries";
+			}
 //			HOST_URL = "http://techerrata.com/get/twrp2/" + DEVICE;
 		}
 	}
@@ -440,5 +481,17 @@ public class Support {
 			}
 			
 		return file;
+	}
+	
+	public void installZip(File ZipFile) {
+		try {
+			if (!ZipFile.getPath().endsWith(Environment.getExternalStorageDirectory().getAbsolutePath()))
+				cu.executeSuShell("cat " + ZipFile.getAbsolutePath() + " >> "  + new File(Environment.getExternalStorageDirectory(), ZipFile.getName()).getAbsolutePath());
+			File script = new File("/cache/recovery", "openrecoveryscript");
+			cu.executeSuShell("echo install /sdcard/" + ZipFile.getName() + " >> " + script.getAbsolutePath());
+			cu.executeSuShell("reboot recovery");
+		} catch (RootAccessDeniedException e) {
+			e.printStackTrace();
+		}
 	}
 }

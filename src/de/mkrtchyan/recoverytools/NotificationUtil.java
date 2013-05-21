@@ -30,19 +30,16 @@ import android.widget.Toast;
 
 public class NotificationUtil {
 	
-	Context context;
-	TextView tv;
-	Dialog dialog;
-	AlertDialog.Builder abuilder;
+	Context mContext;
 	
-	public NotificationUtil(Context context) {
-		this.context = context;
+	public NotificationUtil(Context mContext) {
+		this.mContext = mContext;
 	}	
 	public Dialog createDialog(int Title, String Message , boolean isCancelable) {
-		tv = new TextView(context);
+		TextView tv = new TextView(mContext);
 		tv.setTextSize(20);
 		tv.setText(Message);
-		dialog = new Dialog(context);
+		Dialog dialog = new Dialog(mContext);
 		dialog.setTitle(Title);
 		dialog.setContentView(tv);
 		dialog.setCancelable(isCancelable);
@@ -50,10 +47,10 @@ public class NotificationUtil {
 		return dialog;
 	}
 	public Dialog createDialog(int Title, int Content, boolean isMessage, boolean isCancelable) {
-		dialog = new Dialog(context);
+		Dialog dialog = new Dialog(mContext);
 		dialog.setTitle(Title);
 		if (isMessage) {
-			tv = new TextView(context);
+			TextView tv = new TextView(mContext);
 			dialog.setContentView(tv);
 			tv.setTextSize(20);
 			tv.setText(Content);
@@ -66,16 +63,16 @@ public class NotificationUtil {
 	}
 	public void createToast(int Message) {
 		Toast
-			.makeText(context, Message, Toast.LENGTH_LONG)
+			.makeText(mContext, Message, Toast.LENGTH_LONG)
 			.show();
 	}
 	public void createToast(String Message) {
 		Toast
-			.makeText(context, Message, Toast.LENGTH_LONG)
+			.makeText(mContext, Message, Toast.LENGTH_LONG)
 			.show();
 	}
 	public AlertDialog.Builder createAlertDialog(int Title, int Message, final Runnable runOnTrue) {
-		abuilder = new AlertDialog.Builder(context);
+		AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
 		abuilder
 			.setTitle(Title)
 			.setMessage(Message)
@@ -97,13 +94,36 @@ public class NotificationUtil {
 		return abuilder;
 	}
 	
-	public AlertDialog.Builder createAlertDialog(int Title, int Message, boolean PositiveButton, final Runnable runOnTrue, boolean NeutralButton, final Runnable runOnNeutral, boolean NegativeButton , final Runnable runOnNegative) {
-		abuilder = new AlertDialog.Builder(context);
+	public AlertDialog.Builder createAlertDialog(int Title, String Message, final Runnable runOnTrue) {
+		AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
+		abuilder
+			.setTitle(Title)
+			.setMessage(Message)
+			.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				runOnTrue.run();
+			}
+		})
+			.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		})
+			.show();
+		return abuilder;
+	}
+	
+	public AlertDialog.Builder createAlertDialog(int Title, int Message, final Runnable runOnTrue, final Runnable runOnNeutral, final Runnable runOnNegative) {
+		AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
 		abuilder
 			.setTitle(Title)
 			.setMessage(Message);
 		
-		if (PositiveButton){
+		if (!runOnTrue.equals(null)){
 			abuilder.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
 			
 				@Override
@@ -114,7 +134,7 @@ public class NotificationUtil {
 			}); 
 		}
 		
-		if (NegativeButton){
+		if (!runOnNegative.equals(null)){
 			abuilder.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
 			
 				@Override
@@ -124,7 +144,7 @@ public class NotificationUtil {
 			});
 		}
 		
-		if (NeutralButton) {
+		if (!runOnNeutral.equals(null)) {
 			abuilder.setNeutralButton(R.string.neutral, new DialogInterface.OnClickListener() {
 				
 				@Override

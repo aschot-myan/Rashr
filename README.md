@@ -56,6 +56,7 @@ Supported Devices
 
 -LG Optiomus G (geeb)
 -LG GT540 Optimus (swift)
+-LG P990 OPTIMUS 2X/SPEED (p990)
 
 -ZTE Sequence (warp2)
 
@@ -64,6 +65,7 @@ Supported Devices
 -Samsung Galaxy SII (i9100/i9100G)
 -Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
 -Samsung Galaxy Note (n7000)
+-Samsung GalaxyS Captivate (SGH-I897)
 
 -Motorola Droid2 (droid2)
 
@@ -76,6 +78,10 @@ Supported Devices
 
 -Kindle Fire HD 7" (tate)
 
+----- [CUSTOM only] -----
+
+-Samsung Galaxy S II Duos (SCH-i929)
+-LG Optimus One CDMA (thuderc)
 
 ====================
 CHANGELOG
@@ -85,6 +91,16 @@ CHANGELOG
 
 -Stock Recoveries
 -Samsung BLM Devices
+
+Update [1.2.1]
+
+-Custom Recovery from SD fix (Check if format is correct)
+-Probably fix Sony Xperia Z (C6603)
+-LG P990 OPTIMUS 2X/SPEED (p990) added.
+-Samsung Galaxy S II Duos (SCH-i929) added.
+-LG Optimus One CDMA (thuderc) added.
+-Samsung GalaxyS Captivate (SGH-I897) added.
+-No more frezzes while flashing
 
 Update [1.2.0]
 

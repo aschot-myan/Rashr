@@ -21,13 +21,11 @@ public class BackupManagerActivity extends Activity {
 	
 	Context mContext = this;
 	NotificationUtil nu = new NotificationUtil(mContext);
-	CommonUtil cu = new CommonUtil(mContext);
+	CommonUtil cu = new CommonUtil();
 	Support s = new Support();
-	FlashUtil fu = new FlashUtil(mContext);
+	FlashUtil fu;
 	FileChooser fcRestore;
 	FileChooser fcDelete;
-
-	
 	
 	Runnable rBackup = new Runnable(){
 		@Override
@@ -36,8 +34,8 @@ public class BackupManagerActivity extends Activity {
 					|| s.BLM){
 				nu.createDialog(R.string.warning, R.string.no_function, true, true);	
 			} else {
-				fu.backup(fBACKUP);
-				nu.createDialog(R.string.info, R.string.bakreport, true, true);
+				fu = new FlashUtil(mContext, fBACKUP, 2);
+				fu.execute();
 			}
 		}
 	};
@@ -50,8 +48,8 @@ public class BackupManagerActivity extends Activity {
 			} else {
 				if (fcRestore.use)
 					fBACKUP = fcRestore.selectedFile;
-				fu.flash(fBACKUP);
-				nu.createDialog(R.string.info, R.string.resreport, true, true);
+				fu = new FlashUtil(mContext, fBACKUP, 1);
+				fu.execute();
 			}
 		}
 	};
@@ -60,6 +58,7 @@ public class BackupManagerActivity extends Activity {
 		@Override
 		public void run() {
 			fcDelete.selectedFile.delete();
+			fcDelete = new FileChooser(mContext, PathToBackups.getAbsolutePath(), rDelete);
 		}
 	};
 	

@@ -1,5 +1,7 @@
 package de.mkrtchyan.recoverytools;
 
+import org.rootcommands.util.RootAccessDeniedException;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -14,7 +16,7 @@ public class Rebooter {
 	public Rebooter(Context context) {
 		
 		nu = new NotificationUtil(context);
-		cu = new CommonUtil(context);
+		cu = new CommonUtil();
 		this.context = context;
 	
 	}
@@ -29,8 +31,11 @@ public class Rebooter {
 			
 			@Override
 			public void onClick(View v) {
-				cu.executeShell("reboot", true);
-				
+				try {
+					cu.executeSuShell("reboot");
+				} catch (RootAccessDeniedException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -38,7 +43,11 @@ public class Rebooter {
 			
 			@Override
 			public void onClick(View v) {
-				cu.executeShell("reboot recovery", true);
+				try {
+					cu.executeSuShell("reboot recovery");
+				} catch (RootAccessDeniedException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -46,7 +55,11 @@ public class Rebooter {
 			
 			@Override
 			public void onClick(View v) {
-				cu.executeShell("reboot bootloader", true);
+				try {
+					cu.executeSuShell("reboot bootloader");
+				} catch (RootAccessDeniedException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}

@@ -10,7 +10,7 @@
     <string name="sRebooter">Rebooter</string>
     <string name="sRestore">Restore from Backup</string>
     <string name="sCleareCache">Clear downloaded recoveries</string>
-    <string name="report">Scan Report unsupported Device</string>
+    <string name="report">Scan and Report unsupported Device</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Profile</string>
     <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.com</string>
@@ -21,7 +21,7 @@
     <string name="sRebootBootloader">Reboot Bootloader</string>
     <string name="file_chooser">File Chooser</string>
     <string name="empty_dir">Directory empty: %s</string>
-    <string name="choose_message">Flash %s. Are you sure?</string>
+    <string name="choose_message">Choosing %s. Are you sure?</string>
     <string name="rate_title">Rate %s</string>
     <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it? Thanks for your support!</string>
     <string name="rate">Yes, Rate %s</string>
@@ -36,10 +36,10 @@
     <string name="instructions">Instructions</string>
     <string name="instruction">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from sdcard\n\nTWRP:\n\nMain Menu -> Install</string>
     <string name="getdownload">Recovery IMG not found. Download now?</string>
-    <string name="no_function">This function is not avariable on your device</string>
+    <string name="no_function">This function is not available on your device</string>
     <string name="bakreport">Backup process completed</string>
     <string name="resreport">Restore process completed</string>
-    <string name="backupalready">Backup already exists. This will override the existing one. Continue?</string>
+    <string name="backupalready">Backup already exists. This will overwrite the existing one. Continue?</string>
     <string name="nobackup">No existing Backup found (InternalStorage/Recovery-Tools/backups/). Create one now?</string>
     <string name="noconnection">No network available. Download canceled!</string>
     <string name="failed_download">Oh no, a problem is occurred. Please restart the download.\n\n%s</string>
@@ -57,13 +57,20 @@
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
-    <string name="su_logs_title">Executed su-Commands of this session</string>
+    <string name="su_logs_title">Executed su-Commands</string>
     <string name="log">Log SU-Commands</string>
     <string name="showlog">Show Logs</string>
-    <string name="action_settings">tasdasdasdkjaskdjbahskdjb</string>
+    
     <string name="title_activity_backup_manager">Backup-Manager</string>
     <string name="sDeleteBackup">Delete Backup</string>
     <string name="sBackupMgr">Open Backup Manager</string>
     <string name="setname">Set name of Backup</string>
-
+    <string name="reboot_recovery_now">Reboot in to recovery now?</string>
+    <string name="tsk_end">Task completed</string>
+    <string name="flashing">Flashing&#8230;</string>
+	<string name="creating_bak">Creating Backup&#8230;</string>
+	<string name="clear_logs">Clear Logs</string>
+	<string name="download_utils">To use this App you need to download small tools (around 512KB). This requieres a internet connection.\nDowload it now?</string>
+	<string name="wrong_format">You have choose a false file. The File must be in %s format.</string>
+	
 </resources>

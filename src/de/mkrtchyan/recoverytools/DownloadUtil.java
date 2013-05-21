@@ -39,29 +39,36 @@ public class DownloadUtil extends AsyncTask<Void, Integer, Boolean> {
 	
 	Context context;
 	String exString = "";
-	ProgressDialog dialog;
+	ProgressDialog downloadDialog;
+	ProgressDialog connectingDialog;
 	boolean first_start = true;
 	Runnable AfterDownload;
 	String URL;
+	String FileName;
 	File outputFile;
 	NotificationUtil nu;
 	
 	
-	
-	public DownloadUtil(Context context, String URL, File outputFile, Runnable AfterDownload) {
+	public DownloadUtil(Context context, String URL, String FileName, File outputFile, Runnable AfterDownload) {
 		this.context = context;
 		this.URL = URL;
+		this.FileName = FileName;
 		this.outputFile = outputFile;
 		this.AfterDownload = AfterDownload;
 		nu = new NotificationUtil(context);
 	}
 	
 	protected void onPreExecute(){
-		
-		dialog = new ProgressDialog(context);
-		dialog.setTitle(R.string.Downloading);
-		dialog.setMessage(URL);
-		dialog.setCancelable(false);
+		connectingDialog = new ProgressDialog(context);
+		connectingDialog.setTitle("Connecting to..");
+		connectingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		connectingDialog.setCancelable(false);
+		connectingDialog.setMessage(URL);
+		connectingDialog.show();
+		downloadDialog = new ProgressDialog(context);
+		downloadDialog.setTitle(R.string.Downloading);
+		downloadDialog.setMessage(URL + "/" + FileName);
+		downloadDialog.setCancelable(false);
 	}
 	
 	protected Boolean doInBackground(Void... params) throws NullPointerException {
@@ -73,9 +80,8 @@ public class DownloadUtil extends AsyncTask<Void, Integer, Boolean> {
 			if (networkInfo != null 
 					&& networkInfo.isConnected()) {
 				try {
-					URL url = new URL(URL);
 					
-					URLConnection ucon = url.openConnection();
+					URLConnection ucon =  new URL(URL + "/" + FileName).openConnection();
 		
 					ucon.setDoOutput(true);
 					ucon.connect();
@@ -85,7 +91,7 @@ public class DownloadUtil extends AsyncTask<Void, Integer, Boolean> {
 							
 					InputStream inputStream = ucon.getInputStream();
 					
-					byte[] buffer = new byte[2048];
+					byte[] buffer = new byte[1024];
 					int fullLenght = ucon.getContentLength();
 						
 					int bufferLength = 0;
@@ -119,21 +125,24 @@ public class DownloadUtil extends AsyncTask<Void, Integer, Boolean> {
 	protected void onProgressUpdate(Integer... progress) {
 		super.onProgressUpdate(progress);
 		if (first_start) {
+			connectingDialog.dismiss();
 			if (progress[1] >= 0) {
-				dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				downloadDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			} else {
-				dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+				downloadDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 			}
-			dialog.show();
-			dialog.setMax(progress[1]);
+			downloadDialog.show();
+			downloadDialog.setMax(progress[1]);
 			first_start = false;
 		}
-		dialog.setProgress(progress[0]);
+		downloadDialog.setProgress(progress[0]);
 	}
 	
 	protected void onPostExecute(Boolean success) {
-		
-		dialog.dismiss();
+		if (connectingDialog.isShowing())
+			connectingDialog.dismiss();
+		if(downloadDialog.isShowing())
+			downloadDialog.dismiss();
 		
 		if (success) {
 			AfterDownload.run();
@@ -146,4 +155,14 @@ public class DownloadUtil extends AsyncTask<Void, Integer, Boolean> {
 			}
 		}
 	 }
+	
+//	public void addFile(String URL, String FileName, File outputFile) {
+//		this.URL[0] = URL;
+//		this.FileName[0] = FileName;
+//		this.outputFile[0] = outputFile;
+//	}
+//	
+//	public void addFiles(String[] URL, String[] FileName, File[] outputFile) {
+//		
+//	}
 }
