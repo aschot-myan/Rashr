@@ -5,6 +5,7 @@ import java.io.File;
 import org.rootcommands.util.RootAccessDeniedException;
 
 import android.os.Environment;
+import de.mkrtchyan.utils.Common;
 
 
 
@@ -15,7 +16,7 @@ public class Support {
 	 * What kind of partition and where is the recovery partition in the
 	 * FileSystem
 	 */
-	CommonUtil cu = new CommonUtil();
+	Common c = new Common();
 	public String DEVICE = android.os.Build.DEVICE;
 	public String BOARD = android.os.Build.BOARD;
 	public String RecoveryPath;
@@ -486,10 +487,10 @@ public class Support {
 	public void installZip(File ZipFile) {
 		try {
 			if (!ZipFile.getPath().endsWith(Environment.getExternalStorageDirectory().getAbsolutePath()))
-				cu.executeSuShell("cat " + ZipFile.getAbsolutePath() + " >> "  + new File(Environment.getExternalStorageDirectory(), ZipFile.getName()).getAbsolutePath());
+				c.executeSuShell("cat " + ZipFile.getAbsolutePath() + " >> "  + new File(Environment.getExternalStorageDirectory(), ZipFile.getName()).getAbsolutePath());
 			File script = new File("/cache/recovery", "openrecoveryscript");
-			cu.executeSuShell("echo install /sdcard/" + ZipFile.getName() + " >> " + script.getAbsolutePath());
-			cu.executeSuShell("reboot recovery");
+			c.executeSuShell("echo install /sdcard/" + ZipFile.getName() + " >> " + script.getAbsolutePath());
+			c.executeSuShell("reboot recovery");
 		} catch (RootAccessDeniedException e) {
 			e.printStackTrace();
 		}

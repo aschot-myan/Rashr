@@ -6,17 +6,19 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
+import de.mkrtchyan.utils.Common;
+import de.mkrtchyan.utils.Notifyer;
 
 public class Rebooter {
 	
-	NotificationUtil nu;
-	CommonUtil cu;
+	Notifyer nu;
+	Common c;
 	Context context;
 	
 	public Rebooter(Context context) {
 		
-		nu = new NotificationUtil(context);
-		cu = new CommonUtil();
+		nu = new Notifyer(context);
+		c = new Common();
 		this.context = context;
 	
 	}
@@ -32,7 +34,7 @@ public class Rebooter {
 			@Override
 			public void onClick(View v) {
 				try {
-					cu.executeSuShell("reboot");
+					c.executeSuShell("reboot");
 				} catch (RootAccessDeniedException e) {
 					e.printStackTrace();
 				}
@@ -44,7 +46,7 @@ public class Rebooter {
 			@Override
 			public void onClick(View v) {
 				try {
-					cu.executeSuShell("reboot recovery");
+					c.executeSuShell("reboot recovery");
 				} catch (RootAccessDeniedException e) {
 					e.printStackTrace();
 				}
@@ -56,7 +58,7 @@ public class Rebooter {
 			@Override
 			public void onClick(View v) {
 				try {
-					cu.executeSuShell("reboot bootloader");
+					c.executeSuShell("reboot bootloader");
 				} catch (RootAccessDeniedException e) {
 					e.printStackTrace();
 				}

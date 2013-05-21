@@ -11,6 +11,8 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import de.mkrtchyan.utils.Common;
+import de.mkrtchyan.utils.Notifyer;
 
 public class BackupManagerActivity extends Activity {
 
@@ -20,8 +22,8 @@ public class BackupManagerActivity extends Activity {
 	private File fBACKUP;
 	
 	Context mContext = this;
-	NotificationUtil nu = new NotificationUtil(mContext);
-	CommonUtil cu = new CommonUtil();
+	Notifyer nu = new Notifyer(mContext);
+	Common c = new Common();
 	Support s = new Support();
 	FlashUtil fu;
 	FileChooser fcRestore;
@@ -68,7 +70,7 @@ public class BackupManagerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_backup_manager);
 		
-		cu.checkFolder(PathToBackups);
+		c.checkFolder(PathToBackups);
 	}
 	
 	public void bBackup(View view) {

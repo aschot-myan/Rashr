@@ -4,18 +4,21 @@ import java.io.File;
 
 import org.rootcommands.util.RootAccessDeniedException;
 
-import com.sbstrm.appirater.Appirater;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.sbstrm.appirater.Appirater;
+
+import de.mkrtchyan.utils.Common;
+import de.mkrtchyan.utils.Notifyer;
 
 public class FlashUtil extends AsyncTask<Void, Void, Boolean>{
 	
 	Context mContext;
 	ProgressDialog pDialog;
-	CommonUtil cu;
-	NotificationUtil nu;
+	Common c;
+	Notifyer nu;
 	Support s = new Support();
 	File charger;
 	File chargermon;
@@ -29,23 +32,23 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean>{
 		mContext = context;
 		this.file = file;
 		this.JOB = JOB;
-		nu = new NotificationUtil(mContext);
-		cu = new CommonUtil();
+		nu = new Notifyer(mContext);
+		c = new Common();
 		if (s.MTD){
 			fflash = new File(mContext.getFilesDir(), "flash_image");
 			fdump = new File(mContext.getFilesDir(), "dump_image");
 			
-			cu.chmod(fflash, "641", true);
-			cu.chmod(fdump, "641", true);
+			c.chmod(fflash, "641", true);
+			c.chmod(fdump, "641", true);
 		}
 		if (s.DEVICE.equals("C6603")) {
 			charger = new File(mContext.getFilesDir(), "charger");
 			chargermon = new File(mContext.getFilesDir(), "chargermon");
 			ric = new File(mContext.getFilesDir(), "ric");
 			
-			cu.chmod(charger, "755", true);
-			cu.chmod(chargermon, "755", true);
-			cu.chmod(ric, "755", true);
+			c.chmod(charger, "755", true);
+			c.chmod(chargermon, "755", true);
+			c.chmod(ric, "755", true);
 		}
 	}
 	
@@ -73,12 +76,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean>{
 		
 		try {
 			if (s.DEVICE.equals("C6603")) {
-				cu.executeSuShell(mContext, "cat " + charger.getAbsolutePath() + " >> /system/bin" + charger.getName());
-				cu.executeSuShell(mContext, "cat " + chargermon.getAbsolutePath() + " >> /system/bin" + chargermon.getName());
-				cu.executeSuShell(mContext, "cat " + ric.getAbsolutePath() + " >> /system/bin" + ric.getName());
-				cu.chmod(ric, "755", true);
-				cu.chmod(charger, "755", true);
-				cu.chmod(chargermon, "755", true);
+				c.executeSuShell(mContext, "cat " + charger.getAbsolutePath() + " >> /system/bin" + charger.getName());
+				c.executeSuShell(mContext, "cat " + chargermon.getAbsolutePath() + " >> /system/bin" + chargermon.getName());
+				c.executeSuShell(mContext, "cat " + ric.getAbsolutePath() + " >> /system/bin" + ric.getName());
+				c.chmod(ric, "755", true);
+				c.chmod(charger, "755", true);
+				c.chmod(chargermon, "755", true);
 			}
 			
 			switch (JOB) {
@@ -87,24 +90,24 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean>{
 				if (file.exists()) {
 					
 					if (s.MTD)
-						cu.executeSuShell(mContext, fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+						c.executeSuShell(mContext, fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
 					
 					if (!s.MTD
 							&& !s.BLM
 							&& !s.RecoveryPath.equals(""))
-						cu.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + s.RecoveryPath);
+						c.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + s.RecoveryPath);
 					if (s.DEVICE.equals("C6603"))
-						cu.chmod(file, "644", true);
+						c.chmod(file, "644", true);
 				}
 				break;
 			case 2:
 				if (s.MTD)
-					cu.executeSuShell(mContext, fdump.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+					c.executeSuShell(mContext, fdump.getAbsolutePath() + " recovery " + file.getAbsolutePath());
 				
 				if (!s.MTD
 						&& !s.BLM
 						&& !s.RecoveryPath.equals(""))
-					cu.executeSuShell(mContext, "dd if=" + s.RecoveryPath + " of=" + file.getAbsolutePath());
+					c.executeSuShell(mContext, "dd if=" + s.RecoveryPath + " of=" + file.getAbsolutePath());
 				break;
 			}
 		} catch (RootAccessDeniedException e) {e.printStackTrace();}
@@ -118,7 +121,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean>{
 			nu.createAlertDialog(R.string.tsk_end, mContext.getString(R.string.flashed) + " " + mContext.getString(R.string.reboot_recovery_now), new Runnable() {
 				@Override
 				public void run() {try {
-					cu.executeSuShell("reboot recovery");
+					c.executeSuShell("reboot recovery");
 				} catch (RootAccessDeniedException e) {e.printStackTrace();}}
 			});
 		} else {
@@ -127,6 +130,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean>{
 		
 		Appirater.appLaunched(mContext);
 		
-		cu.setBooleanPerf(mContext, "flash-util", "first-flash", false);
+		c.setBooleanPerf(mContext, "flash-util", "first-flash", false);
 	}
 }

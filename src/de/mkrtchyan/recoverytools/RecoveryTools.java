@@ -50,6 +50,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import de.mkrtchyan.utils.Common;
+import de.mkrtchyan.utils.Downloader;
+import de.mkrtchyan.utils.Notifyer;
 
 public class RecoveryTools extends Activity {
 	
@@ -69,8 +72,8 @@ public class RecoveryTools extends Activity {
 	private boolean firstrun = true;
 	private boolean download = false;
 //	Declaring needed objects
-	NotificationUtil nu = new NotificationUtil(mContext);
-	CommonUtil cu = new CommonUtil();
+	Notifyer nu = new Notifyer(mContext);
+	Common c = new Common();
 	Support s = new Support();
 	FileChooser fcFlashOther;
 	
@@ -118,7 +121,7 @@ public class RecoveryTools extends Activity {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										try {
-											cu.executeSuShell("reboot recovery");
+											c.executeSuShell("reboot recovery");
 										} catch (RootAccessDeniedException e) {
 											e.printStackTrace();
 										}
@@ -161,7 +164,7 @@ public class RecoveryTools extends Activity {
 		@Override
 		public void run() {
 //			Download file from URL s.HOST_URL + "/" + fRECOVERY.getName().toString() and write it to fRECOVERY
-			new DownloadUtil(mContext, s.HOST_URL, fRECOVERY.getName(), fRECOVERY, rFlasher).execute();	
+			new Downloader(mContext, s.HOST_URL, fRECOVERY.getName(), fRECOVERY, rFlasher).execute();	
 		}};
 	
 	
@@ -210,7 +213,7 @@ public class RecoveryTools extends Activity {
 				nu.createAlertDialog(R.string.warning, R.string.notsupportded, runOnTrue, null, runOnNegative);
 			}
 //			Check if Su-Access is given if not the app will be closed
-			if (!cu.suRecognition()) {
+			if (!c.suRecognition()) {
 //				Show a new notification with Info
 				createNotification(R.drawable.ic_launcher, R.string.warning, R.string.noroot, 28);
 				finish();
@@ -221,9 +224,9 @@ public class RecoveryTools extends Activity {
 //		Setting up Buttons (CWM and TWRP support)
 		getSupport();
 //		Create needed Folder
-		cu.checkFolder(PathToRecoveryTools);
-		cu.checkFolder(PathToRecoveries);
-		cu.checkFolder(PathToUtils);
+		c.checkFolder(PathToRecoveryTools);
+		c.checkFolder(PathToRecoveries);
+		c.checkFolder(PathToUtils);
 		
 //		Print information of the Device
 		tvInfo = (TextView) findViewById (R.id.tvInfo);
@@ -267,7 +270,7 @@ public class RecoveryTools extends Activity {
 		startActivity(new Intent(this, BackupManagerActivity.class));
 	}
 	public void bCleareCache(View view) {
-		cu.deleteFolder(PathToRecoveries, false);
+		c.deleteFolder(PathToRecoveries, false);
 	}
 	public void bRebooter(View view) {
 		new Rebooter(mContext).run();
@@ -309,28 +312,28 @@ public class RecoveryTools extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 	    super.onPrepareOptionsMenu(menu);
 	    iShowLogs = menu.findItem(R.id.iShowLogs);
-	    iShowLogs.setVisible(cu.getBooleanPerf(mContext, "common_util", "log"));
+	    iShowLogs.setVisible(c.getBooleanPerf(mContext, "common_util", "log"));
 	    iLog = menu.findItem(R.id.iLog);
-	    iLog.setChecked(cu.getBooleanPerf(mContext, "common_util", "log"));
+	    iLog.setChecked(c.getBooleanPerf(mContext, "common_util", "log"));
 	    return true;
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case R.id.iProfile:
-	            cu.xdaProfile(mContext);
+	            c.xdaProfile(mContext);
 	            return true;
 	        case R.id.iExit:
 	        	finish();
 	    		System.exit(0);
 	    		return true;
 	        case R.id.iLog:
-	        	if (cu.getBooleanPerf(mContext, "common_util", "log")){
+	        	if (c.getBooleanPerf(mContext, "mkrtchyan_util_common", "log")){
 	        		iLog.setChecked(false);
-	        		cu.setBooleanPerf(mContext, "common_util", "log", false);
+	        		c.setBooleanPerf(mContext, "mkrtchyan_util_common", "log", false);
 	        	} else {
 	        		iLog.setChecked(true);
-	        		cu.setBooleanPerf(mContext, "common_util", "log", true);
+	        		c.setBooleanPerf(mContext, "mkrtchyan_util_common", "log", true);
 	        	}
 	        	return true;
 	        default:
@@ -420,8 +423,8 @@ public class RecoveryTools extends Activity {
 				
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				new DownloadUtil(mContext, "http://dslnexus.nazuka.net/utils", fflash.getName(), fflash, CommonUtil.rEmpty).execute();
-				new DownloadUtil(mContext, "http://dslnexus.nazuka.net/utils", fdump.getName(), fdump, CommonUtil.rEmpty).execute();
+				new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fflash.getName(), fflash, Common.rEmpty).execute();
+				new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fdump.getName(), fdump, Common.rEmpty).execute();
 			}
 			};
 		} else if (s.DEVICE.equals("C6603")
@@ -431,9 +434,9 @@ public class RecoveryTools extends Activity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					
-						new DownloadUtil(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, chargermon.getName(), chargermon, CommonUtil.rEmpty).execute();
-						new DownloadUtil(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, charger.getName(), charger, CommonUtil.rEmpty).execute();
-						new DownloadUtil(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, ric.getName(), ric, CommonUtil.rEmpty).execute();
+						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, chargermon.getName(), chargermon, Common.rEmpty).execute();
+						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, charger.getName(), charger, Common.rEmpty).execute();
+						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, ric.getName(), ric, Common.rEmpty).execute();
 					
 					;
 				}
