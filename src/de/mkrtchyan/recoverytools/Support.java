@@ -1,5 +1,26 @@
 package de.mkrtchyan.recoverytools;
 
+/*
+ * Copyright (c) 2013 Ashot Mkrtchyan
+ * Permission is hereby granted, free of charge, to any person obtaining a copy 
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights 
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+ * copies of the Software, and to permit persons to whom the Software is 
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in 
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import java.io.File;
 
 import org.rootcommands.util.RootAccessDeniedException;
@@ -30,10 +51,10 @@ public class Support {
 	public boolean MTD = false;
 	public boolean BLM = false;
 	public boolean TWRP = true;
-	public boolean TWRP_INSTALLED = false;
+//	public boolean TWRP_INSTALLED = false;
 	public boolean TWRP_OFFICIAL = true;
 	public boolean CWM = true;
-	public boolean CWM_INSTALLED = false;
+//	public boolean CWM_INSTALLED = false;
 	public boolean CWM_OFFICIAL = true;
 	
 
@@ -194,8 +215,7 @@ public class Support {
 				|| DEVICE.equals("toroplus"))
 			tmp = "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
 		
-		if (DEVICE.equals("grouper") 
-				|| DEVICE.equals("endeavoru") 
+		if (DEVICE.equals("grouper")
 				|| DEVICE.equals("tilapia")) 
 			tmp = "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
 		
@@ -234,6 +254,9 @@ public class Support {
 			tmp = "/dev/block/mmcblk0p12";
 		
 //		HTC DEVICEs + Same
+		
+		if (DEVICE.equals("endeavoru") )
+			tmp = "/dev/block/mmcblk0p5";
 		
 		if (DEVICE.equals("ace") 
 				|| DEVICE.equals("primou")) 

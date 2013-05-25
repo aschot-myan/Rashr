@@ -24,8 +24,8 @@ package de.mkrtchyan.recoverytools;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.rootcommands.util.RootAccessDeniedException;
 
@@ -52,6 +52,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
+import de.mkrtchyan.utils.FileChooser;
 import de.mkrtchyan.utils.Notifyer;
 
 public class RecoveryTools extends Activity {
@@ -65,15 +66,15 @@ public class RecoveryTools extends Activity {
 	public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
 	private File fRECOVERY, fflash, fdump, charger, chargermon, ric;
 //	Declaring Views
-	private static TextView tvInfo;
-	private static CheckBox cbUseBinary;
-	private static MenuItem iLog, iShowLogs;
+	private TextView tvInfo;
+	private CheckBox cbUseBinary;
+	private MenuItem iLog, iShowLogs;
 //	Declaring other vars
 	private boolean firstrun = true;
 	private boolean download = false;
 //	Declaring needed objects
-	Notifyer nu = new Notifyer(mContext);
-	Common c = new Common();
+	Notifyer notifyer = new Notifyer(mContext);
+	Common common = new Common();
 	Support s = new Support();
 	FileChooser fcFlashOther;
 	
@@ -93,7 +94,7 @@ public class RecoveryTools extends Activity {
 						fRECOVERY = fcFlashOther.selectedFile;
 					} else {
 						fRECOVERY = null;
-						nu.createDialog(R.string.warning, String.format(mContext.getString(R.string.wrong_format), s.EXT), true);
+						notifyer.createDialog(R.string.warning, String.format(mContext.getString(R.string.wrong_format), s.EXT), true);
 					}
 				}
 			}
@@ -108,7 +109,7 @@ public class RecoveryTools extends Activity {
 					} else {
 	//					Get user input if Kernel will be modified 
 						if (s.KERNEL_TO)
-							nu.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash);
+							notifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash);
 	//					Get user input if user want to install over recovery now
 						if (s.FLASH_OVER_RECOVERY) {
 	//						Create coustom AlertDialog
@@ -121,7 +122,7 @@ public class RecoveryTools extends Activity {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										try {
-											c.executeSuShell("reboot recovery");
+											common.executeSuShell("reboot recovery");
 										} catch (RootAccessDeniedException e) {
 											e.printStackTrace();
 										}
@@ -154,7 +155,7 @@ public class RecoveryTools extends Activity {
 						
 				} else {
 	//				If Recovery File don't exist ask if you want to download it now.
-					nu.createAlertDialog(R.string.info, R.string.getdownload, rDownload);
+					notifyer.createAlertDialog(R.string.info, R.string.getdownload, rDownload);
 				}
 			}
 		}
@@ -171,7 +172,7 @@ public class RecoveryTools extends Activity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.recovery_tools);
 		
 		fflash = new File("/system/bin", "flash_image");
 		fdump = new File("/system/bin", "dump_image");
@@ -197,7 +198,8 @@ public class RecoveryTools extends Activity {
 		if (firstrun){
 //			If device is not supported, you can report it now or close the App
 			if (s.RecoveryPath.equals("")
-					&& !s.MTD) {
+					&& !s.MTD 
+					&& !s.FLASH_OVER_RECOVERY) {
 				Runnable runOnTrue = new Runnable() {
 					@Override
 					public void run() {report(null);}
@@ -210,10 +212,10 @@ public class RecoveryTools extends Activity {
 						System.exit(0);
 					}
 				};
-				nu.createAlertDialog(R.string.warning, R.string.notsupportded, runOnTrue, null, runOnNegative);
+				notifyer.createAlertDialog(R.string.warning, R.string.notsupportded, runOnTrue, null, runOnNegative);
 			}
 //			Check if Su-Access is given if not the app will be closed
-			if (!c.suRecognition()) {
+			if (!common.suRecognition()) {
 //				Show a new notification with Info
 				createNotification(R.drawable.ic_launcher, R.string.warning, R.string.noroot, 28);
 				finish();
@@ -224,9 +226,9 @@ public class RecoveryTools extends Activity {
 //		Setting up Buttons (CWM and TWRP support)
 		getSupport();
 //		Create needed Folder
-		c.checkFolder(PathToRecoveryTools);
-		c.checkFolder(PathToRecoveries);
-		c.checkFolder(PathToUtils);
+		common.checkFolder(PathToRecoveryTools);
+		common.checkFolder(PathToRecoveries);
+		common.checkFolder(PathToUtils);
 		
 //		Print information of the Device
 		tvInfo = (TextView) findViewById (R.id.tvInfo);
@@ -234,10 +236,12 @@ public class RecoveryTools extends Activity {
 //		Show Advanced information how device will be Flashed
 		cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
 		cbUseBinary.setChecked(true);
-		if (!s.RecoveryPath.equals("")){
+		if (!s.RecoveryPath.equals("")) {
 			cbUseBinary.setText(String.format(mContext.getString(R.string.using_dd), "\n" + s.RecoveryPath));
-		} else if (s.MTD){
+		} else if (s.MTD) {
 			cbUseBinary.setText(R.string.using_mtd);
+		} else if (s.FLASH_OVER_RECOVERY) {
+			cbUseBinary.setText(R.string.over_recovery);
 		}
 		
 		downloadUtils();
@@ -254,7 +258,7 @@ public class RecoveryTools extends Activity {
 				&& chargermon.exists()
 				|| !s.MTD
 				&& !s.DEVICE.equals("C6603")) {
-//			Get newest version No of recovery (view.getTag().toString() returns clockwork or twrp)
+//			Get newest version No. of recovery (view.getTag().toString() returns clockwork or twrp)
 			s.getVersion(view.getTag().toString());
 //			Get device specificed recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
 			fRECOVERY = s.constructFile(PathToRecoveries);
@@ -270,7 +274,7 @@ public class RecoveryTools extends Activity {
 		startActivity(new Intent(this, BackupManagerActivity.class));
 	}
 	public void bCleareCache(View view) {
-		c.deleteFolder(PathToRecoveries, false);
+		common.deleteFolder(PathToRecoveries, false);
 	}
 	public void bRebooter(View view) {
 		new Rebooter(mContext).run();
@@ -304,7 +308,7 @@ public class RecoveryTools extends Activity {
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.main_menu, menu);
+	    inflater.inflate(R.menu.recovery_tools_menu, menu);
 	    return true;
 	}
 	
@@ -312,28 +316,28 @@ public class RecoveryTools extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 	    super.onPrepareOptionsMenu(menu);
 	    iShowLogs = menu.findItem(R.id.iShowLogs);
-	    iShowLogs.setVisible(c.getBooleanPerf(mContext, "common_util", "log"));
+	    iShowLogs.setVisible(common.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
 	    iLog = menu.findItem(R.id.iLog);
-	    iLog.setChecked(c.getBooleanPerf(mContext, "common_util", "log"));
+	    iLog.setChecked(common.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
 	    return true;
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case R.id.iProfile:
-	            c.xdaProfile(mContext);
+	        	common.xdaProfile(mContext);
 	            return true;
 	        case R.id.iExit:
 	        	finish();
 	    		System.exit(0);
 	    		return true;
 	        case R.id.iLog:
-	        	if (c.getBooleanPerf(mContext, "mkrtchyan_util_common", "log")){
+	        	if (common.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands")){
 	        		iLog.setChecked(false);
-	        		c.setBooleanPerf(mContext, "mkrtchyan_util_common", "log", false);
+	        		common.setBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands", false);
 	        	} else {
 	        		iLog.setChecked(true);
-	        		c.setBooleanPerf(mContext, "mkrtchyan_util_common", "log", true);
+	        		common.setBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands", true);
 	        	}
 	        	return true;
 	        default:
@@ -344,7 +348,7 @@ public class RecoveryTools extends Activity {
 	
 	public void report(MenuItem Item) {
 //		Creates a report Email with Commentar
-		final Dialog reportDialog = nu.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
+		final Dialog reportDialog = notifyer.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
 		Button ok = (Button) reportDialog.findViewById(R.id.bGo);
 		ok.setOnClickListener(new View.OnClickListener() {
 			
@@ -384,29 +388,37 @@ public class RecoveryTools extends Activity {
 	
 	public void showLogs(MenuItem item) {
 		
-		Dialog dialog = nu.createDialog(R.string.su_logs_title, R.layout.dialog_su_logs, false, true);
-		final TextView Log = (TextView) dialog.findViewById(R.id.tvSuLogs);
+		Dialog dialog = notifyer.createDialog(R.string.su_logs_title, R.layout.dialog_command_logs, false, true);
+		final TextView tvLog = (TextView) dialog.findViewById(R.id.tvSuLogs);
 		final Button bClearLog = (Button) dialog.findViewById(R.id.bClearLog);
 		bClearLog.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				new File(mContext.getFilesDir(), "su-logs.log").delete();
-				Log.setText("");
+				new File(mContext.getFilesDir(), "command-logs.log").delete();
+				tvLog.setText("");
 			}
 		});
 		String sLog = "";
 		
 		try {
+			
 			String line = "";
-			BufferedReader br = new BufferedReader(new FileReader(new File(getFilesDir(), "su-logs.log")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(openFileInput("command-logs.log")));
 			while ((line = br.readLine()) != null) {
 				sLog = sLog + line + "\n";
 			}
 			br.close();
-		} catch (FileNotFoundException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
+			tvLog.setText(sLog);
+		} catch (FileNotFoundException e) {
+			tvLog.setText(tvLog.getText() + "\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			tvLog.setText(tvLog.getText() + "\n" + e.getMessage());
+			e.printStackTrace();
+		}
 		
-		Log.setText(sLog);
+//		Log.setText(sLog);
 	}
 	
 	public void downloadUtils() {
@@ -423,8 +435,8 @@ public class RecoveryTools extends Activity {
 				
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fflash.getName(), fflash, Common.rEmpty).execute();
-				new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fdump.getName(), fdump, Common.rEmpty).execute();
+				new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fflash.getName(), fflash, Notifyer.rEmpty).execute();
+				new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fdump.getName(), fdump, Notifyer.rEmpty).execute();
 			}
 			};
 		} else if (s.DEVICE.equals("C6603")
@@ -434,10 +446,9 @@ public class RecoveryTools extends Activity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					
-						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, chargermon.getName(), chargermon, Common.rEmpty).execute();
-						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, charger.getName(), charger, Common.rEmpty).execute();
-						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, ric.getName(), ric, Common.rEmpty).execute();
-					
+						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, chargermon.getName(), chargermon, Notifyer.rEmpty).execute();
+						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, charger.getName(), charger, Notifyer.rEmpty).execute();
+						new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + s.DEVICE, ric.getName(), ric, Notifyer.rEmpty).execute();
 					;
 				}
 			};

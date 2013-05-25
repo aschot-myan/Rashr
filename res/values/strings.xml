@@ -19,9 +19,7 @@
     <string name="sReboot">Reboot</string>
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
-    <string name="file_chooser">File Chooser</string>
-    <string name="empty_dir">Directory empty: %s</string>
-    <string name="choose_message">Choosing %s. Are you sure?</string>
+    
     <string name="rate_title">Rate %s</string>
     <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it? Thanks for your support!</string>
     <string name="rate">Yes, Rate %s</string>
@@ -57,8 +55,8 @@
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
-    <string name="su_logs_title">Executed su-Commands</string>
-    <string name="log">Log SU-Commands</string>
+    <string name="su_logs_title">Executed Shell-Commands</string>
+    <string name="log">Log Shell-Commands</string>
     <string name="showlog">Show Logs</string>
     
     <string name="title_activity_backup_manager">Backup-Manager</string>
@@ -72,5 +70,6 @@
 	<string name="clear_logs">Clear Logs</string>
 	<string name="download_utils">To use this App you need to download small tools (around 512KB). This requieres a internet connection.\nDowload it now?</string>
 	<string name="wrong_format">You have choose a false file. The File must be in %s format.</string>
+	<string name="over_recovery">Device will be flashed over recovery</string>
 	
 </resources>

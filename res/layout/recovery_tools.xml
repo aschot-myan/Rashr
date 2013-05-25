@@ -74,22 +74,35 @@
         </LinearLayout>
     </ScrollView>
 
-    <CheckBox
-        android:id="@+id/cbUseBinary"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:clickable="false"
-        android:textSize="20sp"
-        android:visibility="visible" />
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/tvInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textIsSelectable="false"
-        android:visibility="visible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textIsSelectable="false"
+                android:visibility="visible" />
+
+            <CheckBox
+                android:id="@+id/cbUseBinary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:clickable="false"
+                android:textSize="20sp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

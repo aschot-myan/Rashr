@@ -1,5 +1,5 @@
 ====================
-Recovery Tools
+Recovery-Tools
 ====================
 
 About:
@@ -22,67 +22,6 @@ The app loads a predefined custom-recovery system down for your device and insta
 -Full network access: download recoveries
 -[normally managed by SuperUser-App]Full access to all functions of the device: Flashing the recoveries
 
-Supported Devices
-
------ [TWRP & CWM] -----
-
--Nexus One (passion)
--Nexus S (crespo/crespo4g)
--Galaxy Nexus (maguro/toro/toroplus)
--Nexus 4 (mako)
--Nexus 7 (grouper/tilapia)
--Nexus 10 (manta)
-
--Asus Transformer Infinity (ft700t)
-
--HTC Desire HD (ace)
--HTC Desire S (saga)
--HTC Sensation (pyramid)
--HTC Fireball (fireball)
--HTC One V (primou)
--HTC One S (ville/villec2)
--HTC One X (endeavoru)
--HTC One XL (evita)
--HTC Butterfly (dlxub1)
-
--Samsung Galaxy S2 LTE (skyrocket)
--Samsung Galaxy Note 2 (n7100/t0ltevzw)
--Samsung Galaxy Note 2 LTE (t0lte)
--Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
--Samsung Galaxy SIII Mini (golden)
--Samsung Galaxy Mini II (jena)
-
--Sony Xperia Z (C6603)
-
--LG Optiomus G (geeb)
--LG GT540 Optimus (swift)
--LG P990 OPTIMUS 2X/SPEED (p990)
-
--ZTE Sequence (warp2)
-
------ [CWM only] -----
-
--Samsung Galaxy SII (i9100/i9100G)
--Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
--Samsung Galaxy Note (n7000)
--Samsung GalaxyS Captivate (SGH-I897)
-
--Motorola Droid2 (droid2)
-
--LG Optimus HD X4 (x3)
-
------ [TWRP only] -----
-
--Sony Xperia S(nozomi/LT30p)
--Sony Xperia Play(mint/LT26i)
-
--Kindle Fire HD 7" (tate)
-
------ [CUSTOM only] -----
-
--Samsung Galaxy S II Duos (SCH-i929)
--LG Optimus One CDMA (thuderc)
-
 ====================
 CHANGELOG
 ====================
@@ -91,10 +30,13 @@ CHANGELOG
 
 -Stock Recoveries
 -Samsung BLM Devices
+-Fix HTC One X flash issue
 
-Update [1.2.2]
+Update [1.2.3]
 
 -Fix CWM & TWRP button
+-Fic FC on some devices
+
 
 Update [1.2.1]
 
@@ -247,6 +189,83 @@ Update [2.3]
 Update [2.2]
 
 -Choice possibility added (if you want the IMG download now)
+
+===================================
+Compile instructions
+===================================
+
+To compile Recovery-Tools download the Source and needed Librarys:
+
+Recovery-Tools: https://github.com/ashotmkrtchyan1995/Recovery-Tools
+
+Utils-Library: https://github.com/ashotmkrtchyan1995/Utils-Library
+
+Root-Commands-Library: https://github.com/dschuermann/root-commands
+
+Import all 3 Projects in to Eclipse and set Utils-Library and Root-Commands-Library as Library
+
+=========================
+Supported Devices
+=========================
+
+----- [TWRP & CWM] -----
+
+-Nexus One (passion)
+-Nexus S (crespo/crespo4g)
+-Galaxy Nexus (maguro/toro/toroplus)
+-Nexus 4 (mako)
+-Nexus 7 (grouper/tilapia)
+-Nexus 10 (manta)
+
+-Asus Transformer Infinity (ft700t)
+
+-HTC Desire HD (ace)
+-HTC Desire S (saga)
+-HTC Sensation (pyramid)
+-HTC Fireball (fireball)
+-HTC One V (primou)
+-HTC One S (ville/villec2)
+-HTC One X (endeavoru)
+-HTC One XL (evita)
+-HTC Butterfly (dlxub1)
+
+-Samsung Galaxy S2 LTE (skyrocket)
+-Samsung Galaxy Note 2 (n7100/t0ltevzw)
+-Samsung Galaxy Note 2 LTE (t0lte)
+-Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
+-Samsung Galaxy SIII Mini (golden)
+-Samsung Galaxy Mini II (jena)
+
+-Sony Xperia Z (C6603)
+
+-LG Optiomus G (geeb)
+-LG GT540 Optimus (swift)
+-LG P990 OPTIMUS 2X/SPEED (p990)
+
+-ZTE Sequence (warp2)
+
+----- [CWM only] -----
+
+-Samsung Galaxy SII (i9100/i9100G)
+-Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
+-Samsung Galaxy Note (n7000)
+-Samsung GalaxyS Captivate (SGH-I897)
+
+-Motorola Droid2 (droid2)
+
+-LG Optimus HD X4 (x3)
+
+----- [TWRP only] -----
+
+-Sony Xperia S(nozomi/LT30p)
+-Sony Xperia Play(mint/LT26i)
+
+-Kindle Fire HD 7" (tate)
+
+----- [CUSTOM only] -----
+
+-Samsung Galaxy S II Duos (SCH-i929)
+-LG Optimus One CDMA (thuderc)
 
 ===================================
 COPYRIGHT

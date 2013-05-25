@@ -3,7 +3,7 @@
     package="de.mkrtchyan.recoverytools"
     android:installLocation="auto"
     android:versionCode="18"
-    android:versionName="1.2.2" >
+    android:versionName="1.2.3" >
 
     <uses-sdk
         android:minSdkVersion="7"
