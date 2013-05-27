@@ -411,7 +411,7 @@ public class RecoveryTools extends Activity {
 			br.close();
 			tvLog.setText(sLog);
 		} catch (FileNotFoundException e) {
-			tvLog.setText(tvLog.getText() + "\n" + e.getMessage());
+			tvLog.setText("No log found!");
 			e.printStackTrace();
 		} catch (IOException e) {
 			tvLog.setText(tvLog.getText() + "\n" + e.getMessage());

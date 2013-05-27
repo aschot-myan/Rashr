@@ -239,6 +239,7 @@ public class Support {
 		
 		if (DEVICE.equals("n7100")
 				|| DEVICE.equals("tf700t")
+				|| DEVICE.equals("t0lte")
 				|| DEVICE.equals("t0ltevzw"))
 //				|| DEVICE.equals("m3"))
 			tmp = "/dev/block/mmcblk0p9";

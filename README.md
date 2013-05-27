@@ -32,6 +32,10 @@ CHANGELOG
 -Samsung BLM Devices
 -Fix HTC One X flash issue
 
+Update [1.2.4]
+
+-Fix device recognition (Samsung Galaxy Note 2 t0lte)
+
 Update [1.2.3]
 
 -Fix CWM & TWRP button
