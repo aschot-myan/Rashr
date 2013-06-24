@@ -1,5 +1,6 @@
 package com.sbstrm.appirater;
 
+import android.os.Build;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -98,8 +99,8 @@ public class Appirater {
 	private static void showRateDialog(final Context mContext, final SharedPreferences.Editor editor) {
     	String appName = mContext.getString(R.string.appirator_app_title);
         final Dialog dialog = new Dialog(mContext);
-        
-        if (android.os.Build.VERSION.RELEASE.startsWith("1.") || android.os.Build.VERSION.RELEASE.startsWith("2.0") || android.os.Build.VERSION.RELEASE.startsWith("2.1")){
+        if (Build.VERSION.SDK_INT<Build.VERSION_CODES.FROYO){
+        //if (android.os.Build.VERSION.RELEASE.startsWith("1.") || android.os.Build.VERSION.RELEASE.startsWith("2.0") || android.os.Build.VERSION.RELEASE.startsWith("2.1")){
         	//No dialog title on pre-froyo devices
         	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         }else if(mContext.getResources().getDisplayMetrics().densityDpi == DisplayMetrics.DENSITY_LOW || mContext.getResources().getDisplayMetrics().densityDpi == DisplayMetrics.DENSITY_MEDIUM){
