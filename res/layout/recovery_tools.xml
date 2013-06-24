@@ -1,106 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="290dp" >
+            android:layout_width="match_parent"
+            android:layout_height="290dp">
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+                android:id="@+id/LinearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/ivCWM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/cwm_ico"
-                android:contentDescription="@string/empty" />
+                    android:id="@+id/ivCWM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cwm_ico"
+                    android:contentDescription="@string/empty"/>
 
             <Button
-                android:id="@+id/bCWM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Go"
-                android:tag="clockwork"
-                android:text="@string/sFlashCWM" />
+                    android:id="@+id/bCWM"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="Go"
+                    android:tag="clockwork"
+                    android:text="@string/sFlashCWM"/>
 
             <ImageView
-                android:id="@+id/ivTWRP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/twrp_ico"
-                android:contentDescription="@string/empty" />
+                    android:id="@+id/ivTWRP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/twrp_ico"
+                    android:contentDescription="@string/empty"/>
 
             <Button
-                android:id="@+id/bTWRP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="Go"
-                android:tag="twrp"
-                android:text="@string/sFlashTWRP" />
+                    android:id="@+id/bTWRP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="Go"
+                    android:tag="twrp"
+                    android:text="@string/sFlashTWRP"/>
 
             <Button
-                android:id="@+id/bFlashOther"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bFlashOther"
-                android:text="@string/flash_other" />
+                    android:id="@+id/bFlashOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="bFlashOther"
+                    android:text="@string/flash_other"/>
 
             <Button
-                android:id="@+id/bBackupMgr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bBackupMgr"
-                android:text="@string/sBackupMgr" />
+                    android:id="@+id/bBackupMgr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="bBackupMgr"
+                    android:text="@string/sBackupMgr"/>
 
             <Button
-                android:id="@+id/bCleareCache"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bCleareCache"
-                android:text="@string/sCleareCache" />
+                    android:id="@+id/bCleareCache"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="bCleareCache"
+                    android:text="@string/sCleareCache"/>
 
             <Button
-                android:id="@+id/bRebooter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bRebooter"
-                android:text="@string/sRebooter" />
+                    android:id="@+id/bRebooter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="bRebooter"
+                    android:text="@string/sRebooter"/>
         </LinearLayout>
     </ScrollView>
 
     <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textIsSelectable="false"
-                android:visibility="visible" />
+                    android:id="@+id/tvInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textIsSelectable="false"
+                    android:visibility="visible"/>
 
             <CheckBox
-                android:id="@+id/cbUseBinary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:clickable="false"
-                android:textSize="20sp"
-                android:visibility="visible" />
+                    android:id="@+id/cbUseBinary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:clickable="false"
+                    android:textSize="20sp"
+                    android:visibility="visible"/>
 
         </LinearLayout>
     </ScrollView>

@@ -43,16 +43,21 @@ Supported Devices
 -HTC Desire S (saga)
 -HTC Sensation (pyramid)
 -HTC Fireball (fireball)
+-HTC Incredible 2 (vivow)
+-HTC EVO (supersonic/CDMA)
 -HTC One V (primou)
 -HTC One S (ville/villec2)
 -HTC One X (endeavoru)
 -HTC One XL (evita)
 -HTC Butterfly (dlxub1)
+-HTC Droid DNA (dlx)
+-HTC ONE GSM (m7/m7ul)
 
+-Samsung Galaxy S4 (GT-I9505/jflte/jfltexx)
 -Samsung Galaxy S2 LTE (skyrocket)
 -Samsung Galaxy Note 2 (n7100/t0ltevzw)
 -Samsung Galaxy Note 2 LTE (t0lte)
--Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
+-Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw/d2spr)
 -Samsung Galaxy SIII Mini (golden)
 -Samsung Galaxy Mini II (jena)
 
@@ -70,6 +75,7 @@ Supported Devices
 -Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
 -Samsung Galaxy Note (n7000)
 -Samsung GalaxyS Captivate (SGH-I897)
+-Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd)
 
 -Motorola Droid2 (droid2)
 
@@ -86,6 +92,8 @@ Supported Devices
 
 -Samsung Galaxy S II Duos (SCH-i929)
 -LG Optimus One CDMA (thuderc)
+-LG Optimus Elite (m3s)
+-Samsung Epic 4G Touch (SPH-D710)
 
 ====================
 CHANGELOG
@@ -95,6 +103,20 @@ CHANGELOG
 
 -Stock Recoveries
 -Samsung BLM Devices
+
+Update [1.2.5]
+
+-Optimized app size (from 260kb to 80kb)
+-HTC Droid DNA (dlx) added
+-HTC ONE GSM (m7/m7ul) added
+-LG Optimus Elite (m3s) added
+-Samsung Epic 4G Touch (SPH-D710) added
+-Samsung Galaxy S4 (GT-I9505/jflte/jfltexx) added
+-Samsung Galaxy S3 (d2spr) added
+-HTC EVO (supersonic/CDMA) added
+-LG Optimus One (p500/thunderg) added
+-Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd) added
+-HTC Incredible 2 (vivow) added
 
 Update [1.2.4]
 

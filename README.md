@@ -4,21 +4,21 @@ Recovery-Tools
 
 About:
 
------Bias----- 
-This app is in the very early stage requires [ROOT] access!
+----- Bias -----
+This app requires [ROOT] access!
 
 Please do not use this app thoughtless and evaluating them without deeper KNOWLEDGE for Android (Root, Custom Recovery, etc.)
 
-I'm working every day to improve this app and soon followed by many updates.
-
-The source code of this app will be published soon so EVERYONE can use itself compile and change without additional approval by me and broadcast the referral is open source
+I'm working to improve this app.
 
 ----- Description -----
 The app loads a predefined custom-recovery system down for your device and installs them automatically (in beta it only supports a less no. of devices) in addition they can restart their device quickly and easily (in the bootloader, recovery, and in the system).
 
+You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Recovery-Tools
+
 ----- Rights explanation -----
 
--Reade and write on external storage: save recoveries
+-Reade and write on external storage: save recoveries images
 -Full network access: download recoveries
 -[normally managed by SuperUser-App]Full access to all functions of the device: Flashing the recoveries
 
@@ -30,7 +30,35 @@ CHANGELOG
 
 -Stock Recoveries
 -Samsung BLM Devices
--Fix HTC One X flash issue
+
+Update [1.2.6]
+
+-HTC HD2 (leo) added
+-Transformer Prime (TF201) added
+-LG Optimus G fixxed
+-LG Optimus G (geebhrc) added
+-LG Optimus Me (pecan) added
+-LG P990 OPTIMUS 2X/SPEED (p990) fixxed
+-HTC One (m7spr) added
+-HTC G2 (vision) added
+-HTC Hero (hero) added
+-HTC First (mystul) added
+-HTC Evo 4G LTE (jewel) added
+-Samsung Galaxy S4 (jfltespr/ja3g) added
+
+Update [1.2.5]
+
+-Optimized app size (from 260kb to 80kb)
+-HTC Droid DNA (dlx) added
+-HTC ONE GSM (m7/m7ul) added
+-LG Optimus Elite (m3s) added
+-Samsung Epic 4G Touch (SPH-D710) added
+-Samsung Galaxy S4 (GT-I9505/jflte/jfltexx) added
+-Samsung Galaxy S3 (d2spr) added
+-HTC EVO (supersonic/CDMA) added
+-LG Optimus One (p500/thunderg) added
+-Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd) added
+-HTC Incredible 2 (vivow) added
 
 Update [1.2.4]
 
@@ -40,7 +68,6 @@ Update [1.2.3]
 
 -Fix CWM & TWRP button
 -Fic FC on some devices
-
 
 Update [1.2.1]
 
@@ -204,9 +231,7 @@ Recovery-Tools: https://github.com/ashotmkrtchyan1995/Recovery-Tools
 
 Utils-Library: https://github.com/ashotmkrtchyan1995/Utils-Library
 
-Root-Commands-Library: https://github.com/dschuermann/root-commands
-
-Import all 3 Projects in to Eclipse and set Utils-Library and Root-Commands-Library as Library
+Import all Projects in to Eclipse and set Utils-Library as Library
 
 =========================
 Supported Devices
@@ -223,26 +248,35 @@ Supported Devices
 
 -Asus Transformer Infinity (ft700t)
 
+-HTC HD2 (leo)
 -HTC Desire HD (ace)
 -HTC Desire S (saga)
 -HTC Sensation (pyramid)
 -HTC Fireball (fireball)
+-HTC Incredible 2 (vivow)
+-HTC EVO (supersonic/CDMA)
+-HTC Evo 4G LTE (jewel)
 -HTC One V (primou)
 -HTC One S (ville/villec2)
 -HTC One X (endeavoru)
 -HTC One XL (evita)
 -HTC Butterfly (dlxub1)
+-HTC Droid DNA (dlx)
+-HTC ONE GSM (m7/m7ul/m7wls/m7spr)
 
+-Motorola Atrix 4G
+
+-Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/ja3g)
 -Samsung Galaxy S2 LTE (skyrocket)
 -Samsung Galaxy Note 2 (n7100/t0ltevzw)
 -Samsung Galaxy Note 2 LTE (t0lte)
--Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw)
+-Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw/d2spr)
 -Samsung Galaxy SIII Mini (golden)
 -Samsung Galaxy Mini II (jena)
 
 -Sony Xperia Z (C6603)
 
--LG Optiomus G (geeb)
+-LG Optiomus G (geeb/geebhrc)
 -LG GT540 Optimus (swift)
 -LG P990 OPTIMUS 2X/SPEED (p990)
 
@@ -254,10 +288,14 @@ Supported Devices
 -Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
 -Samsung Galaxy Note (n7000)
 -Samsung GalaxyS Captivate (SGH-I897)
+-Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd)
 
 -Motorola Droid2 (droid2)
 
 -LG Optimus HD X4 (x3)
+
+-HTC G2 (vision)
+-HTC Hero (hero)
 
 ----- [TWRP only] -----
 
@@ -269,7 +307,14 @@ Supported Devices
 ----- [CUSTOM only] -----
 
 -Samsung Galaxy S II Duos (SCH-i929)
+-Samsung Epic 4G Touch (SPH-D710)
+-Samsung Galaxy S4 (ja3g)
+
+-HTC First (mystul)
+
 -LG Optimus One CDMA (thuderc)
+-LG Optimus Elite (m3s)
+-LG Optimus Me (pecan)
 
 ===================================
 COPYRIGHT
