@@ -297,6 +297,12 @@ public class RecoveryTools extends Activity {
             bCWM.setText(R.string.nocwm);
             bCWM.setClickable(false);
         }
+
+        if (!mSupport.OTHER) {
+            Button bOTHER = (Button) findViewById(R.id.bFlashOther);
+            bOTHER.setText("");
+            bOTHER.setClickable(false);
+        }
     }
 
     public void createRootDeniedNotification() {
@@ -375,7 +381,7 @@ public class RecoveryTools extends Activity {
                             "\nVersionCode: " + pInfo.versionCode +
                             "\n\n\nProduct Info: " +
                             "\n\nManufacture: " + android.os.Build.MANUFACTURER +
-                            "\nDevice: " + android.os.Build.DEVICE +
+                            "\nDevice: " + android.os.Build.DEVICE + " (" + mSupport.DEVICE + ")" +
                             "\nBoard: " + android.os.Build.BOARD +
                             "\nBrand: " + android.os.Build.BRAND +
                             "\nModel: " + android.os.Build.MODEL +

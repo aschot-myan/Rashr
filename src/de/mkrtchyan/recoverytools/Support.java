@@ -39,7 +39,7 @@ public class Support {
      * FileSystem
      */
     private final Common mCommon = new Common();
-    public String DEVICE = android.os.Build.DEVICE;
+    public String DEVICE = Build.DEVICE;
     public String RecoveryPath;
     private String SYSTEM;
     private String VERSION = "";
@@ -54,9 +54,13 @@ public class Support {
     public boolean CWM = true;
     //	public boolean CWM_INSTALLED = false;
     private boolean CWM_OFFICIAL = true;
+    public boolean OTHER = true;
 
 
     public Support() {
+
+        String BOARD = Build.BOARD;
+        String MODEL = Build.MODEL;
 
 //	Set DEVICE predefined options
 
@@ -65,7 +69,7 @@ public class Support {
             DEVICE = "kfhd7";
 
 //      HTC ONE GSM
-        String BOARD = android.os.Build.BOARD;
+
         if (BOARD.equals("m7")
                 || DEVICE.equals("m7")
                 || DEVICE.equals("m7ul"))
@@ -215,6 +219,17 @@ public class Support {
         if (BOARD.equals("ace"))
             DEVICE = "ace";
 
+//      LG Optimus L9
+        if (DEVICE.equals("u2")
+                || BOARD.equals("u2")
+                || MODEL.equals("LG-P760"))
+            DEVICE = "p760";
+//      Huawei U9508
+        if (BOARD.equals("U9508")
+            || DEVICE.equals("hwu9508"))
+            DEVICE = "u9508";
+
+
 //		MTD Devices
         if (DEVICE.equals("crespo")
                 || DEVICE.equals("crespo4g")
@@ -227,7 +242,8 @@ public class Support {
                 || DEVICE.equals("hero")
                 || DEVICE.equals("heroc")
                 || DEVICE.equals("pecan")
-                || DEVICE.equals("leo"))
+                || DEVICE.equals("leo")
+                || DEVICE.equals("p760"))
             MTD = true;
 
 //		Devices who kernel will be flashed to
@@ -295,7 +311,7 @@ public class Support {
                 || DEVICE.equals("mystul")
                 || DEVICE.equals("jfltespr")
                 || DEVICE.equals("jfltevzw")
-                || DEVICE.equals("jtftexx"))
+                || DEVICE.equals("jfltexx"))
             tmp = "/dev/block/mmcblk0p21";
 
         if (DEVICE.equals("jena"))
@@ -345,6 +361,11 @@ public class Support {
                 || DEVICE.equals("ja3g"))
             tmp = "/dev/block/mmcblk0p10";
 
+//      Huawei
+
+        if (DEVICE.equals("u9508"))
+            tmp = "/dev/block/platform/hi_mci.1/by-name/recovery";
+
 //		Sony DEVICEs + Same
 
         if (DEVICE.equals("nozomi")
@@ -353,7 +374,7 @@ public class Support {
                 || DEVICE.equals("LT30p"))
             tmp = "/dev/block/mmcblk0p11";
 
-        if (DEVICE.equals("C6603"))
+        if (DEVICE.equals("c6603"))
             tmp = "/system/bin/recovery.tar";
 
 //		LG DEVICEs + Same
@@ -367,6 +388,9 @@ public class Support {
         if (DEVICE.equals("m3s")
                 || DEVICE.equals("bryce"))
             tmp = "/dev/block/mmcblk0p14";
+
+        if (DEVICE.equals("p970"))
+            tmp = "/dev/block/mmcblk0p4";
 
 //		ZTE DEVICEs + Same
 
@@ -395,7 +419,8 @@ public class Support {
                 || DEVICE.equals("vision")
                 || DEVICE.equals("hero")
                 || DEVICE.equals("pecan")
-                || DEVICE.equals("mystul"))
+                || DEVICE.equals("mystul")
+                || DEVICE.equals("u9508"))
             TWRP = false;
 
         if (DEVICE.equals("nozomi")
@@ -410,7 +435,8 @@ public class Support {
                 || DEVICE.equals("GT-P6200")
                 || DEVICE.equals("bryce")
                 || DEVICE.equals("pecan")
-                || DEVICE.equals("mystul"))
+                || DEVICE.equals("mystul")
+                || DEVICE.equals("u9508"))
             CWM = false;
 
         if (DEVICE.equals("")
@@ -418,6 +444,7 @@ public class Support {
                 && RecoveryPath.equals("")) {
             TWRP = false;
             CWM = false;
+            OTHER = false;
         }
 
     }
@@ -465,7 +492,9 @@ public class Support {
                     || DEVICE.equals("jfltespr")
                     || DEVICE.equals("jewel")
                     || DEVICE.equals("shooter")
-                    || DEVICE.equals("jfltevzw"))
+                    || DEVICE.equals("jfltevzw")
+                    || DEVICE.equals("p970")
+                    || DEVICE.equals("p760"))
                 VERSION = "-touch";
 
 //			Newest Clockworkmod version for devices
@@ -517,6 +546,9 @@ public class Support {
             if (DEVICE.equals("n7000"))
                 VERSION = VERSION + "-6.0.1.2";
 
+            if (DEVICE.equals("p970"))
+                VERSION = VERSION + "-6.0.1.4";
+
             if (DEVICE.equals("golden")
                     || DEVICE.equals("warp2"))
                 VERSION = VERSION + "-6.0.2.7";
@@ -545,7 +577,8 @@ public class Support {
                     || DEVICE.equals("m7")
                     || DEVICE.equals("dlx")
                     || DEVICE.equals("d2spr")
-                    || DEVICE.equals("p990"))
+                    || DEVICE.equals("p990")
+                    || DEVICE.equals("p760"))
                 VERSION = VERSION + "-6.0.3.1";
 
             if (DEVICE.equals("jfltexx")
@@ -611,7 +644,8 @@ public class Support {
                     || DEVICE.equals("p990")
                     || DEVICE.equals("heroc")
                     || DEVICE.equals("jewel")
-                    || DEVICE.equals("shooter"))
+                    || DEVICE.equals("shooter")
+                    || DEVICE.equals("p970"))
                 VERSION = "-2.5.0.0";
 
             if (DEVICE.equals("dlxub1")

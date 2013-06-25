@@ -1,0 +1,432 @@
+com.sbstrm.appirater.Appirater -> a.a.a.a:
+    void appLaunched(android.content.Context) -> a
+    void showRateDialog(android.content.Context,android.content.SharedPreferences$Editor) -> a
+com.sbstrm.appirater.Appirater$1 -> a.a.a.b:
+    android.content.Context val$mContext -> a
+    android.content.SharedPreferences$Editor val$editor -> b
+    android.app.Dialog val$dialog -> c
+    void onClick(android.view.View) -> onClick
+com.sbstrm.appirater.Appirater$2 -> a.a.a.c:
+    android.content.SharedPreferences$Editor val$editor -> a
+    android.app.Dialog val$dialog -> b
+    void onClick(android.view.View) -> onClick
+com.sbstrm.appirater.Appirater$3 -> a.a.a.d:
+    android.content.SharedPreferences$Editor val$editor -> a
+    android.app.Dialog val$dialog -> b
+    void onClick(android.view.View) -> onClick
+de.mkrtchyan.recoverytools.BackupManagerActivity -> de.mkrtchyan.recoverytools.BackupManagerActivity:
+    java.io.File PathToSd -> a
+    java.io.File PathToRecoveryTools -> b
+    java.io.File PathToBackups -> c
+    java.io.File fBACKUP -> d
+    android.content.Context mContext -> e
+    de.mkrtchyan.utils.Notifyer mNotifyer -> f
+    de.mkrtchyan.utils.Common mCommon -> g
+    de.mkrtchyan.recoverytools.Support mSupport -> h
+    de.mkrtchyan.utils.FileChooser fcRestore -> i
+    de.mkrtchyan.utils.FileChooser fcDelete -> j
+    java.lang.Runnable rBackup -> k
+    java.lang.Runnable rRestore -> l
+    java.lang.Runnable rDelete -> m
+    java.lang.Runnable setBakNameAndRun -> n
+    void onCreate(android.os.Bundle) -> onCreate
+    void bBackup(android.view.View) -> bBackup
+    void bRestore(android.view.View) -> bRestore
+    void bDeleteBackup(android.view.View) -> bDeleteBackup
+    de.mkrtchyan.recoverytools.Support access$000(de.mkrtchyan.recoverytools.BackupManagerActivity) -> a
+    de.mkrtchyan.utils.Notifyer access$100(de.mkrtchyan.recoverytools.BackupManagerActivity) -> b
+    android.content.Context access$200(de.mkrtchyan.recoverytools.BackupManagerActivity) -> c
+    java.io.File access$300(de.mkrtchyan.recoverytools.BackupManagerActivity) -> d
+    de.mkrtchyan.utils.FileChooser access$400(de.mkrtchyan.recoverytools.BackupManagerActivity) -> e
+    java.io.File access$302(de.mkrtchyan.recoverytools.BackupManagerActivity,java.io.File) -> a
+    de.mkrtchyan.utils.FileChooser access$500(de.mkrtchyan.recoverytools.BackupManagerActivity) -> f
+    java.io.File access$600() -> a
+    de.mkrtchyan.utils.FileChooser access$502(de.mkrtchyan.recoverytools.BackupManagerActivity,de.mkrtchyan.utils.FileChooser) -> a
+    java.lang.Runnable access$700(de.mkrtchyan.recoverytools.BackupManagerActivity) -> g
+    java.lang.Runnable access$800(de.mkrtchyan.recoverytools.BackupManagerActivity) -> h
+de.mkrtchyan.recoverytools.BackupManagerActivity$1 -> de.mkrtchyan.recoverytools.a:
+    de.mkrtchyan.recoverytools.BackupManagerActivity this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.BackupManagerActivity$2 -> de.mkrtchyan.recoverytools.b:
+    de.mkrtchyan.recoverytools.BackupManagerActivity this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.BackupManagerActivity$3 -> de.mkrtchyan.recoverytools.c:
+    de.mkrtchyan.recoverytools.BackupManagerActivity this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.BackupManagerActivity$4 -> de.mkrtchyan.recoverytools.d:
+    de.mkrtchyan.recoverytools.BackupManagerActivity this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.BackupManagerActivity$4$1 -> de.mkrtchyan.recoverytools.e:
+    android.widget.EditText val$etFileName -> a
+    android.app.Dialog val$dialog -> b
+    de.mkrtchyan.recoverytools.BackupManagerActivity$4 this$1 -> c
+    void onClick(android.view.View) -> onClick
+de.mkrtchyan.recoverytools.FlashUtil -> de.mkrtchyan.recoverytools.f:
+    android.content.Context mContext -> a
+    android.app.ProgressDialog pDialog -> b
+    de.mkrtchyan.utils.Common mCommon -> c
+    de.mkrtchyan.utils.Notifyer mNotifyer -> d
+    de.mkrtchyan.recoverytools.Support mSupport -> e
+    java.io.File charger -> f
+    java.io.File chargermon -> g
+    java.io.File ric -> h
+    java.io.File fflash -> i
+    java.io.File fdump -> j
+    java.io.File file -> k
+    int JOB -> l
+    void onPreExecute() -> onPreExecute
+    java.lang.Boolean doInBackground(java.lang.Void[]) -> a
+    void onPostExecute(java.lang.Boolean) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    de.mkrtchyan.utils.Common access$000(de.mkrtchyan.recoverytools.FlashUtil) -> a
+de.mkrtchyan.recoverytools.FlashUtil$1 -> de.mkrtchyan.recoverytools.g:
+    de.mkrtchyan.recoverytools.FlashUtil this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.Rebooter -> de.mkrtchyan.recoverytools.h:
+de.mkrtchyan.recoverytools.Rebooter$1 -> de.mkrtchyan.recoverytools.i:
+    de.mkrtchyan.utils.Common val$mCommon -> a
+    de.mkrtchyan.recoverytools.Rebooter this$0 -> b
+    void onClick(android.view.View) -> onClick
+de.mkrtchyan.recoverytools.Rebooter$2 -> de.mkrtchyan.recoverytools.j:
+    de.mkrtchyan.utils.Common val$mCommon -> a
+    de.mkrtchyan.recoverytools.Rebooter this$0 -> b
+    void onClick(android.view.View) -> onClick
+de.mkrtchyan.recoverytools.Rebooter$3 -> de.mkrtchyan.recoverytools.k:
+    de.mkrtchyan.utils.Common val$mCommon -> a
+    de.mkrtchyan.recoverytools.Rebooter this$0 -> b
+    void onClick(android.view.View) -> onClick
+de.mkrtchyan.recoverytools.RecoveryTools -> de.mkrtchyan.recoverytools.RecoveryTools:
+    android.content.Context mContext -> b
+    java.io.File PathToSd -> c
+    java.io.File PathToRecoveryTools -> d
+    java.io.File PathToRecoveries -> a
+    java.io.File PathToUtils -> e
+    java.io.File fRECOVERY -> f
+    java.io.File fflash -> g
+    java.io.File fdump -> h
+    java.io.File charger -> i
+    java.io.File chargermon -> j
+    java.io.File ric -> k
+    android.view.MenuItem iLog -> l
+    boolean firstrun -> m
+    boolean download -> n
+    de.mkrtchyan.utils.Notifyer mNotifyer -> o
+    de.mkrtchyan.utils.Common mCommon -> p
+    de.mkrtchyan.recoverytools.Support mSupport -> q
+    java.lang.Runnable rFlash -> r
+    java.lang.Runnable rFlasher -> s
+    java.lang.Runnable rDownload -> t
+    void onCreate(android.os.Bundle) -> onCreate
+    void Go(android.view.View) -> Go
+    void bFlashOther(android.view.View) -> bFlashOther
+    void bBackupMgr(android.view.View) -> bBackupMgr
+    void bCleareCache(android.view.View) -> bCleareCache
+    void bRebooter(android.view.View) -> bRebooter
+    void getSupport() -> a
+    void createRootDeniedNotification() -> b
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean onPrepareOptionsMenu(android.view.Menu) -> onPrepareOptionsMenu
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    void report(android.view.MenuItem) -> report
+    void showLogs(android.view.MenuItem) -> showLogs
+    void downloadUtils() -> c
+    android.content.Context access$000(de.mkrtchyan.recoverytools.RecoveryTools) -> a
+    java.io.File access$100(de.mkrtchyan.recoverytools.RecoveryTools) -> b
+    de.mkrtchyan.recoverytools.Support access$200(de.mkrtchyan.recoverytools.RecoveryTools) -> c
+    java.lang.Runnable access$300(de.mkrtchyan.recoverytools.RecoveryTools) -> d
+    de.mkrtchyan.utils.Notifyer access$400(de.mkrtchyan.recoverytools.RecoveryTools) -> e
+    de.mkrtchyan.utils.Common access$500(de.mkrtchyan.recoverytools.RecoveryTools) -> f
+    java.lang.Runnable access$600(de.mkrtchyan.recoverytools.RecoveryTools) -> g
+    java.lang.Runnable access$700(de.mkrtchyan.recoverytools.RecoveryTools) -> h
+    java.io.File access$800(de.mkrtchyan.recoverytools.RecoveryTools) -> i
+    java.io.File access$900(de.mkrtchyan.recoverytools.RecoveryTools) -> j
+    java.io.File access$1000(de.mkrtchyan.recoverytools.RecoveryTools) -> k
+    java.io.File access$1100(de.mkrtchyan.recoverytools.RecoveryTools) -> l
+    java.io.File access$1200(de.mkrtchyan.recoverytools.RecoveryTools) -> m
+de.mkrtchyan.recoverytools.RecoveryTools$1 -> de.mkrtchyan.recoverytools.l:
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.RecoveryTools$2 -> de.mkrtchyan.recoverytools.m:
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.RecoveryTools$2$1 -> de.mkrtchyan.recoverytools.n:
+    android.app.AlertDialog$Builder val$abuilder -> a
+    de.mkrtchyan.recoverytools.RecoveryTools$2 this$1 -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.recoverytools.RecoveryTools$2$1$1 -> de.mkrtchyan.recoverytools.o:
+    de.mkrtchyan.recoverytools.RecoveryTools$2$1 this$2 -> a
+    void onCancel(android.content.DialogInterface) -> onCancel
+de.mkrtchyan.recoverytools.RecoveryTools$2$2 -> de.mkrtchyan.recoverytools.p:
+    de.mkrtchyan.recoverytools.RecoveryTools$2 this$1 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.recoverytools.RecoveryTools$3 -> de.mkrtchyan.recoverytools.q:
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.RecoveryTools$4 -> de.mkrtchyan.recoverytools.r:
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.RecoveryTools$5 -> de.mkrtchyan.recoverytools.s:
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> a
+    void run() -> run
+de.mkrtchyan.recoverytools.RecoveryTools$6 -> de.mkrtchyan.recoverytools.t:
+    android.app.Dialog val$reportDialog -> a
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> b
+    void onClick(android.view.View) -> onClick
+de.mkrtchyan.recoverytools.RecoveryTools$7 -> de.mkrtchyan.recoverytools.u:
+    android.widget.TextView val$tvLog -> a
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> b
+    void onClick(android.view.View) -> onClick
+de.mkrtchyan.recoverytools.RecoveryTools$8 -> de.mkrtchyan.recoverytools.v:
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.recoverytools.RecoveryTools$9 -> de.mkrtchyan.recoverytools.w:
+    de.mkrtchyan.recoverytools.RecoveryTools this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.recoverytools.Support -> de.mkrtchyan.recoverytools.x:
+    de.mkrtchyan.utils.Common mCommon -> k
+    java.lang.String DEVICE -> a
+    java.lang.String RecoveryPath -> b
+    java.lang.String SYSTEM -> l
+    java.lang.String VERSION -> m
+    java.lang.String EXT -> c
+    java.lang.String HOST_URL -> d
+    boolean KERNEL_TO -> e
+    boolean FLASH_OVER_RECOVERY -> f
+    boolean MTD -> g
+    boolean TWRP -> h
+    boolean TWRP_OFFICIAL -> n
+    boolean CWM -> i
+    boolean CWM_OFFICIAL -> o
+    boolean OTHER -> j
+    java.lang.String getRecoveryPath() -> c
+    void getUnsupportedSystems() -> a
+    void getVersion(java.lang.String) -> a
+    java.io.File constructFile() -> b
+de.mkrtchyan.utils.Common -> de.mkrtchyan.a.a:
+    boolean suRecognition() -> a
+    void checkFolder(java.io.File) -> a
+    void chmod(java.io.File,java.lang.String) -> a
+    void xdaProfile(android.content.Context) -> a
+    void deleteFolder(java.io.File,boolean) -> a
+    void mountDir(java.io.File,java.lang.String) -> b
+    java.lang.String executeSuShell(java.lang.String) -> a
+    java.lang.String executeSuShell(android.content.Context,java.lang.String) -> a
+    boolean getBooleanPerf(android.content.Context,java.lang.String,java.lang.String) -> a
+    void setBooleanPerf(android.content.Context,java.lang.String,java.lang.String,java.lang.Boolean) -> a
+de.mkrtchyan.utils.Downloader -> de.mkrtchyan.a.b:
+    android.content.Context mContext -> a
+    java.lang.String exString -> b
+    android.app.ProgressDialog downloadDialog -> c
+    android.app.ProgressDialog connectingDialog -> d
+    boolean first_start -> e
+    java.lang.Runnable AfterDownload -> f
+    java.lang.String URL -> g
+    java.lang.String FileName -> h
+    java.io.File outputFile -> i
+    void onPreExecute() -> onPreExecute
+    java.lang.Boolean doInBackground(java.lang.Void[]) -> a
+    void onProgressUpdate(java.lang.Integer[]) -> a
+    void onPostExecute(java.lang.Boolean) -> a
+    void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+de.mkrtchyan.utils.FileChooser -> de.mkrtchyan.a.c:
+    java.io.File Start -> c
+    java.io.File currentPath -> d
+    boolean use -> a
+    java.io.File selectedFile -> b
+    android.widget.TextView tvPath -> e
+    android.widget.ListView lvFiles -> f
+    android.content.Context mContext -> g
+    java.lang.String[] files -> h
+    int select -> i
+    java.lang.Runnable runAtChoose -> j
+    de.mkrtchyan.utils.Notifyer mNotifyer -> k
+    java.lang.String EXT -> l
+    void reload() -> a
+    void fileSelected() -> b
+    int access$002(de.mkrtchyan.utils.FileChooser,int) -> a
+    java.io.File access$100() -> c
+    java.lang.String[] access$200(de.mkrtchyan.utils.FileChooser) -> a
+    int access$000(de.mkrtchyan.utils.FileChooser) -> b
+    java.io.File access$102(java.io.File) -> a
+    de.mkrtchyan.utils.Notifyer access$300(de.mkrtchyan.utils.FileChooser) -> c
+    java.io.File access$400() -> d
+    java.lang.Runnable access$500(de.mkrtchyan.utils.FileChooser) -> d
+de.mkrtchyan.utils.FileChooser$1 -> de.mkrtchyan.a.d:
+    de.mkrtchyan.utils.FileChooser this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+de.mkrtchyan.utils.FileChooser$2 -> de.mkrtchyan.a.e:
+    de.mkrtchyan.utils.FileChooser this$0 -> a
+    void onCancel(android.content.DialogInterface) -> onCancel
+de.mkrtchyan.utils.FileChooser$3 -> de.mkrtchyan.a.f:
+    de.mkrtchyan.utils.FileChooser this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.FileChooser$4 -> de.mkrtchyan.a.g:
+    de.mkrtchyan.utils.FileChooser this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.Notifyer -> de.mkrtchyan.a.h:
+    android.content.Context mContext -> b
+    java.lang.Runnable rEmpty -> a
+    android.app.Dialog createDialog(int,java.lang.String,boolean) -> a
+    android.app.Dialog createDialog(int,int,boolean,boolean) -> a
+    void showToast(int) -> a
+    void showToast(java.lang.String) -> a
+    android.app.AlertDialog$Builder createAlertDialog(int,int,java.lang.Runnable) -> a
+    android.app.AlertDialog$Builder createAlertDialog(int,java.lang.String,java.lang.Runnable) -> a
+    android.app.AlertDialog$Builder createAlertDialog(int,int,java.lang.Runnable,java.lang.Runnable,java.lang.Runnable) -> a
+de.mkrtchyan.utils.Notifyer$1 -> de.mkrtchyan.a.i:
+    void run() -> run
+de.mkrtchyan.utils.Notifyer$2 -> de.mkrtchyan.a.j:
+    de.mkrtchyan.utils.Notifyer this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.Notifyer$3 -> de.mkrtchyan.a.k:
+    java.lang.Runnable val$runOnTrue -> a
+    de.mkrtchyan.utils.Notifyer this$0 -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.Notifyer$4 -> de.mkrtchyan.a.l:
+    de.mkrtchyan.utils.Notifyer this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.Notifyer$5 -> de.mkrtchyan.a.m:
+    java.lang.Runnable val$runOnTrue -> a
+    de.mkrtchyan.utils.Notifyer this$0 -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.Notifyer$6 -> de.mkrtchyan.a.n:
+    java.lang.Runnable val$runOnTrue -> a
+    de.mkrtchyan.utils.Notifyer this$0 -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.Notifyer$7 -> de.mkrtchyan.a.o:
+    java.lang.Runnable val$runOnNegative -> a
+    de.mkrtchyan.utils.Notifyer this$0 -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.Notifyer$8 -> de.mkrtchyan.a.p:
+    java.lang.Runnable val$runOnNeutral -> a
+    de.mkrtchyan.utils.Notifyer this$0 -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+de.mkrtchyan.utils.R -> de.mkrtchyan.a.q:
+de.mkrtchyan.utils.R$id -> de.mkrtchyan.a.r:
+    int LinearLayout -> LinearLayout
+    int lvFiles -> lvFiles
+    int tvPath -> tvPath
+de.mkrtchyan.utils.R$layout -> de.mkrtchyan.a.s:
+    int dialog_file_chooser -> dialog_file_chooser
+de.mkrtchyan.utils.R$string -> de.mkrtchyan.a.t:
+    int Downloading -> Downloading
+    int choose_message -> choose_message
+    int empty_dir -> empty_dir
+    int error -> error
+    int failed_download -> failed_download
+    int file_chooser -> file_chooser
+    int negative -> negative
+    int neutral -> neutral
+    int noconnection -> noconnection
+    int positive -> positive
+    int warning -> warning
+    int wrong_format -> wrong_format
+org.rootcommands.Mount -> b.a.a:
+    java.io.File mDevice -> a
+    java.io.File mMountPoint -> b
+    java.lang.String mType -> c
+    java.util.Set mFlags -> d
+    java.io.File getDevice() -> a
+    java.io.File getMountPoint() -> b
+    java.util.Set getFlags() -> c
+    java.lang.String toString() -> toString
+org.rootcommands.Remounter -> b.a.b:
+    org.rootcommands.Shell shell -> a
+    boolean remount(java.lang.String,java.lang.String) -> a
+    org.rootcommands.Mount findMountPointRecursive(java.lang.String) -> a
+    java.util.ArrayList getMounts() -> a
+org.rootcommands.RootCommands -> b.a.c:
+    boolean DEBUG -> a
+    int DEFAULT_TIMEOUT -> b
+org.rootcommands.Shell -> b.a.d:
+    java.lang.Process shellProcess -> a
+    java.io.BufferedReader stdOutErr -> b
+    java.io.DataOutputStream outputStream -> c
+    java.util.List commands -> d
+    boolean close -> e
+    java.lang.String LD_LIBRARY_PATH -> f
+    java.lang.Runnable inputRunnable -> g
+    java.lang.Runnable outputRunnable -> h
+    org.rootcommands.Shell startRootShell(java.util.ArrayList,java.lang.String) -> a
+    org.rootcommands.Shell startRootShell() -> a
+    void destroyShellProcess() -> b
+    void writeCommands() -> c
+    void readOutput() -> d
+    org.rootcommands.command.Command add(org.rootcommands.command.Command) -> a
+    void close() -> close
+    void access$000(org.rootcommands.Shell) -> a
+    void access$100(org.rootcommands.Shell) -> b
+org.rootcommands.Shell$1 -> b.a.e:
+    org.rootcommands.Shell this$0 -> a
+    void run() -> run
+org.rootcommands.Shell$2 -> b.a.f:
+    org.rootcommands.Shell this$0 -> a
+    void run() -> run
+org.rootcommands.Toolbox -> b.a.g:
+    org.rootcommands.Shell shell -> a
+    boolean isRootAccessGiven() -> a
+    java.lang.String getFilePermissions(java.lang.String) -> a
+    boolean setFilePermissions(java.lang.String,java.lang.String) -> a
+    boolean fileExists(java.lang.String) -> b
+    boolean remount(java.lang.String,java.lang.String) -> b
+org.rootcommands.Toolbox$FileExistsCommand -> b.a.h:
+    java.lang.String file -> i
+    boolean fileExists -> j
+    org.rootcommands.Toolbox this$0 -> a
+    boolean isFileExists() -> a
+    void output(int,java.lang.String) -> a
+    void afterExecution(int,int) -> a
+org.rootcommands.Toolbox$LsCommand -> b.a.i:
+    java.lang.String fileName -> i
+    java.lang.String permissionRegex -> j
+    java.util.regex.Pattern permissionPattern -> k
+    java.lang.String symlinkRegex -> l
+    java.util.regex.Pattern symlinkPattern -> m
+    java.lang.String symlink -> n
+    java.lang.String permissions -> o
+    org.rootcommands.Toolbox this$0 -> a
+    java.lang.String getPermissions() -> a
+    java.lang.String convertPermissions(java.lang.String) -> d
+    int getGroupPermission(java.lang.String) -> e
+    void output(int,java.lang.String) -> a
+    void afterExecution(int,int) -> a
+org.rootcommands.command.Command -> b.a.a.a:
+    java.lang.String[] command -> b
+    boolean finished -> c
+    boolean brokenBusyboxDetected -> d
+    int exitCode -> e
+    int id -> f
+    int timeout -> g
+    org.rootcommands.Shell shell -> h
+    void addedToShell(org.rootcommands.Shell,int) -> a
+    java.lang.String getCommand() -> b
+    void writeCommand(java.io.OutputStream) -> a
+    void processOutput(java.lang.String) -> a
+    void output(int,java.lang.String) -> a
+    void processAfterExecution(int) -> a
+    void afterExecution(int,int) -> a
+    void commandFinished(int) -> b
+    void setExitCode(int) -> c
+    void terminate(java.lang.String) -> b
+    void terminated(java.lang.String) -> c
+    void waitForFinish() -> c
+org.rootcommands.command.SimpleCommand -> b.a.a.b:
+    java.lang.StringBuilder sb -> a
+    void output(int,java.lang.String) -> a
+    void afterExecution(int,int) -> a
+    java.lang.String getOutput() -> a
+    int getExitCode() -> d
+org.rootcommands.util.BrokenBusyboxException -> b.a.b.a:
+org.rootcommands.util.Log -> b.a.b.b:
+    void v(java.lang.String,java.lang.String) -> a
+    void d(java.lang.String,java.lang.String) -> b
+    void e(java.lang.String,java.lang.String) -> c
+    void e(java.lang.String,java.lang.String,java.lang.Throwable) -> a
+org.rootcommands.util.RootAccessDeniedException -> b.a.b.c:
+org.rootcommands.util.Utils -> b.a.b.d:
+    java.lang.String[] BinaryPlaces -> a
+    java.lang.String getSuPath() -> a
+    java.lang.Process runWithEnv(java.lang.String,java.util.ArrayList,java.lang.String) -> a

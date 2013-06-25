@@ -2,34 +2,47 @@
 Recovery-Tools
 ====================
 
-About:
-
 ----- Bias -----
+
 This app requires [ROOT] access!
-
 Please do not use this app thoughtless and evaluating them without deeper KNOWLEDGE for Android (Root, Custom Recovery, etc.)
-
 I'm working to improve this app.
 
 ----- Description -----
-The app loads a predefined custom-recovery system down for your device and installs them automatically (in beta it only supports a less no. of devices) in addition they can restart their device quickly and easily (in the bootloader, recovery, and in the system).
+
+This app flashes your device recovery without rebooting it very fast and easy. There are 3 flash options:
+
+"Flash Clockworkmod-Recovery" and "Flash TWRP" (You can use these predefined buttons if they are supported. Shown below) and "Flash other".
+
+"Flash Clockworkmod" & "Flash TWRP" load the custom-recovery for your device down and install them automatically.
+"Flash other" lets you choose an image from the internal or external memory of your device.
+
+You can create backups of the currently installed system (If your device is supported. Shown below), restore and delete backups. You can find these functions under "Backup Manager".
+
+This project is fully open-source if you want to help me with unsupported devices you can use the report button or contact me over XDA.
 
 You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Recovery-Tools
 
 ----- Rights explanation -----
 
--Reade and write on external storage: save recoveries images
+-Read and write on external storage: save recoveries images
 -Full network access: download recoveries
 -[normally managed by SuperUser-App]Full access to all functions of the device: Flashing the recoveries
+
 
 ====================
 CHANGELOG
 ====================
 
-[Working on]
+Update [1.2.8]
 
--Stock Recoveries
--Samsung BLM Devices
+-Sony Xperia Z (C6603) recognition fixed
+-LG Optimus Black (p970) added
+-Huawei U9508 (hwu9508) added
+
+Update [1.2.7]
+
+-Samsung Galaxy S4 (jfltexx/jflte) fixed
 
 Update [1.2.6]
 
@@ -279,6 +292,7 @@ Supported Devices
 -LG Optiomus G (geeb/geebhrc)
 -LG GT540 Optimus (swift)
 -LG P990 OPTIMUS 2X/SPEED (p990)
+-LG Optimus Black (p970)
 
 -ZTE Sequence (warp2)
 
@@ -311,6 +325,8 @@ Supported Devices
 -Samsung Galaxy S4 (ja3g)
 
 -HTC First (mystul)
+
+-Huawei U9508 (hwu9508)
 
 -LG Optimus One CDMA (thuderc)
 -LG Optimus Elite (m3s)
