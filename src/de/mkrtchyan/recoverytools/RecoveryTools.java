@@ -66,15 +66,17 @@ public class RecoveryTools extends Activity {
     public static final File PathToRecoveries = new File(PathToRecoveryTools, "recoveries");
     private static final File PathToUtils = new File(PathToRecoveryTools, "utils");
     private File fRECOVERY, fflash, fdump, charger, chargermon, ric;
-//	Declaring Views
+//	Declaring Items
     private MenuItem iLog;
 //	Declaring other vars
+    private String SYSTEM = "";
     private boolean firstrun = true;
     private boolean download = false;
 //	Declaring needed objects
     private final Notifyer mNotifyer = new Notifyer(mContext);
     private final Common mCommon = new Common();
     private final Support mSupport = new Support();
+    private FileChooser fcFlashOther;
 
 //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
     private final Runnable rFlash = new Runnable() {
@@ -86,7 +88,7 @@ public class RecoveryTools extends Activity {
     private final Runnable rFlasher = new Runnable() {
         @Override
         public void run() {
-            /*if (fcFlashOther != null) {
+            if (fcFlashOther != null) {
                 if (fcFlashOther.use) {
                     if (fcFlashOther.selectedFile.getName().endsWith(mSupport.EXT)) {
                         fRECOVERY = fcFlashOther.selectedFile;
@@ -95,7 +97,7 @@ public class RecoveryTools extends Activity {
                         mNotifyer.createDialog(R.string.warning, String.format(mContext.getString(R.string.wrong_format), mSupport.EXT), true);
                     }
                 }
-            }*/
+            }
 
             if (fRECOVERY != (null)) {
                 if (fRECOVERY.exists()
@@ -161,8 +163,12 @@ public class RecoveryTools extends Activity {
     private final Runnable rDownload = new Runnable() {
         @Override
         public void run() {
-//			Download file from URL mSupport.HOST_URL + "/" + fRECOVERY.getName().toString() and write it to fRECOVERY
-            new Downloader(mContext, mSupport.HOST_URL, fRECOVERY.getName(), fRECOVERY, rFlasher).execute();
+//			Download file from URL mSupport."SYSTEM"_URL + "/" + fRECOVERY.getName().toString() and write it to fRECOVERY
+            if (SYSTEM.equals("clockwork")) {
+                new Downloader(mContext, mSupport.CWM_URL, mSupport.CWM_IMG.getName(), mSupport.CWM_IMG, rFlasher).execute();
+            } else if (SYSTEM.equals("twrp")) {
+                new Downloader(mContext, mSupport.TWRP_URL, mSupport.TWRP_IMG.getName(), mSupport.TWRP_IMG, rFlasher).execute();
+            }
         }
     };
 
@@ -247,6 +253,28 @@ public class RecoveryTools extends Activity {
         }
 
         downloadUtils();
+
+        if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
+
+            AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
+            WarningDialog.setTitle(R.string.warning);
+            WarningDialog.setMessage(R.string.bak_warning);
+            WarningDialog.setPositiveButton(R.string.bak_now, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    bBackupMgr(null);
+                }
+            });
+            WarningDialog.setNegativeButton(R.string.risk, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            WarningDialog.setCancelable(false);
+            WarningDialog.show();
+            mCommon.setBooleanPerf(mContext,"recovery-tools", "first_run", true);
+        }
     }
 
 //	Button Methods (onClick)
@@ -255,10 +283,14 @@ public class RecoveryTools extends Activity {
                 || mSupport.DEVICE.equals("C6603") && ric.exists() && charger.exists() && chargermon.exists()
                 || mSupport.DEVICE.equals("montblanc") && charger.exists() && chargermon.exists()
                 || !mSupport.MTD && !mSupport.DEVICE.equals("C6603") || !mSupport.DEVICE.equals("montblanc")) {
-//			Get newest version No. of recovery (view.getTag().toString() returns clockwork or twrp)
-            mSupport.getVersion(view.getTag().toString());
 //			Get device specificed recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
-            fRECOVERY = mSupport.constructFile();
+            mSupport.constructFile();
+            SYSTEM = view.getTag().toString();
+            if (SYSTEM.equals("clockwork")) {
+                fRECOVERY = mSupport.CWM_IMG;
+            } else {
+                fRECOVERY = mSupport.TWRP_IMG;
+            }
             rFlasher.run();
         } else {
             downloadUtils();
@@ -266,7 +298,8 @@ public class RecoveryTools extends Activity {
     }
 
     public void bFlashOther(View view) {
-        new FileChooser(mContext, PathToSd.getAbsolutePath(), mSupport.EXT, rFlasher).show();
+        fcFlashOther = new FileChooser(mContext, PathToSd.getAbsolutePath(), mSupport.EXT, rFlasher);
+        fcFlashOther.show();
     }
 
     public void bBackupMgr(View view) {

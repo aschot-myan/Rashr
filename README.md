@@ -34,6 +34,17 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.2.9]
+
+-Flash Other function fixed
+-Samsung Galaxy Note 10.1 (p4notewifi/n8013) added
+-HTC One X+ (enrc2) added
+-Samsung Galaxy S4(jfltexx/jfltespr/jfltevzw) CWM fixed
+-Samsung Galaxy S4 (jfltecan) added
+-HTC One (m7wls) CWM fixed
+-LG Optimus HD X4 (x3) fixed
+-Samsung Galaxy Tab 2 (GT-P3113) added
+
 Update [1.2.8]
 
 -Sony Xperia Z (C6603) recognition fixed
@@ -279,8 +290,9 @@ Supported Devices
 
 -Motorola Atrix 4G
 
--Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/ja3g)
+-Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/jfltecan/ja3g)
 -Samsung Galaxy S2 LTE (skyrocket)
+-Samsung Galaxy Note 10.1 (p4notewifi/n8013)
 -Samsung Galaxy Note 2 (n7100/t0ltevzw)
 -Samsung Galaxy Note 2 LTE (t0lte)
 -Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw/d2spr)
@@ -303,6 +315,7 @@ Supported Devices
 -Samsung Galaxy Note (n7000)
 -Samsung GalaxyS Captivate (SGH-I897)
 -Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd)
+-Samsung Galaxy Tab 2 (GT-P3113)
 
 -Motorola Droid2 (droid2)
 
@@ -310,6 +323,7 @@ Supported Devices
 
 -HTC G2 (vision)
 -HTC Hero (hero)
+-HTC One X+ (enrc2)
 
 ----- [TWRP only] -----
 

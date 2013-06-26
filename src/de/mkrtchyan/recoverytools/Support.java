@@ -41,18 +41,21 @@ public class Support {
     private final Common mCommon = new Common();
     public String DEVICE = Build.DEVICE;
     public String RecoveryPath;
-    private String SYSTEM;
-    private String VERSION = "";
+
+    public File CWM_IMG;
+    public File TWRP_IMG;
+
+    private String CWM_VERSION = "";
+    private String TWRP_VERSION = "";
     public String EXT = ".img";
-    public String HOST_URL = "http://dslnexus.nazuka.net/recoveries";
+    public String CWM_URL = "http://dslnexus.nazuka.net/recoveries";
+    public String TWRP_URL = "http://jrummy16.com/jrummy/goodies/recoveries/twrp/";
     public boolean KERNEL_TO = false;
     public boolean FLASH_OVER_RECOVERY = false;
     public boolean MTD = false;
     public boolean TWRP = true;
-    //	public boolean TWRP_INSTALLED = false;
     private boolean TWRP_OFFICIAL = true;
     public boolean CWM = true;
-    //	public boolean CWM_INSTALLED = false;
     private boolean CWM_OFFICIAL = true;
     public boolean OTHER = true;
 
@@ -94,6 +97,17 @@ public class Support {
             DEVICE = "n7000";
             FLASH_OVER_RECOVERY = true;
         }
+
+//      Samsung Galaxy Note 10.1
+        if (MODEL.equals("GT-N8013")
+                || DEVICE.equals("p4notewifi"))
+            DEVICE = "n8013";
+
+//      Samsung Galaxy Tab 2
+        if (DEVICE.equals("espressowifi")
+                || BOARD.equals("piranha")
+                || MODEL.equals("GT-P3113"))
+            DEVICE = "p3113";
 
 //		Galaxy Note 2
         if (DEVICE.equals("t03g")
@@ -180,7 +194,8 @@ public class Support {
                 || BOARD.equals("galaxysmtd")
                 || BOARD.equals("GT-I9000")
                 || BOARD.equals("GT-I9000M")
-                || BOARD.equals("GT-I9000T")) {
+                || BOARD.equals("GT-I9000T")
+                || MODEL.equals("GT-I9000T")) {
             DEVICE = "galaxys";
             EXT = ".zip";
             FLASH_OVER_RECOVERY = true;
@@ -258,6 +273,8 @@ public class Support {
 
         RecoveryPath = getRecoveryPath();
         getUnsupportedSystems();
+        getVersion();
+        constructFile();
     }
 
     private String getRecoveryPath() {
@@ -272,7 +289,8 @@ public class Support {
             tmp = "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
 
         if (DEVICE.equals("grouper")
-                || DEVICE.equals("tilapia"))
+                || DEVICE.equals("tilapia")
+                || DEVICE.equals("p880"))
             tmp = "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
 
         if (DEVICE.equals("mako")
@@ -292,7 +310,9 @@ public class Support {
             tmp = "/dev/block/mmcblk0p18";
 
         if (DEVICE.equals("i9300")
-                || DEVICE.equals("galaxys2"))
+                || DEVICE.equals("galaxys2")
+                || DEVICE.equals("n8013")
+                || DEVICE.equals("p3113"))
             tmp = "/dev/block/mmcblk0p6";
 
         if (DEVICE.equals("n7100")
@@ -311,7 +331,9 @@ public class Support {
                 || DEVICE.equals("mystul")
                 || DEVICE.equals("jfltespr")
                 || DEVICE.equals("jfltevzw")
-                || DEVICE.equals("jfltexx"))
+                || DEVICE.equals("jfltexx")
+                || DEVICE.equals("jfltecan")
+                || DEVICE.equals("jfltetmo"))
             tmp = "/dev/block/mmcblk0p21";
 
         if (DEVICE.equals("jena"))
@@ -328,7 +350,8 @@ public class Support {
         if (DEVICE.equals("m7wls"))
             tmp = "/dev/block/mmcblk0p36";
 
-        if (DEVICE.equals("endeavoru"))
+        if (DEVICE.equals("endeavoru")
+                || DEVICE.equals("enrc2b"))
             tmp = "/dev/block/mmcblk0p5";
 
         if (DEVICE.equals("ace")
@@ -420,7 +443,9 @@ public class Support {
                 || DEVICE.equals("hero")
                 || DEVICE.equals("pecan")
                 || DEVICE.equals("mystul")
-                || DEVICE.equals("u9508"))
+                || DEVICE.equals("u9508")
+                || DEVICE.equals("p880")
+                || DEVICE.equals("p3113"))
             TWRP = false;
 
         if (DEVICE.equals("nozomi")
@@ -436,7 +461,8 @@ public class Support {
                 || DEVICE.equals("bryce")
                 || DEVICE.equals("pecan")
                 || DEVICE.equals("mystul")
-                || DEVICE.equals("u9508"))
+                || DEVICE.equals("u9508")
+                || DEVICE.equals("enrc2b"))
             CWM = false;
 
         if (DEVICE.equals("")
@@ -449,257 +475,267 @@ public class Support {
 
     }
 
-    public void getVersion(String SYSTEM) {
-        this.SYSTEM = SYSTEM;
-        if (SYSTEM.equals("clockwork")) {
-
+    public void getVersion() {
 //		CLOCKWORKMOD touch supported devices
-            if (DEVICE.equals("ace")
-                    || DEVICE.equals("crespo")
-                    || DEVICE.equals("crespo4g")
-                    || DEVICE.equals("d2att")
-                    || DEVICE.equals("d2tmo")
-                    || DEVICE.equals("endeavoru")
-                    || DEVICE.equals("evita")
-                    || DEVICE.equals("fireball")
-                    || DEVICE.equals("galaxys2")
-                    || DEVICE.equals("golden")
-                    || DEVICE.equals("grouper")
-                    || DEVICE.equals("i9300")
-                    || DEVICE.equals("maguro")
-                    || DEVICE.equals("mako")
-                    || DEVICE.equals("manta")
-                    || DEVICE.equals("n7100")
-                    || DEVICE.equals("pyramid")
-                    || DEVICE.equals("saga")
-                    || DEVICE.equals("skyrocket")
-                    || DEVICE.equals("t0lte")
-                    || DEVICE.equals("tilapia")
-                    || DEVICE.equals("toro")
-                    || DEVICE.equals("toroplus")
-                    || DEVICE.equals("ville")
-                    || DEVICE.equals("warp2")
-                    || DEVICE.equals("p990")
-                    || DEVICE.equals("tf700t")
-                    || DEVICE.equals("m7")
-                    || DEVICE.equals("dlx")
-                    || DEVICE.equals("jflte")
-                    || DEVICE.equals("d2spr")
-                    || DEVICE.equals("supersonic")
-                    || DEVICE.equals("olympus")
-                    || DEVICE.equals("m7spr")
-                    || DEVICE.equals("p990")
-                    || DEVICE.equals("jfltespr")
-                    || DEVICE.equals("jewel")
-                    || DEVICE.equals("shooter")
-                    || DEVICE.equals("jfltevzw")
-                    || DEVICE.equals("p970")
-                    || DEVICE.equals("p760"))
-                VERSION = "-touch";
+        if (DEVICE.equals("ace")
+                || DEVICE.equals("crespo")
+                || DEVICE.equals("crespo4g")
+                || DEVICE.equals("d2att")
+                || DEVICE.equals("d2tmo")
+                || DEVICE.equals("endeavoru")
+                || DEVICE.equals("evita")
+                || DEVICE.equals("fireball")
+                || DEVICE.equals("galaxys2")
+                || DEVICE.equals("golden")
+                || DEVICE.equals("grouper")
+                || DEVICE.equals("i9300")
+                || DEVICE.equals("maguro")
+                || DEVICE.equals("mako")
+                || DEVICE.equals("manta")
+                || DEVICE.equals("n7100")
+                || DEVICE.equals("pyramid")
+                || DEVICE.equals("saga")
+                || DEVICE.equals("skyrocket")
+                || DEVICE.equals("t0lte")
+                || DEVICE.equals("tilapia")
+                || DEVICE.equals("toro")
+                || DEVICE.equals("toroplus")
+                || DEVICE.equals("ville")
+                || DEVICE.equals("warp2")
+                || DEVICE.equals("p990")
+                || DEVICE.equals("tf700t")
+                || DEVICE.equals("m7")
+                || DEVICE.equals("dlx")
+                || DEVICE.equals("jflte")
+                || DEVICE.equals("d2spr")
+                || DEVICE.equals("supersonic")
+                || DEVICE.equals("olympus")
+                || DEVICE.equals("m7spr")
+                || DEVICE.equals("p990")
+                || DEVICE.equals("jfltespr")
+                || DEVICE.equals("jewel")
+                || DEVICE.equals("shooter")
+                || DEVICE.equals("jfltevzw")
+                || DEVICE.equals("p970")
+                || DEVICE.equals("p760")
+                || DEVICE.equals("jfltecan")
+                || DEVICE.equals("jfltexx")
+                || DEVICE.equals("jfltespr")
+                || DEVICE.equals("m7wls")
+                || DEVICE.equals("jfltevzw")
+                || DEVICE.equals("p880")
+                || DEVICE.equals("n8013")
+                || DEVICE.equals("jfltetmo")
+                || DEVICE.equals("p3113"))
+            CWM_VERSION = "-touch";
 
-//			Newest Clockworkmod version for devices
+//	    Newest Clockworkmod version for devices
 
-            if (DEVICE.equals("heroc"))
-                VERSION = VERSION + "-2.5.0.7";
+        if (DEVICE.equals("heroc"))
+            CWM_VERSION = CWM_VERSION + "-2.5.0.7";
 
-            if (DEVICE.equals("SGH-I897")
-                    || DEVICE.equals("galaxys")
-                    || DEVICE.equals("captivate"))
-                VERSION = VERSION + "-2.5.1.2";
+        if (DEVICE.equals("SGH-I897")
+                || DEVICE.equals("galaxys")
+                || DEVICE.equals("captivate"))
+            CWM_VERSION = CWM_VERSION + "-2.5.1.2";
 
-            if (DEVICE.equals("leo"))
-                VERSION = VERSION + "-3.1.0.0";
+        if (DEVICE.equals("leo"))
+            CWM_VERSION = CWM_VERSION + "-3.1.0.0";
 
-            if (DEVICE.equals("droid2")
-                    || DEVICE.equals("vivow"))
-                VERSION = VERSION + "-5.0.2.0";
+        if (DEVICE.equals("droid2")
+                || DEVICE.equals("vivow"))
+            CWM_VERSION = CWM_VERSION + "-5.0.2.0";
 
-            if (DEVICE.equals("thunderg"))
-                VERSION = VERSION + "-5.0.2.7";
+        if (DEVICE.equals("thunderg"))
+            CWM_VERSION = CWM_VERSION + "-5.0.2.7";
 
-            if (DEVICE.equals("supersonic"))
-                VERSION = VERSION + "-5.8.0.1";
+        if (DEVICE.equals("supersonic"))
+            CWM_VERSION = CWM_VERSION + "-5.8.0.1";
 
-            if (DEVICE.equals("shooter"))
-                VERSION = VERSION + "-5.8.0.2";
-            if (DEVICE.equals("pyramid"))
-                VERSION = VERSION + "-5.8.0.9";
+        if (DEVICE.equals("shooter"))
+            CWM_VERSION = CWM_VERSION + "-5.8.0.2";
+        if (DEVICE.equals("pyramid"))
+            CWM_VERSION = CWM_VERSION + "-5.8.0.9";
 
-            if (DEVICE.equals("ace")
-                    || DEVICE.equals("saga")
-                    || DEVICE.equals("galaxys2")
-                    || DEVICE.equals("olympus"))
-            VERSION = VERSION + "-5.8.1.5";
+        if (DEVICE.equals("ace")
+                || DEVICE.equals("saga")
+                || DEVICE.equals("galaxys2")
+                || DEVICE.equals("olympus"))
+            CWM_VERSION = CWM_VERSION + "-5.8.1.5";
 
-            if (DEVICE.equals("tf201"))
-                VERSION = VERSION + "-5.8.3.4";
+        if (DEVICE.equals("tf201"))
+            CWM_VERSION = CWM_VERSION + "-5.8.3.4";
 
-            if (DEVICE.equals("jewel"))
-                VERSION = VERSION + "-5.8.3.5";
+        if (DEVICE.equals("jewel"))
+            CWM_VERSION = CWM_VERSION + "-5.8.3.5";
 
-            if (DEVICE.equals("endeavoru"))
-                VERSION = VERSION + "-5.8.4.0";
+        if (DEVICE.equals("endeavoru"))
+            CWM_VERSION = CWM_VERSION + "-5.8.4.0";
 
-            if (DEVICE.equals("primou"))
-                VERSION = VERSION + "-5.8.4.5";
+        if (DEVICE.equals("primou"))
+            CWM_VERSION = CWM_VERSION + "-5.8.4.5";
 
-            if (DEVICE.equals("n7000"))
-                VERSION = VERSION + "-6.0.1.2";
+        if (DEVICE.equals("n7000"))
+            CWM_VERSION = CWM_VERSION + "-6.0.1.2";
 
-            if (DEVICE.equals("p970"))
-                VERSION = VERSION + "-6.0.1.4";
+        if (DEVICE.equals("p970"))
+            CWM_VERSION = CWM_VERSION + "-6.0.1.4";
 
-            if (DEVICE.equals("golden")
-                    || DEVICE.equals("warp2"))
-                VERSION = VERSION + "-6.0.2.7";
+        if (DEVICE.equals("golden")
+                || DEVICE.equals("warp2"))
+            CWM_VERSION = CWM_VERSION + "-6.0.2.7";
 
-            if (DEVICE.equals("crespo")
-                    || DEVICE.equals("crespo4g")
-                    || DEVICE.equals("d2att")
-                    || DEVICE.equals("d2tmo")
-                    || DEVICE.equals("dlxub1")
-                    || DEVICE.equals("evita")
-                    || DEVICE.equals("fireball")
-                    || DEVICE.equals("grouper")
-                    || DEVICE.equals("i9300")
-                    || DEVICE.equals("maguro")
-                    || DEVICE.equals("mako")
-                    || DEVICE.equals("manta")
-                    || DEVICE.equals("n7100")
-                    || DEVICE.equals("skyrocket")
-                    || DEVICE.equals("t0lte")
-                    || DEVICE.equals("tilapia")
-                    || DEVICE.equals("toro")
-                    || DEVICE.equals("toroplus")
-                    || DEVICE.equals("ville")
-                    || DEVICE.equals("p990")
-                    || DEVICE.equals("tf700t")
-                    || DEVICE.equals("m7")
-                    || DEVICE.equals("dlx")
-                    || DEVICE.equals("d2spr")
-                    || DEVICE.equals("p990")
-                    || DEVICE.equals("p760"))
-                VERSION = VERSION + "-6.0.3.1";
+        if (DEVICE.equals("crespo")
+                || DEVICE.equals("crespo4g")
+                || DEVICE.equals("d2att")
+                || DEVICE.equals("d2tmo")
+                || DEVICE.equals("dlxub1")
+                || DEVICE.equals("evita")
+                || DEVICE.equals("fireball")
+                || DEVICE.equals("grouper")
+                || DEVICE.equals("i9300")
+                || DEVICE.equals("maguro")
+                || DEVICE.equals("mako")
+                || DEVICE.equals("manta")
+                || DEVICE.equals("n7100")
+                || DEVICE.equals("skyrocket")
+                || DEVICE.equals("tilapia")
+                || DEVICE.equals("toro")
+                || DEVICE.equals("toroplus")
+                || DEVICE.equals("ville")
+                || DEVICE.equals("p990")
+                || DEVICE.equals("tf700t")
+                || DEVICE.equals("m7")
+                || DEVICE.equals("dlx")
+                || DEVICE.equals("d2spr")
+                || DEVICE.equals("p990")
+                || DEVICE.equals("p760")
+                || DEVICE.equals("p880")
+                || DEVICE.equals("n8013"))
+            CWM_VERSION = CWM_VERSION + "-6.0.3.1";
 
-            if (DEVICE.equals("jfltexx")
-                    || DEVICE.equals("jfltespr")
-                    || DEVICE.equals("m7wls")
-                    || DEVICE.equals("jfltevzw"))
-                VERSION = "-6.0.3.2";
+        if (DEVICE.equals("jfltexx")
+                || DEVICE.equals("jfltespr")
+                || DEVICE.equals("m7wls")
+                || DEVICE.equals("jfltevzw")
+                || DEVICE.equals("t0lte")
+                || DEVICE.equals("jfltetmo")
+                || DEVICE.equals("p3113"))
+            CWM_VERSION = CWM_VERSION + "-6.0.3.2";
 
-            if (VERSION.equals(""))
-                CWM_OFFICIAL = false;
+        //if (CWM_VERSION.equals(""))
+        //    CWM_OFFICIAL = false;
 
-            HOST_URL = "http://dslnexus.nazuka.net/recoveries";
+        CWM_URL = "http://dslnexus.nazuka.net/recoveries";
+
+        if (DEVICE.equals("thunderg"))
+            TWRP_VERSION = "-2.0.0alpha1";
+
+        if (DEVICE.equals("leo"))
+            TWRP_VERSION = "-2.1.1";
+
+        if (DEVICE.equals("ace")
+                || DEVICE.equals("crespo")
+                || DEVICE.equals("crespo4g")
+                || DEVICE.equals("d2att")
+                || DEVICE.equals("d2tmo")
+                || DEVICE.equals("d2vzw")
+                || DEVICE.equals("endeavoru")
+                || DEVICE.equals("evita")
+                || DEVICE.equals("fireball")
+                || DEVICE.equals("geeb")
+                || DEVICE.equals("golden")
+                || DEVICE.equals("grouper")
+                || DEVICE.equals("i9300")
+                || DEVICE.equals("maguro")
+                || DEVICE.equals("mako")
+                || DEVICE.equals("manta")
+                || DEVICE.equals("mint")
+                || DEVICE.equals("nozomi")
+                || DEVICE.equals("passion")
+                || DEVICE.equals("primou")
+                || DEVICE.equals("pyramid")
+                || DEVICE.equals("skyrocket")
+                || DEVICE.equals("t0lte")
+                || DEVICE.equals("t0lteatt")
+                || DEVICE.equals("t0ltetmo")
+                || DEVICE.equals("t0ltevzw")
+                || DEVICE.equals("tilapia")
+                || DEVICE.equals("toro")
+                || DEVICE.equals("toroplus")
+                || DEVICE.equals("ville")
+                || DEVICE.equals("villec2")
+                || DEVICE.equals("p990")
+                || DEVICE.equals("tf700t")
+                || DEVICE.equals("m7")
+                || DEVICE.equals("dlx")
+                || DEVICE.equals("d2spr")
+                || DEVICE.equals("supersonic")
+                || DEVICE.equals("vivow")
+                || DEVICE.equals("olympus")
+                || DEVICE.equals("m7wls")
+                || DEVICE.equals("p990")
+                || DEVICE.equals("heroc")
+                || DEVICE.equals("jewel")
+                || DEVICE.equals("shooter")
+                || DEVICE.equals("p970")
+                || DEVICE.equals("n8013")
+                || DEVICE.equals("enrc2b"))
+            TWRP_VERSION = "-2.5.0.0";
+
+        if (DEVICE.equals("dlxub1")
+                || DEVICE.equals("n7100")
+                || DEVICE.equals("saga"))
+            TWRP_VERSION = "-2.5.0.1";
+
+        if (DEVICE.equals("jfltexx")
+                || DEVICE.equals("jfltespr")
+                || DEVICE.equals("jfltevzw")
+                || DEVICE.equals("jfltetmo")
+                || DEVICE.equals("jfltecan"))
+            TWRP_VERSION = "-2.5.0.2";
+
+        if (DEVICE.equals("tf201")){
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH
+                    || Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                TWRP_VERSION = TWRP_VERSION + "-ICS";
+            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                TWRP_VERSION = TWRP_VERSION + "-JB";
+            }
         }
 
-        if (SYSTEM.equals("twrp")) {
+        if (TWRP_VERSION.equals(""))
+            TWRP_OFFICIAL = false;
 
-            if (DEVICE.equals("thunderg"))
-                VERSION = "-2.0.0alpha1";
-
-            if (DEVICE.equals("leo"))
-                VERSION = "-2.1.1";
-
-            if (DEVICE.equals("ace")
-                    || DEVICE.equals("crespo")
-                    || DEVICE.equals("crespo4g")
-                    || DEVICE.equals("d2att")
-                    || DEVICE.equals("d2tmo")
-                    || DEVICE.equals("d2vzw")
-                    || DEVICE.equals("endeavoru")
-                    || DEVICE.equals("evita")
-                    || DEVICE.equals("fireball")
-                    || DEVICE.equals("geeb")
-                    || DEVICE.equals("golden")
-                    || DEVICE.equals("grouper")
-                    || DEVICE.equals("i9300")
-                    || DEVICE.equals("maguro")
-                    || DEVICE.equals("mako")
-                    || DEVICE.equals("manta")
-                    || DEVICE.equals("mint")
-                    || DEVICE.equals("nozomi")
-                    || DEVICE.equals("passion")
-                    || DEVICE.equals("primou")
-                    || DEVICE.equals("pyramid")
-                    || DEVICE.equals("skyrocket")
-                    || DEVICE.equals("t0lte")
-                    || DEVICE.equals("t0lteatt")
-                    || DEVICE.equals("t0ltetmo")
-                    || DEVICE.equals("t0ltevzw")
-                    || DEVICE.equals("tilapia")
-                    || DEVICE.equals("toro")
-                    || DEVICE.equals("toroplus")
-                    || DEVICE.equals("ville")
-                    || DEVICE.equals("villec2")
-                    || DEVICE.equals("p990")
-                    || DEVICE.equals("tf700t")
-                    || DEVICE.equals("m7")
-                    || DEVICE.equals("dlx")
-                    || DEVICE.equals("d2spr")
-                    || DEVICE.equals("supersonic")
-                    || DEVICE.equals("vivow")
-                    || DEVICE.equals("olympus")
-                    || DEVICE.equals("m7wls")
-                    || DEVICE.equals("p990")
-                    || DEVICE.equals("heroc")
-                    || DEVICE.equals("jewel")
-                    || DEVICE.equals("shooter")
-                    || DEVICE.equals("p970"))
-                VERSION = "-2.5.0.0";
-
-            if (DEVICE.equals("dlxub1")
-                    || DEVICE.equals("n7100")
-                    || DEVICE.equals("saga"))
-                VERSION = "-2.5.0.1";
-
-            if (DEVICE.equals("jfltexx")
-                    || DEVICE.equals("jfltespr")
-                    || DEVICE.equals("jfltevzw"))
-                VERSION = "-2.5.0.2";
-
-            if (DEVICE.equals("tf201")){
-                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH
-                        || Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                    VERSION = VERSION + "-ICS";
-                } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH
-                        || Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                    VERSION = VERSION + "-JB";
-                }
-            }
-
-            if (VERSION.equals(""))
-                TWRP_OFFICIAL = false;
-
-            if (TWRP_OFFICIAL
-                    && !DEVICE.equals("tf700t")) {
-                HOST_URL = "http://jrummy16.com/jrummy/goodies/recoveries/twrp/" + DEVICE;
-                //HOST_URL = "http://dslnexus.nazuka.net/recoveries";
+        if (TWRP_OFFICIAL) {
+            if (!DEVICE.equals("tf700t") && !DEVICE.equals("n8013")) {
+                TWRP_URL = "http://jrummy16.com/jrummy/goodies/recoveries/twrp/" + DEVICE;
             } else {
-                HOST_URL = "http://dslnexus.nazuka.net/recoveries";
+                TWRP_URL = "http://dslnexus.nazuka.net/recoveries";
             }
-//			HOST_URL = "http://techerrata.com/get/twrp2/" + DEVICE;
+        } else {
+            TWRP_URL = "http://dslnexus.nazuka.net/recoveries";
         }
+
     }
 
-    public File constructFile() {
+    public void constructFile() {
 
-        File file = null;
-        if (SYSTEM.equals("clockwork"))
-            if (CWM_OFFICIAL) {
-                file = new File(RecoveryTools.PathToRecoveries, "recovery-" + SYSTEM + VERSION + "-" + DEVICE + EXT);
+        if (CWM_OFFICIAL) {
+            CWM_IMG = new File(RecoveryTools.PathToRecoveries, "recovery-clockwork" + CWM_VERSION + "-" + DEVICE + EXT);
+        } else {
+            CWM_IMG = new File(RecoveryTools.PathToRecoveries, DEVICE + "-cwm" + EXT);
+        }
+
+        if (TWRP_OFFICIAL) {
+            if (DEVICE.equals("n8013")) {
+                TWRP_IMG = new File(RecoveryTools.PathToRecoveries, "openrecovery-twrp" + TWRP_VERSION + "-gt-" + DEVICE + EXT);
             } else {
-                file = new File(RecoveryTools.PathToRecoveries, DEVICE + "-cwm" + EXT);
+                TWRP_IMG = new File(RecoveryTools.PathToRecoveries, "openrecovery-twrp" + TWRP_VERSION + "-" + DEVICE + EXT);
             }
-
-        if (SYSTEM.equals("twrp"))
-            if (TWRP_OFFICIAL) {
-                file = new File(RecoveryTools.PathToRecoveries, "openrecovery-" + SYSTEM + VERSION + "-" + DEVICE + EXT);
-            } else {
-                file = new File(RecoveryTools.PathToRecoveries, DEVICE + "-twrp" + EXT);
-            }
-
-        return file;
+        } else {
+            TWRP_IMG = new File(RecoveryTools.PathToRecoveries, DEVICE + "-twrp" + EXT);
+        }
     }
 
     public void installZip(File ZipFile) {

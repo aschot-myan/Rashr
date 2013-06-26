@@ -18,6 +18,10 @@
     <string name="rename">If you want set a custom name to the backup type it in the text field. If
         not the current time will be set.
     </string>
+    <string name="bak_warning">Before you do some actions with Recovery-Tools please create an backup and store it on your PC.\nBackups will be created under *InternalStorage*/Recovery-Tools/backups/.\nThe DEV is not responsible on the damages of your device.
+    </string>
+    <string name="risk">I know the risk</string>
+    <string name="bak_now">Backup Manager</string>
     <string name="sReboot">Reboot</string>
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
