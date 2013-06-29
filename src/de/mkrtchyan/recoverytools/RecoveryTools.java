@@ -32,6 +32,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -62,9 +63,10 @@ public class RecoveryTools extends Activity {
 //	Get path to external storage
     private static final File PathToSd = Environment.getExternalStorageDirectory();
 //	Declaring needed files and folders
-    private static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
+    public static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
     public static final File PathToRecoveries = new File(PathToRecoveryTools, "recoveries");
-    private static final File PathToUtils = new File(PathToRecoveryTools, "utils");
+    public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
+    public static final File PathToBin = new File("/system/bin");
     private File fRECOVERY, fflash, fdump, charger, chargermon, ric;
 //	Declaring Items
     private MenuItem iLog;
@@ -190,8 +192,8 @@ public class RecoveryTools extends Activity {
                 || !fdump.exists()
                 && mSupport.MTD)
             download = true;
-        charger = new File(mContext.getFilesDir(), "charger");
-        chargermon = new File(mContext.getFilesDir(), "chargermon");
+        charger = new File(PathToUtils, "charger");
+        chargermon = new File(PathToUtils, "chargermon");
         ric = new File(mContext.getFilesDir(), "ric");
         if (!charger.exists() && mSupport.DEVICE.equals("C6603")
                 || !charger.exists() && mSupport.DEVICE.equals("montblanc")
@@ -244,12 +246,12 @@ public class RecoveryTools extends Activity {
 //		Show Advanced information how device will be Flashed
 
         cbUseBinary.setChecked(true);
-        if (!mSupport.RecoveryPath.equals("")) {
+        if (mSupport.FLASH_OVER_RECOVERY) {
+            cbUseBinary.setText(R.string.over_recovery);
+        } else if (!mSupport.RecoveryPath.equals("")) {
             cbUseBinary.setText(String.format(mContext.getString(R.string.using_dd), "\n" + mSupport.RecoveryPath));
         } else if (mSupport.MTD) {
             cbUseBinary.setText(R.string.using_mtd);
-        } else if (mSupport.FLASH_OVER_RECOVERY) {
-            cbUseBinary.setText(R.string.over_recovery);
         }
 
         downloadUtils();
@@ -370,7 +372,8 @@ public class RecoveryTools extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.iProfile:
-                mCommon.xdaProfile(mContext);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://forum.xda-developers.com/showthread.php?t=2334554"));
+                startActivity(browserIntent);
                 return true;
             case R.id.iExit:
                 finish();

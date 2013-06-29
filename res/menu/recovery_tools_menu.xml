@@ -17,6 +17,7 @@
             android:id="@+id/iLog"
             android:checkable="true"
             android:title="@string/log"></item>
+
     <item
             android:id="@+id/iExit"
             android:title="@string/sExit"></item>

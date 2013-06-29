@@ -12,7 +12,7 @@
     <string name="sCleareCache">Clear downloaded recoveries</string>
     <string name="report">Scan and Report unsupported Device</string>
     <string name="sExit">Exit</string>
-    <string name="xda">Open XDA-Profile</string>
+    <string name="xda">Open XDA-Thread</string>
     <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.com</string>
     <string name="EMAIL_SUBJECT">Recovery-Tools report to support new Device</string>
     <string name="rename">If you want set a custom name to the backup type it in the text field. If
@@ -46,7 +46,7 @@
         sdcard\n\nTWRP:\n\nMain Menu -> Install
     </string>
     <string name="getdownload">Recovery IMG not found. Download now?</string>
-    <string name="no_function">This function is not available on your device</string>
+    <string name="no_function">%s function is not available on your device</string>
     <string name="bak_done">Backup completed</string>
     <string name="res_done">Restore completed</string>
     <string name="backupalready">Backup already exists. This will overwrite the existing one.
@@ -99,5 +99,6 @@
     </string>
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="bak_del">Backup deleted!</string>
+    <string name="thx_support">Thanks for supporting me</string>
 
 </resources>

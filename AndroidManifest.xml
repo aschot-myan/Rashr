@@ -3,7 +3,7 @@
           package="de.mkrtchyan.recoverytools"
           android:installLocation="auto"
           android:versionCode="25"
-          android:versionName="1.2.9">
+          android:versionName="1.3.0">
 
     <uses-sdk
             android:minSdkVersion="7"
@@ -33,6 +33,9 @@
                 android:name="de.mkrtchyan.recoverytools.BackupManagerActivity"
                 android:label="@string/title_activity_backup_manager">
         </activity>
+        <activity android:name="com.google.ads.AdActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+
     </application>
 
 </manifest>

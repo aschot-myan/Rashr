@@ -44,17 +44,18 @@ public class BackupManagerActivity extends Activity {
     private static final File PathToBackups = new File(PathToRecoveryTools, "backups");
     private File fBACKUP;
 
+    Button bBackup, bRestore;
+
     final private Context mContext = this;
     final private Notifyer mNotifyer = new Notifyer(mContext);
     final private Common mCommon = new Common();
-    final private Support mSupport = new Support();
     private FileChooser fcRestore, fcDelete;
 
     private final Runnable rBackup = new Runnable() {
         @Override
         public void run() {
             if (mSupport.FLASH_OVER_RECOVERY) {
-                mNotifyer.createDialog(R.string.warning, R.string.no_function, true, true).show();
+                mNotifyer.createDialog(R.string.warning, String.format(getString(R.string.no_function), getString(R.string.sBackup)), true).show();
             } else {
                 new FlashUtil(mContext, fBACKUP, 2).execute();
             }
@@ -106,11 +107,11 @@ public class BackupManagerActivity extends Activity {
                         } else {
                             Calendar c = Calendar.getInstance();
                             Name = Calendar.DATE
-                                    + "-" + c.get(Calendar.MONTH)
-                                    + "-" + c.get(Calendar.YEAR)
-                                    + "-" + c.get(Calendar.HOUR)
-                                    + ":" + c.get(Calendar.MINUTE)
-                                    + "-" + c.get(Calendar.AM_PM);
+                                + "-" + c.get(Calendar.MONTH)
+                                + "-" + c.get(Calendar.YEAR)
+                                + "-" + c.get(Calendar.HOUR)
+                                + ":" + c.get(Calendar.MINUTE)
+                                + "-" + c.get(Calendar.AM_PM);
                         }
 
                         Name = Name + mSupport.EXT;
@@ -132,6 +133,8 @@ public class BackupManagerActivity extends Activity {
         }
     };
 
+    Support mSupport = new Support();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +142,18 @@ public class BackupManagerActivity extends Activity {
         setContentView(R.layout.activity_backup_manager);
 
         mCommon.checkFolder(PathToBackups);
+
+        if (!mSupport.OTHER
+                || mSupport.FLASH_OVER_RECOVERY){
+            Button bBackup = (Button) findViewById(R.id.bCreateBackup);
+            Button bRestore = (Button) findViewById(R.id.bRestoreBackup);
+
+            bBackup.setText(String.format(getString(R.string.no_function, bBackup.getText())));
+            bRestore.setText(String.format(getString(R.string.no_function, bRestore.getText())));
+            bBackup.setEnabled(false);
+            bRestore.setEnabled(false);
+        }
+
     }
 
     public void bBackup(View view) {

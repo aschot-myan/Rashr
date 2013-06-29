@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Downloading">Descargando…</string>
+    <string name="wrong_format">Haz eligido un archivo falso. El archivo debe estar en formato %s. </string>
+    <string name="noconnection">No hay red disponible. Descarga cancelada!</string>
+    <string name="failed_download">Oh no, se ha producido un problema. Por favor reinicie la descarga.\n%s"</string>
+    <string name="error">Error</string>
+    <string name="warning">¡Advertencia!</string>
+    <string name="positive">Si, por favor</string>
+    <string name="neutral">No, gracias</string>
+    <string name="negative">Cancelar</string>
+    <string name="file_chooser">Selector de archivos</string>
+    <string name="empty_dir">Carpeta vacía: %s</string>
+    <string name="choose_message">Seleccionando %s. ¿Estás seguro?</string>
+    <string name="appirator_app_title">Recovery-Tools</string>
+    <string name="appirator_market_url">market://details?id=%s</string>
+    <string name="app_name">Recovery-Tools</string>
+    <string name="sFlashCWM">Instalar Recuperador Clockworkmod </string>
+    <string name="sFlashTWRP">Instalar Recuperador TWRP </string>
+    <string name="flash_other">Instalar Otro Recuperador</string>
+    <string name="sBackup">Crear copia del Recuperador actual.</string>
+    <string name="go">Seguir</string>
+    <string name="sRebooter">Reiniciador</string>
+    <string name="sRestore">Restaurar Recuperador</string>
+    <string name="sCleareCache">Eliminar Recuperadores descargados</string>
+    <string name="report">Escanear y Reportar dispositivo incompatible</string>
+    <string name="sExit">Salir</string>
+    <string name="xda">Abrir XDA-Thread</string>
+    <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.com</string>
+    <string name="EMAIL_SUBJECT">Recovery-Tools reporte para apoyar un nuevo Dispositivo</string>
+    <string name="rename">Si desea establecer un nombre personalizado para el tipo de copia de seguridad, escribelo en el campo de texto. De otro modo se establecera el tiempo actual.</string>
+    <string name="bak_warning">"Antes de hacer algunas acciones con Recovery-Tools por favor crea una copia de seguridad y guárdelo en su Ordenador.
+Las copias de seguridad se crean bajo *memoria interna*/Recovery-Tools/backups /.
+El DEV no se hace responsable de los daños y perjuicios de su dispositivo."</string>
+    <string name="risk">Conozco el riesgo</string>
+    <string name="bak_now">Manejador de copias</string>
+    <string name="sReboot">Reiniciar</string>
+    <string name="sRebootRecovery">Reinicio al Recuperador</string>
+    <string name="sRebootBootloader">Reinicio al Bootloader</string>
+    <string name="rate_title">Evaluar %s</string>
+    <string name="rate_message">Si te gusta usar %s, ¿Te importaría tomar un momento para evaluarlo? Gracias por su apoyo!</string>
+    <string name="rate">Si, Evaluar %s</string>
+    <string name="rate_later">Recordarmelo luego</string>
+    <string name="rate_cancel">No, Gracias</string>
+    <string name="empty"></string>
+    <string name="info">Información</string>
+    <string name="flashed">Recuperador instalado.</string>
+    <string name="kernel_to">Instalando el Recuperador de Systema en este dispocitivo tambien se cambiara el Kernel instalado.</string>
+    <string name="flash_over_recovery">¿Instalar Recuperador ahora? (necesita Reiniciar en Recuperador)</string>
+    <string name="instructions">Instrucciones</string>
+    <string name="instruction">"CWM:
+
+Menu Principal -> instalar zip desde la sdcard -> escojer zip desde la sdcard
+
+TWRP:
+
+Menu Principal -> Instalar"</string>
+    <string name="getdownload">IMG de Recuperacion no encontrada. ¿Descargar ahora?</string>
+    <string name="no_function">Esta funcion no es disponible para tu dispositivo</string>
+    <string name="bak_done">Copia de seguridad completada</string>
+    <string name="res_done">Restauración completada</string>
+    <string name="backupalready">Copia de seguridad ya existe. Esto sobrescribirá la existente. ¿Continuar?</string>
+    <string name="nobackup">No se han encontrado copias de seguridad (InternalStorage/Recovery-Tools/backups/). ¿Crear una ahora?</string>
+    <string name="notsupportded">Su dispositivo no es compatible con el developer todavía. ¿Escanear el sistema y reportar un dispositivo incompatible?</string>
+    <string name="noroot">"Dispositivo no ruteado. Pofavor rutearlo. Mas infomacion bajo
+        xda-developer.com"</string>
+    <string name="notwrp">TWRP no disponible</string>
+    <string name="nocwm">CWM no disponble</string>
+    <string name="using_dd">Utilizando dd binario. Recuperador en FS: %s</string>
+    <string name="using_mtd">Utilizando flash/dump_image (MTD)</string>
+    <string name="commentar">Comentar</string>
+    <string name="commenthint">Comentar aqui, que no esta trabajando correctamente (descarga, instalación, soporte común u otro)</string>
+    <string name="su_logs_title">Ejecutar Shell-Commands</string>
+    <string name="log">Log Shell-Commands</string>
+    <string name="showlog">Ver Logs</string>
+    <string name="title_activity_backup_manager">Backup-Manager</string>
+    <string name="sDeleteBackup">Borrar Copia de seguridad</string>
+    <string name="sBackupMgr">Abrir Backup Manager</string>
+    <string name="setname">Nombrar la Copia de seguridad</string>
+    <string name="reboot_recovery_now">¿Reiniciar en recuperador ahora?</string>
+    <string name="tsk_end">Tarea completada</string>
+    <string name="flashing">Instalando…</string>
+    <string name="creating_bak">Creando copia de seguridad…</string>
+    <string name="clear_logs">Eliminar Logs</string>
+    <string name="download_utils">Para utilizar esta aplicación es necesario descargar herramientas pequeñas (alrededor de 512KB). Esto requiere una conexión a Internet.
+¿Descargar Ahora?</string>
+    <string name="over_recovery">Dispositivo sera flasheado sobre el Recuperador</string>
+    <string name="bak_del">¡Copia de seguridad borrada!</string>
+</resources>

@@ -51,10 +51,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         mNotifyer = new Notifyer(mContext);
 
         if (mSupport.MTD) {
-            fdump = new File(mContext.getFilesDir(), "dump_image");
-            fflash = new File(mContext.getFilesDir(), "flash_image");
-            mCommon.chmod(fflash, "641");
-            mCommon.chmod(fdump, "641");
+            fdump = new File(RecoveryTools.PathToUtils, "dump_image");
+            fflash = new File(RecoveryTools.PathToUtils, "flash_image");
         }
 
         charger = new File(mContext.getFilesDir(), "charger");
@@ -109,8 +107,15 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 case 1:
                     if (file.exists()) {
 
-                        if (mSupport.MTD)
+                        if (mSupport.MTD) {
+                            if (!new File(RecoveryTools.PathToBin, fflash.getName()).exists())
+                                mCommon.copy(fflash, new File(RecoveryTools.PathToBin, fflash.getName()), true);
+
+                            fflash = new File(RecoveryTools.PathToBin, fflash.getName());
+                            mCommon.chmod(fflash, "777");
                             mCommon.executeSuShell(mContext, fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+
+                        }
 
                         if (!mSupport.MTD
                                 && !mSupport.RecoveryPath.equals(""))
@@ -123,8 +128,14 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     }
                     break;
                 case 2:
-                    if (mSupport.MTD)
+                    if (mSupport.MTD) {
+                        if (!new File(RecoveryTools.PathToBin, fdump.getName()).exists())
+                            mCommon.copy(fflash, new File(RecoveryTools.PathToBin, fdump.getName()), true);
+
+                        fdump = new File(RecoveryTools.PathToBin, fflash.getName());
+                        mCommon.chmod(fdump, "777");
                         mCommon.executeSuShell(mContext, fdump.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+                    }
 
                     if (!mSupport.MTD
                             && !mSupport.RecoveryPath.equals(""))

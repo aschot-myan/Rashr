@@ -34,6 +34,22 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.3.0]
+
+-Unofficial CWM devices recognition fixed
+-Spanish translation by BoriKing
+-Flash on MTD devices fixed
+-ZTE Blade (blade) added
+-Samsung Galaxy S4 (jflteatt/jflteusc) added
+-ASUS Transformer Pad (TF300T) added
+-Motorola Droid (sholes) added
+-Oppo Find5 (find5) added
+-HTC Flyer (flyer) added
+-Motorola DROID RAZR HD (vanquish) added
+-Droid X2 (daytona) added
+-HTC Desire (bravo) added
+-Huawei C8813 (hwc8813) added
+
 Update [1.2.9]
 
 -Flash Other function fixed
@@ -290,7 +306,10 @@ Supported Devices
 
 -Motorola Atrix 4G
 
--Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/jfltecan/ja3g)
+-Oppo Find5 (find5)
+
+-Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/
+                    jfltecan/jflteatt/jflteusc/ja3g)
 -Samsung Galaxy S2 LTE (skyrocket)
 -Samsung Galaxy Note 10.1 (p4notewifi/n8013)
 -Samsung Galaxy Note 2 (n7100/t0ltevzw)
@@ -317,13 +336,17 @@ Supported Devices
 -Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd)
 -Samsung Galaxy Tab 2 (GT-P3113)
 
+-Motorola Droid (sholes)
 -Motorola Droid2 (droid2)
 
 -LG Optimus HD X4 (x3)
 
 -HTC G2 (vision)
 -HTC Hero (hero)
+-HTC Desire (bravo)
 -HTC One X+ (enrc2)
+
+-ZTE Blade (blade)
 
 ----- [TWRP only] -----
 
@@ -334,17 +357,23 @@ Supported Devices
 
 ----- [CUSTOM only] -----
 
+-ASUS Transformer Pad (TF300T)
+
 -Samsung Galaxy S II Duos (SCH-i929)
 -Samsung Epic 4G Touch (SPH-D710)
 -Samsung Galaxy S4 (ja3g)
 
 -HTC First (mystul)
+-HTC Flyer (flyer)
 
 -Huawei U9508 (hwu9508)
+-Huawei C8813 (hwc8813)
 
 -LG Optimus One CDMA (thuderc)
 -LG Optimus Elite (m3s)
 -LG Optimus Me (pecan)
+
+-Motorola DROID RAZR HD (vanquish)
 
 ===================================
 COPYRIGHT
