@@ -110,10 +110,14 @@ public class Support {
             DEVICE = "n8013";
 
 //      Samsung Galaxy Tab 2
-        if (DEVICE.equals("espressowifi")
-                || BOARD.equals("piranha")
+        if (BOARD.equals("piranha")
                 || MODEL.equals("GT-P3113"))
             DEVICE = "p3113";
+
+        if (DEVICE.equals("espressowifi")
+                || MODEL.equals("GT-P3110"))
+            DEVICE = "p3110";
+
 
 //		Galaxy Note 2
         if (DEVICE.equals("t03g")
@@ -326,7 +330,8 @@ public class Support {
         if (DEVICE.equals("i9300")
                 || DEVICE.equals("galaxys2")
                 || DEVICE.equals("n8013")
-                || DEVICE.equals("p3113"))
+                || DEVICE.equals("p3113")
+                || DEVICE.equals("p3110"))
             tmp = "/dev/block/mmcblk0p6";
 
         if (DEVICE.equals("n7100")
@@ -466,6 +471,7 @@ public class Support {
                 || DEVICE.equals("u9508")
                 || DEVICE.equals("p880")
                 || DEVICE.equals("p3113")
+                || DEVICE.equals("p3110")
                 || DEVICE.equals("flyer")
                 || DEVICE.equals("daytona")
                 || DEVICE.equals("vanquish")
@@ -565,7 +571,8 @@ public class Support {
                 || DEVICE.equals("bravo")
                 || DEVICE.equals("find5")
                 || DEVICE.equals("jflteatt")
-                || DEVICE.equals("jflteusc"))
+                || DEVICE.equals("jflteusc")
+                || DEVICE.equals("p3110"))
             CWM_VERSION = "-touch";
 
 //	    Newest Clockworkmod version for devices
@@ -628,8 +635,12 @@ public class Support {
         if (DEVICE.equals("p970"))
             CWM_VERSION = CWM_VERSION + "-6.0.1.4";
 
+        if (DEVICE.equals("p3113"))
+            CWM_VERSION = CWM_VERSION + "-6.0.2.3";
+
         if (DEVICE.equals("golden")
-                || DEVICE.equals("warp2"))
+                || DEVICE.equals("warp2")
+                || DEVICE.equals("p3110"))
             CWM_VERSION = CWM_VERSION + "-6.0.2.7";
 
         if (DEVICE.equals("crespo")
@@ -669,7 +680,6 @@ public class Support {
                 || DEVICE.equals("jfltevzw")
                 || DEVICE.equals("t0lte")
                 || DEVICE.equals("jfltetmo")
-                || DEVICE.equals("p3113")
                 || DEVICE.equals("jflteatt")
                 || DEVICE.equals("jflteusc"))
             CWM_VERSION = CWM_VERSION + "-6.0.3.2";
