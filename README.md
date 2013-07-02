@@ -34,6 +34,10 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.3.2]
+
+-Flash over Recovery devices fixed
+
 Update [1.3.1]
 
 -Samsung Galaxy Tab 2 7.0 (p3110/p3113) fixed

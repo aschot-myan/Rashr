@@ -506,8 +506,7 @@ public class Support {
             CWM = false;
 
         if (DEVICE.equals("")
-                || !MTD
-                && RecoveryPath.equals("")) {
+                || !MTD && RecoveryPath.equals("") && !FLASH_OVER_RECOVERY) {
             TWRP = false;
             CWM = false;
             OTHER = false;
