@@ -680,7 +680,8 @@ public class Support {
                 || DEVICE.equals("t0lte")
                 || DEVICE.equals("jfltetmo")
                 || DEVICE.equals("jflteatt")
-                || DEVICE.equals("jflteusc"))
+                || DEVICE.equals("jflteusc")
+                || DEVICE.equals("jfltecan"))
             CWM_VERSION = CWM_VERSION + "-6.0.3.2";
 
         if (CWM_VERSION.equals(""))

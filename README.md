@@ -34,6 +34,10 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.3.3]
+
+-Samsung Galaxy S4 (jfltecan) CWM fixed
+
 Update [1.3.2]
 
 -Flash over Recovery devices fixed
