@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Recovery-Tools</string>
+    <string name="sFlashCWM">Flashare Clockworkmod Recovery</string>
+    <string name="sFlashTWRP">Flashare TWRP Recovery</string>
+    <string name="flash_other">Flashare una Recovery diversa</string>
+    <string name="sBackup">Backup della Recovery corrente</string>
+    <string name="go">Avvia</string>
+    <string name="sRebooter">Riavvio</string>
+    <string name="sRestore">Ripristina da Backup</string>
+    <string name="sCleareCache">Cancella le recovery scaricate</string>
+    <string name="report">Analizza e segnala un dispositivo non supportato</string>
+    <string name="sExit">Esci</string>
+    <string name="xda">Apri il Thread XDA</string>
+    <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.co m</string>
+    <string name="EMAIL_SUBJECT">Recovery-Tools report to support new Device</string>
+    <string name="rename">Se vuoi rinominare il backup scrivi nel campo di testo. Altrimenti verrà impostata l\'ora corrente.</string>
+    <string name="bak_warning">Prima di fare qualsiasi azione con Recovery-Tools crea un backup e salvalo nel tuo PC. \nIl Backup sarà salvato in *InternalStorage*/Recovery-Tools/backups/.\nIl programmatore non è responsabile per danni al tuo dispositivo.
+    </string>
+    <string name="risk">Conosco i rischi</string>
+    <string name="bak_now">Backup Manager</string>
+    <string name="sReboot">Riavvia</string>
+    <string name="sRebootRecovery">Riavvia in Recovery</string>
+    <string name="sRebootBootloader">Riavvia in Bootloader</string>
+
+    <string name="rate_title">Vota %s</string>
+    <string name="rate_message">Se ti piace utilizzare %s, ti dispiacerebbe usare un momento del tuo tempo per votarla?
+        Grazie per il tuo supporto!
+    </string>
+    <string name="rate">Si, Vota %s</string>
+    <string name="rate_later">Ricordamelo più tardi</string>
+    <string name="rate_cancel">No, Grazie</string>
+    <string name="empty"></string>
+    <string name="info">Informazioni</string>
+    <string name="flashed">Recovery flashata.</string>
+    <string name="warning">Attenzione!</string>
+    <string name="kernel_to">Flashare il Recovery System su questo dispositivo flasherà il Boot.img (Kernel) stock con una custom Recovery.
+    </string>
+    <string name="flash_over_recovery">Flashare la Recovery adesso? (necessità il Riavvio in Recovery)</string>
+    <string name="instructions">Istruzioni</string>
+    <string name="instruction">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from
+        sdcard\n\nTWRP:\n\nMain Menu -> Install
+    </string>
+    <string name="getdownload">IMG della Recovery non trovata. Scaricarla ora?</string>
+    <string name="no_function">La funzione %s non è disponibile per questo dispositivo</string>
+    <string name="bak_done">Backup completato</string>
+    <string name="res_done">Ripristino completato</string>
+    <string name="backupalready">Esiste già un Backup. Verrà sostituito.
+        Continuare?
+    </string>
+    <string name="nobackup">Nessun Backup trovato (InternalStorage/Recovery-Tools/backups/).
+        Crearne uno?
+    </string>
+    <string name="noconnection">Nessuna connessione. Download annullato!</string>
+    <string name="failed_download">Oh no, si è verificato un problema. Per favore riavvia il download.\n\n%s
+    </string>
+    <string name="error">Errore</string>
+    <string name="notsupportded">Il tuo dispositivo non è ancora supportato dallo sviluppatore. Scansiona il sistema e segnala un dispositivo non supportato?
+    </string>
+    <string name="noroot">"Root non presente. Esegui il Root. Maggiori informazioni su xda-developer.com"
+    </string>
+    <string name="notwrp">TWRP non supportata</string>
+    <string name="nocwm">CWM non supportata</string>
+    <string name="using_dd">Usando i file binari dd. Recovery in FS: %s</string>
+    <string name="using_mtd">Usa flash/dump_image (MTD)</string>
+
+    <string name="Downloading">Download in corso…</string>
+    <string name="commentar">Commenti</string>
+    <string name="commenthint">Commenta qui, cosa non funziona correttamente (download, flash, supporto o altro)
+    </string>
+    <string name="positive">Si, per favore</string>
+    <string name="neutral">No, grazie</string>
+    <string name="negative">Annulla</string>
+    <string name="su_logs_title">Esegui Shell-Commands</string>
+    <string name="log">Log Shell-Commands</string>
+    <string name="showlog">Mostra Logs</string>
+
+    <string name="title_activity_backup_manager">Backup-Manager</string>
+    <string name="sDeleteBackup">Cancella Backup</string>
+    <string name="sBackupMgr">Apri Backup Manager</string>
+    <string name="setname">Imposta nome del Backup</string>
+    <string name="reboot_recovery_now">Riavviare in recovery adesso?</string>
+    <string name="tsk_end">Operazione completata</string>
+    <string name="flashing">Flash in corso…</string>
+    <string name="creating_bak">Backup in corso…</string>
+    <string name="clear_logs">Pulisci Logs</string>
+    <string name="download_utils">Per usare quest\'App hai bisogno di scaricare dei piccoli tool (circa 512KB). Richiede la connessione internet.\nScaricarli ora?
+    </string>
+    <string name="wrong_format">Hai scelto un file sbagliato. Il File deve essere in formato %s.
+    </string>
+    <string name="over_recovery">La recovery verrà installata al posto di quella attuale</string>
+    <string name="bak_del">Backup cancellato!</string>
+    <string name="thx_support">Grazie per supportarmi</string>
+
+</resources>

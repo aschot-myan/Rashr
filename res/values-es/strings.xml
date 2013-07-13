@@ -45,7 +45,7 @@ El DEV no se hace responsable de los daños y perjuicios de su dispositivo."</st
     <string name="empty"></string>
     <string name="info">Información</string>
     <string name="flashed">Recuperador instalado.</string>
-    <string name="kernel_to">Instalando el Recuperador de Systema en este dispocitivo tambien se cambiara el Kernel instalado.</string>
+    <string name="kernel_to">Instalando el Recuperador de Systema en este dispocitivo también se cambiara el Kernel instalado.</string>
     <string name="flash_over_recovery">¿Instalar Recuperador ahora? (necesita Reiniciar en Recuperador)</string>
     <string name="instructions">Instrucciones</string>
     <string name="instruction">"CWM:
@@ -56,7 +56,7 @@ TWRP:
 
 Menu Principal -> Instalar"</string>
     <string name="getdownload">IMG de Recuperacion no encontrada. ¿Descargar ahora?</string>
-    <string name="no_function">Esta funcion no es disponible para tu dispositivo</string>
+    <string name="no_function">Esta función no es disponible para tu dispositivo</string>
     <string name="bak_done">Copia de seguridad completada</string>
     <string name="res_done">Restauración completada</string>
     <string name="backupalready">Copia de seguridad ya existe. Esto sobrescribirá la existente. ¿Continuar?</string>
@@ -69,7 +69,7 @@ Menu Principal -> Instalar"</string>
     <string name="using_dd">Utilizando dd binario. Recuperador en FS: %s</string>
     <string name="using_mtd">Utilizando flash/dump_image (MTD)</string>
     <string name="commentar">Comentar</string>
-    <string name="commenthint">Comentar aqui, que no esta trabajando correctamente (descarga, instalación, soporte común u otro)</string>
+    <string name="commenthint">Comentar aquí, que no esta trabajando correctamente (descarga, instalación, soporte común u otro)</string>
     <string name="su_logs_title">Ejecutar Shell-Commands</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Ver Logs</string>
@@ -84,6 +84,6 @@ Menu Principal -> Instalar"</string>
     <string name="clear_logs">Eliminar Logs</string>
     <string name="download_utils">Para utilizar esta aplicación es necesario descargar herramientas pequeñas (alrededor de 512KB). Esto requiere una conexión a Internet.
 ¿Descargar Ahora?</string>
-    <string name="over_recovery">Dispositivo sera flasheado sobre el Recuperador</string>
+    <string name="over_recovery">Dispositivo será flasheado sobre el Recuperador</string>
     <string name="bak_del">¡Copia de seguridad borrada!</string>
 </resources>

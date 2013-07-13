@@ -24,9 +24,6 @@ package de.mkrtchyan.recoverytools;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -63,7 +60,7 @@ public class RecoveryTools extends Activity {
 //	Get path to external storage
     private static final File PathToSd = Environment.getExternalStorageDirectory();
 //	Declaring needed files and folders
-    public static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
+    private static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
     public static final File PathToRecoveries = new File(PathToRecoveryTools, "recoveries");
     public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
     public static final File PathToBin = new File("/system/bin");
@@ -102,56 +99,56 @@ public class RecoveryTools extends Activity {
             }
 
             if (fRECOVERY != (null)) {
-                if (fRECOVERY.exists()
-                        && fRECOVERY.getAbsolutePath().endsWith(mSupport.EXT)) {
-//				    If the flashing don't be handle specially flash it
-                    if (!mSupport.KERNEL_TO
-                            && !mSupport.FLASH_OVER_RECOVERY) {
-                        rFlash.run();
-                    } else {
-//					    Get user input if Kernel will be modified
-                        if (mSupport.KERNEL_TO)
-                            mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
-//					    Get user input if user want to install over recovery now
-                        if (mSupport.FLASH_OVER_RECOVERY) {
-//						    Create coustom AlertDialog
-                            final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
-                            abuilder
-                                    .setTitle(R.string.info)
-                                    .setMessage(R.string.flash_over_recovery)
-                                    .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                if (fRECOVERY.exists() && fRECOVERY.getAbsolutePath().endsWith(mSupport.EXT)) {
+                    if (fRECOVERY.length() > 1000000) {
+//				        If the flashing don't be handle specially flash it
+                        if (!mSupport.KERNEL_TO && !mSupport.FLASH_OVER_RECOVERY) {
+                            rFlash.run();
+                        } else {
+//					        Get user input if Kernel will be modified
+                            if (mSupport.KERNEL_TO)
+                                mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
+//					        Get user input if user want to install over recovery now
+                            if (mSupport.FLASH_OVER_RECOVERY) {
+//						        Create coustom AlertDialog
+                                final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
+                                abuilder
+                                        .setTitle(R.string.info)
+                                        .setMessage(R.string.flash_over_recovery)
+                                        .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
 
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            try {
-                                                mCommon.executeSuShell("reboot recovery");
-                                            } catch (RootAccessDeniedException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    })
-                                    .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
-
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Dialog d = new Dialog(mContext);
-                                            d.setTitle(R.string.instructions);
-                                            TextView tv = new TextView(mContext);
-                                            tv.setTextSize(20);
-                                            tv.setText(R.string.instruction);
-                                            d.setContentView(tv);
-                                            d.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                                                @Override
-                                                public void onCancel(DialogInterface dialog) {
-                                                    abuilder.show();
-
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                try {
+                                                    mCommon.executeSuShell("reboot recovery");
+                                                } catch (RootAccessDeniedException e) {
+                                                    e.printStackTrace();
                                                 }
-                                            });
-                                            d.show();
-                                        }
-                                    })
-                                    .show();
+                                            }
+                                        })
+                                        .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
+
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Dialog d = new Dialog(mContext);
+                                                d.setTitle(R.string.instructions);
+                                                TextView tv = new TextView(mContext);
+                                                tv.setTextSize(20);
+                                                tv.setText(R.string.instruction);
+                                                d.setContentView(tv);
+                                                d.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                                                    @Override
+                                                    public void onCancel(DialogInterface dialog) {
+                                                        abuilder.show();
+
+                                                    }
+                                                });
+                                                d.show();
+                                            }
+                                        })
+                                        .show();
+                            }
                         }
                     }
                 } else {
@@ -211,13 +208,12 @@ public class RecoveryTools extends Activity {
                 Runnable runOnTrue = new Runnable() {
                     @Override
                     public void run() {
-                        report(null);
+                        report();
                     }
                 };
                 Runnable runOnNegative = new Runnable() {
                     @Override
                     public void run() {
-                        createRootDeniedNotification();
                         finish();
                         System.exit(0);
                     }
@@ -227,10 +223,32 @@ public class RecoveryTools extends Activity {
 //			Check if Su-Access is given if not the app will be closed
             if (!mCommon.suRecognition()) {
 //				Show a new notification with Info
-                createRootDeniedNotification();
-                finish();
-                System.exit(0);
+                mNotifyer.showRootDeniedDialog();
+            } else {
+
+                if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
+
+                    AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
+                    WarningDialog.setTitle(R.string.warning);
+                    WarningDialog.setMessage(R.string.bak_warning);
+                    WarningDialog.setPositiveButton(R.string.bak_now, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            bBackupMgr(null);
+                        }
+                    });
+                    WarningDialog.setNegativeButton(R.string.risk, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    WarningDialog.setCancelable(false);
+                    WarningDialog.show();
+                    mCommon.setBooleanPerf(mContext,"recovery-tools", "first_run", true);
+                }
             }
+
             firstrun = false;
         }
 //		Setting up Buttons (CWM and TWRP support)
@@ -256,27 +274,7 @@ public class RecoveryTools extends Activity {
 
         downloadUtils();
 
-        if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
 
-            AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
-            WarningDialog.setTitle(R.string.warning);
-            WarningDialog.setMessage(R.string.bak_warning);
-            WarningDialog.setPositiveButton(R.string.bak_now, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    bBackupMgr(null);
-                }
-            });
-            WarningDialog.setNegativeButton(R.string.risk, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            });
-            WarningDialog.setCancelable(false);
-            WarningDialog.show();
-            mCommon.setBooleanPerf(mContext,"recovery-tools", "first_run", true);
-        }
     }
 
 //	Button Methods (onClick)
@@ -332,20 +330,6 @@ public class RecoveryTools extends Activity {
             bCWM.setText(R.string.nocwm);
             bCWM.setClickable(false);
         }
-
-        if (!mSupport.OTHER) {
-            Button bOTHER = (Button) findViewById(R.id.bFlashOther);
-            bOTHER.setText("");
-            bOTHER.setClickable(false);
-        }
-    }
-
-    public void createRootDeniedNotification() {
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Notification n = new Notification(R.drawable.ic_launcher, getString(R.string.noroot), System.currentTimeMillis());
-        n.setLatestEventInfo(this, getString(R.string.warning), getString(R.string.noroot), PendingIntent.getActivity(this, 0, new Intent(), 0));
-        n.flags = Notification.FLAG_AUTO_CANCEL;
-        nm.notify(28, n);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -356,16 +340,22 @@ public class RecoveryTools extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        MenuItem iShowLogs = menu.findItem(R.id.iShowLogs);
-        try {
-            iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
-        } catch (RuntimeException e) {
-            iShowLogs.setVisible(false);
-            mNotifyer.showToast("Something went wrong.. " + e.getMessage());
-        }
-        iLog = menu.findItem(R.id.iLog);
-        iLog.setChecked(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+
+            super.onPrepareOptionsMenu(menu);
+            MenuItem iShowLogs = menu.findItem(R.id.iShowLogs);
+            try {
+                iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+            } catch (RuntimeException e) {
+                try{
+                    iShowLogs.setVisible(false);
+                } catch (NullPointerException e1) {
+                    mNotifyer.showExceptionToast(e1);
+                }
+                mNotifyer.showExceptionToast(e);
+            }
+            iLog = menu.findItem(R.id.iLog);
+            iLog.setChecked(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+
         return true;
     }
 
@@ -388,13 +378,48 @@ public class RecoveryTools extends Activity {
                     mCommon.setBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands", true);
                 }
                 return true;
+            case R.id.iReport:
+                report();
+                return true;
+            case R.id.iShowLogs:
+                Dialog dialog = mNotifyer.createDialog(R.string.su_logs_title, R.layout.dialog_command_logs, false, true);
+                final TextView tvLog = (TextView) dialog.findViewById(R.id.tvSuLogs);
+                final Button bClearLog = (Button) dialog.findViewById(R.id.bClearLog);
+                bClearLog.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View arg0) {
+                        new File(mContext.getFilesDir(), "command-logs.log").delete();
+                        tvLog.setText("");
+                    }
+                });
+                String sLog = "";
+
+                try {
+                    String line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(openFileInput("command-logs.log")));
+                    while ((line = br.readLine()) != null) {
+                        sLog = sLog + line + "\n";
+                    }
+                    br.close();
+                    tvLog.setText(sLog);
+                } catch (FileNotFoundException e) {
+                    tvLog.setText("No log found!");
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    tvLog.setText(tvLog.getText() + "\n" + e.getMessage());
+                    e.printStackTrace();
+                }
+
+                dialog.show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
 
-    public void report(MenuItem Item) {
+    public void report() {
 //		Creates a report Email with Commentar
         final Dialog reportDialog = mNotifyer.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
         final Button ok = (Button) reportDialog.findViewById(R.id.bGo);
@@ -434,40 +459,6 @@ public class RecoveryTools extends Activity {
         });
 
         reportDialog.show();
-    }
-
-    public void showLogs(MenuItem item) {
-
-        Dialog dialog = mNotifyer.createDialog(R.string.su_logs_title, R.layout.dialog_command_logs, false, true);
-        final TextView tvLog = (TextView) dialog.findViewById(R.id.tvSuLogs);
-        final Button bClearLog = (Button) dialog.findViewById(R.id.bClearLog);
-        bClearLog.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                new File(mContext.getFilesDir(), "command-logs.log").delete();
-                tvLog.setText("");
-            }
-        });
-        String sLog = "";
-
-        try {
-            String line;
-            BufferedReader br = new BufferedReader(new InputStreamReader(openFileInput("command-logs.log")));
-            while ((line = br.readLine()) != null) {
-                sLog = sLog + line + "\n";
-            }
-            br.close();
-            tvLog.setText(sLog);
-        } catch (FileNotFoundException e) {
-            tvLog.setText("No log found!");
-            e.printStackTrace();
-        } catch (IOException e) {
-            tvLog.setText(tvLog.getText() + "\n" + e.getMessage());
-            e.printStackTrace();
-        }
-
-        dialog.show();
     }
 
     public void downloadUtils() {

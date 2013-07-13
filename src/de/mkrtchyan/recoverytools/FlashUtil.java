@@ -38,7 +38,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private Context mContext;
     private ProgressDialog pDialog;
-    private Common mCommon = new Common();
+    final private Common mCommon = new Common();
     private Notifyer mNotifyer;
     private final Support mSupport = new Support();
     private File charger, chargermon, ric, fflash, fdump, file;
@@ -127,6 +127,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                         }
                     }
                     break;
+
                 case 2:
                     if (mSupport.MTD) {
                         if (!new File(RecoveryTools.PathToBin, fdump.getName()).exists())
@@ -160,8 +161,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     } catch (RootAccessDeniedException e) {
                         e.printStackTrace();
                     }
-                }
-            }).show();
+                }}).show();
         } else {
             mNotifyer.showToast(R.string.bak_done);
         }

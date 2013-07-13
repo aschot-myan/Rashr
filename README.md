@@ -34,6 +34,12 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.3.4]
+
+-Italian translation by Curtis7990
+-Fixed startup crash on 4.0.X devices.
+-Better error detention on Download.
+
 Update [1.3.3]
 
 -Samsung Galaxy S4 (jfltecan) CWM fixed

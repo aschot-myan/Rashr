@@ -15,11 +15,10 @@
     <string name="xda">Open XDA-Thread</string>
     <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.com</string>
     <string name="EMAIL_SUBJECT">Recovery-Tools report to support new Device</string>
-    <string name="rename">If you want set a custom name to the backup type it in the text field. If
-        not the current time will be set.
-    </string>
-    <string name="bak_warning">Before you do some actions with Recovery-Tools please create an backup and store it on your PC.\nBackups will be created under *InternalStorage*/Recovery-Tools/backups/.\nThe DEV is not responsible on the damages of your device.
-    </string>
+    <string name="rename">If you want set a custom name to the backup type it in the text field. If not the current time will be set.</string>
+    <string name="bak_warning">Before you do some actions with Recovery-Tools please create an backup and store it on your PC.
+        \nBackups will be created under *InternalStorage*/Recovery-Tools/backups/.
+        \nThe DEV is not responsible on the damages of your device.</string>
     <string name="risk">I know the risk</string>
     <string name="bak_now">Backup Manager</string>
     <string name="sReboot">Reboot</string>
@@ -27,9 +26,7 @@
     <string name="sRebootBootloader">Reboot Bootloader</string>
 
     <string name="rate_title">Rate %s</string>
-    <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it?
-        Thanks for your support!
-    </string>
+    <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it? Thanks for your support!</string>
     <string name="rate">Yes, Rate %s</string>
     <string name="rate_later">Remind me later</string>
     <string name="rate_cancel">No, Thanks</string>
@@ -37,35 +34,26 @@
     <string name="info">Information</string>
     <string name="flashed">Recovery flashed.</string>
     <string name="warning">Warning!</string>
-    <string name="kernel_to">Flashing the Recovery System on this devices will flash the Boot.img
-        (Kernel) to Stock with custom Recovery.
-    </string>
+    <string name="kernel_to">Flashing the Recovery System on this devices will flash the Boot.img (Kernel) to Stock with custom Recovery.</string>
     <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
     <string name="instructions">Instructions</string>
-    <string name="instruction">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from
-        sdcard\n\nTWRP:\n\nMain Menu -> Install
-    </string>
+    <string name="instruction">CWM:
+        \n\nMain Menu -> install zip from sdcard -> choose zip from sdcard
+        \n\nTWRP:
+        \n\nMain Menu -> Install</string>
     <string name="getdownload">Recovery IMG not found. Download now?</string>
     <string name="no_function">%s function is not available on your device</string>
     <string name="bak_done">Backup completed</string>
     <string name="res_done">Restore completed</string>
-    <string name="backupalready">Backup already exists. This will overwrite the existing one.
-        Continue?
-    </string>
-    <string name="nobackup">No existing Backup found (InternalStorage/Recovery-Tools/backups/).
-        Create one now?
-    </string>
+    <string name="backupalready">Backup already exists. This will overwrite the existing one. Continue?</string>
+    <string name="nobackup">No existing Backup found (InternalStorage/Recovery-Tools/backups/). Create one now?</string>
     <string name="noconnection">No network available. Download canceled!</string>
-    <string name="failed_download">Oh no, a problem is occurred. Please restart the
-        download.\n\n%s
-    </string>
+    <string name="failed_download">Oh no, a problem is occurred. Please restart the download.
+        \n\n%s</string>
     <string name="error">Error</string>
-    <string name="notsupportded">Your Device is not supported by the developer yet. Scan System and
-        Report unsupported Device?
-    </string>
+    <string name="notsupportded">Your Device is not supported by the developer yet. Scan System and Report unsupported Device?</string>
     <string name="noroot">"Device not Rooted. Please Root it. More information under
-        xda-developer.com"
-    </string>
+        \n\nxda-developer.com"</string>
     <string name="notwrp">TWRP not supported</string>
     <string name="nocwm">CWM not supported</string>
     <string name="using_dd">Using dd binary. Recovery in FS: %s</string>
@@ -73,9 +61,7 @@
 
     <string name="Downloading">Downloading&#8230;</string>
     <string name="commentar">Commentar</string>
-    <string name="commenthint">Comment here, what is not working correctly (download, flash, common
-        support or other)
-    </string>
+    <string name="commenthint">Comment here, what is not working correctly (download, flash, common support or other)</string>
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
@@ -92,11 +78,9 @@
     <string name="flashing">Flashing&#8230;</string>
     <string name="creating_bak">Creating Backup&#8230;</string>
     <string name="clear_logs">Clear Logs</string>
-    <string name="download_utils">To use this App you need to download small tools (around 512KB).
-        This requieres a internet connection.\nDowload it now?
-    </string>
-    <string name="wrong_format">You have choose a false file. The File must be in %s format.
-    </string>
+    <string name="download_utils">To use this App you need to download small tools (around 512KB). This requires a internet connection.
+        \nDownload it now?</string>
+    <string name="wrong_format">You have choose a false file. The File must be in %s format.</string>
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="bak_del">Backup deleted!</string>
     <string name="thx_support">Thanks for supporting me</string>

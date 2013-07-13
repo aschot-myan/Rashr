@@ -44,8 +44,6 @@ public class BackupManagerActivity extends Activity {
     private static final File PathToBackups = new File(PathToRecoveryTools, "backups");
     private File fBACKUP;
 
-    Button bBackup, bRestore;
-
     final private Context mContext = this;
     final private Notifyer mNotifyer = new Notifyer(mContext);
     final private Common mCommon = new Common();
@@ -125,7 +123,7 @@ public class BackupManagerActivity extends Activity {
                         }
                         dialog.dismiss();
                     } catch (NullPointerException e) {
-                        mNotifyer.showToast("Something went wrong: " + e.getMessage());
+                        mNotifyer.showExceptionToast(e);
                     }
                 }
             });
@@ -133,7 +131,7 @@ public class BackupManagerActivity extends Activity {
         }
     };
 
-    Support mSupport = new Support();
+    final Support mSupport = new Support();
 
 
     @Override
@@ -148,8 +146,8 @@ public class BackupManagerActivity extends Activity {
             Button bBackup = (Button) findViewById(R.id.bCreateBackup);
             Button bRestore = (Button) findViewById(R.id.bRestoreBackup);
 
-            bBackup.setText(String.format(getString(R.string.no_function, bBackup.getText())));
-            bRestore.setText(String.format(getString(R.string.no_function, bRestore.getText())));
+            bBackup.setText(String.format(getString(R.string.no_function), bBackup.getText()));
+            bRestore.setText(String.format(getString(R.string.no_function), bRestore.getText()));
             bBackup.setEnabled(false);
             bRestore.setEnabled(false);
         }

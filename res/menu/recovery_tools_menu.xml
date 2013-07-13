@@ -5,12 +5,10 @@
             android:title="@string/xda"></item>
     <item
             android:id="@+id/iReport"
-            android:title="@string/report"
-            android:onClick="report"></item>
+            android:title="@string/report"></item>
 
     <item
             android:id="@+id/iShowLogs"
-            android:onClick="showLogs"
             android:title="@string/showlog"
             android:visible="false"></item>
     <item
