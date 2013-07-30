@@ -34,6 +34,13 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.3.5]
+
+-Optionaly Ads added.
+-Fixxed flash issues on Xperia S/T nozomi/mint
+-New TWRP Imgs 2.6.x
+-Samsung Galaxy S2 now flash without recovery
+
 Update [1.3.4]
 
 -Italian translation by Curtis7990
@@ -322,7 +329,7 @@ Supported Devices
 -HTC Droid DNA (dlx)
 -HTC ONE GSM (m7/m7ul/m7wls/m7spr)
 
--Motorola Atrix 4G
+-Motorola Atrix 4G (olympus)
 
 -Oppo Find5 (find5)
 
@@ -330,8 +337,7 @@ Supported Devices
                     jfltecan/jflteatt/jflteusc/ja3g)
 -Samsung Galaxy S2 LTE (skyrocket)
 -Samsung Galaxy Note 10.1 (p4notewifi/n8013)
--Samsung Galaxy Note 2 (n7100/t0ltevzw)
--Samsung Galaxy Note 2 LTE (t0lte)
+-Samsung Galaxy Note 2 LTE (t0lte/tmo/att/can/vzw)
 -Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw/d2spr)
 -Samsung Galaxy SIII Mini (golden)
 -Samsung Galaxy Mini II (jena)

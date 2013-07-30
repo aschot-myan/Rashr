@@ -14,7 +14,7 @@ package de.mkrtchyan.recoverytools;
  * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -63,7 +63,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             mCommon.chmod(charger, "755");
             mCommon.chmod(chargermon, "755");
             if (mSupport.DEVICE.equals("C6603"))
-            mCommon.chmod(ric, "755");
+                mCommon.chmod(ric, "755");
         }
     }
 
@@ -161,7 +161,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     } catch (RootAccessDeniedException e) {
                         e.printStackTrace();
                     }
-                }}).show();
+                }
+            }).show();
         } else {
             mNotifyer.showToast(R.string.bak_done);
         }

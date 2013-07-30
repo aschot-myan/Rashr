@@ -84,5 +84,6 @@
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="bak_del">Backup deleted!</string>
     <string name="thx_support">Thanks for supporting me</string>
+    <string name="ShowAds">Show Ads to support</string>
 
 </resources>

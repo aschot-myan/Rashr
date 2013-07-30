@@ -17,6 +17,11 @@
             android:title="@string/log"></item>
 
     <item
+            android:id="@+id/iShowAds"
+            android:checkable="true"
+            android:title="@string/ShowAds"></item>
+
+    <item
             android:id="@+id/iExit"
             android:title="@string/sExit"></item>
 

@@ -105,11 +105,11 @@ public class BackupManagerActivity extends Activity {
                         } else {
                             Calendar c = Calendar.getInstance();
                             Name = Calendar.DATE
-                                + "-" + c.get(Calendar.MONTH)
-                                + "-" + c.get(Calendar.YEAR)
-                                + "-" + c.get(Calendar.HOUR)
-                                + ":" + c.get(Calendar.MINUTE)
-                                + "-" + c.get(Calendar.AM_PM);
+                                    + "-" + c.get(Calendar.MONTH)
+                                    + "-" + c.get(Calendar.YEAR)
+                                    + "-" + c.get(Calendar.HOUR)
+                                    + ":" + c.get(Calendar.MINUTE)
+                                    + "-" + c.get(Calendar.AM_PM);
                         }
 
                         Name = Name + mSupport.EXT;
@@ -142,7 +142,7 @@ public class BackupManagerActivity extends Activity {
         mCommon.checkFolder(PathToBackups);
 
         if (!mSupport.OTHER
-                || mSupport.FLASH_OVER_RECOVERY){
+                || mSupport.FLASH_OVER_RECOVERY) {
             Button bBackup = (Button) findViewById(R.id.bCreateBackup);
             Button bRestore = (Button) findViewById(R.id.bRestoreBackup);
 
@@ -170,7 +170,7 @@ public class BackupManagerActivity extends Activity {
         if (PathToBackups.list().length < 1) {
             mNotifyer.createAlertDialog(R.string.warning, R.string.nobackup, setBakNameAndRun).show();
         } else {
-            fcDelete = new FileChooser(mContext, PathToBackups.getAbsolutePath() , "", rDelete);
+            fcDelete = new FileChooser(mContext, PathToBackups.getAbsolutePath(), "", rDelete);
         }
     }
 }

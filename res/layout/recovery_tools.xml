@@ -8,6 +8,8 @@
             android:layout_width="match_parent"
             android:layout_height="290dp">
 
+
+
         <LinearLayout
                 android:id="@+id/LinearLayout1"
                 android:layout_width="match_parent"
@@ -43,6 +45,20 @@
                     android:onClick="Go"
                     android:tag="twrp"
                     android:text="@string/sFlashTWRP"/>
+
+            <com.google.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+                    android:id="@+id/adView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+
+                    ads:testDevices="B3E74DD3FC0A127E58F92B299B4F81F9"
+                    ads:adUnitId="a151cdc8be01253"
+                    ads:adSize="BANNER"
+                    ads:loadAdOnCreate="true" >
+            </com.google.ads.AdView>
 
             <Button
                     android:id="@+id/bFlashOther"

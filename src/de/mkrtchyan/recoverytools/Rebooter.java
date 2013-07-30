@@ -14,7 +14,7 @@ package de.mkrtchyan.recoverytools;
  * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -34,7 +34,10 @@ public class Rebooter extends Dialog {
 
     public Rebooter(Context mContext) {
         super(mContext);
+
         final Common mCommon = new Common();
+
+        final Support mSupport = new Support();
         setTitle(R.string.sRebooter);
         setContentView(R.layout.dialog_rebooter);
         Button bReboot = (Button) findViewById(R.id.bReboot);
@@ -46,7 +49,11 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell("reboot");
+                     mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd && adb connect localhost:5555");
+                     int tmp = 0;
+                     while (1 != tmp){
+                        mCommon.executeSuShell("adb reboot");
+                     }
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -58,7 +65,11 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell("reboot recovery");
+                    mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd && adb connect localhost:5555");
+                    int tmp = 0;
+                    while (1 != tmp){
+                        mCommon.executeSuShell("adb reboot recovery");
+                    }
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -70,7 +81,11 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell("reboot bootloader");
+                    mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd && adb connect localhost:5555");
+                    int tmp = 0;
+                    while (1 != tmp){
+                        mCommon.executeSuShell("adb reboot bootloader");
+                    }
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }

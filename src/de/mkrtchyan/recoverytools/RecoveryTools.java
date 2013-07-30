@@ -41,6 +41,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.ads.AdView;
+
 import org.rootcommands.util.RootAccessDeniedException;
 
 import java.io.BufferedReader;
@@ -57,27 +59,29 @@ import de.mkrtchyan.utils.Notifyer;
 public class RecoveryTools extends Activity {
 
     private final Context mContext = this;
-//	Get path to external storage
+    private final Activity mActivity = (Activity) this;
+    private AdView adView;
+    //	Get path to external storage
     private static final File PathToSd = Environment.getExternalStorageDirectory();
-//	Declaring needed files and folders
+    //	Declaring needed files and folders
     private static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
     public static final File PathToRecoveries = new File(PathToRecoveryTools, "recoveries");
     public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
     public static final File PathToBin = new File("/system/bin");
     private File fRECOVERY, fflash, fdump, charger, chargermon, ric;
-//	Declaring Items
+    //	Declaring Items
     private MenuItem iLog;
-//	Declaring other vars
+    //	Declaring other vars
     private String SYSTEM = "";
     private boolean firstrun = true;
     private boolean download = false;
-//	Declaring needed objects
+    //	Declaring needed objects
     private final Notifyer mNotifyer = new Notifyer(mContext);
     private final Common mCommon = new Common();
     private final Support mSupport = new Support();
     private FileChooser fcFlashOther;
 
-//	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
+    //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
     private final Runnable rFlash = new Runnable() {
         @Override
         public void run() {
@@ -120,7 +124,11 @@ public class RecoveryTools extends Activity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 try {
-                                                    mCommon.executeSuShell("reboot recovery");
+                                                    mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd && adb connect localhost:5555");
+                                                    int tmp = 0;
+                                                    while (1 != tmp){
+                                                        mCommon.executeSuShell("adb reboot recovery");
+                                                    }
                                                 } catch (RootAccessDeniedException e) {
                                                     e.printStackTrace();
                                                 }
@@ -177,6 +185,10 @@ public class RecoveryTools extends Activity {
         setContentView(R.layout.recovery_tools);
         final CheckBox cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
         final TextView tvInfo = (TextView) findViewById(R.id.tvInfo);
+
+        adView = (AdView) findViewById(R.id.adView);
+
+
 
         fflash = new File("/system/bin", "flash_image");
         fdump = new File("/system/bin", "dump_image");
@@ -245,7 +257,8 @@ public class RecoveryTools extends Activity {
                     });
                     WarningDialog.setCancelable(false);
                     WarningDialog.show();
-                    mCommon.setBooleanPerf(mContext,"recovery-tools", "first_run", true);
+                    mCommon.setBooleanPerf(mContext, "recovery-tools", "first_run", true);
+                    mCommon.setBooleanPerf(mContext, "recovery-tools", "show_ads", true);
                 }
             }
 
@@ -277,7 +290,7 @@ public class RecoveryTools extends Activity {
 
     }
 
-//	Button Methods (onClick)
+    //	Button Methods (onClick)
     public void Go(View view) {
         if (mSupport.MTD && fflash.exists() && fdump.exists()
                 || mSupport.DEVICE.equals("C6603") && ric.exists() && charger.exists() && chargermon.exists()
@@ -314,7 +327,7 @@ public class RecoveryTools extends Activity {
         new Rebooter(mContext).show();
     }
 
-//	Called from Button Methods, created to redundancy
+    //	Called from Button Methods, created to redundancy
     public void getSupport() {
 //	Toggle TWRP and CWM install button if they aren't supported
 //		Settings for TWRP unsupported devices
@@ -341,20 +354,22 @@ public class RecoveryTools extends Activity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-            super.onPrepareOptionsMenu(menu);
-            MenuItem iShowLogs = menu.findItem(R.id.iShowLogs);
+        super.onPrepareOptionsMenu(menu);
+        MenuItem iShowLogs = menu.findItem(R.id.iShowLogs);
+        MenuItem iShowAds = menu.findItem(R.id.iShowAds);
+        try {
+            iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+            iShowAds.setChecked(mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads"));
+        } catch (RuntimeException e) {
             try {
-                iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
-            } catch (RuntimeException e) {
-                try{
-                    iShowLogs.setVisible(false);
-                } catch (NullPointerException e1) {
-                    mNotifyer.showExceptionToast(e1);
-                }
-                mNotifyer.showExceptionToast(e);
+                iShowLogs.setVisible(false);
+            } catch (NullPointerException e1) {
+                mNotifyer.showExceptionToast(e1);
             }
-            iLog = menu.findItem(R.id.iLog);
-            iLog.setChecked(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+            mNotifyer.showExceptionToast(e);
+        }
+        iLog = menu.findItem(R.id.iLog);
+        iLog.setChecked(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
 
         return true;
     }
@@ -412,6 +427,17 @@ public class RecoveryTools extends Activity {
                 }
 
                 dialog.show();
+                return true;
+            case R.id.iShowAds:
+                if (mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads")) {
+                    iLog.setChecked(false);
+                    mCommon.setBooleanPerf(mContext, "recovery-tools", "show_ads", false);
+                    adView.setVisibility(View.INVISIBLE);
+                } else {
+                    iLog.setChecked(true);
+                    mCommon.setBooleanPerf(mContext, "recovery-tools", "show_ads", true);
+                    adView.setVisibility(View.VISIBLE);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
