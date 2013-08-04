@@ -34,12 +34,26 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.3.6]
+
+-Some UI Changes (More icons and cleaner)
+-Disenable Ads fixed
+-Revert Galaxy S2 changes
+-HTC Explorer (pico) added
+-Samsung Galaxy S4 (Google Play Edition/jgedlte) added
+-Huawei Ascend P1 (u9200) added
+-Motorola Milestone XT720 (sholest) added
+-HTC Desire SV (magnids) added
+-Kindle Fire HD 7" (kfhd7) fixed
+-Asus Google Nexus 7 2013 (flo) added
+
 Update [1.3.5]
 
 -Optionaly Ads added.
 -Fixxed flash issues on Xperia S/T nozomi/mint
 -New TWRP Imgs 2.6.x
 -Samsung Galaxy S2 now flash without recovery
+-Reboot issues on some HTC Devices fixxed
 
 Update [1.3.4]
 
@@ -374,10 +388,14 @@ Supported Devices
 
 ----- [TWRP only] -----
 
+-Asus Google Nexus 7 2013 (flo)
+
 -Sony Xperia S(nozomi/LT30p)
 -Sony Xperia Play(mint/LT26i)
 
 -Kindle Fire HD 7" (tate)
+
+-Samsung Galaxy S4 (Google Play Edition/jgedlte)
 
 ----- [CUSTOM only] -----
 
@@ -389,9 +407,13 @@ Supported Devices
 
 -HTC First (mystul)
 -HTC Flyer (flyer)
+-HTC Desire SV (magnids)
 
 -Huawei U9508 (hwu9508)
+-Huawei Ascend P1 (u9200)
 -Huawei C8813 (hwc8813)
+
+-Motorola Milestone XT720 (sholest)
 
 -LG Optimus One CDMA (thuderc)
 -LG Optimus Elite (m3s)

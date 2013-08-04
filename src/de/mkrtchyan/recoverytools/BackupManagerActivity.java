@@ -52,7 +52,7 @@ public class BackupManagerActivity extends Activity {
     private final Runnable rBackup = new Runnable() {
         @Override
         public void run() {
-            if (mSupport.FLASH_OVER_RECOVERY) {
+            if (mDeviceHandler.FLASH_OVER_RECOVERY) {
                 mNotifyer.createDialog(R.string.warning, String.format(getString(R.string.no_function), getString(R.string.sBackup)), true).show();
             } else {
                 new FlashUtil(mContext, fBACKUP, 2).execute();
@@ -62,7 +62,7 @@ public class BackupManagerActivity extends Activity {
     private final Runnable rRestore = new Runnable() {
         @Override
         public void run() {
-            if (mSupport.FLASH_OVER_RECOVERY) {
+            if (mDeviceHandler.FLASH_OVER_RECOVERY) {
                 mNotifyer.createDialog(R.string.warning, R.string.no_function, true, true).show();
             } else {
                 if (fcRestore.use)
@@ -112,7 +112,7 @@ public class BackupManagerActivity extends Activity {
                                     + "-" + c.get(Calendar.AM_PM);
                         }
 
-                        Name = Name + mSupport.EXT;
+                        Name = Name + mDeviceHandler.EXT;
 
                         fBACKUP = new File(PathToBackups, Name);
 
@@ -131,7 +131,7 @@ public class BackupManagerActivity extends Activity {
         }
     };
 
-    final Support mSupport = new Support();
+    final DeviceHandler mDeviceHandler = new DeviceHandler();
 
 
     @Override
@@ -141,8 +141,8 @@ public class BackupManagerActivity extends Activity {
 
         mCommon.checkFolder(PathToBackups);
 
-        if (!mSupport.OTHER
-                || mSupport.FLASH_OVER_RECOVERY) {
+        if (!mDeviceHandler.OTHER
+                || mDeviceHandler.FLASH_OVER_RECOVERY) {
             Button bBackup = (Button) findViewById(R.id.bCreateBackup);
             Button bRestore = (Button) findViewById(R.id.bRestoreBackup);
 
@@ -162,7 +162,7 @@ public class BackupManagerActivity extends Activity {
         if (PathToBackups.list().length < 1) {
             mNotifyer.createAlertDialog(R.string.warning, R.string.nobackup, setBakNameAndRun).show();
         } else {
-            fcRestore = new FileChooser(mContext, PathToBackups.getAbsolutePath(), mSupport.EXT, rRestore);
+            fcRestore = new FileChooser(mContext, PathToBackups.getAbsolutePath(), mDeviceHandler.EXT, rRestore);
         }
     }
 

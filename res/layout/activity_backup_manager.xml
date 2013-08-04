@@ -15,12 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="bBackup"
+            android:drawableLeft="@drawable/ic_backup"
             android:text="@string/sBackup"/>
 
     <Button
             android:id="@+id/bRestoreBackup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_restore"
             android:onClick="bRestore"
             android:text="@string/sRestore"/>
 
@@ -29,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="bDeleteBackup"
+            android:drawableLeft="@drawable/ic_delete"
             android:text="@string/sDeleteBackup"/>
 
 </LinearLayout>

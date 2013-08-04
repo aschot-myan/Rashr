@@ -6,9 +6,7 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="290dp">
-
-
+            android:layout_height="337dp">
 
         <LinearLayout
                 android:id="@+id/LinearLayout1"
@@ -16,27 +14,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <ImageView
-                    android:id="@+id/ivCWM"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cwm_ico"
-                    android:contentDescription="@string/empty"/>
-
             <Button
                     android:id="@+id/bCWM"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="Go"
                     android:tag="clockwork"
-                    android:text="@string/sFlashCWM"/>
-
-            <ImageView
-                    android:id="@+id/ivTWRP"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/twrp_ico"
-                    android:contentDescription="@string/empty"/>
+                    android:drawableLeft="@drawable/ic_cwm"
+                    android:text="@string/sFlashCWM"
+                    android:visibility="visible"/>
 
             <Button
                     android:id="@+id/bTWRP"
@@ -44,6 +30,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="Go"
                     android:tag="twrp"
+                    android:drawableLeft="@drawable/ic_twrp"
                     android:text="@string/sFlashTWRP"/>
 
             <com.google.ads.AdView
@@ -51,19 +38,17 @@
                     android:id="@+id/adView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-
-                    ads:testDevices="B3E74DD3FC0A127E58F92B299B4F81F9"
                     ads:adUnitId="a151cdc8be01253"
-                    ads:adSize="BANNER"
-                    ads:loadAdOnCreate="true" >
+                    ads:loadAdOnCreate="true"
+                    ads:testDevices="B3E74DD3FC0A127E58F92B299B4F81F9"
+                    ads:adSize="BANNER">
             </com.google.ads.AdView>
 
             <Button
                     android:id="@+id/bFlashOther"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_flash"
                     android:onClick="bFlashOther"
                     android:text="@string/flash_other"/>
 
@@ -72,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="bBackupMgr"
+                    android:drawableLeft="@drawable/ic_bak_mgr"
                     android:text="@string/sBackupMgr"/>
 
             <Button
@@ -79,46 +65,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="bCleareCache"
+                    android:drawableLeft="@drawable/ic_delete"
                     android:text="@string/sCleareCache"/>
 
             <Button
                     android:id="@+id/bRebooter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_reboot"
                     android:onClick="bRebooter"
                     android:text="@string/sRebooter"/>
         </LinearLayout>
     </ScrollView>
 
-    <ScrollView
-            android:id="@+id/scrollView1"
+    <CheckBox
+            android:id="@+id/cbUseBinary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView
-                    android:id="@+id/tvInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textIsSelectable="false"
-                    android:visibility="visible"/>
-
-            <CheckBox
-                    android:id="@+id/cbUseBinary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:clickable="false"
-                    android:textSize="20sp"
-                    android:visibility="visible"/>
-
-        </LinearLayout>
-    </ScrollView>
-
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:clickable="false"
+            android:textSize="20sp"
+            android:visibility="visible"/>
 </LinearLayout>

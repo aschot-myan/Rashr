@@ -34,10 +34,8 @@ public class Rebooter extends Dialog {
 
     public Rebooter(Context mContext) {
         super(mContext);
-
+        final Context context = mContext;
         final Common mCommon = new Common();
-
-        final Support mSupport = new Support();
         setTitle(R.string.sRebooter);
         setContentView(R.layout.dialog_rebooter);
         Button bReboot = (Button) findViewById(R.id.bReboot);
@@ -49,11 +47,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                     mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd && adb connect localhost:5555");
-                     int tmp = 0;
-                     while (1 != tmp){
-                        mCommon.executeSuShell("adb reboot");
-                     }
+                    mCommon.executeSuShell(context, "setprop service.adb.tcp.port 5555 && stop adbd && start adbd && sleep 2 && adb connect localhost:5555 && adb reboot");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -65,11 +59,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd && adb connect localhost:5555");
-                    int tmp = 0;
-                    while (1 != tmp){
-                        mCommon.executeSuShell("adb reboot recovery");
-                    }
+                    mCommon.executeSuShell(context, "setprop service.adb.tcp.port 5555 && stop adbd && start adbd && sleep 2 && adb connect localhost:5555 && adb reboot recovery");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -81,11 +71,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd && adb connect localhost:5555");
-                    int tmp = 0;
-                    while (1 != tmp){
-                        mCommon.executeSuShell("adb reboot bootloader");
-                    }
+                    mCommon.executeSuShell(context, "setprop service.adb.tcp.port 5555 && stop adbd && start adbd && sleep 2 && adb connect localhost:5555 && adb reboot bootloader");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
