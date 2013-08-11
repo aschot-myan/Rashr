@@ -6,7 +6,8 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="337dp">
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
         <LinearLayout
                 android:id="@+id/LinearLayout1"
@@ -40,8 +41,9 @@
                     android:layout_height="wrap_content"
                     ads:adUnitId="a151cdc8be01253"
                     ads:loadAdOnCreate="true"
-                    ads:testDevices="B3E74DD3FC0A127E58F92B299B4F81F9"
-                    ads:adSize="BANNER">
+                    ads:testDevices="A0430FC87D6984E51EC808D6114C998C, TEST_EMULATOR"
+                    ads:adSize="SMART_BANNER"
+                    android:layout_gravity="center">
             </com.google.ads.AdView>
 
             <Button
@@ -79,11 +81,12 @@
     </ScrollView>
 
     <CheckBox
-            android:id="@+id/cbUseBinary"
+            android:id="@+id/cbMethod"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:checked="false"
             android:clickable="false"
             android:textSize="20sp"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:layout_weight="6"/>
 </LinearLayout>

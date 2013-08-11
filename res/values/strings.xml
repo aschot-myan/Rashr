@@ -13,8 +13,6 @@
     <string name="report">Scan and Report unsupported Device</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Thread</string>
-    <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.com</string>
-    <string name="EMAIL_SUBJECT">Recovery-Tools report to support new Device</string>
     <string name="rename">If you want set a custom name to the backup type it in the text field. If
         not the current time will be set.
     </string>
@@ -71,9 +69,7 @@
     <string name="noroot">"Device not Rooted. Please Root it. More information under
         \n\nxda-developer.com"
     </string>
-    <string name="notwrp">TWRP not supported</string>
-    <string name="nocwm">CWM not supported</string>
-    <string name="using_dd">Using dd binary. Recovery in FS: %s</string>
+    <string name="using_dd">Using dd. Recovery in FS</string>
     <string name="using_mtd">Use flash/dump_image (MTD)</string>
 
     <string name="Downloading">Downloading&#8230;</string>
@@ -109,5 +105,6 @@
     <string name="ShowAds">Show Ads to support</string>
 
     <string name="please_restart">Please restart the app to apply changes</string>
+    <string name="please_ads">Please turn the Ads on to support my work!</string>
 
 </resources>

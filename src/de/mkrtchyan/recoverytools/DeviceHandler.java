@@ -21,14 +21,15 @@ package de.mkrtchyan.recoverytools;
  * SOFTWARE.
  */
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
-import android.os.Environment;
-
-import org.rootcommands.util.RootAccessDeniedException;
 
 import java.io.File;
 
-import de.mkrtchyan.utils.Common;
+import de.mkrtchyan.utils.Downloader;
+import de.mkrtchyan.utils.Notifyer;
 
 
 public class DeviceHandler {
@@ -38,7 +39,8 @@ public class DeviceHandler {
      * What kind of partition and where is the recovery partition in the
      * FileSystem
      */
-    private final Common mCommon = new Common();
+
+
     public String DEVICE_NAME = Build.DEVICE;
     public String RecoveryPath;
 
@@ -58,9 +60,14 @@ public class DeviceHandler {
     public boolean CWM = true;
     private boolean CWM_OFFICIAL = true;
     public boolean OTHER = true;
+	private Context mContext;
+
+    public File fflash, fdump, charger, chargermon, ric;
 
 
-    public DeviceHandler() {
+    public DeviceHandler(Context mContext) {
+
+	    this.mContext = mContext;
 
         String BOARD = Build.BOARD;
         String MODEL = Build.MODEL;
@@ -98,10 +105,8 @@ public class DeviceHandler {
                 || BOARD.equals("GT-N7000")
                 || BOARD.equals("n7000")
                 || BOARD.equals("galaxynote")
-                || BOARD.equals("N7000")) {
+                || BOARD.equals("N7000"))
             DEVICE_NAME = "n7000";
-            FLASH_OVER_RECOVERY = true;
-        }
 
 //      Samsung Galaxy Note 10.1
         if (MODEL.equals("GT-N8013")
@@ -175,18 +180,14 @@ public class DeviceHandler {
                 || BOARD.equals("GT-I9100M")
                 || BOARD.equals("GT-I9100P")
                 || BOARD.equals("GT-I9100")
-                || BOARD.equals("galaxys2")) {
+                || BOARD.equals("galaxys2"))
             DEVICE_NAME = "galaxys2";
-            FLASH_OVER_RECOVERY = true;
-        }
 
 //		Galaxy S2 ATT
         if (DEVICE_NAME.equals("SGH-I777")
                 || BOARD.equals("SGH-777")
-                || BOARD.equals("galaxys2att")) {
+                || BOARD.equals("galaxys2att"))
             DEVICE_NAME = "galaxys2att";
-            FLASH_OVER_RECOVERY = true;
-        }
 
 //		Galaxy S2 LTE (skyrocket)
         if (DEVICE_NAME.equals("SGH-I727")
@@ -207,16 +208,12 @@ public class DeviceHandler {
                 || BOARD.equals("GT-I9000T")
                 || MODEL.equals("GT-I9000T")
                 || DEVICE_NAME.equals("SPH-D710BST")
-                || MODEL.equals("SPH-D710BST")) {
+                || MODEL.equals("SPH-D710BST"))
             DEVICE_NAME = "galaxys";
-            FLASH_OVER_RECOVERY = true;
-        }
 
 //		GalaxyS Captivate (SGH-I897)
-        if (DEVICE_NAME.equals("SGH-I897")
-                || DEVICE_NAME.equals("captivate")) {
+        if (DEVICE_NAME.equals("SGH-I897")) {
             DEVICE_NAME = ("captivate");
-            FLASH_OVER_RECOVERY = true;
         }
 
         if (BOARD.equals("gee")) {
@@ -252,6 +249,12 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("hwu9508"))
             DEVICE_NAME = "u9508";
 
+//      Huawei Ascend P1
+        if (DEVICE_NAME.equals("hwu9200")
+                || BOARD.equals("U9200")
+                || MODEL.equals("U9200"))
+            DEVICE_NAME = "u9200";
+
 //		MTD Devices
         if (DEVICE_NAME.equals("crespo")
                 || DEVICE_NAME.equals("crespo4g")
@@ -273,6 +276,16 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("sholest")
                 || DEVICE_NAME.equals("magnids"))
             MTD = true;
+
+        if (DEVICE_NAME.equals("droid2")
+                || DEVICE_NAME.equals("daytona")
+                || DEVICE_NAME.equals("captivate")
+                || DEVICE_NAME.equals("galaxys")
+                || DEVICE_NAME.equals("galaxys2att")
+                || DEVICE_NAME.equals("galaxys2")
+                || DEVICE_NAME.equals("n7000"))
+            FLASH_OVER_RECOVERY = true;
+
 
 //		Devices who kernel will be flashed to
         if (DEVICE_NAME.equals("nozomi")
@@ -347,7 +360,7 @@ public class DeviceHandler {
             tmp = "/dev/block/mmcblk0p9";
 
         if (DEVICE_NAME.equals("golden")
-                || DEVICE_NAME.equals("villec2")
+		        || DEVICE_NAME.equals("villec2")
                 || DEVICE_NAME.equals("vivow")
                 || DEVICE_NAME.equals("kingdom")
                 || DEVICE_NAME.equals("vision")
@@ -399,17 +412,15 @@ public class DeviceHandler {
             tmp = "/dev/block/mmcblk0p20";
 
 //		Motorola DEVICEs + Same
-        if (DEVICE_NAME.equals("droid2")) {
-            FLASH_OVER_RECOVERY = true;
-        }
 
         if (DEVICE_NAME.equals("olympus")
                 || DEVICE_NAME.equals("ja3g")
                 || DEVICE_NAME.equals("daytona"))
             tmp = "/dev/block/mmcblk0p10";
 
-        if (DEVICE_NAME.equals("daytona"))
-            FLASH_OVER_RECOVERY = true;
+        if (DEVICE_NAME.equals("stingray")
+                || DEVICE_NAME.equals("wingray"))
+            tmp = "/dev/block/platform/sdhci-tegra.3/by-name/recovery";
 
 //      Huawei DEVICEs + Same
         if (DEVICE_NAME.equals("u9508"))
@@ -422,6 +433,9 @@ public class DeviceHandler {
 //		Sony DEVICEs + Same
         if (DEVICE_NAME.equals("nozomi"))
             tmp = "/dev/block/mmcblk0p3";
+
+        if (DEVICE_NAME.equals("c6603"))
+            tmp = "/system/bin/recovery.tar";
 
 //		LG DEVICEs + Same
         if (DEVICE_NAME.equals("p990")
@@ -482,7 +496,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("blade")
                 || DEVICE_NAME.equals("u9200")
                 || DEVICE_NAME.equals("sholest")
-                || DEVICE_NAME.equals("magnids"))
+                || DEVICE_NAME.equals("magnids")
+                || DEVICE_NAME.equals("stingray")
+                || DEVICE_NAME.equals("wingray"))
             TWRP = false;
 
         if (DEVICE_NAME.equals("nozomi")
@@ -579,7 +595,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("find5")
                 || DEVICE_NAME.equals("jflteatt")
                 || DEVICE_NAME.equals("jflteusc")
-                || DEVICE_NAME.equals("p3110"))
+                || DEVICE_NAME.equals("p3110")
+                || DEVICE_NAME.equals("stingray")
+                || DEVICE_NAME.equals("wingray"))
             CWM_VERSION = "-touch";
 
 //	    Newest Clockworkmod version for devices
@@ -685,7 +703,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("find5")
                 || DEVICE_NAME.equals("t0ltespr")
                 || DEVICE_NAME.equals("t0lteatt")
-                || DEVICE_NAME.equals("t0ltetmo"))
+                || DEVICE_NAME.equals("t0ltetmo")
+                || DEVICE_NAME.equals("stingray")
+                || DEVICE_NAME.equals("wingray"))
             CWM_VERSION = CWM_VERSION + "-6.0.3.1";
 
         if (DEVICE_NAME.equals("jfltexx")
@@ -796,15 +816,44 @@ public class DeviceHandler {
         }
     }
 
-    public void installZipOverTWRP(File ZipFile) {
-        try {
-            if (!ZipFile.getPath().endsWith(Environment.getExternalStorageDirectory().getAbsolutePath()))
-                mCommon.executeSuShell("cat " + ZipFile.getAbsolutePath() + " >> " + new File(Environment.getExternalStorageDirectory(), ZipFile.getName()).getAbsolutePath());
-            File script = new File("/cache/recovery", "openrecoveryscript");
-            mCommon.executeSuShell("echo install /sdcard/" + ZipFile.getName() + " >> " + script.getAbsolutePath());
-            mCommon.executeSuShell("reboot recovery");
-        } catch (RootAccessDeniedException e) {
-            e.printStackTrace();
+    public boolean downloadUtils() {
+
+        boolean download = false;
+
+        if (DEVICE_NAME.equals("c6603")
+                || DEVICE_NAME.equals("montblanc")) {
+            charger = new File(RecoveryTools.PathToUtils, "charger");
+            chargermon = new File(RecoveryTools.PathToUtils, "chargermon");
+            ric = new File(mContext.getFilesDir(), "ric");
+            if (!charger.exists() || !chargermon.exists() || !chargermon.exists() || !ric.exists()
+                    && DEVICE_NAME.equals("c6603"))
+                download = true;
         }
+
+        AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
+        mAlertDialog
+                .setTitle(R.string.warning)
+                .setMessage(R.string.download_utils);
+        DialogInterface.OnClickListener onClick = null;
+
+        if (DEVICE_NAME.equals("c6603") || DEVICE_NAME.equals("montblanc")
+                && download) {
+
+            onClick = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, chargermon.getName(), chargermon, Notifyer.rEmpty).execute();
+                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, charger.getName(), charger, Notifyer.rEmpty).execute();
+                    if (DEVICE_NAME.equals("c6603"))
+                        new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, ric.getName(), ric, Notifyer.rEmpty).execute();
+                }
+            };
+        }
+        mAlertDialog.setPositiveButton(R.string.positive, onClick);
+        if (download)
+            mAlertDialog.show();
+
+        return download;
     }
 }

@@ -108,8 +108,7 @@ public class BackupManagerActivity extends Activity {
                                     + "-" + c.get(Calendar.MONTH)
                                     + "-" + c.get(Calendar.YEAR)
                                     + "-" + c.get(Calendar.HOUR)
-                                    + ":" + c.get(Calendar.MINUTE)
-                                    + "-" + c.get(Calendar.AM_PM);
+                                    + ":" + c.get(Calendar.MINUTE);
                         }
 
                         Name = Name + mDeviceHandler.EXT;
@@ -131,7 +130,7 @@ public class BackupManagerActivity extends Activity {
         }
     };
 
-    final DeviceHandler mDeviceHandler = new DeviceHandler();
+    private final DeviceHandler mDeviceHandler = new DeviceHandler(mContext);
 
 
     @Override

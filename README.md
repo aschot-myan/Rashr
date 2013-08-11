@@ -34,6 +34,14 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.3.7]
+
+-Code cleanup
+-Common app optimizations
+-Motorola XOOM (stingray/wingray) added.
+-Xperia Z (C6603) fixed
+-Huawei Ascend P1 recognition fixed
+
 Update [1.3.6]
 
 -Some UI Changes (More icons and cleaner)
@@ -376,6 +384,7 @@ Supported Devices
 
 -Motorola Droid (sholes)
 -Motorola Droid2 (droid2)
+-Motorola XOOM (stingray/wingray)
 
 -LG Optimus HD X4 (x3)
 

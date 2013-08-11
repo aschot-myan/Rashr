@@ -13,8 +13,6 @@
     <string name="report">Analizza e segnala un dispositivo non supportato</string>
     <string name="sExit">Esci</string>
     <string name="xda">Apri il Thread XDA</string>
-    <string name="REPORT_to_EMAIL">ashotmkrtchyan1995@gmail.co m</string>
-    <string name="EMAIL_SUBJECT">Recovery-Tools report to support new Device</string>
     <string name="rename">Se vuoi rinominare il backup scrivi nel campo di testo. Altrimenti verrà impostata l\'ora corrente.</string>
     <string name="bak_warning">Prima di fare qualsiasi azione con Recovery-Tools crea un backup e salvalo nel tuo PC. \nIl Backup sarà salvato in *InternalStorage*/Recovery-Tools/backups/.\nIl programmatore non è responsabile per danni al tuo dispositivo.
     </string>
@@ -60,9 +58,7 @@
     </string>
     <string name="noroot">"Root non presente. Esegui il Root. Maggiori informazioni su xda-developer.com"
     </string>
-    <string name="notwrp">TWRP non supportata</string>
-    <string name="nocwm">CWM non supportata</string>
-    <string name="using_dd">Usando i file binari dd. Recovery in FS: %s</string>
+    <string name="using_dd">Usando i file binari dd.</string>
     <string name="using_mtd">Usa flash/dump_image (MTD)</string>
 
     <string name="Downloading">Download in corso…</string>

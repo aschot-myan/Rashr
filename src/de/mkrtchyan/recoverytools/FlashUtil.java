@@ -24,6 +24,7 @@ package de.mkrtchyan.recoverytools;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.sbstrm.appirater.Appirater;
 
@@ -37,40 +38,27 @@ import de.mkrtchyan.utils.Notifyer;
 public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private Context mContext;
+	private static final String TAG = "FlashUtil";
     private ProgressDialog pDialog;
     final private Common mCommon = new Common();
     private Notifyer mNotifyer;
-    private final DeviceHandler mDeviceHandler = new DeviceHandler();
-    private File charger, chargermon, ric, fflash, fdump, file;
+    private final DeviceHandler mDeviceHandler;
+	private File file;
     private int JOB;
 
-    public FlashUtil(Context context, File file, int JOB) {
-        mContext = context;
+    public FlashUtil(Context mContext, File file, int JOB) {
+        this.mContext = mContext;
         this.file = file;
         this.JOB = JOB;
         mNotifyer = new Notifyer(mContext);
-
-        if (mDeviceHandler.MTD) {
-            fdump = new File(RecoveryTools.PathToUtils, "dump_image");
-            fflash = new File(RecoveryTools.PathToUtils, "flash_image");
-        }
-
-        charger = new File(mContext.getFilesDir(), "charger");
-        chargermon = new File(mContext.getFilesDir(), "chargermon");
-        ric = new File(mContext.getFilesDir(), "ric");
-        if (mDeviceHandler.DEVICE_NAME.equals("C6603")
-                || mDeviceHandler.DEVICE_NAME.equals("montblanc")) {
-            mCommon.chmod(charger, "755");
-            mCommon.chmod(chargermon, "755");
-            if (mDeviceHandler.DEVICE_NAME.equals("C6603"))
-                mCommon.chmod(ric, "755");
-        }
+		mDeviceHandler = new DeviceHandler(mContext);
     }
-
 
     protected void onPreExecute() {
 
+	    Log.d(TAG, "Preparing to flash");
         pDialog = new ProgressDialog(mContext);
+
         int Title;
         if (JOB == 1) {
             Title = R.string.flashing;
@@ -80,7 +68,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         pDialog.setTitle(Title);
         pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
-        pDialog.setMessage(file.getAbsolutePath());
+        pDialog.setMessage(file.getName());
         pDialog.setCancelable(false);
         pDialog.show();
     }
@@ -88,40 +76,34 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
 
+	    Log.i(TAG, "Flashing...");
+
         try {
-            if (mDeviceHandler.DEVICE_NAME.equals("C6603")
-                    || mDeviceHandler.DEVICE_NAME.equals("montblanc")) {
-                mCommon.mountDir(new File(mDeviceHandler.RecoveryPath), "RW");
-                mCommon.executeSuShell(mContext, "cat " + charger.getAbsolutePath() + " >> /system/bin/" + charger.getName());
-                mCommon.executeSuShell(mContext, "cat " + chargermon.getAbsolutePath() + " >> /system/bin/" + chargermon.getName());
-                if (mDeviceHandler.DEVICE_NAME.equals("C6603")) {
-                    mCommon.executeSuShell(mContext, "cat " + ric.getAbsolutePath() + " >> /system/bin/" + ric.getName());
-                    mCommon.chmod(ric, "755");
-                }
-                mCommon.chmod(charger, "755");
-                mCommon.chmod(chargermon, "755");
-            }
 
             switch (JOB) {
 
                 case 1:
                     if (file.exists()) {
-
                         if (mDeviceHandler.MTD) {
-                            if (!new File(RecoveryTools.PathToBin, fflash.getName()).exists())
-                                mCommon.copy(fflash, new File(RecoveryTools.PathToBin, fflash.getName()), true);
-
-                            fflash = new File(RecoveryTools.PathToBin, fflash.getName());
-                            mCommon.chmod(fflash, "777");
+							File fflash = new File(mContext.getFilesDir(), "flash_image");
+                            mCommon.chmod(fflash, "741");
                             mCommon.executeSuShell(mContext, fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
 
-                        }
-
-                        if (!mDeviceHandler.MTD
-                                && !mDeviceHandler.RecoveryPath.equals(""))
+                        } else if (!mDeviceHandler.RecoveryPath.equals(""))
                             mCommon.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + mDeviceHandler.RecoveryPath);
-                        if (mDeviceHandler.DEVICE_NAME.equals("C6603")
+                        if (mDeviceHandler.DEVICE_NAME.equals("c6603")
                                 || mDeviceHandler.DEVICE_NAME.equals("montblanc")) {
+                            if (mCommon.getBooleanPerf(mContext, "flash-util", "first-flash")) {
+                                mCommon.mountDir(new File(mDeviceHandler.RecoveryPath), "RW");
+                                mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.charger.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.charger.getName());
+                                mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.chargermon.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.chargermon.getName());
+                                if (mDeviceHandler.DEVICE_NAME.equals("c6603")) {
+                                    mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.ric.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.ric.getName());
+                                    mCommon.chmod(mDeviceHandler.ric, "755");
+                                }
+                                mCommon.chmod(mDeviceHandler.charger, "755");
+                                mCommon.chmod(mDeviceHandler.chargermon, "755");
+                            }
                             mCommon.chmod(file, "644");
                             mCommon.mountDir(new File(mDeviceHandler.RecoveryPath), "RO");
                         }
@@ -130,16 +112,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
                 case 2:
                     if (mDeviceHandler.MTD) {
-                        if (!new File(RecoveryTools.PathToBin, fdump.getName()).exists())
-                            mCommon.copy(fflash, new File(RecoveryTools.PathToBin, fdump.getName()), true);
-
-                        fdump = new File(RecoveryTools.PathToBin, fflash.getName());
-                        mCommon.chmod(fdump, "777");
+						File fdump = new File(mContext.getFilesDir(), "dump_image");
+                        mCommon.chmod(mDeviceHandler.fdump, "741");
                         mCommon.executeSuShell(mContext, fdump.getAbsolutePath() + " recovery " + file.getAbsolutePath());
-                    }
-
-                    if (!mDeviceHandler.MTD
-                            && !mDeviceHandler.RecoveryPath.equals(""))
+                    } else if (!mDeviceHandler.RecoveryPath.equals(""))
                         mCommon.executeSuShell(mContext, "dd if=" + mDeviceHandler.RecoveryPath + " of=" + file.getAbsolutePath());
                     break;
             }
@@ -150,6 +126,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean succes) {
+
+	    Log.i(TAG, "Flashing finished");
 
         pDialog.dismiss();
         if (JOB == 1) {
@@ -168,6 +146,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         }
 
         Appirater.appLaunched(mContext);
+
         mCommon.setBooleanPerf(mContext, "flash-util", "first-flash", false);
     }
 }

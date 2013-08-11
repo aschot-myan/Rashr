@@ -30,8 +30,10 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,8 +45,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.ads.AdView;
-
-import org.rootcommands.util.RootAccessDeniedException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,28 +59,23 @@ import de.mkrtchyan.utils.Notifyer;
 
 public class RecoveryTools extends Activity {
 
+    private final static String TAG = "Recovery-Tools";
     private final Context mContext = this;
-    private AdView adView;
-    private ViewGroup layout;
-    //	Get path to external storage
+//	Get path to external storage
     private static final File PathToSd = Environment.getExternalStorageDirectory();
-    //	Declaring needed files and folders
+//	Declaring needed files and folders
     private static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
     public static final File PathToRecoveries = new File(PathToRecoveryTools, "recoveries");
     public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
-    public static final File PathToBin = new File("/system/bin");
-    private File fRECOVERY, fflash, fdump, charger, chargermon, ric;
-    //	Declaring other vars
+    private File fRECOVERY;
     private String SYSTEM = "";
-    private boolean firstrun = true;
-    private boolean download = false;
-    //	Declaring needed objects
+//	Declaring needed objects
     private final Notifyer mNotifyer = new Notifyer(mContext);
     private final Common mCommon = new Common();
-    private final DeviceHandler mDeviceHandler = new DeviceHandler();
+	private final DeviceHandler mDeviceHandler = new DeviceHandler(mContext);
     private FileChooser fcFlashOther;
 
-    //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
+//	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
     private final Runnable rFlash = new Runnable() {
         @Override
         public void run() {
@@ -92,11 +87,7 @@ public class RecoveryTools extends Activity {
         public void run() {
             if (fcFlashOther != null) {
                 if (fcFlashOther.use) {
-                    if (fcFlashOther.selectedFile.getName().endsWith(mDeviceHandler.EXT)) {
-                        fRECOVERY = fcFlashOther.selectedFile;
-                    } else {
-                        fRECOVERY = null;
-                    }
+                    fRECOVERY = fcFlashOther.selectedFile;
                 }
             }
 
@@ -112,7 +103,7 @@ public class RecoveryTools extends Activity {
                                 mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
 //					        Get user input if user want to install over recovery now
                             if (mDeviceHandler.FLASH_OVER_RECOVERY) {
-//						        Create coustom AlertDialog
+//						        Create custom AlertDialog
                                 final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
                                 abuilder
                                         .setTitle(R.string.info)
@@ -121,12 +112,7 @@ public class RecoveryTools extends Activity {
 
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                try {
-                                                    mCommon.executeSuShell("setprop service.adb.tcp.port 5555 && stop adbd && start adbd");
-                                                    mCommon.executeSuShell("adb connect localhost:5555 && adb reboot recovery");
-                                                } catch (RootAccessDeniedException e) {
-                                                    e.printStackTrace();
-                                                }
+                                                bRebooter(null);
                                             }
                                         })
                                         .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
@@ -156,6 +142,7 @@ public class RecoveryTools extends Activity {
                     }
                 } else {
 //				    If Recovery File don't exist ask if you want to download it now.
+                    fRECOVERY.delete();
                     mNotifyer.createAlertDialog(R.string.info, R.string.getdownload, rDownload).show();
                 }
             }
@@ -174,70 +161,38 @@ public class RecoveryTools extends Activity {
         }
     };
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recovery_tools);
 
-        final CheckBox cbUseBinary = (CheckBox) findViewById(R.id.cbUseBinary);
-        adView = (AdView) findViewById(R.id.adView);
+        final CheckBox cbMethod = (CheckBox) findViewById(R.id.cbMethod);
+        AdView adView = (AdView) findViewById(R.id.adView);
         Button CWM_BUTTON = (Button) findViewById(R.id.bCWM);
         Button TWRP_BUTTON = (Button) findViewById(R.id.bTWRP);
-        ViewGroup layout = (ViewGroup) adView.getParent();
 
-
-        if (mDeviceHandler.MTD) {
-            fflash = new File("/system/bin", "flash_image");
-            fdump = new File("/system/bin", "dump_image");
-            //		Checking if flash and dump image is implemented in ROM
-            if (!fflash.exists())
-                fflash = new File(mContext.getFilesDir(), fflash.getName());
-            if (!fdump.exists())
-                fdump = new File(mContext.getFilesDir(), fdump.getName());
-            if (!fflash.exists()
-                    || !fdump.exists())
-                download = true;
-        }
-
-        if (mDeviceHandler.DEVICE_NAME.equals("C6603")
-                || mDeviceHandler.DEVICE_NAME.equals("montblanc")) {
-            charger = new File(PathToUtils, "charger");
-            chargermon = new File(PathToUtils, "chargermon");
-            ric = new File(mContext.getFilesDir(), "ric");
-            if (!charger.exists()
-                    || !chargermon.exists()
-                    || !chargermon.exists()
-                    || !ric.exists() && mDeviceHandler.DEVICE_NAME.equals("C6603"))
-                download = true;
-        }
-
-//		Do on every First-Run
-        if (firstrun) {
 //			If device is not supported, you can report it now or close the App
-            if (mDeviceHandler.RecoveryPath.equals("")
-                    && !mDeviceHandler.MTD
-                    && !mDeviceHandler.FLASH_OVER_RECOVERY) {
-                Runnable runOnTrue = new Runnable() {
-                    @Override
-                    public void run() {
-                        report();
-                    }
-                };
-                Runnable runOnNegative = new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                        System.exit(0);
-                    }
-                };
-                mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded, runOnTrue, null, runOnNegative).show();
-            }
+        if (mDeviceHandler.RecoveryPath.equals("")
+                && !mDeviceHandler.MTD
+                && !mDeviceHandler.FLASH_OVER_RECOVERY) {
+            Runnable runOnTrue = new Runnable() {
+                @Override
+                public void run() {
+                    report();
+                }
+            };
+            Runnable runOnNegative = new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                    System.exit(0);
+                }
+            };
+            mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded, runOnTrue, null, runOnNegative).show();
+        } else {
 //			Check if Su-Access is given if not the app will be closed
             if (!mCommon.suRecognition()) {
-//				Show a new notification with Info
                 mNotifyer.showRootDeniedDialog();
             } else {
-
                 if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
 
                     AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
@@ -261,45 +216,48 @@ public class RecoveryTools extends Activity {
                     mCommon.setBooleanPerf(mContext, "recovery-tools", "show_ads", true);
                 }
             }
-            if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads")) {
-                layout.removeView(adView);
-            }
-            firstrun = false;
-        }
 
 //		Create needed Folder
-        mCommon.checkFolder(PathToRecoveryTools);
-        mCommon.checkFolder(PathToRecoveries);
-        mCommon.checkFolder(PathToUtils);
+            mCommon.checkFolder(PathToRecoveryTools);
+            mCommon.checkFolder(PathToRecoveries);
+            mCommon.checkFolder(PathToUtils);
 
 //		Show Advanced information how device will be Flashed
 
-        cbUseBinary.setChecked(true);
-        if (mDeviceHandler.FLASH_OVER_RECOVERY) {
-            cbUseBinary.setText(R.string.over_recovery);
-        } else if (!mDeviceHandler.RecoveryPath.equals("")) {
-            cbUseBinary.setText(String.format(mContext.getString(R.string.using_dd), "\n" + mDeviceHandler.RecoveryPath));
-        } else if (mDeviceHandler.MTD) {
-            cbUseBinary.setText(R.string.using_mtd);
+            cbMethod.setChecked(true);
+            if (mDeviceHandler.FLASH_OVER_RECOVERY) {
+                cbMethod.setText(R.string.over_recovery);
+            } else if (!mDeviceHandler.RecoveryPath.equals("")) {
+                cbMethod.setText(R.string.using_dd);
+            } else if (mDeviceHandler.MTD) {
+                cbMethod.setText(R.string.using_mtd);
+            }
         }
 
-//		Setting up Buttons (CWM and TWRP support)
-        if (!mDeviceHandler.CWM)
-            layout.removeView(CWM_BUTTON);
-        if (!mDeviceHandler.TWRP)
-            layout.removeView(TWRP_BUTTON);
+        try {
+            if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads"))
+                ((ViewGroup) adView.getParent()).removeView(adView);
+            if (!mDeviceHandler.CWM)
+                ((ViewGroup) CWM_BUTTON.getParent()).removeView(CWM_BUTTON);
+            if (!mDeviceHandler.TWRP)
+                ((ViewGroup) TWRP_BUTTON.getParent()).removeView(TWRP_BUTTON);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            Log.d(TAG, e.getMessage(), e);
+        }
 
-        downloadUtils();
-
-
+	    if (mDeviceHandler.MTD) {
+		    mDeviceHandler.fflash = new File(mContext.getFilesDir(), "flash_image");
+		    mCommon.pushFileFromRAW(mContext, mDeviceHandler.fflash, R.raw.flash_image);
+		    mDeviceHandler.fdump = new File(mContext.getFilesDir(), "dump_image");
+		    mCommon.pushFileFromRAW(mContext, mDeviceHandler.fdump, R.raw.dump_image);
+	    }
     }
 
-    //	Button Methods (onClick)
+//	Button Methods (onClick)
     public void Go(View view) {
-        if (mDeviceHandler.MTD && fflash.exists() && fdump.exists()
-                || mDeviceHandler.DEVICE_NAME.equals("C6603") && ric.exists() && charger.exists() && chargermon.exists()
-                || mDeviceHandler.DEVICE_NAME.equals("montblanc") && charger.exists() && chargermon.exists()
-                || !mDeviceHandler.MTD && !mDeviceHandler.DEVICE_NAME.equals("C6603") || !mDeviceHandler.DEVICE_NAME.equals("montblanc")) {
+        fRECOVERY = null;
+        if (!mDeviceHandler.downloadUtils()) {
 //			Get device specificed recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
             mDeviceHandler.constructFile();
             SYSTEM = view.getTag().toString();
@@ -309,12 +267,11 @@ public class RecoveryTools extends Activity {
                 fRECOVERY = mDeviceHandler.TWRP_IMG;
             }
             rFlasher.run();
-        } else {
-            downloadUtils();
         }
     }
 
     public void bFlashOther(View view) {
+        fRECOVERY = null;
         fcFlashOther = new FileChooser(mContext, PathToSd.getAbsolutePath(), mDeviceHandler.EXT, rFlasher);
         fcFlashOther.show();
     }
@@ -344,17 +301,8 @@ public class RecoveryTools extends Activity {
         MenuItem iLog = menu.findItem(R.id.iLog);
         MenuItem iShowLogs = menu.findItem(R.id.iShowLogs);
         MenuItem iShowAds = menu.findItem(R.id.iShowAds);
-        try {
-            iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
-            iShowAds.setChecked(mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads"));
-        } catch (RuntimeException e) {
-            try {
-                iShowLogs.setVisible(false);
-            } catch (NullPointerException e1) {
-                mNotifyer.showExceptionToast(e1);
-            }
-            mNotifyer.showExceptionToast(e);
-        }
+        iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+        iShowAds.setChecked(mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads"));
         iLog.setChecked(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
 
         return true;
@@ -387,7 +335,7 @@ public class RecoveryTools extends Activity {
                 bClearLog.setOnClickListener(new View.OnClickListener() {
 
                     @Override
-                    public void onClick(View arg0) {
+                    public void onClick(View view) {
                         new File(mContext.getFilesDir(), "command-logs.log").delete();
                         tvLog.setText("");
                     }
@@ -425,8 +373,6 @@ public class RecoveryTools extends Activity {
         }
     }
 
-    //	Called from Button Methods, created to redundancy
-
     public void report() {
 //		Creates a report Email with Commentar
         final Dialog reportDialog = mNotifyer.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
@@ -435,6 +381,10 @@ public class RecoveryTools extends Activity {
 
             @Override
             public void onClick(View v) {
+
+                if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads"))
+                    mNotifyer.showToast(R.string.please_ads);
+
                 try {
                     PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                     EditText text = (EditText) reportDialog.findViewById(R.id.etCommentar);
@@ -442,18 +392,19 @@ public class RecoveryTools extends Activity {
 
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{mContext.getString(R.string.REPORT_to_EMAIL)});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, mContext.getString(R.string.EMAIL_SUBJECT));
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools bug report");
                     intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
                             "\n\nName: " + pInfo.packageName +
                             "\nVersionName: " + pInfo.versionName +
                             "\nVersionCode: " + pInfo.versionCode +
                             "\n\n\nProduct Info: " +
                             "\n\nManufacture: " + android.os.Build.MANUFACTURER +
-                            "\nDevice: " + android.os.Build.DEVICE + " (" + mDeviceHandler.DEVICE_NAME + ")" +
-                            "\nBoard: " + android.os.Build.BOARD +
-                            "\nBrand: " + android.os.Build.BRAND +
-                            "\nModel: " + android.os.Build.MODEL +
+                            "\nDevice: " + Build.DEVICE + " (" + mDeviceHandler.DEVICE_NAME + ")" +
+                            "\nBoard: " + Build.BOARD +
+                            "\nBrand: " + Build.BRAND +
+                            "\nModel: " + Build.MODEL +
+                            "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")" +
                             "\n\n\n===========Comment==========\n" + comment +
                             "\n===========Comment==========");
                     startActivity(Intent.createChooser(intent, "Send as EMAIL"));
@@ -465,46 +416,6 @@ public class RecoveryTools extends Activity {
                 }
             }
         });
-
         reportDialog.show();
-    }
-
-    public void downloadUtils() {
-        AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
-        mAlertDialog
-                .setTitle(R.string.warning)
-                .setMessage(R.string.download_utils);
-        DialogInterface.OnClickListener onClick = null;
-
-        if (mDeviceHandler.MTD
-                && download) {
-
-            onClick = new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fflash.getName(), fflash, Notifyer.rEmpty).execute();
-                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils", fdump.getName(), fdump, Notifyer.rEmpty).execute();
-                }
-            };
-        } else if (mDeviceHandler.DEVICE_NAME.equals("C6603") || mDeviceHandler.DEVICE_NAME.equals("montblanc")
-                && download) {
-
-            onClick = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + mDeviceHandler.DEVICE_NAME, chargermon.getName(), chargermon, Notifyer.rEmpty).execute();
-                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + mDeviceHandler.DEVICE_NAME, charger.getName(), charger, Notifyer.rEmpty).execute();
-                    if (mDeviceHandler.DEVICE_NAME.equals("C6603"))
-                        new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + mDeviceHandler.DEVICE_NAME, ric.getName(), ric, Notifyer.rEmpty).execute();
-                }
-            };
-        }
-        mAlertDialog.setPositiveButton(R.string.positive, onClick);
-        if (mDeviceHandler.MTD && download
-                || mDeviceHandler.DEVICE_NAME.equals("C6603") && download
-                || mDeviceHandler.DEVICE_NAME.equals("montblanc") && download)
-            mAlertDialog.show();
     }
 }

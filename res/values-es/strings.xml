@@ -64,9 +64,7 @@ Menu Principal -> Instalar"</string>
     <string name="notsupportded">Su dispositivo no es compatible con el developer todavía. ¿Escanear el sistema y reportar un dispositivo incompatible?</string>
     <string name="noroot">"Dispositivo no ruteado. Pofavor rutearlo. Mas infomacion bajo
         xda-developer.com"</string>
-    <string name="notwrp">TWRP no disponible</string>
-    <string name="nocwm">CWM no disponble</string>
-    <string name="using_dd">Utilizando dd binario. Recuperador en FS: %s</string>
+    <string name="using_dd">Utilizando dd binario.</string>
     <string name="using_mtd">Utilizando flash/dump_image (MTD)</string>
     <string name="commentar">Comentar</string>
     <string name="commenthint">Comentar aquí, que no esta trabajando correctamente (descarga, instalación, soporte común u otro)</string>

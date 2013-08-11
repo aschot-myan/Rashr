@@ -47,7 +47,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell(context, "setprop service.adb.tcp.port 5555 && stop adbd && start adbd && sleep 2 && adb connect localhost:5555 && adb reboot");
+                    mCommon.executeSuShell(context, "reboot");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -59,7 +59,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell(context, "setprop service.adb.tcp.port 5555 && stop adbd && start adbd && sleep 2 && adb connect localhost:5555 && adb reboot recovery");
+                    mCommon.executeSuShell("reboot recovery");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -71,7 +71,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell(context, "setprop service.adb.tcp.port 5555 && stop adbd && start adbd && sleep 2 && adb connect localhost:5555 && adb reboot bootloader");
+                    mCommon.executeSuShell(context, "reboot bootloader");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
