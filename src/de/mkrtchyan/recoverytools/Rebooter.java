@@ -26,7 +26,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 
-import org.rootcommands.util.RootAccessDeniedException;
+import org.sufficientlysecure.rootcommands.util.RootAccessDeniedException;
 
 import de.mkrtchyan.utils.Common;
 

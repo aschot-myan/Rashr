@@ -28,7 +28,7 @@ import android.util.Log;
 
 import com.sbstrm.appirater.Appirater;
 
-import org.rootcommands.util.RootAccessDeniedException;
+import org.sufficientlysecure.rootcommands.util.RootAccessDeniedException;
 
 import java.io.File;
 
@@ -38,12 +38,12 @@ import de.mkrtchyan.utils.Notifyer;
 public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private Context mContext;
-	private static final String TAG = "FlashUtil";
+    private static final String TAG = "FlashUtil";
     private ProgressDialog pDialog;
     final private Common mCommon = new Common();
     private Notifyer mNotifyer;
     private final DeviceHandler mDeviceHandler;
-	private File file;
+    private File file;
     private int JOB;
 
     public FlashUtil(Context mContext, File file, int JOB) {
@@ -51,12 +51,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         this.file = file;
         this.JOB = JOB;
         mNotifyer = new Notifyer(mContext);
-		mDeviceHandler = new DeviceHandler(mContext);
+        mDeviceHandler = new DeviceHandler(mContext);
     }
 
     protected void onPreExecute() {
 
-	    Log.d(TAG, "Preparing to flash");
+        Log.d(TAG, "Preparing to flash");
         pDialog = new ProgressDialog(mContext);
 
         int Title;
@@ -76,7 +76,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
 
-	    Log.i(TAG, "Flashing...");
+        Log.i(TAG, "Flashing...");
 
         try {
 
@@ -85,7 +85,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 case 1:
                     if (file.exists()) {
                         if (mDeviceHandler.MTD) {
-							File fflash = new File(mContext.getFilesDir(), "flash_image");
+                            File fflash = new File(mContext.getFilesDir(), "flash_image");
                             mCommon.chmod(fflash, "741");
                             mCommon.executeSuShell(mContext, fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
 
@@ -112,7 +112,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
                 case 2:
                     if (mDeviceHandler.MTD) {
-						File fdump = new File(mContext.getFilesDir(), "dump_image");
+                        File fdump = new File(mContext.getFilesDir(), "dump_image");
                         mCommon.chmod(mDeviceHandler.fdump, "741");
                         mCommon.executeSuShell(mContext, fdump.getAbsolutePath() + " recovery " + file.getAbsolutePath());
                     } else if (!mDeviceHandler.RecoveryPath.equals(""))
@@ -127,7 +127,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     protected void onPostExecute(Boolean succes) {
 
-	    Log.i(TAG, "Flashing finished");
+        Log.i(TAG, "Flashing finished");
 
         pDialog.dismiss();
         if (JOB == 1) {

@@ -66,6 +66,7 @@ public class RecoveryTools extends Activity {
 //	Declaring needed files and folders
     private static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
     public static final File PathToRecoveries = new File(PathToRecoveryTools, "recoveries");
+    public static final File PathToBackups = new File(PathToRecoveryTools, "backups");
     public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
     private File fRECOVERY;
     private String SYSTEM = "";
@@ -85,65 +86,70 @@ public class RecoveryTools extends Activity {
     private final Runnable rFlasher = new Runnable() {
         @Override
         public void run() {
-            if (fcFlashOther != null) {
-                if (fcFlashOther.use) {
-                    fRECOVERY = fcFlashOther.selectedFile;
+
+            if (!mCommon.suRecognition()) {
+                mNotifyer.showRootDeniedDialog();
+            } else {
+                if (fcFlashOther != null) {
+                    if (fcFlashOther.use) {
+                        fRECOVERY = fcFlashOther.selectedFile;
+                    }
                 }
-            }
 
-            if (fRECOVERY != (null)) {
-                if (fRECOVERY.exists() && fRECOVERY.getAbsolutePath().endsWith(mDeviceHandler.EXT)) {
-                    if (fRECOVERY.length() > 1000000) {
-//				        If the flashing don't be handle specially flash it
-                        if (!mDeviceHandler.KERNEL_TO && !mDeviceHandler.FLASH_OVER_RECOVERY) {
-                            rFlash.run();
-                        } else {
-//					        Get user input if Kernel will be modified
-                            if (mDeviceHandler.KERNEL_TO)
-                                mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
-//					        Get user input if user want to install over recovery now
-                            if (mDeviceHandler.FLASH_OVER_RECOVERY) {
-//						        Create custom AlertDialog
-                                final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
-                                abuilder
-                                        .setTitle(R.string.info)
-                                        .setMessage(R.string.flash_over_recovery)
-                                        .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                if (fRECOVERY != (null)) {
+                    if (fRECOVERY.exists()) {
+                        if (fRECOVERY.length() > 1000000) {
+                            //				        If the flashing don't be handle specially flash it
+                            if (!mDeviceHandler.KERNEL_TO && !mDeviceHandler.FLASH_OVER_RECOVERY) {
+                                rFlash.run();
+                            } else {
+                                //					        Get user input if Kernel will be modified
+                                if (mDeviceHandler.KERNEL_TO)
+                                    mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
+                                //					        Get user input if user want to install over recovery now
+                                if (mDeviceHandler.FLASH_OVER_RECOVERY) {
+                                    //						        Create custom AlertDialog
+                                    final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
+                                    abuilder
+                                            .setTitle(R.string.info)
+                                            .setMessage(R.string.flash_over_recovery)
+                                            .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
 
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                bRebooter(null);
-                                            }
-                                        })
-                                        .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    bRebooter(null);
+                                                }
+                                            })
+                                            .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
 
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Dialog d = new Dialog(mContext);
-                                                d.setTitle(R.string.instructions);
-                                                TextView tv = new TextView(mContext);
-                                                tv.setTextSize(20);
-                                                tv.setText(R.string.instruction);
-                                                d.setContentView(tv);
-                                                d.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Dialog d = new Dialog(mContext);
+                                                    d.setTitle(R.string.instructions);
+                                                    TextView tv = new TextView(mContext);
+                                                    tv.setTextSize(20);
+                                                    tv.setText(R.string.instruction);
+                                                    d.setContentView(tv);
+                                                    d.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
-                                                    @Override
-                                                    public void onCancel(DialogInterface dialog) {
-                                                        abuilder.show();
+                                                        @Override
+                                                        public void onCancel(DialogInterface dialog) {
+                                                            abuilder.show();
 
-                                                    }
-                                                });
-                                                d.show();
-                                            }
-                                        })
-                                        .show();
+                                                        }
+                                                    });
+                                                    d.show();
+                                                }
+                                            })
+                                            .show();
+                                }
                             }
                         }
+                    } else {
+                        //				    If Recovery File don't exist ask if you want to download it now.
+                        fRECOVERY.delete();
+                        mNotifyer.createAlertDialog(R.string.info, R.string.getdownload, rDownload).show();
                     }
-                } else {
-//				    If Recovery File don't exist ask if you want to download it now.
-                    fRECOVERY.delete();
-                    mNotifyer.createAlertDialog(R.string.info, R.string.getdownload, rDownload).show();
                 }
             }
         }
@@ -169,8 +175,9 @@ public class RecoveryTools extends Activity {
         AdView adView = (AdView) findViewById(R.id.adView);
         Button CWM_BUTTON = (Button) findViewById(R.id.bCWM);
         Button TWRP_BUTTON = (Button) findViewById(R.id.bTWRP);
+        Button BAK_MGR = (Button) findViewById(R.id.bBackupMgr);
 
-//			If device is not supported, you can report it now or close the App
+//      If device is not supported, you can report it now or close the App
         if (mDeviceHandler.RecoveryPath.equals("")
                 && !mDeviceHandler.MTD
                 && !mDeviceHandler.FLASH_OVER_RECOVERY) {
@@ -189,13 +196,11 @@ public class RecoveryTools extends Activity {
             };
             mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded, runOnTrue, null, runOnNegative).show();
         } else {
-//			Check if Su-Access is given if not the app will be closed
-            if (!mCommon.suRecognition()) {
-                mNotifyer.showRootDeniedDialog();
-            } else {
-                if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
 
-                    AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
+            if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
+
+                if (!mDeviceHandler.FLASH_OVER_RECOVERY && mCommon.suRecognition()) {
+                    final AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
                     WarningDialog.setTitle(R.string.warning);
                     WarningDialog.setMessage(R.string.bak_warning);
                     WarningDialog.setPositiveButton(R.string.bak_now, new DialogInterface.OnClickListener() {
@@ -207,23 +212,21 @@ public class RecoveryTools extends Activity {
                     WarningDialog.setNegativeButton(R.string.risk, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
                         }
                     });
                     WarningDialog.setCancelable(false);
                     WarningDialog.show();
-                    mCommon.setBooleanPerf(mContext, "recovery-tools", "first_run", true);
+                }
+                mCommon.setBooleanPerf(mContext, "recovery-tools", "first_run", true);
                     mCommon.setBooleanPerf(mContext, "recovery-tools", "show_ads", true);
                 }
-            }
 
-//		Create needed Folder
+//		    Create needed Folder
             mCommon.checkFolder(PathToRecoveryTools);
             mCommon.checkFolder(PathToRecoveries);
             mCommon.checkFolder(PathToUtils);
 
-//		Show Advanced information how device will be Flashed
-
+//		    Show Advanced information how device will be Flashed
             cbMethod.setChecked(true);
             if (mDeviceHandler.FLASH_OVER_RECOVERY) {
                 cbMethod.setText(R.string.over_recovery);
@@ -241,6 +244,8 @@ public class RecoveryTools extends Activity {
                 ((ViewGroup) CWM_BUTTON.getParent()).removeView(CWM_BUTTON);
             if (!mDeviceHandler.TWRP)
                 ((ViewGroup) TWRP_BUTTON.getParent()).removeView(TWRP_BUTTON);
+            if (mDeviceHandler.FLASH_OVER_RECOVERY)
+                ((ViewGroup) BAK_MGR.getParent()).removeView(BAK_MGR);
         } catch (NullPointerException e) {
             e.printStackTrace();
             Log.d(TAG, e.getMessage(), e);
@@ -298,21 +303,27 @@ public class RecoveryTools extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
 
         super.onPrepareOptionsMenu(menu);
-        MenuItem iLog = menu.findItem(R.id.iLog);
-        MenuItem iShowLogs = menu.findItem(R.id.iShowLogs);
-        MenuItem iShowAds = menu.findItem(R.id.iShowAds);
-        iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
-        iShowAds.setChecked(mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads"));
-        iLog.setChecked(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+        try {
+            MenuItem iLog = menu.findItem(R.id.iLog);
+            MenuItem iShowLogs = menu.findItem(R.id.iShowLogs);
+            MenuItem iShowAds = menu.findItem(R.id.iShowAds);
+            iShowLogs.setVisible(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+            iShowAds.setChecked(mCommon.getBooleanPerf(mContext, "recovery-tools", "show_ads"));
+            iLog.setChecked(mCommon.getBooleanPerf(mContext, "mkrtchyan_utils_common", "log-commands"));
+        } catch (NullPointerException e) {
+            mNotifyer.showExceptionToast(e);
+        }
 
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.iDonate:
+                startActivity(new Intent(this, DonationsActivity.class));
+                return true;
             case R.id.iProfile:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://forum.xda-developers.com/showthread.php?t=2334554"));
-                startActivity(browserIntent);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://forum.xda-developers.com/showthread.php?t=2334554")));
                 return true;
             case R.id.iExit:
                 finish();
@@ -374,7 +385,7 @@ public class RecoveryTools extends Activity {
     }
 
     public void report() {
-//		Creates a report Email with Commentar
+//		Creates a report Email with Comment
         final Dialog reportDialog = mNotifyer.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
         final Button ok = (Button) reportDialog.findViewById(R.id.bGo);
         ok.setOnClickListener(new View.OnClickListener() {
@@ -393,7 +404,7 @@ public class RecoveryTools extends Activity {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools bug report");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report");
                     intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
                             "\n\nName: " + pInfo.packageName +
                             "\nVersionName: " + pInfo.versionName +

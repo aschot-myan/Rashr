@@ -25,7 +25,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,9 +38,6 @@ import de.mkrtchyan.utils.Notifyer;
 
 public class BackupManagerActivity extends Activity {
 
-    private static final File PathToSd = Environment.getExternalStorageDirectory();
-    private static final File PathToRecoveryTools = new File(PathToSd, "Recovery-Tools");
-    private static final File PathToBackups = new File(PathToRecoveryTools, "backups");
     private File fBACKUP;
 
     final private Context mContext = this;
@@ -52,23 +48,18 @@ public class BackupManagerActivity extends Activity {
     private final Runnable rBackup = new Runnable() {
         @Override
         public void run() {
-            if (mDeviceHandler.FLASH_OVER_RECOVERY) {
-                mNotifyer.createDialog(R.string.warning, String.format(getString(R.string.no_function), getString(R.string.sBackup)), true).show();
-            } else {
-                new FlashUtil(mContext, fBACKUP, 2).execute();
-            }
+
+            new FlashUtil(mContext, fBACKUP, 2).execute();
+
         }
     };
     private final Runnable rRestore = new Runnable() {
         @Override
         public void run() {
-            if (mDeviceHandler.FLASH_OVER_RECOVERY) {
-                mNotifyer.createDialog(R.string.warning, R.string.no_function, true, true).show();
-            } else {
-                if (fcRestore.use)
-                    fBACKUP = fcRestore.selectedFile;
+
+            if (fcRestore.use) {
+                fBACKUP = fcRestore.selectedFile;
                 new FlashUtil(mContext, fBACKUP, 1).execute();
-                mNotifyer.showToast(R.string.res_done);
             }
         }
     };
@@ -77,10 +68,9 @@ public class BackupManagerActivity extends Activity {
         @Override
         public void run() {
             fcDelete.selectedFile.delete();
-            if (PathToBackups.listFiles().length > 0) {
-                fcDelete = new FileChooser(mContext, PathToBackups.getAbsolutePath(), "", rDelete);
+            if (RecoveryTools.PathToBackups.listFiles().length > 0) {
+                fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), "", rDelete);
             }
-            mNotifyer.showToast(R.string.bak_del);
         }
     };
 
@@ -91,7 +81,7 @@ public class BackupManagerActivity extends Activity {
 
             final Dialog dialog = new Dialog(mContext);
             dialog.setTitle(R.string.setname);
-            dialog.setContentView(R.layout.dialog_backup);
+            dialog.setContentView(R.layout.dialog_input);
             Button dobackup = (Button) dialog.findViewById(R.id.bGoBackup);
             final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
             dobackup.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +94,7 @@ public class BackupManagerActivity extends Activity {
                             Name = etFileName.getText().toString();
                         } else {
                             Calendar c = Calendar.getInstance();
-                            Name = Calendar.DATE
+                            Name = c.get(Calendar.DATE)
                                     + "-" + c.get(Calendar.MONTH)
                                     + "-" + c.get(Calendar.YEAR)
                                     + "-" + c.get(Calendar.HOUR)
@@ -113,7 +103,7 @@ public class BackupManagerActivity extends Activity {
 
                         Name = Name + mDeviceHandler.EXT;
 
-                        fBACKUP = new File(PathToBackups, Name);
+                        fBACKUP = new File(RecoveryTools.PathToBackups, Name);
 
                         if (fBACKUP.exists()) {
                             mNotifyer.createAlertDialog(R.string.warning, R.string.backupalready, rBackup).show();
@@ -138,38 +128,34 @@ public class BackupManagerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup_manager);
 
-        mCommon.checkFolder(PathToBackups);
-
-        if (!mDeviceHandler.OTHER
-                || mDeviceHandler.FLASH_OVER_RECOVERY) {
-            Button bBackup = (Button) findViewById(R.id.bCreateBackup);
-            Button bRestore = (Button) findViewById(R.id.bRestoreBackup);
-
-            bBackup.setText(String.format(getString(R.string.no_function), bBackup.getText()));
-            bRestore.setText(String.format(getString(R.string.no_function), bRestore.getText()));
-            bBackup.setEnabled(false);
-            bRestore.setEnabled(false);
-        }
-
+        mCommon.checkFolder(RecoveryTools.PathToBackups);
     }
 
     public void bBackup(View view) {
-        setBakNameAndRun.run();
+        if (!mCommon.suRecognition()) {
+            mNotifyer.showRootDeniedDialog();
+        } else {
+            setBakNameAndRun.run();
+        }
     }
 
     public void bRestore(View view) {
-        if (PathToBackups.list().length < 1) {
-            mNotifyer.createAlertDialog(R.string.warning, R.string.nobackup, setBakNameAndRun).show();
+        if (!mCommon.suRecognition()) {
+            mNotifyer.showRootDeniedDialog();
         } else {
-            fcRestore = new FileChooser(mContext, PathToBackups.getAbsolutePath(), mDeviceHandler.EXT, rRestore);
+            if (RecoveryTools.PathToBackups.list().length < 1) {
+                mNotifyer.createAlertDialog(R.string.warning, R.string.nobackup, setBakNameAndRun).show();
+            } else {
+                fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.EXT, rRestore);
+            }
         }
     }
 
     public void bDeleteBackup(View view) {
-        if (PathToBackups.list().length < 1) {
+        if (RecoveryTools.PathToBackups.list().length < 1) {
             mNotifyer.createAlertDialog(R.string.warning, R.string.nobackup, setBakNameAndRun).show();
         } else {
-            fcDelete = new FileChooser(mContext, PathToBackups.getAbsolutePath(), "", rDelete);
+            fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), "", rDelete);
         }
     }
 }

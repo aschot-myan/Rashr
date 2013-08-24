@@ -27,12 +27,17 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 
 -Read and write on external storage: save recoveries images
 -Full network access: download recoveries
+-Google Play billing: donations over Google Play
 -[normally managed by SuperUser-App]Full access to all functions of the device: Flashing the recoveries
 
 
 ====================
 CHANGELOG
 ====================
+
+Update [1.3.8]
+
+-Donations added
 
 Update [1.3.7]
 

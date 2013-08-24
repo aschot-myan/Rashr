@@ -27,13 +27,7 @@
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
 
-    <string name="rate_title">Rate %s</string>
-    <string name="rate_message">If you enjoy using %s, would you mind taking a moment to rate it?
-        Thanks for your support!
-    </string>
-    <string name="rate">Yes, Rate %s</string>
-    <string name="rate_later">Remind me later</string>
-    <string name="rate_cancel">No, Thanks</string>
+
     <string name="empty"></string>
     <string name="info">Information</string>
     <string name="flashed">Recovery flashed.</string>
@@ -83,6 +77,7 @@
     <string name="su_logs_title">Executed Shell-Commands</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Show Logs</string>
+    <string name="settings">Settings</string>
 
     <string name="title_activity_backup_manager">Backup-Manager</string>
     <string name="sDeleteBackup">Delete Backup</string>
@@ -106,5 +101,14 @@
 
     <string name="please_restart">Please restart the app to apply changes</string>
     <string name="please_ads">Please turn the Ads on to support my work!</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Euro</item>
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+    </string-array>
+    <string name="donate">Donate</string>
+
+    <string name="donation_paypal_item">Donation</string>
 
 </resources>
