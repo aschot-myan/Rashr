@@ -2,6 +2,8 @@
 Recovery-Tools
 ====================
 
+----- Bias -----
+
 This app requires [ROOT] access!
 Please do not use this app thoughtless and evaluating them without deeper KNOWLEDGE for Android (Root, Custom Recovery, etc.)
 I'm working to improve this app.
