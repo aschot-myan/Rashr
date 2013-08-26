@@ -32,9 +32,8 @@ import de.mkrtchyan.utils.Common;
 
 public class Rebooter extends Dialog {
 
-    public Rebooter(Context mContext) {
+    public Rebooter(final Context mContext) {
         super(mContext);
-        final Context context = mContext;
         final Common mCommon = new Common();
         setTitle(R.string.sRebooter);
         setContentView(R.layout.dialog_rebooter);
@@ -47,7 +46,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell(context, "reboot");
+                    mCommon.executeSuShell(mContext, "reboot");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -59,7 +58,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell("reboot recovery");
+                    mCommon.executeSuShell(mContext, "reboot recovery");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }
@@ -71,7 +70,7 @@ public class Rebooter extends Dialog {
             @Override
             public void onClick(View v) {
                 try {
-                    mCommon.executeSuShell(context, "reboot bootloader");
+                    mCommon.executeSuShell(mContext, "reboot bootloader");
                 } catch (RootAccessDeniedException e) {
                     e.printStackTrace();
                 }

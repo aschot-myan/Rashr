@@ -21,8 +21,10 @@ package de.mkrtchyan.recoverytools;
  * SOFTWARE.
  */
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -131,16 +133,34 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
         pDialog.dismiss();
         if (JOB == 1) {
-            mNotifyer.createAlertDialog(R.string.tsk_end, mContext.getString(R.string.flashed) + " " + mContext.getString(R.string.reboot_recovery_now), new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        mCommon.executeSuShell("reboot recovery");
-                    } catch (RootAccessDeniedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).show();
+            if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "never_show")) {
+                AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
+                abuilder.setTitle(R.string.tsk_end)
+                        .setMessage(mContext.getString(R.string.flashed) + " " + mContext.getString(R.string.reboot_recovery_now))
+                        .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                try {
+                                    mCommon.executeSuShell(mContext, "reboot recovery");
+                                } catch (RootAccessDeniedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setNeutralButton(R.string.neutral, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setNegativeButton(R.string.never_again, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mCommon.setBooleanPerf(mContext, "recovery-tools", "never_show", true);
+                            }
+                        })
+                        .show();
+            }
         } else {
             mNotifyer.showToast(R.string.bak_done);
         }

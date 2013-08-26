@@ -12,7 +12,7 @@ I'm working to improve this app.
 
 This app flashes your device recovery without rebooting it very fast and easy. There are 3 flash options:
 
-"Flash Clockworkmod-Recovery" and "Flash TWRP" (You can use these predefined buttons if they are supported. Shown below) and "Flash other".
+"Flash Clockworkmod-Recovery" and "Flash TWRP" (You can use these predefined buttons if they are supported.) and "Flash other".
 
 "Flash Clockworkmod" & "Flash TWRP" load the custom-recovery for your device down and install them automatically.
 "Flash other" lets you choose an image from the internal or external memory of your device.
@@ -34,6 +34,12 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 ====================
 CHANGELOG
 ====================
+
+Update [1.3.9]
+
+-Backup-Manager fixed
+-rk29sdk added.
+-Motorola Droid RAZR (spyder/cdma_spyder) added
 
 Update [1.3.8]
 
@@ -360,8 +366,7 @@ Supported Devices
 
 -Oppo Find5 (find5)
 
--Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/
-                    jfltecan/jflteatt/jflteusc/ja3g)
+-Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/jfltecan/jflteatt/jflteusc/ja3g)
 -Samsung Galaxy S2 LTE (skyrocket)
 -Samsung Galaxy Note 10.1 (p4notewifi/n8013)
 -Samsung Galaxy Note 2 LTE (t0lte/tmo/att/can/vzw)
@@ -433,7 +438,10 @@ Supported Devices
 -LG Optimus Elite (m3s)
 -LG Optimus Me (pecan)
 
+-Motorola Droid RAZR (spyder/cdma_spyder)
 -Motorola DROID RAZR HD (vanquish)
+
+-Rk29sdk
 
 ===================================
 COPYRIGHT
