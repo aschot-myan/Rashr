@@ -33,7 +33,6 @@ public class BackupManager extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bakmgr_activity);
-
     }
 
     public void bBackup(View view) {
