@@ -40,6 +40,7 @@ public class DeviceHandler {
      * FileSystem
      */
 
+
     public String DEVICE_NAME = Build.DEVICE;
     public String RecoveryPath;
 
@@ -81,9 +82,6 @@ public class DeviceHandler {
 //		Kindle Fire HD 7"
         if (DEVICE_NAME.equals("D01E"))
             DEVICE_NAME = "kfhd7";
-
-        if (BOARD.equals("rk29sdk"))
-            DEVICE_NAME = "rk29sdk";
 
 //      HTC ONE GSM
 
@@ -257,11 +255,6 @@ public class DeviceHandler {
                 || MODEL.equals("U9200"))
             DEVICE_NAME = "u9200";
 
-//      Motorola Droid RAZR
-        if (DEVICE_NAME.equals("cdma_spyder")
-                || BOARD.equals("spyder"))
-            DEVICE_NAME = "spyder";
-
 //		MTD Devices
         if (DEVICE_NAME.equals("crespo")
                 || DEVICE_NAME.equals("crespo4g")
@@ -281,9 +274,7 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("blade")
                 || DEVICE_NAME.equals("pico")
                 || DEVICE_NAME.equals("sholest")
-                || DEVICE_NAME.equals("magnids")
-                || DEVICE_NAME.equals("rk29sdk")
-                || DEVICE_NAME.equals("spyder"))
+                || DEVICE_NAME.equals("magnids"))
             MTD = true;
 
         if (DEVICE_NAME.equals("droid2")
@@ -507,9 +498,7 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("sholest")
                 || DEVICE_NAME.equals("magnids")
                 || DEVICE_NAME.equals("stingray")
-                || DEVICE_NAME.equals("wingray")
-                || DEVICE_NAME.equals("rk29sdk")
-                || DEVICE_NAME.equals("spyder"))
+                || DEVICE_NAME.equals("wingray"))
             TWRP = false;
 
         if (DEVICE_NAME.equals("nozomi")
@@ -540,9 +529,7 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("t0ltektt")
                 || DEVICE_NAME.equals("t0lteskt")
                 || DEVICE_NAME.equals("magnids")
-                || DEVICE_NAME.equals("flo")
-                || DEVICE_NAME.equals("rk29sdk")
-                || DEVICE_NAME.equals("spyder"))
+                || DEVICE_NAME.equals("flo"))
             CWM = false;
 
         if (DEVICE_NAME.equals("")

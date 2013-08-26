@@ -42,12 +42,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.ads.AdView;
-
-import org.sufficientlysecure.rootcommands.util.RootAccessDeniedException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -60,8 +57,7 @@ import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.FileChooser;
 import de.mkrtchyan.utils.Notifyer;
 
-@SuppressWarnings("NewApi")
-public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClickListener {
+public class RecoveryTools extends Activity {
 
     private final static String TAG = "Recovery-Tools";
     private final Context mContext = this;
@@ -150,7 +146,7 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
                             }
                         }
                     } else {
-//				        If Recovery File don't exist ask if you want to download it now.
+                        //				    If Recovery File don't exist ask if you want to download it now.
                         fRECOVERY.delete();
                         mNotifyer.createAlertDialog(R.string.info, R.string.getdownload, rDownload).show();
                     }
@@ -185,21 +181,20 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
         if (mDeviceHandler.RecoveryPath.equals("")
                 && !mDeviceHandler.MTD
                 && !mDeviceHandler.FLASH_OVER_RECOVERY) {
-            mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded,
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            report();
-                        }
-                    }, null,
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            finish();
-                            System.exit(0);
-                        }
-                    }
-            ).show();
+            Runnable runOnTrue = new Runnable() {
+                @Override
+                public void run() {
+                    report();
+                }
+            };
+            Runnable runOnNegative = new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                    System.exit(0);
+                }
+            };
+            mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded, runOnTrue, null, runOnNegative).show();
         } else {
 
             if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
@@ -207,25 +202,24 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
                 if (!mDeviceHandler.FLASH_OVER_RECOVERY && mCommon.suRecognition()) {
                     final AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
                     WarningDialog.setTitle(R.string.warning);
-                    WarningDialog.setMessage(String.format(getString(R.string.bak_warning), PathToBackups.getAbsolutePath()));
-                    WarningDialog.setPositiveButton(R.string.sBackup, new DialogInterface.OnClickListener() {
+                    WarningDialog.setMessage(R.string.bak_warning);
+                    WarningDialog.setPositiveButton(R.string.bak_now, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            new BackupHandler(mContext).backup();
-                            mCommon.setBooleanPerf(mContext, "recovery-tools", "first_run", true);
+                            bBackupMgr(null);
                         }
                     });
                     WarningDialog.setNegativeButton(R.string.risk, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            mCommon.setBooleanPerf(mContext, "recovery-tools", "first_run", true);
                         }
                     });
                     WarningDialog.setCancelable(false);
                     WarningDialog.show();
                 }
-                mCommon.setBooleanPerf(mContext, "recovery-tools", "show_ads", true);
-            }
+                mCommon.setBooleanPerf(mContext, "recovery-tools", "first_run", true);
+                    mCommon.setBooleanPerf(mContext, "recovery-tools", "show_ads", true);
+                }
 
 //		    Create needed Folder
             mCommon.checkFolder(PathToRecoveryTools);
@@ -288,11 +282,7 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
     }
 
     public void bBackupMgr(View view) {
-        if (Build.VERSION.SDK_INT >= 11) {
-            showPopupMenu(R.menu.bakmgr_menu, view);
-        } else {
-            startActivity(new Intent(this, BackupManager.class));
-        }
+        startActivity(new Intent(this, BackupManagerActivity.class));
     }
 
     public void bCleareCache(View view) {
@@ -300,11 +290,7 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
     }
 
     public void bRebooter(View view) {
-        if (Build.VERSION.SDK_INT >= 11) {
-            showPopupMenu(R.menu.rebooter_menu, view);
-        } else {
-            new Rebooter(mContext).show();
-        }
+        new Rebooter(mContext).show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -329,44 +315,6 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
         }
 
         return true;
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.iReboot:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iRebootRecovery:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot recovery");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iRebootBootloader:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot bootloader");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iCreateBackup:
-                new BackupHandler(mContext).backup();
-                return true;
-            case R.id.iRestoreBackup:
-                new BackupHandler(mContext).restore();
-                return true;
-            case R.id.iDeleteBackup:
-                new BackupHandler(mContext).deleteBackup();
-                return true;
-            default:
-                return false;
-        }
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -480,12 +428,5 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
             }
         });
         reportDialog.show();
-    }
-
-    public void showPopupMenu(int MENU, View view) {
-        PopupMenu popup = new PopupMenu(this, view);
-        popup.inflate(MENU);
-        popup.setOnMenuItemClickListener(this);
-        popup.show();
     }
 }
