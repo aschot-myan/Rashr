@@ -18,7 +18,7 @@
     </string>
     <string name="bak_warning">Before you do some actions with Recovery-Tools please create an
         backup and store it on your PC.
-        \nBackups will be created under *InternalStorage*/Recovery-Tools/backups/.
+        \nBackups will be created under %s.
         \nThe DEV is not responsible on the damages of your device.
     </string>
     <string name="risk">I know the risk</string>
@@ -110,5 +110,7 @@
     <string name="donate">Donate</string>
 
     <string name="donation_paypal_item">Donation</string>
+
+    <string name="never_again">Never show again</string>
 
 </resources>
