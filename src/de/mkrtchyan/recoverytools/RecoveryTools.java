@@ -47,8 +47,6 @@ import android.widget.TextView;
 
 import com.google.ads.AdView;
 
-import org.sufficientlysecure.rootcommands.util.RootAccessDeniedException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,8 +58,8 @@ import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.FileChooser;
 import de.mkrtchyan.utils.Notifyer;
 
-@SuppressWarnings("NewApi")
-public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClickListener {
+
+public class RecoveryTools extends Activity {
 
     private final static String TAG = "Recovery-Tools";
     private final Context mContext = this;
@@ -180,16 +178,17 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
         Button CWM_BUTTON = (Button) findViewById(R.id.bCWM);
         Button TWRP_BUTTON = (Button) findViewById(R.id.bTWRP);
         Button BAK_MGR = (Button) findViewById(R.id.bBackupMgr);
+        Button FLASH_OTHER = (Button) findViewById(R.id.bFlashOther);
 
 //      If device is not supported, you can report it now or close the App
         if (mDeviceHandler.RecoveryPath.equals("")
                 && !mDeviceHandler.MTD
                 && !mDeviceHandler.FLASH_OVER_RECOVERY) {
-            mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded,
+            AlertDialog.Builder DeviceNotSupported = mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded,
                     new Runnable() {
                         @Override
                         public void run() {
-                            report();
+                            report(false);
                         }
                     }, null,
                     new Runnable() {
@@ -199,9 +198,10 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
                             System.exit(0);
                         }
                     }
-            ).show();
+            );
+            DeviceNotSupported.setCancelable(false);
+            DeviceNotSupported.show();
         } else {
-
             if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
 
                 if (!mDeviceHandler.FLASH_OVER_RECOVERY && mCommon.suRecognition()) {
@@ -250,6 +250,8 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
                 ((ViewGroup) CWM_BUTTON.getParent()).removeView(CWM_BUTTON);
             if (!mDeviceHandler.TWRP)
                 ((ViewGroup) TWRP_BUTTON.getParent()).removeView(TWRP_BUTTON);
+            if (!mDeviceHandler.OTHER)
+                ((ViewGroup) FLASH_OTHER.getParent()).removeAllViews();
             if (mDeviceHandler.FLASH_OVER_RECOVERY)
                 ((ViewGroup) BAK_MGR.getParent()).removeView(BAK_MGR);
         } catch (NullPointerException e) {
@@ -331,44 +333,6 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
         return true;
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.iReboot:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iRebootRecovery:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot recovery");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iRebootBootloader:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot bootloader");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iCreateBackup:
-                new BackupHandler(mContext).backup();
-                return true;
-            case R.id.iRestoreBackup:
-                new BackupHandler(mContext).restore();
-                return true;
-            case R.id.iDeleteBackup:
-                new BackupHandler(mContext).deleteBackup();
-                return true;
-            default:
-                return false;
-        }
-    }
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.iDonate:
@@ -389,7 +353,7 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
                 }
                 return true;
             case R.id.iReport:
-                report();
+                report(true);
                 return true;
             case R.id.iShowLogs:
                 Dialog LogDialog = mNotifyer.createDialog(R.string.su_logs_title, R.layout.dialog_command_logs, false, true);
@@ -436,9 +400,17 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
         }
     }
 
-    public void report() {
+    public void report(boolean isCancelable) {
 //		Creates a report Email with Comment
         final Dialog reportDialog = mNotifyer.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
+        if (!isCancelable)
+            reportDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialogInterface) {
+                    System.exit(0);
+                    finish();
+                }
+            });
         final Button ok = (Button) reportDialog.findViewById(R.id.bGo);
         ok.setOnClickListener(new View.OnClickListener() {
 
@@ -482,10 +454,11 @@ public class RecoveryTools extends Activity implements PopupMenu.OnMenuItemClick
         reportDialog.show();
     }
 
+    @SuppressWarnings("NewApi")
     public void showPopupMenu(int MENU, View view) {
         PopupMenu popup = new PopupMenu(this, view);
         popup.inflate(MENU);
-        popup.setOnMenuItemClickListener(this);
+        popup.setOnMenuItemClickListener(new PopupHelper(mContext));
         popup.show();
     }
 }

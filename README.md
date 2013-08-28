@@ -33,6 +33,13 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.0]
+
+-Fix start up crashes for 4.0< devices
+-LG Connect 4G (cayman) added
+-Samsung Galaxy Exhibit (ancora_tmo) added
+-Motorola Xoom UMTS (everest) added
+
 Update [1.3.9]
 
 -Backup-Manager fixed
@@ -421,6 +428,7 @@ Supported Devices
 -Samsung Galaxy S II Duos (SCH-i929)
 -Samsung Epic 4G Touch (SPH-D710)
 -Samsung Galaxy S4 (ja3g)
+-Samsung Galaxy Exhibit (ancora_tmo)
 
 -HTC First (mystul)
 -HTC Flyer (flyer)
@@ -435,9 +443,11 @@ Supported Devices
 -LG Optimus One CDMA (thuderc)
 -LG Optimus Elite (m3s)
 -LG Optimus Me (pecan)
+-LG Connect 4G (cayman)
 
 -Motorola Droid RAZR (spyder/cdma_spyder)
 -Motorola DROID RAZR HD (vanquish)
+-Motorola Xoom UMTS (everest)
 
 -Rk29sdk
 

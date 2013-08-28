@@ -63,10 +63,11 @@ public class DeviceHandler {
 
     public File fflash, fdump, charger, chargermon, ric;
 
-
     public DeviceHandler(Context mContext) {
 
         this.mContext = mContext;
+
+        DEVICE_NAME = "golden";
 
         String BOARD = Build.BOARD;
         String MODEL = Build.MODEL;
@@ -428,7 +429,8 @@ public class DeviceHandler {
             tmp = "/dev/block/mmcblk0p10";
 
         if (DEVICE_NAME.equals("stingray")
-                || DEVICE_NAME.equals("wingray"))
+                || DEVICE_NAME.equals("wingray")
+                || DEVICE_NAME.equals("everest"))
             tmp = "/dev/block/platform/sdhci-tegra.3/by-name/recovery";
 
 //      Huawei DEVICEs + Same
@@ -465,7 +467,9 @@ public class DeviceHandler {
 //		ZTE DEVICEs + Same
         if (DEVICE_NAME.equals("warp2")
                 || DEVICE_NAME.equals("hwc8813")
-                || DEVICE_NAME.equals("galaxysplus"))
+                || DEVICE_NAME.equals("galaxysplus")
+                || DEVICE_NAME.equals("cayman")
+                || DEVICE_NAME.equals("ancora_tmo"))
             tmp = "/dev/block/mmcblk0p13";
 
         return tmp;
@@ -509,7 +513,10 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("stingray")
                 || DEVICE_NAME.equals("wingray")
                 || DEVICE_NAME.equals("rk29sdk")
-                || DEVICE_NAME.equals("spyder"))
+                || DEVICE_NAME.equals("spyder")
+                || DEVICE_NAME.equals("cayman")
+                || DEVICE_NAME.equals("ancora_tmo")
+                || DEVICE_NAME.equals("everest"))
             TWRP = false;
 
         if (DEVICE_NAME.equals("nozomi")
@@ -542,7 +549,10 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("magnids")
                 || DEVICE_NAME.equals("flo")
                 || DEVICE_NAME.equals("rk29sdk")
-                || DEVICE_NAME.equals("spyder"))
+                || DEVICE_NAME.equals("spyder")
+                || DEVICE_NAME.equals("cayman")
+                || DEVICE_NAME.equals("ancora_tmo")
+                || DEVICE_NAME.equals("everest"))
             CWM = false;
 
         if (DEVICE_NAME.equals("")

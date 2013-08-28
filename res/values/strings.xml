@@ -33,7 +33,8 @@
     <string name="flashed">Recovery flashed.</string>
     <string name="warning">Warning!</string>
     <string name="kernel_to">Flashing the Recovery System on this devices will flash the Boot.img
-        (Kernel) to Stock with custom Recovery.
+        (Kernel) to Stock with custom Recovery (this can cause bootloops, save a backup of Boot.img
+        on your PC).
     </string>
     <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
     <string name="instructions">Instructions</string>
