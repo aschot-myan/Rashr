@@ -65,9 +65,10 @@ public class DeviceHandler {
 
     public DeviceHandler(Context mContext) {
 
-        this.mContext = mContext;
+        if (BuildConfig.DEBUG)
+            DEVICE_NAME = "golden";
 
-        DEVICE_NAME = "golden";
+        this.mContext = mContext;
 
         String BOARD = Build.BOARD;
         String MODEL = Build.MODEL;
@@ -87,7 +88,6 @@ public class DeviceHandler {
             DEVICE_NAME = "rk29sdk";
 
 //      HTC ONE GSM
-
         if (BOARD.equals("m7")
                 || DEVICE_NAME.equals("m7")
                 || DEVICE_NAME.equals("m7ul"))

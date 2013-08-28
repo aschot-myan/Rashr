@@ -40,6 +40,7 @@ public class BackupHandler {
     private File fBACKUP;
     final private Common mCommon = new Common();
     private FileChooser fcRestore, fcDelete;
+    private DeviceHandler mDeviceHandler;
 
     private final Runnable rBackup = new Runnable() {
         @Override
@@ -63,6 +64,7 @@ public class BackupHandler {
     private final Runnable rDelete = new Runnable() {
         @Override
         public void run() {
+
             fcDelete.selectedFile.delete();
             if (RecoveryTools.PathToBackups.listFiles().length > 0) {
                 fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), "", rDelete);
@@ -78,9 +80,9 @@ public class BackupHandler {
             final Dialog dialog = new Dialog(mContext);
             dialog.setTitle(R.string.setname);
             dialog.setContentView(R.layout.dialog_backup);
-            Button dobackup = (Button) dialog.findViewById(R.id.bGoBackup);
+            Button bGoBackup = (Button) dialog.findViewById(R.id.bGoBackup);
             final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
-            dobackup.setOnClickListener(new View.OnClickListener() {
+            bGoBackup.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -116,10 +118,9 @@ public class BackupHandler {
         }
     };
 
-    private final DeviceHandler mDeviceHandler = new DeviceHandler(mContext);
-
     BackupHandler(final Context mContext) {
         this.mContext = mContext;
+        mDeviceHandler = new DeviceHandler(mContext);
     }
 
     public void backup() {
