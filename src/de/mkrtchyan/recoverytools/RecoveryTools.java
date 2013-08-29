@@ -89,7 +89,8 @@ public class RecoveryTools extends Activity {
         @Override
         public void run() {
 
-            if (!mCommon.suRecognition()) {
+            if (!mCommon.suRecognition()
+                    && !BuildConfig.DEBUG) {
                 mNotifyer.showRootDeniedDialog();
             } else {
                 if (fcFlashOther != null) {
@@ -101,14 +102,14 @@ public class RecoveryTools extends Activity {
                 if (fRECOVERY != (null)) {
                     if (fRECOVERY.exists()) {
                         if (fRECOVERY.length() > 1000000) {
-                            //				        If the flashing don't be handle specially flash it
+//				        If the flashing don't be handle specially flash it
                             if (!mDeviceHandler.KERNEL_TO && !mDeviceHandler.FLASH_OVER_RECOVERY) {
                                 rFlash.run();
                             } else {
-                                //					        Get user input if Kernel will be modified
+//					        Get user input if Kernel will be modified
                                 if (mDeviceHandler.KERNEL_TO)
                                     mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
-                                //					        Get user input if user want to install over recovery now
+//					        Get user input if user want to install over recovery now
                                 if (mDeviceHandler.FLASH_OVER_RECOVERY) {
                                     //						        Create custom AlertDialog
                                     final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
@@ -150,7 +151,7 @@ public class RecoveryTools extends Activity {
                     } else {
 //				        If Recovery File don't exist ask if you want to download it now.
                         fRECOVERY.delete();
-                        mNotifyer.createAlertDialog(R.string.info, R.string.getdownload, rDownload).show();
+                        mNotifyer.createAlertDialog(R.string.info, R.string.img_not_found, rDownload).show();
                     }
                 }
             }
@@ -230,6 +231,7 @@ public class RecoveryTools extends Activity {
 //		    Create needed Folder
             mCommon.checkFolder(PathToRecoveryTools);
             mCommon.checkFolder(PathToRecoveries);
+            mCommon.checkFolder(PathToBackups);
             mCommon.checkFolder(PathToUtils);
 
 //		    Show Advanced information how device will be Flashed
@@ -356,7 +358,7 @@ public class RecoveryTools extends Activity {
                 report(true);
                 return true;
             case R.id.iShowLogs:
-                Dialog LogDialog = mNotifyer.createDialog(R.string.su_logs_title, R.layout.dialog_command_logs, false, true);
+                final Dialog LogDialog = mNotifyer.createDialog(R.string.su_logs_title, R.layout.dialog_command_logs, false, true);
                 final TextView tvLog = (TextView) LogDialog.findViewById(R.id.tvSuLogs);
                 final Button bClearLog = (Button) LogDialog.findViewById(R.id.bClearLog);
                 bClearLog.setOnClickListener(new View.OnClickListener() {
@@ -378,11 +380,11 @@ public class RecoveryTools extends Activity {
                     br.close();
                     tvLog.setText(sLog);
                 } catch (FileNotFoundException e) {
-                    tvLog.setText("No log found!");
-                    e.printStackTrace();
+                    LogDialog.dismiss();
+                    mNotifyer.showExceptionToast(e);
                 } catch (IOException e) {
-                    tvLog.setText(tvLog.getText() + "\n" + e.getMessage());
-                    e.printStackTrace();
+                    LogDialog.dismiss();
+                    mNotifyer.showExceptionToast(e);
                 }
 
                 LogDialog.show();

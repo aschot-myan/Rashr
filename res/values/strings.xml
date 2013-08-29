@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Recovery-Tools</string>
+    <string name="app_name">Recovery Tools</string>
     <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
     <string name="sFlashTWRP">Flash TWRP Recovery</string>
     <string name="flash_other">Flash other Recovery</string>
@@ -27,7 +27,6 @@
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
 
-
     <string name="empty"></string>
     <string name="info">Information</string>
     <string name="flashed">Recovery flashed.</string>
@@ -43,14 +42,14 @@
         \n\nTWRP:
         \n\nMain Menu -> Install
     </string>
-    <string name="getdownload">Recovery IMG not found. Download now?</string>
-    <string name="no_function">%s function is not available on your device</string>
+    <string name="img_not_found">Recovery IMG not found. Download now?</string>
+
     <string name="bak_done">Backup completed</string>
     <string name="res_done">Restore completed</string>
     <string name="backupalready">Backup already exists. This will overwrite the existing one.
         Continue?
     </string>
-    <string name="nobackup">No existing Backup found (InternalStorage/Recovery-Tools/backups/).
+    <string name="no_backup">No existing Backup found (%s/Recovery-Tools/backups/).
         Create one now?
     </string>
     <string name="noconnection">No network available. Download canceled!</string>

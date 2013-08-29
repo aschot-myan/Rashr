@@ -22,17 +22,19 @@ package de.mkrtchyan.recoverytools;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 public class BackupManager extends Activity {
-
-    final private BackupHandler mBackupHandler = new BackupHandler(this);
+    private Context mContext = this;
+    private BackupHandler mBackupHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bakmgr_activity);
+        mBackupHandler = new BackupHandler(this);
     }
 
     public void bBackup(View view) {

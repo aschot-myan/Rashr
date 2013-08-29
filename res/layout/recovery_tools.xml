@@ -34,6 +34,14 @@
                     android:drawableLeft="@drawable/ic_twrp"
                     android:text="@string/sFlashTWRP"/>
 
+            <Button
+                    android:id="@+id/bFlashOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_flash"
+                    android:onClick="bFlashOther"
+                    android:text="@string/flash_other"/>
+
             <com.google.ads.AdView
                     xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
                     android:id="@+id/adView"
@@ -45,14 +53,6 @@
                     ads:adSize="SMART_BANNER"
                     android:layout_gravity="center">
             </com.google.ads.AdView>
-
-            <Button
-                    android:id="@+id/bFlashOther"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_flash"
-                    android:onClick="bFlashOther"
-                    android:text="@string/flash_other"/>
 
             <Button
                     android:id="@+id/bBackupMgr"

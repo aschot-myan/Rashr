@@ -33,6 +33,13 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.2]
+
+-Varius device recognition fixes
+-Huawei M835 (m835) added
+-All MTD Devices supported
+-HTC Incredible S (vivo) added
+
 Update [1.4.0]
 
 -Fix start up crashes for 4.0< devices
@@ -356,6 +363,7 @@ Supported Devices
 -HTC Desire S (saga)
 -HTC Sensation (pyramid)
 -HTC Fireball (fireball)
+-HTC Incredible S (vivo)
 -HTC Incredible 2 (vivow)
 -HTC EVO (supersonic/CDMA)
 -HTC Evo 4G LTE (jewel)
@@ -371,7 +379,7 @@ Supported Devices
 
 -Oppo Find5 (find5)
 
--Samsung Galaxy S4 (GT-I9505/jflte/jfltexx/jfltespr/jfltecan/jflteatt/jflteusc/ja3g)
+-Samsung Galaxy S4 (GT-I9505/jflte/xx/spr/can/att/usc/ja3g)
 -Samsung Galaxy S2 LTE (skyrocket)
 -Samsung Galaxy Note 10.1 (p4notewifi/n8013)
 -Samsung Galaxy Note 2 LTE (t0lte/tmo/att/can/vzw)
@@ -450,6 +458,10 @@ Supported Devices
 -Motorola Xoom UMTS (everest)
 
 -Rk29sdk
+
+*****************
+*ALL MTD Devices*
+*****************
 
 ===================================
 COPYRIGHT
