@@ -55,10 +55,10 @@ public class DeviceHandler {
     public boolean FLASH_OVER_RECOVERY = false;
     public boolean MTD = false;
     public boolean TWRP = false;
-    private boolean TWRP_OFFICIAL = true;
+    public boolean OTHER = false;
     public boolean CWM = false;
+    private boolean TWRP_OFFICIAL = true;
     private boolean CWM_OFFICIAL = true;
-    public boolean OTHER = true;
     private Context mContext;
 
     public File fflash, fdump, charger, chargermon, ric;
@@ -66,6 +66,7 @@ public class DeviceHandler {
     public DeviceHandler(Context mContext) {
 
         if (BuildConfig.DEBUG) {
+            DEVICE_NAME = "galaxys2";
         }
 
         if (new File("/dev/mtd/").exists())
@@ -77,6 +78,11 @@ public class DeviceHandler {
         String MODEL = Build.MODEL.toLowerCase();
 
 //	Set DEVICE_NAME predefined options
+
+//      OPPO Find 5
+        if (DEVICE_NAME.equals("x909"))
+            DEVICE_NAME = "find5";
+
 //      Samsung Galaxy S +
         if (DEVICE_NAME.equals("gt-i9001")
                 || BOARD.equals("gt-i9001")
@@ -245,6 +251,12 @@ public class DeviceHandler {
         if (BOARD.equals("ace"))
             DEVICE_NAME = "ace";
 
+//      Motorola Droid X
+        if (DEVICE_NAME.equals("cdma_shadow")
+                || BOARD.equals("shadow")
+                || MODEL.equals("droidx"))
+            DEVICE_NAME = "shadow";
+
 //      LG Optimus L9
         if (DEVICE_NAME.equals("u2")
                 || BOARD.equals("u2")
@@ -315,7 +327,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("vanquish")
                 || DEVICE_NAME.equals("find5")
                 || DEVICE_NAME.equals("jgedlte")
-                || DEVICE_NAME.equals("flo"))
+                || DEVICE_NAME.equals("flo")
+                || DEVICE_NAME.equals("scorpion_mini"))
             tmp = "/dev/block/platform/msm_sdcc.1/by-name/recovery";
 
         if (DEVICE_NAME.equals("manta"))
@@ -365,7 +378,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("jfltecan")
                 || DEVICE_NAME.equals("jfltetmo")
                 || DEVICE_NAME.equals("jflteusc")
-                || DEVICE_NAME.equals("flyer"))
+                || DEVICE_NAME.equals("flyer")
+                || DEVICE_NAME.equals("saga"))
             tmp = "/dev/block/mmcblk0p21";
 
         if (DEVICE_NAME.equals("jena"))
@@ -382,7 +396,8 @@ public class DeviceHandler {
             tmp = "/dev/block/mmcblk0p36";
 
         if (DEVICE_NAME.equals("endeavoru")
-                || DEVICE_NAME.equals("enrc2b"))
+                || DEVICE_NAME.equals("enrc2b")
+                || DEVICE_NAME.equals("p999"))
             tmp = "/dev/block/mmcblk0p5";
 
         if (DEVICE_NAME.equals("ace")
@@ -405,6 +420,9 @@ public class DeviceHandler {
             tmp = "/dev/block/mmcblk0p20";
 
 //		Motorola DEVICEs + Same
+
+        if (DEVICE_NAME.equals("shadow"))
+            tmp = "/dev/block/mmcblk1p16";
 
         if (DEVICE_NAME.equals("olympus")
                 || DEVICE_NAME.equals("ja3g")
@@ -514,6 +532,7 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("swift")
                 || DEVICE_NAME.equals("p990")
                 || DEVICE_NAME.equals("p970")
+                || DEVICE_NAME.equals("p999")
                 || DEVICE_NAME.equals("warp2")) {
             TWRP = true;
             CWM = true;
@@ -535,7 +554,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("hero")
                 || DEVICE_NAME.equals("bravo")
                 || DEVICE_NAME.equals("enrc2")
-                || DEVICE_NAME.equals("blade"))
+                || DEVICE_NAME.equals("blade")
+                || DEVICE_NAME.equals("shadow"))
             CWM = true;
 
         if (DEVICE_NAME.equals("flo")
@@ -566,17 +586,11 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("vanquish")
                 || DEVICE_NAME.equals("everest")
                 || DEVICE_NAME.equals("rk29sdk")
-                || MTD)
+                || DEVICE_NAME.equals("scorpion_mini")
+                || MTD
+                || CWM
+                || TWRP)
             OTHER = true;
-
-        if (DEVICE_NAME.equals("")
-                || !MTD && RecoveryPath.equals("") && !FLASH_OVER_RECOVERY) {
-            TWRP = false;
-            CWM = false;
-            OTHER = false;
-        }
-
-
     }
 
     public void getVersion() {
@@ -657,7 +671,9 @@ public class DeviceHandler {
         if (DEVICE_NAME.equals("droid2")
                 || DEVICE_NAME.equals("vivo")
                 || DEVICE_NAME.equals("vivow")
-                || DEVICE_NAME.equals("blade"))
+                || DEVICE_NAME.equals("blade")
+                || DEVICE_NAME.equals("shadow")
+                || DEVICE_NAME.equals("p999"))
             CWM_VERSION = CWM_VERSION + "-5.0.2.0";
 
         if (DEVICE_NAME.equals("daytona"))
@@ -815,7 +831,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("shooter")
                 || DEVICE_NAME.equals("i9300")
                 || DEVICE_NAME.equals("jgedlte")
-                || DEVICE_NAME.equals("flo"))
+                || DEVICE_NAME.equals("flo")
+                || DEVICE_NAME.equals("p999"))
             TWRP_VERSION = "-2.6.0.0";
 
         if (DEVICE_NAME.equals("t03g")

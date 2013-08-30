@@ -120,7 +120,7 @@ public class RecoveryTools extends Activity {
 
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    bRebooter(null);
+                                                    bRebooter((View) findViewById(R.id.bRebooter));
                                                 }
                                             })
                                             .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
@@ -292,7 +292,8 @@ public class RecoveryTools extends Activity {
     }
 
     public void bBackupMgr(View view) {
-        if (Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 11
+                && view != null) {
             showPopupMenu(R.menu.bakmgr_menu, view);
         } else {
             startActivity(new Intent(this, BackupManager.class));
@@ -304,7 +305,8 @@ public class RecoveryTools extends Activity {
     }
 
     public void bRebooter(View view) {
-        if (Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 11
+                && view != null) {
             showPopupMenu(R.menu.rebooter_menu, view);
         } else {
             new Rebooter(mContext).show();
@@ -458,7 +460,7 @@ public class RecoveryTools extends Activity {
 
     @SuppressWarnings("NewApi")
     public void showPopupMenu(int MENU, View view) {
-        PopupMenu popup = new PopupMenu(this, view);
+        PopupMenu popup = new PopupMenu(mContext, view);
         popup.inflate(MENU);
         popup.setOnMenuItemClickListener(new PopupHelper(mContext));
         popup.show();

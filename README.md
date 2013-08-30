@@ -33,9 +33,18 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.3]
+
+-Fix FC on FLASH_OVER_RECOVERY devices (galaxys2, n7000) on reboot.
+-Motorola RAZR M (scorpion_mini) added
+-OPPO Find5 (x909) added
+-LG G2X (p999) added
+-Motorola Droid X (shadow/cdma_shadow) added
+
 Update [1.4.2]
 
 -Varius device recognition fixes
+-Backup Manager fixed
 -Huawei M835 (m835) added
 -All MTD Devices supported
 -HTC Incredible S (vivo) added
@@ -377,7 +386,7 @@ Supported Devices
 
 -Motorola Atrix 4G (olympus)
 
--Oppo Find5 (find5)
+-Oppo Find5 (find5/x909)
 
 -Samsung Galaxy S4 (GT-I9505/jflte/xx/spr/can/att/usc/ja3g)
 -Samsung Galaxy S2 LTE (skyrocket)
@@ -391,6 +400,7 @@ Supported Devices
 
 -LG Optiomus G (geeb/geebhrc)
 -LG GT540 Optimus (swift)
+-LG G2X (p999)
 -LG P990 OPTIMUS 2X/SPEED (p990)
 -LG Optimus Black (p970)
 
@@ -447,6 +457,8 @@ Supported Devices
 -Huawei C8813 (hwc8813)
 
 -Motorola Milestone XT720 (sholest)
+-Motorola Droid X (shadow/cdma_shadow)
+-Motorola RAZR M (scorpion_mini)
 
 -LG Optimus One CDMA (thuderc)
 -LG Optimus Elite (m3s)

@@ -92,8 +92,6 @@
         This requires a internet connection.
         \nDownload it now?
     </string>
-    <string name="wrong_format">You have choose a false file. The File must be in %s format.
-    </string>
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="bak_del">Backup deleted!</string>
     <string name="thx_support">Thanks for supporting me</string>
