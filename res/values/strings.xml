@@ -111,4 +111,8 @@
 
     <string name="never_again">Never show again</string>
 
+    <string name="corrupt_download">Downloaded file is corrupted.</string>
+    <string name="try_again">Try again!</string>
+    <string name="later">Later</string>
+
 </resources>

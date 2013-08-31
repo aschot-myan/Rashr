@@ -101,72 +101,72 @@ public class RecoveryTools extends Activity {
 
                 if (fRECOVERY != (null)) {
                     if (fRECOVERY.exists()) {
-                        if (fRECOVERY.length() > 1000000) {
 //				        If the flashing don't be handle specially flash it
-                            if (!mDeviceHandler.KERNEL_TO && !mDeviceHandler.FLASH_OVER_RECOVERY) {
-                                rFlash.run();
-                            } else {
-//					        Get user input if Kernel will be modified
-                                if (mDeviceHandler.KERNEL_TO)
-                                    mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
+                        if (!mDeviceHandler.KERNEL_TO && !mDeviceHandler.FLASH_OVER_RECOVERY) {
+                            rFlash.run();
+                        } else {
+//		        	        Get user input if Kernel will be modified
+                            if (mDeviceHandler.KERNEL_TO)
+                                mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
 //					        Get user input if user want to install over recovery now
-                                if (mDeviceHandler.FLASH_OVER_RECOVERY) {
-                                    //						        Create custom AlertDialog
-                                    final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
-                                    abuilder
-                                            .setTitle(R.string.info)
-                                            .setMessage(R.string.flash_over_recovery)
-                                            .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            if (mDeviceHandler.FLASH_OVER_RECOVERY) {
+//						        Create custom AlertDialog
+                                final AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
+                                abuilder
+                                        .setTitle(R.string.info)
+                                        .setMessage(R.string.flash_over_recovery)
+                                        .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                bRebooter((View) findViewById(R.id.bRebooter));
+                                            }
+                                        })
+                                        .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
 
-                                                @Override
+                                            @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    bRebooter((View) findViewById(R.id.bRebooter));
-                                                }
-                                            })
-                                            .setNeutralButton(R.string.instructions, new DialogInterface.OnClickListener() {
-
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    Dialog d = new Dialog(mContext);
-                                                    d.setTitle(R.string.instructions);
-                                                    TextView tv = new TextView(mContext);
-                                                    tv.setTextSize(20);
-                                                    tv.setText(R.string.instruction);
-                                                    d.setContentView(tv);
-                                                    d.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                                                        @Override
-                                                        public void onCancel(DialogInterface dialog) {
-                                                            abuilder.show();
-
-                                                        }
-                                                    });
-                                                    d.show();
-                                                }
+                                                Dialog d = new Dialog(mContext);
+                                                d.setTitle(R.string.instructions);
+                                                TextView tv = new TextView(mContext);
+                                                tv.setTextSize(20);
+                                                tv.setText(R.string.instruction);
+                                                d.setContentView(tv);
+                                                d.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                                    @Override
+                                                    public void onCancel(DialogInterface dialog) {
+                                                        abuilder.show();
+                                                    }
+                                                });
+                                                d.show();
+                                            }
                                             })
                                             .show();
                                 }
                             }
-                        }
                     } else {
-//				        If Recovery File don't exist ask if you want to download it now.
-                        fRECOVERY.delete();
+//  				        If Recovery File don't exist ask if you want to download it now.
                         mNotifyer.createAlertDialog(R.string.info, R.string.img_not_found, rDownload).show();
+                    }
                     }
                 }
             }
-        }
     };
 
     private final Runnable rDownload = new Runnable() {
         @Override
         public void run() {
+            Downloader RecoveryDownloader;
 //			Download file from URL mDeviceHandler."SYSTEM"_URL + "/" + fRECOVERY.getName().toString() and write it to fRECOVERY
             if (SYSTEM.equals("clockwork")) {
-                new Downloader(mContext, mDeviceHandler.CWM_URL, mDeviceHandler.CWM_IMG.getName(), mDeviceHandler.CWM_IMG, rFlasher).execute();
-            } else if (SYSTEM.equals("twrp")) {
-                new Downloader(mContext, mDeviceHandler.TWRP_URL, mDeviceHandler.TWRP_IMG.getName(), mDeviceHandler.TWRP_IMG, rFlasher).execute();
+                RecoveryDownloader = new Downloader(mContext, mDeviceHandler.CWM_URL, mDeviceHandler.CWM_IMG.getName(), mDeviceHandler.CWM_IMG, rFlasher);
+            } else {
+                RecoveryDownloader = new Downloader(mContext, mDeviceHandler.TWRP_URL, mDeviceHandler.TWRP_IMG.getName(), mDeviceHandler.TWRP_IMG, rFlasher);
             }
+            File SampleCorruptFile = new File(mContext.getFilesDir(), "corruptDownload");
+            mCommon.pushFileFromRAW(mContext, SampleCorruptFile, R.raw.corrupt_download);
+            RecoveryDownloader.setCheckFile(true);
+            RecoveryDownloader.setSampleCorruptFile(SampleCorruptFile);
+            RecoveryDownloader.execute();
         }
     };
 
@@ -175,11 +175,11 @@ public class RecoveryTools extends Activity {
         setContentView(R.layout.recovery_tools);
 
         final CheckBox cbMethod = (CheckBox) findViewById(R.id.cbMethod);
-        AdView adView = (AdView) findViewById(R.id.adView);
-        Button CWM_BUTTON = (Button) findViewById(R.id.bCWM);
-        Button TWRP_BUTTON = (Button) findViewById(R.id.bTWRP);
-        Button BAK_MGR = (Button) findViewById(R.id.bBackupMgr);
-        Button FLASH_OTHER = (Button) findViewById(R.id.bFlashOther);
+        final AdView adView = (AdView) findViewById(R.id.adView);
+        final Button CWM_BUTTON = (Button) findViewById(R.id.bCWM);
+        final Button TWRP_BUTTON = (Button) findViewById(R.id.bTWRP);
+        final Button BAK_MGR = (Button) findViewById(R.id.bBackupMgr);
+        final Button FLASH_OTHER = (Button) findViewById(R.id.bFlashOther);
 
 //      If device is not supported, you can report it now or close the App
         if (mDeviceHandler.RecoveryPath.equals("")

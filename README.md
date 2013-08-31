@@ -33,6 +33,14 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.4]
+
+-Huawei Ascend P1 (u9200) fixed
+-Samsung Galaxy Note (n8000) added.
+-Better error detention while downloading
+-HTC Butterfly J (dlxj) added
+-Samsung Galaxy Tab 7 Plus (p6200) added
+
 Update [1.4.3]
 
 -Fix FC on FLASH_OVER_RECOVERY devices (galaxys2, n7000) on reboot.
@@ -411,6 +419,7 @@ Supported Devices
 -Samsung Galaxy SII (i9100/i9100G)
 -Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
 -Samsung Galaxy Note (n7000)
+-Samsung Galaxy Note II (n8000)
 -Samsung GalaxyS Captivate (SGH-I897)
 -Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd)
 -Samsung Galaxy Tab 2 (GT-P3113)
@@ -425,6 +434,7 @@ Supported Devices
 -HTC Hero (hero)
 -HTC Desire (bravo)
 -HTC One X+ (enrc2)
+-HTC Butterfly J (dlxj)
 
 -ZTE Blade (blade)
 
@@ -447,6 +457,7 @@ Supported Devices
 -Samsung Epic 4G Touch (SPH-D710)
 -Samsung Galaxy S4 (ja3g)
 -Samsung Galaxy Exhibit (ancora_tmo)
+-Samsung Galaxy Tab 7 Plus (p6200)
 
 -HTC First (mystul)
 -HTC Flyer (flyer)

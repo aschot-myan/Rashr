@@ -28,8 +28,8 @@ import android.os.Build;
 
 import java.io.File;
 
+import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
-import de.mkrtchyan.utils.Notifyer;
 
 
 public class DeviceHandler {
@@ -66,11 +66,9 @@ public class DeviceHandler {
     public DeviceHandler(Context mContext) {
 
         if (BuildConfig.DEBUG) {
-            DEVICE_NAME = "galaxys2";
+            DEVICE_NAME = DEVICE_NAME;
         }
 
-        if (new File("/dev/mtd/").exists())
-            MTD = true;
 
         this.mContext = mContext;
 
@@ -88,6 +86,10 @@ public class DeviceHandler {
                 || BOARD.equals("gt-i9001")
                 || MODEL.equals("gt-i9001"))
             DEVICE_NAME = "galaxysplus";
+
+//      Samsung Galaxy Tab 7 Plus
+        if (DEVICE_NAME.equals("gt-p6200"))
+            DEVICE_NAME = "p6200";
 
 //		Kindle Fire HD 7"
         if (DEVICE_NAME.equals("d01e"))
@@ -119,6 +121,10 @@ public class DeviceHandler {
                 || BOARD.equals("galaxynote")
                 || BOARD.equals("N7000"))
             DEVICE_NAME = "n7000";
+
+        if (DEVICE_NAME.equals("p4noterf")
+                || MODEL.equals("gt-n8000"))
+            DEVICE_NAME = "n8000";
 
 //      Samsung Galaxy Note 10.1
         if (MODEL.equals("gt-n8013")
@@ -283,6 +289,9 @@ public class DeviceHandler {
                 || BOARD.equals("m835"))
             DEVICE_NAME = "m835";
 
+        if (new File("/dev/mtd/").exists() && !DEVICE_NAME.equals("u9200"))
+            MTD = true;
+
         if (DEVICE_NAME.equals("droid2")
                 || DEVICE_NAME.equals("daytona")
                 || DEVICE_NAME.equals("captivate")
@@ -309,18 +318,16 @@ public class DeviceHandler {
 
     private String getRecoveryPath() {
 
-        String tmp = "";
-
 //		Nexus DEVICEs + Same
         if (DEVICE_NAME.equals("maguro")
                 || DEVICE_NAME.equals("toro")
                 || DEVICE_NAME.equals("toroplus"))
-            tmp = "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
+            return "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
 
         if (DEVICE_NAME.equals("grouper")
                 || DEVICE_NAME.equals("tilapia")
                 || DEVICE_NAME.equals("p880"))
-            tmp = "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
+            return "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
 
         if (DEVICE_NAME.equals("mako")
                 || DEVICE_NAME.equals("geeb")
@@ -329,10 +336,10 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("jgedlte")
                 || DEVICE_NAME.equals("flo")
                 || DEVICE_NAME.equals("scorpion_mini"))
-            tmp = "/dev/block/platform/msm_sdcc.1/by-name/recovery";
+            return "/dev/block/platform/msm_sdcc.1/by-name/recovery";
 
         if (DEVICE_NAME.equals("manta"))
-            tmp = "/dev/block/platform/dw_mmc.0/by-name/recovery";
+            return "/dev/block/platform/dw_mmc.0/by-name/recovery";
 
 //		Samsung DEVICEs + Same
         if (DEVICE_NAME.equals("d2att")
@@ -341,14 +348,16 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("d2spr")
                 || DEVICE_NAME.equals("d2usc")
                 || DEVICE_NAME.equals("SCH-i929"))
-            tmp = "/dev/block/mmcblk0p18";
+            return "/dev/block/mmcblk0p18";
 
         if (DEVICE_NAME.equals("i9300")
                 || DEVICE_NAME.equals("galaxys2")
                 || DEVICE_NAME.equals("n8013")
                 || DEVICE_NAME.equals("p3113")
-                || DEVICE_NAME.equals("p3110"))
-            tmp = "/dev/block/mmcblk0p6";
+                || DEVICE_NAME.equals("p3110")
+                || DEVICE_NAME.equals("p6200")
+                || DEVICE_NAME.equals("n8000"))
+            return "/dev/block/mmcblk0p6";
 
         if (DEVICE_NAME.equals("t03g")
                 || DEVICE_NAME.equals("tf700t")
@@ -362,7 +371,7 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("t0ltevzw")
                 || DEVICE_NAME.equals("t0lteatt")
                 || DEVICE_NAME.equals("t0ltetmo"))
-            tmp = "/dev/block/mmcblk0p9";
+            return "/dev/block/mmcblk0p9";
 
         if (DEVICE_NAME.equals("golden")
                 || DEVICE_NAME.equals("villec2")
@@ -380,32 +389,32 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("jflteusc")
                 || DEVICE_NAME.equals("flyer")
                 || DEVICE_NAME.equals("saga"))
-            tmp = "/dev/block/mmcblk0p21";
+            return "/dev/block/mmcblk0p21";
 
         if (DEVICE_NAME.equals("jena"))
-            tmp = "/dev/block/mmcblk0p12";
+            return "/dev/block/mmcblk0p12";
 
         if (DEVICE_NAME.equals("GT-I9103"))
-            tmp = "/dev/block/mmcblk0p8";
+            return "/dev/block/mmcblk0p8";
 
 //		HTC DEVICEs + Same
         if (DEVICE_NAME.equals("m7"))
-            tmp = "/dev/block/mmcblk0p34";
+            return "/dev/block/mmcblk0p34";
 
         if (DEVICE_NAME.equals("m7wls"))
-            tmp = "/dev/block/mmcblk0p36";
+            return "/dev/block/mmcblk0p36";
 
         if (DEVICE_NAME.equals("endeavoru")
                 || DEVICE_NAME.equals("enrc2b")
                 || DEVICE_NAME.equals("p999"))
-            tmp = "/dev/block/mmcblk0p5";
+            return "/dev/block/mmcblk0p5";
 
         if (DEVICE_NAME.equals("ace")
                 || DEVICE_NAME.equals("primou"))
-            tmp = "/dev/block/platform/msm_sdcc.2/mmcblk0p21";
+            return "/dev/block/platform/msm_sdcc.2/mmcblk0p21";
 
         if (DEVICE_NAME.equals("pyramid"))
-            tmp = "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
+            return "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
 
         if (DEVICE_NAME.equals("ville")
                 || DEVICE_NAME.equals("evita")
@@ -413,57 +422,57 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("fireball")
                 || DEVICE_NAME.equals("jewel")
                 || DEVICE_NAME.equals("shooter"))
-            tmp = "/dev/block/mmcblk0p22";
+            return "/dev/block/mmcblk0p22";
 
         if (DEVICE_NAME.equals("dlxub1")
-                || DEVICE_NAME.equals("dlx"))
-            tmp = "/dev/block/mmcblk0p20";
+                || DEVICE_NAME.equals("dlx")
+                || DEVICE_NAME.equals("dlxj"))
+            return "/dev/block/mmcblk0p20";
 
 //		Motorola DEVICEs + Same
-
         if (DEVICE_NAME.equals("shadow"))
-            tmp = "/dev/block/mmcblk1p16";
+            return "/dev/block/mmcblk1p16";
 
         if (DEVICE_NAME.equals("olympus")
                 || DEVICE_NAME.equals("ja3g")
                 || DEVICE_NAME.equals("daytona"))
-            tmp = "/dev/block/mmcblk0p10";
+            return "/dev/block/mmcblk0p10";
 
         if (DEVICE_NAME.equals("stingray")
                 || DEVICE_NAME.equals("wingray")
                 || DEVICE_NAME.equals("everest"))
-            tmp = "/dev/block/platform/sdhci-tegra.3/by-name/recovery";
+            return "/dev/block/platform/sdhci-tegra.3/by-name/recovery";
 
 //      Huawei DEVICEs + Same
         if (DEVICE_NAME.equals("u9508"))
-            tmp = "/dev/block/platform/hi_mci.1/by-name/recovery";
+            return "/dev/block/platform/hi_mci.1/by-name/recovery";
 
         if (DEVICE_NAME.equals("u9200")
                 || DEVICE_NAME.equals("kfdh7"))
-            tmp = "/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery";
+            return "/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery";
 
 //		Sony DEVICEs + Same
         if (DEVICE_NAME.equals("nozomi"))
-            tmp = "/dev/block/mmcblk0p3";
+            return "/dev/block/mmcblk0p3";
 
         if (DEVICE_NAME.equals("c6603"))
-            tmp = "/system/bin/recovery.tar";
+            return "/system/bin/recovery.tar";
 
 //		LG DEVICEs + Same
         if (DEVICE_NAME.equals("p990")
                 || DEVICE_NAME.equals("tf300t"))
-            tmp = "/dev/block/mmcblk0p7";
+            return "/dev/block/mmcblk0p7";
 
         if (DEVICE_NAME.equals("x3"))
-            tmp = "/dev/block/mmcblk0p1";
+            return "/dev/block/mmcblk0p1";
 
         if (DEVICE_NAME.equals("m3s")
                 || DEVICE_NAME.equals("bryce"))
-            tmp = "/dev/block/mmcblk0p14";
+            return "/dev/block/mmcblk0p14";
 
         if (DEVICE_NAME.equals("p970")
                 || DEVICE_NAME.equals("mint"))
-            tmp = "/dev/block/mmcblk0p4";
+            return "/dev/block/mmcblk0p4";
 
 //		ZTE DEVICEs + Same
         if (DEVICE_NAME.equals("warp2")
@@ -471,9 +480,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("galaxysplus")
                 || DEVICE_NAME.equals("cayman")
                 || DEVICE_NAME.equals("ancora_tmo"))
-            tmp = "/dev/block/mmcblk0p13";
+            return "/dev/block/mmcblk0p13";
 
-        return tmp;
+        return "";
     }
 
     public void getSupportedSystems() {
@@ -533,7 +542,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("p990")
                 || DEVICE_NAME.equals("p970")
                 || DEVICE_NAME.equals("p999")
-                || DEVICE_NAME.equals("warp2")) {
+                || DEVICE_NAME.equals("warp2")
+                || DEVICE_NAME.equals("n8000")) {
             TWRP = true;
             CWM = true;
         }
@@ -555,14 +565,16 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("bravo")
                 || DEVICE_NAME.equals("enrc2")
                 || DEVICE_NAME.equals("blade")
-                || DEVICE_NAME.equals("shadow"))
+                || DEVICE_NAME.equals("shadow")
+                || DEVICE_NAME.equals("dlxj"))
             CWM = true;
 
         if (DEVICE_NAME.equals("flo")
                 || DEVICE_NAME.equals("nozomi")
                 || DEVICE_NAME.equals("mint")
                 || DEVICE_NAME.equals("tate")
-                || DEVICE_NAME.equals("jgedlte"))
+                || DEVICE_NAME.equals("jgedlte")
+                || DEVICE_NAME.equals("t0ltecan"))
             TWRP = true;
 
         if (DEVICE_NAME.equals("tf300t")
@@ -650,7 +662,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("jflteusc")
                 || DEVICE_NAME.equals("p3110")
                 || DEVICE_NAME.equals("stingray")
-                || DEVICE_NAME.equals("wingray"))
+                || DEVICE_NAME.equals("wingray")
+                || DEVICE_NAME.equals("dlxj")
+                || DEVICE_NAME.equals("n8000"))
             CWM_VERSION = "-touch";
 
 //	    Newest Clockworkmod version for devices
@@ -761,7 +775,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("t0lteatt")
                 || DEVICE_NAME.equals("t0ltetmo")
                 || DEVICE_NAME.equals("stingray")
-                || DEVICE_NAME.equals("wingray"))
+                || DEVICE_NAME.equals("wingray")
+                || DEVICE_NAME.equals("dlxj"))
             CWM_VERSION = CWM_VERSION + "-6.0.3.1";
 
         if (DEVICE_NAME.equals("jfltexx")
@@ -770,6 +785,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("jfltevzw")
                 || DEVICE_NAME.equals("t0lte"))
             CWM_VERSION = CWM_VERSION + "-6.0.3.2";
+
+        if (DEVICE_NAME.equals("n8000"))
+            CWM_VERSION = CWM_VERSION + "-6.0.3.6";
 
         if (CWM_VERSION.equals(""))
             CWM_OFFICIAL = false;
@@ -848,6 +866,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("t0ltetmo"))
             TWRP_VERSION = "-2.6.0.3";
 
+        if (DEVICE_NAME.equals("n8000"))
+            TWRP_VERSION = "-2.6.1.0";
+
         if (DEVICE_NAME.equals("tf201")) {
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH
                     || Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
@@ -876,42 +897,88 @@ public class DeviceHandler {
 
     public boolean downloadUtils() {
 
-        boolean download = false;
-
         if (DEVICE_NAME.equals("c6603")
                 || DEVICE_NAME.equals("montblanc")) {
             charger = new File(RecoveryTools.PathToUtils, "charger");
             chargermon = new File(RecoveryTools.PathToUtils, "chargermon");
-            ric = new File(mContext.getFilesDir(), "ric");
-            if (!charger.exists() || !chargermon.exists() || !chargermon.exists() || !ric.exists()
-                    && DEVICE_NAME.equals("c6603"))
-                download = true;
+            ric = new File(RecoveryTools.PathToUtils, "ric");
+            if (!charger.exists() || !chargermon.exists() && DEVICE_NAME.equals("montblanc")
+                    || !charger.exists() || !chargermon.exists() || !ric.exists() && DEVICE_NAME.equals("c6603")) {
+                AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
+                mAlertDialog
+                        .setTitle(R.string.warning)
+                        .setMessage(R.string.download_utils);
+                final DialogInterface.OnClickListener onClick = new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        final DialogInterface.OnClickListener loop = this;
+                        final Runnable checkFile = new Runnable() {
+                            @Override
+                            public void run() {
+                                boolean corrupt = false;
+                                if (isDowloadCorrupt(chargermon)) {
+                                    chargermon.delete();
+                                    corrupt = true;
+                                }
+                                if (isDowloadCorrupt(charger)) {
+                                    charger.delete();
+                                    corrupt = true;
+                                }
+                                if (DEVICE_NAME.equals("c6603"))
+                                    if (isDowloadCorrupt(ric)) {
+                                        ric.delete();
+                                        corrupt = true;
+                                    }
+
+                                if (corrupt) {
+                                    final AlertDialog.Builder tryAgain = new AlertDialog.Builder(mContext);
+                                    tryAgain
+                                            .setMessage(R.string.corrupt_download)
+                                            .setPositiveButton(R.string.try_again, loop)
+                                            .setNegativeButton(R.string.later, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                }
+                                            })
+                                            .setTitle(R.string.warning)
+                                            .show();
+                                }
+                            }
+                        };
+                        new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, chargermon.getName(), chargermon, new Runnable() {
+                            @Override
+                            public void run() {
+                                new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, charger.getName(), charger, new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (DEVICE_NAME.equals("c6603"))
+                                            new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, ric.getName(), ric, checkFile).execute();
+                                        else
+                                            checkFile.run();
+                                    }
+                                }).execute();
+
+                            }
+                        }).execute();
+                    }
+
+                    ;
+                };
+                mAlertDialog.setPositiveButton(R.string.positive, onClick);
+                mAlertDialog.show();
+                return true;
+            }
         }
+        return false;
+    }
 
-        AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
-        mAlertDialog
-                .setTitle(R.string.warning)
-                .setMessage(R.string.download_utils);
-        DialogInterface.OnClickListener onClick = null;
-
-        if (DEVICE_NAME.equals("c6603") || DEVICE_NAME.equals("montblanc")
-                && download) {
-
-            onClick = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, chargermon.getName(), chargermon, Notifyer.rEmpty).execute();
-                    new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, charger.getName(), charger, Notifyer.rEmpty).execute();
-                    if (DEVICE_NAME.equals("c6603"))
-                        new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEVICE_NAME, ric.getName(), ric, Notifyer.rEmpty).execute();
-                }
-            };
-        }
-        mAlertDialog.setPositiveButton(R.string.positive, onClick);
-        if (download)
-            mAlertDialog.show();
-
-        return download;
+    public boolean isDowloadCorrupt(File downloadFile) {
+        Common mCommon = new Common();
+        File CorruptDownload = new File(mContext.getFilesDir(), "corruptDownload");
+        mCommon.pushFileFromRAW(mContext, CorruptDownload, R.raw.corrupt_download);
+        return downloadFile.length() == CorruptDownload.length();
     }
 }
