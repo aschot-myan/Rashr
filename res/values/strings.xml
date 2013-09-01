@@ -13,7 +13,8 @@
     <string name="report">Scan and Report unsupported Device</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Thread</string>
-    <string name="rename">If you want set a custom name to the backup type it in the text field. If
+    <string name="rename">If you want set a custom name to the backup type it in the text field (NO
+        SPACE ALLOWED!). If
         not the current time will be set.
     </string>
     <string name="bak_warning">Before you do some actions with Recovery-Tools please create an
@@ -26,8 +27,6 @@
     <string name="sReboot">Reboot</string>
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
-
-    <string name="empty"></string>
     <string name="info">Information</string>
     <string name="flashed">Recovery flashed.</string>
     <string name="warning">Warning!</string>
@@ -110,5 +109,9 @@
     <string name="donation_paypal_item">Donation</string>
 
     <string name="never_again">Never show again</string>
+
+    <string name="corrupt_download">Downloaded file is corrupted.</string>
+    <string name="try_again">Try again!</string>
+    <string name="later">Later</string>
 
 </resources>

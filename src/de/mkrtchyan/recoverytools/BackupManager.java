@@ -34,7 +34,7 @@ public class BackupManager extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bakmgr_activity);
-        mBackupHandler = new BackupHandler(this);
+	    mBackupHandler = new BackupHandler(mContext);
     }
 
     public void bBackup(View view) {

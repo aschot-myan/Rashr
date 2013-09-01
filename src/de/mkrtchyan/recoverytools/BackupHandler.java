@@ -47,7 +47,7 @@ public class BackupHandler {
         @Override
         public void run() {
 
-            new FlashUtil(mContext, fBACKUP, 2).execute();
+	        new FlashUtil(mContext, fBACKUP, 2, false).execute();
 
         }
     };
@@ -57,7 +57,7 @@ public class BackupHandler {
 
             if (fcRestore.use) {
                 fBACKUP = fcRestore.selectedFile;
-                new FlashUtil(mContext, fBACKUP, 1).execute();
+	            new FlashUtil(mContext, fBACKUP, 1, false).execute();
             }
         }
     };

@@ -67,15 +67,10 @@
 
         Menu Principal -> Instalar"
     </string>
-    <string name="getdownload">IMG de Recuperacion no encontrada. ¿Descargar ahora?</string>
-    <string name="no_function">Esta función no es disponible para tu dispositivo</string>
     <string name="bak_done">Copia de seguridad completada</string>
     <string name="res_done">Restauración completada</string>
     <string name="backupalready">Copia de seguridad ya existe. Esto sobrescribirá la existente.
         ¿Continuar?
-    </string>
-    <string name="nobackup">No se han encontrado copias de seguridad
-        (InternalStorage/Recovery-Tools/backups/). ¿Crear una ahora?
     </string>
     <string name="notsupportded">Su dispositivo no es compatible con el developer todavía. ¿Escanear
         el sistema y reportar un dispositivo incompatible?
