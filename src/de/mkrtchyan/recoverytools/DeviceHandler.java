@@ -69,7 +69,6 @@ public class DeviceHandler {
 	        DEVICE_NAME = DEVICE_NAME;
         }
 
-
         this.mContext = mContext;
 
         String BOARD = Build.BOARD.toLowerCase();
@@ -580,7 +579,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("enrc2")
                 || DEVICE_NAME.equals("blade")
 		        || DEVICE_NAME.equals("shadow")
-		        || DEVICE_NAME.equals("dlxj"))
+		        || DEVICE_NAME.equals("dlxj")
+                || DEVICE_NAME.equals("jfltexx"))
 	        CWM = true;
 
         if (DEVICE_NAME.equals("flo")
@@ -591,28 +591,7 @@ public class DeviceHandler {
 		        || DEVICE_NAME.equals("t0ltecan"))
 	        TWRP = true;
 
-        if (DEVICE_NAME.equals("tf300t")
-                || DEVICE_NAME.equals("sch-i929")
-                || DEVICE_NAME.equals("sph-d710")
-                || DEVICE_NAME.equals("ja3g")
-                || DEVICE_NAME.equals("ancora_tmo")
-                || DEVICE_NAME.equals("mystul")
-                || DEVICE_NAME.equals("flyer")
-                || DEVICE_NAME.equals("magnids")
-                || DEVICE_NAME.equals("hwu9508")
-                || DEVICE_NAME.equals("u9200")
-                || DEVICE_NAME.equals("hwc8813")
-                || DEVICE_NAME.equals("sholest")
-                || DEVICE_NAME.equals("thunderc")
-                || DEVICE_NAME.equals("thunderc")
-                || DEVICE_NAME.equals("m3s")
-                || DEVICE_NAME.equals("pecan")
-                || DEVICE_NAME.equals("cayman")
-                || DEVICE_NAME.equals("spyder")
-                || DEVICE_NAME.equals("vanquish")
-                || DEVICE_NAME.equals("everest")
-                || DEVICE_NAME.equals("rk29sdk")
-                || DEVICE_NAME.equals("scorpion_mini")
+        if (!RecoveryPath.equals("")
                 || MTD
                 || CWM
                 || TWRP)

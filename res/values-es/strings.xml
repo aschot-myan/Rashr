@@ -49,7 +49,6 @@
     <string name="rate">Si, Evaluar %s</string>
     <string name="rate_later">Recordarmelo luego</string>
     <string name="rate_cancel">No, Gracias</string>
-    <string name="empty"></string>
     <string name="info">Información</string>
     <string name="flashed">Recuperador instalado.</string>
     <string name="kernel_to">Instalando el Recuperador de Systema en este dispocitivo también se

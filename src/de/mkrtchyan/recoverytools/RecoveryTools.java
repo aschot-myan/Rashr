@@ -447,7 +447,8 @@ public class RecoveryTools extends Activity {
 			                "\n\n\n===========Comment==========\n" + comment +
 			                "\n===========Comment==========\n\n" +
 			                "MTD Testresult\n" +
-			                mCommon.executeSuShell(dump_img.getAbsolutePath() + " recovery /dev/zero");
+			                mCommon.executeSuShell(dump_img.getAbsolutePath() + " recovery /dev/zero") + "\n\n\n\n" +
+                            mCommon.executeSuShell("ls -lR /dev");
 	                Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});

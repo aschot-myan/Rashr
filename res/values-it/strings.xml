@@ -40,15 +40,10 @@
     <string name="instruction">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from
         sdcard\n\nTWRP:\n\nMain Menu -> Install
     </string>
-    <string name="getdownload">IMG della Recovery non trovata. Scaricarla ora?</string>
-    <string name="no_function">La funzione %s non è disponibile per questo dispositivo</string>
     <string name="bak_done">Backup completato</string>
     <string name="res_done">Ripristino completato</string>
     <string name="backupalready">Esiste già un Backup. Verrà sostituito.
         Continuare?
-    </string>
-    <string name="nobackup">Nessun Backup trovato (InternalStorage/Recovery-Tools/backups/).
-        Crearne uno?
     </string>
     <string name="noconnection">Nessuna connessione. Download annullato!</string>
     <string name="failed_download">Oh no, si è verificato un problema. Per favore riavvia il download.\n\n%s

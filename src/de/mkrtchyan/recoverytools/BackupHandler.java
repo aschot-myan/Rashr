@@ -51,16 +51,7 @@ public class BackupHandler {
 
         }
     };
-    private final Runnable rRestore = new Runnable() {
-        @Override
-        public void run() {
 
-            if (fcRestore.use) {
-                fBACKUP = fcRestore.selectedFile;
-	            new FlashUtil(mContext, fBACKUP, 1, false).execute();
-            }
-        }
-    };
 
     private final Runnable rDelete = new Runnable() {
         @Override
@@ -123,7 +114,16 @@ public class BackupHandler {
         this.mContext = mContext;
         mNotifyer = new Notifyer(mContext);
         mDeviceHandler = new DeviceHandler(mContext);
-        fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.EXT, rRestore);
+        fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.EXT, new Runnable() {
+            @Override
+            public void run() {
+
+                if (fcRestore.use) {
+                    fBACKUP = fcRestore.selectedFile;
+                    new FlashUtil(mContext, fBACKUP, 1, false).execute();
+                }
+            }
+        });
         fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.EXT, rDelete);
     }
 

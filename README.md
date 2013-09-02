@@ -33,6 +33,10 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.6]
+
+-Blank Screen fixed
+
 Update [1.4.5]
 
 -Huawei C8812E (c8812e) added
