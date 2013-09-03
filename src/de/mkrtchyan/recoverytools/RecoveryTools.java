@@ -42,7 +42,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.PopupMenu;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.ads.AdView;
@@ -77,14 +77,14 @@ public class RecoveryTools extends Activity {
     //	Declaring needed objects
     private final Notifyer mNotifyer = new Notifyer(mContext);
     private final Common mCommon = new Common();
-    private final DeviceHandler mDeviceHandler = new DeviceHandler(mContext);
+    private DeviceHandler mDeviceHandler = new DeviceHandler(mContext);
     private FileChooser fcFlashOther;
 
     //	"Methods" need a input from user (AlertDialog) or at the end of AsyncTask
     private final Runnable rFlash = new Runnable() {
         @Override
         public void run() {
-	        new FlashUtil(mContext, fRECOVERY, 1, false).execute();
+	        new FlashUtil(mContext, fRECOVERY, 1).execute();
         }
     };
     private final Runnable rFlasher = new Runnable() {
@@ -176,6 +176,48 @@ public class RecoveryTools extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recovery_tools);
 
+	    if (BuildConfig.DEBUG) {
+            // Fake other devices
+		    final Dialog d = new Dialog(mContext);
+		    d.setTitle("Set your perfered device name");
+		    final LinearLayout ll = new LinearLayout(mContext);
+		    ll.setOrientation(LinearLayout.VERTICAL);
+		    final EditText et = new EditText(mContext);
+		    if (mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name").equals("")) {
+			    et.setText(mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name"));
+				mDeviceHandler = new DeviceHandler(mContext, mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name"));
+		    } else {
+                et.setText(Build.DEVICE);
+            }
+		    final Button setCustom = new Button(mContext);
+		    setCustom.setText(R.string.go);
+		    setCustom.setOnClickListener(new View.OnClickListener() {
+			    @Override
+			    public void onClick(View v) {
+				    mCommon.setStringPerf(mContext, "recovery-tools", "custom_device_name", et.getText().toString());
+				    d.dismiss();
+				    mNotifyer.showToast(R.string.please_restart);
+			    }
+		    });
+		    final Button setDefault = new Button(mContext);
+		    setDefault.setText("Reset to Default");
+		    setDefault.setOnClickListener(new View.OnClickListener() {
+			    @Override
+			    public void onClick(View v) {
+				    mCommon.setStringPerf(mContext, "recovery-tools", "custom_device_name", Build.DEVICE);
+				    mCommon.setBooleanPerf(mContext, "recovery-tools", "use_custom_device_name", false);
+				    et.setText(Build.DEVICE);
+				    d.dismiss();
+				    mNotifyer.showToast(R.string.please_restart);
+			    }
+		    });
+		    ll.addView(et);
+		    ll.addView(setCustom);
+		    ll.addView(setDefault);
+		    d.setContentView(ll);
+		    d.show();
+	    }
+
         final CheckBox cbMethod = (CheckBox) findViewById(R.id.cbMethod);
 	    final AdView adView = (AdView) findViewById(R.id.adView);
 	    final Button CWM_BUTTON = (Button) findViewById(R.id.bCWM);
@@ -184,9 +226,7 @@ public class RecoveryTools extends Activity {
 	    final Button FLASH_OTHER = (Button) findViewById(R.id.bFlashOther);
 
 //      If device is not supported, you can report it now or close the App
-        if (mDeviceHandler.RecoveryPath.equals("")
-                && !mDeviceHandler.MTD
-                && !mDeviceHandler.FLASH_OVER_RECOVERY) {
+        if (!mDeviceHandler.OTHER) {
             AlertDialog.Builder DeviceNotSupported = mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded,
                     new Runnable() {
                         @Override
@@ -296,7 +336,7 @@ public class RecoveryTools extends Activity {
     public void bBackupMgr(View view) {
         if (Build.VERSION.SDK_INT >= 11
                 && view != null) {
-            showPopupMenu(R.menu.bakmgr_menu, view);
+            new PopupHelper(mContext).showPopupMenu(R.menu.bakmgr_menu, view);
         } else {
             startActivity(new Intent(this, BackupManager.class));
         }
@@ -309,7 +349,7 @@ public class RecoveryTools extends Activity {
     public void bRebooter(View view) {
         if (Build.VERSION.SDK_INT >= 11
                 && view != null) {
-            showPopupMenu(R.menu.rebooter_menu, view);
+	        new PopupHelper(mContext).showPopupMenu(R.menu.rebooter_menu, view);
         } else {
             new Rebooter(mContext).show();
         }
@@ -448,7 +488,7 @@ public class RecoveryTools extends Activity {
 			                "\n===========Comment==========\n\n" +
 			                "MTD Testresult\n" +
 			                mCommon.executeSuShell(dump_img.getAbsolutePath() + " recovery /dev/zero") + "\n\n\n\n" +
-                            mCommon.executeSuShell("ls -lR /dev");
+                            mCommon.executeSuShell("ls -lR /dev/block");
 	                Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
@@ -466,13 +506,5 @@ public class RecoveryTools extends Activity {
             }
         });
         reportDialog.show();
-    }
-
-    @SuppressWarnings("NewApi")
-    public void showPopupMenu(int MENU, View view) {
-        PopupMenu popup = new PopupMenu(mContext, view);
-        popup.inflate(MENU);
-        popup.setOnMenuItemClickListener(new PopupHelper(mContext));
-        popup.show();
     }
 }

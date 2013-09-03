@@ -10,7 +10,7 @@
     <string name="sRebooter">Rebooter</string>
     <string name="sRestore">Restore from Backup</string>
     <string name="sCleareCache">Clear downloaded recoveries</string>
-    <string name="report">Scan and Report unsupported Device</string>
+    <string name="report">Report bug</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Thread</string>
     <string name="rename">If you want set a custom name to the backup type it in the text field (NO

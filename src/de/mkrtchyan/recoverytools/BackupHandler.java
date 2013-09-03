@@ -47,7 +47,7 @@ public class BackupHandler {
         @Override
         public void run() {
 
-	        new FlashUtil(mContext, fBACKUP, 2, false).execute();
+	        new FlashUtil(mContext, fBACKUP, 2).execute();
 
         }
     };
@@ -74,6 +74,11 @@ public class BackupHandler {
             dialog.setContentView(R.layout.dialog_backup);
             Button bGoBackup = (Button) dialog.findViewById(R.id.bGoBackup);
             final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
+            etFileName.setHint(Calendar.getInstance().get(Calendar.DATE)
+                    + "-" + Calendar.getInstance().get(Calendar.MONTH)
+                    + "-" + Calendar.getInstance().get(Calendar.YEAR)
+                    + "-" + Calendar.getInstance().get(Calendar.HOUR)
+                    + ":" + Calendar.getInstance().get(Calendar.MINUTE));
             bGoBackup.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -83,12 +88,11 @@ public class BackupHandler {
                         if (!etFileName.getText().toString().equals("")) {
                             Name = etFileName.getText().toString();
                         } else {
-                            Calendar c = Calendar.getInstance();
-                            Name = c.get(Calendar.DATE)
-                                    + "-" + c.get(Calendar.MONTH)
-                                    + "-" + c.get(Calendar.YEAR)
-                                    + "-" + c.get(Calendar.HOUR)
-                                    + ":" + c.get(Calendar.MINUTE);
+                            Name = Calendar.getInstance().get(Calendar.DATE)
+                                    + "-" + Calendar.getInstance().get(Calendar.MONTH)
+                                    + "-" + Calendar.getInstance().get(Calendar.YEAR)
+                                    + "-" + Calendar.getInstance().get(Calendar.HOUR)
+                                    + ":" + Calendar.getInstance().get(Calendar.MINUTE);
                         }
 
                         Name = Name + mDeviceHandler.EXT;
@@ -120,7 +124,7 @@ public class BackupHandler {
 
                 if (fcRestore.use) {
                     fBACKUP = fcRestore.selectedFile;
-                    new FlashUtil(mContext, fBACKUP, 1, false).execute();
+                    new FlashUtil(mContext, fBACKUP, 1).execute();
                 }
             }
         });

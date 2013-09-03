@@ -60,263 +60,34 @@ public class DeviceHandler {
     private boolean TWRP_OFFICIAL = true;
     private boolean CWM_OFFICIAL = true;
     private Context mContext;
+	final private Common mCommon = new Common();
 
     public File fflash, fdump, charger, chargermon, ric;
 
-    public DeviceHandler(Context mContext) {
+	public DeviceHandler(Context mContext) {
 
-        if (BuildConfig.DEBUG) {
-	        DEVICE_NAME = DEVICE_NAME;
-        }
+		this.mContext = mContext;
 
-        this.mContext = mContext;
+		setPredefinedOptions();
 
-        String BOARD = Build.BOARD.toLowerCase();
-        String MODEL = Build.MODEL.toLowerCase();
+		RecoveryPath = getRecoveryPath();
 
-//	Set DEVICE_NAME predefined options
+		if (new File("/dev/mtd/").exists() && RecoveryPath.equals(""))
+			MTD = true;
 
-//      OPPO Find 5
-	    if (DEVICE_NAME.equals("x909")
-			    || DEVICE_NAME.equals("x909t"))
-		    DEVICE_NAME = "find5";
+		getSupportedSystems();
+		getVersion();
+		constructFile();
+	}
 
-//      Samsung Galaxy S +
-        if (DEVICE_NAME.equals("gt-i9001")
-                || BOARD.equals("gt-i9001")
-                || MODEL.equals("gt-i9001"))
-            DEVICE_NAME = "galaxysplus";
+    public DeviceHandler(Context mContext, String CustomDevice) {
 
-//      Samsung Galaxy Tab 7 Plus
-	    if (DEVICE_NAME.equals("gt-p6200"))
-		    DEVICE_NAME = "p6200";
+	    this.mContext = mContext;
 
-//		Kindle Fire HD 7"
-        if (DEVICE_NAME.equals("d01e"))
-            DEVICE_NAME = "kfhd7";
+	    if (BuildConfig.DEBUG && !CustomDevice.equals(""))
+			DEVICE_NAME = CustomDevice;
 
-        if (BOARD.equals("rk29sdk"))
-            DEVICE_NAME = "rk29sdk";
-
-//      HTC ONE GSM
-        if (BOARD.equals("m7")
-                || DEVICE_NAME.equals("m7")
-                || DEVICE_NAME.equals("m7ul"))
-            DEVICE_NAME = "m7";
-
-        if (DEVICE_NAME.equals("m7spr"))
-            DEVICE_NAME = "m7wls";
-
-//      Samsung Galaxy S4 (i9505/jflte)
-        if (DEVICE_NAME.equals("jflte"))
-            DEVICE_NAME = "jfltexx";
-
-//		Galaxy Note 
-        if (DEVICE_NAME.equals("gt-n7000")
-                || DEVICE_NAME.equals("n7000")
-                || DEVICE_NAME.equals("galaxynote")
-                || DEVICE_NAME.equals("n7000")
-                || BOARD.equals("gt-n7000")
-                || BOARD.equals("n7000")
-                || BOARD.equals("galaxynote")
-                || BOARD.equals("N7000"))
-            DEVICE_NAME = "n7000";
-
-	    if (DEVICE_NAME.equals("p4noterf")
-			    || MODEL.equals("gt-n8000"))
-		    DEVICE_NAME = "n8000";
-
-//      Samsung Galaxy Note 10.1
-        if (MODEL.equals("gt-n8013")
-                || DEVICE_NAME.equals("p4notewifi"))
-            DEVICE_NAME = "n8013";
-
-//      Samsung Galaxy Tab 2
-        if (BOARD.equals("piranha")
-                || MODEL.equals("gt-p3113"))
-            DEVICE_NAME = "p3113";
-
-        if (DEVICE_NAME.equals("espressowifi")
-                || MODEL.equals("gt-p3110"))
-            DEVICE_NAME = "p3110";
-
-//		Galaxy Note 2
-        if (DEVICE_NAME.equals("n7100")
-                || DEVICE_NAME.equals("n7100")
-                || DEVICE_NAME.equals("gt-n7100")
-                || BOARD.equals("t03g")
-                || BOARD.equals("n7100")
-                || BOARD.equals("gt-n7100"))
-            DEVICE_NAME = "t03g";
-
-//		Galaxy Note 2 LTE
-        if (DEVICE_NAME.equals("t0ltexx")
-                || DEVICE_NAME.equals("gt-n7105")
-                || DEVICE_NAME.equals("t0ltedv")
-                || DEVICE_NAME.equals("gt-n7105T")
-                || DEVICE_NAME.equals("t0ltevl")
-                || DEVICE_NAME.equals("sgh-I317m")
-                || BOARD.equals("t0ltexx")
-                || BOARD.equals("gt-n7105")
-                || BOARD.equals("t0ltedv")
-                || BOARD.equals("gt-n7105T")
-                || BOARD.equals("t0ltevl")
-                || BOARD.equals("sgh-i317m"))
-            DEVICE_NAME = "t0lte";
-
-        if (DEVICE_NAME.equals("sgh-i317")
-                || BOARD.equals("t0lteatt")
-                || BOARD.equals("sgh-i317"))
-            DEVICE_NAME = "t0lteatt";
-
-        if (DEVICE_NAME.equals("sgh-t889")
-                || BOARD.equals("t0ltetmo")
-                || BOARD.equals("sgh-t889"))
-            DEVICE_NAME = "t0ltetmo";
-
-        if (BOARD.equals("t0ltecan"))
-            DEVICE_NAME = "t0ltecan";
-
-//		Galaxy S3 (international)
-        if (DEVICE_NAME.equals("gt-i9300")
-                || DEVICE_NAME.equals("galaxy s3")
-                || DEVICE_NAME.equals("galaxys3")
-                || DEVICE_NAME.equals("m0")
-                || DEVICE_NAME.equals("i9300")
-                || BOARD.equals("gt-i9300")
-                || BOARD.equals("m0")
-                || BOARD.equals("i9300"))
-            DEVICE_NAME = "i9300";
-
-//		Galaxy S2
-        if (DEVICE_NAME.equals("gt-i9100g")
-                || DEVICE_NAME.equals("gt-i9100m")
-                || DEVICE_NAME.equals("gt-i9100p")
-                || DEVICE_NAME.equals("gt-i9100")
-                || DEVICE_NAME.equals("galaxys2")
-                || BOARD.equals("gt-i9100g")
-                || BOARD.equals("gt-i9100m")
-                || BOARD.equals("gt-I9100p")
-                || BOARD.equals("gt-i9100")
-                || BOARD.equals("galaxys2"))
-            DEVICE_NAME = "galaxys2";
-
-//		Galaxy S2 ATT
-        if (DEVICE_NAME.equals("sgh-i777")
-                || BOARD.equals("sgh-i777")
-                || BOARD.equals("galaxys2att"))
-            DEVICE_NAME = "galaxys2att";
-
-//		Galaxy S2 LTE (skyrocket)
-        if (DEVICE_NAME.equals("sgh-i727")
-                || BOARD.equals("skyrocket")
-                || BOARD.equals("sgh-i727"))
-            DEVICE_NAME = "skyrocket";
-
-//      Galaxy S (i9000)
-        if (DEVICE_NAME.equals("galaxys")
-                || DEVICE_NAME.equals("galaxysmtd")
-                || DEVICE_NAME.equals("gt-i9000")
-                || DEVICE_NAME.equals("gt-i9000m")
-                || DEVICE_NAME.equals("gt-i9000t")
-                || BOARD.equals("galaxys")
-                || BOARD.equals("galaxysmtd")
-                || BOARD.equals("gt-i9000")
-                || BOARD.equals("gt-i9000m")
-                || BOARD.equals("gt-i9000t")
-                || MODEL.equals("gt-i9000t")
-                || DEVICE_NAME.equals("sph-d710bst")
-                || MODEL.equals("sph-d710bst"))
-            DEVICE_NAME = "galaxys";
-
-//      Samsung Galaxy Note
-	    if (DEVICE_NAME.equals("gt-n7000b"))
-		    DEVICE_NAME = "n7000";
-
-//		GalaxyS Captivate (SGH-I897)
-        if (DEVICE_NAME.equals("sgh-i897")) {
-            DEVICE_NAME = ("captivate");
-        }
-
-        if (BOARD.equals("gee")) {
-            DEVICE_NAME = "geeb";
-        }
-
-//		Sony Xperia Z (C6603)
-        if (DEVICE_NAME.equals("c6603")
-                || DEVICE_NAME.equals("yuga")) {
-            DEVICE_NAME = "c6603";
-            EXT = ".tar";
-        }
-
-//		Sony Xperia S
-        if (DEVICE_NAME.equals("lt26i"))
-            DEVICE_NAME = "nozomi";
-
-//		Sony Xperia T
-        if (DEVICE_NAME.equals("lt30p"))
-            DEVICE_NAME = "mint";
-
-//      HTC Desire HD
-        if (BOARD.equals("ace"))
-            DEVICE_NAME = "ace";
-
-//      Motorola Droid X
-        if (DEVICE_NAME.equals("cdma_shadow")
-                || BOARD.equals("shadow")
-                || MODEL.equals("droidx"))
-            DEVICE_NAME = "shadow";
-
-//      LG Optimus L9
-        if (DEVICE_NAME.equals("u2")
-                || BOARD.equals("u2")
-                || MODEL.equals("lg-p760"))
-            DEVICE_NAME = "p760";
-//      Huawei U9508
-        if (BOARD.equals("u9508")
-                || DEVICE_NAME.equals("hwu9508"))
-            DEVICE_NAME = "u9508";
-
-//      Huawei Ascend P1
-        if (DEVICE_NAME.equals("hwu9200")
-                || BOARD.equals("u9200")
-                || MODEL.equals("u9200"))
-            DEVICE_NAME = "u9200";
-
-//      Motorola Droid RAZR
-        if (DEVICE_NAME.equals("cdma_spyder")
-                || BOARD.equals("spyder"))
-            DEVICE_NAME = "spyder";
-
-//      Huawei M835
-        if (DEVICE_NAME.equals("hwm835")
-                || BOARD.equals("m835"))
-            DEVICE_NAME = "m835";
-
-//      LG Optimus Black
-	    if (DEVICE_NAME.equals("bproj_cis-xxx")
-			    || BOARD.equals("bproj")
-			    || MODEL.equals("lg-p970"))
-		    DEVICE_NAME = "p970";
-
-
-	    if (DEVICE_NAME.equals("droid2")
-                || DEVICE_NAME.equals("daytona")
-                || DEVICE_NAME.equals("captivate")
-                || DEVICE_NAME.equals("galaxys")
-                || DEVICE_NAME.equals("galaxys2att")
-                || DEVICE_NAME.equals("galaxys2")
-                || DEVICE_NAME.equals("n7000"))
-            FLASH_OVER_RECOVERY = true;
-
-
-//		Devices who kernel will be flashed to
-        if (DEVICE_NAME.equals("nozomi")
-                || DEVICE_NAME.equals("mint"))
-            KERNEL_TO = true;
-
-        if (FLASH_OVER_RECOVERY)
-            EXT = ".zip";
+		setPredefinedOptions();
 
         RecoveryPath = getRecoveryPath();
 
@@ -328,6 +99,259 @@ public class DeviceHandler {
         constructFile();
     }
 
+	private void setPredefinedOptions() {
+
+		String BOARD = Build.BOARD.toLowerCase();
+		String MODEL = Build.MODEL.toLowerCase();
+//	Set DEVICE_NAME predefined options
+
+//      Motorola Droid 2 WE
+		if (DEVICE_NAME.equals("cdma_droid2we"))
+			DEVICE_NAME = "droid2we";
+
+//      OPPO Find 5
+		if (DEVICE_NAME.equals("x909")
+				|| DEVICE_NAME.equals("x909t"))
+			DEVICE_NAME = "find5";
+
+//      Samsung Galaxy S +
+		if (DEVICE_NAME.equals("gt-i9001")
+				|| BOARD.equals("gt-i9001")
+				|| MODEL.equals("gt-i9001"))
+			DEVICE_NAME = "galaxysplus";
+
+//      Samsung Galaxy Tab 7 Plus
+		if (DEVICE_NAME.equals("gt-p6200"))
+			DEVICE_NAME = "p6200";
+
+//		Kindle Fire HD 7"
+		if (DEVICE_NAME.equals("d01e"))
+			DEVICE_NAME = "kfhd7";
+
+		if (BOARD.equals("rk29sdk"))
+			DEVICE_NAME = "rk29sdk";
+
+//      HTC ONE GSM
+		if (BOARD.equals("m7")
+				|| DEVICE_NAME.equals("m7")
+				|| DEVICE_NAME.equals("m7ul"))
+			DEVICE_NAME = "m7";
+
+		if (DEVICE_NAME.equals("m7spr"))
+			DEVICE_NAME = "m7wls";
+
+//      Samsung Galaxy S4 (i9505/jflte)
+		if (DEVICE_NAME.equals("jflte"))
+			DEVICE_NAME = "jfltexx";
+
+//		Galaxy Note
+		if (DEVICE_NAME.equals("gt-n7000")
+				|| DEVICE_NAME.equals("n7000")
+				|| DEVICE_NAME.equals("galaxynote")
+				|| DEVICE_NAME.equals("n7000")
+				|| BOARD.equals("gt-n7000")
+				|| BOARD.equals("n7000")
+				|| BOARD.equals("galaxynote")
+				|| BOARD.equals("N7000"))
+			DEVICE_NAME = "n7000";
+
+		if (DEVICE_NAME.equals("p4noterf")
+				|| MODEL.equals("gt-n8000"))
+			DEVICE_NAME = "n8000";
+
+//      Samsung Galaxy Note 10.1
+		if (MODEL.equals("gt-n8013")
+				|| DEVICE_NAME.equals("p4notewifi"))
+			DEVICE_NAME = "n8013";
+
+//      Samsung Galaxy Tab 2
+		if (BOARD.equals("piranha")
+				|| MODEL.equals("gt-p3113"))
+			DEVICE_NAME = "p3113";
+
+		if (DEVICE_NAME.equals("espressowifi")
+				|| MODEL.equals("gt-p3110"))
+			DEVICE_NAME = "p3110";
+
+//		Galaxy Note 2
+		if (DEVICE_NAME.equals("n7100")
+				|| DEVICE_NAME.equals("n7100")
+				|| DEVICE_NAME.equals("gt-n7100")
+				|| BOARD.equals("t03g")
+				|| BOARD.equals("n7100")
+				|| BOARD.equals("gt-n7100"))
+			DEVICE_NAME = "t03g";
+
+//		Galaxy Note 2 LTE
+		if (DEVICE_NAME.equals("t0ltexx")
+				|| DEVICE_NAME.equals("gt-n7105")
+				|| DEVICE_NAME.equals("t0ltedv")
+				|| DEVICE_NAME.equals("gt-n7105T")
+				|| DEVICE_NAME.equals("t0ltevl")
+				|| DEVICE_NAME.equals("sgh-I317m")
+				|| BOARD.equals("t0ltexx")
+				|| BOARD.equals("gt-n7105")
+				|| BOARD.equals("t0ltedv")
+				|| BOARD.equals("gt-n7105T")
+				|| BOARD.equals("t0ltevl")
+				|| BOARD.equals("sgh-i317m"))
+			DEVICE_NAME = "t0lte";
+
+		if (DEVICE_NAME.equals("sgh-i317")
+				|| BOARD.equals("t0lteatt")
+				|| BOARD.equals("sgh-i317"))
+			DEVICE_NAME = "t0lteatt";
+
+		if (DEVICE_NAME.equals("sgh-t889")
+				|| BOARD.equals("t0ltetmo")
+				|| BOARD.equals("sgh-t889"))
+			DEVICE_NAME = "t0ltetmo";
+
+		if (BOARD.equals("t0ltecan"))
+			DEVICE_NAME = "t0ltecan";
+
+//		Galaxy S3 (international)
+		if (DEVICE_NAME.equals("gt-i9300")
+				|| DEVICE_NAME.equals("galaxy s3")
+				|| DEVICE_NAME.equals("galaxys3")
+				|| DEVICE_NAME.equals("m0")
+				|| DEVICE_NAME.equals("i9300")
+				|| BOARD.equals("gt-i9300")
+				|| BOARD.equals("m0")
+				|| BOARD.equals("i9300"))
+			DEVICE_NAME = "i9300";
+
+//		Galaxy S2
+		if (DEVICE_NAME.equals("gt-i9100g")
+				|| DEVICE_NAME.equals("gt-i9100m")
+				|| DEVICE_NAME.equals("gt-i9100p")
+				|| DEVICE_NAME.equals("gt-i9100")
+				|| DEVICE_NAME.equals("galaxys2")
+				|| BOARD.equals("gt-i9100g")
+				|| BOARD.equals("gt-i9100m")
+				|| BOARD.equals("gt-I9100p")
+				|| BOARD.equals("gt-i9100")
+				|| BOARD.equals("galaxys2"))
+			DEVICE_NAME = "galaxys2";
+
+//		Galaxy S2 ATT
+		if (DEVICE_NAME.equals("sgh-i777")
+				|| BOARD.equals("sgh-i777")
+				|| BOARD.equals("galaxys2att"))
+			DEVICE_NAME = "galaxys2att";
+
+//		Galaxy S2 LTE (skyrocket)
+		if (DEVICE_NAME.equals("sgh-i727")
+				|| BOARD.equals("skyrocket")
+				|| BOARD.equals("sgh-i727"))
+			DEVICE_NAME = "skyrocket";
+
+//      Galaxy S (i9000)
+		if (DEVICE_NAME.equals("galaxys")
+				|| DEVICE_NAME.equals("galaxysmtd")
+				|| DEVICE_NAME.equals("gt-i9000")
+				|| DEVICE_NAME.equals("gt-i9000m")
+				|| DEVICE_NAME.equals("gt-i9000t")
+				|| BOARD.equals("galaxys")
+				|| BOARD.equals("galaxysmtd")
+				|| BOARD.equals("gt-i9000")
+				|| BOARD.equals("gt-i9000m")
+				|| BOARD.equals("gt-i9000t")
+				|| MODEL.equals("gt-i9000t")
+				|| DEVICE_NAME.equals("sph-d710bst")
+				|| MODEL.equals("sph-d710bst"))
+			DEVICE_NAME = "galaxys";
+
+//      Samsung Galaxy Note
+		if (DEVICE_NAME.equals("gt-n7000b"))
+			DEVICE_NAME = "n7000";
+
+//		GalaxyS Captivate (SGH-I897)
+		if (DEVICE_NAME.equals("sgh-i897")) {
+			DEVICE_NAME = ("captivate");
+		}
+
+		if (BOARD.equals("gee")) {
+			DEVICE_NAME = "geeb";
+		}
+
+//		Sony Xperia Z (C6603)
+		if (DEVICE_NAME.equals("c6603")
+				|| DEVICE_NAME.equals("yuga")) {
+			DEVICE_NAME = "c6603";
+			EXT = ".tar";
+		}
+
+//		Sony Xperia S
+		if (DEVICE_NAME.equals("lt26i"))
+			DEVICE_NAME = "nozomi";
+
+//		Sony Xperia T
+		if (DEVICE_NAME.equals("lt30p"))
+			DEVICE_NAME = "mint";
+
+//      HTC Desire HD
+		if (BOARD.equals("ace"))
+			DEVICE_NAME = "ace";
+
+//      Motorola Droid X
+		if (DEVICE_NAME.equals("cdma_shadow")
+				|| BOARD.equals("shadow")
+				|| MODEL.equals("droidx"))
+			DEVICE_NAME = "shadow";
+
+//      LG Optimus L9
+		if (DEVICE_NAME.equals("u2")
+				|| BOARD.equals("u2")
+				|| MODEL.equals("lg-p760"))
+			DEVICE_NAME = "p760";
+//      Huawei U9508
+		if (BOARD.equals("u9508")
+				|| DEVICE_NAME.equals("hwu9508"))
+			DEVICE_NAME = "u9508";
+
+//      Huawei Ascend P1
+		if (DEVICE_NAME.equals("hwu9200")
+				|| BOARD.equals("u9200")
+				|| MODEL.equals("u9200"))
+			DEVICE_NAME = "u9200";
+
+//      Motorola Droid RAZR
+		if (DEVICE_NAME.equals("cdma_spyder")
+				|| BOARD.equals("spyder"))
+			DEVICE_NAME = "spyder";
+
+//      Huawei M835
+		if (DEVICE_NAME.equals("hwm835")
+				|| BOARD.equals("m835"))
+			DEVICE_NAME = "m835";
+
+//      LG Optimus Black
+		if (DEVICE_NAME.equals("bproj_cis-xxx")
+				|| BOARD.equals("bproj")
+				|| MODEL.equals("lg-p970"))
+			DEVICE_NAME = "p970";
+
+
+		if (DEVICE_NAME.equals("droid2")
+				|| DEVICE_NAME.equals("daytona")
+				|| DEVICE_NAME.equals("captivate")
+				|| DEVICE_NAME.equals("galaxys")
+				|| DEVICE_NAME.equals("galaxys2att")
+				|| DEVICE_NAME.equals("galaxys2")
+				|| DEVICE_NAME.equals("n7000"))
+			FLASH_OVER_RECOVERY = true;
+
+
+//		Devices who kernel will be flashed to
+		if (DEVICE_NAME.equals("nozomi")
+				|| DEVICE_NAME.equals("mint"))
+			KERNEL_TO = true;
+
+		if (FLASH_OVER_RECOVERY)
+			EXT = ".zip";
+	}
+
     private String getRecoveryPath() {
 
 //		Nexus DEVICEs + Same
@@ -338,7 +362,8 @@ public class DeviceHandler {
 
 	    if (DEVICE_NAME.equals("grouper")
                 || DEVICE_NAME.equals("tilapia")
-                || DEVICE_NAME.equals("p880"))
+                || DEVICE_NAME.equals("p880")
+			    || DEVICE_NAME.equals("n710"))
 		    return "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
 
 	    if (DEVICE_NAME.equals("mako")
@@ -368,7 +393,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("p3113")
 			    || DEVICE_NAME.equals("p3110")
 			    || DEVICE_NAME.equals("p6200")
-			    || DEVICE_NAME.equals("n8000"))
+			    || DEVICE_NAME.equals("n8000")
+                || DEVICE_NAME.equals("sph-d710vmub"))
 		    return "/dev/block/mmcblk0p6";
 
 	    if (DEVICE_NAME.equals("t03g")
@@ -406,7 +432,8 @@ public class DeviceHandler {
 	    if (DEVICE_NAME.equals("jena"))
 		    return "/dev/block/mmcblk0p12";
 
-	    if (DEVICE_NAME.equals("GT-I9103"))
+	    if (DEVICE_NAME.equals("GT-I9103")
+			    || DEVICE_NAME.equals("mevlana"))
 		    return "/dev/block/mmcblk0p8";
 
 //		HTC DEVICEs + Same
@@ -442,7 +469,8 @@ public class DeviceHandler {
 		    return "/dev/block/mmcblk0p20";
 
 //		Motorola DEVICEs + Same
-        if (DEVICE_NAME.equals("shadow"))
+        if (DEVICE_NAME.equals("shadow")
+                || DEVICE_NAME.equals("droid2we"))
 	        return "/dev/block/mmcblk1p16";
 
 	    if (DEVICE_NAME.equals("olympus")
@@ -475,7 +503,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("tf300t"))
 	        return "/dev/block/mmcblk0p7";
 
-	    if (DEVICE_NAME.equals("x3"))
+	    if (DEVICE_NAME.equals("x3")
+                || DEVICE_NAME.equals("picasso_m"))
 		    return "/dev/block/mmcblk0p1";
 
 	    if (DEVICE_NAME.equals("m3s")
@@ -492,7 +521,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("galaxysplus")
                 || DEVICE_NAME.equals("cayman")
 		        || DEVICE_NAME.equals("ancora_tmo")
-		        || DEVICE_NAME.equals("c8812e"))
+		        || DEVICE_NAME.equals("c8812e")
+		        || DEVICE_NAME.equals("batman_skt"))
 	        return "/dev/block/mmcblk0p13";
 
 	    return "";
@@ -556,7 +586,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("p970")
                 || DEVICE_NAME.equals("p999")
 		        || DEVICE_NAME.equals("warp2")
-		        || DEVICE_NAME.equals("n8000")) {
+		        || DEVICE_NAME.equals("n8000")
+                || DEVICE_NAME.equals("heroc")) {
 	        TWRP = true;
             CWM = true;
         }
@@ -580,7 +611,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("blade")
 		        || DEVICE_NAME.equals("shadow")
 		        || DEVICE_NAME.equals("dlxj")
-                || DEVICE_NAME.equals("jfltexx"))
+                || DEVICE_NAME.equals("jfltexx")
+                || DEVICE_NAME.equals("droid2we"))
 	        CWM = true;
 
         if (DEVICE_NAME.equals("flo")
@@ -592,6 +624,7 @@ public class DeviceHandler {
 	        TWRP = true;
 
         if (!RecoveryPath.equals("")
+                || FLASH_OVER_RECOVERY
                 || MTD
                 || CWM
                 || TWRP)
@@ -682,6 +715,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("shadow")
                 || DEVICE_NAME.equals("p999"))
             CWM_VERSION = CWM_VERSION + "-5.0.2.0";
+
+        if (DEVICE_NAME.equals("droid2we"))
+            CWM_VERSION = CWM_VERSION + "5.0.2.3";
 
         if (DEVICE_NAME.equals("daytona"))
             CWM_VERSION = CWM_VERSION + "-5.0.2.5";
@@ -838,7 +874,6 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("nozomi")
                 || DEVICE_NAME.equals("mint")
                 || DEVICE_NAME.equals("enrc2b")
-                || DEVICE_NAME.equals("heroc")
                 || DEVICE_NAME.equals("shooter")
                 || DEVICE_NAME.equals("i9300")
                 || DEVICE_NAME.equals("jgedlte")
@@ -859,7 +894,8 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("t0ltetmo"))
             TWRP_VERSION = "-2.6.0.3";
 
-	    if (DEVICE_NAME.equals("n8000"))
+	    if (DEVICE_NAME.equals("n8000")
+                || DEVICE_NAME.equals("heroc"))
 		    TWRP_VERSION = "-2.6.1.0";
 
 	    if (DEVICE_NAME.equals("tf201")) {

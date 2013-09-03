@@ -33,6 +33,14 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.7]
+
+-Acer A700 (picasso_m) added
+-Vestel Mevlana (mevlana) added
+-LG F100S (batman_skt) added
+-Motorola Droid2 Global Edition (cdma_droid2we/droid2we) added
+-Better reports
+
 Update [1.4.6]
 
 -Blank Screen fixed
@@ -434,7 +442,7 @@ Supported Devices
 -Samsung Galaxy Tab 2 (GT-P3113)
 
 -Motorola Droid (sholes)
--Motorola Droid2 (droid2)
+-Motorola Droid2 (droid2/droid2we)
 -Motorola XOOM (stingray/wingray)
 
 -LG Optimus HD X4 (x3)
@@ -459,6 +467,8 @@ Supported Devices
 -Samsung Galaxy S4 (Google Play Edition/jgedlte)
 
 ----- [CUSTOM only] -----
+
+-Acer A700 (picasso_m)
 
 -ASUS Transformer Pad (TF300T)
 
@@ -485,10 +495,13 @@ Supported Devices
 -LG Optimus Elite (m3s)
 -LG Optimus Me (pecan)
 -LG Connect 4G (cayman)
+-LG F100S (batman_skt)
 
 -Motorola Droid RAZR (spyder/cdma_spyder)
 -Motorola DROID RAZR HD (vanquish)
 -Motorola Xoom UMTS (everest)
+
+-Vestel Mevlana (mevlana)
 
 -Rk29sdk
 

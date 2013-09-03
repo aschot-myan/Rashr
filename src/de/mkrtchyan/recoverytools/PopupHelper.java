@@ -23,6 +23,7 @@ package de.mkrtchyan.recoverytools;
 
 import android.content.Context;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.PopupMenu;
 
 import org.sufficientlysecure.rootcommands.util.RootAccessDeniedException;
@@ -30,9 +31,9 @@ import org.sufficientlysecure.rootcommands.util.RootAccessDeniedException;
 import de.mkrtchyan.utils.Common;
 
 @SuppressWarnings("NewApi")
-public class PopupHelper implements PopupMenu.OnMenuItemClickListener {
-    Common mCommon = new Common();
-    Context mContext;
+class PopupHelper implements PopupMenu.OnMenuItemClickListener {
+    private Common mCommon = new Common();
+    private Context mContext;
 
     public PopupHelper(Context mContext) {
         this.mContext = mContext;
@@ -75,4 +76,11 @@ public class PopupHelper implements PopupMenu.OnMenuItemClickListener {
                 return false;
         }
     }
+
+	public void showPopupMenu(int MENU, View view) {
+		PopupMenu popup = new PopupMenu(mContext, view);
+		popup.inflate(MENU);
+		popup.setOnMenuItemClickListener(new PopupHelper(mContext));
+		popup.show();
+	}
 }
