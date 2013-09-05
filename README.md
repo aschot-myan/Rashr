@@ -33,6 +33,17 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.8]
+
+-Samsung Galaxy SIII (d2mtr) added
+-LG Optimus L5 (e610) added
+-HTC Desire C (golfu) added
+-LG P769 (u2) added
+-Samsung Galaxy Note 8.0 (konawifi) added
+-HTC EVO 3D (shooteru) added
+-LG Optimus 3D (p920) added
+-Samsung Galaxy Note 2 LTE (t0lte) fixed
+
 Update [1.4.7]
 
 -Acer A700 (picasso_m) added
@@ -400,6 +411,7 @@ Supported Devices
 -HTC Incredible S (vivo)
 -HTC Incredible 2 (vivow)
 -HTC EVO (supersonic/CDMA)
+-HTC EVO 3D (shooter/shooteru)
 -HTC Evo 4G LTE (jewel)
 -HTC One V (primou)
 -HTC One S (ville/villec2)
@@ -446,6 +458,7 @@ Supported Devices
 -Motorola XOOM (stingray/wingray)
 
 -LG Optimus HD X4 (x3)
+-LG Optimus 3D (p920)
 
 -HTC G2 (vision)
 -HTC Hero (hero)
@@ -458,6 +471,12 @@ Supported Devices
 ----- [TWRP only] -----
 
 -Asus Google Nexus 7 2013 (flo)
+
+-HTC Desire C (golfu)
+
+-LG Optimus L5 (e610)
+
+-Samsung Galaxy SIII (d2mtr)
 
 -Sony Xperia S(nozomi/LT30p)
 -Sony Xperia Play(mint/LT26i)
@@ -477,6 +496,7 @@ Supported Devices
 -Samsung Galaxy S4 (ja3g)
 -Samsung Galaxy Exhibit (ancora_tmo)
 -Samsung Galaxy Tab 7 Plus (p6200)
+-Samsung Galaxy Note 8.0 (konawifi)
 
 -HTC First (mystul)
 -HTC Flyer (flyer)
@@ -496,6 +516,7 @@ Supported Devices
 -LG Optimus Me (pecan)
 -LG Connect 4G (cayman)
 -LG F100S (batman_skt)
+-LG P769 (u2)
 
 -Motorola Droid RAZR (spyder/cdma_spyder)
 -Motorola DROID RAZR HD (vanquish)

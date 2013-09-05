@@ -183,8 +183,8 @@ public class RecoveryTools extends Activity {
 		    final LinearLayout ll = new LinearLayout(mContext);
 		    ll.setOrientation(LinearLayout.VERTICAL);
 		    final EditText et = new EditText(mContext);
-		    if (mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name").equals("")) {
-			    et.setText(mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name"));
+            if (!mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name").equals("")) {
+                et.setText(mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name"));
 				mDeviceHandler = new DeviceHandler(mContext, mCommon.getStringPerf(mContext, "recovery-tools", "custom_device_name"));
 		    } else {
                 et.setText(Build.DEVICE);
@@ -494,7 +494,7 @@ public class RecoveryTools extends Activity {
                     intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
                     intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report");
 	                intent.putExtra(Intent.EXTRA_TEXT, message);
-	                startActivity(Intent.createChooser(intent, "Send as EMAIL"));
+                    startActivity(Intent.createChooser(intent, "Send over GMAIL"));
                     reportDialog.dismiss();
                 } catch (NameNotFoundException e) {
                     e.printStackTrace();

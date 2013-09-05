@@ -60,7 +60,6 @@ public class DeviceHandler {
     private boolean TWRP_OFFICIAL = true;
     private boolean CWM_OFFICIAL = true;
     private Context mContext;
-	final private Common mCommon = new Common();
 
     public File fflash, fdump, charger, chargermon, ric;
 
@@ -123,6 +122,10 @@ public class DeviceHandler {
 //      Samsung Galaxy Tab 7 Plus
 		if (DEVICE_NAME.equals("gt-p6200"))
 			DEVICE_NAME = "p6200";
+
+//      Samsung Galaxy Note 8.0
+        if (MODEL.equals("gt-n5110"))
+            DEVICE_NAME = "konawifi";
 
 //		Kindle Fire HD 7"
 		if (DEVICE_NAME.equals("d01e"))
@@ -305,6 +308,12 @@ public class DeviceHandler {
 				|| BOARD.equals("u2")
 				|| MODEL.equals("lg-p760"))
 			DEVICE_NAME = "p760";
+
+//      LG Optimus L5
+        if (DEVICE_NAME.equals("m4")
+                || MODEL.equals("lg-e610"))
+            DEVICE_NAME = "e610";
+
 //      Huawei U9508
 		if (BOARD.equals("u9508")
 				|| DEVICE_NAME.equals("hwu9508"))
@@ -315,6 +324,11 @@ public class DeviceHandler {
 				|| BOARD.equals("u9200")
 				|| MODEL.equals("u9200"))
 			DEVICE_NAME = "u9200";
+
+//      Motorola RAZR
+        if (DEVICE_NAME.equals("cdma_yangtze")
+                || BOARD.equals("yangtze"))
+            DEVICE_NAME = "yangtze";
 
 //      Motorola Droid RAZR
 		if (DEVICE_NAME.equals("cdma_spyder")
@@ -381,6 +395,7 @@ public class DeviceHandler {
 //		Samsung DEVICEs + Same
         if (DEVICE_NAME.equals("d2att")
                 || DEVICE_NAME.equals("d2tmo")
+                || DEVICE_NAME.equals("d2mtr")
                 || DEVICE_NAME.equals("d2vzw")
                 || DEVICE_NAME.equals("d2spr")
                 || DEVICE_NAME.equals("d2usc")
@@ -394,8 +409,10 @@ public class DeviceHandler {
 			    || DEVICE_NAME.equals("p3110")
 			    || DEVICE_NAME.equals("p6200")
 			    || DEVICE_NAME.equals("n8000")
-                || DEVICE_NAME.equals("sph-d710vmub"))
-		    return "/dev/block/mmcblk0p6";
+                || DEVICE_NAME.equals("sph-d710vmub")
+                || DEVICE_NAME.equals("p920")
+                || DEVICE_NAME.equals("konawifi"))
+            return "/dev/block/mmcblk0p6";
 
 	    if (DEVICE_NAME.equals("t03g")
                 || DEVICE_NAME.equals("tf700t")
@@ -426,8 +443,10 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("jfltetmo")
                 || DEVICE_NAME.equals("jflteusc")
                 || DEVICE_NAME.equals("flyer")
-                || DEVICE_NAME.equals("saga"))
-		    return "/dev/block/mmcblk0p21";
+                || DEVICE_NAME.equals("saga")
+                || DEVICE_NAME.equals("shooteru")
+                || DEVICE_NAME.equals("golfu"))
+            return "/dev/block/mmcblk0p21";
 
 	    if (DEVICE_NAME.equals("jena"))
 		    return "/dev/block/mmcblk0p12";
@@ -435,6 +454,10 @@ public class DeviceHandler {
 	    if (DEVICE_NAME.equals("GT-I9103")
 			    || DEVICE_NAME.equals("mevlana"))
 		    return "/dev/block/mmcblk0p8";
+
+//      LG DEVICEs + Same
+        if (DEVICE_NAME.equals("e610"))
+            return "/dev/block/mmcblk0p17";
 
 //		HTC DEVICEs + Same
         if (DEVICE_NAME.equals("m7"))
@@ -473,7 +496,10 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("droid2we"))
 	        return "/dev/block/mmcblk1p16";
 
-	    if (DEVICE_NAME.equals("olympus")
+        if (DEVICE_NAME.equals("spyder"))
+            return "/dev/block/mmcblk1p15";
+
+        if (DEVICE_NAME.equals("olympus")
                 || DEVICE_NAME.equals("ja3g")
                 || DEVICE_NAME.equals("daytona"))
 		    return "/dev/block/mmcblk0p10";
@@ -512,8 +538,9 @@ public class DeviceHandler {
 		    return "/dev/block/mmcblk0p14";
 
 	    if (DEVICE_NAME.equals("p970")
-                || DEVICE_NAME.equals("mint"))
-		    return "/dev/block/mmcblk0p4";
+                || DEVICE_NAME.equals("mint")
+                || DEVICE_NAME.equals("u2"))
+            return "/dev/block/mmcblk0p4";
 
 //		ZTE DEVICEs + Same
         if (DEVICE_NAME.equals("warp2")
@@ -587,8 +614,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("p999")
 		        || DEVICE_NAME.equals("warp2")
 		        || DEVICE_NAME.equals("n8000")
-                || DEVICE_NAME.equals("heroc")) {
-	        TWRP = true;
+                || DEVICE_NAME.equals("heroc")
+                || DEVICE_NAME.equals("shooteru")) {
+            TWRP = true;
             CWM = true;
         }
 
@@ -612,16 +640,19 @@ public class DeviceHandler {
 		        || DEVICE_NAME.equals("shadow")
 		        || DEVICE_NAME.equals("dlxj")
                 || DEVICE_NAME.equals("jfltexx")
-                || DEVICE_NAME.equals("droid2we"))
-	        CWM = true;
+                || DEVICE_NAME.equals("droid2we")
+                || DEVICE_NAME.equals("p920"))
+            CWM = true;
 
         if (DEVICE_NAME.equals("flo")
                 || DEVICE_NAME.equals("nozomi")
                 || DEVICE_NAME.equals("mint")
                 || DEVICE_NAME.equals("tate")
-		        || DEVICE_NAME.equals("jgedlte")
-		        || DEVICE_NAME.equals("t0ltecan"))
-	        TWRP = true;
+                || DEVICE_NAME.equals("d2mtr")
+                || DEVICE_NAME.equals("jgedlte")
+                || DEVICE_NAME.equals("t0ltecan")
+                || DEVICE_NAME.equals("golfu"))
+            TWRP = true;
 
         if (!RecoveryPath.equals("")
                 || FLASH_OVER_RECOVERY
@@ -690,8 +721,11 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("stingray")
 		        || DEVICE_NAME.equals("wingray")
 		        || DEVICE_NAME.equals("dlxj")
-		        || DEVICE_NAME.equals("n8000"))
-	        CWM_VERSION = "-touch";
+                || DEVICE_NAME.equals("n8000")
+                || DEVICE_NAME.equals("p920")
+                || DEVICE_NAME.equals("t0lte")
+                || DEVICE_NAME.equals("shooteru"))
+            CWM_VERSION = "-touch";
 
 //	    Newest Clockworkmod version for devices
         if (DEVICE_NAME.equals("sholes"))
@@ -717,7 +751,7 @@ public class DeviceHandler {
             CWM_VERSION = CWM_VERSION + "-5.0.2.0";
 
         if (DEVICE_NAME.equals("droid2we"))
-            CWM_VERSION = CWM_VERSION + "5.0.2.3";
+            CWM_VERSION = CWM_VERSION + "-5.0.2.3";
 
         if (DEVICE_NAME.equals("daytona"))
             CWM_VERSION = CWM_VERSION + "-5.0.2.5";
@@ -732,7 +766,8 @@ public class DeviceHandler {
             CWM_VERSION = CWM_VERSION + "-5.8.0.1";
 
         if (DEVICE_NAME.equals("shooter")
-                || DEVICE_NAME.equals("bravo"))
+                || DEVICE_NAME.equals("bravo")
+                || DEVICE_NAME.equals("shooteru"))
             CWM_VERSION = CWM_VERSION + "-5.8.0.2";
         if (DEVICE_NAME.equals("pyramid"))
             CWM_VERSION = CWM_VERSION + "-5.8.0.9";
@@ -761,6 +796,9 @@ public class DeviceHandler {
         if (DEVICE_NAME.equals("p970"))
             CWM_VERSION = CWM_VERSION + "-6.0.1.4";
 
+        if (DEVICE_NAME.equals("p920"))
+            CWM_VERSION = CWM_VERSION + "-6.0.1.9";
+
         if (DEVICE_NAME.equals("p3113"))
             CWM_VERSION = CWM_VERSION + "-6.0.2.3";
 
@@ -768,6 +806,9 @@ public class DeviceHandler {
                 || DEVICE_NAME.equals("warp2")
                 || DEVICE_NAME.equals("p3110"))
             CWM_VERSION = CWM_VERSION + "-6.0.2.7";
+
+        if (DEVICE_NAME.equals("e610"))
+            CWM_VERSION = CWM_VERSION + "-6.0.2.8";
 
         if (DEVICE_NAME.equals("t0ltevzw"))
             CWM_VERSION = "-6.0.3.0";
@@ -811,12 +852,12 @@ public class DeviceHandler {
         if (DEVICE_NAME.equals("jfltexx")
                 || DEVICE_NAME.equals("jfltespr")
                 || DEVICE_NAME.equals("m7wls")
-                || DEVICE_NAME.equals("jfltevzw")
-                || DEVICE_NAME.equals("t0lte"))
+                || DEVICE_NAME.equals("jfltevzw"))
             CWM_VERSION = CWM_VERSION + "-6.0.3.2";
 
-	    if (DEVICE_NAME.equals("n8000"))
-		    CWM_VERSION = CWM_VERSION + "-6.0.3.6";
+        if (DEVICE_NAME.equals("n8000")
+                || DEVICE_NAME.equals("t0lte"))
+            CWM_VERSION = CWM_VERSION + "-6.0.3.6";
 
 	    if (CWM_VERSION.equals(""))
             CWM_OFFICIAL = false;
@@ -895,8 +936,12 @@ public class DeviceHandler {
             TWRP_VERSION = "-2.6.0.3";
 
 	    if (DEVICE_NAME.equals("n8000")
-                || DEVICE_NAME.equals("heroc"))
-		    TWRP_VERSION = "-2.6.1.0";
+                || DEVICE_NAME.equals("golfu")
+                || DEVICE_NAME.equals("heroc")
+                || DEVICE_NAME.equals("t0lte")
+                || DEVICE_NAME.equals("d2mtr")
+                || DEVICE_NAME.equals("shooteru"))
+            TWRP_VERSION = "-2.6.1.0";
 
 	    if (DEVICE_NAME.equals("tf201")) {
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH
