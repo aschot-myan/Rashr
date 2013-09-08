@@ -52,27 +52,27 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 		this.mContext = mContext;
 		this.file = file;
 		this.JOB = JOB;
-        mNotifyer = new Notifyer(mContext);
+		mNotifyer = new Notifyer(mContext);
 		mDeviceHandler = new DeviceHandler(mContext);
 	}
 
 	protected void onPreExecute() {
 
 		Log.d(TAG, "Preparing to flash");
-			pDialog = new ProgressDialog(mContext);
+		pDialog = new ProgressDialog(mContext);
 
-			int Title;
-			if (JOB == 1) {
-				Title = R.string.flashing;
-			} else {
-				Title = R.string.creating_bak;
-			}
-			pDialog.setTitle(Title);
-			pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		int Title;
+		if (JOB == 1) {
+			Title = R.string.flashing;
+		} else {
+			Title = R.string.creating_bak;
+		}
+		pDialog.setTitle(Title);
+		pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
-			pDialog.setMessage(file.getName());
-			pDialog.setCancelable(false);
-			pDialog.show();
+		pDialog.setMessage(file.getName());
+		pDialog.setCancelable(false);
+		pDialog.show();
 
 	}
 
@@ -139,15 +139,15 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 				abuilder.setTitle(R.string.tsk_end)
 						.setMessage(mContext.getString(R.string.flashed) + " " + mContext.getString(R.string.reboot_recovery_now))
 						.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialogInterface, int i) {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
 								try {
 									mCommon.executeSuShell(mContext, "reboot recovery");
 								} catch (RootAccessDeniedException e) {
 									e.printStackTrace();
 								}
-						}
-							})
+							}
+						})
 						.setNeutralButton(R.string.neutral, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialogInterface, int i) {
@@ -155,11 +155,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 							}
 						})
 						.setNegativeButton(R.string.never_again, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialogInterface, int i) {
+							@Override
+							public void onClick(DialogInterface dialogInterface, int i) {
 								mCommon.setBooleanPerf(mContext, "recovery-tools", "never_show", true);
-						}
-							})
+							}
+						})
 						.show();
 			}
 		} else {

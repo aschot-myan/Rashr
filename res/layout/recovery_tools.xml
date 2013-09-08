@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     ads:adUnitId="a151cdc8be01253"
                     ads:loadAdOnCreate="true"
-                    ads:testDevices="046D151862B2CEFDBB35C36762EE01CE, TEST_EMULATOR"
+                    ads:testDevices="F0518E98AFA0F7A8FBE3612CB987C9C5, TEST_EMULATOR"
                     ads:adSize="SMART_BANNER"
                     android:layout_gravity="center">
             </com.google.ads.AdView>

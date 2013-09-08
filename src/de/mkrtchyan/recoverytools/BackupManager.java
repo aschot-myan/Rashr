@@ -27,25 +27,25 @@ import android.os.Bundle;
 import android.view.View;
 
 public class BackupManager extends Activity {
-    private Context mContext = this;
-    private BackupHandler mBackupHandler;
+	private Context mContext = this;
+	private BackupHandler mBackupHandler;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.bakmgr_activity);
-	    mBackupHandler = new BackupHandler(mContext);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.bakmgr_activity);
+		mBackupHandler = new BackupHandler(mContext);
+	}
 
-    public void bBackup(View view) {
-        mBackupHandler.backup();
-    }
+	public void bBackup(View view) {
+		mBackupHandler.backup();
+	}
 
-    public void bRestore(View view) {
-        mBackupHandler.restore();
-    }
+	public void bRestore(View view) {
+		mBackupHandler.restore();
+	}
 
-    public void bDeleteBackup(View view) {
-        mBackupHandler.deleteBackup();
-    }
+	public void bDeleteBackup(View view) {
+		mBackupHandler.deleteBackup();
+	}
 }

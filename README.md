@@ -33,6 +33,24 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.4.9]
+
+-ASUS PadFone 2 (A68) added
+-Samsung Galaxy Note II CDMA (t03gctc) added
+-LG-P769 fixed
+-Motorola ATRIX HD (qinara) added
+-Samsung Galaxy Note 8.0 AT&T (konalteatt) added
+-HTC Rezound (vigor) added
+-LG Motion 4G (l0) added
+-Nexus 7 (2013) (deb) added
+-Nexus 7 (2013) (flo) CWM img added
+-HTC Vivid (holiday) added
+-LG Optimus G International (geehrc) added
+-Motorola DROID4 (maserati) added
+-Kyocera Torque (e6710) added
+-LG Spectrum II 4G (vs930) added
+-PANTECH IM-A840SP (im-a840sp) added
+
 Update [1.4.8]
 
 -Samsung Galaxy SIII (d2mtr) added
@@ -394,136 +412,172 @@ Supported Devices
 
 ----- [TWRP & CWM] -----
 
--Nexus One (passion)
--Nexus S (crespo/crespo4g)
+--[NEXUS]--
+-One (passion)
+-S (crespo/crespo4g)
 -Galaxy Nexus (maguro/toro/toroplus)
--Nexus 4 (mako)
--Nexus 7 (grouper/tilapia)
--Nexus 10 (manta)
+-N4 (mako)
+-N7 (grouper/tilapia/flo)
+-N10 (manta)
 
--Asus Transformer Infinity (ft700t)
+--[ASUS]--
+-Transformer Infinity (ft700t)
 
--HTC HD2 (leo)
--HTC Desire HD (ace)
--HTC Desire S (saga)
--HTC Sensation (pyramid)
--HTC Fireball (fireball)
--HTC Incredible S (vivo)
--HTC Incredible 2 (vivow)
--HTC EVO (supersonic/CDMA)
--HTC EVO 3D (shooter/shooteru)
--HTC Evo 4G LTE (jewel)
--HTC One V (primou)
--HTC One S (ville/villec2)
--HTC One X (endeavoru)
--HTC One XL (evita)
--HTC Butterfly (dlxub1)
--HTC Droid DNA (dlx)
--HTC ONE GSM (m7/m7ul/m7wls/m7spr)
+--[HTC]--
+-HD2 (leo)
+-Desire HD (ace)
+-Desire S (saga)
+-Sensation (pyramid)
+-Fireball (fireball)
+-Incredible S (vivo)
+-Incredible 2 (vivow)
+-EVO (supersonic/CDMA)
+-EVO 3D (shooter/shooteru)
+-Evo 4G LTE (jewel)
+-Vivid (holiday)
+-One V (primou)
+-One S (ville/villec2)
+-One X (endeavoru)
+-One XL (evita)
+-Butterfly (dlxub1)
+-Droid DNA (dlx)
+-ONE GSM (m7/m7ul/m7wls/m7spr)
 
 -Motorola Atrix 4G (olympus)
 
 -Oppo Find5 (find5/x909)
 
--Samsung Galaxy S4 (GT-I9505/jflte/xx/spr/can/att/usc/ja3g)
--Samsung Galaxy S2 LTE (skyrocket)
--Samsung Galaxy Note 10.1 (p4notewifi/n8013)
--Samsung Galaxy Note 2 LTE (t0lte/tmo/att/can/vzw)
--Samsung Galaxy SIII (i9300/d2att/d2tmo/d2vzw/d2spr)
--Samsung Galaxy SIII Mini (golden)
--Samsung Galaxy Mini II (jena)
+--[SAMSUNG]--
+-Galaxy S4 (GT-I9505/jflte/xx/spr/can/att/usc/ja3g)
+-Galaxy S2 LTE (skyrocket)
+-Galaxy Note 10.1 (p4notewifi/n8013)
+-Galaxy Note 2 LTE (t0lte/tmo/att/can/vzw)
+-Galaxy SIII (i9300/d2att/d2tmo/d2vzw/d2spr)
+-Galaxy SIII Mini (golden)
+-Galaxy Mini II (jena)
 
--Sony Xperia Z (C6603)
+--[SONY]--
+-Xperia Z (C6603)
 
--LG Optiomus G (geeb/geebhrc)
--LG GT540 Optimus (swift)
--LG G2X (p999)
--LG P990 OPTIMUS 2X/SPEED (p990)
--LG Optimus Black (p970)
+--[LG]--
+-Optiomus G (geeb/geebhrc)
+-GT540 Optimus (swift)
+-G2X (p999)
+-P990 OPTIMUS 2X/SPEED (p990)
+-Optimus Black (p970)
 
--ZTE Sequence (warp2)
+--[ZTE]--
+-Sequence (warp2)
 
 ----- [CWM only] -----
 
--Samsung Galaxy SII (i9100/i9100G)
--Samsung Galaxy S2 AT&T (SGH-I777/SGH-I727)
--Samsung Galaxy Note (n7000)
--Samsung Galaxy Note II (n8000)
--Samsung GalaxyS Captivate (SGH-I897)
--Samsung Galaxy S (i9000/M/T/galaxys/galaxysmtd)
--Samsung Galaxy Tab 2 (GT-P3113)
+--[SAMSUNG]--
+-Galaxy SII (i9100/i9100G)
+-Galaxy S2 AT&T (SGH-I777/SGH-I727)
+-Galaxy Note (n7000)
+-Galaxy Note II (n8000)
+-GalaxyS Captivate (SGH-I897)
+-Galaxy S (i9000/M/T/galaxys/galaxysmtd)
+-Galaxy Tab 2 (GT-P3113)
 
--Motorola Droid (sholes)
--Motorola Droid2 (droid2/droid2we)
--Motorola XOOM (stingray/wingray)
+--[MOTOROLA]--
+-Droid (sholes)
+-Droid2 (droid2/droid2we)
+-XOOM (stingray/wingray)
 
--LG Optimus HD X4 (x3)
--LG Optimus 3D (p920)
+--[LG]--
+-Optimus G International (geehrc)
+-Optimus HD X4 (x3)
+-Optimus 3D (p920)
 
--HTC G2 (vision)
--HTC Hero (hero)
--HTC Desire (bravo)
--HTC One X+ (enrc2)
--HTC Butterfly J (dlxj)
+--[HTC]--
+-Rezound (vigor)
+-G2 (vision)
+-Hero (hero)
+-Desire (bravo)
+-One X+ (enrc2)
+-Butterfly J (dlxj)
 
--ZTE Blade (blade)
+--[ZTE]--
+-Blade (blade)
 
 ----- [TWRP only] -----
 
--Asus Google Nexus 7 2013 (flo)
+--[ASUS]--
 
--HTC Desire C (golfu)
+-PadFone 2 (a68)
 
--LG Optimus L5 (e610)
+--[NEXUS]--
+-N7 (deb)
 
--Samsung Galaxy SIII (d2mtr)
+--[HTC]--
+-Desire C (golfu)
 
--Sony Xperia S(nozomi/LT30p)
--Sony Xperia Play(mint/LT26i)
+--[LG]--
+-Optimus L5 (e610)
+
+--[SAMSUNG]--
+-Galaxy SIII (d2mtr)
+-Galaxy S4 (Google Play Edition/jgedlte)
+
+--[SONY]--
+-Xperia S(nozomi/LT30p)
+-Xperia Play(mint/LT26i)
 
 -Kindle Fire HD 7" (tate)
 
--Samsung Galaxy S4 (Google Play Edition/jgedlte)
-
 ----- [CUSTOM only] -----
 
--Acer A700 (picasso_m)
+--[ACER]--
+-A700 (picasso_m)
 
--ASUS Transformer Pad (TF300T)
+--[ASUS]--
+-Transformer Pad (TF300T)
 
--Samsung Galaxy S II Duos (SCH-i929)
--Samsung Epic 4G Touch (SPH-D710)
--Samsung Galaxy S4 (ja3g)
--Samsung Galaxy Exhibit (ancora_tmo)
--Samsung Galaxy Tab 7 Plus (p6200)
--Samsung Galaxy Note 8.0 (konawifi)
+--[SAMSUNG]--
+-Galaxy S II Duos (SCH-i929)
+-Epic 4G Touch (SPH-D710)
+-Galaxy S4 (ja3g)
+-Galaxy Exhibit (ancora_tmo)
+-Galaxy Tab 7 Plus (p6200)
+-Galaxy Note 8.0 (konawifi/konalteatt)
+-Galaxy Note II CDMA (t03gctc)
 
--HTC First (mystul)
--HTC Flyer (flyer)
--HTC Desire SV (magnids)
+--[HTC]--
+-First (mystul)
+-Flyer (flyer)
+-Desire SV (magnids)
 
--Huawei U9508 (hwu9508)
--Huawei Ascend P1 (u9200)
--Huawei C8813 (hwc8813)
--Huawei C8812E (c8812e)
+--[HUAWEI]--
+-U9508 (hwu9508)
+-Ascend P1 (u9200)
+-C8813 (hwc8813)
+-C8812E (c8812e)
 
--Motorola Milestone XT720 (sholest)
--Motorola Droid X (shadow/cdma_shadow)
--Motorola RAZR M (scorpion_mini)
+--[MOTOROLA]--
+-Milestone XT720 (sholest)
+-ATRIX HD (qinara)
+-Droid X (shadow/cdma_shadow)
+-RAZR M (scorpion_mini)
+-Droid RAZR (spyder/cdma_spyder)
+-DROID RAZR HD (vanquish)
+-Xoom UMTS (everest)
+-DROID4 (maserati)
 
--LG Optimus One CDMA (thuderc)
--LG Optimus Elite (m3s)
--LG Optimus Me (pecan)
--LG Connect 4G (cayman)
--LG F100S (batman_skt)
--LG P769 (u2)
+--[LG]--
+-Optimus One CDMA (thuderc)
+-Optimus Elite (m3s)
+-Optimus Me (pecan)
+-Connect 4G (cayman)
+-F100S (batman_skt)
+-P769 (u2)
+-Spectrum II 4G (vs930)
+-Motion 4G (l0)
 
--Motorola Droid RAZR (spyder/cdma_spyder)
--Motorola DROID RAZR HD (vanquish)
--Motorola Xoom UMTS (everest)
-
+--[OTHER]--
+-Kyocera Torque (e6710)
+-PANTECH IM-A840SP (im-a840sp)
 -Vestel Mevlana (mevlana)
-
 -Rk29sdk
 
 *****************

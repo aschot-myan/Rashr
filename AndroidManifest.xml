@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="de.mkrtchyan.recoverytools"
           android:installLocation="auto"
-          android:versionCode="45"
-          android:versionName="1.4.8">
+          android:versionCode="46"
+          android:versionName="1.4.9">
 
-<uses-sdk
+    <uses-sdk
             android:minSdkVersion="7"
             android:targetSdkVersion="18"/>
 

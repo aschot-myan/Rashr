@@ -32,50 +32,50 @@ import de.mkrtchyan.utils.Common;
 
 @SuppressWarnings("NewApi")
 class PopupHelper implements PopupMenu.OnMenuItemClickListener {
-    private Common mCommon = new Common();
-    private Context mContext;
+	private Common mCommon = new Common();
+	private Context mContext;
 
-    public PopupHelper(Context mContext) {
-        this.mContext = mContext;
-    }
+	public PopupHelper(Context mContext) {
+		this.mContext = mContext;
+	}
 
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.iReboot:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iRebootRecovery:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot recovery");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iRebootBootloader:
-                try {
-                    mCommon.executeSuShell(mContext, "reboot bootloader");
-                } catch (RootAccessDeniedException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.iCreateBackup:
-                new BackupHandler(mContext).backup();
-                return true;
-            case R.id.iRestoreBackup:
-                new BackupHandler(mContext).restore();
-                return true;
-            case R.id.iDeleteBackup:
-                new BackupHandler(mContext).deleteBackup();
-                return true;
-            default:
-                return false;
-        }
-    }
+	@Override
+	public boolean onMenuItemClick(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.iReboot:
+				try {
+					mCommon.executeSuShell(mContext, "reboot");
+				} catch (RootAccessDeniedException e) {
+					e.printStackTrace();
+				}
+				return true;
+			case R.id.iRebootRecovery:
+				try {
+					mCommon.executeSuShell(mContext, "reboot recovery");
+				} catch (RootAccessDeniedException e) {
+					e.printStackTrace();
+				}
+				return true;
+			case R.id.iRebootBootloader:
+				try {
+					mCommon.executeSuShell(mContext, "reboot bootloader");
+				} catch (RootAccessDeniedException e) {
+					e.printStackTrace();
+				}
+				return true;
+			case R.id.iCreateBackup:
+				new BackupHandler(mContext).backup();
+				return true;
+			case R.id.iRestoreBackup:
+				new BackupHandler(mContext).restore();
+				return true;
+			case R.id.iDeleteBackup:
+				new BackupHandler(mContext).deleteBackup();
+				return true;
+			default:
+				return false;
+		}
+	}
 
 	public void showPopupMenu(int MENU, View view) {
 		PopupMenu popup = new PopupMenu(mContext, view);

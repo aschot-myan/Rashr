@@ -13,8 +13,13 @@
     <string name="report">Analizza e segnala un dispositivo non supportato</string>
     <string name="sExit">Esci</string>
     <string name="xda">Apri il Thread XDA</string>
-    <string name="rename">Se vuoi rinominare il backup scrivi nel campo di testo. Altrimenti verrà impostata l\'ora corrente.</string>
-    <string name="bak_warning">Prima di fare qualsiasi azione con Recovery-Tools crea un backup e salvalo nel tuo PC. \nIl Backup sarà salvato in *InternalStorage*/Recovery-Tools/backups/.\nIl programmatore non è responsabile per danni al tuo dispositivo.
+    <string name="rename">Se vuoi rinominare il backup scrivi nel campo di testo. Altrimenti verrà
+        impostata l\'ora corrente.
+    </string>
+    <string name="bak_warning">Prima di fare qualsiasi azione con Recovery-Tools crea un backup e
+        salvalo nel tuo PC. \nIl Backup sarà salvato in
+        *InternalStorage*/Recovery-Tools/backups/.\nIl programmatore non è responsabile per danni al
+        tuo dispositivo.
     </string>
     <string name="risk">Conosco i rischi</string>
     <string name="bak_now">Backup Manager</string>
@@ -23,7 +28,8 @@
     <string name="sRebootBootloader">Riavvia in Bootloader</string>
 
     <string name="rate_title">Vota %s</string>
-    <string name="rate_message">Se ti piace utilizzare %s, ti dispiacerebbe usare un momento del tuo tempo per votarla?
+    <string name="rate_message">Se ti piace utilizzare %s, ti dispiacerebbe usare un momento del tuo
+        tempo per votarla?
         Grazie per il tuo supporto!
     </string>
     <string name="rate">Si, Vota %s</string>
@@ -33,9 +39,12 @@
     <string name="info">Informazioni</string>
     <string name="flashed">Recovery flashata.</string>
     <string name="warning">Attenzione!</string>
-    <string name="kernel_to">Flashare il Recovery System su questo dispositivo flasherà il Boot.img (Kernel) stock con una custom Recovery.
+    <string name="kernel_to">Flashare il Recovery System su questo dispositivo flasherà il Boot.img
+        (Kernel) stock con una custom Recovery.
     </string>
-    <string name="flash_over_recovery">Flashare la Recovery adesso? (necessità il Riavvio in Recovery)</string>
+    <string name="flash_over_recovery">Flashare la Recovery adesso? (necessità il Riavvio in
+        Recovery)
+    </string>
     <string name="instructions">Istruzioni</string>
     <string name="instruction">CWM:\n\nMain Menu -> install zip from sdcard -> choose zip from
         sdcard\n\nTWRP:\n\nMain Menu -> Install
@@ -46,19 +55,23 @@
         Continuare?
     </string>
     <string name="noconnection">Nessuna connessione. Download annullato!</string>
-    <string name="failed_download">Oh no, si è verificato un problema. Per favore riavvia il download.\n\n%s
+    <string name="failed_download">Oh no, si è verificato un problema. Per favore riavvia il
+        download.\n\n%s
     </string>
     <string name="error">Errore</string>
-    <string name="notsupportded">Il tuo dispositivo non è ancora supportato dallo sviluppatore. Scansiona il sistema e segnala un dispositivo non supportato?
+    <string name="notsupportded">Il tuo dispositivo non è ancora supportato dallo sviluppatore.
+        Scansiona il sistema e segnala un dispositivo non supportato?
     </string>
-    <string name="noroot">"Root non presente. Esegui il Root. Maggiori informazioni su xda-developer.com"
+    <string name="noroot">"Root non presente. Esegui il Root. Maggiori informazioni su
+        xda-developer.com"
     </string>
     <string name="using_dd">Usando i file binari dd.</string>
     <string name="using_mtd">Usa flash/dump_image (MTD)</string>
 
     <string name="Downloading">Download in corso…</string>
     <string name="commentar">Commenti</string>
-    <string name="commenthint">Commenta qui, cosa non funziona correttamente (download, flash, supporto o altro)
+    <string name="commenthint">Commenta qui, cosa non funziona correttamente (download, flash,
+        supporto o altro)
     </string>
     <string name="positive">Si, per favore</string>
     <string name="neutral">No, grazie</string>
@@ -76,7 +89,8 @@
     <string name="flashing">Flash in corso…</string>
     <string name="creating_bak">Backup in corso…</string>
     <string name="clear_logs">Pulisci Logs</string>
-    <string name="download_utils">Per usare quest\'App hai bisogno di scaricare dei piccoli tool (circa 512KB). Richiede la connessione internet.\nScaricarli ora?
+    <string name="download_utils">Per usare quest\'App hai bisogno di scaricare dei piccoli tool
+        (circa 512KB). Richiede la connessione internet.\nScaricarli ora?
     </string>
     <string name="wrong_format">Hai scelto un file sbagliato. Il File deve essere in formato %s.
     </string>
