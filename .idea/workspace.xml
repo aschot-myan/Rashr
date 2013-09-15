@@ -19,25 +19,44 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Ads" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="de.mkrtchyan." />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03225607-4d97-4462-9431-f9ffd0a5921f" name="Default" comment="Update [1.4.8]&#10;&#10;-Samsung Galaxy SIII (d2mtr) added&#10;-LG Optimus L5 (e610) added&#10;-HTC Desire C (golfu) added&#10;-LG P769 (u2) added&#10;-Samsung Galaxy Note 8.0 (konawifi) added&#10;-HTC EVO 3D (shooteru) added&#10;-LG Optimus 3D (p920) added&#10;-Samsung Galaxy Note 2 LTE (t0lte) fixed">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_history.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_history.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_history.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_history.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Recovery-Tools.apk" afterPath="$PROJECT_DIR$/Recovery-Tools.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupManager.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" afterPath="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/gen/de/mkrtchyan/utils/BuildConfig.java" afterPath="$PROJECT_DIR$/../Utils-Library/gen/de/mkrtchyan/utils/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Rebooter.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Rebooter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Recovery-Tools.iml" afterPath="$PROJECT_DIR$/Recovery-Tools.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" afterPath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_backup_manager.xml" afterPath="$PROJECT_DIR$/res/layout/activity_backup_manager.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/bakmgr_activity.xml" afterPath="$PROJECT_DIR$/res/layout/bakmgr_activity.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/bakmgr_menu.xml" afterPath="$PROJECT_DIR$/res/menu/bakmgr_menu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_backup.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_backup.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_command_logs.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_command_logs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_comment.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_comment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_rebooter.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_rebooter.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/donations_activity.xml" afterPath="$PROJECT_DIR$/res/layout/donations_activity.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/rebooter_menu.xml" afterPath="$PROJECT_DIR$/res/menu/rebooter_menu.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/recovery_tools.xml" afterPath="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-it/strings.xml" afterPath="$PROJECT_DIR$/res/values-it/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/recovery_tools_menu.xml" afterPath="$PROJECT_DIR$/res/menu/recovery_tools_menu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Recovery-Tools.iws" />
@@ -109,38 +128,24 @@
       <file leaf-file-name="RecoveryTools.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="503" column="38" selection-start="18770" selection-end="18770" vertical-scroll-proportion="0.0" vertical-offset="7471" max-vertical-offset="8772">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PopupHelper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="39" selection-start="1819" selection-end="1819" vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="1564">
+            <state line="326" column="27" selection-start="15478" selection-end="15492" vertical-scroll-proportion="0.0" vertical-offset="4743" max-vertical-offset="8602">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#6284#6304#0" expanded="true" />
+                <element signature="e#9400#9411#0" expanded="true" />
+                <element signature="e#12329#12360#0" expanded="true" />
+                <element signature="e#13851#13873#0" expanded="true" />
+                <element signature="e#13975#13992#0" expanded="true" />
+                <element signature="e#14073#14091#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlashUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
+      <file leaf-file-name="FileChooser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="24" selection-start="4645" selection-end="4645" vertical-scroll-proportion="0.0" vertical-offset="1981" max-vertical-offset="2907">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeviceHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="699" column="0" selection-start="20161" selection-end="20161" vertical-scroll-proportion="0.0" vertical-offset="11203" max-vertical-offset="19091">
+            <state line="65" column="3" selection-start="2437" selection-end="2437" vertical-scroll-proportion="0.0" vertical-offset="1105" max-vertical-offset="2091">
               <folding />
             </state>
           </provider>
@@ -149,7 +154,7 @@
       <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="0" selection-start="1475" selection-end="1981" vertical-scroll-proportion="0.3322884" vertical-offset="383" max-vertical-offset="10370">
+            <state line="37" column="0" selection-start="1491" selection-end="1981" vertical-scroll-proportion="0.19432624" vertical-offset="492" max-vertical-offset="10948">
               <folding />
             </state>
           </provider>
@@ -158,7 +163,57 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="37" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+            <state line="8" column="33" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
+              <folding>
+                <element signature="e#1040#1058#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PopupHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="62" column="24" selection-start="2593" selection-end="2593" vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="1292">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeviceHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="439" column="39" selection-start="14168" selection-end="14168" vertical-scroll-proportion="0.0" vertical-offset="7286" max-vertical-offset="18683">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#37667#40968#0" expanded="true" />
+                <element signature="e#37941#39836#0" expanded="true" />
+                <element signature="e#39809#39810#0" expanded="true" />
+                <element signature="e#39981#40916#0" expanded="true" />
+                <element signature="e#40229#40848#0" expanded="true" />
+                <element signature="e#40813#40814#0" expanded="true" />
+                <element signature="e#40889#40890#0" expanded="true" />
+                <element signature="e#40949#40950#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Downloader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="144" column="13" selection-start="5103" selection-end="5103" vertical-scroll-proportion="0.0" vertical-offset="2374" max-vertical-offset="3944">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BackupHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="135" column="36" selection-start="5366" selection-end="5366" vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="2873">
               <folding />
             </state>
           </provider>
@@ -188,30 +243,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/values-it/strings.xml" />
-        <option value="$PROJECT_DIR$/res/values-es/strings.xml" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/dialog_backup.xml" />
         <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java" />
         <option value="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" />
         <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" />
-        <option value="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
         <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
-        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java" />
+        <option value="$PROJECT_DIR$/res/layout/drawer_list_item.xml" />
+        <option value="$PROJECT_DIR$/res/layout/drawer.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
+        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -245,6 +300,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -261,68 +317,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rootcommands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rootcommands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rootcommands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -464,6 +458,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable-xhdpi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -502,31 +514,31 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="ExportedApkPath" value="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\Recovery-Tools.apk" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="vcs.Git" />
     <property name="recentsLimit" value="5" />
     <property name="ExportedModule" value="Recovery-Tools" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/android-support-v4.jar!/" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/GoogleAdMobAdsSdk.jar!/" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4790049867d5cfdc" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Gnex" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -537,11 +549,11 @@
       <recent name="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res\layout" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\raw" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\values" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\menu" />
       <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\layout" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-xxhdpi" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-xhdpi" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-mdpi" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-hdpi" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -555,24 +567,6 @@
       <setting name="params" value="" />
       <setting name="workDir" value="file://$PROJECT_DIR$" />
       <setting name="debug" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
@@ -595,6 +589,24 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="GriffonRunConfigurationType" factoryName="Griffon">
@@ -794,36 +806,40 @@
       <created>1378403089786</created>
       <updated>1378403089786</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Update [1.4.9]&#10;&#10;-ASUS PadFone 2 (A68) added&#10;-Samsung Galaxy Note II CDMA (t03gctc) added&#10;-LG-P769 fixed&#10;-Motorola ATRIX HD (qinara) added&#10;-Samsung Galaxy Note 8.0 AT&amp;T (konalteatt) added&#10;-HTC Rezound (vigor) added&#10;-LG Motion 4G (l0) added&#10;-Nexus 7 (2013) (deb) added&#10;-Nexus 7 (2013) (flo) CWM img added&#10;-HTC Vivid (holiday) added&#10;-LG Optimus G International (geehrc) added&#10;-Motorola DROID4 (maserati) added&#10;-Kyocera Torque (e6710) added&#10;-LG Spectrum II 4G (vs930) added&#10;-PANTECH IM-A840SP (im-a840sp) added">
+      <created>1378634926346</created>
+      <updated>1378634926346</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33570412" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36796537" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32392472" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28030303" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32488987" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28138527" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30241936" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.58064514" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25208333" sideWeight="0.7186147" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.225" sideWeight="0.69758064" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329375" sideWeight="0.6317204" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.160625" sideWeight="0.63852817" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38978493" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -834,12 +850,12 @@
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30376345" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3252688" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3252688" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.146875" sideWeight="0.5564516" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -852,8 +868,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30376345" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.58064514" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39935064" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -877,7 +893,8 @@
     <MESSAGE value="Update [1.4.4]&#10;&#10;-Huawei Ascend P1 (u9200) fixed&#10;-Samsung Galaxy Note (n8000) added.&#10;-Better error detention while downloading&#10;-HTC Butterfly J (dlxj) added&#10;-Samsung Galaxy Tab 7 Plus (p6200) added" />
     <MESSAGE value="Update [1.4.7]&#10;&#10;-Acer A700 (picasso_m) added&#10;-Vestel Mevlana (mevlana) added&#10;-LG F100S (batman_skt) added&#10;-Motorola Droid2 Global Edition (cdma_droid2we/droid2we) added&#10;-Better reports" />
     <MESSAGE value="Update [1.4.8]&#10;&#10;-Samsung Galaxy SIII (d2mtr) added&#10;-LG Optimus L5 (e610) added&#10;-HTC Desire C (golfu) added&#10;-LG P769 (u2) added&#10;-Samsung Galaxy Note 8.0 (konawifi) added&#10;-HTC EVO 3D (shooteru) added&#10;-LG Optimus 3D (p920) added&#10;-Samsung Galaxy Note 2 LTE (t0lte) fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update [1.4.8]&#10;&#10;-Samsung Galaxy SIII (d2mtr) added&#10;-LG Optimus L5 (e610) added&#10;-HTC Desire C (golfu) added&#10;-LG P769 (u2) added&#10;-Samsung Galaxy Note 8.0 (konawifi) added&#10;-HTC EVO 3D (shooteru) added&#10;-LG Optimus 3D (p920) added&#10;-Samsung Galaxy Note 2 LTE (t0lte) fixed" />
+    <MESSAGE value="Update [1.4.9]&#10;&#10;-ASUS PadFone 2 (A68) added&#10;-Samsung Galaxy Note II CDMA (t03gctc) added&#10;-LG-P769 fixed&#10;-Motorola ATRIX HD (qinara) added&#10;-Samsung Galaxy Note 8.0 AT&amp;T (konalteatt) added&#10;-HTC Rezound (vigor) added&#10;-LG Motion 4G (l0) added&#10;-Nexus 7 (2013) (deb) added&#10;-Nexus 7 (2013) (flo) CWM img added&#10;-HTC Vivid (holiday) added&#10;-LG Optimus G International (geehrc) added&#10;-Motorola DROID4 (maserati) added&#10;-Kyocera Torque (e6710) added&#10;-LG Spectrum II 4G (vs930) added&#10;-PANTECH IM-A840SP (im-a840sp) added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update [1.4.9]&#10;&#10;-ASUS PadFone 2 (A68) added&#10;-Samsung Galaxy Note II CDMA (t03gctc) added&#10;-LG-P769 fixed&#10;-Motorola ATRIX HD (qinara) added&#10;-Samsung Galaxy Note 8.0 AT&amp;T (konalteatt) added&#10;-HTC Rezound (vigor) added&#10;-LG Motion 4G (l0) added&#10;-Nexus 7 (2013) (deb) added&#10;-Nexus 7 (2013) (flo) CWM img added&#10;-HTC Vivid (holiday) added&#10;-LG Optimus G International (geehrc) added&#10;-Motorola DROID4 (maserati) added&#10;-Kyocera Torque (e6710) added&#10;-LG Spectrum II 4G (vs930) added&#10;-PANTECH IM-A840SP (im-a840sp) added" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -889,119 +906,127 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-18/android.jar!/java/io/DataInputStream.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="2083" selection-end="2083" vertical-scroll-proportion="0.8277027" vertical-offset="309" max-vertical-offset="901" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/recovery_tools.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="69" selection-start="2231" selection-end="2231" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1649">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="35" selection-start="5466" selection-end="5466" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="2397">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="100" selection-start="7485" selection-end="7485" vertical-scroll-proportion="0.0" vertical-offset="3148" max-vertical-offset="4182">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/command/SimpleCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="23" selection-start="1163" selection-end="1171" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/command/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="43" selection-start="4064" selection-end="4064" vertical-scroll-proportion="0.0" vertical-offset="1193" max-vertical-offset="2601">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/Shell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="320" column="0" selection-start="10870" selection-end="10870" vertical-scroll-proportion="0.0" vertical-offset="4559" max-vertical-offset="5457">
-          <folding />
-        </state>
+        <state line="320" column="0" selection-start="10870" selection-end="10870" vertical-scroll-proportion="0.0" vertical-offset="4559" max-vertical-offset="5457" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/command/BinaryCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="27" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
-          <folding />
-        </state>
+        <state line="51" column="27" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/util/Log.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="999" selection-end="999" vertical-scroll-proportion="0.30289534" vertical-offset="0" max-vertical-offset="1258">
-          <folding />
-        </state>
+        <state line="30" column="0" selection-start="999" selection-end="999" vertical-scroll-proportion="0.30289534" vertical-offset="0" max-vertical-offset="1258" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/util/BrokenBusyboxException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="37" selection-start="885" selection-end="885" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+        <state line="23" column="37" selection-start="885" selection-end="885" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/recovery_tools.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="55" selection-start="3136" selection-end="3136" vertical-scroll-proportion="0.14141414" vertical-offset="1109" max-vertical-offset="1802">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="37" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+        <state line="27" column="42" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="2091" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="13" selection-start="5968" selection-end="5968" vertical-scroll-proportion="0.4212766" vertical-offset="2134" max-vertical-offset="2839" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="36" selection-start="5366" selection-end="5366" vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="2873">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
+    <entry file="file://$PROJECT_DIR$/../Utils-Library/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="699" column="0" selection-start="20161" selection-end="20161" vertical-scroll-proportion="0.0" vertical-offset="11203" max-vertical-offset="19091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="503" column="38" selection-start="18770" selection-end="18770" vertical-scroll-proportion="0.0" vertical-offset="7471" max-vertical-offset="8772">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="664">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="39" selection-start="1819" selection-end="1819" vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="1564">
+        <state line="62" column="24" selection-start="2593" selection-end="2593" vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="1292">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="326" column="27" selection-start="15478" selection-end="15492" vertical-scroll-proportion="0.0" vertical-offset="4743" max-vertical-offset="8602">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6284#6304#0" expanded="true" />
+            <element signature="e#9400#9411#0" expanded="true" />
+            <element signature="e#12329#12360#0" expanded="true" />
+            <element signature="e#13851#13873#0" expanded="true" />
+            <element signature="e#13975#13992#0" expanded="true" />
+            <element signature="e#14073#14091#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="3" selection-start="2437" selection-end="2437" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="2091">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="33" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
+          <folding>
+            <element signature="e#1040#1058#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="13" selection-start="5103" selection-end="5103" vertical-scroll-proportion="0.0" vertical-offset="2374" max-vertical-offset="3944">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="24" selection-start="4645" selection-end="4645" vertical-scroll-proportion="0.0" vertical-offset="1981" max-vertical-offset="2907">
+        <state line="439" column="39" selection-start="14168" selection-end="14168" vertical-scroll-proportion="0.0" vertical-offset="7286" max-vertical-offset="18683">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#37667#40968#0" expanded="true" />
+            <element signature="e#37941#39836#0" expanded="true" />
+            <element signature="e#39809#39810#0" expanded="true" />
+            <element signature="e#39981#40916#0" expanded="true" />
+            <element signature="e#40229#40848#0" expanded="true" />
+            <element signature="e#40813#40814#0" expanded="true" />
+            <element signature="e#40889#40890#0" expanded="true" />
+            <element signature="e#40949#40950#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1475" selection-end="1981" vertical-scroll-proportion="0.3322884" vertical-offset="383" max-vertical-offset="10370">
+        <state line="37" column="0" selection-start="1491" selection-end="1981" vertical-scroll-proportion="0.19432624" vertical-offset="492" max-vertical-offset="10948">
           <folding />
         </state>
       </provider>
@@ -1094,7 +1119,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>libs</last-edited>
+          <last-edited>GoogleAdMobAdsSdk</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

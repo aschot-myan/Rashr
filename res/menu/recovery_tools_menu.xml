@@ -2,34 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/iProfile"
-            android:title="@string/xda"></item>
+        android:id="@+id/iProfile"
+        android:title="@string/xda"></item>
 
     <item
-            android:id="@+id/iReport"
-            android:title="@string/report"></item>
+        android:id="@+id/iReport"
+        android:title="@string/report"></item>
 
     <item
-            android:id="@+id/iShowAds"
-            android:checkable="true"
-            android:title="@string/ShowAds"></item>
+        android:id="@+id/iShowAds"
+        android:checkable="true"
+        android:title="@string/ShowAds"></item>
 
     <item
-            android:id="@+id/iLog"
-            android:checkable="true"
-            android:title="@string/log"></item>
+        android:id="@+id/iLog"
+        android:checkable="true"
+        android:title="@string/log"></item>
 
     <item
-            android:id="@+id/iShowLogs"
-            android:title="@string/showlog"
-            android:visible="false"></item>
+        android:id="@+id/iShowLogs"
+        android:title="@string/showlog"
+        android:visible="false"></item>
 
     <item
-            android:id="@+id/iDonate"
-            android:title="@string/donate"></item>
+        android:id="@+id/iDonate"
+        android:title="@string/donate"></item>
 
     <item
-            android:id="@+id/iExit"
-            android:title="@string/sExit"></item>
+        android:id="@+id/iExit"
+        android:title="@string/sExit"></item>
 
 </menu>

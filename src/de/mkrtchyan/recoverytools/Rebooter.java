@@ -32,50 +32,50 @@ import de.mkrtchyan.utils.Common;
 
 public class Rebooter extends Dialog {
 
-	public Rebooter(final Context mContext) {
-		super(mContext);
-		final Common mCommon = new Common();
-		setTitle(R.string.sRebooter);
-		setContentView(R.layout.dialog_rebooter);
-		Button bReboot = (Button) findViewById(R.id.bReboot);
-		Button bRebootRecovery = (Button) findViewById(R.id.bRebootRecovery);
-		Button bRebootBootloader = (Button) findViewById(R.id.bRebootBootloader);
+    public Rebooter(final Context mContext) {
+        super(mContext);
+        final Common mCommon = new Common();
+        setTitle(R.string.sRebooter);
+        setContentView(R.layout.dialog_rebooter);
+        Button bReboot = (Button) findViewById(R.id.bReboot);
+        Button bRebootRecovery = (Button) findViewById(R.id.bRebootRecovery);
+        Button bRebootBootloader = (Button) findViewById(R.id.bRebootBootloader);
 
-		bReboot.setOnClickListener(new View.OnClickListener() {
+        bReboot.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				try {
-					mCommon.executeSuShell(mContext, "reboot");
-				} catch (RootAccessDeniedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                try {
+                    mCommon.executeSuShell(mContext, "reboot");
+                } catch (RootAccessDeniedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-		bRebootRecovery.setOnClickListener(new View.OnClickListener() {
+        bRebootRecovery.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				try {
-					mCommon.executeSuShell(mContext, "reboot recovery");
-				} catch (RootAccessDeniedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                try {
+                    mCommon.executeSuShell(mContext, "reboot recovery");
+                } catch (RootAccessDeniedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-		bRebootBootloader.setOnClickListener(new View.OnClickListener() {
+        bRebootBootloader.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				try {
-					mCommon.executeSuShell(mContext, "reboot bootloader");
-				} catch (RootAccessDeniedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		show();
-	}
+            @Override
+            public void onClick(View v) {
+                try {
+                    mCommon.executeSuShell(mContext, "reboot bootloader");
+                } catch (RootAccessDeniedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        show();
+    }
 }

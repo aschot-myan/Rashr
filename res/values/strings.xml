@@ -3,6 +3,7 @@
 
     <string name="app_name">Recovery Tools</string>
     <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
+    <string name="sHistory">History</string>
     <string name="sFlashTWRP">Flash TWRP Recovery</string>
     <string name="flash_other">Flash other Recovery</string>
     <string name="sBackup">Backup current Recovery</string>

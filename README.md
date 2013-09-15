@@ -33,6 +33,29 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.5.0]
+
+-- NEW DEVICES --
+-PANTECH IM-A850K
+-Samsung Galaxy Tab 3 (lt02wifi)
+-Barnes & Noble NookHD+ (ovation)
+-Casio CA-201L (ca201l)
+-LG Optimus 2X (p990)
+-Fujitsu F-02E (f02e)
+-Xolo Play (us9230e1)
+-Samsung Galaxy S3 (d2can)
+-K-Touch C980t (lc1810)
+-Motorola Droid Ultra (obakem)
+-Samsung Galaxy S4 GT-i9502 (ja3gchnduos)
+-SONY Xperia Z (c6602)
+-PANTECH IM-A840SP (im-a840s)
+
+-- Functions & Fixes --
+-LG Optimus G2x recognition fixed
+-Flash History added
+-Motorola Droid RAZR m recognition fixed
+
+
 Update [1.4.9]
 
 -ASUS PadFone 2 (A68) added
@@ -489,6 +512,7 @@ Supported Devices
 -Optimus G International (geehrc)
 -Optimus HD X4 (x3)
 -Optimus 3D (p920)
+-Optimus 2X (p990)
 
 --[HTC]--
 -Rezound (vigor)
@@ -497,6 +521,10 @@ Supported Devices
 -Desire (bravo)
 -One X+ (enrc2)
 -Butterfly J (dlxj)
+
+--[SONY]--
+
+-Xperia Z (c6602)
 
 --[ZTE]--
 -Blade (blade)
@@ -517,7 +545,7 @@ Supported Devices
 -Optimus L5 (e610)
 
 --[SAMSUNG]--
--Galaxy SIII (d2mtr)
+-Galaxy SIII (d2mtr/d2can)
 -Galaxy S4 (Google Play Edition/jgedlte)
 
 --[SONY]--
@@ -537,7 +565,7 @@ Supported Devices
 --[SAMSUNG]--
 -Galaxy S II Duos (SCH-i929)
 -Epic 4G Touch (SPH-D710)
--Galaxy S4 (ja3g)
+-Galaxy S4 (ja3g/ja3gchnduos)
 -Galaxy Exhibit (ancora_tmo)
 -Galaxy Tab 7 Plus (p6200)
 -Galaxy Note 8.0 (konawifi/konalteatt)
@@ -559,6 +587,7 @@ Supported Devices
 -ATRIX HD (qinara)
 -Droid X (shadow/cdma_shadow)
 -RAZR M (scorpion_mini)
+-Droid Ultra (obakem)
 -Droid RAZR (spyder/cdma_spyder)
 -DROID RAZR HD (vanquish)
 -Xoom UMTS (everest)
@@ -576,9 +605,14 @@ Supported Devices
 
 --[OTHER]--
 -Kyocera Torque (e6710)
--PANTECH IM-A840SP (im-a840sp)
+-Xolo Play (us9230e1)
+-PANTECH IM-A840SP (im-a840s/p)
+-K-Touch C980t (lc1810)
 -Vestel Mevlana (mevlana)
 -Rk29sdk
+-Fujitsu F-02E (f02e)
+-Barnes & Noble NookHD+ (ovation)
+-PANTECH IM-A850K
 
 *****************
 *ALL MTD Devices*
