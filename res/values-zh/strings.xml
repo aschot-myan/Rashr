@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appirator_app_title">Recovery 工具箱</string>
+    <string name="appirator_market_url">market://details?id=%s</string>
+    <string name="donations__button_close">关闭</string>
+    <string name="donations__flattr">Flattr</string>
+    <string name="donations__description">"您觉得这款应用有用吗?
+请向开发者提供捐赠以表支持!"</string>
+    <string name="donations__flattr_description">Flattr 会获得 10 % 的月租费!</string>
+    <string name="donations__google_android_market">Google Play 商店</string>
+    <string name="donations__google_android_market_not_supported_title">不支持内部捐赠.</string>
+    <string name="donations__google_android_market_not_supported">不支持内部捐赠. 您正确安装 Google Play 商店了吗?</string>
+    <string name="donations__google_android_market_description">每次捐赠都会自动转给 Google 30 %!</string>
+    <string name="donations__google_android_market_donate_button">捐赠!</string>
+    <string name="donations__google_android_market_text">多少钱?</string>
+    <string name="donations__paypal">支付宝</string>
+    <string name="donations__paypal_description">您可以在点击捐赠按钮后选择您要捐赠的数量!</string>
+    <string name="donations__thanks_dialog_title">非常感谢!</string>
+    <string name="donations__thanks_dialog">"感谢您的捐赠!
+我真的非常感激您!"</string>
+    <string name="donations__alert_dialog_title">发生错误</string>
+    <string name="donations__alert_dialog_no_browser">未找到浏览器!</string>
+    <string name="corrupt_download">下载文件已损坏.</string>
+    <string name="try_again">重试!</string>
+    <string name="later">稍后</string>
+    <string name="Downloading">正在下载</string>
+    <string name="wrong_format">文件格式错误. 文件格式只能为 %s</string>
+    <string name="noconnection">无可用网络. 下载已取消!</string>
+    <string name="failed_download">"抱歉, 出现意外错误. 请重新下载. 
+
+%s"</string>
+    <string name="error">错误</string>
+    <string name="warning">警告!</string>
+    <string name="positive">确定</string>
+    <string name="neutral">不用了</string>
+    <string name="negative">取消</string>
+    <string name="file_chooser">选择文件</string>
+    <string name="empty_dir">目录为空: %s</string>
+    <string name="choose_message">已选择 %s. 您确定吗?</string>
+    <string name="ok">确定</string>
+    <string name="noroot">"设备没有 Root 权限. 请 Root 您对设备. 更多信息请访问
+        
+
+xda-developer.com"</string>
+    <string name="rate_title">评价 %s</string>
+    <string name="rate_message">如果您喜欢使用 %s, 您愿意花点时间给我们评价吗? 非常感谢您的支持!</string>
+    <string name="rate">立即评价</string>
+    <string name="rate_later">稍后提醒</string>
+    <string name="rate_cancel">不了</string>
+    <string name="app_name">Recovery工具箱</string>
+    <string name="sFlashCWM">刷入 Clockworkmod Recovery</string>
+    <string name="sFlashTWRP">刷入 TWRP Recovery</string>
+    <string name="flash_other">刷入其他 Recovery</string>
+    <string name="sBackup">备份当前 Recovery</string>
+    <string name="go">确定</string>
+    <string name="sRebooter">重启</string>
+    <string name="sRestore">恢复备份</string>
+    <string name="sCleareCache">清除已下载的 Recovery</string>
+    <string name="report">扫描并报告不支持的设备</string>
+    <string name="sExit">退出</string>
+    <string name="xda">打开 XDA-主题</string>
+    <string name="rename">您可以使用文本字段自定义备份类型的名称. 否则备份文件名将设置为当前时间.</string>
+    <string name="bak_warning">"在您使用 Recovery工具箱进行操作前, 请创建备份并保存到您的个人电脑上. 
+备份文件将被创建到 %s.
+作者不会对您对设备的操作导致的任何问题负责.
+
+XDACN汉化组 OPkyd汉化
+论坛：http://bbs.xda.cn/"</string>
+    <string name="risk">我了解风险</string>
+    <string name="bak_now">备份管理器</string>
+    <string name="sReboot">重启</string>
+    <string name="sRebootRecovery">重启到 Recovery</string>
+    <string name="sRebootBootloader">重启到 Bootloader</string>
+    <string name="info">信息</string>
+    <string name="flashed">Recovery 刷入完成.</string>
+    <string name="kernel_to">在您的设备上刷入 Recovery 系统同时也将通过 第三方 Recovery 刷入 Boot.img (内核) 到原生系统.</string>
+    <string name="flash_over_recovery">是否立即刷入 Recovery? (需要重启到 Recovery 模式)</string>
+    <string name="instructions">介绍</string>
+    <string name="instruction">"CWM: 
+
+主菜单 -> 从 SD 卡安装 zip 文件 -> 从 SD 卡选择 zip 文件 
+
+TWRP: 
+
+主菜单 -> 安装"</string>
+    <string name="img_not_found">未找到 Recovery 镜像文件. 是否立即下载?</string>
+    <string name="bak_done">备份完成</string>
+    <string name="res_done">恢复完成</string>
+    <string name="backupalready">备份已存在. 将覆盖现有备份. 是否继续?</string>
+    <string name="no_backup">备份不存在 (%s/Recovery-Tools/backups/). 是否立即创建?</string>
+    <string name="notsupportded">暂不支持您的设备. 是否扫描系统并报告支持请求?</string>
+    <string name="using_dd">强制使用 dd. Recovery</string>
+    <string name="using_mtd">使用 flash/dump_image (MTD)</string>
+    <string name="commentar">注释</string>
+    <string name="commenthint">在这里发表评论, 哪些功能不能正常使用 (下载, 刷入, 设备支持或其他内容)</string>
+    <string name="su_logs_title">执行Shell命令</string>
+    <string name="log">Shell命令日志</string>
+    <string name="showlog">显示日志</string>
+    <string name="settings">设置</string>
+    <string name="title_activity_backup_manager">备份管理器</string>
+    <string name="sDeleteBackup">删除备份</string>
+    <string name="sBackupMgr">打开备份管理器</string>
+    <string name="setname">设置备份名称</string>
+    <string name="reboot_recovery_now">是否立即重启进入 Recovery 模式?</string>
+    <string name="tsk_end">任务已完成</string>
+    <string name="flashing">正在刷入…</string>
+    <string name="creating_bak">正在创建备份…</string>
+    <string name="clear_logs">清除日志</string>
+    <string name="download_utils">"要使用该应用您需要下载部分小工具 (约 512KB). 并需要网络连接. 
+是否立即下载?"</string>
+    <string name="over_recovery">设备将重启刷入 Recovery</string>
+    <string name="bak_del">备份已删除!</string>
+    <string name="thx_support">感谢您的支持</string>
+    <string name="ShowAds">显示广告以支持我们</string>
+    <string name="please_restart">请重启应用程序以使更改生效</string>
+    <string name="please_ads">请打开广告以支持我的工作!</string>
+    <string name="donate">捐赠</string>
+    <string name="donation_paypal_item">捐赠</string>
+    <string name="never_again">不再显示</string>
+</resources>

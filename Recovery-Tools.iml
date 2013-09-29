@@ -2,12 +2,12 @@
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android" name="Android">
-      <configuration />
+      <configuration>
+        <option name="UPDATE_PROPERTY_FILES" value="true" />
+      </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://C:/DEV/Recovery-Tools" />
-    <output-test url="file://C:/DEV/Recovery-Tools" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
@@ -16,8 +16,13 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Utils-Library" />
-    <orderEntry type="library" name="android-support-v4" level="project" />
     <orderEntry type="library" name="GoogleAdMobAdsSdk" level="project" />
+    <orderEntry type="library" name="root-commands-1.2" level="project" />
+    <orderEntry type="module" module-name="AppiRater" />
+    <orderEntry type="module" module-name="AppMsg" />
+    <orderEntry type="module" module-name="Appcompact" />
+    <orderEntry type="library" name="android-support-v7-appcompat" level="project" />
+    <orderEntry type="library" name="android-support-v13" level="project" />
   </component>
 </module>
 

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYSIS_IN_BACKGROUND" value="true" />
+  </component>
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
       <GlobalState />
@@ -10,7 +13,7 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/res/layout/activity_backup_manager.xml">
+      <layout url="file://$PROJECT_DIR$/res/layout/recovery_tools.xml">
         <config>
           <device>Nexus 4</device>
           <theme>@style/AppTheme</theme>
@@ -18,45 +21,81 @@
       </layout>
     </layouts>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="de.mkrtchyan." />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="03225607-4d97-4462-9431-f9ffd0a5921f" name="Default" comment="Update [1.4.8]&#10;&#10;-Samsung Galaxy SIII (d2mtr) added&#10;-LG Optimus L5 (e610) added&#10;-HTC Desire C (golfu) added&#10;-LG P769 (u2) added&#10;-Samsung Galaxy Note 8.0 (konawifi) added&#10;-HTC EVO 3D (shooteru) added&#10;-LG Optimus 3D (p920) added&#10;-Samsung Galaxy Note 2 LTE (t0lte) fixed">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_history.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_history.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_history.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_history.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/drawer_shadow.9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/drawer_shadow.9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/drawer_shadow.9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_drawer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_drawer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_drawer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/list_activated_holo.9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/list_activated_holo.9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/list_activated_holo.9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable/activated_background_holo_dark.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable/activated_background_holo_light.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_support_v13.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_support_v7_appcompat.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/values-zh/strings.xml" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\libs\GoogleAdMobAdsSdk.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\libs\android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\layout\activity_backup_manager.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\layout\bakmgr_activity.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\layout\dialog_rebooter.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\layout\donations_activity.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\menu\recovery_tools_menu.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\src\de\mkrtchyan\recoverytools\BackupManager.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\src\de\mkrtchyan\recoverytools\PopupHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\src\de\mkrtchyan\recoverytools\Rebooter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\libs\android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res\drawable\button_appirator.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res\layout\appirater.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res\values\appirater-settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res\values\styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\com\sbstrm\appirater\Appirater.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\Mount.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\Remounter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\RootCommands.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\Shell.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\SystemCommands.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\Toolbox.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\command\BinaryCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\command\Command.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\command\SimpleBinaryCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\command\SimpleCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\util\BrokenBusyboxException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\util\Log.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\util\RootAccessDeniedException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\util\UnsupportedArchitectureException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Administrator\Google Drive\workspace\Utils-Library\src\org\sufficientlysecure\rootcommands\util\Utils.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Recovery-Tools.apk" afterPath="$PROJECT_DIR$/Recovery-Tools.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupManager.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" afterPath="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/gen/de/mkrtchyan/utils/BuildConfig.java" afterPath="$PROJECT_DIR$/../Utils-Library/gen/de/mkrtchyan/utils/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Rebooter.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Rebooter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Recovery-Tools.iml" afterPath="$PROJECT_DIR$/Recovery-Tools.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" afterPath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_backup_manager.xml" afterPath="$PROJECT_DIR$/res/layout/activity_backup_manager.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/bakmgr_activity.xml" afterPath="$PROJECT_DIR$/res/layout/bakmgr_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/bakmgr_menu.xml" afterPath="$PROJECT_DIR$/res/menu/bakmgr_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_backup.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_backup.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_command_logs.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_command_logs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_comment.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_comment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dialog_rebooter.xml" afterPath="$PROJECT_DIR$/res/layout/dialog_rebooter.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/donations_activity.xml" afterPath="$PROJECT_DIR$/res/layout/donations_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/rebooter_menu.xml" afterPath="$PROJECT_DIR$/res/menu/rebooter_menu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/recovery_tools.xml" afterPath="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/recovery_tools_menu.xml" afterPath="$PROJECT_DIR$/res/menu/recovery_tools_menu.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-es/strings.xml" afterPath="$PROJECT_DIR$/res/values-es/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-it/strings.xml" afterPath="$PROJECT_DIR$/res/values-it/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/res/values/strings.xml" afterPath="$PROJECT_DIR$/../Utils-Library/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/styles.xml" afterPath="$PROJECT_DIR$/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Recovery-Tools.iws" />
@@ -128,25 +167,29 @@
       <file leaf-file-name="RecoveryTools.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="326" column="27" selection-start="15478" selection-end="15492" vertical-scroll-proportion="0.0" vertical-offset="4743" max-vertical-offset="8602">
+            <state line="80" column="38" selection-start="3210" selection-end="3210" vertical-scroll-proportion="0.0" vertical-offset="1975" max-vertical-offset="3485">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6284#6304#0" expanded="true" />
-                <element signature="e#9400#9411#0" expanded="true" />
-                <element signature="e#12329#12360#0" expanded="true" />
-                <element signature="e#13851#13873#0" expanded="true" />
-                <element signature="e#13975#13992#0" expanded="true" />
-                <element signature="e#14073#14091#0" expanded="true" />
+                <element signature="method#onCreate#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bDonate#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bXDA#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bExit#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#cbLog#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bReport#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bShowLogs#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#cbShowAds#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#Go#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bFlashOther#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bShowHistory#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bBackupMgr#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bCleareCache#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#bRebooter#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#report#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#onOptionsItemSelected#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#showPopup#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#onKeyDown#0;class#RecoveryTools#0" expanded="false" />
+                <element signature="method#showFakeDialog#0;class#RecoveryTools#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileChooser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="3" selection-start="2437" selection-end="2437" vertical-scroll-proportion="0.0" vertical-offset="1105" max-vertical-offset="2091">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -154,66 +197,7 @@
       <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1491" selection-end="1981" vertical-scroll-proportion="0.19432624" vertical-offset="492" max-vertical-offset="10948">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="33" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
-              <folding>
-                <element signature="e#1040#1058#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PopupHelper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="24" selection-start="2593" selection-end="2593" vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="1292">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeviceHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="439" column="39" selection-start="14168" selection-end="14168" vertical-scroll-proportion="0.0" vertical-offset="7286" max-vertical-offset="18683">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#37667#40968#0" expanded="true" />
-                <element signature="e#37941#39836#0" expanded="true" />
-                <element signature="e#39809#39810#0" expanded="true" />
-                <element signature="e#39981#40916#0" expanded="true" />
-                <element signature="e#40229#40848#0" expanded="true" />
-                <element signature="e#40813#40814#0" expanded="true" />
-                <element signature="e#40889#40890#0" expanded="true" />
-                <element signature="e#40949#40950#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Downloader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="13" selection-start="5103" selection-end="5103" vertical-scroll-proportion="0.0" vertical-offset="2374" max-vertical-offset="3944">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BackupHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="36" selection-start="5366" selection-end="5366" vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="2873">
+            <state line="35" column="5" selection-start="1475" selection-end="1580" vertical-scroll-proportion="0.35150376" vertical-offset="408" max-vertical-offset="11050">
               <folding />
             </state>
           </provider>
@@ -240,24 +224,37 @@
       <MyDateState />
     </option>
   </component>
+  <component name="GradleLocalSettings">
+    <option name="tasksExpandState">
+      <map>
+        <entry key="" value="true" />
+      </map>
+    </option>
+    <option name="modificationStamps">
+      <map>
+        <entry key="$USER_HOME$/Desktop/android-donations-lib-master" value="1376840986000" />
+        <entry key="C:\Users\Administrator\Google Drive\workspace\Libs" value="1379880929358" />
+      </map>
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/layout/dialog_backup.xml" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java" />
-        <option value="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" />
-        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" />
-        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java" />
+        <option value="$PROJECT_DIR$/res/drawable/activated_background_holo_dark.xml" />
+        <option value="$PROJECT_DIR$/res/drawable/activated_background_holo_light.xml" />
+        <option value="$PROJECT_DIR$/../Libs/Appcompact/res/values/themes.xml" />
+        <option value="$PROJECT_DIR$/res/values-v14/styles.xml" />
+        <option value="$PROJECT_DIR$/res/layout/drawer_list_item.xml" />
+        <option value="$PROJECT_DIR$/res/values-v11/styles.xml" />
+        <option value="$PROJECT_DIR$/res/values/attr.xml" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
+        <option value="$PROJECT_DIR$/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java" />
-        <option value="$PROJECT_DIR$/res/layout/drawer_list_item.xml" />
-        <option value="$PROJECT_DIR$/res/layout/drawer.xml" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" />
-        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -265,8 +262,27 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AndroidLintNewApi</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -283,8 +299,12 @@
   </component>
   <component name="ProjectStructureProblems">
     <ignored-problems>
+      <problem id="invalid-module-dependency(module:preferences1,library1)" />
+      <problem id="invalid-module-dependency(module:preferences1,slider1)" />
       <problem id="invalid-module-dependency(module:Recovery-Tools,&lt; Android 4.3 &gt;)" />
+      <problem id="invalid-module-dependency(module:slider1,library1)" />
       <problem id="invalid-module-dependency(module:Utils-Library,&lt; Android 4.3 &gt;)" />
+      <problem id="module-circular-dependency(project:general)" />
     </ignored-problems>
   </component>
   <component name="ProjectView">
@@ -308,48 +328,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Recovery-Tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -426,89 +404,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="raw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-xhdpi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recoverytools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -518,42 +414,45 @@
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="ExportedApkPath" value="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\Recovery-Tools.apk" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="vcs.Git" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="ExportedApkPath" value="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\Recovery-Tools.apk" />
     <property name="ExportedModule" value="Recovery-Tools" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/GoogleAdMobAdsSdk.jar!/" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4790049867d5cfdc" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Libs/android-support-v4.jar!/" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="AndroidRunProguardForReleaseBuild" value="false" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Gnex" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="N10" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="options.lastSelected" value="preferences.externalResources" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="AndroidRunProguardForReleaseBuild" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\libs" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Utils-Library\libs" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res\values" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Utils-Library\res\layout" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-mdpi" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-xhdpi" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-hdpi" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\values" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\color" />
       <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\layout" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-xxhdpi" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-xhdpi" />
-      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-mdpi" />
       <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-hdpi" />
+      <recent name="C:\Users\Administrator\Google Drive\workspace\Recovery-Tools\res\drawable-mdpi" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -629,6 +528,9 @@
       <ExternalSystemSettings>
         <option name="externalProjectPath" />
         <option name="externalSystemIdString" value="GRADLE" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
         <option name="taskNames">
           <list />
         </option>
@@ -647,6 +549,33 @@
       <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -720,12 +649,6 @@
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Android Application.Recovery-Tools" />
     </list>
-    <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
     </configuration>
@@ -735,6 +658,11 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
@@ -814,35 +742,36 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33570412" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4921875" sideWeight="0.6038961" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32392472" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28030303" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3961039" sideWeight="0.61822915" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40367964" sideWeight="0.38177082" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32488987" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30241936" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28744492" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.58064514" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.225" sideWeight="0.69758064" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13541667" sideWeight="0.6038961" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.160625" sideWeight="0.63852817" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38978493" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38961038" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -906,24 +835,64 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/Shell.java">
+    <entry file="file://$PROJECT_DIR$/../Libs/Appcompact/res/values/attrs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="320" column="0" selection-start="10870" selection-end="10870" vertical-scroll-proportion="0.0" vertical-offset="4559" max-vertical-offset="5457" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9554">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/command/BinaryCommand.java">
+    <entry file="jar://$PROJECT_DIR$/../Libs/android-support-v7-appcompat.jar!/android/support/v7/app/ActionBarActivity.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="27" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884" />
+        <state line="23" column="19" selection-start="1116" selection-end="1116" vertical-scroll-proportion="0.35526314" vertical-offset="239" max-vertical-offset="1581" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/util/Log.java">
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-18/android.jar!/android/view/View.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="999" selection-end="999" vertical-scroll-proportion="0.30289534" vertical-offset="0" max-vertical-offset="1258" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19669" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/org/sufficientlysecure/rootcommands/util/BrokenBusyboxException.java">
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-18/android.jar!/android/view/LayoutInflater.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="37" selection-start="885" selection-end="885" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408" />
+        <state line="33" column="29" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.0" vertical-offset="423" max-vertical-offset="1003" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-18/android.jar!/java/lang/String.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="158" selection-end="158" vertical-scroll-proportion="0.20334928" vertical-offset="0" max-vertical-offset="3145" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-18/android.jar!/java/lang/RuntimeException.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="152" selection-end="152" vertical-scroll-proportion="0.20334928" vertical-offset="0" max-vertical-offset="418" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="34" selection-start="2936" selection-end="2936" vertical-scroll-proportion="0.83950615" vertical-offset="850" max-vertical-offset="2907">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="938" column="32" selection-start="36494" selection-end="36494" vertical-scroll-proportion="0.9186603" vertical-offset="15205" max-vertical-offset="19295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="843" selection-end="843" vertical-scroll-proportion="0.41648108" vertical-offset="0" max-vertical-offset="898">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="47" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/recovery_tools.xml">
@@ -931,102 +900,77 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="55" selection-start="3136" selection-end="3136" vertical-scroll-proportion="0.14141414" vertical-offset="1109" max-vertical-offset="1802">
+        <state line="137" column="42" selection-start="5994" selection-end="5994" vertical-scroll-proportion="-11.6" vertical-offset="2039" max-vertical-offset="3349">
+          <folding>
+            <element signature="e#1682#1701#0" expanded="true" />
+            <element signature="e#2146#2166#0" expanded="true" />
+            <element signature="e#2531#2552#0" expanded="true" />
+            <element signature="e#3345#3363#0" expanded="true" />
+            <element signature="e#3956#3976#0" expanded="true" />
+            <element signature="e#4344#4366#0" expanded="true" />
+            <element signature="e#4728#4747#0" expanded="true" />
+            <element signature="e#5730#5744#0" expanded="true" />
+            <element signature="e#6096#6112#0" expanded="true" />
+            <element signature="e#6783#6796#0" expanded="true" />
+            <element signature="e#7115#7132#0" expanded="true" />
+            <element signature="e#7459#7475#0" expanded="true" />
+            <element signature="e#7798#7813#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1473" selection-end="1473" vertical-scroll-proportion="0.0" vertical-offset="284" max-vertical-offset="816">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="42" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="2091" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="13" selection-start="5968" selection-end="5968" vertical-scroll-proportion="0.4212766" vertical-offset="2134" max-vertical-offset="2839" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="36" selection-start="5366" selection-end="5366" vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="2873">
+        <state line="92" column="52" selection-start="4528" selection-end="4528" vertical-scroll-proportion="0.7387218" vertical-offset="1171" max-vertical-offset="2040">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="664">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/PopupHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="24" selection-start="2593" selection-end="2593" vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="1292">
+        <state line="8" column="22" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="1496">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="326" column="27" selection-start="15478" selection-end="15492" vertical-scroll-proportion="0.0" vertical-offset="4743" max-vertical-offset="8602">
+        <state line="80" column="38" selection-start="3210" selection-end="3210" vertical-scroll-proportion="0.0" vertical-offset="1975" max-vertical-offset="3485">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6284#6304#0" expanded="true" />
-            <element signature="e#9400#9411#0" expanded="true" />
-            <element signature="e#12329#12360#0" expanded="true" />
-            <element signature="e#13851#13873#0" expanded="true" />
-            <element signature="e#13975#13992#0" expanded="true" />
-            <element signature="e#14073#14091#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="3" selection-start="2437" selection-end="2437" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="2091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="33" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
-          <folding>
-            <element signature="e#1040#1058#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="13" selection-start="5103" selection-end="5103" vertical-scroll-proportion="0.0" vertical-offset="2374" max-vertical-offset="3944">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="439" column="39" selection-start="14168" selection-end="14168" vertical-scroll-proportion="0.0" vertical-offset="7286" max-vertical-offset="18683">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#37667#40968#0" expanded="true" />
-            <element signature="e#37941#39836#0" expanded="true" />
-            <element signature="e#39809#39810#0" expanded="true" />
-            <element signature="e#39981#40916#0" expanded="true" />
-            <element signature="e#40229#40848#0" expanded="true" />
-            <element signature="e#40813#40814#0" expanded="true" />
-            <element signature="e#40889#40890#0" expanded="true" />
-            <element signature="e#40949#40950#0" expanded="true" />
+            <element signature="method#onCreate#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bDonate#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bXDA#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bExit#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#cbLog#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bReport#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bShowLogs#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#cbShowAds#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#Go#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bFlashOther#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bShowHistory#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bBackupMgr#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bCleareCache#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#bRebooter#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#report#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#showPopup#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#onKeyDown#0;class#RecoveryTools#0" expanded="false" />
+            <element signature="method#showFakeDialog#0;class#RecoveryTools#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1491" selection-end="1981" vertical-scroll-proportion="0.19432624" vertical-offset="492" max-vertical-offset="10948">
+        <state line="35" column="5" selection-start="1475" selection-end="1580" vertical-scroll-proportion="0.35150376" vertical-offset="408" max-vertical-offset="11050">
           <folding />
         </state>
       </provider>
@@ -1072,6 +1016,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Libs</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1083,7 +1028,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>Android 4.3 Platform</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1095,11 +1040,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Utils-Library</last-edited>
+          <last-edited>Recovery-Tools</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1119,7 +1065,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>GoogleAdMobAdsSdk</last-edited>
+          <last-edited>android-support-v7-appcompat</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

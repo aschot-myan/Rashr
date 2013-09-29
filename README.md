@@ -33,6 +33,12 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.6.0]
+
+-Many UI Changes!! and (<4.x Support of UI)
+-TWRP Imgs updated
+-Chinese translation added
+
 Update [1.5.0]
 
 -- NEW DEVICES --
@@ -440,7 +446,7 @@ Supported Devices
 -S (crespo/crespo4g)
 -Galaxy Nexus (maguro/toro/toroplus)
 -N4 (mako)
--N7 (grouper/tilapia/flo)
+-N7 (grouper/tilapia/flo/deb)
 -N10 (manta)
 
 --[ASUS]--
@@ -545,7 +551,7 @@ Supported Devices
 -Optimus L5 (e610)
 
 --[SAMSUNG]--
--Galaxy SIII (d2mtr/d2can)
+-Galaxy SIII (d2can/d2cri/d2usc/d2mtr)
 -Galaxy S4 (Google Play Edition/jgedlte)
 
 --[SONY]--

@@ -13,7 +13,6 @@
     <string name="neutral">No, gracias</string>
     <string name="negative">Cancelar</string>
     <string name="file_chooser">Selector de archivos</string>
-    <string name="empty_dir">Carpeta vacía: %s</string>
     <string name="choose_message">Seleccionando %s. ¿Estás seguro?</string>
     <string name="appirator_app_title">Recovery-Tools</string>
     <string name="appirator_market_url">market://details?id=%s</string>

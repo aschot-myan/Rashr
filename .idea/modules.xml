@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Libs/AppMsg/AppMsg.iml" filepath="$PROJECT_DIR$/../Libs/AppMsg/AppMsg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Libs/Appcompact/Appcompact.iml" filepath="$PROJECT_DIR$/../Libs/Appcompact/Appcompact.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Libs/AppiRater/AppiRater.iml" filepath="$PROJECT_DIR$/../Libs/AppiRater/AppiRater.iml" />
       <module fileurl="file://$PROJECT_DIR$/Recovery-Tools.iml" filepath="$PROJECT_DIR$/Recovery-Tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" filepath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" />
     </modules>
