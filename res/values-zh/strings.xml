@@ -35,7 +35,6 @@
     <string name="neutral">不用了</string>
     <string name="negative">取消</string>
     <string name="file_chooser">选择文件</string>
-    <string name="empty_dir">目录为空: %s</string>
     <string name="choose_message">已选择 %s. 您确定吗?</string>
     <string name="ok">确定</string>
     <string name="noroot">"设备没有 Root 权限. 请 Root 您对设备. 更多信息请访问
@@ -96,7 +95,6 @@ TWRP:
     <string name="su_logs_title">执行Shell命令</string>
     <string name="log">Shell命令日志</string>
     <string name="showlog">显示日志</string>
-    <string name="settings">设置</string>
     <string name="title_activity_backup_manager">备份管理器</string>
     <string name="sDeleteBackup">删除备份</string>
     <string name="sBackupMgr">打开备份管理器</string>

@@ -37,7 +37,6 @@
         El DEV no se hace responsable de los daños y perjuicios de su dispositivo."
     </string>
     <string name="risk">Conozco el riesgo</string>
-    <string name="bak_now">Manejador de copias</string>
     <string name="sReboot">Reiniciar</string>
     <string name="sRebootRecovery">Reinicio al Recuperador</string>
     <string name="sRebootBootloader">Reinicio al Bootloader</string>
@@ -66,7 +65,6 @@
         Menu Principal -> Instalar"
     </string>
     <string name="bak_done">Copia de seguridad completada</string>
-    <string name="res_done">Restauración completada</string>
     <string name="backupalready">Copia de seguridad ya existe. Esto sobrescribirá la existente.
         ¿Continuar?
     </string>
@@ -85,7 +83,6 @@
     <string name="su_logs_title">Ejecutar Shell-Commands</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Ver Logs</string>
-    <string name="title_activity_backup_manager">Backup-Manager</string>
     <string name="sDeleteBackup">Borrar Copia de seguridad</string>
     <string name="sBackupMgr">Abrir Backup Manager</string>
     <string name="setname">Nombrar la Copia de seguridad</string>
@@ -99,5 +96,4 @@
         ¿Descargar Ahora?
     </string>
     <string name="over_recovery">Dispositivo será flasheado sobre el Recuperador</string>
-    <string name="bak_del">¡Copia de seguridad borrada!</string>
 </resources>

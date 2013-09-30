@@ -1,191 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
 
-    <android.support.v4.widget.DrawerLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/drawer_layout"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawer_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
         <!-- The main content view -->
         <FrameLayout
-                android:id="@+id/content_frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
             <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1">
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
 
                 <LinearLayout
-                        android:id="@+id/LinearLayout1"
+                    android:id="@+id/LinearLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/bCWM"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:onClick="Go"
+                        android:tag="clockwork"
+                        android:drawableLeft="@drawable/ic_cwm"
+                        android:text="@string/sFlashCWM"
+                        android:visibility="visible" />
 
                     <Button
-                            android:id="@+id/bCWM"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:onClick="Go"
-                            android:tag="clockwork"
-                            android:drawableLeft="@drawable/ic_cwm"
-                            android:text="@string/sFlashCWM"
-                            android:visibility="visible"/>
+                        android:id="@+id/bTWRP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="Go"
+                        android:tag="twrp"
+                        android:drawableLeft="@drawable/ic_twrp"
+                        android:text="@string/sFlashTWRP" />
 
                     <Button
-                            android:id="@+id/bTWRP"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:onClick="Go"
-                            android:tag="twrp"
-                            android:drawableLeft="@drawable/ic_twrp"
-                            android:text="@string/sFlashTWRP"/>
-
-                    <Button
-                            android:id="@+id/bFlashOther"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_flash"
-                            android:onClick="bFlashOther"
-                            android:text="@string/flash_other"/>
+                        android:id="@+id/bFlashOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_flash"
+                        android:onClick="bFlashOther"
+                        android:text="@string/flash_other" />
 
                     <com.google.ads.AdView xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-                                           android:id="@+id/adView"
-                                           android:layout_width="wrap_content"
-                                           android:layout_height="wrap_content"
-                                           ads:adUnitId="a151cdc8be01253"
-                                           ads:loadAdOnCreate="true"
-                                           ads:testDevices="F0518E98AFA0F7A8FBE3612CB987C9C5, TEST_EMULATOR"
-                                           ads:adSize="SMART_BANNER"
-                                           android:layout_gravity="center"></com.google.ads.AdView>
+                        android:id="@+id/adView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        ads:adUnitId="a151cdc8be01253"
+                        ads:loadAdOnCreate="true"
+                        ads:testDevices="F0518E98AFA0F7A8FBE3612CB987C9C5, TEST_EMULATOR"
+                        ads:adSize="SMART_BANNER"
+                        android:layout_gravity="center"></com.google.ads.AdView>
 
                     <Button
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/sHistory"
-                            android:id="@+id/bHistory"
-                            android:drawableLeft="@drawable/ic_history"
-                            android:layout_gravity="center"
-                            android:onClick="bShowHistory"/>
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sHistory"
+                        android:id="@+id/bHistory"
+                        android:drawableLeft="@drawable/ic_history"
+                        android:layout_gravity="center"
+                        android:onClick="bShowHistory" />
 
                     <Button
-                            android:id="@+id/bBAK_MGR"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:onClick="bBackupMgr"
-                            android:drawableLeft="@drawable/ic_bak_mgr"
-                            android:text="@string/sBackupMgr"/>
+                        android:id="@+id/bBAK_MGR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="bBackupMgr"
+                        android:drawableLeft="@drawable/ic_bak_mgr"
+                        android:text="@string/sBackupMgr" />
 
                     <Button
-                            android:id="@+id/bCleareCache"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:onClick="bCleareCache"
-                            android:drawableLeft="@drawable/ic_delete"
-                            android:text="@string/sCleareCache"/>
+                        android:id="@+id/bCleareCache"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="bCleareCache"
+                        android:drawableLeft="@drawable/ic_delete"
+                        android:text="@string/sCleareCache" />
 
                     <Button
-                            android:id="@+id/bRebooter"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_reboot"
-                            android:onClick="bRebooter"
-                            android:text="@string/sRebooter"/>
+                        android:id="@+id/bRebooter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_reboot"
+                        android:onClick="bRebooter"
+                        android:text="@string/sRebooter" />
 
                 </LinearLayout>
 
             </ScrollView>
 
             <CheckBox
-                    android:id="@+id/cbMethod"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:checked="false"
-                    android:clickable="false"
-                    android:textSize="20sp"
-                    android:visibility="visible"
-                    android:layout_weight="6"/>
+                android:id="@+id/cbMethod"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:checked="false"
+                android:clickable="false"
+                android:textSize="20sp"
+                android:visibility="visible"
+                android:layout_weight="6" />
 
         </LinearLayout>
         />
 
         <!-- The navigation drawer -->
         <LinearLayout
-                android:id="@+id/left_drawer"
-                android:orientation="vertical"
-                android:layout_width="240dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"
-                android:background="#111">
+            android:id="@+id/left_drawer"
+            android:orientation="vertical"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:background="#111">
 
             <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:text="@string/xda"
-                    android:textColor="@android:color/white"
-                    android:id="@+id/bXDA"
-                    android:onClick="bXDA"
-                    android:minHeight="20dp"/>
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/xda"
+                android:textColor="@android:color/white"
+                android:id="@+id/bXDA"
+                android:onClick="bXDA" />
 
             <Button
-                    android:text="@string/report"
-                    android:id="@+id/bReport"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="bReport"/>
+                android:text="@string/report"
+                android:id="@+id/bReport"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bReport" />
 
             <CheckBox
-                    android:text="@string/ShowAds"
-                    android:id="@+id/cbShowAds"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="cbShowAds"/>
+                android:text="@string/ShowAds"
+                android:id="@+id/cbShowAds"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="cbShowAds" />
 
             <CheckBox
-                    android:text="@string/log"
-                    android:id="@+id/cbLog"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="cbLog"/>
+                android:text="@string/log"
+                android:id="@+id/cbLog"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="cbLog" />
 
             <Button
-                    android:text="@string/showlog"
-                    android:id="@+id/bShowLogs"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="bShowLogs"/>
+                android:text="@string/showlog"
+                android:id="@+id/bShowLogs"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bShowLogs" />
 
             <Button
-                    android:text="@string/donate"
-                    android:id="@+id/bDonate"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="bDonate"/>
+                android:text="@string/donate"
+                android:id="@+id/bDonate"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bDonate" />
 
             <Button
-                    android:text="@string/sExit"
-                    android:id="@+id/bExit"
-                    android:textColor="@android:color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="bExit"/>
+                android:text="@string/sExit"
+                android:id="@+id/bExit"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="bExit" />
 
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>

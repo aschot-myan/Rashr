@@ -36,128 +36,128 @@ import de.mkrtchyan.utils.Notifyer;
 
 public class BackupHandler {
 
-	private Context mContext;
-	private File fBACKUP;
-	private Notifyer mNotifyer;
-	final private Common mCommon = new Common();
-	private FileChooser fcRestore, fcDelete;
-	private DeviceHandler mDeviceHandler;
+    private final Context mContext;
+    private File fBACKUP;
+    private final Notifyer mNotifyer;
+    final private Common mCommon = new Common();
+    private FileChooser fcRestore, fcDelete;
+    private final DeviceHandler mDeviceHandler;
 
-	private final Runnable rBackup = new Runnable() {
-		@Override
-		public void run() {
+    private final Runnable rBackup = new Runnable() {
+        @Override
+        public void run() {
 
-			new FlashUtil(mContext, fBACKUP, 2).execute();
+            new FlashUtil(mContext, fBACKUP, 2).execute();
 
-		}
-	};
+        }
+    };
 
 
-	private final Runnable rDelete = new Runnable() {
-		@Override
-		public void run() {
+    private final Runnable rDelete = new Runnable() {
+        @Override
+        public void run() {
 
-			fcDelete.getSelectedFile().delete();
-			if (RecoveryTools.PathToBackups.listFiles().length > 0) {
-				fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), "", rDelete);
-			}
-		}
-	};
+            fcDelete.getSelectedFile().delete();
+            if (RecoveryTools.PathToBackups.listFiles().length > 0) {
+                fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), "", rDelete);
+            }
+        }
+    };
 
-	private final Runnable setBakNameAndRun = new Runnable() {
+    private final Runnable setBakNameAndRun = new Runnable() {
 
-		@Override
-		public void run() {
+        @Override
+        public void run() {
 
-			final Dialog dialog = new Dialog(mContext);
-			dialog.setTitle(R.string.setname);
-			dialog.setContentView(R.layout.dialog_backup);
-			Button bGoBackup = (Button) dialog.findViewById(R.id.bGoBackup);
-			final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
-			etFileName.setHint(Calendar.getInstance().get(Calendar.DATE)
-					+ "-" + Calendar.getInstance().get(Calendar.MONTH)
-					+ "-" + Calendar.getInstance().get(Calendar.YEAR)
-					+ "-" + Calendar.getInstance().get(Calendar.HOUR)
-					+ ":" + Calendar.getInstance().get(Calendar.MINUTE));
-			bGoBackup.setOnClickListener(new View.OnClickListener() {
+            final Dialog dialog = new Dialog(mContext);
+            dialog.setTitle(R.string.setname);
+            dialog.setContentView(R.layout.dialog_backup);
+            Button bGoBackup = (Button) dialog.findViewById(R.id.bGoBackup);
+            final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
+            etFileName.setHint(Calendar.getInstance().get(Calendar.DATE)
+                    + "-" + Calendar.getInstance().get(Calendar.MONTH)
+                    + "-" + Calendar.getInstance().get(Calendar.YEAR)
+                    + "-" + Calendar.getInstance().get(Calendar.HOUR)
+                    + ":" + Calendar.getInstance().get(Calendar.MINUTE));
+            bGoBackup.setOnClickListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					try {
-						String Name;
-						if (!etFileName.getText().toString().equals("")) {
-							Name = etFileName.getText().toString();
-						} else {
-							Name = Calendar.getInstance().get(Calendar.DATE)
-									+ "-" + Calendar.getInstance().get(Calendar.MONTH)
-									+ "-" + Calendar.getInstance().get(Calendar.YEAR)
-									+ "-" + Calendar.getInstance().get(Calendar.HOUR)
-									+ ":" + Calendar.getInstance().get(Calendar.MINUTE);
-						}
+                @Override
+                public void onClick(View v) {
+                    try {
+                        String Name;
+                        if (!etFileName.getText().toString().equals("")) {
+                            Name = etFileName.getText().toString();
+                        } else {
+                            Name = Calendar.getInstance().get(Calendar.DATE)
+                                    + "-" + Calendar.getInstance().get(Calendar.MONTH)
+                                    + "-" + Calendar.getInstance().get(Calendar.YEAR)
+                                    + "-" + Calendar.getInstance().get(Calendar.HOUR)
+                                    + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+                        }
 
-						Name = Name + mDeviceHandler.getEXT();
+                        Name = Name + mDeviceHandler.getEXT();
 
-						fBACKUP = new File(RecoveryTools.PathToBackups, Name);
+                        fBACKUP = new File(RecoveryTools.PathToBackups, Name);
 
-						if (fBACKUP.exists()) {
-							new Notifyer(mContext).createAlertDialog(R.string.warning, R.string.backupalready, rBackup).show();
-						} else {
-							rBackup.run();
-						}
-						dialog.dismiss();
-					} catch (NullPointerException e) {
-						new Notifyer(mContext).showExceptionToast(e);
-					}
-				}
-			});
-			dialog.show();
-		}
-	};
+                        if (fBACKUP.exists()) {
+                            new Notifyer(mContext).createAlertDialog(R.string.warning, R.string.backupalready, rBackup).show();
+                        } else {
+                            rBackup.run();
+                        }
+                        dialog.dismiss();
+                    } catch (NullPointerException e) {
+                        new Notifyer(mContext).showExceptionToast(e);
+                    }
+                }
+            });
+            dialog.show();
+        }
+    };
 
-	BackupHandler(final Context mContext) {
-		this.mContext = mContext;
-		mNotifyer = new Notifyer(mContext);
-		mDeviceHandler = new DeviceHandler(mContext);
-		fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.getEXT(), new Runnable() {
-			@Override
-			public void run() {
+    BackupHandler(final Context mContext) {
+        this.mContext = mContext;
+        mNotifyer = new Notifyer(mContext);
+        mDeviceHandler = new DeviceHandler(mContext);
+        fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.getEXT(), new Runnable() {
+            @Override
+            public void run() {
 
-				if (fcRestore.isChoosed()) {
-					fBACKUP = fcRestore.getSelectedFile();
-					new FlashUtil(mContext, fBACKUP, 1).execute();
-				}
-			}
-		});
-		fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.getEXT(), rDelete);
-	}
+                if (fcRestore.isChoosed()) {
+                    fBACKUP = fcRestore.getSelectedFile();
+                    new FlashUtil(mContext, fBACKUP, 1).execute();
+                }
+            }
+        });
+        fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.getEXT(), rDelete);
+    }
 
-	public void backup() {
-		if (!mCommon.suRecognition()
-				&& !BuildConfig.DEBUG) {
-			mNotifyer.showRootDeniedDialog();
-		} else {
-			setBakNameAndRun.run();
-		}
-	}
+    public void backup() {
+        if (!mCommon.suRecognition()
+                && !BuildConfig.DEBUG) {
+            mNotifyer.showRootDeniedDialog();
+        } else {
+            setBakNameAndRun.run();
+        }
+    }
 
-	public void restore() {
-		if (!mCommon.suRecognition()
-				&& !BuildConfig.DEBUG) {
-			mNotifyer.showRootDeniedDialog();
-		} else {
-			if (RecoveryTools.PathToBackups.list().length < 1) {
-				mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
-			} else {
-				fcRestore.show();
-			}
-		}
-	}
+    public void restore() {
+        if (!mCommon.suRecognition()
+                && !BuildConfig.DEBUG) {
+            mNotifyer.showRootDeniedDialog();
+        } else {
+            if (RecoveryTools.PathToBackups.list().length < 1) {
+                mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
+            } else {
+                fcRestore.show();
+            }
+        }
+    }
 
-	public void deleteBackup() {
-		if (RecoveryTools.PathToBackups.list().length < 1) {
-			mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
-		} else {
-			fcDelete.show();
-		}
-	}
+    public void deleteBackup() {
+        if (RecoveryTools.PathToBackups.list().length < 1) {
+            mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
+        } else {
+            fcDelete.show();
+        }
+    }
 }

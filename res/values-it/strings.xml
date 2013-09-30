@@ -22,7 +22,6 @@
         tuo dispositivo.
     </string>
     <string name="risk">Conosco i rischi</string>
-    <string name="bak_now">Backup Manager</string>
     <string name="sReboot">Riavvia</string>
     <string name="sRebootRecovery">Riavvia in Recovery</string>
     <string name="sRebootBootloader">Riavvia in Bootloader</string>
@@ -49,7 +48,6 @@
         sdcard\n\nTWRP:\n\nMain Menu -> Install
     </string>
     <string name="bak_done">Backup completato</string>
-    <string name="res_done">Ripristino completato</string>
     <string name="backupalready">Esiste già un Backup. Verrà sostituito.
         Continuare?
     </string>
@@ -79,7 +77,6 @@
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Mostra Logs</string>
 
-    <string name="title_activity_backup_manager">Backup-Manager</string>
     <string name="sDeleteBackup">Cancella Backup</string>
     <string name="sBackupMgr">Apri Backup Manager</string>
     <string name="setname">Imposta nome del Backup</string>
@@ -94,7 +91,6 @@
     <string name="wrong_format">Hai scelto un file sbagliato. Il File deve essere in formato %s.
     </string>
     <string name="over_recovery">La recovery verrà installata al posto di quella attuale</string>
-    <string name="bak_del">Backup cancellato!</string>
     <string name="thx_support">Grazie per supportarmi</string>
 
 </resources>
