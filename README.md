@@ -33,6 +33,10 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.6.2]
+
+-Only OTHER device recognition fixed
+
 Update [1.6.1]
 
 -[NEW DEVICES]-

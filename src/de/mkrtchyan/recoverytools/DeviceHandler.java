@@ -431,7 +431,7 @@ public class DeviceHandler {
                 || DEV_NAME.equals("kfhd7"))
             TWRP = true;
 
-        if (getDevType() != DEV_TYPE_DD
+        if (getDevType() == DEV_TYPE_DD
                 || isOverRecovery()
                 || isMTD()
                 || CWM
