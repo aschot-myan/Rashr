@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/iCreateBackup"
-        android:title="@string/sBackup"></item>
+        android:title="@string/sBackup" />
 
     <item
         android:id="@+id/iRestoreBackup"
-        android:title="@string/sRestore"></item>
+        android:title="@string/sRestore" />
 
     <item
         android:id="@+id/iDeleteBackup"
-        android:title="@string/sDeleteBackup"></item>
+        android:title="@string/sDeleteBackup" />
 
 </menu>

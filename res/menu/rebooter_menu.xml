@@ -4,11 +4,11 @@
 
     <item
         android:title="@string/sReboot"
-        android:id="@+id/iReboot"></item>
+        android:id="@+id/iReboot" />
     <item
         android:id="@+id/iRebootRecovery"
-        android:title="@string/sRebootRecovery"></item>
+        android:title="@string/sRebootRecovery" />
     <item
         android:id="@+id/iRebootBootloader"
-        android:title="@string/sRebootBootloader"></item>
+        android:title="@string/sRebootBootloader" />
 </menu>
