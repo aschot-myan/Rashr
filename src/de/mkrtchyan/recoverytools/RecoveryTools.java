@@ -245,7 +245,7 @@ public class RecoveryTools extends ActionBarActivity {
         } else {
             if (!mCommon.getBooleanPerf(mContext, "recovery-tools", "first_run")) {
 
-                if (!mDeviceHandler.isOverRecovery() && mCommon.suRecognition()) {
+                if (mDeviceHandler.getDevType() != DeviceHandler.DEV_TYPE_RECOVERY && mCommon.suRecognition()) {
                     final AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
                     WarningDialog.setTitle(R.string.warning);
                     WarningDialog.setMessage(String.format(getString(R.string.bak_warning), PathToBackups.getAbsolutePath()));
@@ -479,7 +479,7 @@ public class RecoveryTools extends ActionBarActivity {
                             "\nVersionCode: " + pInfo.versionCode +
                             "\n\n\nProduct Info: " +
                             "\n\nManufacture: " + android.os.Build.MANUFACTURER +
-                            "\nDevice: " + Build.DEVICE + " (" + mDeviceHandler.DEVICE_NAME + ")" +
+                            "\nDevice: " + Build.DEVICE + " (" + mDeviceHandler.DEV_NAME + ")" +
                             "\nBoard: " + Build.BOARD +
                             "\nBrand: " + Build.BRAND +
                             "\nModel: " + Build.MODEL +

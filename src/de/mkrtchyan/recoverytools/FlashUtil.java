@@ -91,39 +91,55 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
                 case 1:
                     if (file.exists()) {
-                        if (mDeviceHandler.isMTD()) {
-                            File fflash = new File(mContext.getFilesDir(), "flash_image");
-                            mCommon.chmod(fflash, "741");
-                            mCommon.executeSuShell(mContext, fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
 
-                        } else if (!mDeviceHandler.getRecoveryPath().equals(""))
-                            mCommon.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + mDeviceHandler.getRecoveryPath());
-                        if (mDeviceHandler.DEVICE_NAME.equals("c6603")
-                                || mDeviceHandler.DEVICE_NAME.equals("montblanc")) {
-                            if (mCommon.getBooleanPerf(mContext, "flash-util", "first-flash")) {
-                                mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RW");
-                                mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.charger.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.charger.getName());
-                                mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.chargermon.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.chargermon.getName());
-                                if (mDeviceHandler.DEVICE_NAME.equals("c6603")) {
-                                    mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.ric.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.ric.getName());
-                                    mCommon.chmod(mDeviceHandler.ric, "755");
+                        switch (mDeviceHandler.getDevType()) {
+                            case DeviceHandler.DEV_TYPE_MTD:
+                                File fflash = new File(mContext.getFilesDir(), "flash_image");
+                                mCommon.chmod(fflash, "741");
+                                mCommon.executeSuShell(mContext, fflash.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+                                break;
+                            case DeviceHandler.DEV_TYPE_DD:
+                                mCommon.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + mDeviceHandler.getRecoveryPath());
+                                break;
+                            case DeviceHandler.DEV_TYPE_CUSTOM:
+                                if (mDeviceHandler.DEV_NAME.equals("c6603")
+                                        || mDeviceHandler.DEV_NAME.equals("montblanc")) {
+                                    mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RW");
+                                    mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.charger.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.charger.getName());
+                                    mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.chargermon.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.chargermon.getName());
+                                    if (mDeviceHandler.DEV_NAME.equals("c6603")) {
+                                        mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.ric.getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.ric.getName());
+                                        mCommon.chmod(mDeviceHandler.ric, "755");
+                                    }
+                                    mCommon.chmod(mDeviceHandler.charger, "755");
+                                    mCommon.chmod(mDeviceHandler.chargermon, "755");
+                                    mCommon.executeSuShell(mContext, "cat " + file.getAbsolutePath() + " >> " + mDeviceHandler.getRecoveryPath());
+                                    mCommon.chmod(file, "644");
+                                    mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RO");
                                 }
-                                mCommon.chmod(mDeviceHandler.charger, "755");
-                                mCommon.chmod(mDeviceHandler.chargermon, "755");
-                            }
-                            mCommon.chmod(file, "644");
-                            mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RO");
+                                break;
                         }
+
                     }
                     break;
 
                 case 2:
-                    if (mDeviceHandler.isMTD()) {
-                        File fdump = new File(mContext.getFilesDir(), "dump_image");
-                        mCommon.chmod(mDeviceHandler.fdump, "741");
-                        mCommon.executeSuShell(mContext, fdump.getAbsolutePath() + " recovery " + file.getAbsolutePath());
-                    } else if (!mDeviceHandler.getRecoveryPath().equals(""))
-                        mCommon.executeSuShell(mContext, "dd if=" + mDeviceHandler.getRecoveryPath() + " of=" + file.getAbsolutePath());
+                    switch (mDeviceHandler.getDevType()) {
+                        case DeviceHandler.DEV_TYPE_DD:
+                            mCommon.executeSuShell(mContext, "dd if=" + mDeviceHandler.getRecoveryPath() + " of=" + file.getAbsolutePath());
+                            break;
+                        case DeviceHandler.DEV_TYPE_MTD:
+                            File fdump = new File(mContext.getFilesDir(), "dump_image");
+                            mCommon.chmod(mDeviceHandler.fdump, "741");
+                            mCommon.executeSuShell(mContext, fdump.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+                            break;
+                        case DeviceHandler.DEV_TYPE_CUSTOM:
+                            if (mDeviceHandler.DEV_NAME.equals("c6603")
+                                    || mDeviceHandler.DEV_NAME.equals("montblanc"))
+                                mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getRecoveryPath() + " >> " + file.getAbsolutePath());
+                            break;
+                    }
+
                     break;
             }
         } catch (RootAccessDeniedException e) {

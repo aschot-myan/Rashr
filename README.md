@@ -33,6 +33,42 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 CHANGELOG
 ====================
 
+Update [1.6.1]
+
+-[NEW DEVICES]-
+-Samsung Galaxy Tab 3 8.0 3G (lt013g)
+-Motorola Xoom 2 (pasteur)
+-Samsung Galaxy S4 Mini (serranolte)
+-LG Lucid2 (l1v)
+-Samsung Galaxy Mega 5.8 (crater)
+-SKY IM-A830L (ef46l)
+-Samsung Galaxy Music (ivoryss)
+-Samsung Galaxy Grand Duos (baffin)
+-Motorola Electrify M (solstice)
+-Amazon Kindle Fire (otter)
+-Samsung Galaxy S3 (d2vmu)
+-ZTE N9100 (hayes)
+-SKY IM-A830S (ef47s)
+-Motorola Photon Q 4G LTE (xt897)
+-Samsung Galaxy Tab (GT-P6810)
+-Samsung Galaxy S2 (GT-I9105P)
+-ALCATEL ONE TOUCH 930D (ot-930)
+-Amazon Kindle Fire2 (otter2)
+-HTC Desire X (protou)
+-LG Optimus F3 (fx3)
+-LG Optimus F7 (fx1)
+-LG Optimus G2 (g2)
+-Motorola MB612 (venus2)
+-Samsung Galaxy Mega (melius3g)
+-Samsung Galaxy Mega LTE (meliuslte)
+-Motorola RAZR HD (vanquish_u)
+-ZTE Quantum (quantum)
+-ZTE Z998 (coeus)
+-Motorola RAZR M (smq_u)
+-Xiaomi MI 2A (taurus)
+-Samsung Galaxy Note 10.1 (p4notelte)
+-Motorola Droid Ultra (obake)
+
 Update [1.6.0]
 
 -Many UI Changes!! and (<4.x Support of UI)
@@ -456,6 +492,7 @@ Supported Devices
 -HD2 (leo)
 -Desire HD (ace)
 -Desire S (saga)
+-Desire X (protou)
 -Sensation (pyramid)
 -Fireball (fireball)
 -Incredible S (vivo)
@@ -553,6 +590,7 @@ Supported Devices
 --[SAMSUNG]--
 -Galaxy SIII (d2can/d2cri/d2usc/d2mtr)
 -Galaxy S4 (Google Play Edition/jgedlte)
+-Galaxy Mega 5.8 (crater)
 
 --[SONY]--
 -Xperia S(nozomi/LT30p)
@@ -572,10 +610,19 @@ Supported Devices
 -Galaxy S II Duos (SCH-i929)
 -Epic 4G Touch (SPH-D710)
 -Galaxy S4 (ja3g/ja3gchnduos)
+-Galaxy S3 (d2vmu)
 -Galaxy Exhibit (ancora_tmo)
 -Galaxy Tab 7 Plus (p6200)
 -Galaxy Note 8.0 (konawifi/konalteatt)
 -Galaxy Note II CDMA (t03gctc)
+-Galaxy Mega (melius3g)
+-Galaxy Mega LTE (meliuslte)
+-Galaxy S2 (GT-I9105P)
+-Galaxy Note 10.1 (p4notelte)
+-GT-P6810
+-Galaxy Music (ivoryss)
+-Galaxy S4 Mini (serranolte)
+-Galaxy Tab 3 8.0 3G (lt013g)
 
 --[HTC]--
 -First (mystul)
@@ -593,23 +640,36 @@ Supported Devices
 -ATRIX HD (qinara)
 -Droid X (shadow/cdma_shadow)
 -RAZR M (scorpion_mini)
--Droid Ultra (obakem)
+-Droid Ultra (obake/m)
 -Droid RAZR (spyder/cdma_spyder)
--DROID RAZR HD (vanquish)
+-DROID RAZR HD (vanquish/_u)
+-Photon Q 4G LTE (xt897)
 -Xoom UMTS (everest)
 -DROID4 (maserati)
+-MB612 (venus2)
+-Electrify M (solstice)
+-RAZR M (smq_u)
+-RAZR R (dinara_td)
+-Xoom 2 (pasteur)
 
 --[LG]--
+-Optimus G2 (g2)
 -Optimus One CDMA (thuderc)
 -Optimus Elite (m3s)
 -Optimus Me (pecan)
+-Optimus F7 (fx1)
+-Optimus F3 (fx3)
 -Connect 4G (cayman)
 -F100S (batman_skt)
 -P769 (u2)
 -Spectrum II 4G (vs930)
 -Motion 4G (l0)
+-Lucid2 (l1v)
 
 --[OTHER]--
+-Amazon Kindle Fire (otter)
+-Amazon Kindle Fire2 (otter2)
+-ALCATEL ONE TOUCH 930D
 -Kyocera Torque (e6710)
 -Xolo Play (us9230e1)
 -PANTECH IM-A840SP (im-a840s/p)
@@ -619,6 +679,11 @@ Supported Devices
 -Fujitsu F-02E (f02e)
 -Barnes & Noble NookHD+ (ovation)
 -PANTECH IM-A850K
+-SKY IM-A830S (ef47s)
+-SKY IM-A830L (ef46l)
+-ZTE Quantum (quantum)
+-ZTE Z998 (coeus)
+-Xiaomi MI 2A (taurus)
 
 *****************
 *ALL MTD Devices*

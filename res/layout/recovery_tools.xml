@@ -64,9 +64,9 @@
                         android:layout_height="wrap_content"
                         ads:adUnitId="a151cdc8be01253"
                         ads:loadAdOnCreate="true"
-                        ads:testDevices="F0518E98AFA0F7A8FBE3612CB987C9C5, TEST_EMULATOR"
+                        ads:testDevices="538324DB6D51B29D9320AFDB7D564DFB, TEST_EMULATOR"
                         ads:adSize="SMART_BANNER"
-                        android:layout_gravity="center"></com.google.ads.AdView>
+                        android:layout_gravity="center" />
 
                     <Button
                         android:layout_width="fill_parent"
