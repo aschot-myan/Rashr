@@ -14,7 +14,7 @@ package de.mkrtchyan.recoverytools;
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -132,8 +132,7 @@ public class BackupHandler {
     }
 
     public void backup() {
-        if (!mCommon.suRecognition()
-                && !BuildConfig.DEBUG) {
+        if (!mCommon.suRecognition()) {
             mNotifyer.showRootDeniedDialog();
         } else {
             setBakNameAndRun.run();
@@ -141,8 +140,7 @@ public class BackupHandler {
     }
 
     public void restore() {
-        if (!mCommon.suRecognition()
-                && !BuildConfig.DEBUG) {
+        if (!mCommon.suRecognition()) {
             mNotifyer.showRootDeniedDialog();
         } else {
             if (RecoveryTools.PathToBackups.list().length < 1) {

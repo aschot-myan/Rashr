@@ -66,7 +66,6 @@ xda-developer.com"</string>
 XDACN汉化组 OPkyd汉化
 论坛：http://bbs.xda.cn/"</string>
     <string name="risk">我了解风险</string>
-    <string name="bak_now">备份管理器</string>
     <string name="sReboot">重启</string>
     <string name="sRebootRecovery">重启到 Recovery</string>
     <string name="sRebootBootloader">重启到 Bootloader</string>
@@ -84,7 +83,6 @@ TWRP:
 主菜单 -> 安装"</string>
     <string name="img_not_found">未找到 Recovery 镜像文件. 是否立即下载?</string>
     <string name="bak_done">备份完成</string>
-    <string name="res_done">恢复完成</string>
     <string name="backupalready">备份已存在. 将覆盖现有备份. 是否继续?</string>
     <string name="no_backup">备份不存在 (%s/Recovery-Tools/backups/). 是否立即创建?</string>
     <string name="notsupportded">暂不支持您的设备. 是否扫描系统并报告支持请求?</string>
@@ -95,7 +93,6 @@ TWRP:
     <string name="su_logs_title">执行Shell命令</string>
     <string name="log">Shell命令日志</string>
     <string name="showlog">显示日志</string>
-    <string name="title_activity_backup_manager">备份管理器</string>
     <string name="sDeleteBackup">删除备份</string>
     <string name="sBackupMgr">打开备份管理器</string>
     <string name="setname">设置备份名称</string>
@@ -107,8 +104,6 @@ TWRP:
     <string name="download_utils">"要使用该应用您需要下载部分小工具 (约 512KB). 并需要网络连接. 
 是否立即下载?"</string>
     <string name="over_recovery">设备将重启刷入 Recovery</string>
-    <string name="bak_del">备份已删除!</string>
-    <string name="thx_support">感谢您的支持</string>
     <string name="ShowAds">显示广告以支持我们</string>
     <string name="please_restart">请重启应用程序以使更改生效</string>
     <string name="please_ads">请打开广告以支持我的工作!</string>

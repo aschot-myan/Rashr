@@ -3,7 +3,6 @@
     <string name="Downloading">Descargando…</string>
     <string name="wrong_format">Haz eligido un archivo falso. El archivo debe estar en formato %s.
     </string>
-    <string name="noconnection">No hay red disponible. Descarga cancelada!</string>
     <string name="failed_download">Oh no, se ha producido un problema. Por favor reinicie la
         descarga.\n%s"
     </string>

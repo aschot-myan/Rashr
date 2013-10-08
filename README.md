@@ -13,7 +13,7 @@ This app flashes your device recovery without rebooting it very fast and easy. T
 "Flash Clockworkmod-Recovery" and "Flash TWRP" (You can use these predefined buttons if they are supported.) and "Flash other".
 
 "Flash Clockworkmod" & "Flash TWRP" load the custom-recovery for your device down and install them automatically.
-"Flash other" lets you choose an image from the internal or external memory of your device.
+"Flash other" lets you choose an image from the internal or external memory of your device additionally you can use your file browser to choose an img.
 
 You can create backups of the currently installed system (If your device is supported. Shown below), restore and delete backups. You can find these functions under "Backup Manager".
 

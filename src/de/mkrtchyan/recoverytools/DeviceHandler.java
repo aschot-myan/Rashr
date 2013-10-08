@@ -27,20 +27,23 @@ import android.content.DialogInterface;
 import android.os.Build;
 
 import java.io.File;
+import java.io.IOException;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
+import de.mkrtchyan.utils.Unzipper;
 
 
 public class DeviceHandler {
 
-
+    public static final String TAG = "DeviceHandler";
     public static final int DEV_TYPE_DD = 1;
     public static final int DEV_TYPE_MTD = 2;
     public static final int DEV_TYPE_RECOVERY = 3;
     public static final int DEV_TYPE_CUSTOM = 4;
 
     private int DEV_TYPE = 0;
+
     /*
      * This class content all device specified information to provide
      * all information for all other classes for example:
@@ -50,6 +53,19 @@ public class DeviceHandler {
 
     public String DEV_NAME = Build.DEVICE.toLowerCase();
     private String RecoveryPath = "";
+    private static final File[] RecoveryList = {
+            new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
+            new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
+            new File("/dev/block/platform/sdhci-tegra.3/by-name/recovery"),
+            new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
+		    new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
+		    new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
+		    new File("/dev/block/platform/dw_mmc.0/by-name/RECOVERY"),
+		    new File("/dev/block/platform/hi_mci.1/by-name/recovery"),
+		    new File("/dev/block/platform/dw_mmc/by-name/recovery"),
+		    new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
+		    new File("/dev/block/recovery")
+    };
 
     private File CWM_IMG = null;
     private File TWRP_IMG = null;
@@ -65,7 +81,8 @@ public class DeviceHandler {
     private boolean CWM_OFFICIAL = false;
     private final Context mContext;
 
-    public File fflash, fdump, charger, chargermon, ric;
+    private File flash_image = new File("/system/bin", "flash_image");
+    private File dump_image = new File("/system/bin", "dump_image");
 
     public DeviceHandler(Context mContext) {
 
@@ -73,7 +90,6 @@ public class DeviceHandler {
 
         setPredefinedOptions();
     }
-
     public DeviceHandler(Context mContext, String CustomDevice) {
 
         this.mContext = mContext;
@@ -407,8 +423,8 @@ public class DeviceHandler {
             DEV_TYPE = DEV_TYPE_CUSTOM;
         }
 
-        if (new File("/dev/mtd/").exists() && RecoveryPath.equals(""))
-            DEV_TYPE = DEV_TYPE_MTD;
+	    if (new File("/dev/mtd/").exists() && DEV_TYPE != DEV_TYPE_DD)
+		    DEV_TYPE = DEV_TYPE_MTD;
     }
 
     public void getSupportedSystems() {
@@ -788,87 +804,45 @@ public class DeviceHandler {
 
     public boolean downloadUtils() {
 
-        if (DEV_NAME.equals("montblanc")
-                || DEV_NAME.equals("c6603")
-                || DEV_NAME.equals("c6602")) {
-            charger = new File(RecoveryTools.PathToUtils, "charger");
-            chargermon = new File(RecoveryTools.PathToUtils, "chargermon");
-            ric = new File(RecoveryTools.PathToUtils, "ric");
+	    final File archive = new File(RecoveryTools.PathToUtils, DEV_NAME  + ".zip");
 
-            if ((DEV_NAME.equals("montblanc") && !charger.exists() || !chargermon.exists())
-                    || DEV_NAME.equals("c6602") || DEV_NAME.equals("c6603") && !charger.exists() || !chargermon.exists() || !ric.exists()) {
-                AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
-                mAlertDialog
-                        .setTitle(R.string.warning)
-                        .setMessage(R.string.download_utils);
-                final DialogInterface.OnClickListener onClick = new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
+        mAlertDialog
+                .setTitle(R.string.warning)
+                .setMessage(R.string.download_utils);
+           if (DEV_NAME.equals("montblanc") || DEV_NAME.equals("c6602") || DEV_NAME.equals("c6603") && !archive.exists()) {
+               mAlertDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final DialogInterface.OnClickListener loop = this;
-                        final Runnable checkFile = new Runnable() {
+                        new Downloader(mContext, "http://dslnexus.org/Android/utils/", archive.getName(), archive, new Runnable() {
                             @Override
                             public void run() {
-                                boolean corrupt = false;
-                                if (isDowloadCorrupt(chargermon)) {
-                                    chargermon.delete();
-                                    corrupt = true;
-                                }
-                                if (isDowloadCorrupt(charger)) {
-                                    charger.delete();
-                                    corrupt = true;
-                                }
-                                if (DEV_NAME.equals("c6603")
-                                        || DEV_NAME.equals("c6602"))
-                                    if (isDowloadCorrupt(ric)) {
-                                        ric.delete();
-                                        corrupt = true;
-                                    }
-                                if (corrupt) {
-                                    final AlertDialog.Builder tryAgain = new AlertDialog.Builder(mContext);
-                                    tryAgain
-                                            .setMessage(R.string.corrupt_download)
-                                            .setPositiveButton(R.string.try_again, loop)
-                                            .setNegativeButton(R.string.later, new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                }
-                                            })
-                                            .setTitle(R.string.warning)
-                                            .show();
-                                }
-                            }
-                        };
-                        new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEV_NAME, chargermon.getName() + ".img", chargermon, new Runnable() {
-                            @Override
-                            public void run() {
-                                new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEV_NAME, charger.getName() + ".img", charger, new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (DEV_NAME.equals("c6603")
-                                                || DEV_NAME.equals("c6602"))
-                                            new Downloader(mContext, "http://dslnexus.nazuka.net/utils/" + DEV_NAME, ric.getName() + ".img", ric, checkFile).execute();
-                                        else
-                                            checkFile.run();
-                                    }
-                                }).execute();
+	                            new Unzipper(mContext, archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
                             }
                         }).execute();
-                    }
-                };
-                mAlertDialog.setPositiveButton(R.string.positive, onClick);
-                mAlertDialog.show();
-                return true;
-            }
-        }
+
+                   }
+               });
+               mAlertDialog.show();
+               return true;
+           }
+	    new Unzipper(mContext, archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
         return false;
     }
 
-    public boolean isDowloadCorrupt(File downloadFile) {
-        Common mCommon = new Common();
-        File CorruptDownload = new File(mContext.getFilesDir(), "corruptDownload");
-        mCommon.pushFileFromRAW(mContext, CorruptDownload, R.raw.corrupt_download);
-        return downloadFile.length() == CorruptDownload.length();
+    public File getFlash_image() {
+        if (!flash_image.exists()) {
+            flash_image = new File(mContext.getFilesDir(), flash_image.getName());
+        }
+        return flash_image;
+    }
+
+    public File getDump_image() {
+        if (!dump_image.exists()) {
+            dump_image = new File(mContext.getFilesDir(), dump_image.getName());
+        }
+        return dump_image;
     }
 
     public boolean isTwrpSupported() {
@@ -894,6 +868,10 @@ public class DeviceHandler {
         return getDevType() == DEV_TYPE_MTD;
     }
 
+	public boolean isDD() {
+		return getDevType() == DEV_TYPE_DD;
+	}
+
     public boolean isOverRecovery() {
         return getDevType() == DEV_TYPE_RECOVERY;
     }
@@ -909,7 +887,6 @@ public class DeviceHandler {
             } else {
                 CWM_IMG = new File(RecoveryTools.PathToCWM, DEV_NAME + getCWMVersion() + EXT);
             }
-
         return CWM_IMG;
     }
 
@@ -925,45 +902,26 @@ public class DeviceHandler {
 
     public String getCWM_URL() {
         //String CWM_URL = "http://dslnexus.nazuka.net/recoveries";
-        return "http://dslnexus.nazuka.net/recoveries";
+        return "http://dslnexus.org/Android/recoveries";
     }
 
     public String getTWRP_URL() {
         //String TWRP_URL = "http://dslnexus.nazuka.net/recoveries";
-        return "http://dslnexus.nazuka.net/recoveries";
+        return "http://dslnexus.org/Android/recoveries";
     }
 
     public String getRecoveryPath() {
         if (RecoveryPath.equals("")) {
+
+	        for (int i = 0; i < RecoveryList.length; i++) {
+		        if (RecoveryList[i].exists()) {
+			        return RecoveryList[i].getAbsolutePath();
+		        }
+	        }
+
 //          ASUS DEVICEs + Same
             if (DEV_NAME.equals("a66"))
                 return "/dev/block/mmcblk0p15";
-
-//		    Nexus DEVICEs + Same
-            if (DEV_NAME.equals("maguro")
-                    || DEV_NAME.equals("toro")
-                    || DEV_NAME.equals("toroplus"))
-                return "/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery";
-
-            if (DEV_NAME.equals("grouper")
-                    || DEV_NAME.equals("tilapia")
-                    || DEV_NAME.equals("p880")
-                    || DEV_NAME.equals("n710"))
-                return "/dev/block/platform/sdhci-tegra.3/by-name/SOS";
-
-            if (DEV_NAME.equals("mako")
-                    || DEV_NAME.equals("geeb")
-                    || DEV_NAME.equals("vanquish")
-                    || DEV_NAME.equals("find5")
-                    || DEV_NAME.equals("jgedlte")
-                    || DEV_NAME.equals("flo")
-                    || DEV_NAME.equals("deb")
-                    || DEV_NAME.equals("scorpion_mini")
-                    || DEV_NAME.equals("g2"))
-                return "/dev/block/platform/msm_sdcc.1/by-name/recovery";
-
-            if (DEV_NAME.equals("manta"))
-                return "/dev/block/platform/dw_mmc.0/by-name/recovery";
 
 //		    Samsung DEVICEs + Same
             if (DEV_NAME.equals("d2att")
@@ -1151,24 +1109,12 @@ public class DeviceHandler {
 		            || DEV_NAME.equals("lt013g"))
                 return "/dev/block/mmcblk0p10";
 
-            if (DEV_NAME.equals("stingray")
-                    || DEV_NAME.equals("wingray")
-                    || DEV_NAME.equals("everest"))
-                return "/dev/block/platform/sdhci-tegra.3/by-name/recovery";
-
-//          Huawei DEVICEs + Same
-            if (DEV_NAME.equals("u9508"))
-                return "/dev/block/platform/hi_mci.1/by-name/recovery";
-
-            if (DEV_NAME.equals("u9200")
-                    || DEV_NAME.equals("kfdh7"))
-                return "/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery";
-
 //		    Sony DEVICEs + Same
             if (DEV_NAME.equals("nozomi"))
                 return "/dev/block/mmcblk0p3";
 
-            if (DEV_NAME.equals("c6603"))
+            if (DEV_NAME.equals("c6603")
+                    || DEV_NAME.equals("c6602"))
                 return "/system/bin/recovery.tar";
 
 //		    LG DEVICEs + Same
@@ -1213,7 +1159,6 @@ public class DeviceHandler {
                 return "/dev/block/mmcblk0p16";
 
             RecoveryPath = "";
-
         }
         return RecoveryPath;
     }
@@ -1221,4 +1166,30 @@ public class DeviceHandler {
     public String getEXT() {
         return EXT;
     }
+
+	public void extractFiles(Context mContext) {
+		if (isMTD()) {
+			try {
+				Common mCommon = new Common();
+				File flash_image = getFlash_image();
+				if (!flash_image.exists())
+					mCommon.pushFileFromRAW(mContext, flash_image, R.raw.flash_image);
+				File dump_image = getDump_image();
+				if (!dump_image.exists())
+					mCommon.pushFileFromRAW(mContext, dump_image, R.raw.dump_image);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public File getRic() {
+		return new File(RecoveryTools.PathToUtils, DEV_NAME + "/ric");
+	}
+	public File getCharger() {
+		return new File(RecoveryTools.PathToUtils, DEV_NAME + "/charger");
+	}
+	public File getChargermon() {
+		return new File(RecoveryTools.PathToUtils, DEV_NAME + "/chargermon");
+	}
 }

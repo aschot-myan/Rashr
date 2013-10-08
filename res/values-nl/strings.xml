@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Recovery Tools</string>
+    <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
+    <string name="sHistory">Geschiedenis</string>
+    <string name="sFlashTWRP">Flash TWRP Recovery</string>
+    <string name="flash_other">Flash andere Recovery</string>
+    <string name="sBackup">Backup huidig Recovery</string>
+    <string name="go">ok</string>
+    <string name="sRebooter">herstarten</string>
+    <string name="sRestore">Zet terug vanaf reservekopie</string>
+    <string name="sCleareCache">verwijder gedownload recoveries</string>
+    <string name="report">rapporteer bug</string>
+    <string name="sExit">Exit</string>
+    <string name="xda">Open XDA-Thread</string>
+    <string name="rename">als je je backup wilt vernoemen, typ het dan in het tekst veld (zonder spatie!). 
+    		Zo niet, dan word huidige tijd ingesteld.
+    </string>
+    <string name="bak_warning">Voordat je een aantal acties met de Recovery-Tools maakt, maak een back-up en op te slaan op uw PC.
+        \nReservekopie wordt gemaakt onder %s.
+        \nDe Dev is niet verantwoordelijk voor enige schade die is gemaakt.
+    </string>
+    <string name="risk">Ik weet the risico</string>
+    <string name="sReboot">Herstarten</string>
+    <string name="sRebootRecovery">Herstart Recovery</string>
+    <string name="sRebootBootloader">Herstart Bootloader</string>
+    <string name="info">Infomatie</string>
+    <string name="flashed">Recovery flashed.</string>
+    <string name="warning">Waarschuwing!</string>
+    <string name="kernel_to">Als je De Recovery System flasht op dit apparaat zal de Boot.img flashen (kernel) naar 
+    		stock met een eigen recovery, make alsjeblieft een reservekopie van je Boot.img.
+    </string>
+    <string name="flash_over_recovery">Flash Recovery nu? (je zal moeten herstarten naar recovery)</string>
+    <string name="instructions">Instructie</string>
+    <string name="instruction">CWM:
+        \n\nMain Menu -> install zip from sdcard -> choose zip from sdcard
+        \n\nTWRP:
+        \n\nMain Menu -> Install
+    </string>
+    <string name="img_not_found">Recovery IMG niet gevonden. Nu downloaden?</string>
+
+    <string name="bak_done">Backup voltooid</string>
+    <string name="backupalready">Backup bestaat al. Dit zal de huidige backup overschrijven, toch doorgaan?
+    </string>
+    <string name="no_backup">geen bestaande Backup gevonden (%s/Recovery-Tools/backups/).
+         Nu een nieuwe maken?
+    </string>
+    <string name="noconnection">Geen internet beschikbaare. Download geannuleerd!</string>
+    <string name="failed_download">Oh nee, Er is een probleem gevonden. Alsjeblieft herstart de downlaod.
+        \n\n%s
+    </string>
+    <string name="error">Error</string>
+    <string name="notsupportded">Jouw apparaat wordt niet ondersteund door de developer. Apparaat informatie sturen naar developer?
+    </string>
+    <string name="noroot">"Apparaat is niet geroot. Root je mobiel. Meer informatie hier
+        \n\nxda-developer.com"
+    </string>
+    <string name="using_dd">gebruik dd. Recovery in FS</string>
+    <string name="using_mtd">gebruik flash/dump_image (MTD)</string>
+
+    <string name="Downloading">Downloading&#8230;</string>
+    <string name="commentar">commentaar</string>
+    <string name="commenthint"> commentaar hier als iets niet werkt of bugs enzovoort...
+    </string>
+    <string name="positive">Ja, graag</string>
+    <string name="neutral">Nee, bedankt</string>
+    <string name="negative">Annuleer</string>
+    <string name="su_logs_title">Shell-Commands uitvoeren</string>
+    <string name="log">Log Shell-Commands</string>
+    <string name="showlog">bekijk Logs</string>
+
+    <string name="sDeleteBackup">verwijder Backup</string>
+    <string name="sBackupMgr">Backup Manager</string>
+    <string name="setname"> stel een naam in for backup</string>
+    <string name="reboot_recovery_now">Nu herstarten naar recovery?</string>
+    <string name="tsk_end">taak voltooid</string>
+    <string name="flashing">Flashing&#8230;</string>
+    <string name="creating_bak">Backup creëren&#8230;</string>
+    <string name="clear_logs">verwijder Logs</string>
+    <string name="download_utils">Als je dit app wilt gebruiken moet je paar dingen downlaoden (ongeveer 512KB)
+        \nNu Downloaden?
+    </string>
+    <string name="over_recovery">Apparaat is geflasht na recovery mode</string>
+    <string name="ShowAds">Laat advertenties zien om ons te ondersteunen</string>
+
+    <string name="please_restart">Herstart alsjeblieft de app om het aantepassenPlease restart the app to apply changes</string>
+    <string name="please_ads">Schakel de advertenties aan op mijn werk te ondersteunen!</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Eurocent</item>
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+        <item>3 Euros</item>
+        <item>5 Euros</item>
+    </string-array>
+    <string name="donate">Donatie</string>
+
+    <string name="donation_paypal_item">Donaties</string>
+
+    <string name="never_again">Niet meer laten zien</string>
+
+    <string name="corrupt_download">De gedownloade bestand is beschadigd.</string>
+    <string name="try_again">Probeer opnieuw!</string>
+    <string name="later">Later</string>
+
+</resources>

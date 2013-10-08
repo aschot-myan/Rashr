@@ -50,7 +50,6 @@
     <string name="no_backup">No existing Backup found (%s/Recovery-Tools/backups/).
         Create one now?
     </string>
-    <string name="noconnection">No network available. Download canceled!</string>
     <string name="failed_download">Oh no, a problem is occurred. Please restart the download.
         \n\n%s
     </string>
@@ -72,7 +71,7 @@
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
-    <string name="su_logs_title">Executed Shell-Commands</string>
+
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Show Logs</string>
 
@@ -83,7 +82,7 @@
     <string name="tsk_end">Task completed</string>
     <string name="flashing">Flashing&#8230;</string>
     <string name="creating_bak">Creating Backup&#8230;</string>
-    <string name="clear_logs">Clear Logs</string>
+
     <string name="download_utils">To use this App you need to download small tools (around 512KB).
         This requires a internet connection.
         \nDownload it now?
@@ -92,7 +91,8 @@
     <string name="ShowAds">Show Ads to support</string>
 
     <string name="please_restart">Please restart the app to apply changes</string>
-    <string name="please_ads">Please turn the Ads on to support my work!</string>
+    <string name="please_ads">Please turn the Ads on to support my work! :(</string>
+    <string name="donate_to_support">Donate over the menu to support my work! :)</string>
 
     <string-array name="donation_google_catalog_values">
         <item>0,50 Euro</item>
@@ -103,12 +103,15 @@
     </string-array>
     <string name="donate">Donate</string>
 
-    <string name="donation_paypal_item">Donation</string>
-
     <string name="never_again">Never show again</string>
 
     <string name="corrupt_download">Downloaded file is corrupted.</string>
     <string name="try_again">Try again!</string>
     <string name="later">Later</string>
+
+    <string name="version">Update [1.6.3]</string>
+    <string name="changes">-Better common error detention.\n-Dutch translation added (thanks XDA-Member KingOfDope)\n-Now flash images over File Browsers\n-New Device support method. Many new not listed devices supported!\n-Samsung Galaxy Nexus (maguro) fixed.\n-New Hoster. Better and more stable. (Financed by donations&#8230; THANKS!)</string>
+
+    <string name="no_choosed">No File chosen</string>
 
 </resources>

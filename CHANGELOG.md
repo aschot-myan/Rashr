@@ -2,6 +2,15 @@
 CHANGELOG
 ====================
 
+Update [1.6.3]
+
+-Better common error detention.
+-Dutch translation added (thanks XDA-Member KingOfDope)
+-Now flash images over File Browsers
+-New Device support method. Many new not listed devices supported!
+-Samsung Galaxy Nexus (maguro) fixed.
+-New Hoster. Better and more stable. (Financed by donations... THANKS!)
+
 Update [1.6.2]
 
 -Only OTHER device recognition fixed

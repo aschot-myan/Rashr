@@ -62,7 +62,7 @@
                         android:id="@+id/adView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        ads:adUnitId="a151cdc8be01253"
+                        ads:adUnitId="ca-app-pub-3591384811135190/6436276193"
                         ads:loadAdOnCreate="true"
                         ads:testDevices="538324DB6D51B29D9320AFDB7D564DFB, TEST_EMULATOR"
                         ads:adSize="SMART_BANNER"
@@ -109,7 +109,7 @@
                 android:id="@+id/cbMethod"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:checked="false"
+                android:checked="true"
                 android:clickable="false"
                 android:textSize="20sp"
                 android:visibility="visible"
@@ -135,7 +135,8 @@
                 android:text="@string/xda"
                 android:textColor="@android:color/white"
                 android:id="@+id/bXDA"
-                android:onClick="bXDA" />
+                android:onClick="bXDA"
+                android:layout_weight="1"/>
 
             <Button
                 android:text="@string/report"
@@ -143,7 +144,8 @@
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="bReport" />
+                android:onClick="bReport"
+                android:layout_weight="1"/>
 
             <CheckBox
                 android:text="@string/ShowAds"
@@ -151,7 +153,8 @@
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="cbShowAds" />
+                android:onClick="cbShowAds"
+                android:layout_weight="1"/>
 
             <CheckBox
                 android:text="@string/log"
@@ -159,7 +162,8 @@
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="cbLog" />
+                android:onClick="cbLog"
+                android:layout_weight="1"/>
 
             <Button
                 android:text="@string/showlog"
@@ -167,7 +171,8 @@
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="bShowLogs" />
+                android:onClick="bShowLogs"
+                android:layout_weight="1"/>
 
             <Button
                 android:text="@string/donate"
@@ -175,7 +180,8 @@
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="bDonate" />
+                android:onClick="bDonate"
+                android:layout_weight="1"/>
 
             <Button
                 android:text="@string/sExit"
@@ -183,7 +189,8 @@
                 android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="bExit" />
+                android:onClick="bExit"
+                android:layout_weight="1"/>
 
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
