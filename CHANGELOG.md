@@ -2,6 +2,12 @@
 CHANGELOG
 ====================
 
+Update [1.6.4]
+
+-App crash after flashing fixed
+-Clockworkmod IMGs updated
+-Better update handling (now you can flash previous downloaded IMGs)
+
 Update [1.6.3]
 
 -Better common error detention.

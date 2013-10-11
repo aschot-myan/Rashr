@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Recovery Tools</string>
+    <string name="settings">Settings</string>
     <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
     <string name="sHistory">History</string>
     <string name="sFlashTWRP">Flash TWRP Recovery</string>
@@ -109,9 +110,12 @@
     <string name="try_again">Try again!</string>
     <string name="later">Later</string>
 
-    <string name="version">Update [1.6.3]</string>
-    <string name="changes">-Better common error detention.\n-Dutch translation added (thanks XDA-Member KingOfDope)\n-Now flash images over File Browsers\n-New Device support method. Many new not listed devices supported!\n-Samsung Galaxy Nexus (maguro) fixed.\n-New Hoster. Better and more stable. (Financed by donations&#8230; THANKS!)</string>
+    <string name="version">Update [1.6.4]</string>
+    <string name="changes">-App crash after flashing fixed\n
+        -Clockworkmod IMGs updated\n
+        -Better update handling (now you can flash previous downloaded IMGs)</string>
 
     <string name="no_choosed">No File chosen</string>
+    <string name="update">Download and flash new IMG</string>
 
 </resources>

@@ -212,14 +212,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 						}
 					}
 				})
-				.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialogInterface) {
-						if (!keepAppOpen) {
-							System.exit(0);
-						}
-					}
-				})
+				.setCancelable(keepAppOpen)
 				.show();
 	}
 

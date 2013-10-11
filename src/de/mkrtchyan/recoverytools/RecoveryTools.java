@@ -105,7 +105,6 @@ public class RecoveryTools extends ActionBarActivity {
 		    getIntent().setData(null);
             showFlashAlertDialog();
 	    } else {
-
         	setContentView(R.layout.recovery_tools);
         	setupDrawerList();
         	if (BuildConfig.DEBUG) {
@@ -173,6 +172,8 @@ public class RecoveryTools extends ActionBarActivity {
 
     //	Button Methods (onClick)
     public void Go(View view) {
+
+	    boolean updateable = true;
         fRECOVERY = null;
         if (!mDeviceHandler.downloadUtils()) {
 //			Get device specified recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
@@ -184,19 +185,53 @@ public class RecoveryTools extends ActionBarActivity {
 	        } else {
 		        return;
 	        }
-            rFlasher.run();
+	        for (File i : fRECOVERY.getParentFile().listFiles()) {
+		        if (i.compareTo(fRECOVERY) == 0) {
+			        updateable = false;
+		        }
+	        }
+		    if (fRECOVERY.getParentFile().listFiles().length == 1 && !updateable) {
+			    rFlasher.run();
+		    } else if (updateable && fRECOVERY.getParentFile().listFiles().length > 0
+			     || fRECOVERY.getParentFile().listFiles().length > 1)  {
+			    final FileChooser AllIMGS = new FileChooser(mContext, fRECOVERY.getParentFile(), rFlasher);
+			    AllIMGS.setEXT(mDeviceHandler.getEXT());
+			    if (updateable) {
+				    LinearLayout chooserLayout = AllIMGS.getLayout();
+				    Button Update = new Button(mContext);
+				    Update.setText(R.string.update);
+				    Update.setOnClickListener(new View.OnClickListener() {
+
+					    @Override
+					    public void onClick(View v) {
+						    AllIMGS.dismiss();
+						    rFlasher.run();
+					    }
+				    });
+				    chooserLayout.addView(Update);
+			    }
+			    AllIMGS.setTitle(SYSTEM);
+			    AllIMGS.show();
+		    } else {
+			    rFlasher.run();
+		    }
         }
     }
 
     public void bFlashOther(View view) {
         fRECOVERY = null;
-        fcFlashOther = new FileChooser(mContext, PathToSd.getAbsolutePath(), mDeviceHandler.getEXT(), rFlasher);
-        fcFlashOther.show();
+	    try {
+            fcFlashOther = new FileChooser(mContext, PathToSd, rFlasher);
+	        fcFlashOther.setEXT(mDeviceHandler.getEXT());
+            fcFlashOther.show();
+	    } catch (NullPointerException e) {
+		    e.printStackTrace();
+	    }
     }
 
     public void bShowHistory(View view) {
-        File tmpFile[] = {null, null, null, null, null};
-        String tmpFileNames[] = {"", "", "", "", ""};
+        File tmpFile[] = new File[5];
+        String tmpFileNames[] = new String[5];
         final Dialog d = new Dialog(mContext);
         d.setTitle(R.string.sHistory);
         ListView list = new ListView(mContext);
@@ -247,7 +282,7 @@ public class RecoveryTools extends ActionBarActivity {
     }
 
     public void report(boolean isCancelable) {
-//		Creates a report Email with Comment
+//		Creates a report Email including a Comment and important device infos
         final Dialog reportDialog = mNotifyer.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
         if (!isCancelable)
             reportDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -300,7 +335,7 @@ public class RecoveryTools extends ActionBarActivity {
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
-
+					e.printStackTrace();
                 }
             }
         });
@@ -499,13 +534,15 @@ public class RecoveryTools extends ActionBarActivity {
 	public void showChangelog() {
 		try {
 			PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-			final int previus_version = mCommon.getIntegerPerf(mContext, PREF_NAME, PREF_CUR_VER);
+			final int previous_version = mCommon.getIntegerPerf(mContext, PREF_NAME, PREF_CUR_VER);
 			final int current_version = pInfo.versionCode;
-			if (current_version > previus_version) {
+			if (current_version > previous_version) {
 				mNotifyer.createDialog(R.string.version, R.string.changes, true, true).show();
 				mCommon.setIntegerPerf(mContext, PREF_NAME, PREF_CUR_VER, current_version);
 			}
 		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -560,7 +597,7 @@ public class RecoveryTools extends ActionBarActivity {
 	public void setupDrawerList() {
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-		ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.app_name, R.string.app_name);
+		ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.settings, R.string.app_name);
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		mDrawerToggle.syncState();

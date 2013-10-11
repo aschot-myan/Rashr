@@ -59,6 +59,7 @@ public class DeviceHandler {
             new File("/dev/block/platform/sdhci-tegra.3/by-name/recovery"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
 		    new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
+		    new File("/dev/block/platform/sdhci.1/by-name/RECOVERY"),
 		    new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
 		    new File("/dev/block/platform/dw_mmc.0/by-name/RECOVERY"),
 		    new File("/dev/block/platform/hi_mci.1/by-name/recovery"),
@@ -529,39 +530,39 @@ public class DeviceHandler {
 
 //	        Newest Clockworkmod version for devices
             if (DEV_NAME.equals("sholes"))
-                CWM_VERSION = CWM_VERSION + "-2.5.0.1";
+                CWM_VERSION = "-2.5.0.1";
 
             if (DEV_NAME.equals("heroc"))
-                CWM_VERSION = CWM_VERSION + "-2.5.0.7";
+                CWM_VERSION = "-2.5.0.7";
 
             if (DEV_NAME.equals("sgh-i897")
                     || DEV_NAME.equals("galaxys")
                     || DEV_NAME.equals("captivate"))
-                CWM_VERSION = CWM_VERSION + "-2.5.1.2";
+                CWM_VERSION = "-2.5.1.2";
 
             if (DEV_NAME.equals("leo"))
-                CWM_VERSION = CWM_VERSION + "-3.1.0.0";
+                CWM_VERSION = "-3.1.0.0";
 
             if (DEV_NAME.equals("droid2")
                     || DEV_NAME.equals("vivo")
                     || DEV_NAME.equals("vivow")
                     || DEV_NAME.equals("blade")
                     || DEV_NAME.equals("shadow")
-                    || DEV_NAME.equals("p999"))
-                CWM_VERSION = CWM_VERSION + "-5.0.2.0";
+                    || DEV_NAME.equals("p999")
+		            || DEV_NAME.equals("thunderg"))
+                CWM_VERSION = "-5.0.2.0";
 
             if (DEV_NAME.equals("droid2we"))
-                CWM_VERSION = CWM_VERSION + "-5.0.2.3";
+                CWM_VERSION = "-5.0.2.3";
 
             if (DEV_NAME.equals("daytona"))
-                CWM_VERSION = CWM_VERSION + "-5.0.2.5";
+                CWM_VERSION = "-5.0.2.5";
 
-            if (DEV_NAME.equals("thunderg")
-                    || DEV_NAME.equals("holiday"))
-                CWM_VERSION = CWM_VERSION + "-5.0.2.7";
+            if (DEV_NAME.equals("holiday"))
+                CWM_VERSION = "-5.0.2.7";
 
             if (DEV_NAME.equals("pico"))
-                CWM_VERSION = CWM_VERSION + "-5.0.2.8";
+                CWM_VERSION = "-5.0.2.8";
 
             if (DEV_NAME.equals("supersonic"))
                 CWM_VERSION = CWM_VERSION + "-5.8.0.1";
@@ -570,6 +571,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("bravo")
                     || DEV_NAME.equals("shooteru"))
                 CWM_VERSION = CWM_VERSION + "-5.8.0.2";
+
             if (DEV_NAME.equals("pyramid"))
                 CWM_VERSION = CWM_VERSION + "-5.8.0.9";
 
@@ -594,11 +596,8 @@ public class DeviceHandler {
             if (DEV_NAME.equals("primou"))
                 CWM_VERSION = CWM_VERSION + "-5.8.4.5";
 
-            if (DEV_NAME.equals("Dummy"))
+            if (DEV_NAME.equals("dummy"))
                 CWM_VERSION = CWM_VERSION + "-6.0.1.1";
-
-            if (DEV_NAME.equals("n7000"))
-                CWM_VERSION = CWM_VERSION + "-6.0.1.2";
 
             if (DEV_NAME.equals("p970"))
                 CWM_VERSION = CWM_VERSION + "-6.0.1.4";
@@ -618,60 +617,64 @@ public class DeviceHandler {
             if (DEV_NAME.equals("e610"))
                 CWM_VERSION = CWM_VERSION + "-6.0.2.8";
 
-            if (DEV_NAME.equals("t0ltevzw")
-                    || DEV_NAME.equals("e975"))
+            if (DEV_NAME.equals("e975"))
                 CWM_VERSION = "-6.0.3.0";
 
-            if (DEV_NAME.equals("crespo")
-                    || DEV_NAME.equals("crespo4g")
-                    || DEV_NAME.equals("d2att")
-                    || DEV_NAME.equals("d2tmo")
-                    || DEV_NAME.equals("dlxub1")
+            if (DEV_NAME.equals("dlxub1")
                     || DEV_NAME.equals("evita")
-                    || DEV_NAME.equals("fireball")
-                    || DEV_NAME.equals("grouper")
                     || DEV_NAME.equals("i9300")
-                    || DEV_NAME.equals("maguro")
-                    || DEV_NAME.equals("mako")
-                    || DEV_NAME.equals("manta")
                     || DEV_NAME.equals("t03g")
                     || DEV_NAME.equals("skyrocket")
-                    || DEV_NAME.equals("tilapia")
-                    || DEV_NAME.equals("toro")
-                    || DEV_NAME.equals("toroplus")
                     || DEV_NAME.equals("ville")
                     || DEV_NAME.equals("p990")
                     || DEV_NAME.equals("tf700t")
                     || DEV_NAME.equals("m7")
                     || DEV_NAME.equals("dlx")
-                    || DEV_NAME.equals("d2spr")
                     || DEV_NAME.equals("p760")
                     || DEV_NAME.equals("p880")
-                    || DEV_NAME.equals("n8013")
-                    || DEV_NAME.equals("d2usc")
-                    || DEV_NAME.equals("find5")
                     || DEV_NAME.equals("t0ltespr")
-                    || DEV_NAME.equals("t0lteatt")
-                    || DEV_NAME.equals("t0ltetmo")
                     || DEV_NAME.equals("stingray")
                     || DEV_NAME.equals("wingray")
                     || DEV_NAME.equals("dlxj")
                     || DEV_NAME.equals("vigor"))
                 CWM_VERSION = CWM_VERSION + "-6.0.3.1";
 
-            if (DEV_NAME.equals("jfltexx")
-                    || DEV_NAME.equals("jfltespr")
-                    || DEV_NAME.equals("m7wls")
-                    || DEV_NAME.equals("jfltevzw")
+            if (DEV_NAME.equals("m7wls")
                     || DEV_NAME.equals("protou"))
                 CWM_VERSION = CWM_VERSION + "-6.0.3.2";
 
+	        if (DEV_NAME.equals("fireball"))
+		        CWM_VERSION = CWM_VERSION + "-6.0.3.3";
+
             if (DEV_NAME.equals("n8000")
-                    || DEV_NAME.equals("t0lte"))
+		            || DEV_NAME.equals("n8013"))
                 CWM_VERSION = CWM_VERSION + "-6.0.3.6";
 
-            if (DEV_NAME.equals("flo"))
+            if (DEV_NAME.equals("find5"))
                 CWM_VERSION = CWM_VERSION + "-6.0.3.7";
+
+	        if (DEV_NAME.equals("t0lte"))
+		        CWM_VERSION = CWM_VERSION +"-6.0.4.1";
+
+	        if (DEV_NAME.equals("n7000")
+			        || DEV_NAME.equals("t0ltevzw")
+			        || DEV_NAME.equals("t0ltetmo")
+			        || DEV_NAME.equals("jfltevzw")
+			        || DEV_NAME.equals("jfltexx")
+			        || DEV_NAME.equals("jfltespr")
+			        || DEV_NAME.equals("crespo")
+			        || DEV_NAME.equals("crespo4g")
+			        || DEV_NAME.equals("grouper")
+			        || DEV_NAME.equals("maguro")
+			        || DEV_NAME.equals("mako")
+			        || DEV_NAME.equals("manta")
+			        || DEV_NAME.equals("tilapia")
+			        || DEV_NAME.equals("flo")
+	                || DEV_NAME.equals("toro")
+			        || DEV_NAME.equals("toroplus")
+			        || DEV_NAME.equals("d2spr")
+			        || DEV_NAME.equals("d2usc"))
+		        CWM_VERSION = CWM_VERSION + "-6.0.4.3";
 
         }
         if (!CWM_VERSION.equals(""))
@@ -827,7 +830,8 @@ public class DeviceHandler {
                mAlertDialog.show();
                return true;
            }
-	    new Unzipper(mContext, archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
+	    if (archive.exists())
+	        new Unzipper(mContext, archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
         return false;
     }
 
@@ -837,7 +841,6 @@ public class DeviceHandler {
         }
         return flash_image;
     }
-
     public File getDump_image() {
         if (!dump_image.exists()) {
             dump_image = new File(mContext.getFilesDir(), dump_image.getName());
@@ -849,12 +852,10 @@ public class DeviceHandler {
         getSupportedSystems();
         return TWRP;
     }
-
     public boolean isCwmSupported() {
         getSupportedSystems();
         return CWM;
     }
-
     public boolean isOtherSupported() {
         getSupportedSystems();
         return OTHER;
@@ -863,11 +864,9 @@ public class DeviceHandler {
     public int getDevType() {
         return DEV_TYPE;
     }
-
     public boolean isMTD() {
         return getDevType() == DEV_TYPE_MTD;
     }
-
 	public boolean isDD() {
 		return getDevType() == DEV_TYPE_DD;
 	}
@@ -875,7 +874,6 @@ public class DeviceHandler {
     public boolean isOverRecovery() {
         return getDevType() == DEV_TYPE_RECOVERY;
     }
-
     public boolean isKernelFlashed() {
         return KERNEL_TO;
     }
@@ -889,7 +887,6 @@ public class DeviceHandler {
             }
         return CWM_IMG;
     }
-
     public File getTWRP_IMG() {
         if (TWRP_IMG == null)
             if (TWRP_OFFICIAL) {
@@ -901,21 +898,18 @@ public class DeviceHandler {
     }
 
     public String getCWM_URL() {
-        //String CWM_URL = "http://dslnexus.nazuka.net/recoveries";
         return "http://dslnexus.org/Android/recoveries";
     }
-
     public String getTWRP_URL() {
-        //String TWRP_URL = "http://dslnexus.nazuka.net/recoveries";
         return "http://dslnexus.org/Android/recoveries";
     }
 
     public String getRecoveryPath() {
         if (RecoveryPath.equals("")) {
 
-	        for (int i = 0; i < RecoveryList.length; i++) {
-		        if (RecoveryList[i].exists()) {
-			        return RecoveryList[i].getAbsolutePath();
+	        for (File i: RecoveryList) {
+		        if (i.exists()) {
+			        i.getAbsolutePath();
 		        }
 	        }
 

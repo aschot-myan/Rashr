@@ -59,7 +59,8 @@ public class BackupHandler {
 
             fcDelete.getSelectedFile().delete();
             if (RecoveryTools.PathToBackups.listFiles().length > 0) {
-                fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), "", rDelete);
+                fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups, rDelete);
+	            fcDelete.show();
             }
         }
     };
@@ -118,7 +119,7 @@ public class BackupHandler {
         this.mContext = mContext;
         mNotifyer = new Notifyer(mContext);
         mDeviceHandler = new DeviceHandler(mContext);
-        fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.getEXT(), new Runnable() {
+        fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups, new Runnable() {
             @Override
             public void run() {
 
@@ -128,7 +129,8 @@ public class BackupHandler {
                 }
             }
         });
-        fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups.getAbsolutePath(), mDeviceHandler.getEXT(), rDelete);
+	    fcRestore.setEXT(mDeviceHandler.getEXT());
+        fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups, rDelete);
     }
 
     public void backup() {
