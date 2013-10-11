@@ -909,7 +909,7 @@ public class DeviceHandler {
 
 	        for (File i: RecoveryList) {
 		        if (i.exists()) {
-			        i.getAbsolutePath();
+			        return i.getAbsolutePath();
 		        }
 	        }
 
