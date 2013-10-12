@@ -230,8 +230,8 @@ public class RecoveryTools extends ActionBarActivity {
     }
 
     public void bShowHistory(View view) {
-        File tmpFile[] = new File[5];
-        String tmpFileNames[] = new String[5];
+	    File tmpFile[] = {null, null, null, null, null};
+	    String tmpFileNames[] = {"", "", "", "", ""};
         final Dialog d = new Dialog(mContext);
         d.setTitle(R.string.sHistory);
         ListView list = new ListView(mContext);

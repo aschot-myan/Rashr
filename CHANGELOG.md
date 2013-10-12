@@ -2,6 +2,10 @@
 CHANGELOG
 ====================
 
+Update [1.6.5]
+
+-History crash fixed
+
 Update [1.6.4]
 
 -App crash after flashing fixed
