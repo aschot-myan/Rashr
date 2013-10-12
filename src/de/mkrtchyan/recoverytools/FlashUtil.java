@@ -41,137 +41,137 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 	public static final String PREF_NAME = "FlashUtil";
 	public static final String PREF_HIDE_REBOOT = "hide_reboot";
 	public static final String PREF_FLASH_COUNTER = "last_counter";
-    public static final int JOB_FLASH = 1;
-    public static final int JOB_BACKUP = 2;
+	public static final int JOB_FLASH = 1;
+	public static final int JOB_BACKUP = 2;
 
-    private final Context mContext;
-    private static final String TAG = "FlashUtil";
-    private ProgressDialog pDialog;
-    final private Common mCommon = new Common();
-    private final Notifyer mNotifyer;
-    private final DeviceHandler mDeviceHandler;
-    private final File file;
-    private final int JOB;
+	private final Context mContext;
+	private static final String TAG = "FlashUtil";
+	private ProgressDialog pDialog;
+	final private Common mCommon = new Common();
+	private final Notifyer mNotifyer;
+	private final DeviceHandler mDeviceHandler;
+	private final File file;
+	private final int JOB;
 	private boolean keepAppOpen = true;
 
-    public FlashUtil(Context mContext, File file, int JOB) {
-        this.mContext = mContext;
-        this.file = file;
-        this.JOB = JOB;
-        mNotifyer = new Notifyer(mContext);
-        mDeviceHandler = new DeviceHandler(mContext);
-    }
+	public FlashUtil(Context mContext, File file, int JOB) {
+		this.mContext = mContext;
+		this.file = file;
+		this.JOB = JOB;
+		mNotifyer = new Notifyer(mContext);
+		mDeviceHandler = new DeviceHandler(mContext);
+	}
 
-    protected void onPreExecute() {
+	protected void onPreExecute() {
 
-        Log.i(TAG, "Preparing to flash");
-        pDialog = new ProgressDialog(mContext);
+		Log.i(TAG, "Preparing to flash");
+		pDialog = new ProgressDialog(mContext);
 
-        int Title = 0;
-        if (JOB == JOB_FLASH) {
-            Title = R.string.flashing;
-        } else if (JOB == JOB_BACKUP) {
-            Title = R.string.creating_bak;
-        }
-        if (Title != 0)
-            pDialog.setTitle(Title);
-        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		int Title = 0;
+		if (JOB == JOB_FLASH) {
+			Title = R.string.flashing;
+		} else if (JOB == JOB_BACKUP) {
+			Title = R.string.creating_bak;
+		}
+		if (Title != 0)
+			pDialog.setTitle(Title);
+		pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
-        pDialog.setMessage(file.getName());
-        pDialog.setCancelable(false);
-        pDialog.show();
+		pDialog.setMessage(file.getName());
+		pDialog.setCancelable(false);
+		pDialog.show();
 
-    }
+	}
 
-    @Override
-    protected Boolean doInBackground(Void... params) {
+	@Override
+	protected Boolean doInBackground(Void... params) {
 
-        Log.i(TAG, "Flashing...");
+		Log.i(TAG, "Flashing...");
 
-        try {
-            switch (JOB) {
-                case 1:
-                    if (file.exists()) {
-                        switch (mDeviceHandler.getDevType()) {
-                            case DeviceHandler.DEV_TYPE_MTD:
-                                File flash_image = mDeviceHandler.getFlash_image();
-                                mCommon.chmod(mDeviceHandler.getFlash_image(), "741");
-                                mCommon.executeSuShell(mContext, flash_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
-                                break;
-                            case DeviceHandler.DEV_TYPE_DD:
-                                mCommon.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + mDeviceHandler.getRecoveryPath());
-                                break;
-                            case DeviceHandler.DEV_TYPE_CUSTOM:
-                                if (mDeviceHandler.DEV_NAME.equals("c6603")
-		                                || mDeviceHandler.DEV_NAME.equals("c6602")
-                                        || mDeviceHandler.DEV_NAME.equals("montblanc")) {
-                                    mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RW");
-                                    mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getCharger().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getCharger().getName());
-                                    mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getChargermon().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getChargermon().getName());
-                                    if (mDeviceHandler.DEV_NAME.equals("c6603")
-		                                    || mDeviceHandler.DEV_NAME.equals("c6602")) {
-                                        mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getRic().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getRic().getName());
-                                        mCommon.chmod(mDeviceHandler.getRic(), "755");
-                                    }
-                                    mCommon.chmod(mDeviceHandler.getCharger(), "755");
-                                    mCommon.chmod(mDeviceHandler.getChargermon(), "755");
-                                    mCommon.executeSuShell(mContext, "cat " + file.getAbsolutePath() + " >> " + mDeviceHandler.getRecoveryPath());
-                                    mCommon.chmod(file, "644");
-                                    mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RO");
-                                }
-                                break;
-                        }
-                    }
-                    break;
+		try {
+			switch (JOB) {
+				case 1:
+					if (file.exists()) {
+						switch (mDeviceHandler.getDevType()) {
+							case DeviceHandler.DEV_TYPE_MTD:
+								File flash_image = mDeviceHandler.getFlash_image();
+								mCommon.chmod(mDeviceHandler.getFlash_image(), "741");
+								mCommon.executeSuShell(mContext, flash_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+								break;
+							case DeviceHandler.DEV_TYPE_DD:
+								mCommon.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + mDeviceHandler.getRecoveryPath());
+								break;
+							case DeviceHandler.DEV_TYPE_CUSTOM:
+								if (mDeviceHandler.DEV_NAME.equals("c6603")
+										|| mDeviceHandler.DEV_NAME.equals("c6602")
+										|| mDeviceHandler.DEV_NAME.equals("montblanc")) {
+									mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RW");
+									mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getCharger().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getCharger().getName());
+									mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getChargermon().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getChargermon().getName());
+									if (mDeviceHandler.DEV_NAME.equals("c6603")
+											|| mDeviceHandler.DEV_NAME.equals("c6602")) {
+										mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getRic().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getRic().getName());
+										mCommon.chmod(mDeviceHandler.getRic(), "755");
+									}
+									mCommon.chmod(mDeviceHandler.getCharger(), "755");
+									mCommon.chmod(mDeviceHandler.getChargermon(), "755");
+									mCommon.executeSuShell(mContext, "cat " + file.getAbsolutePath() + " >> " + mDeviceHandler.getRecoveryPath());
+									mCommon.chmod(file, "644");
+									mCommon.mountDir(new File(mDeviceHandler.getRecoveryPath()), "RO");
+								}
+								break;
+						}
+					}
+					break;
 
-                case 2:
-                    switch (mDeviceHandler.getDevType()) {
-                        case DeviceHandler.DEV_TYPE_DD:
-                            mCommon.executeSuShell(mContext, "dd if=" + mDeviceHandler.getRecoveryPath() + " of=" + file.getAbsolutePath());
-                            break;
-                        case DeviceHandler.DEV_TYPE_MTD:
-                            File dump_image = mDeviceHandler.getDump_image();
-                            mCommon.chmod(dump_image, "741");
-                            mCommon.executeSuShell(mContext, dump_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
-                            break;
-                        case DeviceHandler.DEV_TYPE_CUSTOM:
-                            if (mDeviceHandler.DEV_NAME.equals("c6603")
-		                            || mDeviceHandler.DEV_NAME.equals("c6602")
-                                    || mDeviceHandler.DEV_NAME.equals("montblanc"))
-                                mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getRecoveryPath() + " >> " + file.getAbsolutePath());
-                            break;
-                    }
-                    break;
-            }
-        } catch (Exception e) {
-	        Log.i(TAG, e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }
+				case 2:
+					switch (mDeviceHandler.getDevType()) {
+						case DeviceHandler.DEV_TYPE_DD:
+							mCommon.executeSuShell(mContext, "dd if=" + mDeviceHandler.getRecoveryPath() + " of=" + file.getAbsolutePath());
+							break;
+						case DeviceHandler.DEV_TYPE_MTD:
+							File dump_image = mDeviceHandler.getDump_image();
+							mCommon.chmod(dump_image, "741");
+							mCommon.executeSuShell(mContext, dump_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+							break;
+						case DeviceHandler.DEV_TYPE_CUSTOM:
+							if (mDeviceHandler.DEV_NAME.equals("c6603")
+									|| mDeviceHandler.DEV_NAME.equals("c6602")
+									|| mDeviceHandler.DEV_NAME.equals("montblanc"))
+								mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getRecoveryPath() + " >> " + file.getAbsolutePath());
+							break;
+					}
+					break;
+			}
+		} catch (Exception e) {
+			Log.i(TAG, e.getMessage());
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-    protected void onPostExecute(Boolean succes) {
+	protected void onPostExecute(Boolean succes) {
 
-        Log.i(TAG, "Flashing finished");
+		Log.i(TAG, "Flashing finished");
 
-        pDialog.dismiss();
+		pDialog.dismiss();
 
-        saveHistory();
+		saveHistory();
 
-        if (JOB == 1) {
-            if (!mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_HIDE_REBOOT)) {
-                showRebootDialog();
-            } else {
-	            if (!keepAppOpen) {
-		            System.exit(0);
-	            }
-            }
-        } else {
-            mNotifyer.showToast(R.string.bak_done, AppMsg.STYLE_INFO);
-        }
+		if (JOB == 1) {
+			if (!mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_HIDE_REBOOT)) {
+				showRebootDialog();
+			} else {
+				if (!keepAppOpen) {
+					System.exit(0);
+				}
+			}
+		} else {
+			mNotifyer.showToast(R.string.bak_done, AppMsg.STYLE_INFO);
+		}
 
-        Appirater.appLaunched(mContext);
-    }
+		Appirater.appLaunched(mContext);
+	}
 
 	public void showRebootDialog() {
 		AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
