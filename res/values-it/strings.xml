@@ -26,14 +26,6 @@
     <string name="sRebootRecovery">Riavvia in Recovery</string>
     <string name="sRebootBootloader">Riavvia in Bootloader</string>
 
-    <string name="rate_title">Vota %s</string>
-    <string name="rate_message">Se ti piace utilizzare %s, ti dispiacerebbe usare un momento del tuo
-        tempo per votarla?
-        Grazie per il tuo supporto!
-    </string>
-    <string name="rate">Si, Vota %s</string>
-    <string name="rate_later">Ricordamelo più tardi</string>
-    <string name="rate_cancel">No, Grazie</string>
     <string name="info">Informazioni</string>
     <string name="flashed">Recovery flashata.</string>
     <string name="warning">Attenzione!</string>
@@ -73,7 +65,6 @@
     <string name="positive">Si, per favore</string>
     <string name="neutral">No, grazie</string>
     <string name="negative">Annulla</string>
-    <string name="su_logs_title">Esegui Shell-Commands</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Mostra Logs</string>
 

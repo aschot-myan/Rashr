@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="de.mkrtchyan.recoverytools"
           android:installLocation="auto"
-          android:versionCode="54"
-          android:versionName="1.6.5">
+          android:versionCode="55"
+          android:versionName="1.6.6">
 
     <uses-sdk
             android:minSdkVersion="7"
@@ -37,6 +37,8 @@
                 <data android:scheme="file"/>
                 <data android:scheme="content"/>
                 <data android:mimeType="*/*"/>
+                <data android:mimeType="application/zip"/>
+                <data android:mimeType="application/octet-stream"/>
                 <data android:host="*"/>
                 <data android:pathPattern=".*\\.img"/>
                 <data android:pathPattern=".*\\..*\\.img"/>
@@ -44,13 +46,6 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.img"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.img"/>
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.img"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data android:mimeType="application/zip"/>
-                <data android:mimeType="application/octet-stream"/>
             </intent-filter>
         </activity>
         <activity

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Downloading">Descargando…</string>
-    <string name="wrong_format">Haz eligido un archivo falso. El archivo debe estar en formato %s.
-    </string>
     <string name="failed_download">Oh no, se ha producido un problema. Por favor reinicie la
         descarga.\n%s"
     </string>
@@ -13,8 +11,6 @@
     <string name="negative">Cancelar</string>
     <string name="file_chooser">Selector de archivos</string>
     <string name="choose_message">Seleccionando %s. ¿Estás seguro?</string>
-    <string name="appirator_app_title">Recovery-Tools</string>
-    <string name="appirator_market_url">market://details?id=%s</string>
     <string name="app_name">Recovery-Tools</string>
     <string name="sFlashCWM">Instalar Recuperador Clockworkmod</string>
     <string name="sFlashTWRP">Instalar Recuperador TWRP</string>
@@ -39,13 +35,6 @@
     <string name="sReboot">Reiniciar</string>
     <string name="sRebootRecovery">Reinicio al Recuperador</string>
     <string name="sRebootBootloader">Reinicio al Bootloader</string>
-    <string name="rate_title">Evaluar %s</string>
-    <string name="rate_message">Si te gusta usar %s, ¿Te importaría tomar un momento para evaluarlo?
-        Gracias por su apoyo!
-    </string>
-    <string name="rate">Si, Evaluar %s</string>
-    <string name="rate_later">Recordarmelo luego</string>
-    <string name="rate_cancel">No, Gracias</string>
     <string name="info">Información</string>
     <string name="flashed">Recuperador instalado.</string>
     <string name="kernel_to">Instalando el Recuperador de Systema en este dispocitivo también se
@@ -79,7 +68,6 @@
     <string name="commenthint">Comentar aquí, que no esta trabajando correctamente (descarga,
         instalación, soporte común u otro)
     </string>
-    <string name="su_logs_title">Ejecutar Shell-Commands</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Ver Logs</string>
     <string name="sDeleteBackup">Borrar Copia de seguridad</string>

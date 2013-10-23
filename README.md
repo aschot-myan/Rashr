@@ -42,7 +42,6 @@ Utils-Library:          https://github.com/ashotmkrtchyan1995/Utils-Library
 Root-Commands:          https://github.com/dschuermann/root-commands
 Android-Support-v13:    https://github.com/ashotmkrtchyan1995/Libs/blob/master/android-support-v13.jar
 Appcompact:             https://github.com/ashotmkrtchyan1995/Libs/tree/master/Appcompact
-AppiRater:              https://github.com/sbstrm/appirater-android
 AppMsg:                 https://github.com/johnkil/Android-AppMsg
 
 Import all Projects in to your IDE and set it on the dependencies list

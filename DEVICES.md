@@ -104,6 +104,7 @@ Supported Devices
 --[ASUS]--
 
 -PadFone 2 (a68)
+-EeePad (tf201)
 
 --[NEXUS]--
 -N7 (deb)

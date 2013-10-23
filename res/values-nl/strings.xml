@@ -61,12 +61,11 @@
 
     <string name="Downloading">Downloading&#8230;</string>
     <string name="commentar">commentaar</string>
-    <string name="commenthint"> commentaar hier als iets niet werkt of bugs enzovoort...
+    <string name="commenthint"> commentaar hier als iets niet werkt of bugs enzovoort&#8230;
     </string>
     <string name="positive">Ja, graag</string>
     <string name="neutral">Nee, bedankt</string>
     <string name="negative">Annuleer</string>
-    <string name="su_logs_title">Shell-Commands uitvoeren</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">bekijk Logs</string>
 
@@ -96,7 +95,6 @@
     </string-array>
     <string name="donate">Donatie</string>
 
-    <string name="donation_paypal_item">Donaties</string>
 
     <string name="never_again">Niet meer laten zien</string>
 

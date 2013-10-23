@@ -27,9 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.devspark.appmsg.AppMsg;
-import com.sbstrm.appirater.Appirater;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -52,6 +50,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 	private final DeviceHandler mDeviceHandler;
 	private final File file;
 	private final int JOB;
+    private String output;
 	private boolean keepAppOpen = true;
 
 	public FlashUtil(Context mContext, File file, int JOB) {
@@ -96,10 +95,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 							case DeviceHandler.DEV_TYPE_MTD:
 								File flash_image = mDeviceHandler.getFlash_image();
 								mCommon.chmod(mDeviceHandler.getFlash_image(), "741");
-								mCommon.executeSuShell(mContext, flash_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+								output = mCommon.executeSuShell(mContext, flash_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
 								break;
 							case DeviceHandler.DEV_TYPE_DD:
-								mCommon.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + mDeviceHandler.getRecoveryPath());
+                                output = mCommon.executeSuShell(mContext, "dd if=" + file.getAbsolutePath() + " of=" + mDeviceHandler.getRecoveryPath());
 								break;
 							case DeviceHandler.DEV_TYPE_CUSTOM:
 								if (mDeviceHandler.DEV_NAME.equals("c6603")
@@ -122,17 +121,18 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 								break;
 						}
 					}
-					break;
+
+                    return true;
 
 				case 2:
 					switch (mDeviceHandler.getDevType()) {
 						case DeviceHandler.DEV_TYPE_DD:
-							mCommon.executeSuShell(mContext, "dd if=" + mDeviceHandler.getRecoveryPath() + " of=" + file.getAbsolutePath());
+                            output = mCommon.executeSuShell(mContext, "dd if=" + mDeviceHandler.getRecoveryPath() + " of=" + file.getAbsolutePath());
 							break;
 						case DeviceHandler.DEV_TYPE_MTD:
 							File dump_image = mDeviceHandler.getDump_image();
 							mCommon.chmod(dump_image, "741");
-							mCommon.executeSuShell(mContext, dump_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
+                            output = mCommon.executeSuShell(mContext, dump_image.getAbsolutePath() + " recovery " + file.getAbsolutePath());
 							break;
 						case DeviceHandler.DEV_TYPE_CUSTOM:
 							if (mDeviceHandler.DEV_NAME.equals("c6603")
@@ -141,13 +141,14 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 								mCommon.executeSuShell(mContext, "cat " + mDeviceHandler.getRecoveryPath() + " >> " + file.getAbsolutePath());
 							break;
 					}
-					break;
+                return true;
 			}
+            return false;
 		} catch (Exception e) {
 			Log.i(TAG, e.getMessage());
 			e.printStackTrace();
+            return false;
 		}
-		return null;
 	}
 
 	protected void onPostExecute(Boolean succes) {
@@ -157,21 +158,27 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 		pDialog.dismiss();
 
 		saveHistory();
-
-		if (JOB == 1) {
-			if (!mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_HIDE_REBOOT)) {
-				showRebootDialog();
-			} else {
-				if (!keepAppOpen) {
-					System.exit(0);
-				}
-			}
-		} else {
-			mNotifyer.showToast(R.string.bak_done, AppMsg.STYLE_INFO);
-		}
-
-		Appirater.appLaunched(mContext);
-	}
+//            String sourceHash, destinationHash;
+//            sourceHash = SHA1.generateChecksum(file);
+//            destinationHash = SHA1.generateChecksumOverSuShell(new File(mDeviceHandler.getRecoveryPath()));
+        if (!succes
+                || output.endsWith("failed with error: -1\n")
+                || output.endsWith("No such file or directory\n")) {
+            mNotifyer.createDialog(R.string.warning, String.format(mContext.getString(R.string.flash_error), output), true).show();
+        } else {
+            if (JOB == 1) {
+                if (!mCommon.getBooleanPref(mContext, PREF_NAME, PREF_HIDE_REBOOT)) {
+                    showRebootDialog();
+                } else {
+                    if (!keepAppOpen) {
+                        System.exit(0);
+                    }
+                }
+            } else {
+                Toast.makeText(mContext, R.string.bak_done, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 	public void showRebootDialog() {
 		AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
@@ -198,7 +205,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 				.setNegativeButton(R.string.never_again, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						mCommon.setBooleanPerf(mContext, PREF_NAME, PREF_HIDE_REBOOT, true);
+						mCommon.setBooleanPref(mContext, PREF_NAME, PREF_HIDE_REBOOT, true);
 						if (!keepAppOpen) {
 							System.exit(0);
 						}
@@ -217,17 +224,19 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 	}
 
 	public void saveHistory() {
-		switch (mCommon.getIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER)) {
-			case 0:
-				mCommon.setStringPerf(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_HISTORY + String.valueOf(mCommon.getIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER)), file.getAbsolutePath());
-				mCommon.setIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER, 1);
-				return;
-			default:
-				mCommon.setStringPerf(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_HISTORY + String.valueOf(mCommon.getIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER)), file.getAbsolutePath());
-				mCommon.setIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER, mCommon.getIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER) + 1);
-				if (mCommon.getIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER) == 5)
-					mCommon.setIntegerPerf(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER, 0);
-		}
+        if (JOB == JOB_FLASH) {
+		    switch (mCommon.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER)) {
+		    	case 0:
+		    		mCommon.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_HISTORY + String.valueOf(mCommon.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER)), file.getAbsolutePath());
+		    		mCommon.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER, 1);
+		    		return;
+		    	default:
+		    		mCommon.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_HISTORY + String.valueOf(mCommon.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER)), file.getAbsolutePath());
+		    		mCommon.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER, mCommon.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER) + 1);
+		    		if (mCommon.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER) == 5)
+		    			mCommon.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_FLASH_COUNTER, 0);
+		    }
+        }
 	}
 
 	public void setKeepAppOpen(boolean keepAppOpen) {

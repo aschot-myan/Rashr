@@ -11,7 +11,7 @@
     <string name="go">Go</string>
     <string name="sRebooter">Rebooter</string>
     <string name="sRestore">Restore from Backup</string>
-    <string name="sCleareCache">Clear downloaded recoveries</string>
+    <string name="sClearCache">Clear downloaded recoveries</string>
     <string name="report">Report bug</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Thread</string>
@@ -42,7 +42,6 @@
         \n\nTWRP:
         \n\nMain Menu -> Install
     </string>
-    <string name="img_not_found">Recovery IMG not found. Download now?</string>
 
     <string name="bak_done">Backup completed</string>
     <string name="backupalready">Backup already exists. This will overwrite the existing one.
@@ -110,12 +109,21 @@
     <string name="try_again">Try again!</string>
     <string name="later">Later</string>
 
-    <string name="version">Update [1.6.4]</string>
-    <string name="changes">-App crash after flashing fixed\n
-        -Clockworkmod IMGs updated\n
-        -Better update handling (now you can flash previous downloaded IMGs)</string>
+    <string name="version">Update [1.6.6]</string>
+    <string name="changes">
+        -New Devices Added\n
+        -Acer Iconia A500 recognition fixed\n
+        -Better reporting for not supported devices\n
+        -Choosing of Recovery Version fixed\n
+        -Improved error detention while flashing\n
+        -Downloads now cancelable\n
+        -Downloads now more secure with sha1 checksum\n
+        -Better error detection of flashing\n
+    </string>
 
     <string name="no_choosed">No File chosen</string>
     <string name="update">Download and flash new IMG</string>
+    <string name="search_recovery">Search Recovery</string>
+    <string name="flash_error">Flash failed error occurred:\n\n %s</string>
 
 </resources>

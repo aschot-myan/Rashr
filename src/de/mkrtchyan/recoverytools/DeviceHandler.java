@@ -57,8 +57,11 @@ public class DeviceHandler {
 			new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
 			new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
 			new File("/dev/block/platform/sdhci-tegra.3/by-name/recovery"),
+            new File("/dev/block/platform/sdhci-pxav3.2/by-name/RECOVERY"),
 			new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
 			new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
+			new File("/dev/block/platform/sdhci-tegra.3/by-name/USP"),
+            new File("/dev/block/platform/sdhci-tegra.3/by-name/SS"),
 			new File("/dev/block/platform/sdhci.1/by-name/RECOVERY"),
 			new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
 			new File("/dev/block/platform/dw_mmc.0/by-name/RECOVERY"),
@@ -108,6 +111,10 @@ public class DeviceHandler {
 		String MODEL = Build.MODEL.toLowerCase();
 
 //	Set DEV_NAME predefined options
+
+//      Acer Iconia Tab A500
+        if (DEV_NAME.equals("a500"))
+            DEV_NAME = "picasso";
 
 //      Motorola DROID RAZR M
 		if (DEV_NAME.equals("xt907"))
@@ -229,6 +236,7 @@ public class DeviceHandler {
 		if (DEV_NAME.equals("n7100")
 				|| DEV_NAME.equals("n7100")
 				|| DEV_NAME.equals("gt-n7100")
+                || MODEL.equals("gt-n7100")
 				|| BOARD.equals("t03g")
 				|| BOARD.equals("n7100")
 				|| BOARD.equals("gt-n7100"))
@@ -623,8 +631,6 @@ public class DeviceHandler {
 
 			if (DEV_NAME.equals("dlxub1")
 					|| DEV_NAME.equals("evita")
-					|| DEV_NAME.equals("i9300")
-					|| DEV_NAME.equals("t03g")
 					|| DEV_NAME.equals("skyrocket")
 					|| DEV_NAME.equals("ville")
 					|| DEV_NAME.equals("p990")
@@ -648,7 +654,8 @@ public class DeviceHandler {
 				CWM_VERSION = CWM_VERSION + "-6.0.3.3";
 
 			if (DEV_NAME.equals("n8000")
-					|| DEV_NAME.equals("n8013"))
+					|| DEV_NAME.equals("n8013")
+                    || DEV_NAME.equals("i9300"))
 				CWM_VERSION = CWM_VERSION + "-6.0.3.6";
 
 			if (DEV_NAME.equals("find5"))
@@ -674,7 +681,8 @@ public class DeviceHandler {
 					|| DEV_NAME.equals("toro")
 					|| DEV_NAME.equals("toroplus")
 					|| DEV_NAME.equals("d2spr")
-					|| DEV_NAME.equals("d2usc"))
+					|| DEV_NAME.equals("d2usc")
+                    || DEV_NAME.equals("t03g"))
 				CWM_VERSION = CWM_VERSION + "-6.0.4.3";
 
 		}
@@ -702,9 +710,6 @@ public class DeviceHandler {
 					|| DEV_NAME.equals("mint")
 					|| DEV_NAME.equals("enrc2b"))
 				TWRP_VERSION = "-2.6.0.0";
-
-			if (DEV_NAME.equals("t03g"))
-				TWRP_VERSION = "-2.6.0.1";
 
 			if (DEV_NAME.equals("n8000")
 					|| DEV_NAME.equals("heroc")
@@ -787,7 +792,9 @@ public class DeviceHandler {
 					|| DEV_NAME.equals("jgedlte")
 					|| DEV_NAME.equals("protou")
 					|| DEV_NAME.equals("evitareul")
-					|| DEV_NAME.equals("crater"))
+					|| DEV_NAME.equals("crater")
+					|| DEV_NAME.equals("tf201")
+                    || DEV_NAME.equals("t03g"))
 				TWRP_VERSION = "-2.6.3.0";
 
 			if (DEV_NAME.equals("tf201")) {
@@ -822,7 +829,7 @@ public class DeviceHandler {
 					new Downloader(mContext, "http://dslnexus.org/Android/utils/", archive.getName(), archive, new Runnable() {
 						@Override
 						public void run() {
-							new Unzipper(mContext, archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
+							new Unzipper(archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
 						}
 					}).execute();
 
@@ -832,7 +839,7 @@ public class DeviceHandler {
 			return true;
 		}
 		if (archive.exists())
-			new Unzipper(mContext, archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
+			new Unzipper(archive, new File(RecoveryTools.PathToUtils, DEV_NAME)).unzip();
 		return false;
 	}
 
@@ -963,7 +970,6 @@ public class DeviceHandler {
 
 			if (DEV_NAME.equals("t03g")
 					|| DEV_NAME.equals("tf700t")
-					|| DEV_NAME.equals("tf201")
 					|| DEV_NAME.equals("t0lte")
 					|| DEV_NAME.equals("t0lteatt")
 					|| DEV_NAME.equals("t0ltecan")
@@ -980,7 +986,7 @@ public class DeviceHandler {
 				return "/dev/block/mmcblk0p9";
 
 			if (DEV_NAME.equals("golden")
-					|| DEV_NAME.equals("villec2")
+                    || DEV_NAME.equals("villec2")
 					|| DEV_NAME.equals("vivo")
 					|| DEV_NAME.equals("vivow")
 					|| DEV_NAME.equals("kingdom")

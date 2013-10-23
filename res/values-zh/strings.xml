@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="appirator_app_title">Recovery 工具箱</string>
-    <string name="appirator_market_url">market://details?id=%s</string>
     <string name="donations__button_close">关闭</string>
     <string name="donations__flattr">Flattr</string>
     <string name="donations__description">"您觉得这款应用有用吗?
@@ -36,16 +34,11 @@
     <string name="negative">取消</string>
     <string name="file_chooser">选择文件</string>
     <string name="choose_message">已选择 %s. 您确定吗?</string>
-    <string name="ok">确定</string>
     <string name="noroot">"设备没有 Root 权限. 请 Root 您对设备. 更多信息请访问
         
 
 xda-developer.com"</string>
-    <string name="rate_title">评价 %s</string>
-    <string name="rate_message">如果您喜欢使用 %s, 您愿意花点时间给我们评价吗? 非常感谢您的支持!</string>
-    <string name="rate">立即评价</string>
-    <string name="rate_later">稍后提醒</string>
-    <string name="rate_cancel">不了</string>
+
     <string name="app_name">Recovery工具箱</string>
     <string name="sFlashCWM">刷入 Clockworkmod Recovery</string>
     <string name="sFlashTWRP">刷入 TWRP Recovery</string>
@@ -90,7 +83,6 @@ TWRP:
     <string name="using_mtd">使用 flash/dump_image (MTD)</string>
     <string name="commentar">注释</string>
     <string name="commenthint">在这里发表评论, 哪些功能不能正常使用 (下载, 刷入, 设备支持或其他内容)</string>
-    <string name="su_logs_title">执行Shell命令</string>
     <string name="log">Shell命令日志</string>
     <string name="showlog">显示日志</string>
     <string name="sDeleteBackup">删除备份</string>
@@ -108,6 +100,5 @@ TWRP:
     <string name="please_restart">请重启应用程序以使更改生效</string>
     <string name="please_ads">请打开广告以支持我的工作!</string>
     <string name="donate">捐赠</string>
-    <string name="donation_paypal_item">捐赠</string>
     <string name="never_again">不再显示</string>
 </resources>

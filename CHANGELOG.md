@@ -2,6 +2,17 @@
 CHANGELOG
 ====================
 
+Update [1.6.6]
+
+-New Devices Added
+-Acer Iconia A500 recognition fixed
+-Better reporting for not supported devices
+-Choosing of Recovery Version fixed
+-Improved error detention while flashing
+-Downloads now cancelable
+-Downloads now more secure with sha1 checksum
+-Better error detection of flashing
+
 Update [1.6.5]
 
 -History crash fixed

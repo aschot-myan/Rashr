@@ -51,8 +51,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.devspark.appmsg.AppMsg;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,6 +82,7 @@ public class RecoveryTools extends ActionBarActivity {
 	public static final File PathToTWRP = new File(PathToRecoveries, "twrp");
 	public static final File PathToBackups = new File(PathToRecoveryTools, "backups");
 	public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
+    private static final File Checksums = new File(PathToRecoveries, "IMG_SUMS");
 	private File fRECOVERY;
 	private String SYSTEM;
 	private final String CWM_SYSTEM = "clockwork";
@@ -94,6 +94,7 @@ public class RecoveryTools extends ActionBarActivity {
 	private DeviceHandler mDeviceHandler = new DeviceHandler(mContext);
 	private DrawerLayout mDrawerLayout = null;
 	private FileChooser fcFlashOther = null;
+    private FileChooser fcAllIMGS = null;
 	private boolean keepAppOpen = true;
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +115,9 @@ public class RecoveryTools extends ActionBarActivity {
 			if (!mDeviceHandler.isOtherSupported()) {
 				showDeviceNotSupportedDialog();
 			} else {
-				if (!mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_FIRST_RUN)) {
+				if (!mCommon.getBooleanPref(mContext, PREF_NAME, PREF_FIRST_RUN)) {
 					showFlashWarning();
-					mCommon.setBooleanPerf(mContext, PREF_NAME, PREF_ADS, true);
+					mCommon.setBooleanPref(mContext, PREF_NAME, PREF_ADS, true);
 				}
 //			    Create needed Folder
 				checkFolder();
@@ -130,7 +131,14 @@ public class RecoveryTools extends ActionBarActivity {
 			mDeviceHandler.extractFiles(mContext);
 			mDeviceHandler.downloadUtils();
 			showChangelog();
-		}
+            if (Checksums.exists())
+                Checksums.delete();
+            try {
+                mCommon.pushFileFromRAW(mContext, Checksums, R.raw.img_sums);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 
 	public void bDonate(View view) {
@@ -147,8 +155,8 @@ public class RecoveryTools extends ActionBarActivity {
 	}
 
 	public void cbLog(View view) {
-		mCommon.setBooleanPerf(mContext, Common.PREF_NAME, Common.PREF_LOG, !mCommon.getBooleanPerf(mContext, Common.PREF_NAME, Common.PREF_LOG));
-		((CheckBox) view).setChecked(mCommon.getBooleanPerf(mContext, Common.PREF_NAME, Common.PREF_LOG));
+		mCommon.setBooleanPref(mContext, Common.PREF_NAME, Common.PREF_LOG, !mCommon.getBooleanPref(mContext, Common.PREF_NAME, Common.PREF_LOG));
+		((CheckBox) view).setChecked(mCommon.getBooleanPref(mContext, Common.PREF_NAME, Common.PREF_LOG));
 		if (((CheckBox) view).isChecked()) {
 			findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
 		} else {
@@ -165,9 +173,9 @@ public class RecoveryTools extends ActionBarActivity {
 	}
 
 	public void cbShowAds(View view) {
-		mCommon.setBooleanPerf(mContext, PREF_NAME, PREF_ADS, !mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_ADS));
-		((CheckBox) view).setChecked(mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_ADS));
-		mNotifyer.showToast(R.string.please_restart, AppMsg.STYLE_INFO);
+		mCommon.setBooleanPref(mContext, PREF_NAME, PREF_ADS, !mCommon.getBooleanPref(mContext, PREF_NAME, PREF_ADS));
+		((CheckBox) view).setChecked(mCommon.getBooleanPref(mContext, PREF_NAME, PREF_ADS));
+		Toast.makeText(mContext, R.string.please_restart, Toast.LENGTH_SHORT);
 	}
 
 	//	Button Methods (onClick)
@@ -194,24 +202,25 @@ public class RecoveryTools extends ActionBarActivity {
 				rFlasher.run();
 			} else if (updateable && fRECOVERY.getParentFile().listFiles().length > 0
 					|| fRECOVERY.getParentFile().listFiles().length > 1) {
-				final FileChooser AllIMGS = new FileChooser(mContext, fRECOVERY.getParentFile(), rFlasher);
-				AllIMGS.setEXT(mDeviceHandler.getEXT());
+				fcAllIMGS = new FileChooser(mContext, fRECOVERY.getParentFile(), rFlasher);
+				fcAllIMGS.setEXT(mDeviceHandler.getEXT());
+                fcAllIMGS.setWarn(false);
 				if (updateable) {
-					LinearLayout chooserLayout = AllIMGS.getLayout();
+					LinearLayout chooserLayout = fcAllIMGS.getLayout();
 					Button Update = new Button(mContext);
 					Update.setText(R.string.update);
 					Update.setOnClickListener(new View.OnClickListener() {
 
 						@Override
 						public void onClick(View v) {
-							AllIMGS.dismiss();
+							fcAllIMGS.dismiss();
 							rFlasher.run();
 						}
 					});
 					chooserLayout.addView(Update);
 				}
-				AllIMGS.setTitle(SYSTEM);
-				AllIMGS.show();
+				fcAllIMGS.setTitle(SYSTEM.toUpperCase());
+				fcAllIMGS.show();
 			} else {
 				rFlasher.run();
 			}
@@ -222,6 +231,7 @@ public class RecoveryTools extends ActionBarActivity {
 		fRECOVERY = null;
 		try {
 			fcFlashOther = new FileChooser(mContext, PathToSd, rFlasher);
+            fcFlashOther.setTitle(R.string.search_recovery);
 			fcFlashOther.setEXT(mDeviceHandler.getEXT());
 			fcFlashOther.show();
 		} catch (NullPointerException e) {
@@ -237,9 +247,9 @@ public class RecoveryTools extends ActionBarActivity {
 		ListView list = new ListView(mContext);
 
 		for (int i = 0; i < 5; i++) {
-			tmpFile[i] = new File(mCommon.getStringPerf(mContext, PREF_NAME, PREF_HISTORY + String.valueOf(i)));
+			tmpFile[i] = new File(mCommon.getStringPref(mContext, PREF_NAME, PREF_HISTORY + String.valueOf(i)));
 			if (!tmpFile[i].exists())
-				mCommon.setStringPerf(mContext, PREF_NAME, PREF_HISTORY + String.valueOf(i), "");
+				mCommon.setStringPref(mContext, PREF_NAME, PREF_HISTORY + String.valueOf(i), "");
 			else {
 				tmpFileNames[i] = tmpFile[i].getName();
 			}
@@ -256,7 +266,7 @@ public class RecoveryTools extends ActionBarActivity {
 					rFlasher.run();
 				} else {
 					d.dismiss();
-					mNotifyer.showToast(R.string.no_choosed, AppMsg.STYLE_CONFIRM);
+					Toast.makeText(mContext ,R.string.no_choosed, Toast.LENGTH_SHORT);
 				}
 			}
 		});
@@ -268,7 +278,7 @@ public class RecoveryTools extends ActionBarActivity {
 		showPopup(R.menu.bakmgr_menu, view);
 	}
 
-	public void bCleareCache(View view) {
+	public void bClearCache(View view) {
 		try {
 			mCommon.deleteFolder(PathToCWM, false);
 			mCommon.deleteFolder(PathToTWRP, false);
@@ -298,9 +308,9 @@ public class RecoveryTools extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 
-				if (!mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_ADS))
-					mNotifyer.showToast(R.string.please_ads, AppMsg.STYLE_ALERT);
-				mNotifyer.showToast(R.string.donate_to_support, AppMsg.STYLE_ALERT);
+				if (!mCommon.getBooleanPref(mContext, PREF_NAME, PREF_ADS))
+					Toast.makeText(mContext, R.string.please_ads, Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, R.string.donate_to_support, Toast.LENGTH_SHORT).show();
 				try {
 					PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
 					EditText text = (EditText) reportDialog.findViewById(R.id.etCommentar);
@@ -317,9 +327,13 @@ public class RecoveryTools extends ActionBarActivity {
 							"\nModel: " + Build.MODEL +
 							"\nFingerprint: " + Build.FINGERPRINT +
 							"\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")" +
+                            "\nRecovery Path: " + mDeviceHandler.getRecoveryPath() +
+                            "\nIs MTD: " + mDeviceHandler.isMTD() +
+                            "\nIs DD: " + mDeviceHandler.isDD() +
 							"\n\n\n===========Comment==========\n" + comment +
 							"\n===========Comment==========\n" +
-							"\nMTD Testresult:\n" +
+                            "\nRecovery-Tools:\n\n" + mCommon.executeSuShell("ls -lR " + PathToRecoveryTools.getAbsolutePath()) + "\n" +
+							"\nMTD result:\n" +
 							mCommon.executeSuShell("cat /proc/mtd") + "\n" +
 							"\nDevice Tree:\n" +
 							"\n" + mCommon.executeSuShell("ls -lR /dev/block");
@@ -409,9 +423,9 @@ public class RecoveryTools extends ActionBarActivity {
 		final LinearLayout FakerLayout = new LinearLayout(mContext);
 		FakerLayout.setOrientation(LinearLayout.VERTICAL);
 		final EditText etFakeDevName = new EditText(mContext);
-		if (!mCommon.getStringPerf(mContext, PREF_NAME, PREF_CUSTOM_DEVICE).equals("")) {
-			etFakeDevName.setHint(mCommon.getStringPerf(mContext, PREF_NAME, PREF_CUSTOM_DEVICE));
-			mDeviceHandler = new DeviceHandler(mContext, mCommon.getStringPerf(mContext, PREF_NAME, PREF_CUSTOM_DEVICE));
+		if (!mCommon.getStringPref(mContext, PREF_NAME, PREF_CUSTOM_DEVICE).equals("")) {
+			etFakeDevName.setHint(mCommon.getStringPref(mContext, PREF_NAME, PREF_CUSTOM_DEVICE));
+			mDeviceHandler = new DeviceHandler(mContext, mCommon.getStringPref(mContext, PREF_NAME, PREF_CUSTOM_DEVICE));
 		} else {
 			etFakeDevName.setHint(Build.DEVICE);
 		}
@@ -420,9 +434,9 @@ public class RecoveryTools extends ActionBarActivity {
 		reset.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mCommon.setStringPerf(mContext, PREF_NAME, PREF_CUSTOM_DEVICE, etFakeDevName.getText().toString());
+				mCommon.setStringPref(mContext, PREF_NAME, PREF_CUSTOM_DEVICE, etFakeDevName.getText().toString());
 				FakerDialog.dismiss();
-				mNotifyer.showToast(R.string.please_restart, AppMsg.STYLE_INFO);
+				Toast.makeText(mContext, R.string.please_restart, Toast.LENGTH_SHORT).show();
 			}
 		});
 		final Button setDefault = new Button(mContext);
@@ -430,11 +444,11 @@ public class RecoveryTools extends ActionBarActivity {
 		setDefault.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mCommon.setStringPerf(mContext, PREF_NAME, PREF_CUSTOM_DEVICE, Build.DEVICE);
-				mCommon.setBooleanPerf(mContext, PREF_NAME, PREF_USE_CUSTOM, false);
+				mCommon.setStringPref(mContext, PREF_NAME, PREF_CUSTOM_DEVICE, Build.DEVICE);
+				mCommon.setBooleanPref(mContext, PREF_NAME, PREF_USE_CUSTOM, false);
 				etFakeDevName.setHint(Build.DEVICE);
 				FakerDialog.dismiss();
-				mNotifyer.showToast(R.string.please_restart, AppMsg.STYLE_INFO);
+				Toast.makeText(mContext, R.string.please_restart, Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -458,16 +472,16 @@ public class RecoveryTools extends ActionBarActivity {
 		final LinearLayout mDrawerLinear = (LinearLayout) findViewById(R.id.left_drawer);
 		CheckBox cbShowAds = (CheckBox) mDrawerLinear.findViewById(R.id.cbShowAds);
 		CheckBox cbLog = (CheckBox) mDrawerLinear.findViewById(R.id.cbLog);
-		cbShowAds.setChecked(mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_ADS));
-		cbLog.setChecked(mCommon.getBooleanPerf(mContext, Common.PREF_NAME, Common.PREF_LOG));
+		cbShowAds.setChecked(mCommon.getBooleanPref(mContext, PREF_NAME, PREF_ADS));
+		cbLog.setChecked(mCommon.getBooleanPref(mContext, Common.PREF_NAME, Common.PREF_LOG));
 		if (cbLog.isChecked()) {
 			findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
 		} else {
 			findViewById(R.id.bShowLogs).setVisibility(View.INVISIBLE);
 		}
-		((CheckBox) mDrawerLayout.findViewById(R.id.cbShowAds)).setChecked(mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_ADS));
+		((CheckBox) mDrawerLayout.findViewById(R.id.cbShowAds)).setChecked(mCommon.getBooleanPref(mContext, PREF_NAME, PREF_ADS));
 		try {
-			if (!mCommon.getBooleanPerf(mContext, PREF_NAME, PREF_ADS)) {
+			if (!mCommon.getBooleanPref(mContext, PREF_NAME, PREF_ADS)) {
 				((ViewGroup) findViewById(R.id.adView).getParent()).removeView(findViewById(R.id.adView));
 			}
 			if (!mDeviceHandler.isCwmSupported()) {
@@ -485,7 +499,6 @@ public class RecoveryTools extends ActionBarActivity {
 		} catch (NullPointerException e) {
 			throw new Exception("Error while setting up Layout");
 		}
-
 	}
 
 	private void checkFolder() {
@@ -534,12 +547,12 @@ public class RecoveryTools extends ActionBarActivity {
 	public void showChangelog() {
 		try {
 			PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-			final int previous_version = mCommon.getIntegerPerf(mContext, PREF_NAME, PREF_CUR_VER);
+			final int previous_version = mCommon.getIntegerPref(mContext, PREF_NAME, PREF_CUR_VER);
 			final int current_version = pInfo.versionCode;
 			if (current_version > previous_version) {
 				mNotifyer.createDialog(R.string.version, R.string.changes, true, true).show();
-				mCommon.setIntegerPerf(mContext, PREF_NAME, PREF_CUR_VER, current_version);
-			}
+				mCommon.setIntegerPref(mContext, PREF_NAME, PREF_CUR_VER, current_version);
+            }
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {
@@ -616,13 +629,13 @@ public class RecoveryTools extends ActionBarActivity {
 				@Override
 				public void onClick(DialogInterface dialogInterface, int i) {
 					new BackupHandler(mContext).backup();
-					mCommon.setBooleanPerf(mContext, PREF_NAME, PREF_FIRST_RUN, true);
+					mCommon.setBooleanPref(mContext, PREF_NAME, PREF_FIRST_RUN, true);
 				}
 			});
 			WarningDialog.setNegativeButton(R.string.risk, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialogInterface, int i) {
-					mCommon.setBooleanPerf(mContext, PREF_NAME, PREF_FIRST_RUN, true);
+					mCommon.setBooleanPref(mContext, PREF_NAME, PREF_FIRST_RUN, true);
 				}
 			});
 			WarningDialog.setCancelable(false);
@@ -651,6 +664,11 @@ public class RecoveryTools extends ActionBarActivity {
 						fRECOVERY = fcFlashOther.getSelectedFile();
 					}
 				}
+                if (fcAllIMGS != null) {
+                    if (fcAllIMGS.isChoosed()) {
+                        fRECOVERY = fcAllIMGS.getSelectedFile();
+                    }
+                }
 				if (fRECOVERY != (null)) {
 					if (fRECOVERY.exists()) {
 						if (fRECOVERY.getName().endsWith(mDeviceHandler.getEXT())) {
@@ -668,30 +686,28 @@ public class RecoveryTools extends ActionBarActivity {
 							}
 						}
 					} else {
-//  				    If Recovery File don't exist ask if you want to download it now.
-						mNotifyer.createAlertDialog(R.string.info, R.string.img_not_found, rDownload).show();
+                        Downloader RecoveryDownloader;
+                        String url;
+//                        Download file from URL mDeviceHandler."SYSTEM"_URL + "/" + fRECOVERY.getName().toString() and write it to fRECOVERY
+                        if (SYSTEM.equals(CWM_SYSTEM)) {
+                            url = mDeviceHandler.getCWM_URL();
+                        } else if (SYSTEM.equals(TWRP_SYSTEM)) {
+                            url = mDeviceHandler.getTWRP_URL();
+                        } else {
+                            return;
+                        }
+                        RecoveryDownloader = new Downloader(mContext, url, fRECOVERY.getName(), fRECOVERY, rFlasher);
+                        RecoveryDownloader.setRetry(true);
+                        RecoveryDownloader.setAskBeforeDownload(true);
+                        RecoveryDownloader.setChecksumFile(Checksums);
+                        RecoveryDownloader.ask();
 					}
 				}
 			}
+            fcFlashOther = null;
+            fcAllIMGS = null;
 		}
 	};
 
-	private final Runnable rDownload = new Runnable() {
-		@Override
-		public void run() {
-			Downloader RecoveryDownloader;
-			String url;
-//			Download file from URL mDeviceHandler."SYSTEM"_URL + "/" + fRECOVERY.getName().toString() and write it to fRECOVERY
-			if (SYSTEM.equals(CWM_SYSTEM)) {
-				url = mDeviceHandler.getCWM_URL();
-			} else if (SYSTEM.equals(TWRP_SYSTEM)) {
-				url = mDeviceHandler.getTWRP_URL();
-			} else {
-				return;
-			}
-			RecoveryDownloader = new Downloader(mContext, url, fRECOVERY.getName(), fRECOVERY, rFlasher);
-			RecoveryDownloader.setRetry(true);
-			RecoveryDownloader.execute();
-		}
-	};
+
 }

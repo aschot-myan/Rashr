@@ -17,8 +17,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Utils-Library" />
     <orderEntry type="library" name="GoogleAdMobAdsSdk" level="project" />
-    <orderEntry type="module" module-name="AppiRater" />
-    <orderEntry type="module" module-name="AppMsg" />
     <orderEntry type="module" module-name="Appcompact" />
     <orderEntry type="library" name="android-support-v7-appcompat" level="project" />
     <orderEntry type="library" name="android-support-v13" level="project" />

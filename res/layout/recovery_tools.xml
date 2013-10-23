@@ -64,7 +64,7 @@
                                            android:layout_height="wrap_content"
                                            ads:adUnitId="ca-app-pub-3591384811135190/6436276193"
                                            ads:loadAdOnCreate="true"
-                                           ads:testDevices="538324DB6D51B29D9320AFDB7D564DFB, TEST_EMULATOR"
+                                           ads:testDevices="A457335CBE8C6225036638B977F77948, TEST_EMULATOR"
                                            ads:adSize="SMART_BANNER"
                                            android:layout_gravity="center"/>
 
@@ -86,12 +86,12 @@
                             android:text="@string/sBackupMgr"/>
 
                     <Button
-                            android:id="@+id/bCleareCache"
+                            android:id="@+id/bClearCache"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onClick="bCleareCache"
+                            android:onClick="bClearCache"
                             android:drawableLeft="@drawable/ic_delete"
-                            android:text="@string/sCleareCache"/>
+                            android:text="@string/sClearCache"/>
 
                     <Button
                             android:id="@+id/bRebooter"
