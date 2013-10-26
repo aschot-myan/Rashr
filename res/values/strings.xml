@@ -6,8 +6,9 @@
     <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
     <string name="sHistory">History</string>
     <string name="sFlashTWRP">Flash TWRP Recovery</string>
-    <string name="flash_other">Flash other Recovery</string>
+    <string name="sFlashOTHER">Flash other Recovery</string>
     <string name="sBackup">Backup current Recovery</string>
+    <string name="backups">Backups</string>
     <string name="go">Go</string>
     <string name="sRebooter">Rebooter</string>
     <string name="sRestore">Restore from Backup</string>
@@ -15,12 +16,8 @@
     <string name="report">Report bug</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Thread</string>
-    <string name="rename">If you want set a custom name to the backup type it in the text field (NO
-        SPACE ALLOWED!). If
-        not the current time will be set.
-    </string>
-    <string name="bak_warning">Before you do some actions with Recovery-Tools please create an
-        backup and store it on your PC.
+    <string name="rename">If you want set a custom name to the backup type it in the text field. If not the current time/date will be set.</string>
+    <string name="bak_warning">Before you do some actions with Recovery-Tools please create an backup and store it on your PC.
         \nBackups will be created under %s.
         \nThe DEV is not responsible on the damages of your device.
     </string>
@@ -31,27 +28,21 @@
     <string name="info">Information</string>
     <string name="flashed">Recovery flashed.</string>
     <string name="warning">Warning!</string>
-    <string name="kernel_to">Flashing the Recovery System on this devices will flash the Boot.img
-        (Kernel) to Stock with custom Recovery (this can cause bootloops, save a backup of Boot.img
-        on your PC).
-    </string>
+    <string name="kernel_to">Flashing the Recovery System on this devices will flash the boot.img (Kernel) to Stock with custom Recovery (this can cause bootloops, save a backup of Boot.img on your PC).</string>
     <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
     <string name="instructions">Instructions</string>
     <string name="instruction">CWM:
-        \n\nMain Menu -> install zip from sdcard -> choose zip from sdcard
+        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
         \n\nTWRP:
-        \n\nMain Menu -> Install
+        \nMain Menu -> Install
     </string>
 
     <string name="bak_done">Backup completed</string>
     <string name="backupalready">Backup already exists. This will overwrite the existing one.
-        Continue?
+        \n\nContinue?
     </string>
-    <string name="no_backup">No existing Backup found (%s/Recovery-Tools/backups/).
-        Create one now?
-    </string>
-    <string name="failed_download">Oh no, a problem is occurred. Please restart the download.
-        \n\n%s
+    <string name="no_backup">No existing Backup found (%s/Recovery-Tools/backups/)
+        \n\nCreate one now?
     </string>
     <string name="error">Error</string>
     <string name="notsupportded">Your Device is not supported by the developer yet. Scan System and
@@ -79,8 +70,8 @@
     <string name="sBackupMgr">Backup Manager</string>
     <string name="setname">Set name of Backup</string>
     <string name="reboot_recovery_now">Reboot in to recovery now?</string>
-    <string name="tsk_end">Task completed</string>
     <string name="flashing">Flashing&#8230;</string>
+    <string name="restoring">Restoring&#8230;</string>
     <string name="creating_bak">Creating Backup&#8230;</string>
 
     <string name="download_utils">To use this App you need to download small tools (around 512KB).
@@ -104,8 +95,6 @@
     <string name="donate">Donate</string>
 
     <string name="never_again">Never show again</string>
-
-    <string name="corrupt_download">Downloaded file is corrupted.</string>
     <string name="try_again">Try again!</string>
     <string name="later">Later</string>
 
@@ -124,6 +113,8 @@
     <string name="no_choosed">No File chosen</string>
     <string name="update">Download and flash new IMG</string>
     <string name="search_recovery">Search Recovery</string>
-    <string name="flash_error">Flash failed error occurred:\n\n %s</string>
+    <string name="flash_error">Failed to flash</string>
+    <string name="res_error">Failed to restore</string>
+    <string name="bak_error">Failed to backup</string>
 
 </resources>

@@ -4,12 +4,12 @@
     <string name="app_name">Recovery-Tools</string>
     <string name="sFlashCWM">Flashare Clockworkmod Recovery</string>
     <string name="sFlashTWRP">Flashare TWRP Recovery</string>
-    <string name="flash_other">Flashare una Recovery diversa</string>
+    <string name="sFlashOTHER">Flashare una Recovery diversa</string>
     <string name="sBackup">Backup della Recovery corrente</string>
     <string name="go">Avvia</string>
     <string name="sRebooter">Riavvio</string>
     <string name="sRestore">Ripristina da Backup</string>
-    <string name="sCleareCache">Cancella le recovery scaricate</string>
+    <string name="sClearCache">Cancella le recovery scaricate</string>
     <string name="report">Analizza e segnala un dispositivo non supportato</string>
     <string name="sExit">Esci</string>
     <string name="xda">Apri il Thread XDA</string>
@@ -72,14 +72,11 @@
     <string name="sBackupMgr">Apri Backup Manager</string>
     <string name="setname">Imposta nome del Backup</string>
     <string name="reboot_recovery_now">Riavviare in recovery adesso?</string>
-    <string name="tsk_end">Operazione completata</string>
     <string name="flashing">Flash in corso…</string>
     <string name="creating_bak">Backup in corso…</string>
     <string name="clear_logs">Pulisci Logs</string>
     <string name="download_utils">Per usare quest\'App hai bisogno di scaricare dei piccoli tool
         (circa 512KB). Richiede la connessione internet.\nScaricarli ora?
-    </string>
-    <string name="wrong_format">Hai scelto un file sbagliato. Il File deve essere in formato %s.
     </string>
     <string name="over_recovery">La recovery verrà installata al posto di quella attuale</string>
 

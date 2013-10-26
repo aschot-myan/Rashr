@@ -47,7 +47,7 @@ xda-developer.com"</string>
     <string name="go">确定</string>
     <string name="sRebooter">重启</string>
     <string name="sRestore">恢复备份</string>
-    <string name="sCleareCache">清除已下载的 Recovery</string>
+    <string name="sClearCache">清除已下载的 Recovery</string>
     <string name="report">扫描并报告不支持的设备</string>
     <string name="sExit">退出</string>
     <string name="xda">打开 XDA-主题</string>
@@ -74,7 +74,6 @@ XDACN汉化组 OPkyd汉化
 TWRP: 
 
 主菜单 -> 安装"</string>
-    <string name="img_not_found">未找到 Recovery 镜像文件. 是否立即下载?</string>
     <string name="bak_done">备份完成</string>
     <string name="backupalready">备份已存在. 将覆盖现有备份. 是否继续?</string>
     <string name="no_backup">备份不存在 (%s/Recovery-Tools/backups/). 是否立即创建?</string>
@@ -89,7 +88,6 @@ TWRP:
     <string name="sBackupMgr">打开备份管理器</string>
     <string name="setname">设置备份名称</string>
     <string name="reboot_recovery_now">是否立即重启进入 Recovery 模式?</string>
-    <string name="tsk_end">任务已完成</string>
     <string name="flashing">正在刷入…</string>
     <string name="creating_bak">正在创建备份…</string>
     <string name="clear_logs">清除日志</string>

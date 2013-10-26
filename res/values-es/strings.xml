@@ -14,12 +14,12 @@
     <string name="app_name">Recovery-Tools</string>
     <string name="sFlashCWM">Instalar Recuperador Clockworkmod</string>
     <string name="sFlashTWRP">Instalar Recuperador TWRP</string>
-    <string name="flash_other">Instalar Otro Recuperador</string>
+    <string name="sFlashOTHER">Instalar Otro Recuperador</string>
     <string name="sBackup">Crear copia del Recuperador actual.</string>
     <string name="go">Seguir</string>
     <string name="sRebooter">Reiniciador</string>
     <string name="sRestore">Restaurar Recuperador</string>
-    <string name="sCleareCache">Eliminar Recuperadores descargados</string>
+    <string name="sClearCache">Eliminar Recuperadores descargados</string>
     <string name="report">Escanear y Reportar dispositivo incompatible</string>
     <string name="sExit">Salir</string>
     <string name="xda">Abrir XDA-Thread</string>
@@ -74,7 +74,6 @@
     <string name="sBackupMgr">Abrir Backup Manager</string>
     <string name="setname">Nombrar la Copia de seguridad</string>
     <string name="reboot_recovery_now">¿Reiniciar en recuperador ahora?</string>
-    <string name="tsk_end">Tarea completada</string>
     <string name="flashing">Instalando…</string>
     <string name="creating_bak">Creando copia de seguridad…</string>
     <string name="clear_logs">Eliminar Logs</string>

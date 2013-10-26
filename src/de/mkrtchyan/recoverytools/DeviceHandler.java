@@ -37,10 +37,13 @@ import de.mkrtchyan.utils.Unzipper;
 public class DeviceHandler {
 
 	public static final String TAG = "DeviceHandler";
+
 	public static final int DEV_TYPE_DD = 1;
 	public static final int DEV_TYPE_MTD = 2;
 	public static final int DEV_TYPE_RECOVERY = 3;
-	public static final int DEV_TYPE_CUSTOM = 4;
+	public static final int DEV_TYPE_SONY = 4;
+
+    public static final String HOST_URL = "http://dslnexus.org/Android/recoveries";
 
 	private int DEV_TYPE = 0;
 
@@ -68,7 +71,8 @@ public class DeviceHandler {
 			new File("/dev/block/platform/hi_mci.1/by-name/recovery"),
 			new File("/dev/block/platform/dw_mmc/by-name/recovery"),
 			new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
-			new File("/dev/block/recovery")
+			new File("/dev/block/recovery"),
+            new File("/dev/block/nandg")
 	};
 
 	private File CWM_IMG = null;
@@ -430,7 +434,7 @@ public class DeviceHandler {
 		if (DEV_NAME.equals("nozomi")
 				|| DEV_NAME.equals("mint")) {
 			KERNEL_TO = true;
-			DEV_TYPE = DEV_TYPE_CUSTOM;
+			DEV_TYPE = DEV_TYPE_SONY;
 		}
 
 		if (new File("/dev/mtd/").exists() && DEV_TYPE != DEV_TYPE_DD)
@@ -912,14 +916,6 @@ public class DeviceHandler {
 		return TWRP_IMG;
 	}
 
-	public String getCWM_URL() {
-		return "http://dslnexus.org/Android/recoveries";
-	}
-
-	public String getTWRP_URL() {
-		return "http://dslnexus.org/Android/recoveries";
-	}
-
 	public String getRecoveryPath() {
 		if (RecoveryPath.equals("")) {
 
@@ -1179,13 +1175,12 @@ public class DeviceHandler {
 	public void extractFiles(Context mContext) {
 		if (isMTD()) {
 			try {
-				Common mCommon = new Common();
 				File flash_image = getFlash_image();
 				if (!flash_image.exists())
-					mCommon.pushFileFromRAW(mContext, flash_image, R.raw.flash_image);
+					Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image);
 				File dump_image = getDump_image();
 				if (!dump_image.exists())
-					mCommon.pushFileFromRAW(mContext, dump_image, R.raw.dump_image);
+					Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

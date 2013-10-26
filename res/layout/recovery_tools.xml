@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/RecoveryToolsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -26,7 +27,7 @@
                     android:layout_weight="1">
 
                 <LinearLayout
-                        android:id="@+id/LinearLayout1"
+                        android:id="@+id/MainLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -56,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_flash"
                             android:onClick="bFlashOther"
-                            android:text="@string/flash_other"/>
+                            android:text="@string/sFlashOTHER"/>
 
                     <com.google.ads.AdView xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
                                            android:id="@+id/adView"

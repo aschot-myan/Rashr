@@ -5,12 +5,12 @@
     <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
     <string name="sHistory">Geschiedenis</string>
     <string name="sFlashTWRP">Flash TWRP Recovery</string>
-    <string name="flash_other">Flash andere Recovery</string>
+    <string name="sFlashOTHER">Flash andere Recovery</string>
     <string name="sBackup">Backup huidig Recovery</string>
     <string name="go">ok</string>
     <string name="sRebooter">herstarten</string>
     <string name="sRestore">Zet terug vanaf reservekopie</string>
-    <string name="sCleareCache">verwijder gedownload recoveries</string>
+    <string name="sClearCache">verwijder gedownload recoveries</string>
     <string name="report">rapporteer bug</string>
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Thread</string>
@@ -73,7 +73,6 @@
     <string name="sBackupMgr">Backup Manager</string>
     <string name="setname"> stel een naam in for backup</string>
     <string name="reboot_recovery_now">Nu herstarten naar recovery?</string>
-    <string name="tsk_end">taak voltooid</string>
     <string name="flashing">Flashing&#8230;</string>
     <string name="creating_bak">Backup creëren&#8230;</string>
     <string name="clear_logs">verwijder Logs</string>
@@ -98,7 +97,6 @@
 
     <string name="never_again">Niet meer laten zien</string>
 
-    <string name="corrupt_download">De gedownloade bestand is beschadigd.</string>
     <string name="try_again">Probeer opnieuw!</string>
     <string name="later">Later</string>
 

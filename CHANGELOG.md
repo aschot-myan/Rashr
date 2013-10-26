@@ -2,6 +2,13 @@
 CHANGELOG
 ====================
 
+Update [1.6.7]
+
+-Backup/Restore/Flash problem with Space now working
+-All actions now smoother
+-Some Bugs fixed
+-New Devices added (Softwinner/Allwinners and more)
+
 Update [1.6.6]
 
 -New Devices Added
