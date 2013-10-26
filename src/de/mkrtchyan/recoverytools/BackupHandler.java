@@ -36,35 +36,35 @@ import de.mkrtchyan.utils.Notifyer;
 
 public class BackupHandler {
 
-	private final Context mContext;
-	private File fBACKUP;
-	private final Notifyer mNotifyer;
+    private final Context mContext;
+    private File fBACKUP;
+    private final Notifyer mNotifyer;
     private FileChooser fcDelete;
-	private final DeviceHandler mDeviceHandler;
+    private final DeviceHandler mDeviceHandler;
 
-	BackupHandler(final Context mContext) {
-		this.mContext = mContext;
-		mNotifyer = new Notifyer(mContext);
-		mDeviceHandler = new DeviceHandler(mContext);
-		fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups, rDelete);
+    BackupHandler(final Context mContext) {
+        this.mContext = mContext;
+        mNotifyer = new Notifyer(mContext);
+        mDeviceHandler = new DeviceHandler(mContext);
+        fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups, rDelete);
         fcDelete.setTitle(R.string.backups);
-	}
+    }
 
-	public void backup() {
-		if (!Common.suRecognition()) {
-			mNotifyer.showRootDeniedDialog();
-		} else {
-			setBakNameAndRun.run();
-		}
-	}
+    public void backup() {
+        if (!Common.suRecognition()) {
+            mNotifyer.showRootDeniedDialog();
+        } else {
+            setBakNameAndRun.run();
+        }
+    }
 
-	public void restore() {
-		if (!Common.suRecognition()) {
-			mNotifyer.showRootDeniedDialog();
-		} else {
-			if (RecoveryTools.PathToBackups.list().length < 1) {
-				mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
-			} else {
+    public void restore() {
+        if (!Common.suRecognition()) {
+            mNotifyer.showRootDeniedDialog();
+        } else {
+            if (RecoveryTools.PathToBackups.list().length < 1) {
+                mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
+            } else {
                 FileChooser fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups, new Runnable() {
                     @Override
                     public void run() {
@@ -73,18 +73,18 @@ public class BackupHandler {
                 });
                 fcRestore.setTitle(R.string.backups);
                 fcRestore.setEXT(mDeviceHandler.getEXT());
-				fcRestore.show();
-			}
-		}
-	}
+                fcRestore.show();
+            }
+        }
+    }
 
-	public void deleteBackup() {
-		if (RecoveryTools.PathToBackups.list().length < 1) {
-			mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
-		} else {
-			fcDelete.show();
-		}
-	}
+    public void deleteBackup() {
+        if (RecoveryTools.PathToBackups.list().length < 1) {
+            mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
+        } else {
+            fcDelete.show();
+        }
+    }
 
     private final Runnable rBackup = new Runnable() {
         @Override
@@ -98,7 +98,7 @@ public class BackupHandler {
         @Override
         public void run() {
             fcDelete.getSelectedFile().delete();
-            if (RecoveryTools.PathToBackups.listFiles()  != null && RecoveryTools.PathToBackups.listFiles().length > 0) {
+            if (RecoveryTools.PathToBackups.listFiles() != null && RecoveryTools.PathToBackups.listFiles().length > 0) {
                 fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups, rDelete);
                 fcDelete.setTitle(R.string.backups);
                 fcDelete.show();

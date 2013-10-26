@@ -3,12 +3,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:title="@string/sReboot"
-            android:id="@+id/iReboot"/>
+        android:title="@string/sReboot"
+        android:id="@+id/iReboot" />
     <item
-            android:id="@+id/iRebootRecovery"
-            android:title="@string/sRebootRecovery"/>
+        android:id="@+id/iRebootRecovery"
+        android:title="@string/sRebootRecovery" />
     <item
-            android:id="@+id/iRebootBootloader"
-            android:title="@string/sRebootBootloader"/>
+        android:id="@+id/iRebootBootloader"
+        android:title="@string/sRebootBootloader" />
 </menu>

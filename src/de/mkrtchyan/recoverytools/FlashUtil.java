@@ -37,37 +37,37 @@ import de.mkrtchyan.utils.Notifyer;
 public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private static final String TAG = "FlashUtil";
-	private static final String PREF_NAME = "FlashUtil";
-	private static final String PREF_KEY_HIDE_REBOOT = "hide_reboot";
-	private static final String PREF_KEY_FLASH_COUNTER = "last_counter";
+    private static final String PREF_NAME = "FlashUtil";
+    private static final String PREF_KEY_HIDE_REBOOT = "hide_reboot";
+    private static final String PREF_KEY_FLASH_COUNTER = "last_counter";
 
-	public static final int JOB_FLASH = 1;
-	public static final int JOB_BACKUP = 2;
+    public static final int JOB_FLASH = 1;
+    public static final int JOB_BACKUP = 2;
     public static final int JOB_RESTORE = 3;
 
-	private final Context mContext;
-	private ProgressDialog pDialog;
-	private final Notifyer mNotifyer;
-	private final DeviceHandler mDeviceHandler;
-	private final File CustomRecovery;
+    private final Context mContext;
+    private ProgressDialog pDialog;
+    private final Notifyer mNotifyer;
+    private final DeviceHandler mDeviceHandler;
+    private final File CustomRecovery;
     private final File CurrentRecovery;
-	private final int JOB;
+    private final int JOB;
     private String output;
-	private boolean keepAppOpen = true;
+    private boolean keepAppOpen = true;
     private Exception exception = null;
 
-	public FlashUtil(Context mContext, File CustomRecovery, int JOB) {
-		this.mContext = mContext;
-		this.CustomRecovery = CustomRecovery;
-		this.JOB = JOB;
-		mNotifyer = new Notifyer(mContext);
-		mDeviceHandler = new DeviceHandler(mContext);
+    public FlashUtil(Context mContext, File CustomRecovery, int JOB) {
+        this.mContext = mContext;
+        this.CustomRecovery = CustomRecovery;
+        this.JOB = JOB;
+        mNotifyer = new Notifyer(mContext);
+        mDeviceHandler = new DeviceHandler(mContext);
         CurrentRecovery = new File(mDeviceHandler.getRecoveryPath());
-	}
+    }
 
-	protected void onPreExecute() {
+    protected void onPreExecute() {
 
-		pDialog = new ProgressDialog(mContext);
+        pDialog = new ProgressDialog(mContext);
 
         switch (JOB) {
             case JOB_FLASH:
@@ -83,17 +83,17 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Log.i(TAG, "Preparing to restore");
                 break;
         }
-		pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		pDialog.setMessage(CustomRecovery.getName());
-		pDialog.setCancelable(false);
-		pDialog.show();
+        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pDialog.setMessage(CustomRecovery.getName());
+        pDialog.setCancelable(false);
+        pDialog.show();
 
-	}
+    }
 
-	@Override
-	protected Boolean doInBackground(Void... params) {
+    @Override
+    protected Boolean doInBackground(Void... params) {
 
-		try {
+        try {
             switch (mDeviceHandler.getDevType()) {
                 case DeviceHandler.DEV_TYPE_MTD:
                     output = MTD();
@@ -106,17 +106,17 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     return true;
             }
             return false;
-		} catch (Exception e) {
+        } catch (Exception e) {
             exception = e;
             return false;
-		}
-	}
+        }
+    }
 
-	protected void onPostExecute(Boolean success) {
+    protected void onPostExecute(Boolean success) {
 
-		pDialog.dismiss();
+        pDialog.dismiss();
 
-		saveHistory();
+        saveHistory();
         if (!success
                 || output.endsWith("failed with error: -1\n")
                 || output.endsWith("No such file or directory\n")
@@ -150,73 +150,75 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                         System.exit(0);
                     }
                 }
-            } else if (JOB == JOB_BACKUP){
+            } else if (JOB == JOB_BACKUP) {
                 Log.i(TAG, "Backup finished");
                 Toast.makeText(mContext, R.string.bak_done, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-	public void showRebootDialog() {
-		new AlertDialog.Builder(mContext)
+    public void showRebootDialog() {
+        new AlertDialog.Builder(mContext)
                 .setTitle(R.string.flashed)
-				.setMessage(mContext.getString(R.string.reboot_recovery_now))
-				.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						try {
-							Common.executeSuShell(mContext, "reboot recovery");
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				})
-				.setNeutralButton(R.string.neutral, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						if (!keepAppOpen) {
-							System.exit(0);
-						}
-					}
-				})
-				.setNegativeButton(R.string.never_again, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_HIDE_REBOOT, true);
-						if (!keepAppOpen) {
-							System.exit(0);
-						}
-					}
-				})
-				.setOnCancelListener(new DialogInterface.OnCancelListener() {
-					@Override
-					public void onCancel(DialogInterface dialogInterface) {
-						if (!keepAppOpen) {
-							System.exit(0);
-						}
-					}
-				})
-				.setCancelable(keepAppOpen)
-				.show();
-	}
-	public void saveHistory() {
+                .setMessage(mContext.getString(R.string.reboot_recovery_now))
+                .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        try {
+                            Common.executeSuShell(mContext, "reboot recovery");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .setNeutralButton(R.string.neutral, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (!keepAppOpen) {
+                            System.exit(0);
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.never_again, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_HIDE_REBOOT, true);
+                        if (!keepAppOpen) {
+                            System.exit(0);
+                        }
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        if (!keepAppOpen) {
+                            System.exit(0);
+                        }
+                    }
+                })
+                .setCancelable(keepAppOpen)
+                .show();
+    }
+
+    public void saveHistory() {
         if (JOB == JOB_FLASH) {
-		    switch (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)) {
-		    	case 0:
-		    		Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomRecovery.getAbsolutePath());
-		    		Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, 1);
-		    		return;
-		    	default:
-		    		Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomRecovery.getAbsolutePath());
-		    		Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER) + 1);
-		    		if (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER) == 5)
-		    			Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, 0);
-		    }
+            switch (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)) {
+                case 0:
+                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomRecovery.getAbsolutePath());
+                    Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, 1);
+                    return;
+                default:
+                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomRecovery.getAbsolutePath());
+                    Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER) + 1);
+                    if (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER) == 5)
+                        Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, 0);
+            }
         }
-	}
-	public void setKeepAppOpen(boolean keepAppOpen) {
-		this.keepAppOpen = keepAppOpen;
-	}
+    }
+
+    public void setKeepAppOpen(boolean keepAppOpen) {
+        this.keepAppOpen = keepAppOpen;
+    }
 
     public String DD() throws Exception {
         String Command = "";
@@ -229,6 +231,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         }
         return Common.executeSuShell(mContext, Command);
     }
+
     public String MTD() throws Exception {
         String Command = "";
         if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
@@ -245,6 +248,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         return Common.executeSuShell(mContext, Command);
 
     }
+
     public String SONY() throws Exception {
         String Command = "";
         if (mDeviceHandler.DEV_NAME.equals("c6603")
