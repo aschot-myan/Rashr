@@ -45,7 +45,7 @@ public class BackupHandler {
     BackupHandler(final Context mContext) {
         this.mContext = mContext;
         mNotifyer = new Notifyer(mContext);
-        mDeviceHandler = new DeviceHandler(mContext);
+        mDeviceHandler = new DeviceHandler();
         fcDelete = new FileChooser(mContext, RecoveryTools.PathToBackups, rDelete);
         fcDelete.setTitle(R.string.backups);
     }

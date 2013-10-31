@@ -2,6 +2,12 @@
 CHANGELOG
 ====================
 
+Update [1.6.8]
+
+-Flash Other fixed
+-Better file chooser
+-Some other fixes
+
 Update [1.6.7]
 
 -Backup/Restore/Flash problem with Space now working

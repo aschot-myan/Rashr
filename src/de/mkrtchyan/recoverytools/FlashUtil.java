@@ -61,14 +61,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         this.CustomRecovery = CustomRecovery;
         this.JOB = JOB;
         mNotifyer = new Notifyer(mContext);
-        mDeviceHandler = new DeviceHandler(mContext);
+        mDeviceHandler = new DeviceHandler();
         CurrentRecovery = new File(mDeviceHandler.getRecoveryPath());
     }
 
     protected void onPreExecute() {
-
         pDialog = new ProgressDialog(mContext);
-
         switch (JOB) {
             case JOB_FLASH:
                 pDialog.setTitle(R.string.flashing);
@@ -87,12 +85,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         pDialog.setMessage(CustomRecovery.getName());
         pDialog.setCancelable(false);
         pDialog.show();
-
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
-
         try {
             switch (mDeviceHandler.getDevType()) {
                 case DeviceHandler.DEV_TYPE_MTD:
@@ -113,14 +109,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean success) {
-
         pDialog.dismiss();
-
         saveHistory();
         if (!success
                 || output.endsWith("failed with error: -1\n")
                 || output.endsWith("No such file or directory\n")
-                || output.endsWith("style=gnu?)\n")) {
+                || output.endsWith("style=gnu?)\n")){
             if (exception != null) {
                 Notifyer.showExceptionToast(mContext, TAG, exception);
             }
@@ -164,10 +158,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
                         try {
                             Common.executeSuShell(mContext, "reboot recovery");
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } catch (Common.ShellException e) {
+                            Notifyer.showExceptionToast(mContext, TAG, e);
                         }
                     }
                 })
@@ -235,18 +230,17 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public String MTD() throws Exception {
         String Command = "";
         if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
-            File flash_image = mDeviceHandler.getFlash_image();
-            Common.chmod(mDeviceHandler.getFlash_image(), "741");
+            File flash_image = mDeviceHandler.getFlash_image(mContext);
+            Common.chmod(mDeviceHandler.getFlash_image(mContext), "741");
             Log.i(TAG, "Flash started!");
             Command = flash_image.getAbsolutePath() + " recovery " + CustomRecovery.getAbsolutePath();
         } else if (JOB == JOB_BACKUP) {
-            File dump_image = mDeviceHandler.getDump_image();
+            File dump_image = mDeviceHandler.getDump_image(mContext);
             Common.chmod(dump_image, "741");
             Log.i(TAG, "Backup started!");
             Command = dump_image.getAbsolutePath() + " recovery " + CustomRecovery.getAbsolutePath();
         }
         return Common.executeSuShell(mContext, Command);
-
     }
 
     public String SONY() throws Exception {

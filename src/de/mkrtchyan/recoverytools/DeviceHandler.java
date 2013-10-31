@@ -36,8 +36,6 @@ import de.mkrtchyan.utils.Unzipper;
 
 public class DeviceHandler {
 
-    public static final String TAG = "DeviceHandler";
-
     public static final int DEV_TYPE_DD = 1;
     public static final int DEV_TYPE_MTD = 2;
     public static final int DEV_TYPE_RECOVERY = 3;
@@ -77,7 +75,6 @@ public class DeviceHandler {
 
     private File CWM_IMG = null;
     private File TWRP_IMG = null;
-
     private String CWM_VERSION = "";
     private String TWRP_VERSION = "";
     private String EXT = ".img";
@@ -87,25 +84,17 @@ public class DeviceHandler {
     private boolean CWM = false;
     private boolean TWRP_OFFICIAL = false;
     private boolean CWM_OFFICIAL = false;
-    private final Context mContext;
 
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
 
-    public DeviceHandler(Context mContext) {
-
-        this.mContext = mContext;
-
+    public DeviceHandler() {
         setPredefinedOptions();
     }
 
-    public DeviceHandler(Context mContext, String CustomDevice) {
-
-        this.mContext = mContext;
-
+    public DeviceHandler(String CustomDevice) {
         if (BuildConfig.DEBUG && !CustomDevice.equals(""))
             DEV_NAME = CustomDevice;
-
         setPredefinedOptions();
     }
 
@@ -115,6 +104,11 @@ public class DeviceHandler {
         String MODEL = Build.MODEL.toLowerCase();
 
 //	Set DEV_NAME predefined options
+
+//      LG Optimus L7
+        if (MODEL.equals("lg-p710")
+                || DEV_NAME.equals("vee7e"))
+            DEV_NAME = "p710";
 
 //      Acer Iconia Tab A500
         if (DEV_NAME.equals("a500"))
@@ -817,7 +811,7 @@ public class DeviceHandler {
         return TWRP_VERSION;
     }
 
-    public boolean downloadUtils() {
+    public boolean downloadUtils(final Context mContext) {
 
         final File archive = new File(RecoveryTools.PathToUtils, DEV_NAME + ".zip");
 
@@ -847,14 +841,14 @@ public class DeviceHandler {
         return false;
     }
 
-    public File getFlash_image() {
+    public File getFlash_image(Context mContext) {
         if (!flash_image.exists()) {
             flash_image = new File(mContext.getFilesDir(), flash_image.getName());
         }
         return flash_image;
     }
 
-    public File getDump_image() {
+    public File getDump_image(Context mContext) {
         if (!dump_image.exists()) {
             dump_image = new File(mContext.getFilesDir(), dump_image.getName());
         }
@@ -918,7 +912,6 @@ public class DeviceHandler {
 
     public String getRecoveryPath() {
         if (RecoveryPath.equals("")) {
-
             for (File i : RecoveryList) {
                 if (i.exists()) {
                     return i.getAbsolutePath();
@@ -942,7 +935,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("sch-i929")
                     || DEV_NAME.equals("e6710")
                     || DEV_NAME.equals("expresslte")
-                    || DEV_NAME.equals("goghcri"))
+                    || DEV_NAME.equals("goghcri")
+                    || DEV_NAME.equals("p710"))
                 return "/dev/block/mmcblk0p18";
 
             if (DEV_NAME.equals("i9300")
@@ -1175,10 +1169,10 @@ public class DeviceHandler {
     public void extractFiles(Context mContext) {
         if (isMTD()) {
             try {
-                File flash_image = getFlash_image();
+                File flash_image = getFlash_image(mContext);
                 if (!flash_image.exists())
                     Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image);
-                File dump_image = getDump_image();
+                File dump_image = getDump_image(mContext);
                 if (!dump_image.exists())
                     Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image);
             } catch (IOException e) {
