@@ -2,6 +2,10 @@
 CHANGELOG
 ====================
 
+Update [1.6.9]
+
+-Restore fixed
+
 Update [1.6.8]
 
 -Flash Other fixed

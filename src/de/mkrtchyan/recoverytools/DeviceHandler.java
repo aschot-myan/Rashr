@@ -62,6 +62,7 @@ public class DeviceHandler {
             new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/USP"),
+            new File("/dev/block/platform/sdhci-tegra.3/by-name/UP"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/SS"),
             new File("/dev/block/platform/sdhci.1/by-name/RECOVERY"),
             new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
@@ -532,7 +533,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("vigor")
                     || DEV_NAME.equals("runnymede")
                     || DEV_NAME.equals("flo")
-                    || DEV_NAME.equals("protou"))
+                    || DEV_NAME.equals("protou")
+                    || DEV_NAME.equals("tf101"))
                 CWM_VERSION = "-touch";
 
 //	        Newest Clockworkmod version for devices
@@ -591,7 +593,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("olympus"))
                 CWM_VERSION = CWM_VERSION + "-5.8.1.5";
 
-            if (DEV_NAME.equals("tf201"))
+            if (DEV_NAME.equals("tf201")
+                    || DEV_NAME.equals("tf101"))
                 CWM_VERSION = CWM_VERSION + "-5.8.3.4";
 
             if (DEV_NAME.equals("jewel"))
@@ -698,6 +701,9 @@ public class DeviceHandler {
 
             if (DEV_NAME.equals("leo"))
                 TWRP_VERSION = "-2.2.0";
+
+            if (DEV_NAME.equals("tf101"))
+                TWRP_VERSION = "-2.3.2.3";
 
             if (DEV_NAME.equals("pico"))
                 TWRP_VERSION = "-2.4.4.0";

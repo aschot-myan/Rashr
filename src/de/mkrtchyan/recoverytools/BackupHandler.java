@@ -39,7 +39,7 @@ public class BackupHandler {
     private final Context mContext;
     private File fBACKUP;
     private final Notifyer mNotifyer;
-    private FileChooser fcDelete;
+    private FileChooser fcDelete, fcRestore;
     private final DeviceHandler mDeviceHandler;
 
     BackupHandler(final Context mContext) {
@@ -65,10 +65,10 @@ public class BackupHandler {
             if (RecoveryTools.PathToBackups.list().length < 1) {
                 mNotifyer.createAlertDialog(R.string.warning, String.format(mContext.getString(R.string.no_backup), RecoveryTools.PathToBackups.getAbsolutePath()), setBakNameAndRun).show();
             } else {
-                FileChooser fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups, new Runnable() {
+                fcRestore = new FileChooser(mContext, RecoveryTools.PathToBackups, new Runnable() {
                     @Override
                     public void run() {
-                        new FlashUtil(mContext, fBACKUP, FlashUtil.JOB_RESTORE).execute();
+                        new FlashUtil(mContext, fcRestore.getSelectedFile(), FlashUtil.JOB_RESTORE).execute();
                     }
                 });
                 fcRestore.setTitle(R.string.backups);

@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.mkrtchyan.recoverytools"
     android:installLocation="auto"
-    android:versionCode="57"
-    android:versionName="1.6.8">
+    android:versionCode="58"
+    android:versionName="1.6.9">
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />

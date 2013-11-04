@@ -14,6 +14,7 @@ Supported Devices
 
 --[ASUS]--
 -Transformer Infinity (ft700t)
+-Transformer (tf101)
 
 --[HTC]--
 -HD2 (leo)
