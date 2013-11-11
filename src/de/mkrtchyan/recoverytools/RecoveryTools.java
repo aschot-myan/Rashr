@@ -42,6 +42,8 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -106,9 +108,9 @@ public class RecoveryTools extends ActionBarActivity {
         if (getIntent().getData() != null) {
             handleBrowserChoice();
         } else {
-            if (BuildConfig.DEBUG) {
-                showFakeDialog();
-            }
+//            if (BuildConfig.DEBUG) {
+//                showFakeDialog();
+//            }
 //      	If device is not supported, you can report it now or close the App
             if (!mDeviceHandler.isOtherSupported()) {
                 showDeviceNotSupportedDialog();
@@ -342,7 +344,7 @@ public class RecoveryTools extends ActionBarActivity {
                                 if (TestResults.exists())
                                     TestResults.delete();
                                 FileOutputStream fos = openFileOutput(TestResults.getName(), Context.MODE_PRIVATE);
-                                fos.write(("\nRecovery-Tools:\n\n" + Common.executeSuShell("ls -lR " + PathToRecoveryTools.getAbsolutePath()) +
+                                fos.write(("Recovery-Tools:\n\n" + Common.executeSuShell("ls -lR " + PathToRecoveryTools.getAbsolutePath()) +
                                         "\nMTD result:\n" + Common.executeSuShell("cat /proc/mtd") + "\n" +
                                         "\nDevice Tree:\n" + "\n" + Common.executeSuShell("ls -lR /dev/block")).getBytes());
                                 files.add(TestResults);
@@ -599,7 +601,14 @@ public class RecoveryTools extends ActionBarActivity {
                 final int previous_version = Common.getIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER);
                 final int current_version = pInfo.versionCode;
                 if (current_version > previous_version) {
-                    mNotifyer.createDialog(R.string.version, R.string.changes, true, true).show();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+                    dialog.setTitle(R.string.changelog);
+                    WebView changes = new WebView(mContext);
+                    changes.setWebViewClient(new WebViewClient());
+                    changes.loadUrl("http://forum.xda-developers.com/showpost.php?p=42839595&postcount=3");
+                    changes.getSettings().setJavaScriptEnabled(true);
+                    dialog.setView(changes);
+                    dialog.show();
                     Common.setIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER, current_version);
                 }
             }

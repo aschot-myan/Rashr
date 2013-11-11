@@ -98,20 +98,6 @@
     <string name="try_again">Try again!</string>
     <string name="later">Later</string>
 
-    <string name="version">Update [1.6.8]</string>
-    <string name="changes">
-    -Flash Other fixed\n
-    -Better file chooser\n
-    -Some other fixes\n\n
-
-    Update [1.6.7]\n\n
-
-    -Backup/Restore/Flash problem with Space now working\n
-    -All actions now smoother\n
-    -Some Bugs fixed\n
-    -New Devices added (Softwinner/Allwinners and more)
-     </string>
-
     <string name="no_choosed">No File chosen</string>
     <string name="update">Download and flash new IMG</string>
     <string name="search_recovery">Search Recovery</string>
@@ -120,5 +106,6 @@
     <string name="bak_error">Failed to backup</string>
     <string name="current_recovery">Current Recovery:</string>
     <string name="stock">Stock</string>
+    <string name="changelog">Changelog</string>
 
 </resources>

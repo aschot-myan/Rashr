@@ -2,6 +2,10 @@
 CHANGELOG
 ====================
 
+Update [1.7.2]
+
+-Better Changelog (online)
+
 Update [1.7.1]
 
 -Using busybox to flash device.
