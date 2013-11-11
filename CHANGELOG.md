@@ -2,6 +2,10 @@
 CHANGELOG
 ====================
 
+Update [1.7.1]
+
+-Using busybox to flash device.
+
 Update [1.7.0]
 
 -Nexus 5 TWRP added

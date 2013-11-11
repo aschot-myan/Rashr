@@ -217,12 +217,14 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     public String DD() throws Exception {
         String Command = "";
+        File busybox = new File(mContext.getFilesDir(), "busybox");
+        Common.chmod(busybox, "744");
         if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
             Log.i(TAG, "Flash started!");
-            Command = "dd if=\"" + CustomRecovery.getAbsolutePath() + "\" of=\"" + CurrentRecovery.getAbsolutePath() + "\"";
+            Command = busybox.getAbsolutePath() + " dd if=\"" + CustomRecovery.getAbsolutePath() + "\" of=\"" + CurrentRecovery.getAbsolutePath() + "\"";
         } else if (JOB == JOB_BACKUP) {
             Log.i(TAG, "Backup started!");
-            Command = "dd if=\"" + CurrentRecovery.getAbsolutePath() + "\" of=\"" + CustomRecovery.getAbsolutePath() + "\"";
+            Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentRecovery.getAbsolutePath() + "\" of=\"" + CustomRecovery.getAbsolutePath() + "\"";
         }
         return Common.executeSuShell(mContext, Command);
     }

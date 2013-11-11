@@ -134,8 +134,10 @@ public class RecoveryTools extends ActionBarActivity {
             if (Sums.exists()) {
                 Sums.delete();
             }
+            File busybox = new File(mContext.getFilesDir(), "busybox");
             try {
                 Common.pushFileFromRAW(mContext, Sums, R.raw.img_sums);
+                Common.pushFileFromRAW(mContext, busybox, R.raw.busybox);
             } catch (IOException e) {
                 Notifyer.showExceptionToast(mContext, TAG, e);
             }
