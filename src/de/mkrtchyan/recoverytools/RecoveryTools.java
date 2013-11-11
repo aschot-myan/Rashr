@@ -52,8 +52,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
@@ -328,13 +334,30 @@ public class RecoveryTools extends ActionBarActivity {
                             Toast.makeText(mContext, R.string.please_ads, Toast.LENGTH_SHORT).show();
                         Toast.makeText(mContext, R.string.donate_to_support, Toast.LENGTH_SHORT).show();
                         try {
+                            ArrayList<File> files = new ArrayList<File>();
+                            File TestResults = new File(mContext.getFilesDir(), "results.txt");
+                            try {
+                                if (TestResults.exists())
+                                    TestResults.delete();
+                                FileOutputStream fos = openFileOutput(TestResults.getName(), Context.MODE_PRIVATE);
+                                fos.write(("\nRecovery-Tools:\n\n" + Common.executeSuShell("ls -lR " + PathToRecoveryTools.getAbsolutePath()) +
+                                        "\nMTD result:\n" + Common.executeSuShell("cat /proc/mtd") + "\n" +
+                                        "\nDevice Tree:\n" + "\n" + Common.executeSuShell("ls -lR /dev/block")).getBytes());
+                                files.add(TestResults);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
                             if (getPackageManager() != null) {
                                 PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                                 EditText text = (EditText) reportDialog.findViewById(R.id.etCommentar);
                                 String comment = "";
                                 if (text.getText() != null)
                                     comment = text.getText().toString();
-                                String message = "Package Infos:" +
+                                Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                                intent.setType("text/plain");
+                                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report");
+                                intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
                                         "\n\nName: " + pInfo.packageName +
                                         "\nVersionName: " + pInfo.versionName +
                                         "\nVersionCode: " + pInfo.versionCode +
@@ -350,23 +373,23 @@ public class RecoveryTools extends ActionBarActivity {
                                         "\nIs MTD: " + mDeviceHandler.isMTD() +
                                         "\nIs DD: " + mDeviceHandler.isDD() +
                                         "\n\n\n===========Comment==========\n" + comment +
-                                        "\n===========Comment==========\n" +
-                                        "\nRecovery-Tools:\n\n" + Common.executeSuShell("ls -lR " + PathToRecoveryTools.getAbsolutePath()) + "\n" +
-                                        "\nMTD result:\n" +
-                                        Common.executeSuShell("cat /proc/mtd") + "\n" +
-                                        "\nDevice Tree:\n" +
-                                        "\n" + Common.executeSuShell("ls -lR /dev/block");
-                                Intent intent = new Intent(Intent.ACTION_SEND);
-                                intent.setType("text/plain");
-                                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report");
-                                intent.putExtra(Intent.EXTRA_TEXT, message);
+                                        "\n===========Comment==========\n");
+                                File CommandLogs = new File(mContext.getFilesDir(), Common.Logs);
+                                if (CommandLogs.exists())
+                                    files.add(CommandLogs);
+                                files.add(new File(getFilesDir(), "last_log.txt"));
+                                ArrayList<Uri> uris = new ArrayList<Uri>();
+                                for (File file : files) {
+                                    Common.executeSuShell("cp " + file.getAbsolutePath() + " " + new File(mContext.getFilesDir(), file.getName()).getAbsolutePath());
+                                    file = new File(mContext.getFilesDir(), file.getName());
+                                    Common.chmod(file, "644");
+                                    uris.add(Uri.fromFile(file));
+                                }
+                                intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
                                 startActivity(Intent.createChooser(intent, "Send over Gmail"));
                                 reportDialog.dismiss();
                             }
-                        } catch (Common.ShellException e) {
-                            Notifyer.showExceptionToast(mContext, TAG, e);
-                        } catch (PackageManager.NameNotFoundException e) {
+                        } catch (Exception e) {
                             Notifyer.showExceptionToast(mContext, TAG, e);
                         }
                     }
@@ -485,15 +508,6 @@ public class RecoveryTools extends ActionBarActivity {
     public void optimizeLayout() throws NullPointerException {
         setContentView(R.layout.recovery_tools);
         setupDrawerList();
-//	    Show information how device will be Flashed
-        final CheckBox cbMethod = (CheckBox) findViewById(R.id.cbMethod);
-        if (mDeviceHandler.isOverRecovery()) {
-            cbMethod.setText(R.string.over_recovery);
-        } else if (mDeviceHandler.isDD()) {
-            cbMethod.setText(R.string.using_dd);
-        } else if (mDeviceHandler.isMTD()) {
-            cbMethod.setText(R.string.using_mtd);
-        }
         final LinearLayout mDrawerLinear = (LinearLayout) findViewById(R.id.left_drawer);
         CheckBox cbShowAds = (CheckBox) mDrawerLinear.findViewById(R.id.cbShowAds);
         CheckBox cbLog = (CheckBox) mDrawerLinear.findViewById(R.id.cbLog);
@@ -522,6 +536,7 @@ public class RecoveryTools extends ActionBarActivity {
             }
             if (!mDeviceHandler.isOtherSupported())
                 layout.removeAllViews();
+            readLastLog();
         } catch (NullPointerException e) {
             throw new NullPointerException("Error while setting up Layout");
         }
@@ -680,6 +695,38 @@ public class RecoveryTools extends ActionBarActivity {
             fRECOVERY = new File(getIntent().getData().getPath());
             getIntent().setData(null);
             showFlashAlertDialog();
+        }
+    }
+
+    public void readLastLog() {
+        try {
+            File LastLog = new File("/cache/recovery/last_log");
+            File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
+            if (LogCopy.exists())
+                LogCopy.delete();
+            Common.executeSuShell("cp " + LastLog.getAbsolutePath() + " " + LogCopy.getAbsolutePath() );
+            if (LogCopy.exists()) {
+                final TextView RecoveryInfo = (TextView) findViewById(R.id.tvRecoveryVersion);
+                Common.chmod(LogCopy, "644");
+                String line;
+                boolean version_found = false;
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
+                while ((line = br.readLine()) != null && !version_found) {
+                    if (line.contains("ClockworkMod Recovery")) {
+                        version_found = true;
+                        RecoveryInfo.setText(line);
+                    }
+                    if (line.contains("Starting TWRP")) {
+                        version_found = true;
+                        line = line.replace("Starting ", "");
+                        line = line.substring(0, 12);
+                        RecoveryInfo.setText(line);
+                    }
+                }
+                br.close();
+            }
+        } catch (Exception e) {
+            Notifyer.showExceptionToast(mContext, "TAG", e);
         }
     }
 

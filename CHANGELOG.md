@@ -2,6 +2,14 @@
 CHANGELOG
 ====================
 
+Update [1.7.0]
+
+-Nexus 5 TWRP added
+-Download issues fixed
+-Better reporting
+-Now current recovery recognition!
+-Some other fixes
+
 Update [1.6.9]
 
 -Restore fixed

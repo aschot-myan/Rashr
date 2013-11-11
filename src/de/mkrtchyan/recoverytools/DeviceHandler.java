@@ -801,14 +801,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("t03g"))
                 TWRP_VERSION = "-2.6.3.0";
 
-            if (DEV_NAME.equals("tf201")) {
-                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH
-                        || Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                    TWRP_VERSION = TWRP_VERSION + "-ICS";
-                } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                    TWRP_VERSION = TWRP_VERSION + "-JB";
-                }
-            }
+            if (DEV_NAME.equals("hammerhead"))
+                TWRP_VERSION = "-2.6.3.2";
         }
         if (!TWRP_VERSION.equals(""))
             TWRP_OFFICIAL = true;
@@ -909,7 +903,16 @@ public class DeviceHandler {
     public File getTWRP_IMG() {
         if (TWRP_IMG == null)
             if (TWRP_OFFICIAL) {
-                TWRP_IMG = new File(RecoveryTools.PathToTWRP, "openrecovery-twrp" + getTWRPVersion() + "-" + DEV_NAME + EXT);
+                String IMG_NAME = "openrecovery-twrp" + getTWRPVersion() + "-" + DEV_NAME + EXT;
+                if (DEV_NAME.equals("tf201")) {
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH
+                            || Build.VERSION.SDK_INT == Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                        IMG_NAME = IMG_NAME + "-ICS";
+                    } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                        IMG_NAME = IMG_NAME + "-JB";
+                    }
+                }
+                TWRP_IMG = new File(RecoveryTools.PathToTWRP, IMG_NAME);
             } else {
                 TWRP_IMG = new File(RecoveryTools.PathToTWRP, DEV_NAME + getTWRPVersion() + EXT);
             }

@@ -109,6 +109,7 @@ Supported Devices
 
 --[NEXUS]--
 -N7 (deb)
+-N5 (hammerhead)
 
 --[HTC]--
 -Desire C (golfu)
@@ -213,6 +214,7 @@ Supported Devices
 -ZTE Quantum (quantum)
 -ZTE Z998 (coeus)
 -Xiaomi MI 2A (taurus)
+-AND MORE UNLISTED!
 
 *****************
 *ALL MTD Devices*

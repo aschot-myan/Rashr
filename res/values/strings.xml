@@ -118,5 +118,7 @@
     <string name="flash_error">Failed to flash</string>
     <string name="res_error">Failed to restore</string>
     <string name="bak_error">Failed to backup</string>
+    <string name="current_recovery">Current Recovery:</string>
+    <string name="stock">Stock</string>
 
 </resources>
