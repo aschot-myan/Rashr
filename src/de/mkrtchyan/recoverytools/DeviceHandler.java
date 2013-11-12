@@ -59,6 +59,7 @@ public class DeviceHandler {
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/recovery"),
             new File("/dev/block/platform/sdhci-pxav3.2/by-name/RECOVERY"),
+            new File("/dev/block/platform/comip-mmc.1/by-name/recovery"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/USP"),
@@ -71,6 +72,7 @@ public class DeviceHandler {
             new File("/dev/block/platform/dw_mmc/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
             new File("/dev/block/recovery"),
+            new File("/dev/recovery"),
             new File("/dev/block/nandg")
     };
 
@@ -1010,7 +1012,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("protou"))
                 return "/dev/block/mmcblk0p21";
 
-            if (DEV_NAME.equals("jena"))
+            if (DEV_NAME.equals("jena")
+                    || DEV_NAME.equals("kylessopen"))
                 return "/dev/block/mmcblk0p12";
 
             if (DEV_NAME.equals("GT-I9103")
@@ -1019,7 +1022,9 @@ public class DeviceHandler {
 
 //          LG DEVICEs + Same
             if (DEV_NAME.equals("e610")
-                    || DEV_NAME.equals("fx3"))
+                    || DEV_NAME.equals("fx3")
+                    || DEV_NAME.equals("hws7300u")
+                    || DEV_NAME.equals("vee3e"))
                 return "/dev/block/mmcblk0p17";
 
             if (DEV_NAME.equals("vs930")
@@ -1053,7 +1058,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("p999")
                     || DEV_NAME.equals("us9230e1")
                     || DEV_NAME.equals("evitareul")
-                    || DEV_NAME.equals("otter"))
+                    || DEV_NAME.equals("otter")
+                    || DEV_NAME.equals("e2001_v89_gq2008s"))
                 return "/dev/block/mmcblk0p5";
 
             if (DEV_NAME.equals("ace")
