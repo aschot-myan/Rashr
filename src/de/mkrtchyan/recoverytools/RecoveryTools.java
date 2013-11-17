@@ -138,8 +138,8 @@ public class RecoveryTools extends ActionBarActivity {
             }
             File busybox = new File(mContext.getFilesDir(), "busybox");
             try {
-                Common.pushFileFromRAW(mContext, Sums, R.raw.img_sums);
-                Common.pushFileFromRAW(mContext, busybox, R.raw.busybox);
+                Common.pushFileFromRAW(mContext, Sums, R.raw.img_sums, true);
+                Common.pushFileFromRAW(mContext, busybox, R.raw.busybox, true);
             } catch (IOException e) {
                 Notifyer.showExceptionToast(mContext, TAG, e);
             }

@@ -1186,10 +1186,10 @@ public class DeviceHandler {
             try {
                 File flash_image = getFlash_image(mContext);
                 if (!flash_image.exists())
-                    Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image);
+                    Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image, false);
                 File dump_image = getDump_image(mContext);
                 if (!dump_image.exists())
-                    Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image);
+                    Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image, false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
