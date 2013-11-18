@@ -63,17 +63,18 @@ public class DeviceHandler {
             new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/USP"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/UP"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/SS"),
-            new File("/dev/block/platform/sdhci.1/by-name/RECOVERY"),
             new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc.0/by-name/RECOVERY"),
             new File("/dev/block/platform/hi_mci.1/by-name/recovery"),
+            new File("/dev/block/platform/sdhci-tegra.3/by-name/UP"),
+            new File("/dev/block/platform/sdhci-tegra.3/by-name/SS"),
+            new File("/dev/block/platform/sdhci.1/by-name/RECOVERY"),
             new File("/dev/block/platform/dw_mmc/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
             new File("/dev/block/recovery"),
-            new File("/dev/recovery"),
-            new File("/dev/block/nandg")
+            new File("/dev/block/nandg"),
+            new File("/dev/block/acta"),
+            new File("/dev/recovery")
     };
 
     private File CWM_IMG = null;
@@ -685,6 +686,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("toroplus")
                     || DEV_NAME.equals("d2spr")
                     || DEV_NAME.equals("d2usc")
+                    || DEV_NAME.equals("d2att")
                     || DEV_NAME.equals("t03g"))
                 CWM_VERSION = CWM_VERSION + "-6.0.4.3";
 
@@ -930,7 +932,8 @@ public class DeviceHandler {
             }
 
 //          ASUS DEVICEs + Same
-            if (DEV_NAME.equals("a66"))
+            if (DEV_NAME.equals("a66")
+                    || DEV_NAME.equals("c5133"))
                 return "/dev/block/mmcblk0p15";
 
 //		    Samsung DEVICEs + Same
@@ -947,7 +950,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("e6710")
                     || DEV_NAME.equals("expresslte")
                     || DEV_NAME.equals("goghcri")
-                    || DEV_NAME.equals("p710"))
+                    || DEV_NAME.equals("p710")
+                    || DEV_NAME.equals("im-a810s"))
                 return "/dev/block/mmcblk0p18";
 
             if (DEV_NAME.equals("i9300")
@@ -1009,7 +1013,9 @@ public class DeviceHandler {
                     || DEV_NAME.equals("golfu")
                     || DEV_NAME.equals("glacier")
                     || DEV_NAME.equals("runnymede")
-                    || DEV_NAME.equals("protou"))
+                    || DEV_NAME.equals("protou")
+                    || DEV_NAME.equals("codinametropcs")
+                    || DEV_NAME.equals("codinatmo"))
                 return "/dev/block/mmcblk0p21";
 
             if (DEV_NAME.equals("jena")
@@ -1024,7 +1030,8 @@ public class DeviceHandler {
             if (DEV_NAME.equals("e610")
                     || DEV_NAME.equals("fx3")
                     || DEV_NAME.equals("hws7300u")
-                    || DEV_NAME.equals("vee3e"))
+                    || DEV_NAME.equals("vee3e")
+                    || DEV_NAME.equals("victor"))
                 return "/dev/block/mmcblk0p17";
 
             if (DEV_NAME.equals("vs930")
@@ -1163,13 +1170,16 @@ public class DeviceHandler {
                     || DEV_NAME.equals("cayman")
                     || DEV_NAME.equals("ancora_tmo")
                     || DEV_NAME.equals("c8812e")
-                    || DEV_NAME.equals("batman_skt"))
+                    || DEV_NAME.equals("batman_skt")
+                    || DEV_NAME.equals("u8833")
+                    || DEV_NAME.equals("i_vzw"))
                 return "/dev/block/mmcblk0p13";
 
             if (DEV_NAME.equals("elden")
                     || DEV_NAME.equals("hayes")
                     || DEV_NAME.equals("quantum")
-                    || DEV_NAME.equals("coeus"))
+                    || DEV_NAME.equals("coeus")
+                    || DEV_NAME.equals("c_4"))
                 return "/dev/block/mmcblk0p16";
 
             RecoveryPath = "";
