@@ -63,8 +63,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;

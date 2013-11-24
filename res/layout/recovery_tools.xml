@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         ads:adUnitId="ca-app-pub-3591384811135190/6436276193"
                         ads:loadAdOnCreate="true"
-                        ads:testDevices="A457335CBE8C6225036638B977F77948, TEST_EMULATOR"
+                        ads:testDevices="801ABC03F589C10F085EBB85FEFD5545, TEST_EMULATOR"
                         ads:adSize="SMART_BANNER"
                         android:layout_gravity="center" />
 

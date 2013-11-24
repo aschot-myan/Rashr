@@ -4,6 +4,7 @@ CHANGELOG
 
 Update [1.7.2]
 
+-File Not Found with Clockworkmod Superuser fixed
 -Better Changelog (online)
 -Samsung Galaxy Ace II x (kylessopen) added
 -New Busybox

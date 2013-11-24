@@ -30,6 +30,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Notifyer;
@@ -49,7 +50,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     private ProgressDialog pDialog;
     private final Notifyer mNotifyer;
     private final DeviceHandler mDeviceHandler;
-    private final File CustomRecovery;
+    private final File CustomRecovery, tmpFile;
     private final File CurrentRecovery;
     private final int JOB;
     private String output;
@@ -60,6 +61,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         this.mContext = mContext;
         this.CustomRecovery = CustomRecovery;
         this.JOB = JOB;
+        tmpFile = new File(mContext.getFilesDir(), CustomRecovery.getName());
         mNotifyer = new Notifyer(mContext);
         mDeviceHandler = new DeviceHandler();
         CurrentRecovery = new File(mDeviceHandler.getRecoveryPath());
@@ -109,6 +111,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean success) {
+        File tmpFile = new File(mContext.getFilesDir(), CustomRecovery.getName());
         pDialog.dismiss();
         saveHistory();
         if (!success
@@ -146,9 +149,18 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 }
             } else if (JOB == JOB_BACKUP) {
                 Log.i(TAG, "Backup finished");
+                try {
+                    Common.executeSuShell(mContext, "chmod 777 \"" + tmpFile.getAbsolutePath() + "\"");
+                    Common.copyFile(tmpFile, CustomRecovery);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(mContext, R.string.bak_done, Toast.LENGTH_SHORT).show();
             }
         }
+        tmpFile.delete();
     }
 
     public void showRebootDialog() {
@@ -221,10 +233,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         Common.chmod(busybox, "744");
         if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
             Log.i(TAG, "Flash started!");
-            Command = busybox.getAbsolutePath() + " dd if=\"" + CustomRecovery.getAbsolutePath() + "\" of=\"" + CurrentRecovery.getAbsolutePath() + "\"";
+            Common.copyFile(CustomRecovery, tmpFile);
+            Command = busybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
+                    "of=\"" + CurrentRecovery.getAbsolutePath() + "\"";
         } else if (JOB == JOB_BACKUP) {
             Log.i(TAG, "Backup started!");
-            Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentRecovery.getAbsolutePath() + "\" of=\"" + CustomRecovery.getAbsolutePath() + "\"";
+            Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentRecovery.getAbsolutePath() + "\" " +
+                    "of=\"" + tmpFile.getAbsolutePath() + "\"";
         }
         return Common.executeSuShell(mContext, Command);
     }
@@ -235,12 +250,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             File flash_image = mDeviceHandler.getFlash_image(mContext);
             Common.chmod(mDeviceHandler.getFlash_image(mContext), "741");
             Log.i(TAG, "Flash started!");
-            Command = flash_image.getAbsolutePath() + " recovery " + CustomRecovery.getAbsolutePath();
+            Command = flash_image.getAbsolutePath() + " recovery \"" + tmpFile.getAbsolutePath() + "\"";
         } else if (JOB == JOB_BACKUP) {
             File dump_image = mDeviceHandler.getDump_image(mContext);
             Common.chmod(dump_image, "741");
             Log.i(TAG, "Backup started!");
-            Command = dump_image.getAbsolutePath() + " recovery " + CustomRecovery.getAbsolutePath();
+            Command = dump_image.getAbsolutePath() + " recovery \"" + tmpFile.getAbsolutePath() + "\"";
         }
         return Common.executeSuShell(mContext, Command);
     }
