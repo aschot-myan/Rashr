@@ -104,8 +104,11 @@
     <string name="flash_error">Failed to flash</string>
     <string name="res_error">Failed to restore</string>
     <string name="bak_error">Failed to backup</string>
-    <string name="current_recovery">Current Recovery:</string>
+    <string name="current_recovery">Current Recovery: %s</string>
     <string name="stock">Stock</string>
     <string name="changelog">Changelog</string>
+
+    <string name="use_supersu">SuperSu from Chainfire not recognized on your device. Please use it to avoid errors. Download SuperSu (from Play Store) now?</string>
+    <string name="bak_deleted">%s deleted</string>
 
 </resources>

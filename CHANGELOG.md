@@ -5,12 +5,11 @@ CHANGELOG
 Update [1.7.2]
 
 -Better Changelog (online)
--Ousheng iOCEAN x7 added
--Lenovo S868T added
--Lenovo P780 added
--Huawei MediaPad (hws7300u) added
--LG-E425g (vee3e) added
 -Samsung Galaxy Ace II x (kylessopen) added
+-New Busybox
+-More Unlisted devices added
+-Improved BackupManager now swipe from left
+-Some UI Changes
 
 Update [1.7.1]
 

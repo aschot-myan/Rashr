@@ -42,7 +42,6 @@ xda-developer.com"</string>
     <string name="app_name">Recovery工具箱</string>
     <string name="sFlashCWM">刷入 Clockworkmod Recovery</string>
     <string name="sFlashTWRP">刷入 TWRP Recovery</string>
-    <string name="flash_other">刷入其他 Recovery</string>
     <string name="sBackup">备份当前 Recovery</string>
     <string name="go">确定</string>
     <string name="sRebooter">重启</string>

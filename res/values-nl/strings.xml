@@ -38,7 +38,6 @@
         \n\nTWRP:
         \n\nMain Menu -> Install
     </string>
-    <string name="img_not_found">Recovery IMG niet gevonden. Nu downloaden?</string>
 
     <string name="bak_done">Backup voltooid</string>
     <string name="backupalready">Backup bestaat al. Dit zal de huidige backup overschrijven, toch doorgaan?
