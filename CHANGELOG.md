@@ -2,6 +2,18 @@
 CHANGELOG
 ====================
 
+Update [1.7.3]
+
+-Now you can download old Recoveries to
+-Rating never show now works
+-Now you can choose files from external storage
+-Lenovo A706 (armani_row) added
+-Oppo Find 5 download fixed
+-Rate dialog fixed
+-Samsung Galaxy Xcover2 (skomer) added
+-HTC One Maxx Verizon (t6wl) added
+-Other Unlisted devices added
+
 Update [1.7.2]
 
 -File Not Found with Clockworkmod Superuser fixed

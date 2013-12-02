@@ -153,8 +153,10 @@ Supported Devices
 -Galaxy Music (ivoryss)
 -Galaxy S4 Mini (serranolte)
 -Galaxy Tab 3 8.0 3G (lt013g)
+-Samsung Galaxy Xcover2 (skomer)
 
 --[HTC]--
+-One Max (t6wl)
 -First (mystul)
 -Flyer (flyer)
 -Desire SV (magnids)

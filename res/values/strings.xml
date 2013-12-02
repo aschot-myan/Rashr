@@ -111,4 +111,6 @@
     <string name="use_supersu">SuperSu from Chainfire not recognized on your device. Please use it to avoid errors. Download SuperSu (from Play Store) now?</string>
     <string name="bak_deleted">%s deleted</string>
 
+    <string name="extract_failed">Extract needed files from App failed. Please restart the App.</string>
+    <string name="no_history">No history found</string>
 </resources>
