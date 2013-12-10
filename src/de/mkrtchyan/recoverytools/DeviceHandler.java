@@ -832,6 +832,11 @@ public class DeviceHandler {
                 }
                 br.close();
                 Collections.sort(CwmArrayList);
+                ArrayList<String> tmpList = new ArrayList<String>();
+                for (Object i : CwmArrayList.toArray()) {
+                    tmpList.add(0, i.toString());
+                }
+                CwmArrayList = tmpList;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -857,6 +862,11 @@ public class DeviceHandler {
                 }
                 br.close();
                 Collections.sort(TwrpArrayList);
+                ArrayList<String> tmpList = new ArrayList<String>();
+                for (Object i : TwrpArrayList.toArray()) {
+                    tmpList.add(0, i.toString());
+                }
+                TwrpArrayList = tmpList;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
