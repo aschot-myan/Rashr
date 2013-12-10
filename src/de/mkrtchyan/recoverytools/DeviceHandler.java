@@ -33,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
@@ -93,12 +94,6 @@ public class DeviceHandler {
     private File dump_image = new File("/system/bin", "dump_image");
 
     public DeviceHandler() {
-        setPredefinedOptions();
-    }
-
-    public DeviceHandler(String CustomDevice) {
-        if (BuildConfig.DEBUG && !CustomDevice.equals(""))
-            DEV_NAME = CustomDevice;
         setPredefinedOptions();
     }
 
@@ -823,46 +818,50 @@ public class DeviceHandler {
 
     public ArrayList<String> getCWMVersions() {
         ArrayList<String> CwmArrayList = new ArrayList<String>();
-
-        try {
-            String Line;
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
-            while ((Line = br.readLine()) != null) {
-                if (Line.contains(DEV_NAME)) {
-                    Line = Line.substring(55);
-                    if (Line.contains("clockwork") || Line.contains("cwm")) {
-                        CwmArrayList.add(Line);
+        if (!getRecoveryPath().equals("")) {
+            try {
+                String Line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
+                while ((Line = br.readLine()) != null) {
+                    if (Line.contains(DEV_NAME)) {
+                        Line = Line.substring(55);
+                        if (Line.contains("clockwork") || Line.contains("cwm") && Line.endsWith(EXT)) {
+                            CwmArrayList.add(Line);
+                        }
                     }
                 }
+                br.close();
+                Collections.sort(CwmArrayList);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return CwmArrayList;
     }
 
     public ArrayList<String> getTWRPVersions() {
         ArrayList<String> TwrpArrayList = new ArrayList<String>();
-        try {
-            String Line;
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
-            while ((Line = br.readLine()) != null) {
-                if (Line.contains(DEV_NAME)) {
-                    Line = Line.substring(55);
-                    if (Line.contains("twrp")) {
-                        TwrpArrayList.add(Line);
+        if (!getRecoveryPath().equals("")) {
+            try {
+                String Line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
+                while ((Line = br.readLine()) != null) {
+                    if (Line.contains(DEV_NAME)) {
+                        Line = Line.substring(55);
+                        if (Line.contains("twrp") && Line.endsWith(EXT)) {
+                            TwrpArrayList.add(Line);
+                        }
                     }
                 }
+                br.close();
+                Collections.sort(TwrpArrayList);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return TwrpArrayList;
     }
@@ -894,5 +893,4 @@ public class DeviceHandler {
     public File getChargermon() {
         return new File(RecoveryTools.PathToUtils, DEV_NAME + "/chargermon");
     }
-
 }

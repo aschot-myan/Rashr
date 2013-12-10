@@ -151,11 +151,12 @@ public class RecoveryTools extends ActionBarActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     recoveries.dismiss();
-                    if (((TextView) view).getText().toString() != null) {
+                    final String fileName = ((TextView) view).getText().toString();
+                    if (fileName != null) {
                         if (SYSTEM.equals("clockwork")) {
-                            fRECOVERY = new File(PathToCWM, ((TextView) view).getText().toString());
+                            fRECOVERY = new File(PathToCWM, fileName);
                         } else if (SYSTEM.equals("twrp")) {
-                            fRECOVERY = new File(PathToTWRP, ((TextView) view).getText().toString());
+                            fRECOVERY = new File(PathToTWRP, fileName);
                         }
 
                         if (!fRECOVERY.exists()) {
@@ -174,7 +175,7 @@ public class RecoveryTools extends ActionBarActivity {
     }
 
     public void bDonate(View view) {
-        startActivity(new Intent(mContext, DonationsActivity.class));
+        startActivity(new Intent(view.getContext(), DonationsActivity.class));
     }
 
     public void bXDA(View view) {
@@ -214,7 +215,7 @@ public class RecoveryTools extends ActionBarActivity {
     public void bFlashOther(View view) {
         fRECOVERY = null;
         try {
-            fcFlashOther = new FileChooser(mContext, PathToSd, new Runnable() {
+            fcFlashOther = new FileChooser(view.getContext(), PathToSd, new Runnable() {
                 @Override
                 public void run() {
                     fRECOVERY = fcFlashOther.getSelectedFile();
@@ -430,6 +431,9 @@ public class RecoveryTools extends ActionBarActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 try {
+
+                    final String text = ((TextView) v).getText().toString();
+
                     switch (menuItem.getItemId()) {
                         case R.id.iReboot:
                             Common.executeSuShell(mContext, "reboot");
@@ -441,15 +445,15 @@ public class RecoveryTools extends ActionBarActivity {
                             Common.executeSuShell(mContext, "reboot bootloader");
                             return true;
                         case R.id.iRestoreBackup:
-                            new FlashUtil(mContext, new File(PathToBackups,
-                                    ((TextView) v).getText().toString()), FlashUtil.JOB_RESTORE).execute();
+                                new FlashUtil(mContext, new File(PathToBackups, text), FlashUtil.JOB_RESTORE).execute();
                             return true;
                         case R.id.iDeleteBackup:
-                            File backup = new File(PathToBackups, ((TextView) v).getText().toString());
-                            backup.delete();
-                            Toast.makeText(mContext, String.format(mContext.getString(R.string.bak_deleted)
-                                    , backup.getName()), Toast.LENGTH_SHORT).show();
-                            new StartUpLoader().execute();
+                            if (((TextView) v).getText() != null) {
+                                new File(PathToBackups, text).delete();
+                                Toast.makeText(mContext, String.format(mContext.getString(R.string.bak_deleted)
+                                        , ((TextView) v).getText()), Toast.LENGTH_SHORT).show();
+                                new StartUpLoader().execute();
+                            }
                             return true;
                         default:
                             return false;

@@ -2,6 +2,14 @@
 CHANGELOG
 ====================
 
+Update [1.7.4]
+
+-Fix startup crashes on 2.3 devices
+-Many new CWM Imgs
+-Some other fixes
+-Translation Macedonian added (XDA-User @01 Vlatce)
+-Translation Turkish added (XDA-User @Fatih_BaKeR)
+
 Update [1.7.3]
 
 -Now you can download old Recoveries to
