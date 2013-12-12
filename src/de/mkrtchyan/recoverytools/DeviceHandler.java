@@ -59,7 +59,7 @@ public class DeviceHandler {
      */
 
     public String DEV_NAME = Build.DEVICE.toLowerCase();
-    private String RecoveryPath = "";
+//    private String RecoveryPath = "";
     private static final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
@@ -93,7 +93,13 @@ public class DeviceHandler {
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
 
-    public DeviceHandler() {
+    private Context mContext;
+    private String RecoveryPath;
+    private ArrayList<String> CwmArrayList = new ArrayList<String>();
+    private ArrayList<String> TwrpArrayList = new ArrayList<String>();
+
+    public DeviceHandler(Context mContext) {
+        this.mContext = mContext;
         setPredefinedOptions();
     }
 
@@ -416,8 +422,8 @@ public class DeviceHandler {
             DEV_TYPE = DEV_TYPE_RECOVERY;
             EXT = ".zip";
         }
-
-        if (!getRecoveryPath().equals(""))
+        RecoveryPath = getRecoveryPath();
+        if (!RecoveryPath.equals(""))
             DEV_TYPE = DEV_TYPE_DD;
 
 //		Devices who kernel will be flashed to
@@ -433,8 +439,7 @@ public class DeviceHandler {
 
     public void getSupportedSystems() {
 
-        if (RecoveryPath.equals(""))
-            getRecoveryPath();
+        getRecoveryPath();
         if (getCWMVersions().toArray().length > 0)
             CWM = true;
 
@@ -536,6 +541,28 @@ public class DeviceHandler {
                 }
             }
 
+            try {
+                String line;
+                File LogCopy = new File(mContext.getFilesDir(), "last_log.txt");
+                if (LogCopy.exists()) {
+                    Common.chmod(LogCopy, "644");
+                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
+
+                    while ((line = br.readLine()) != null) {
+                        if (line.contains("/recovery") && line.contains("/dev")) {
+                            line = line.replace("\"", "");
+                            line = line.substring(line.indexOf("/dev"));
+                            line = line.split(" ")[0];
+
+                            return line;
+                        }
+                    }
+                    br.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 //          ASUS DEVICEs + Same
             if (DEV_NAME.equals("a66")
                     || DEV_NAME.equals("c5133")
@@ -543,7 +570,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("raybst"))
                 return "/dev/block/mmcblk0p15";
 
-//		    Samsung DEVICEs + Same
+//	        Samsung DEVICEs + Same
             if (DEV_NAME.equals("d2att")
                     || DEV_NAME.equals("d2tmo")
                     || DEV_NAME.equals("d2mtr")
@@ -661,7 +688,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("l1v"))
                 return "/dev/block/mmcblk0p19";
 
-//		    HTC DEVICEs + Same
+//	        HTC DEVICEs + Same
             if (DEV_NAME.equals("t6wl"))
                 return "/dev/block/mmcblk0p38";
 
@@ -711,7 +738,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("taurus"))
                 return "/dev/block/mmcblk0p20";
 
-//		    Motorola DEVICEs + Same
+//	        Motorola DEVICEs + Same
             if (DEV_NAME.equals("qinara")
                     || DEV_NAME.equals("f02e")
                     || DEV_NAME.equals("vanquish_u")
@@ -749,7 +776,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("lt013g"))
                 return "/dev/block/mmcblk0p10";
 
-//		    Sony DEVICEs + Same
+//	        Sony DEVICEs + Same
             if (DEV_NAME.equals("nozomi"))
                 return "/dev/block/mmcblk0p3";
 
@@ -757,7 +784,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("c6602"))
                 return "/system/bin/recovery.tar";
 
-//		    LG DEVICEs + Same
+//	        LG DEVICEs + Same
             if (DEV_NAME.equals("p990")
                     || DEV_NAME.equals("tf300t"))
                 return "/dev/block/mmcblk0p7";
@@ -782,7 +809,7 @@ public class DeviceHandler {
                     || DEV_NAME.equals("p768"))
                 return "/dev/block/mmcblk0p4";
 
-//		    ZTE DEVICEs + Same
+//	        ZTE DEVICEs + Same
             if (DEV_NAME.equals("warp2")
                     || DEV_NAME.equals("hwc8813")
                     || DEV_NAME.equals("galaxysplus")
@@ -806,10 +833,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("coeus")
                     || DEV_NAME.equals("c_4"))
                 return "/dev/block/mmcblk0p16";
-
-            RecoveryPath = "";
         }
-        return RecoveryPath;
+        return "";
     }
 
     public String getEXT() {
@@ -817,60 +842,62 @@ public class DeviceHandler {
     }
 
     public ArrayList<String> getCWMVersions() {
-        ArrayList<String> CwmArrayList = new ArrayList<String>();
-        if (!getRecoveryPath().equals("")) {
-            try {
-                String Line;
-                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
-                while ((Line = br.readLine()) != null) {
-                    if (Line.contains(DEV_NAME)) {
-                        Line = Line.substring(55);
-                        if (Line.contains("clockwork") || Line.contains("cwm") && Line.endsWith(EXT)) {
-                            CwmArrayList.add(Line);
+        if (CwmArrayList.size() == 0) {
+            if (!getRecoveryPath().equals("")) {
+                try {
+                    String Line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
+                    while ((Line = br.readLine()) != null) {
+                        if (Line.contains(DEV_NAME)) {
+                            Line = Line.substring(55);
+                            if (Line.contains("clockwork") || Line.contains("cwm") && Line.endsWith(EXT)) {
+                                CwmArrayList.add(Line);
+                            }
                         }
                     }
+                    br.close();
+                    Collections.sort(CwmArrayList);
+                    ArrayList<String> tmpList = new ArrayList<String>();
+                    for (Object i : CwmArrayList.toArray()) {
+                        tmpList.add(0, i.toString());
+                    }
+                    CwmArrayList = tmpList;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                br.close();
-                Collections.sort(CwmArrayList);
-                ArrayList<String> tmpList = new ArrayList<String>();
-                for (Object i : CwmArrayList.toArray()) {
-                    tmpList.add(0, i.toString());
-                }
-                CwmArrayList = tmpList;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return CwmArrayList;
     }
 
     public ArrayList<String> getTWRPVersions() {
-        ArrayList<String> TwrpArrayList = new ArrayList<String>();
-        if (!getRecoveryPath().equals("")) {
-            try {
-                String Line;
-                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
-                while ((Line = br.readLine()) != null) {
-                    if (Line.contains(DEV_NAME)) {
-                        Line = Line.substring(55);
-                        if (Line.contains("twrp") && Line.endsWith(EXT)) {
-                            TwrpArrayList.add(Line);
+        if (TwrpArrayList.size() == 0) {
+            if (!getRecoveryPath().equals("")) {
+                try {
+                    String Line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
+                    while ((Line = br.readLine()) != null) {
+                        if (Line.contains(DEV_NAME)) {
+                            Line = Line.substring(55);
+                            if (Line.contains("twrp") && Line.endsWith(EXT)) {
+                                TwrpArrayList.add(Line);
+                            }
                         }
                     }
+                    br.close();
+                    Collections.sort(TwrpArrayList);
+                    ArrayList<String> tmpList = new ArrayList<String>();
+                    for (Object i : TwrpArrayList.toArray()) {
+                        tmpList.add(0, i.toString());
+                    }
+                    TwrpArrayList = tmpList;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                br.close();
-                Collections.sort(TwrpArrayList);
-                ArrayList<String> tmpList = new ArrayList<String>();
-                for (Object i : TwrpArrayList.toArray()) {
-                    tmpList.add(0, i.toString());
-                }
-                TwrpArrayList = tmpList;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return TwrpArrayList;
