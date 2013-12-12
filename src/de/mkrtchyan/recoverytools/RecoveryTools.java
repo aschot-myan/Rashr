@@ -56,6 +56,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.rootcommands.Shell;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -98,7 +100,8 @@ public class RecoveryTools extends ActionBarActivity {
 
     //	Declaring needed objects
     private final Notifyer mNotifyer = new Notifyer(mContext);
-    private DeviceHandler mDeviceHandler = new DeviceHandler();
+    private Shell mShell;
+    private DeviceHandler mDeviceHandler;
     private DrawerLayout mDrawerLayout = null;
     private FileChooser fcFlashOther = null;
     private boolean keepAppOpen = true;
@@ -110,6 +113,13 @@ public class RecoveryTools extends ActionBarActivity {
             this.setTheme(R.style.Theme_AppCompat_Light_DarkActionBar);
         } else {
             this.setTheme(R.style.Theme_AppCompat);
+        }
+
+        try {
+            mShell = Shell.startRootShell();
+            mDeviceHandler = new DeviceHandler(mContext);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         if (getIntent().getData() != null) {
@@ -298,7 +308,7 @@ public class RecoveryTools extends ActionBarActivity {
 
         final Dialog dialog = new Dialog(mContext);
         dialog.setTitle(R.string.setname);
-        dialog.setContentView(R.layout.dialog_backup);
+        dialog.setContentView(R.layout.dialog_input);
         final Button bGoBackup = (Button) dialog.findViewById(R.id.bGoBackup);
         final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
         String NameHint = Calendar.getInstance().get(Calendar.DATE)
@@ -323,13 +333,19 @@ public class RecoveryTools extends ActionBarActivity {
                 Runnable rBackup = new Runnable() {
                     @Override
                     public void run() {
-                        new FlashUtil(mContext, fBACKUP, FlashUtil.JOB_BACKUP).execute();
+                        try {
+                            new FlashUtil(mContext, mDeviceHandler, fBACKUP, FlashUtil.JOB_BACKUP).execute();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         new StartUpLoader().execute();
 
                     }
                 };
                 if (fBACKUP.exists()) {
-                    new Notifyer(mContext).createAlertDialog(R.string.warning, R.string.backupalready, rBackup).show();
+                    Toast
+                            .makeText(mContext, R.string.backupalready, Toast.LENGTH_SHORT)
+                            .show();
                 } else {
                     rBackup.run();
                 }
@@ -379,9 +395,9 @@ public class RecoveryTools extends ActionBarActivity {
                                 if (TestResults.exists())
                                     TestResults.delete();
                                 FileOutputStream fos = openFileOutput(TestResults.getName(), Context.MODE_PRIVATE);
-                                fos.write(("Recovery-Tools:\n\n" + Common.executeSuShell("ls -lR " + PathToRecoveryTools.getAbsolutePath()) +
-                                        "\nMTD result:\n" + Common.executeSuShell("cat /proc/mtd") + "\n" +
-                                        "\nDevice Tree:\n" + "\n" + Common.executeSuShell("ls -lR /dev")).getBytes());
+                                fos.write(("Recovery-Tools:\n\n" + Common.execCommand(mShell, "ls -lR " + PathToRecoveryTools.getAbsolutePath()) +
+                                        "\nMTD result:\n" + Common.execCommand(mShell, "cat /proc/mtd") + "\n" +
+                                        "\nDevice Tree:\n" + "\n" + Common.execCommand(mShell, "ls -lR /dev")).getBytes());
                                 files.add(TestResults);
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
@@ -419,7 +435,7 @@ public class RecoveryTools extends ActionBarActivity {
                                 files.add(new File(getFilesDir(), "last_log.txt"));
                                 ArrayList<Uri> uris = new ArrayList<Uri>();
                                 for (File file : files) {
-                                    Common.executeSuShell("cp " + file.getAbsolutePath() + " " + new File(mContext.getFilesDir(), file.getName()).getAbsolutePath());
+                                    Common.execCommand(mShell, "cp " + file.getAbsolutePath() + " " + new File(mContext.getFilesDir(), file.getName()).getAbsolutePath());
                                     file = new File(mContext.getFilesDir(), file.getName());
                                     Common.chmod(file, "644");
                                     uris.add(Uri.fromFile(file));
@@ -461,16 +477,52 @@ public class RecoveryTools extends ActionBarActivity {
 
                     switch (menuItem.getItemId()) {
                         case R.id.iReboot:
-                            Common.executeSuShell(mContext, "reboot");
+                            Common.execCommand(mContext, mShell, "reboot");
                             return true;
                         case R.id.iRebootRecovery:
-                            Common.executeSuShell(mContext, "reboot recovery");
+                            Common.execCommand(mContext, mShell, "reboot recovery");
                             return true;
                         case R.id.iRebootBootloader:
-                            Common.executeSuShell(mContext, "reboot bootloader");
+                            Common.execCommand(mContext, mShell, "reboot bootloader");
                             return true;
-                        case R.id.iRestoreBackup:
-                            new FlashUtil(mContext, new File(PathToBackups, text), FlashUtil.JOB_RESTORE).execute();
+                        case R.id.iRestore:
+                            new FlashUtil(mContext, mDeviceHandler, new File(PathToBackups, text), FlashUtil.JOB_RESTORE).execute();
+                            return true;
+                        case R.id.iRename:
+                            final Dialog dialog = new Dialog(mContext);
+                            dialog.setTitle(R.string.setname);
+                            dialog.setContentView(R.layout.dialog_input);
+                            final Button bGo = (Button) dialog.findViewById(R.id.bGoBackup);
+                            final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
+                            final File Backup = new File(PathToBackups, text);
+                            etFileName.setHint(text);
+                            bGo.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+
+                                    String Name = "";
+                                    if (etFileName.getText() != null && !etFileName.getText().toString().equals(""))
+                                        Name = etFileName.getText().toString();
+                                    if (Name.equals(""))
+                                        Name = String.valueOf(etFileName.getHint());
+                                    if (!Name.endsWith(mDeviceHandler.getEXT()))
+                                        Name = Name + mDeviceHandler.getEXT();
+                                    final File newBackup = new File(RecoveryTools.PathToBackups, Name);
+
+                                    if (newBackup.exists()) {
+                                        Toast
+                                                .makeText(mContext, R.string.backupalready, Toast.LENGTH_SHORT)
+                                                .show();
+                                    } else {
+                                        Backup.renameTo(newBackup);
+                                    }
+                                    dialog.dismiss();
+                                    new StartUpLoader().execute();
+
+                                }
+                            });
+                            dialog.show();
                             return true;
                         case R.id.iDeleteBackup:
                             if (((TextView) v).getText() != null) {
@@ -485,6 +537,9 @@ public class RecoveryTools extends ActionBarActivity {
                     }
                 } catch (Common.ShellException e) {
                     Notifyer.showExceptionToast(mContext, TAG, e);
+                    return false;
+                } catch (IOException e) {
+                    e.printStackTrace();
                     return false;
                 }
             }
@@ -649,9 +704,13 @@ public class RecoveryTools extends ActionBarActivity {
     private final Runnable rFlash = new Runnable() {
         @Override
         public void run() {
-            FlashUtil flashUtil = new FlashUtil(mContext, fRECOVERY, FlashUtil.JOB_FLASH);
-            flashUtil.setKeepAppOpen(keepAppOpen);
-            flashUtil.execute();
+            try {
+                FlashUtil flashUtil = new FlashUtil(mContext, mDeviceHandler, fRECOVERY, FlashUtil.JOB_FLASH);
+                flashUtil.setKeepAppOpen(keepAppOpen);
+                flashUtil.execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     };
     private final Runnable rFlasher = new Runnable() {
@@ -806,7 +865,7 @@ public class RecoveryTools extends ActionBarActivity {
                 File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
                 if (LogCopy.exists())
                     LogCopy.delete();
-                Common.executeSuShell("cp " + LastLog.getAbsolutePath() + " " + LogCopy.getAbsolutePath());
+                Common.execCommand(mShell, "cp " + LastLog.getAbsolutePath() + " " + LogCopy.getAbsolutePath());
                 if (LogCopy.exists()) {
                     Common.chmod(LogCopy, "644");
                     String line;

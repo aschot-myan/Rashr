@@ -29,6 +29,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.rootcommands.Shell;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -54,16 +56,18 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     private final File CurrentRecovery;
     private final int JOB;
     private String output;
+    private Shell mShell;
     private boolean keepAppOpen = true;
     private Exception exception = null;
 
-    public FlashUtil(Context mContext, File CustomRecovery, int JOB) {
+    public FlashUtil(Context mContext, DeviceHandler mDeviceHandler, File CustomRecovery, int JOB) throws IOException {
         this.mContext = mContext;
+        this.mDeviceHandler = mDeviceHandler;
         this.CustomRecovery = CustomRecovery;
         this.JOB = JOB;
+        mShell = Shell.startRootShell();
         tmpFile = new File(mContext.getFilesDir(), CustomRecovery.getName());
         mNotifyer = new Notifyer(mContext);
-        mDeviceHandler = new DeviceHandler();
         CurrentRecovery = new File(mDeviceHandler.getRecoveryPath());
     }
 
@@ -117,7 +121,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (!success
                 || output.endsWith("failed with error: -1\n")
                 || output.endsWith("No such file or directory\n")
-                || output.endsWith("style=gnu?)\n")){
+                || output.endsWith("style=gnu?)\n")) {
             if (exception != null) {
                 Notifyer.showExceptionToast(mContext, TAG, exception);
             }
@@ -150,7 +154,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             } else if (JOB == JOB_BACKUP) {
                 Log.i(TAG, "Backup finished");
                 try {
-                    Common.executeSuShell(mContext, "chmod 777 \"" + tmpFile.getAbsolutePath() + "\"");
+                    Common.execCommand(mContext, mShell, "chmod 777 \"" + tmpFile.getAbsolutePath() + "\"");
                     Common.copyFile(tmpFile, CustomRecovery);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -172,7 +176,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         try {
-                            Common.executeSuShell(mContext, "reboot recovery");
+                            Common.execCommand(mContext, mShell, "reboot recovery");
                         } catch (Common.ShellException e) {
                             Notifyer.showExceptionToast(mContext, TAG, e);
                         }
@@ -241,7 +245,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentRecovery.getAbsolutePath() + "\" " +
                     "of=\"" + tmpFile.getAbsolutePath() + "\"";
         }
-        return Common.executeSuShell(mContext, Command);
+        return Common.execCommand(mContext, mShell, Command);
     }
 
     public String MTD() throws Exception {
@@ -257,7 +261,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             Log.i(TAG, "Backup started!");
             Command = dump_image.getAbsolutePath() + " recovery \"" + tmpFile.getAbsolutePath() + "\"";
         }
-        return Common.executeSuShell(mContext, Command);
+        return Common.execCommand(mContext, mShell, Command);
     }
 
     public String SONY() throws Exception {
@@ -267,11 +271,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 || mDeviceHandler.DEV_NAME.equals("montblanc")) {
             if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
                 Common.mountDir(CurrentRecovery, "RW");
-                Common.executeSuShell(mContext, "cat " + mDeviceHandler.getCharger().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getCharger().getName());
-                Common.executeSuShell(mContext, "cat " + mDeviceHandler.getChargermon().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getChargermon().getName());
+                Common.execCommand(mContext, mShell, "cat " + mDeviceHandler.getCharger().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getCharger().getName());
+                Common.execCommand(mContext, mShell, "cat " + mDeviceHandler.getChargermon().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getChargermon().getName());
                 if (mDeviceHandler.DEV_NAME.equals("c6603")
                         || mDeviceHandler.DEV_NAME.equals("c6602")) {
-                    Common.executeSuShell(mContext, "cat " + mDeviceHandler.getRic().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getRic().getName());
+                    Common.execCommand(mContext, mShell, "cat " + mDeviceHandler.getRic().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getRic().getName());
                     Common.chmod(mDeviceHandler.getRic(), "755");
                 }
                 Common.chmod(mDeviceHandler.getCharger(), "755");
@@ -285,6 +289,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Command = "cat " + CurrentRecovery.getAbsolutePath() + " >> " + CustomRecovery.getAbsolutePath();
             }
         }
-        return Common.executeSuShell(mContext, Command);
+        return Common.execCommand(mContext, mShell, Command);
     }
 }
