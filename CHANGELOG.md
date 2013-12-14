@@ -2,6 +2,16 @@
 CHANGELOG
 ====================
 
+Update [1.7.5]
+
+-Multi-Theme (Now Dark and Light) can be changed in the menu
+-Now newer imgs on first place in the list
+-90% OF ALL DEVICES are now supported (by flash other) excluded Sony and MTK devices
+-Performance boost
+-Rename backups added
+
+---MTK FLASH coming soon !
+
 Update [1.7.4]
 
 -Fix startup crashes on 2.3 devices

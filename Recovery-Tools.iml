@@ -20,6 +20,7 @@
     <orderEntry type="module" module-name="Appcompact" />
     <orderEntry type="library" name="android-support-v7-appcompat" level="project" />
     <orderEntry type="library" name="android-support-v13" level="project" />
+    <orderEntry type="module" module-name="root-commands" />
   </component>
 </module>
 

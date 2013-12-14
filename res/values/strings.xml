@@ -113,6 +113,11 @@
     <string name="extract_failed">Extract needed files from App failed. Please restart the App.</string>
     <string name="no_history">No history found</string>
 
-    <string name="holo_dark">Using Holo Dark Style</string>
-    <string name="holo_light">Using Holo Light Style</string>
+    <string name="styles">Styles</string>
+    <string-array name="styles">
+        <item>Styles</item>
+        <item>Holo Light Dark Bar Style</item>
+        <item>Holo Light Style</item>
+        <item>Holo Dark Style</item>
+    </string-array>
 </resources>

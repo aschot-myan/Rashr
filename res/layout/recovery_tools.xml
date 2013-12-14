@@ -146,13 +146,15 @@
                 android:onClick="bReport"
                 android:layout_weight="1" />
 
-            <CheckBox
+            <Spinner
+                style="@style/spinnerStyleView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:entries="@array/styles"
+                android:id="@+id/spStyle"
+                android:spinnerMode="dropdown"
                 android:layout_weight="1"
-                android:textColor="@android:color/white"
-                android:id="@+id/cbStyle"
-                android:onClick="cbStyle" />
+                android:textAlignment="center" />
 
             <CheckBox
                 android:text="@string/ShowAds"

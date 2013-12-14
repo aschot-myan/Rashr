@@ -26,6 +26,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 
+import org.sufficientlysecure.rootcommands.Shell;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -59,7 +61,8 @@ public class DeviceHandler {
      */
 
     public String DEV_NAME = Build.DEVICE.toLowerCase();
-//    private String RecoveryPath = "";
+    public String RecoveryPath = "";
+    public String KernelPath = "";
     private static final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
@@ -83,24 +86,29 @@ public class DeviceHandler {
             new File("/dev/block/acta"),
             new File("/dev/recovery")
     };
+    private static final File[] KernelList = {
+            new File("/dev/boot")
+    };
 
-    private String EXT = ".img";
-    private boolean KERNEL_TO = false;
-    private boolean TWRP = false;
-    private boolean OTHER = false;
-    private boolean CWM = false;
+    public String EXT = ".img";
+    public boolean KERNEL_TO = false;
+    public boolean TWRP = false;
+    public ArrayList<String> TwrpArrayList = new ArrayList<String>();
+    public boolean OTHER = false;
+    public boolean CWM = false;
+    public ArrayList<String> CwmArrayList = new ArrayList<String>();
 
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
 
     private Context mContext;
-    private String RecoveryPath;
-    private ArrayList<String> CwmArrayList = new ArrayList<String>();
-    private ArrayList<String> TwrpArrayList = new ArrayList<String>();
 
     public DeviceHandler(Context mContext) {
         this.mContext = mContext;
         setPredefinedOptions();
+        RecoveryPath = getRecoveryPath();
+        KernelPath = getKernelPath();
+        getSupportedSystems();
     }
 
     private void setPredefinedOptions() {
@@ -433,25 +441,19 @@ public class DeviceHandler {
             DEV_TYPE = DEV_TYPE_SONY;
         }
 
-        if (new File("/dev/mtd/").exists() && DEV_TYPE != DEV_TYPE_DD)
+        if (new File("/dev/mtd/").exists() && !isDD())
             DEV_TYPE = DEV_TYPE_MTD;
     }
 
-    public void getSupportedSystems() {
+    private void getSupportedSystems() {
 
-        getRecoveryPath();
-        if (getCWMVersions().toArray().length > 0)
-            CWM = true;
-
-        if (getTWRPVersions().toArray().length > 0)
-            TWRP = true;
-
-        if (getDevType() == DEV_TYPE_DD
+        CWM = getCWMVersions().toArray().length > 0;
+        TWRP = getTWRPVersions().toArray().length > 0;
+        OTHER = getDevType() == DEV_TYPE_DD
                 || isOverRecovery()
                 || isMTD()
                 || CWM
-                || TWRP)
-            OTHER = true;
+                || TWRP;
     }
 
     public boolean downloadUtils(final Context mContext) {
@@ -499,17 +501,14 @@ public class DeviceHandler {
     }
 
     public boolean isTwrpSupported() {
-        getSupportedSystems();
         return TWRP;
     }
 
     public boolean isCwmSupported() {
-        getSupportedSystems();
         return CWM;
     }
 
     public boolean isOtherSupported() {
-        getSupportedSystems();
         return OTHER;
     }
 
@@ -533,8 +532,7 @@ public class DeviceHandler {
         return KERNEL_TO;
     }
 
-    public String getRecoveryPath() {
-        if (RecoveryPath.equals("")) {
+    private String getRecoveryPath() {
             for (File i : RecoveryList) {
                 if (i.exists()) {
                     return i.getAbsolutePath();
@@ -545,16 +543,17 @@ public class DeviceHandler {
                 String line;
                 File LogCopy = new File(mContext.getFilesDir(), "last_log.txt");
                 if (LogCopy.exists()) {
-                    Common.chmod(LogCopy, "644");
+                    Common.chmod(Shell.startRootShell(), LogCopy, "644");
                     BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
 
                     while ((line = br.readLine()) != null) {
-                        if (line.contains("/recovery") && line.contains("/dev")) {
+                        if (line.contains("/recovery") && line.contains("/dev/")) {
                             line = line.replace("\"", "");
-                            line = line.substring(line.indexOf("/dev"));
-                            line = line.split(" ")[0];
-
-                            return line;
+                            for (String split : line.split(" ")) {
+                                if (new File(split).exists()) {
+                                    return split;
+                                }
+                            }
                         }
                     }
                     br.close();
@@ -833,90 +832,97 @@ public class DeviceHandler {
                     || DEV_NAME.equals("coeus")
                     || DEV_NAME.equals("c_4"))
                 return "/dev/block/mmcblk0p16";
+        return "";
+    }
+
+    private String getKernelPath() {
+        for (File i : KernelList) {
+            if (i.exists()) {
+                return i.getAbsolutePath();
+            }
+        }
+        try {
+            String line;
+            File LogCopy = new File(mContext.getFilesDir(), "last_log.txt");
+            if (LogCopy.exists()) {
+                Common.chmod(Shell.startRootShell(), LogCopy, "644");
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
+
+                while ((line = br.readLine()) != null) {
+                    if (line.contains("/boot") && line.contains("/dev/")) {
+                        line = line.replace("\"", "");
+                        for (String split : line.split(" ")) {
+                            if (new File(split).exists()) {
+                                return split;
+                            }
+                        }
+                    }
+                }
+                br.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "";
     }
 
-    public String getEXT() {
-        return EXT;
-    }
+    private ArrayList<String> getCWMVersions() {
 
-    public ArrayList<String> getCWMVersions() {
-        if (CwmArrayList.size() == 0) {
-            if (!getRecoveryPath().equals("")) {
-                try {
-                    String Line;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
-                    while ((Line = br.readLine()) != null) {
-                        if (Line.contains(DEV_NAME)) {
-                            Line = Line.substring(55);
-                            if (Line.contains("clockwork") || Line.contains("cwm") && Line.endsWith(EXT)) {
-                                CwmArrayList.add(Line);
-                            }
+        if (!RecoveryPath.equals("")) {
+            try {
+                String Line;
+                ArrayList<String> tmpList = new ArrayList<String>();
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
+                while ((Line = br.readLine()) != null) {
+                    if (Line.contains(DEV_NAME)) {
+                        Line = Line.substring(55);
+                        if (Line.contains("clockwork") || Line.contains("cwm") && Line.endsWith(EXT)) {
+                            tmpList.add(Line);
                         }
                     }
-                    br.close();
-                    Collections.sort(CwmArrayList);
-                    ArrayList<String> tmpList = new ArrayList<String>();
-                    for (Object i : CwmArrayList.toArray()) {
-                        tmpList.add(0, i.toString());
-                    }
-                    CwmArrayList = tmpList;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                br.close();
+                Collections.sort(tmpList);
+
+                for (Object i : tmpList.toArray()) {
+                    CwmArrayList.add(0, i.toString());
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return CwmArrayList;
     }
 
-    public ArrayList<String> getTWRPVersions() {
-        if (TwrpArrayList.size() == 0) {
-            if (!getRecoveryPath().equals("")) {
-                try {
-                    String Line;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
-                    while ((Line = br.readLine()) != null) {
-                        if (Line.contains(DEV_NAME)) {
-                            Line = Line.substring(55);
-                            if (Line.contains("twrp") && Line.endsWith(EXT)) {
-                                TwrpArrayList.add(Line);
-                            }
+    private ArrayList<String> getTWRPVersions() {
+        if (!RecoveryPath.equals("")) {
+            try {
+                String Line;
+                ArrayList<String> tmpList = new ArrayList<String>();
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(RecoveryTools.Sums)));
+                while ((Line = br.readLine()) != null) {
+                    if (Line.contains(DEV_NAME)) {
+                        Line = Line.substring(55);
+                        if (Line.contains("twrp") && Line.endsWith(EXT)) {
+                            tmpList.add(Line);
                         }
                     }
-                    br.close();
-                    Collections.sort(TwrpArrayList);
-                    ArrayList<String> tmpList = new ArrayList<String>();
-                    for (Object i : TwrpArrayList.toArray()) {
-                        tmpList.add(0, i.toString());
-                    }
-                    TwrpArrayList = tmpList;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                br.close();
+                Collections.sort(tmpList);
+
+                for (Object i : tmpList.toArray()) {
+                    TwrpArrayList.add(0, i.toString());
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return TwrpArrayList;
-    }
-
-    public void extractFiles(Context mContext) throws IOException {
-        if (isMTD()) {
-            File flash_image = getFlash_image(mContext);
-            if (!flash_image.exists())
-                Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image, false);
-            File dump_image = getDump_image(mContext);
-            if (!dump_image.exists())
-                Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image, false);
-        }
-        if (isDD()) {
-            File busybox = new File(mContext.getFilesDir(), "busybox");
-            Common.pushFileFromRAW(mContext, busybox, R.raw.busybox, true);
-        }
-        Common.pushFileFromRAW(mContext, RecoveryTools.Sums, R.raw.img_sums, true);
     }
 
     public File getRic() {

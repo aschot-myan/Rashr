@@ -4,6 +4,7 @@
     android:id="@android:id/text1"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textColor="@android:color/white"
+    android:background="#111"
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:layout_gravity="center_horizontal"
