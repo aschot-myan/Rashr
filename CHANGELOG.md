@@ -2,6 +2,15 @@
 CHANGELOG
 ====================
 
+Update [1.7.6]
+
+-Some Device recognition issues fixed
+-Startup crashes fixed
+-Now recovery updates online (can be update without apk update)
+-Philz touch added (over 200 new IMGS)
+
+--Kernel flash & MTK flash coming soon !
+
 Update [1.7.5]
 
 -Multi-Theme (Now Dark and Light) can be changed in the menu

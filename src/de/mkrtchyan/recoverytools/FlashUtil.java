@@ -45,6 +45,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     private static final String PREF_KEY_HIDE_REBOOT = "hide_reboot";
     private static final String PREF_KEY_FLASH_COUNTER = "last_counter";
 
+    private int PARTITION = 0;
+    public static final int RECOVERY = 1;
+    public static final int KERNEL = 2;
+
     public static final int JOB_FLASH = 1;
     public static final int JOB_BACKUP = 2;
     public static final int JOB_RESTORE = 3;
@@ -53,22 +57,30 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     private ProgressDialog pDialog;
     private final Notifyer mNotifyer;
     private final DeviceHandler mDeviceHandler;
-    private final File CustomRecovery, tmpFile;
-    private final File CurrentRecovery;
+    private final File CustomIMG, tmpFile;
+    private File CurrentPartition;
     private final int JOB;
     private Shell mShell;
     private boolean keepAppOpen = true;
     private FailedExecuteCommand mFailedExecuteCommand = null;
 
-    public FlashUtil(Context mContext, DeviceHandler mDeviceHandler, File CustomRecovery, int JOB) throws IOException {
+    public FlashUtil(Context mContext, DeviceHandler mDeviceHandler, int Partition, File CustomIMG, int JOB) throws IOException {
         this.mContext = mContext;
         this.mDeviceHandler = mDeviceHandler;
-        this.CustomRecovery = CustomRecovery;
+        this.CustomIMG = CustomIMG;
         this.JOB = JOB;
+        this.PARTITION = Partition;
         mShell = Shell.startRootShell();
-        tmpFile = new File(mContext.getFilesDir(), CustomRecovery.getName());
+        tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
         mNotifyer = new Notifyer(mContext);
-        CurrentRecovery = new File(mDeviceHandler.RecoveryPath);
+        switch (Partition) {
+            case RECOVERY:
+                CurrentPartition = new File(mDeviceHandler.RecoveryPath);
+                break;
+            case KERNEL:
+                CurrentPartition = new File(mDeviceHandler.KernelPath);
+                break;
+        }
     }
 
     protected void onPreExecute() {
@@ -88,7 +100,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 break;
         }
         pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pDialog.setMessage(CustomRecovery.getName());
+        pDialog.setMessage(CustomIMG.getName());
         pDialog.setCancelable(false);
         pDialog.show();
     }
@@ -115,7 +127,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean success) {
-        File tmpFile = new File(mContext.getFilesDir(), CustomRecovery.getName());
+        File tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
         pDialog.dismiss();
         saveHistory();
         if (!success || mFailedExecuteCommand != null) {
@@ -152,7 +164,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Log.i(TAG, "Backup finished");
                 try {
                     mShell.execCommand(mContext, "chmod 777 \"" + tmpFile.getAbsolutePath() + "\"");
-                    Common.copyFile(tmpFile, CustomRecovery);
+                    Common.copyFile(tmpFile, CustomIMG);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
@@ -212,11 +224,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (JOB == JOB_FLASH) {
             switch (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)) {
                 case 0:
-                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomRecovery.getAbsolutePath());
+                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomIMG.getAbsolutePath());
                     Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, 1);
                     return;
                 default:
-                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomRecovery.getAbsolutePath());
+                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, RecoveryTools.PREF_KEY_HISTORY + String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER)), CustomIMG.getAbsolutePath());
                     Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER) + 1);
                     if (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER) == 5)
                         Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, PREF_KEY_FLASH_COUNTER, 0);
@@ -235,33 +247,45 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             Common.chmod(mShell, busybox, "744");
             if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
                 Log.i(TAG, "Flash started!");
-                Common.copyFile(CustomRecovery, tmpFile);
+                Common.copyFile(CustomIMG, tmpFile);
                 Command = busybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
-                        "of=\"" + CurrentRecovery.getAbsolutePath() + "\"";
+                        "of=\"" + CurrentPartition.getAbsolutePath() + "\"";
             } else if (JOB == JOB_BACKUP) {
                 Log.i(TAG, "Backup started!");
-                Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentRecovery.getAbsolutePath() + "\" " +
+                Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() + "\" " +
                         "of=\"" + tmpFile.getAbsolutePath() + "\"";
             }
-        } catch (IOException e){}
+        } catch (IOException e){
+            e.printStackTrace();
+        }
         return mShell.execCommand(mContext, Command);
     }
 
     public String MTD() throws FailedExecuteCommand{
         String Command = "";
         try {
+
+            String partition;
+            if (PARTITION == KERNEL) {
+                partition = "boot";
+            } else {
+                partition = "recovery";
+            }
             if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
                 File flash_image = mDeviceHandler.getFlash_image(mContext);
                 Common.chmod(mShell, mDeviceHandler.getFlash_image(mContext), "741");
                 Log.i(TAG, "Flash started!");
-                Command = flash_image.getAbsolutePath() + " recovery \"" + tmpFile.getAbsolutePath() + "\"";
+                Command = flash_image.getAbsolutePath() + " " + partition + " \"" + tmpFile.getAbsolutePath() + "\"";
             } else if (JOB == JOB_BACKUP) {
                 File dump_image = mDeviceHandler.getDump_image(mContext);
                 Common.chmod(mShell, dump_image, "741");
                 Log.i(TAG, "Backup started!");
-                Command = dump_image.getAbsolutePath() + " recovery \"" + tmpFile.getAbsolutePath() + "\"";
+
+                Command = dump_image.getAbsolutePath() + " " + partition + " \"" + tmpFile.getAbsolutePath() + "\"";
             }
-        } catch (IOException e){}
+        } catch (IOException e){
+            e.printStackTrace();
+        }
         return mShell.execCommand(mContext, Command);
     }
 
@@ -272,7 +296,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     || mDeviceHandler.DEV_NAME.equals("c6602")
                     || mDeviceHandler.DEV_NAME.equals("montblanc")) {
                 if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
-                    Common.mountDir(CurrentRecovery, "RW");
+                    Common.mountDir(CurrentPartition, "RW");
                     mShell.execCommand(mContext, "cat " + mDeviceHandler.getCharger().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getCharger().getName());
                     mShell.execCommand(mContext, "cat " + mDeviceHandler.getChargermon().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getChargermon().getName());
                     if (mDeviceHandler.DEV_NAME.equals("c6603")
@@ -282,16 +306,18 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     }
                     Common.chmod(mShell, mDeviceHandler.getCharger(), "755");
                     Common.chmod(mShell, mDeviceHandler.getChargermon(), "755");
-                    Common.chmod(mShell, CustomRecovery, "644");
-                    Common.mountDir(CurrentRecovery, "RO");
+                    Common.chmod(mShell, CustomIMG, "644");
+                    Common.mountDir(CurrentPartition, "RO");
                     Log.i(TAG, "Flash started!");
-                    Command = "cat " + CustomRecovery.getAbsolutePath() + " >> " + CurrentRecovery.getAbsolutePath();
+                    Command = "cat " + CustomIMG.getAbsolutePath() + " >> " + CurrentPartition.getAbsolutePath();
                 } else if (JOB == JOB_BACKUP) {
                     Log.i(TAG, "Backup started!");
-                    Command = "cat " + CurrentRecovery.getAbsolutePath() + " >> " + CustomRecovery.getAbsolutePath();
+                    Command = "cat " + CurrentPartition.getAbsolutePath() + " >> " + CustomIMG.getAbsolutePath();
                 }
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return mShell.execCommand(mContext, Command);
     }
 }

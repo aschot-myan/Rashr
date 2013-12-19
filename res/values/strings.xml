@@ -6,8 +6,10 @@
     <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
     <string name="sHistory">History</string>
     <string name="sFlashTWRP">Flash TWRP Recovery</string>
+    <string name="sFlashPhilz">Flash Philz Recovery</string>
     <string name="sFlashOTHER">Flash other Recovery</string>
-    <string name="sBackup">Backup current Recovery</string>
+    <string name="sRecoveryBackup">Backup Recovery</string>
+    <string name="sKernelBackup">Backup Kernel</string>
     <string name="backups">Backups</string>
     <string name="go">Go</string>
     <string name="sRebooter">Rebooter</string>
@@ -45,7 +47,7 @@
     </string>
     <string name="error">Error</string>
     <string name="not_supportded">Your Device is not supported by the developer yet. Scan System and
-        Report unsupported Device?
+        Report unsupported Device or try to find partition (reboot once into recovery)?
     </string>
     <string name="no_root">"Device not Rooted. Please Root it. More information under
         \n\nxda-developer.com"
@@ -98,7 +100,7 @@
     <string name="later">Later</string>
 
     <string name="no_choosed">No File chosen</string>
-    <string name="update">Download and flash new IMG</string>
+    <string name="update">Update recovery list</string>
     <string name="search_recovery">Search Recovery</string>
     <string name="flash_error">Failed to flash</string>
     <string name="res_error">Failed to restore</string>

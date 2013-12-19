@@ -52,6 +52,15 @@
                         android:text="@string/sFlashTWRP" />
 
                     <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sFlashPhilz"
+                        android:id="@+id/bPHILZ"
+                        android:tag="philz"
+                        android:layout_gravity="center_horizontal"
+                        android:onClick="Go" />
+
+                    <Button
                         android:id="@+id/bFlashOther"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -215,10 +224,10 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/bCreateBackup"
-                android:onClick="bCreateBackup"
+                android:id="@+id/bCreateRecoveryBackup"
+                android:onClick="bCreateRecoveryBackup"
                 android:textColor="@android:color/white"
-                android:text="@string/sBackup"
+                android:text="@string/sRecoveryBackup"
                 android:layout_weight="6" />
 
             <ListView

@@ -29,7 +29,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,6 +39,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,13 +60,10 @@ import android.widget.Toast;
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -89,9 +86,9 @@ public class RecoveryTools extends ActionBarActivity {
     public static final String PREF_KEY_HISTORY = "last_history_";
 
     private final Context mContext = this;
-    private final int HOLO_DARK = R.style.Theme_AppCompat;
-    private final int HOLO_LIGHT = R.style.Theme_AppCompat_Light;
-    private final int HOLO_LIGHT_DARK_BAR = R.style.Theme_AppCompat_Light_DarkActionBar;
+    private final int APPCOMPAT_DARK = R.style.Theme_AppCompat;
+    private final int APPCOMPAT_LIGHT = R.style.Theme_AppCompat_Light;
+    private final int APPCOMPAT_LIGHT_DARK_BAR = R.style.Theme_AppCompat_Light_DarkActionBar;
 
     //  Used paths and files
     private static final File PathToSd = Environment.getExternalStorageDirectory();
@@ -99,10 +96,11 @@ public class RecoveryTools extends ActionBarActivity {
     private static final File PathToRecoveries = new File(PathToRecoveryTools, "recoveries");
     public static final File PathToCWM = new File(PathToRecoveries, "clockworkmod");
     public static final File PathToTWRP = new File(PathToRecoveries, "twrp");
+    public static final File PathToPhilz = new File(PathToRecoveries, "philz");
     public static final File PathToRecoveryBackups = new File(PathToRecoveryTools, "recovery-backups");
-    public static final File PathToKernelBackups = new File(PathToRecoveries, "kernel-backups");
+    public static final File PathToKernelBackups = new File(PathToRecoveryTools, "kernel-backups");
     public static final File PathToUtils = new File(PathToRecoveryTools, "utils");
-    public static final File Sums = new File(PathToUtils, "IMG_SUMS");
+    private File RecoveryCollection;
     public static final File LastLog = new File("/cache/recovery/last_log");
     private File fRECOVERY;
 
@@ -118,21 +116,41 @@ public class RecoveryTools extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        RecoveryCollection = new File(getFilesDir(), "IMG_SUMS");
+        PathToRecoveryTools.mkdir();
+        PathToRecoveries.mkdir();
+        PathToCWM.mkdir();
+        PathToTWRP.mkdir();
+        PathToPhilz.mkdir();
+        PathToRecoveryBackups.mkdir();
+        PathToKernelBackups.mkdir();
+        PathToUtils.mkdir();
+        unpackFiles();
+
         try {
             mShell = Shell.startRootShell();
+            try {
+                File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
+                Common.chmod(mShell, LastLog, "644");
+                mShell.execCommand("cp " + LastLog.getAbsolutePath() + " " + LogCopy.getAbsolutePath());
+            } catch (FailedExecuteCommand failedExecuteCommand) {
+                failedExecuteCommand.printStackTrace();
+            }
+
             mDeviceHandler = new DeviceHandler(mContext);
+            new File(PathToUtils, mDeviceHandler.DEV_NAME).mkdir();
 
             if (getIntent().getData() != null) {
                 handleIntent();
             } else {
-//      	If device is not supported, you can report it now or close the App
+//      If device is not supported, you can report it now or close the App
                 if (!mDeviceHandler.isOtherSupported()) {
                     showDeviceNotSupportedDialog();
                 } else {
                     if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_FIRST_RUN)) {
-                        Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, HOLO_LIGHT_DARK_BAR);
+                        Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
                         Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS, true);
-                        Common.setBooleanPref(mContext, Common.PREF_NAME, Shell.PREF_LOG, true);
+                        Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
                         showUsageWarning();
                     } else {
                         Notifyer.showAppRateDialog(mContext);
@@ -143,9 +161,24 @@ public class RecoveryTools extends ActionBarActivity {
                 }
 
                 this.setTheme(Common.getIntegerPref(mContext, PREF_NAME, PREF_STYLE));
-                new StartUpLoader().execute();
-                mDeviceHandler.downloadUtils(mContext);
 
+                try {
+                    if (getPackageManager() != null) {
+                        PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(getPackageName(), 0);
+                        final int previous_version = Common.getIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER);
+                        final int current_version = pInfo.versionCode;
+                        if (current_version > previous_version) {
+                            version_changed = true;
+                        }
+                        Common.setIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER, current_version);
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    version_changed = true;
+                } catch (NullPointerException e) {
+                    version_changed = true;
+                }
+                optimizeLayout();
+                mDeviceHandler.downloadUtils(mContext);
             }
 
         } catch (IOException e) {
@@ -158,12 +191,14 @@ public class RecoveryTools extends ActionBarActivity {
         fRECOVERY = null;
         ArrayList<String> Versions;
         if (!mDeviceHandler.downloadUtils(mContext)) {
-            //			Get device specified recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
+            //Get device specified recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
             final String SYSTEM = view.getTag().toString();
             if (SYSTEM.equals("clockwork")) {
                 Versions = mDeviceHandler.CwmArrayList;
             } else if (SYSTEM.equals("twrp")) {
                 Versions = mDeviceHandler.TwrpArrayList;
+            } else if (SYSTEM.equals("philz")) {
+                Versions = mDeviceHandler.PhilzArrayList;
             } else {
                 return;
             }
@@ -184,13 +219,15 @@ public class RecoveryTools extends ActionBarActivity {
                             fRECOVERY = new File(PathToCWM, fileName);
                         } else if (SYSTEM.equals("twrp")) {
                             fRECOVERY = new File(PathToTWRP, fileName);
+                        } else if (SYSTEM.equals("philz")) {
+                            fRECOVERY = new File(PathToPhilz, fileName);
                         }
 
                         if (!fRECOVERY.exists()) {
                             Downloader RecoveryDownloader = new Downloader(mContext, DeviceHandler.HOST_URL, fRECOVERY.getName(), fRECOVERY, rFlasher);
                             RecoveryDownloader.setRetry(true);
                             RecoveryDownloader.setAskBeforeDownload(true);
-                            RecoveryDownloader.setChecksumFile(Sums);
+                            RecoveryDownloader.setChecksumFile(RecoveryCollection);
                             RecoveryDownloader.ask();
                         } else {
                             rFlasher.run();
@@ -236,7 +273,7 @@ public class RecoveryTools extends ActionBarActivity {
     public void cbShowAds(View view) {
         Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS, !Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
         ((CheckBox) view).setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
-        new StartUpLoader().execute();
+        optimizeLayout();
     }
 
     public void bFlashOther(View view) {
@@ -299,7 +336,7 @@ public class RecoveryTools extends ActionBarActivity {
 
     }
 
-    public void bCreateBackup(View view) {
+    public void bCreateRecoveryBackup(View view) {
 
         final Dialog dialog = new Dialog(mContext);
         dialog.setTitle(R.string.setname);
@@ -329,12 +366,11 @@ public class RecoveryTools extends ActionBarActivity {
                     @Override
                     public void run() {
                         try {
-                            new FlashUtil(mContext, mDeviceHandler, fBACKUP, FlashUtil.JOB_BACKUP).execute();
+                            new FlashUtil(mContext, mDeviceHandler, FlashUtil.RECOVERY, fBACKUP, FlashUtil.JOB_BACKUP).execute();
+                            loadBackupDrawer();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        new StartUpLoader().execute();
-
                     }
                 };
                 if (fBACKUP.exists()) {
@@ -354,6 +390,7 @@ public class RecoveryTools extends ActionBarActivity {
     public void bClearCache(View view) {
         Common.deleteFolder(PathToCWM, false);
         Common.deleteFolder(PathToTWRP, false);
+        Common.deleteFolder(PathToPhilz, false);
     }
 
     public void bRebooter(View view) {
@@ -391,8 +428,9 @@ public class RecoveryTools extends ActionBarActivity {
                                     TestResults.delete();
                                 FileOutputStream fos = openFileOutput(TestResults.getName(), Context.MODE_PRIVATE);
                                 fos.write(("Recovery-Tools:\n\n" + mShell.execCommand("ls -lR " + PathToRecoveryTools.getAbsolutePath()) +
+                                        "\nCache Tree:\n" + mShell.execCommand("ls -lR /cache") + "\n" +
                                         "\nMTD result:\n" + mShell.execCommand("cat /proc/mtd") + "\n" +
-                                        "\nDevice Tree:\n" + "\n" + mShell.execCommand("ls -lR /dev")).getBytes());
+                                        "\nDevice Tree:\n\n" + mShell.execCommand("ls -lR /dev")).getBytes());
                                 files.add(TestResults);
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
@@ -420,8 +458,12 @@ public class RecoveryTools extends ActionBarActivity {
                                         "\nFingerprint: " + Build.FINGERPRINT +
                                         "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")" +
                                         "\nRecovery Path: " + mDeviceHandler.RecoveryPath +
-                                        "\nIs MTD: " + mDeviceHandler.isMTD() +
-                                        "\nIs DD: " + mDeviceHandler.isDD() +
+                                        "\nMTD: " + mDeviceHandler.isMTD() +
+                                        "\nDD: " + mDeviceHandler.isDD() +
+                                        "\n\nCWM " + mDeviceHandler.CWM +
+                                        "\nTWRP: " + mDeviceHandler.TWRP +
+                                        "\nPHILZ :" + mDeviceHandler.PHILZ +
+                                        "\nOTHER :" + mDeviceHandler.OTHER +
                                         "\n\n\n===========Comment==========\n" + comment +
                                         "\n===========Comment==========\n");
                                 File CommandLogs = new File(mContext.getFilesDir(), Shell.Logs);
@@ -452,11 +494,27 @@ public class RecoveryTools extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
-            if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
-                mDrawerLayout.closeDrawer(Gravity.LEFT);
-            else
-                mDrawerLayout.openDrawer(Gravity.LEFT);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                else
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                break;
+            case R.id.update:
+                Downloader updater = new Downloader(mContext, "http://dslnexus.org/Android/", "img_sums", RecoveryCollection, new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast
+                                .makeText(mContext, R.string.please_restart, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
+                updater.setOverrideFile(true);
+                updater.setRetry(true);
+                updater.execute();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -478,10 +536,10 @@ public class RecoveryTools extends ActionBarActivity {
             final AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
             WarningDialog.setTitle(R.string.warning);
             WarningDialog.setMessage(String.format(getString(R.string.bak_warning), PathToRecoveryBackups.getAbsolutePath()));
-            WarningDialog.setPositiveButton(R.string.sBackup, new DialogInterface.OnClickListener() {
+            WarningDialog.setPositiveButton(R.string.sRecoveryBackup, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    bCreateBackup(null);
+                    bCreateRecoveryBackup(null);
                     Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_FIRST_RUN, true);
                 }
             });
@@ -517,7 +575,7 @@ public class RecoveryTools extends ActionBarActivity {
                             mShell.execCommand(mContext,"reboot bootloader");
                             return true;
                         case R.id.iRestore:
-                            new FlashUtil(mContext, mDeviceHandler, new File(PathToRecoveryBackups, text), FlashUtil.JOB_RESTORE).execute();
+                            new FlashUtil(mContext, mDeviceHandler, FlashUtil.RECOVERY, new File(PathToRecoveryBackups, text), FlashUtil.JOB_RESTORE).execute();
                             return true;
                         case R.id.iRename:
                             final Dialog dialog = new Dialog(mContext);
@@ -549,7 +607,7 @@ public class RecoveryTools extends ActionBarActivity {
                                         Backup.renameTo(newBackup);
                                     }
                                     dialog.dismiss();
-                                    new StartUpLoader().execute();
+                                    loadBackupDrawer();
 
                                 }
                             });
@@ -558,9 +616,9 @@ public class RecoveryTools extends ActionBarActivity {
                         case R.id.iDeleteBackup:
                             if (((TextView) v).getText() != null) {
                                 new File(PathToRecoveryBackups, text).delete();
-                                Toast.makeText(mContext, String.format(mContext.getString(R.string.bak_deleted)
-                                        , ((TextView) v).getText()), Toast.LENGTH_SHORT).show();
-                                new StartUpLoader().execute();
+                                Toast.makeText(mContext, String.format(mContext.getString(R.string.bak_deleted),
+                                        ((TextView) v).getText()), Toast.LENGTH_SHORT).show();
+                                loadBackupDrawer();
                             }
                             return true;
                         default:
@@ -652,21 +710,32 @@ public class RecoveryTools extends ActionBarActivity {
     }
 
     private void showDeviceNotSupportedDialog() {
-        AlertDialog.Builder DeviceNotSupported = mNotifyer.createAlertDialog(R.string.warning, R.string.notsupportded,
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        report(false);
-                    }
-                }, null,
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                        System.exit(0);
-                    }
+        AlertDialog.Builder DeviceNotSupported = new AlertDialog.Builder(mContext);
+        DeviceNotSupported.setTitle(R.string.warning);
+        DeviceNotSupported.setMessage(R.string.not_supportded);
+        DeviceNotSupported.setPositiveButton(R.string.report, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                report(false);
+            }
+        });
+        DeviceNotSupported.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+                System.exit(0);
+            }
+        });
+        DeviceNotSupported.setNeutralButton(R.string.sReboot, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                try {
+                    mShell.execCommand(mContext, "reboot recovery");
+                } catch (FailedExecuteCommand e) {
+                    e.printStackTrace();
                 }
-        );
+            }
+        });
         DeviceNotSupported.setCancelable(BuildConfig.DEBUG);
         DeviceNotSupported.show();
     }
@@ -678,6 +747,7 @@ public class RecoveryTools extends ActionBarActivity {
             fRECOVERY = new File(getIntent().getData().getPath());
             getIntent().setData(null);
             showFlashAlertDialog();
+            this.setTheme(R.style.Theme_AppCompat_Base_CompactMenu_Dialog);
         }
     }
 
@@ -687,7 +757,7 @@ public class RecoveryTools extends ActionBarActivity {
         @Override
         public void run() {
             try {
-                FlashUtil flashUtil = new FlashUtil(mContext, mDeviceHandler, fRECOVERY, FlashUtil.JOB_FLASH);
+                FlashUtil flashUtil = new FlashUtil(mContext, mDeviceHandler, FlashUtil.RECOVERY, fRECOVERY, FlashUtil.JOB_FLASH);
                 flashUtil.setKeepAppOpen(keepAppOpen);
                 flashUtil.execute();
             } catch (IOException e) {
@@ -724,210 +794,135 @@ public class RecoveryTools extends ActionBarActivity {
         }
     };
 
-    private class StartUpLoader extends AsyncTask<Void, Void, Void> {
-
-        private String currentRecovery = "Stock";
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            setContentView(new ProgressBar(mContext));
+    private void unpackFiles() {
+        try {
+            File flash_image = new File(getFilesDir(), "flash_image");
+            Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image, version_changed);
+            File dump_image = new File(getFilesDir(), "dump_image");
+            Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image, version_changed);
+            File busybox = new File(mContext.getFilesDir(), "busybox");
+            Common.pushFileFromRAW(mContext, busybox, R.raw.busybox, version_changed);
+            Common.pushFileFromRAW(mContext, RecoveryCollection, R.raw.img_sums, version_changed);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            Common.checkFolder(PathToRecoveryTools);
-            Common.checkFolder(PathToRecoveries);
-            Common.checkFolder(PathToCWM);
-            Common.checkFolder(PathToTWRP);
-            Common.checkFolder(PathToRecoveryBackups);
-            Common.checkFolder(PathToKernelBackups);
-            Common.checkFolder(PathToUtils);
-            Common.checkFolder(new File(PathToUtils, mDeviceHandler.DEV_NAME));
-            try {
-                if (getPackageManager() != null) {
-                    PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(getPackageName(), 0);
-                    final int previous_version = Common.getIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER);
-                    final int current_version = pInfo.versionCode;
-                    if (current_version > previous_version) {
-                        version_changed = true;
-                    }
-                    Common.setIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER, current_version);
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                version_changed = true;
-            } catch (NullPointerException e) {
-                version_changed = true;
+    public void loadBackupDrawer() {
+        if (PathToRecoveryBackups.listFiles() != null) {
+            ArrayList<File> BakList = new ArrayList<File>();
+            BakList.addAll(Arrays.asList(PathToRecoveryBackups.listFiles()));
+            String[] tmp = new String[BakList.toArray(new File[BakList.size()]).length];
+            for (int i = 0; i < tmp.length; i++) {
+                tmp[i] = BakList.get(i).getName();
             }
-            unpackFiles();
-            readLastLog();
-            return null;
+
+            final ListView lvBackups = (ListView) mActivity.findViewById(R.id.lvBackups);
+            lvBackups.setAdapter(new ArrayAdapter<String>(mContext, R.layout.custom_list_item, tmp));
+            lvBackups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                        long arg3) {
+                    showPopup(R.menu.bakmgr_menu, arg1);
+                }
+            });
         }
+    }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            optimizeLayout();
-        }
+    public void optimizeLayout() throws NullPointerException {
+        setContentView(R.layout.recovery_tools);
 
-        public void optimizeLayout() throws NullPointerException {
-            setContentView(R.layout.recovery_tools);
+        ViewGroup layout = (ViewGroup) findViewById(R.id.MainLayout);
+        try {
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+            ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(mActivity,
+                    mDrawerLayout, R.drawable.ic_drawer, R.string.settings, R.string.app_name);
+            mDrawerLayout.setDrawerListener(mDrawerToggle);
+            mDrawerToggle.syncState();
+            mDrawerToggle.setDrawerIndicatorEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
 
-            ViewGroup layout = (ViewGroup) findViewById(R.id.MainLayout);
-            try {
-                mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-                mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-                ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout, R.drawable.ic_drawer, R.string.settings, R.string.app_name);
-                mDrawerLayout.setDrawerListener(mDrawerToggle);
-                mDrawerToggle.syncState();
-                mDrawerToggle.setDrawerIndicatorEnabled(true);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setHomeButtonEnabled(true);
+            String Styles[] = getResources().getStringArray(R.array.styles);
 
-                String Styles[] = getResources().getStringArray(R.array.styles);
+            final LinearLayout mMenuDrawer = (LinearLayout) findViewById(R.id.menu_drawer);
+            Spinner spStyle = (Spinner) mMenuDrawer.findViewById(R.id.spStyle);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity,
+                    R.layout.custom_list_item, Styles);
+            adapter.setDropDownViewResource(R.layout.custom_list_item);
 
-                final LinearLayout mMenuDrawer = (LinearLayout) findViewById(R.id.menu_drawer);
-                Spinner spStyle = (Spinner) mMenuDrawer.findViewById(R.id.spStyle);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity,
-                        R.layout.custom_list_item, Styles);
-                adapter.setDropDownViewResource(R.layout.custom_list_item);
-
-                spStyle.setAdapter(adapter);
-                spStyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        switch (position) {
-                            case 0:
-                                return;
-                            case 1:
-                                Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, HOLO_LIGHT_DARK_BAR);
-                                break;
-                            case 2:
-                                Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, HOLO_LIGHT);
-                                break;
-                            case 3:
-                                Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, HOLO_DARK);
-                                break;
-                            default:
-                                Toast
-                                        .makeText(mContext, R.string.please_restart, Toast.LENGTH_SHORT)
-                                        .show();
-                        }
+            spStyle.setAdapter(adapter);
+            spStyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    switch (position) {
+                        case 0:
+                            return;
+                        case 1:
+                            Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
+                            break;
+                        case 2:
+                            Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT);
+                            break;
+                        case 3:
+                            Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_DARK);
+                            break;
+                        default:
+                            Toast
+                                    .makeText(mContext, R.string.please_restart, Toast.LENGTH_SHORT)
+                                    .show();
                     }
+                }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-                    }
-                });
-                CheckBox cbShowAds = (CheckBox) mMenuDrawer.findViewById(R.id.cbShowAds);
-                CheckBox cbLog = (CheckBox) mMenuDrawer.findViewById(R.id.cbLog);
-                cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
-                cbLog.setChecked(Common.getBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG));
-                if (cbLog.isChecked()) {
-                    findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.bShowLogs).setVisibility(View.INVISIBLE);
                 }
-                cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
-
-                final TextView RecoveryVersion = (TextView) findViewById(R.id.tvRecoveryVersion);
-                RecoveryVersion.setText(currentRecovery);
-                loadBackupDrawer();
-
-                if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {
-                    layout.removeView(layout.findViewById(R.id.adView));
-                }
-                if (!mDeviceHandler.isCwmSupported()) {
-                    layout.removeView(layout.findViewById(R.id.bCWM));
-                }
-                if (!mDeviceHandler.isTwrpSupported()) {
-                    layout.removeView(layout.findViewById(R.id.bTWRP));
-                }
-                if (mDeviceHandler.isOverRecovery()) {
-                    layout.removeView(layout.findViewById(R.id.backup_drawer));
-                    layout.removeView(layout.findViewById(R.id.bHistory));
-                }
-                if (!mDeviceHandler.isOtherSupported())
-                    layout.removeAllViews();
-            } catch (NullPointerException e) {
-                throw new NullPointerException("Error while setting up Layout " + e.getMessage());
+            });
+            CheckBox cbShowAds = (CheckBox) mMenuDrawer.findViewById(R.id.cbShowAds);
+            CheckBox cbLog = (CheckBox) mMenuDrawer.findViewById(R.id.cbLog);
+            cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
+            cbLog.setChecked(Common.getBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG));
+            if (cbLog.isChecked()) {
+                findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
+            } else {
+                findViewById(R.id.bShowLogs).setVisibility(View.INVISIBLE);
             }
-        }
+            cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
 
-        public void loadBackupDrawer() {
-            if (PathToRecoveryBackups.listFiles() != null) {
+            final TextView RecoveryVersion = (TextView) findViewById(R.id.tvRecoveryVersion);
+            RecoveryVersion.setText(mDeviceHandler.CurrentRecoveryVersion);
+            loadBackupDrawer();
 
-                ArrayList<File> BakList = new ArrayList<File>();
-                BakList.addAll(Arrays.asList(PathToRecoveryBackups.listFiles()));
-                String[] tmp = new String[BakList.toArray(new File[BakList.size()]).length];
-                for (int i = 0; i < tmp.length; i++) {
-                    tmp[i] = BakList.get(i).getName();
-                }
-
-                final ListView lvBackups = (ListView) mActivity.findViewById(R.id.lvBackups);
-                lvBackups.setAdapter(new ArrayAdapter<String>(mContext, R.layout.custom_list_item, tmp));
-                lvBackups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                            long arg3) {
-                        showPopup(R.menu.bakmgr_menu, arg1);
-                    }
-                });
-
+            if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {
+                layout.removeView(layout.findViewById(R.id.adView));
             }
-        }
-
-        public void readLastLog() {
-            try {
-                File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
-                if (LastLog.exists())
-                    LogCopy.delete();
-                mShell.execCommand("cp " + LastLog.getAbsolutePath() + " " + LogCopy.getAbsolutePath());
-                if (LogCopy.exists()) {
-                    Common.chmod(mShell ,LogCopy, "644");
-                    String line;
-                    boolean version_found = false;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
-                    while ((line = br.readLine()) != null && !version_found) {
-                        if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
-                            version_found = true;
-                            currentRecovery = line;
-                        }
-                        if (line.contains("Starting TWRP")) {
-                            version_found = true;
-                            line = line.replace("Starting ", "");
-                            line = line.substring(0, 12);
-                            currentRecovery = line;
-                        }
-                    }
-                    br.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (!mDeviceHandler.isCwmSupported()) {
+                layout.removeView(layout.findViewById(R.id.bCWM));
             }
-        }
-
-        private void unpackFiles() {
-            try {
-                if (mDeviceHandler.isMTD()) {
-                    File flash_image = mDeviceHandler.getFlash_image(mContext);
-                    if (!flash_image.exists()|| version_changed)
-                        Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image, true);
-                    File dump_image = mDeviceHandler.getDump_image(mContext);
-                    if (!dump_image.exists()|| version_changed)
-                        Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image, true);
-                }
-                File busybox = new File(mContext.getFilesDir(), "busybox");
-                if (!busybox.exists() || version_changed)
-                    Common.pushFileFromRAW(mContext, busybox, R.raw.busybox, true);
-                if (!RecoveryTools.Sums.exists() || version_changed) {
-                    Common.pushFileFromRAW(mContext, RecoveryTools.Sums, R.raw.img_sums, true);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (!mDeviceHandler.isTwrpSupported()) {
+                layout.removeView(layout.findViewById(R.id.bTWRP));
             }
+            if (!mDeviceHandler.isPhilzSupported()) {
+                layout.removeView(layout.findViewById(R.id.bPHILZ));
+            }
+            if (mDeviceHandler.isOverRecovery()) {
+                layout.removeView(layout.findViewById(R.id.backup_drawer));
+                layout.removeView(layout.findViewById(R.id.bHistory));
+            }
+            if (!mDeviceHandler.isOtherSupported())
+                layout.removeAllViews();
+        } catch (NullPointerException e) {
+            throw new NullPointerException("Error while setting up Layout " + e.getMessage());
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.recovery_tools_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
