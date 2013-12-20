@@ -27,7 +27,6 @@ import android.content.DialogInterface;
 import android.os.Build;
 
 import org.sufficientlysecure.rootcommands.Shell;
-import org.sufficientlysecure.rootcommands.command.SimpleCommand;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,7 +37,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Unzipper;
 
@@ -540,16 +538,13 @@ public class DeviceHandler {
         }
         for (File i : RecoveryList) {
             if (i.exists() && RecoveryPath.equals("")) {
-//                RecoveryPath = i.getAbsolutePath();
+                RecoveryPath = i.getAbsolutePath();
             }
         }
 
         try {
             String line;
             File LogCopy = new File(mContext.getFilesDir(), RecoveryTools.LastLog.getName() + ".txt");
-            if (!LogCopy.exists()) {
-
-            }
             Shell.startRootShell().execCommand(mContext, "chmod 644 " + LogCopy.getAbsolutePath());
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
             while ((line = br.readLine()) != null) {
