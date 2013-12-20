@@ -33,6 +33,7 @@
                     android:orientation="vertical">
 
                     <Button
+                        style="?button_style"
                         android:id="@+id/bCWM"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
                         android:visibility="visible" />
 
                     <Button
+                        style="?button_style"
                         android:id="@+id/bTWRP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -52,6 +54,7 @@
                         android:text="@string/sFlashTWRP" />
 
                     <Button
+                        style="?button_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/sFlashPhilz"
@@ -61,6 +64,7 @@
                         android:onClick="Go" />
 
                     <Button
+                        style="?button_style"
                         android:id="@+id/bFlashOther"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -79,6 +83,7 @@
                         android:layout_gravity="center" />
 
                     <Button
+                        style="?button_style"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/sHistory"
@@ -88,6 +93,7 @@
                         android:onClick="bShowHistory" />
 
                     <Button
+                        style="?button_style"
                         android:id="@+id/bClearCache"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -96,6 +102,7 @@
                         android:text="@string/sClearCache" />
 
                     <Button
+                        style="?button_style"
                         android:id="@+id/bRebooter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -117,7 +124,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/tvRecoveryVersion"
                     android:layout_gravity="center_horizontal"
                     android:textAlignment="center"

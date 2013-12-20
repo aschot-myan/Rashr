@@ -86,9 +86,9 @@ public class RecoveryTools extends ActionBarActivity {
     public static final String PREF_KEY_HISTORY = "last_history_";
 
     private final Context mContext = this;
-    private final int APPCOMPAT_DARK = R.style.Theme_AppCompat;
-    private final int APPCOMPAT_LIGHT = R.style.Theme_AppCompat_Light;
-    private final int APPCOMPAT_LIGHT_DARK_BAR = R.style.Theme_AppCompat_Light_DarkActionBar;
+    private final int APPCOMPAT_DARK = R.style.MyDark;
+    private final int APPCOMPAT_LIGHT = R.style.MyLight;
+    private final int APPCOMPAT_LIGHT_DARK_BAR = R.style.MyLightDarkBar;
 
     //  Used paths and files
     private static final File PathToSd = Environment.getExternalStorageDirectory();
@@ -458,12 +458,13 @@ public class RecoveryTools extends ActionBarActivity {
                                         "\nFingerprint: " + Build.FINGERPRINT +
                                         "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")" +
                                         "\nRecovery Path: " + mDeviceHandler.RecoveryPath +
+                                        "\nKernel Path: " + mDeviceHandler.KernelPath +
                                         "\nMTD: " + mDeviceHandler.isMTD() +
                                         "\nDD: " + mDeviceHandler.isDD() +
-                                        "\n\nCWM " + mDeviceHandler.CWM +
+                                        "\n\nCWM: " + mDeviceHandler.CWM +
                                         "\nTWRP: " + mDeviceHandler.TWRP +
-                                        "\nPHILZ :" + mDeviceHandler.PHILZ +
-                                        "\nOTHER :" + mDeviceHandler.OTHER +
+                                        "\nPHILZ: " + mDeviceHandler.PHILZ +
+                                        "\nOTHER: " + mDeviceHandler.OTHER +
                                         "\n\n\n===========Comment==========\n" + comment +
                                         "\n===========Comment==========\n");
                                 File CommandLogs = new File(mContext.getFilesDir(), Shell.Logs);
@@ -635,20 +636,6 @@ public class RecoveryTools extends ActionBarActivity {
         });
         popup.show();
     }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            if (!mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
-            } else {
-                mDrawerLayout.closeDrawer(Gravity.LEFT);
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
 
     public void showOverRecoveryInstructions() {
         final AlertDialog.Builder Instructions = new AlertDialog.Builder(mContext);

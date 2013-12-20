@@ -2,6 +2,12 @@
 CHANGELOG
 ====================
 
+Update [1.7.7]
+
+-Some Device recognition issues fixed
+-New UI!
+-Startup crash fixed on some devices
+
 Update [1.7.6]
 
 -Some Device recognition issues fixed

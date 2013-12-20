@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/../Libs/Appcompact/Appcompact.iml" filepath="$PROJECT_DIR$/../Libs/Appcompact/Appcompact.iml" />
       <module fileurl="file://$PROJECT_DIR$/Recovery-Tools.iml" filepath="$PROJECT_DIR$/Recovery-Tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" filepath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Libs/root-commands/libraries/RootCommands/src/root-commands/root-commands.iml" filepath="$PROJECT_DIR$/../Libs/root-commands/libraries/RootCommands/src/root-commands/root-commands.iml" />
     </modules>
   </component>
 </project>
