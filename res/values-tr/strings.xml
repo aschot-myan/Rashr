@@ -1,105 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="info">Bilgi</string>
+    <string name="try_again">Tekrar dene!</string>
+    <string name="later">Sonra</string>
+    <string name="Downloading">İndiriliyor…</string>
+    <string name="error">Hata</string>
+    <string name="warning">Uyarı!</string>
+    <string name="positive">Evet, lütfen</string>
+    <string name="neutral">Hayır, teşekkürler</string>
+    <string name="negative">İptal</string>
+    <string name="noroot">"Cihaz Root'lu değil. Lütfen Root'layın. Aşağıda daha fazla bilgi bulabilirsiniz
+        
 
+xda-developer.com"</string>
     <string name="app_name">Recovery Tools</string>
     <string name="settings">Ayarlar</string>
     <string name="sFlashCWM">Clockworkmod Recovery Yükle</string>
     <string name="sHistory">Geçmiş</string>
     <string name="sFlashTWRP">TWRP Recovery Yükle</string>
     <string name="sFlashOTHER">Başka Recovery Yükle</string>
-    <string name="sBackup">Geçerli Recovery\'yi Yedekle</string>
     <string name="backups">Yedekler</string>
-    <string name="go">Başlat</string>
+    <string name="go">Tamam</string>
     <string name="sRebooter">Yeniden başlatıcı</string>
-    <string name="sRestore">Yedekten geri yükle</string>
-    <string name="sClearCache">İndirilen recovery\'leri temizle</string>
+    <string name="rename">Yedekleme için özel bir ad ayarlamak isterseniz metin alanına yazın. Aksi takdirde geçerli saat/tarih kullanılacaktır.</string>
+    <string name="sClearCache">"İndirilen recovery'leri temizle"</string>
     <string name="report">Hata raporu</string>
     <string name="sExit">Çıkış</string>
     <string name="xda">XDA-Konusunu Aç</string>
-    <string name="rename">Yedekleme için özel bir ad ayarlamak isterseniz metin alanına yazın. Aksi takdirde geçerli saat/tarih kullanılacaktır.</string>
-    <string name="bak_warning">Recovery-Tools ile bazı eylemleri yapmadan önce lütfen bir yedek oluşturun ve PC\'nizde saklayın.
-        \nYedekler %s altında oluşturulacaktır.
-        \nGeliştirici cihazınızda oluşabilecek zararlardan sorumlu değildir.
-    </string>
+    <string name="bak_warning">"Recovery-Tools ile bazı eylemleri yapmadan önce lütfen bir yedek oluşturun ve PC'nizde saklayın. 
+Yedekler %s altında oluşturulacaktır. 
+Geliştirici cihazınızda oluşabilecek zararlardan sorumlu değildir."</string>
     <string name="risk">Tehlikenin farkındayım</string>
     <string name="sReboot">Yeniden başlat</string>
-    <string name="sRebootRecovery">Recovery\'yi yeniden başlat</string>
-    <string name="sRebootBootloader">Bootloader\'ı yeniden başlat</string>
-    <string name="info">Bilgi</string>
+    <string name="sRebootRecovery">"Recovery'yi yeniden başlat"</string>
+    <string name="sRebootBootloader">"Bootloader'ı yeniden başlat"</string>
     <string name="flashed">Recovery yüklendi.</string>
-    <string name="warning">Uyarı!</string>
-    <string name="kernel_to">Bu cihazda Sistem Recovery özel Recovery ile Stock boot.img (Kernel) yükleyecektir (bu önyükleme hatasına neden olabilir, PC\'nize boot.img\'nin bir yedeğini kaydedin).</string>
+    <string name="kernel_to">"Bu cihazda Sistem Recovery özel Recovery ile Stock boot.img (Kernel) yükleyecektir (bu önyükleme hatasına neden olabilir, PC'nize boot.img'nin bir yedeğini kaydedin)."</string>
     <string name="flash_over_recovery">Recovery şimdi yüklensin mi? (yeniden başlatma gerektirir)</string>
     <string name="instructions">Talimatlar</string>
-    <string name="instruction">CWM:
-        \nAna Menü -> install zip from sdcard -> choose zip from sdcard
-        \n\nTWRP:
-        \nAna Menü -> Install
-    </string>
+    <string name="instruction">"CWM: 
+Ana Menü -> install zip from sdcard -> choose zip from sdcard 
 
+TWRP: 
+Ana Menü -> Install"</string>
     <string name="bak_done">Yedekleme tamamlandı</string>
-    <string name="backupalready">Yedek zaten mevcut. Mevcut olanın üzerine yazılacak.
-        \n\nDevam edilsin mi?
-    </string>
-    <string name="no_backup">Mevcut yedek bulunamadı (%s/Recovery-Tools/backups/)
-        \n\nŞimdi bir tane oluşturulsun mu?
-    </string>
-    <string name="error">Hata</string>
-    <string name="notsupportded">Cihazınız henüz geliştirici tarafından desteklenmiyor. Sistem taransın ve
-        desteklenmeyen Cihaz bildirilsin mi?
-    </string>
-    <string name="noroot">"Cihaz Root'lu değil. Lütfen Root'layın. Aşağıda daha fazla bilgi bulabilirsiniz
-        \n\nxda-developer.com"
-    </string>
+    <string name="backupalready">"Yedek zaten mevcut. Mevcut olanın üzerine yazılacak. 
+
+Devam edilsin mi?"</string>
+    <string name="no_backup">"Mevcut yedek bulunamadı (%s/Recovery-Tools/backups/) 
+
+Şimdi bir tane oluşturulsun mu?"</string>
     <string name="using_dd">Using dd. Recovery in FS</string>
     <string name="using_mtd">Use flash/dump_image (MTD)</string>
-
-    <string name="Downloading">İndiriliyor&#8230;</string>
     <string name="commentar">Yorum</string>
-    <string name="commenthint">Buraya neyin düzgün çalışmadığını yazın (indirme, yükleme, genel
-        destek veya diğer)
-    </string>
-    <string name="positive">Evet, lütfen</string>
-    <string name="neutral">Hayır, teşekkürler</string>
-    <string name="negative">İptal</string>
-
+    <string name="commenthint">Buraya neyin düzgün çalışmadığını yazın (indirme, yükleme, genel destek veya diğer)</string>
     <string name="log">Shell-Komutları Kaydı</string>
     <string name="showlog">Kayıtları Göster</string>
-
-    <string name="sDeleteBackup">Yedeklemeyi Sil</string>
     <string name="sBackupMgr">Yedekleme Yöneticisi</string>
     <string name="setname">Yedekleme için ad girin</string>
     <string name="reboot_recovery_now">Şimdi Recovery için yeniden başlatılsın mı?</string>
-    <string name="flashing">Yükleniyor&#8230;</string>
-    <string name="restoring">Geri yükleniyor&#8230;</string>
-    <string name="creating_bak">Yedek Oluşturuluyor&#8230;</string>
-
-    <string name="download_utils">Bu uygulamayı kullanmak için küçük araçları yüklemeniz gerekiyor (512KB civarında).
-        Bu bir internet bağlantısı gerektirir.
-        \nŞimdi indirilsin mi?
-    </string>
+    <string name="flashing">Yükleniyor…</string>
+    <string name="restoring">Geri yükleniyor…</string>
+    <string name="creating_bak">Yedek Oluşturuluyor…</string>
+    <string name="download_utils">"Bu uygulamayı kullanmak için küçük araçları yüklemeniz gerekiyor (512KB civarında). Bu bir internet bağlantısı gerektirir. 
+Şimdi indirilsin mi?"</string>
     <string name="over_recovery">Cihaz recovery verileriyle yüklenecektir</string>
     <string name="ShowAds">Destek için Reklamları göster</string>
-
     <string name="please_restart">Değişikliklerin uygulanması için uygulamayı lütfen yeniden başlatın</string>
     <string name="please_ads">Çalışmalarımı desteklemek için Reklamları lütfen açın! :(</string>
     <string name="donate_to_support">Çalışmalarımı desteklemek için menüden Bağış yapın! :)</string>
-
-    <string-array name="donation_google_catalog_values">
-        <item>0,50 Euro</item>
-        <item>1 Euro</item>
-        <item>2 Euros</item>
-        <item>3 Euros</item>
-        <item>5 Euros</item>
-    </string-array>
     <string name="donate">Bağış yap</string>
-
     <string name="never_again">Tekrar gösterme</string>
-    <string name="try_again">Tekrar dene!</string>
-    <string name="later">Sonra</string>
-
     <string name="no_choosed">Seçilmiş dosya yok</string>
-    <string name="update">Yeni IMG yükle ve indir</string>
+    <string name="update">Recovery listesini güncelle</string>
     <string name="search_recovery">Recovery Ara</string>
     <string name="flash_error">Yükleme başarısız</string>
     <string name="res_error">Geri yükleme başarısız</string>
@@ -107,10 +80,12 @@
     <string name="current_recovery">Geçerli Recovery: %s</string>
     <string name="stock">Stock</string>
     <string name="changelog">Değişiklikler</string>
-
-    <string name="use_supersu">Chainfire\'dan gelen SuperSu cihazınızda tanınmadı. Hataları önlemek için lütfen bunu kullanın. Şimdi (Play Store\'dan) SuperSu indirilsin mi?</string>
+    <string name="use_supersu">"Chainfire'dan gelen SuperSu cihazınızda tanınmadı. Hataları önlemek için lütfen bunu kullanın. Şimdi (Play Store'dan) SuperSu indirilsin mi?"</string>
     <string name="bak_deleted">%s silindi</string>
-
     <string name="extract_failed">Uygulamadan gerekli dosyalar çıkartılamadı. Lütfen uygulamayı yeniden başlatın.</string>
     <string name="no_history">Geçmiş bulunamadı</string>
+    <string name="sBackup">"Geçerli Recovery'yi Yedekle"</string>
+    <string name="sRestore">Yedekten geri yükle</string>
+    <string name="notsupportded">Cihazınız henüz geliştirici tarafından desteklenmiyor. Sistem taransın ve desteklenmeyen Cihaz bildirilsin mi?</string>
+    <string name="sDeleteBackup">Yedeklemeyi Sil</string>
 </resources>

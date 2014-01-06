@@ -43,14 +43,16 @@ import de.mkrtchyan.utils.Unzipper;
 
 public class DeviceHandler {
 
+    public static final int DEV_TYPE_NOT_SUPPORTED = 0;
     public static final int DEV_TYPE_DD = 1;
     public static final int DEV_TYPE_MTD = 2;
     public static final int DEV_TYPE_RECOVERY = 3;
     public static final int DEV_TYPE_SONY = 4;
+//    public static final int DEV_TYPE_MTK = 5;
 
     public static final String HOST_URL = "http://dslnexus.org/Android/recoveries";
 
-    private int DEV_TYPE = 0;
+    private int DEV_TYPE = DEV_TYPE_NOT_SUPPORTED;
 
     /*
      * This class content all device specified information to provide
@@ -88,6 +90,7 @@ public class DeviceHandler {
             new File("/dev/recovery")
     };
     private static final File[] KernelList = {
+            new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
             new File("/dev/boot")
     };
 
@@ -100,6 +103,11 @@ public class DeviceHandler {
     public boolean PHILZ = false;
     public ArrayList<String> PhilzArrayList = new ArrayList<String>();
     public boolean OTHER = false;
+
+    public String MTK_Recovery_START_HEX = "";
+    public String MTK_Recovery_Length_HEX = "";
+    public String MTK_Kernel_START_HEX = "";
+    public String MTK_Kernel_Length_HEX = "";
 
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
@@ -242,12 +250,12 @@ public class DeviceHandler {
 
 //      Samsung Galaxy Tab 2
         if (BOARD.equals("piranha")
-                || MODEL.equals("gt-p3113"))
-            DEV_NAME = "p3113";
-
-        if (DEV_NAME.equals("espressowifi")
                 || MODEL.equals("gt-p3110"))
             DEV_NAME = "p3110";
+
+        if (DEV_NAME.equals("espressowifi")
+                || MODEL.equals("gt-p3113"))
+            DEV_NAME = "p3113";
 
 //		Galaxy Note 2
         if (DEV_NAME.equals("n7100")
@@ -437,9 +445,13 @@ public class DeviceHandler {
             EXT = ".zip";
         }
         readDeviceInfos();
-        if (!RecoveryPath.equals("")) {
+        if (!RecoveryPath.equals("") && !isOverRecovery()) {
             DEV_TYPE = DEV_TYPE_DD;
         }
+
+//        if (!MTK_Kernel_START_HEX.equals("") || !MTK_Recovery_START_HEX.equals("")) {
+//            DEV_TYPE = DEV_TYPE_MTK;
+//        }
 
 //		Devices who kernel will be flashed to
         if (DEV_NAME.equals("nozomi")
@@ -448,15 +460,16 @@ public class DeviceHandler {
             DEV_TYPE = DEV_TYPE_SONY;
         }
 
-        if (new File("/dev/mtd/").exists() && !isDD())
+        if (new File("/dev/mtd/").exists() && !isDD()/* &&  !isMTK()*/) {
             DEV_TYPE = DEV_TYPE_MTD;
+        }
     }
 
     private void getSupportedSystems() {
 
         ArrayList<String> tmp1 = new ArrayList<String>(), tmp2 = new ArrayList<String>(), tmp3 = new ArrayList<String>();
 
-        if (isDD() || isMTD() || isOverRecovery()) {
+        if (isDD() || isMTD() || isOverRecovery() /*|| isMTK() */) {
             try {
                 String Line;
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "IMG_SUMS"))));
@@ -495,8 +508,7 @@ public class DeviceHandler {
             CWM = CwmArrayList.toArray().length > 0;
             TWRP = TwrpArrayList.toArray().length > 0;
             PHILZ = PhilzArrayList.toArray().length > 0;
-            OTHER = isDD() || isOverRecovery() || isMTD();
-
+            OTHER = DEV_TYPE != DEV_TYPE_NOT_SUPPORTED;
         }
     }
 
@@ -563,7 +575,7 @@ public class DeviceHandler {
                 }
 
                 if (KernelPath.equals("")) {
-                    if (line.contains("/boot") && line.contains("/dev/")) {
+                    if (line.contains("/boot") && line.contains("/dev/") && !line.contains("/bootloader")) {
                         line = line.replace("\"", "");
                         for (String split : line.split(" ")) {
                             if (new File(split).exists()) {
@@ -572,6 +584,17 @@ public class DeviceHandler {
                         }
                     }
                 }
+//                else if (line.startsWith("bootimg") && line.endsWith("/dev/block/mmcblk0")) {
+//                    KernelPath = "/dev/block/mmcblk0";
+//                    for (String split : line.split(" ")) {
+//                        if (MTK_Kernel_Length_HEX.equals("") && split.startsWith("0x")) {
+//                            MTK_Kernel_Length_HEX = split.substring(2);
+//                        } else if (MTK_Kernel_START_HEX.equals("") && split.startsWith("0x")) {
+//                            MTK_Kernel_START_HEX = split.substring(2);
+//                        }
+//                    }
+//                }
+
                 if (RecoveryPath.equals("")) {
                     if (line.contains("/recovery") && line.contains("/dev/")) {
                         line = line.replace("\"", "");
@@ -581,6 +604,16 @@ public class DeviceHandler {
                             }
                         }
                     }
+//                    else if (line.startsWith("recovery") && line.endsWith("/dev/block/mmcblk0")) {
+//                        RecoveryPath = "/dev/block/mmcblk0";
+//                        for (String split : line.split(" ")) {
+//                            if (MTK_Recovery_Length_HEX.equals("") && split.startsWith("0x")) {
+//                                MTK_Recovery_Length_HEX = split.substring(2);
+//                            } else if (MTK_Recovery_START_HEX.equals("") && split.startsWith("0x")) {
+//                                MTK_Recovery_START_HEX = split.substring(2);
+//                            }
+//                        }
+//                    }
                 }
 
             }
@@ -851,7 +884,8 @@ public class DeviceHandler {
                     || DEV_NAME.equals("ad685g")
                     || DEV_NAME.equals("audi")
                     || DEV_NAME.equals("a111")
-                    || DEV_NAME.equals("ancora"))
+                    || DEV_NAME.equals("ancora")
+                    || DEV_NAME.equals("arubaslim"))
                 RecoveryPath = "/dev/block/mmcblk0p13";
 
             if (DEV_NAME.equals("elden")
@@ -910,16 +944,20 @@ public class DeviceHandler {
     }
 
     public boolean isMTD() {
-        return getDevType() == DEV_TYPE_MTD;
+        return DEV_TYPE == DEV_TYPE_MTD;
     }
 
     public boolean isDD() {
-        return getDevType() == DEV_TYPE_DD;
+        return DEV_TYPE == DEV_TYPE_DD;
     }
 
     public boolean isOverRecovery() {
-        return getDevType() == DEV_TYPE_RECOVERY;
+        return DEV_TYPE == DEV_TYPE_RECOVERY;
     }
+
+//    public boolean isMTK() {
+//        return DEV_TYPE == DEV_TYPE_MTK;
+//    }
 
     public boolean isKernelFlashed() {
         return KERNEL_TO;

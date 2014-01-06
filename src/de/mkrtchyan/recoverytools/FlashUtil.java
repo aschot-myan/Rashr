@@ -118,6 +118,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 case DeviceHandler.DEV_TYPE_SONY:
                     SONY();
                     return true;
+//                case DeviceHandler.DEV_TYPE_MTK:
+//                    MTK();
+//                    return true;
             }
             return false;
         } catch (FailedExecuteCommand e) {
@@ -280,7 +283,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 File dump_image = mDeviceHandler.getDump_image(mContext);
                 Common.chmod(mShell, dump_image, "741");
                 Log.i(TAG, "Backup started!");
-
                 Command = dump_image.getAbsolutePath() + " " + partition + " \"" + tmpFile.getAbsolutePath() + "\"";
             }
         } catch (IOException e){
@@ -297,11 +299,14 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     || mDeviceHandler.DEV_NAME.equals("montblanc")) {
                 if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
                     Common.mountDir(CurrentPartition, "RW");
-                    mShell.execCommand(mContext, "cat " + mDeviceHandler.getCharger().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getCharger().getName());
-                    mShell.execCommand(mContext, "cat " + mDeviceHandler.getChargermon().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getChargermon().getName());
+                    mShell.execCommand(mContext, "cat " + mDeviceHandler.getCharger().getAbsolutePath() +
+                            " >> /system/bin/" + mDeviceHandler.getCharger().getName());
+                    mShell.execCommand(mContext, "cat " + mDeviceHandler.getChargermon().getAbsolutePath() +
+                            " >> /system/bin/" + mDeviceHandler.getChargermon().getName());
                     if (mDeviceHandler.DEV_NAME.equals("c6603")
                             || mDeviceHandler.DEV_NAME.equals("c6602")) {
-                        mShell.execCommand(mContext, "cat " + mDeviceHandler.getRic().getAbsolutePath() + " >> /system/bin/" + mDeviceHandler.getRic().getName());
+                        mShell.execCommand(mContext, "cat " + mDeviceHandler.getRic().getAbsolutePath() +
+                                " >> /system/bin/" + mDeviceHandler.getRic().getName());
                         Common.chmod(mShell, mDeviceHandler.getRic(), "755");
                     }
                     Common.chmod(mShell, mDeviceHandler.getCharger(), "755");
@@ -315,9 +320,47 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     Command = "cat " + CurrentPartition.getAbsolutePath() + " >> " + CustomIMG.getAbsolutePath();
                 }
             }
+            return mShell.execCommand(mContext, Command);
         } catch (IOException e) {
             e.printStackTrace();
+            return "";
         }
+    }
+
+    public String MTK() throws FailedExecuteCommand {
+        File busybox = new File(mContext.getFilesDir(), "busybox");
+
+        String Command = "";
+
+        switch (PARTITION) {
+            case RECOVERY:
+                if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
+                    Command = busybox.getAbsolutePath() + " dd if=\"" + CustomIMG.getAbsolutePath() +
+                            "\" of=\"" + CurrentPartition.getAbsolutePath() +
+                            "\" count=" + Integer.parseInt(mDeviceHandler.MTK_Recovery_Length_HEX, 16) +
+                            " seek=" + Integer.parseInt(mDeviceHandler.MTK_Recovery_START_HEX, 16) + " conv=notrunc";
+                } else if (JOB == JOB_BACKUP) {
+                    Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() +
+                            "\" of=\"" + CustomIMG.getAbsolutePath() +
+                            "\" count=" + Integer.parseInt(mDeviceHandler.MTK_Recovery_Length_HEX, 16) +
+                            " seek=" + Integer.parseInt(mDeviceHandler.MTK_Recovery_START_HEX, 16) + " conv=notrunc";
+                }
+                break;
+            case KERNEL:
+                if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
+                    Command = busybox.getAbsolutePath() + " dd if=\"" + CustomIMG.getAbsolutePath() +
+                            "\" of=\"" + CurrentPartition.getAbsolutePath() +
+                            "\" count=" + Integer.parseInt(mDeviceHandler.MTK_Kernel_Length_HEX, 16) +
+                            " seek=" + Integer.parseInt(mDeviceHandler.MTK_Kernel_START_HEX, 16) + " conv=notrunc";
+                } else if (JOB == JOB_BACKUP) {
+                    Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() +
+                            "\" of=\"" + CustomIMG.getAbsolutePath() +
+                            "\" count=" + Integer.parseInt(mDeviceHandler.MTK_Kernel_Length_HEX, 16) +
+                            " seek=" + Integer.parseInt(mDeviceHandler.MTK_Kernel_START_HEX, 16) + " conv=notrunc";
+                }
+                break;
+        }
+
         return mShell.execCommand(mContext, Command);
     }
 }

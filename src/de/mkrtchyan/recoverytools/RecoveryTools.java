@@ -38,7 +38,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -128,7 +127,13 @@ public class RecoveryTools extends ActionBarActivity {
         unpackFiles();
 
         try {
-            mShell = Shell.startRootShell();
+            try {
+                mShell = Shell.startRootShell();
+            } catch (IOException e) {
+                mShell = Shell.startShell();
+                Notifyer.showRootDeniedDialog(mContext);
+                Notifyer.showExceptionToast(mContext, TAG, e);
+            }
             try {
                 File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
                 Common.chmod(mShell, LastLog, "644");
@@ -163,15 +168,13 @@ public class RecoveryTools extends ActionBarActivity {
                 this.setTheme(Common.getIntegerPref(mContext, PREF_NAME, PREF_STYLE));
 
                 try {
-                    if (getPackageManager() != null) {
-                        PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(getPackageName(), 0);
-                        final int previous_version = Common.getIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER);
-                        final int current_version = pInfo.versionCode;
-                        if (current_version > previous_version) {
-                            version_changed = true;
-                        }
-                        Common.setIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER, current_version);
+                    PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    final int previous_version = Common.getIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER);
+                    final int current_version = pInfo.versionCode;
+                    if (current_version > previous_version) {
+                        version_changed = true;
                     }
+                    Common.setIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER, current_version);
                 } catch (PackageManager.NameNotFoundException e) {
                     version_changed = true;
                 } catch (NullPointerException e) {
@@ -184,6 +187,10 @@ public class RecoveryTools extends ActionBarActivity {
         } catch (IOException e) {
             Notifyer.showExceptionToast(mContext, TAG, e);
         }
+
+//        if (mDeviceHandler.isMTK()) {
+//            Toast.makeText(mContext, "YES!! MTK RECOGNIZED!!", Toast.LENGTH_LONG).show();
+//        }
     }
 
     //	View Methods (onClick)
@@ -287,7 +294,8 @@ public class RecoveryTools extends ActionBarActivity {
                 }
             });
             fcFlashOther.setTitle(R.string.search_recovery);
-            fcFlashOther.setEXT(mDeviceHandler.EXT);
+            String AllowedEXT[] = {mDeviceHandler.EXT};
+            fcFlashOther.setAllowedEXT(AllowedEXT);
             fcFlashOther.setBrowseUpEnabled(true);
             fcFlashOther.show();
         } catch (NullPointerException e) {
@@ -526,7 +534,6 @@ public class RecoveryTools extends ActionBarActivity {
             WebView changes = new WebView(mContext);
             changes.setWebViewClient(new WebViewClient());
             changes.loadUrl("http://forum.xda-developers.com/showpost.php?p=42839595&postcount=3");
-            changes.getSettings().setJavaScriptEnabled(true);
             dialog.setView(changes);
             dialog.show();
         }
@@ -713,16 +720,18 @@ public class RecoveryTools extends ActionBarActivity {
                 System.exit(0);
             }
         });
-        DeviceNotSupported.setNeutralButton(R.string.sReboot, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                try {
-                    mShell.execCommand(mContext, "reboot recovery");
-                } catch (FailedExecuteCommand e) {
-                    e.printStackTrace();
+        if (!LastLog.exists()) {
+            DeviceNotSupported.setNeutralButton(R.string.sReboot, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    try {
+                        mShell.execCommand(mContext, "reboot recovery");
+                    } catch (FailedExecuteCommand e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        }
         DeviceNotSupported.setCancelable(BuildConfig.DEBUG);
         DeviceNotSupported.show();
     }
@@ -730,6 +739,7 @@ public class RecoveryTools extends ActionBarActivity {
     public void handleIntent() {
 //      Handle with Files chosen by FileBrowsers
         if (getIntent().getData() != null) {
+            setTheme(R.style.Theme_AppCompat_CompactMenu_Dialog);
             keepAppOpen = false;
             fRECOVERY = new File(getIntent().getData().getPath());
             getIntent().setData(null);
@@ -755,28 +765,24 @@ public class RecoveryTools extends ActionBarActivity {
     private final Runnable rFlasher = new Runnable() {
         @Override
         public void run() {
-            if (!Common.suRecognition()) {
-                mNotifyer.showRootDeniedDialog();
-            } else {
-                if (fRECOVERY != null) {
-                    if (fRECOVERY.exists()) {
-                        if (fRECOVERY.getName().endsWith(mDeviceHandler.EXT)) {
-//				            If the flashing don't be handle specially flash it
-                            if (!mDeviceHandler.isKernelFlashed() && !mDeviceHandler.isOverRecovery()) {
-                                rFlash.run();
-                            } else {
-//		        	            Get user input if Kernel will be modified
-                                if (mDeviceHandler.isKernelFlashed())
-                                    mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
-//					            Get user input if user want to install over recovery now
-                                if (mDeviceHandler.isOverRecovery()) {
-                                    showOverRecoveryInstructions();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+           if (fRECOVERY != null) {
+               if (fRECOVERY.exists()) {
+                   if (fRECOVERY.getName().endsWith(mDeviceHandler.EXT)) {
+//		            If the flashing don't be handle specially flash it
+                       if (!mDeviceHandler.isKernelFlashed() && !mDeviceHandler.isOverRecovery()) {
+                           rFlash.run();
+                       } else {
+//		   	            Get user input if Kernel will be modified
+                           if (mDeviceHandler.isKernelFlashed())
+                               mNotifyer.createAlertDialog(R.string.warning, R.string.kernel_to, rFlash).show();
+//			            Get user input if user want to install over recovery now
+                           if (mDeviceHandler.isOverRecovery()) {
+                               showOverRecoveryInstructions();
+                           }
+                       }
+                   }
+               }
+           }
             fcFlashOther = null;
         }
     };

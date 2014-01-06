@@ -2,6 +2,11 @@
 CHANGELOG
 ====================
 
+Update [1.7.8]
+
+-Turkish, Italian translations updated
+-Romanian translation added (XDA-Member megarus)
+
 Update [1.7.7]
 
 -Some Device recognition issues fixed
