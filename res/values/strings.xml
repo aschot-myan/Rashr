@@ -3,11 +3,13 @@
 
     <string name="app_name">Recovery Tools</string>
     <string name="settings">Settings</string>
-    <string name="sFlashCWM">Flash Clockworkmod Recovery</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sFlashRecovery">Flash Recovery</string>
+    <string name="sFlashKernel">Flash Kernel</string>
     <string name="sHistory">History</string>
-    <string name="sFlashTWRP">Flash TWRP Recovery</string>
-    <string name="sFlashPhilz">Flash Philz Recovery</string>
-    <string name="sFlashOTHER">Flash other Recovery</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="sOTHER">Other from Storage</string>
     <string name="sRecoveryBackup">Backup Recovery</string>
     <string name="sKernelBackup">Backup Kernel</string>
     <string name="backups">Backups</string>
@@ -24,12 +26,13 @@
         \nBackups will be created under %s.
         \nThe DEV is not responsible on the damages of your device.
     </string>
+    <string name="flash_options">Flash Options</string>
     <string name="risk">I know the risk</string>
     <string name="sReboot">Reboot</string>
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
     <string name="info">Information</string>
-    <string name="flashed">Recovery flashed.</string>
+    <string name="flashed">Partition flashed.</string>
     <string name="warning">Warning!</string>
     <string name="kernel_to">Flashing the Recovery System on this devices will flash the boot.img (Kernel) to Stock with custom Recovery (this can cause bootloops, save a backup of Boot.img on your PC).</string>
     <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
@@ -93,6 +96,7 @@
         <item>3 Euros</item>
         <item>5 Euros</item>
     </string-array>
+
     <string name="donate">Donate</string>
 
     <string name="never_again">Never show again</string>
@@ -101,7 +105,7 @@
 
     <string name="no_choosed">No File chosen</string>
     <string name="update">Update recovery list</string>
-    <string name="search_recovery">Search Recovery</string>
+    <string name="pick_file">Pick File</string>
     <string name="flash_error">Failed to flash</string>
     <string name="res_error">Failed to restore</string>
     <string name="bak_error">Failed to backup</string>
@@ -122,4 +126,7 @@
         <item>Holo Light Style</item>
         <item>Holo Dark Style</item>
     </string-array>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

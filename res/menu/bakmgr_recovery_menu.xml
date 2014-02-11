@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/iRestoreRecovery"
+        android:title="@string/restore" />
+
+    <item
+        android:id="@+id/iRenameRecovery"
+        android:title="@string/rename" />
+
+    <item
+        android:id="@+id/iDeleteRecoveryBackup"
+        android:title="@string/delete" />
+
+</menu>

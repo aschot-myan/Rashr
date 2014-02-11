@@ -1,6 +1,6 @@
 package de.mkrtchyan.recoverytools;
 
-/*
+/**
  * Copyright (c) 2013 Ashot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.util.Log;
 
 import org.sufficientlysecure.rootcommands.Shell;
+import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,20 +43,25 @@ import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Unzipper;
 
 
-public class DeviceHandler {
+public class Device {
 
-    public static final int DEV_TYPE_NOT_SUPPORTED = 0;
-    public static final int DEV_TYPE_DD = 1;
-    public static final int DEV_TYPE_MTD = 2;
-    public static final int DEV_TYPE_RECOVERY = 3;
-    public static final int DEV_TYPE_SONY = 4;
+    private static final String TAG = "Device";
+
+    public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
+    public static final int PARTITION_TYPE_DD = 1;
+    public static final int PARTITION_TYPE_MTD = 2;
+    public static final int PARTITION_TYPE_RECOVERY = 3;
+    public static final int PARTITION_TYPE_SONY = 4;
 //    public static final int DEV_TYPE_MTK = 5;
 
-    public static final String HOST_URL = "http://dslnexus.org/Android/recoveries";
 
-    private int DEV_TYPE = DEV_TYPE_NOT_SUPPORTED;
+    public static final String RECOVERY_HOST_URL = "http://dslnexus.org/Android/recoveries";
+//    public static final String KERNEL_HOST_URL = "http://dslnexus.org/Android/kernel";
 
-    /*
+    private int RECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
+    private int KERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
+
+    /**
      * This class content all device specified information to provide
      * all information for all other classes for example:
      * What kind of partition and where is the recovery partition in the
@@ -73,6 +80,7 @@ public class DeviceHandler {
             new File("/dev/block/platform/sdhci-pxav3.2/by-name/RECOVERY"),
             new File("/dev/block/platform/comip-mmc.1/by-name/recovery"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
+            new File("/dev/block/platform/sprd-sdhci.3/by-name/KERNEL"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/USP"),
             new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
@@ -90,35 +98,35 @@ public class DeviceHandler {
             new File("/dev/recovery")
     };
     private static final File[] KernelList = {
+            new File("/dev/block/platform/sprd-sdhci.3/by-name/KERNEL"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
             new File("/dev/boot")
     };
 
-    public String EXT = ".img";
+    public String RECOVERY_EXT = ".img";
+    public String KERNEL_EXT = ".img";
     public boolean KERNEL_TO = false;
-    public boolean TWRP = false;
     public ArrayList<String> TwrpArrayList = new ArrayList<String>();
-    public boolean CWM = false;
     public ArrayList<String> CwmArrayList = new ArrayList<String>();
-    public boolean PHILZ = false;
     public ArrayList<String> PhilzArrayList = new ArrayList<String>();
-    public boolean OTHER = false;
 
+    /*
     public String MTK_Recovery_START_HEX = "";
     public String MTK_Recovery_Length_HEX = "";
     public String MTK_Kernel_START_HEX = "";
     public String MTK_Kernel_Length_HEX = "";
+    */
 
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
 
     private Context mContext;
 
-    public DeviceHandler(Context mContext) {
+    public Device(Context mContext) {
         this.mContext = mContext;
         try {
             setPredefinedOptions();
-            getSupportedSystems();
+            getSupportedRecoverySystems();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,8 +138,7 @@ public class DeviceHandler {
         String BOARD = Build.BOARD.toLowerCase();
         String MODEL = Build.MODEL.toLowerCase();
 
-//	Set DEV_NAME predefined options
-
+    /** Set DEV_NAME predefined options */
 //      LG Optimus L7
         if (MODEL.equals("lg-p710")
                 || DEV_NAME.equals("vee7e"))
@@ -368,8 +375,9 @@ public class DeviceHandler {
         }
 
         if (DEV_NAME.equals("c6603")
-                || DEV_NAME.equals("c6602"))
-            EXT = ".tar";
+                || DEV_NAME.equals("c6602")) {
+            RECOVERY_EXT = ".tar";
+        }
 
 //		Sony Xperia S
         if (DEV_NAME.equals("lt26i"))
@@ -441,12 +449,12 @@ public class DeviceHandler {
                 || DEV_NAME.equals("captivate")
                 || DEV_NAME.equals("galaxys")
                 || DEV_NAME.equals("droid2we")) {
-            DEV_TYPE = DEV_TYPE_RECOVERY;
-            EXT = ".zip";
+            RECOVERY_TYPE = PARTITION_TYPE_RECOVERY;
+            RECOVERY_EXT = ".zip";
         }
         readDeviceInfos();
-        if (!RecoveryPath.equals("") && !isOverRecovery()) {
-            DEV_TYPE = DEV_TYPE_DD;
+        if (!RecoveryPath.equals("") && !isRecoveryOverRecovery()) {
+            RECOVERY_TYPE = PARTITION_TYPE_DD;
         }
 
 //        if (!MTK_Kernel_START_HEX.equals("") || !MTK_Recovery_START_HEX.equals("")) {
@@ -457,58 +465,59 @@ public class DeviceHandler {
         if (DEV_NAME.equals("nozomi")
                 || DEV_NAME.equals("mint")) {
             KERNEL_TO = true;
-            DEV_TYPE = DEV_TYPE_SONY;
+            RECOVERY_TYPE = PARTITION_TYPE_SONY;
         }
 
-        if (new File("/dev/mtd/").exists() && !isDD()/* &&  !isMTK()*/) {
-            DEV_TYPE = DEV_TYPE_MTD;
+        if (new File("/dev/mtd/").exists()/* &&  !isMTK()*/) {
+            if (!isRecoveryDD()) {
+                RECOVERY_TYPE = PARTITION_TYPE_MTD;
+            }
+            if (!isKernelDD()) {
+                KERNEL_TYPE = PARTITION_TYPE_MTD;
+            }
         }
     }
 
-    private void getSupportedSystems() {
+    private void getSupportedRecoverySystems() {
 
-        ArrayList<String> tmp1 = new ArrayList<String>(), tmp2 = new ArrayList<String>(), tmp3 = new ArrayList<String>();
+        ArrayList<String> CWMList = new ArrayList<String>(), TWRPList = new ArrayList<String>(),
+                PHILZList = new ArrayList<String>();
 
-        if (isDD() || isMTD() || isOverRecovery() /*|| isMTK() */) {
-            try {
-                String Line;
-                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "IMG_SUMS"))));
-                while ((Line = br.readLine()) != null) {
-                    if (Line.contains(DEV_NAME) && Line.contains("clockwork") && Line.endsWith(EXT)
-                            || Line.contains("cwm") && Line.contains(DEV_NAME) && Line.endsWith(EXT)) {
-                        tmp1.add(Line.substring(55));
-                    } else if (Line.contains(DEV_NAME) && Line.contains("twrp") && Line.endsWith(EXT)) {
-                        tmp2.add(Line.substring(55));
-                    } else if (Line.contains(DEV_NAME) && Line.contains("philz") && Line.endsWith(EXT) ) {
-                        tmp3.add(Line.substring(55));
-                    }
+        try {
+            String Line;
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "IMG_SUMS"))));
+            while ((Line = br.readLine()) != null) {
+                String lowLine = Line.toLowerCase();
+                if (lowLine.contains(DEV_NAME) && lowLine.contains("clockwork") && lowLine.endsWith(RECOVERY_EXT)
+                        || lowLine.contains("cwm") && lowLine.contains(DEV_NAME) && lowLine.endsWith(RECOVERY_EXT)) {
+                    CWMList.add(Line.substring(55));
+                } else if (lowLine.contains(DEV_NAME) && lowLine.contains("twrp") && lowLine.endsWith(RECOVERY_EXT)) {
+                    TWRPList.add(Line.substring(55));
+                } else if (lowLine.contains(DEV_NAME) && lowLine.contains("philz") && lowLine.endsWith(RECOVERY_EXT) ) {
+                    PHILZList.add(Line.substring(55));
                 }
-                br.close();
+            }
+            br.close();
 
-                Collections.sort(tmp1);
-                Collections.sort(tmp2);
-                Collections.sort(tmp3);
+            Collections.sort(CWMList);
+            Collections.sort(TWRPList);
+            Collections.sort(PHILZList);
 
-                for (Object i : tmp1.toArray()) {
-                    CwmArrayList.add(0, i.toString());
-                }
-                for (Object i : tmp2.toArray()) {
-                    TwrpArrayList.add(0, i.toString());
-                }
-                for (Object i : tmp3.toArray()) {
-                    PhilzArrayList.add(0, i.toString());
-                }
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            /** Sort newest version to first place */
+            for (Object i : CWMList.toArray()) {
+                CwmArrayList.add(0, i.toString());
+            }
+            for (Object i : TWRPList.toArray()) {
+                TwrpArrayList.add(0, i.toString());
+            }
+            for (Object i : PHILZList.toArray()) {
+                PhilzArrayList.add(0, i.toString());
             }
 
-            CWM = CwmArrayList.toArray().length > 0;
-            TWRP = TwrpArrayList.toArray().length > 0;
-            PHILZ = PhilzArrayList.toArray().length > 0;
-            OTHER = DEV_TYPE != DEV_TYPE_NOT_SUPPORTED;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -555,35 +564,43 @@ public class DeviceHandler {
         }
 
         try {
-            String line;
-            File LogCopy = new File(mContext.getFilesDir(), RecoveryTools.LastLog.getName() + ".txt");
-            Shell.startRootShell().execCommand(mContext, "chmod 644 " + LogCopy.getAbsolutePath());
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
-            while ((line = br.readLine()) != null) {
-                if (CurrentRecoveryVersion.equals("Stock Recovery")) {
-                   if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
-                       CurrentRecoveryVersion = line;
-                   }
-                   if (line.contains("Starting TWRP")) {
-                       line = line.replace("Starting ", "");
-                       line = line.substring(0, 12);
-                       CurrentRecoveryVersion = line;
-                   }
-                   if (line.contains("PhilZ")) {
-                       CurrentRecoveryVersion = line;
-                   }
-                }
+            Shell mShell = Shell.startRootShell();
+            try {
+                String line;
+                File LogCopy = new File(mContext.getFilesDir(), RecoveryTools.LastLog.getName() + ".txt");
+                mShell.execCommand(mContext, "chmod 644 " + LogCopy.getAbsolutePath());
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
+                while ((line = br.readLine()) != null) {
+                    line = line.replace("\"", "");
+                    line = line.replace("\'", "");
+                    if (CurrentRecoveryVersion.equals("Stock Recovery")) {
+                        if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
+                            CurrentRecoveryVersion = line;
+                        }
+                        if (line.contains("Starting TWRP")) {
+                            line = line.replace("Starting ", "");
+                            line = line.substring(0, 12);
+                            CurrentRecoveryVersion = line;
+                        }
+                        if (line.contains("PhilZ")) {
+                            CurrentRecoveryVersion = line;
+                        }
+                    }
 
-                if (KernelPath.equals("")) {
-                    if (line.contains("/boot") && line.contains("/dev/") && !line.contains("/bootloader")) {
-                        line = line.replace("\"", "");
-                        for (String split : line.split(" ")) {
-                            if (new File(split).exists()) {
-                                KernelPath = split;
+                    if (KernelPath.equals("")) {
+                        if (line.contains("/boot") && !line.contains("/bootloader")) {
+                            if (line.contains("mtd")) {
+                                KERNEL_TYPE = PARTITION_TYPE_MTD;
+                            } else if (line.contains("/dev/")) {
+                                for (String split : line.split(" ")) {
+                                    if (new File(split).exists()) {
+                                        KernelPath = split;
+                                        KERNEL_TYPE = PARTITION_TYPE_DD;
+                                    }
+                                }
                             }
                         }
                     }
-                }
 //                else if (line.startsWith("bootimg") && line.endsWith("/dev/block/mmcblk0")) {
 //                    KernelPath = "/dev/block/mmcblk0";
 //                    for (String split : line.split(" ")) {
@@ -595,12 +612,17 @@ public class DeviceHandler {
 //                    }
 //                }
 
-                if (RecoveryPath.equals("")) {
-                    if (line.contains("/recovery") && line.contains("/dev/")) {
-                        line = line.replace("\"", "");
-                        for (String split : line.split(" ")) {
-                            if (new File(split).exists()) {
-                                RecoveryPath = split;
+                    if (RecoveryPath.equals("")) {
+                        if (line.contains("/recovery")) {
+                            if (line.contains("mtd")) {
+                                RECOVERY_TYPE = PARTITION_TYPE_MTD;
+                            } else if (line.contains("/dev/")) {
+                                for (String split : line.split(" ")) {
+                                    if (new File(split).exists()) {
+                                        RecoveryPath = split;
+                                        RECOVERY_TYPE = PARTITION_TYPE_DD;
+                                    }
+                                }
                             }
                         }
                     }
@@ -614,11 +636,13 @@ public class DeviceHandler {
 //                            }
 //                        }
 //                    }
-                }
 
+                }
+                br.close();
+            } catch (FailedExecuteCommand e) {
+                Log.i(TAG, "Recovery Lastlog not found");
             }
-            br.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -924,35 +948,35 @@ public class DeviceHandler {
     }
 
     public boolean isTwrpSupported() {
-        return TWRP;
+        return TwrpArrayList.toArray().length > 0;
     }
 
     public boolean isCwmSupported() {
-        return CWM;
+        return CwmArrayList.toArray().length > 0;
     }
 
     public boolean isPhilzSupported() {
-        return PHILZ;
+        return PhilzArrayList.toArray().length > 0;
     }
 
-    public boolean isOtherSupported() {
-        return OTHER;
+    public boolean isRecoverySupported() {
+        return RECOVERY_TYPE == PARTITION_TYPE_NOT_SUPPORTED;
     }
 
-    public int getDevType() {
-        return DEV_TYPE;
+    public int getRecoveryType() {
+        return RECOVERY_TYPE;
     }
 
-    public boolean isMTD() {
-        return DEV_TYPE == DEV_TYPE_MTD;
+    public boolean isRecoveryMTD() {
+        return RECOVERY_TYPE == PARTITION_TYPE_MTD;
     }
 
-    public boolean isDD() {
-        return DEV_TYPE == DEV_TYPE_DD;
+    public boolean isRecoveryDD() {
+        return RECOVERY_TYPE == PARTITION_TYPE_DD;
     }
 
-    public boolean isOverRecovery() {
-        return DEV_TYPE == DEV_TYPE_RECOVERY;
+    public boolean isRecoveryOverRecovery() {
+        return RECOVERY_TYPE == PARTITION_TYPE_RECOVERY;
     }
 
 //    public boolean isMTK() {
@@ -961,5 +985,21 @@ public class DeviceHandler {
 
     public boolean isKernelFlashed() {
         return KERNEL_TO;
+    }
+
+    public boolean isKernelSupported() {
+        return !KernelPath.equals("");
+    }
+
+    public boolean isKernelDD() {
+        return KERNEL_TYPE == PARTITION_TYPE_DD;
+    }
+
+    public boolean isKernelMTD() {
+        return KERNEL_TYPE == PARTITION_TYPE_MTD;
+    }
+
+    public int getKernelType() {
+        return KERNEL_TYPE;
     }
 }

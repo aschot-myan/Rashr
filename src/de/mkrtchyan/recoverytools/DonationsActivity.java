@@ -1,6 +1,6 @@
 package de.mkrtchyan.recoverytools;
 
-/*
+/**
  * Copyright (c) 2013 Ashot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,24 +34,18 @@ import donations.DonationsFragment;
 
 public class DonationsActivity extends FragmentActivity {
 
-    /**
-     * Google
-     */
+    /** Google */
     private static final boolean GOOGLE_PLAY = true;
     private static final String GOOGLE_PUBKEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhHa/9/sYU2dbF6nQqGzNktvxb+83Ed/inkK8cbiEkcRjw/t/Okge6UghlyYEXcZLJL9TDPAlraktUZZ/XH8+ZpgdNlO+UeQTD4Yl9ReZ/ujQ151g/RLrVNi7NF4SQ1jD20RmX2lCUhbl5cPi6UKL/bHFeZwjE0pOr48svW0nXbRfpgSSk3V/DaV1igTX66DuFUITKi0gQGD8XAVsrOcQRQtr4wHfdgyMQR9m0vPPzpFoDD8SZZFCp9UgvuzqdwYqY8kr7ZcyxuQhaNlcx74hpFQ9MJteRTII+ii/pHfWDh0hDMqcodm4UD9rISmPSvlLR3amfSg4Vm6ObWFiVe4qVwIDAQAB";
     private static final String[] GOOGLE_CATALOG = new String[]{"donate_0_50", "donate_1", "donate_2", "donate_3", "donate_5"};
 
-    /**
-     * PayPal
-     */
+    /** PayPal */
     private static final boolean PAYPAL = true;
     private static final String PAYPAL_USER = "ashotmkrtchyan1995@gmail.com";
     private static final String PAYPAL_CURRENCY_CODE = "EUR";
     private static final String PAYPAL_ITEM_NAME = "Recovery-Tools donation";
 
-    /**
-     * Flattr
-     */
+    /** Flattr */
     private static final boolean FLATTR = true;
     private static final String FLATTR_PROJECT_URL = "http://github.com/ashotmkrtchyan1995/Recovery-Tools";
     private static final String FLATTR_URL = "flattr.com/thing/1853888/ashotmkrtchyan1995Recovery-Tools-on-GitHub";

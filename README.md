@@ -8,14 +8,11 @@ I'm working to improve this app.
 
 ----- Description -----
 
-This app flashes your device recovery without rebooting it very fast and easy. There are 3 flash options:
+This app flashes and backups your device recovery and kernel without rebooting it very fast and easy without a PC or any outside influence.
 
-"Flash Clockworkmod-Recovery" and "Flash TWRP" (You can use these predefined buttons if they are supported.) and "Flash other".
+This app have over 850 build-in recovery imgs (Clockworkmod/TWRP/philz) of course you can choose other imgs from internal and external storage.
 
-"Flash Clockworkmod" & "Flash TWRP" load the custom-recovery for your device down and install them automatically.
-"Flash other" lets you choose an image from the internal or external memory of your device additionally you can use your file browser to choose an img.
-
-You can create backups of the currently installed system (If your device is supported. Shown below), restore and delete backups. You can find these functions under "Backup Manager".
+Over 90% of all devices will be supported by the App.
 
 This project is fully open-source if you want to help me with unsupported devices you can use the report button or contact me over XDA.
 

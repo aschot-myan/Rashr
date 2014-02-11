@@ -2,9 +2,13 @@
 CHANGELOG
 ====================
 
-Update [1.7.8]
+Update [1.8.0]
 
--Turkish, Italian translations updated
+-Kernel Flash/Backup/Restore ADDED!!
+-New CWM/PHILZ and TWRP imgs (over 300 new IMGS)
+-Many new Samsung devices added
+-Device recognition improved
+-Turkish, Italian, Dutch translations updated
 -Romanian translation added (XDA-Member megarus)
 
 Update [1.7.7]

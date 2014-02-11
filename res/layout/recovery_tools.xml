@@ -9,7 +9,7 @@
     <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/drawer_layout"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent" >
 
         <FrameLayout
             android:id="@+id/content_frame"
@@ -34,43 +34,21 @@
 
                     <Button
                         style="?button_style"
-                        android:id="@+id/bCWM"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="Go"
-                        android:tag="clockwork"
-                        android:drawableLeft="@drawable/ic_cwm"
-                        android:text="@string/sFlashCWM"
-                        android:visibility="visible" />
-
-                    <Button
-                        style="?button_style"
-                        android:id="@+id/bTWRP"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="Go"
-                        android:tag="twrp"
-                        android:drawableLeft="@drawable/ic_twrp"
-                        android:text="@string/sFlashTWRP" />
-
-                    <Button
-                        style="?button_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sFlashPhilz"
-                        android:id="@+id/bPHILZ"
-                        android:tag="philz"
-                        android:layout_gravity="center_horizontal"
-                        android:onClick="Go" />
-
-                    <Button
-                        style="?button_style"
-                        android:id="@+id/bFlashOther"
+                        android:id="@+id/bFlashRecovery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_flash"
-                        android:onClick="bFlashOther"
-                        android:text="@string/sFlashOTHER" />
+                        android:onClick="bFlashRecovery"
+                        android:text="@string/sFlashRecovery" />
+
+                    <Button
+                        style="?button_style"
+                        android:id="@+id/bFlashKernel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_flash"
+                        android:onClick="bFlashKernel"
+                        android:text="@string/sFlashKernel" />
 
                     <com.google.ads.AdView xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
                         android:id="@+id/adView"
@@ -78,19 +56,9 @@
                         android:layout_height="wrap_content"
                         ads:adUnitId="ca-app-pub-3591384811135190/6436276193"
                         ads:loadAdOnCreate="true"
-                        ads:testDevices="TEST_EMULATOR, 801ABC03F589C10F085EBB85FEFD5545, CDEE5039C3C2BF03421C3ED8F42F4747"
+                        ads:testDevices="TEST_EMULATOR, D8C221D153DA442260EA751810375941, 896047E1A726D481A3AD95454BD15606"
                         ads:adSize="SMART_BANNER"
                         android:layout_gravity="center" />
-
-                    <Button
-                        style="?button_style"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sHistory"
-                        android:id="@+id/bHistory"
-                        android:drawableLeft="@drawable/ic_history"
-                        android:layout_gravity="center"
-                        android:onClick="bShowHistory" />
 
                     <Button
                         style="?button_style"
@@ -134,116 +102,6 @@
         </LinearLayout>
 
         <!-- The navigation drawer -->
-        <LinearLayout
-            android:id="@+id/menu_drawer"
-            android:orientation="vertical"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#111"
-            android:clickable="false">
-
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="@string/xda"
-                android:textColor="@android:color/white"
-                android:id="@+id/bXDA"
-                android:onClick="bXDA"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/report"
-                android:id="@+id/bReport"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bReport"
-                android:layout_weight="1" />
-
-            <Spinner
-                style="@style/spinnerStyleView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/styles"
-                android:id="@+id/spStyle"
-                android:spinnerMode="dropdown"
-                android:layout_weight="1"
-                android:textAlignment="center" />
-
-            <CheckBox
-                android:text="@string/ShowAds"
-                android:id="@+id/cbShowAds"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="cbShowAds"
-                android:layout_weight="1" />
-
-            <CheckBox
-                android:text="@string/log"
-                android:id="@+id/cbLog"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="cbLog"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/showlog"
-                android:id="@+id/bShowLogs"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bShowLogs"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/donate"
-                android:id="@+id/bDonate"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bDonate"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/sExit"
-                android:id="@+id/bExit"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="bExit"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/backup_drawer"
-            android:orientation="vertical"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:divider="@android:color/transparent"
-            android:background="#111">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/bCreateRecoveryBackup"
-                android:onClick="bCreateRecoveryBackup"
-                android:textColor="@android:color/white"
-                android:text="@string/sRecoveryBackup"
-                android:layout_weight="6" />
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@android:color/white"
-                android:id="@+id/lvBackups"
-                android:layout_weight="1" />
-
-        </LinearLayout>
 
     </android.support.v4.widget.DrawerLayout>
 

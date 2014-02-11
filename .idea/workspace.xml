@@ -14,37 +14,74 @@
   </component>
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
-      <GlobalState />
+      <GlobalState>
+        <option name="visible" value="false" />
+      </GlobalState>
     </option>
   </component>
   <component name="AndroidLayouts">
     <shared>
       <config />
     </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/res/layout/backup_drawer.xml">
+        <config>
+          <device>Nexus 4</device>
+          <theme>@style/MyLightDarkBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/kernel_dialog.xml">
+        <config>
+          <device>Nexus 4</device>
+          <theme>@style/MyLightDarkBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/recovery_dialog.xml">
+        <config>
+          <device>Nexus 4</device>
+          <theme>@style/MyLightDarkBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/recovery_tools.xml">
+        <config>
+          <device>Nexus 4</device>
+          <theme>@style/MyLightDarkBar</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Ads" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Recovery-Tools" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fd8c375-754e-41fa-a18e-b6ef910e58bf" name="Default" comment="-Fix device recognition&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/values-ro/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENSE.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/backup_drawer.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/menu/bakmgr_kernel_menu.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/kernel_dialog.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/menu_drawer.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/recovery_dialog.xml" />
+      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\LICENSE" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\menu\bakmgr_menu.xml" afterPath="$PROJECT_DIR$/res/menu/bakmgr_recovery_menu.xml" />
+      <change type="MOVED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\src\de\mkrtchyan\recoverytools\DeviceHandler.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Device.java" />
+      <change type="MOVED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Utils-Library\src\de\mkrtchyan\utils\FileChooser.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooserDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Recovery-Tools.apk" afterPath="$PROJECT_DIR$/Recovery-Tools.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" afterPath="$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="$PROJECT_DIR$/CHANGELOG.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java" afterPath="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Recovery-Tools.iml" afterPath="$PROJECT_DIR$/Recovery-Tools.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" afterPath="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" afterPath="$PROJECT_DIR$/../Utils-Library/Utils-Library.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/custom_list_item.xml" afterPath="$PROJECT_DIR$/res/layout/custom_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/dimens.xml" afterPath="$PROJECT_DIR$/res/values/dimens.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/raw/img_sums" afterPath="$PROJECT_DIR$/res/raw/img_sums" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/recovery_tools.xml" afterPath="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-it/strings.xml" afterPath="$PROJECT_DIR$/res/values-it/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-tr/strings.xml" afterPath="$PROJECT_DIR$/res/values-tr/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/recovery_tools_menu.xml" afterPath="$PROJECT_DIR$/res/menu/recovery_tools_menu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Recovery-Tools.iws" />
@@ -110,94 +147,107 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RecoveryTools.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
+      <file leaf-file-name="DonationsActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="192" column="11" selection-start="8371" selection-end="8371" vertical-scroll-proportion="0.0" vertical-offset="4237" max-vertical-offset="13566">
+            <state line="72" column="0" selection-start="3599" selection-end="3599" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="1394">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Notifyer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java">
+      <file leaf-file-name="Device.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Device.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="9" selection-start="5750" selection-end="5750" vertical-scroll-proportion="0.0" vertical-offset="2243" max-vertical-offset="2805">
+            <state line="994" column="48" selection-start="37559" selection-end="37559" vertical-scroll-proportion="0.0" vertical-offset="15979" max-vertical-offset="16643">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values-it/strings.xml">
+      <file leaf-file-name="img_sums" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/raw/img_sums">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="43" selection-start="4835" selection-end="4835" vertical-scroll-proportion="0.0" vertical-offset="1648" max-vertical-offset="2210">
+            <state line="1079" column="43" selection-start="96691" selection-end="96691" vertical-scroll-proportion="0.0" vertical-offset="18087" max-vertical-offset="18751">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeviceHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="31" selection-start="4247" selection-end="4247" vertical-scroll-proportion="0.0" vertical-offset="1632" max-vertical-offset="16099">
-              <folding>
-                <element signature="e#15596#15604#0" expanded="true" />
-                <element signature="e#15628#15636#0" expanded="true" />
-                <element signature="e#15660#15668#0" expanded="true" />
-                <element signature="e#35127#35128#0" expanded="true" />
-                <element signature="e#35154#35155#0" expanded="true" />
-                <element signature="e#35193#35194#0" expanded="true" />
-                <element signature="e#35219#35220#0" expanded="true" />
-                <element signature="e#35260#35261#0" expanded="true" />
-                <element signature="e#35288#35289#0" expanded="true" />
-                <element signature="e#35329#35330#0" expanded="true" />
-                <element signature="e#35357#35358#0" expanded="true" />
-                <element signature="e#35388#35389#0" expanded="true" />
-                <element signature="e#35419#35420#0" expanded="true" />
-                <element signature="e#35785#35786#0" expanded="true" />
-                <element signature="e#35817#35818#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlashUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="25" selection-start="4727" selection-end="4727" vertical-scroll-proportion="0.0" vertical-offset="1491" max-vertical-offset="5814">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="22" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1139">
-              <folding>
-                <element signature="e#868#886#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CHANGELOG.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="48" selection-start="53" selection-end="310" vertical-scroll-proportion="0.35150376" vertical-offset="0" max-vertical-offset="9554">
+              <folding />
+            </state>
+          </provider>
           <provider editor-type-id="MarkdownPreviewEditor">
             <state />
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bakmgr_recovery_menu.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/menu/bakmgr_recovery_menu.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="53" selection-end="156" vertical-scroll-proportion="0.13385826" vertical-offset="0" max-vertical-offset="9486">
+            <state line="16" column="7" selection-start="407" selection-end="407" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+              <folding>
+                <element signature="e#182#199#0" expanded="false" />
+                <element signature="e#278#294#0" expanded="false" />
+                <element signature="e#379#395#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu_drawer.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/menu_drawer.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="34" selection-start="679" selection-end="679" vertical-scroll-proportion="-0.0" vertical-offset="272" max-vertical-offset="1513">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="backup_drawer.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/backup_drawer.xml">
+          <provider editor-type-id="text-editor">
+            <state line="13" column="42" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1003">
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="32" selection-start="90" selection-end="90" vertical-scroll-proportion="-2.72" vertical-offset="0" max-vertical-offset="1156">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="13" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1122">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values-tr/strings.xml">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="38" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0" vertical-offset="752" max-vertical-offset="1649">
+            <state line="121" column="41" selection-start="5819" selection-end="5819" vertical-scroll-proportion="0.0" vertical-offset="1733" max-vertical-offset="2329">
               <folding />
             </state>
           </provider>
@@ -239,10 +289,7 @@
         <option value="$PROJECT_DIR$/res/values-es/strings.xml" />
         <option value="$PROJECT_DIR$/res/values-zh/strings.xml" />
         <option value="$PROJECT_DIR$/res/values-nl/strings.xml" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/BackupHandler.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" />
-        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" />
         <option value="$PROJECT_DIR$/res/anim/slide_up_right.xml" />
         <option value="$PROJECT_DIR$/res/anim/slide_up_left.xml" />
         <option value="$PROJECT_DIR$/res/values/integers.xml" />
@@ -251,21 +298,41 @@
         <option value="$PROJECT_DIR$/res/values/attrs.xml" />
         <option value="$PROJECT_DIR$/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileListView.java" />
-        <option value="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
         <option value="$PROJECT_DIR$/../Libs/root-commands/libraries/RootCommands/src/root-commands/java/org/sufficientlysecure/rootcommands/Toolbox.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/values-it/strings.xml" />
-        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java" />
-        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" />
+        <option value="$PROJECT_DIR$/Recovery-Tools/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/Recovery-Tools/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/Recovery-Tools/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/Recovery-Tools/src/main/res/values-v14/dimens.xml" />
         <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java" />
+        <option value="$PROJECT_DIR$/res/menu/bakmgr_recovery_menu.xml" />
+        <option value="$PROJECT_DIR$/res/menu/bakmgr_kernel_menu.xml" />
+        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java" />
+        <option value="$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java" />
+        <option value="$PROJECT_DIR$/res/layout/recovery_tools.xml" />
+        <option value="$PROJECT_DIR$/res/layout/custom_list_item.xml" />
+        <option value="$PROJECT_DIR$/res/layout/backup_drawer.xml" />
+        <option value="$PROJECT_DIR$/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/res/menu/recovery_tools_menu.xml" />
+        <option value="$PROJECT_DIR$/res/layout/kernel_dialog.xml" />
+        <option value="$PROJECT_DIR$/res/layout/menu_drawer.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/layout/recovery_dialog.xml" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Device.java" />
+        <option value="$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="960" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -299,13 +366,54 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="Recovery-Tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Utils-Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Utils-Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Utils-Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -364,61 +472,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="values-tr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values-ro" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values-it" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Recovery-Tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values-es" />
+              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -440,8 +494,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Recovery-Tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -455,9 +546,9 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4790049867d5cfdc" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="YT9102XM01" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_fed20eba68b3e238e49a47cdfed0a45783d93651/bin/git.exe" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_054f2e797ebafd44a30203088cd3d58663c627ef/bin/git.exe" />
     <property name="ExportedModule" value="Recovery-Tools" />
     <property name="ExportedApkPath" value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools.apk" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
@@ -477,10 +568,10 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\raw" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\values-ro" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\values-it" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\values-tr" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\drawable-hdpi" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\values" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\res\layout" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\src\de\mkrtchyan\recoverytools" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.Android">
@@ -648,24 +739,33 @@
       <created>1387537291962</created>
       <updated>1387537291962</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update [1.7.8]&#10;&#10;-Turkish, Italian translations updated&#10;-Romanian translation added (XDA-Member megarus)">
+      <created>1389007028945</created>
+      <updated>1389007028945</updated>
+    </task>
+    <task id="LOCAL-00003" summary="-Dutch translation improved">
+      <created>1389007480844</created>
+      <updated>1389007480844</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="960" height="1040" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864583" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3693495" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40683573" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36836404" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36836404" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263506" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261105" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -673,12 +773,11 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29449153" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.088541664" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997833" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -711,7 +810,7 @@
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USERS">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
     </option>
   </component>
@@ -724,7 +823,9 @@
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <MESSAGE value="-Fix device recognition" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Fix device recognition" />
+    <MESSAGE value="Update [1.7.8]&#10;&#10;-Turkish, Italian translations updated&#10;-Romanian translation added (XDA-Member megarus)" />
+    <MESSAGE value="-Dutch translation improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Dutch translation improved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -734,204 +835,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="246" selection-end="246" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1139">
-          <folding>
-            <element signature="e#868#886#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-tr/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="38" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0" vertical-offset="752" max-vertical-offset="1649">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="301" column="105" selection-start="12766" selection-end="12766" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6358">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="25" selection-start="6208" selection-end="6213" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="15572">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="826" column="0" selection-start="30988" selection-end="30988" vertical-scroll-proportion="0.0" vertical-offset="14042" max-vertical-offset="14484">
-          <folding>
-            <element signature="e#15596#15604#0" expanded="true" />
-            <element signature="e#15628#15636#0" expanded="true" />
-            <element signature="e#15660#15668#0" expanded="true" />
-            <element signature="e#35127#35128#0" expanded="true" />
-            <element signature="e#35154#35155#0" expanded="true" />
-            <element signature="e#35193#35194#0" expanded="true" />
-            <element signature="e#35219#35220#0" expanded="true" />
-            <element signature="e#35260#35261#0" expanded="true" />
-            <element signature="e#35288#35289#0" expanded="true" />
-            <element signature="e#35329#35330#0" expanded="true" />
-            <element signature="e#35357#35358#0" expanded="true" />
-            <element signature="e#35388#35389#0" expanded="true" />
-            <element signature="e#35419#35420#0" expanded="true" />
-            <element signature="e#35785#35786#0" expanded="true" />
-            <element signature="e#35817#35818#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="301" column="105" selection-start="12766" selection-end="12766" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6307">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="25" selection-start="6208" selection-end="6213" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="15640">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="760" column="47" selection-start="28576" selection-end="28576" vertical-scroll-proportion="0.0" vertical-offset="12920" max-vertical-offset="14705">
-          <folding>
-            <element signature="e#15596#15604#0" expanded="true" />
-            <element signature="e#15628#15636#0" expanded="true" />
-            <element signature="e#15660#15668#0" expanded="true" />
-            <element signature="e#35127#35128#0" expanded="true" />
-            <element signature="e#35154#35155#0" expanded="true" />
-            <element signature="e#35193#35194#0" expanded="true" />
-            <element signature="e#35219#35220#0" expanded="true" />
-            <element signature="e#35260#35261#0" expanded="true" />
-            <element signature="e#35288#35289#0" expanded="true" />
-            <element signature="e#35329#35330#0" expanded="true" />
-            <element signature="e#35357#35358#0" expanded="true" />
-            <element signature="e#35388#35389#0" expanded="true" />
-            <element signature="e#35419#35420#0" expanded="true" />
-            <element signature="e#35785#35786#0" expanded="true" />
-            <element signature="e#35817#35818#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="301" column="105" selection-start="12766" selection-end="12766" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6307">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="25" selection-start="6208" selection-end="6213" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="15640">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="654" column="47" selection-start="23819" selection-end="23819" vertical-scroll-proportion="0.0" vertical-offset="11118" max-vertical-offset="14705">
-          <folding>
-            <element signature="e#15596#15604#0" expanded="true" />
-            <element signature="e#15628#15636#0" expanded="true" />
-            <element signature="e#15660#15668#0" expanded="true" />
-            <element signature="e#35127#35128#0" expanded="true" />
-            <element signature="e#35154#35155#0" expanded="true" />
-            <element signature="e#35193#35194#0" expanded="true" />
-            <element signature="e#35219#35220#0" expanded="true" />
-            <element signature="e#35260#35261#0" expanded="true" />
-            <element signature="e#35288#35289#0" expanded="true" />
-            <element signature="e#35329#35330#0" expanded="true" />
-            <element signature="e#35357#35358#0" expanded="true" />
-            <element signature="e#35388#35389#0" expanded="true" />
-            <element signature="e#35419#35420#0" expanded="true" />
-            <element signature="e#35785#35786#0" expanded="true" />
-            <element signature="e#35817#35818#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="322" column="1" selection-start="14121" selection-end="14121" vertical-scroll-proportion="0.0" vertical-offset="1598" max-vertical-offset="1598">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15844">
-          <folding>
-            <element signature="e#15596#15604#0" expanded="true" />
-            <element signature="e#15628#15636#0" expanded="true" />
-            <element signature="e#15660#15668#0" expanded="true" />
-            <element signature="e#35127#35128#0" expanded="true" />
-            <element signature="e#35154#35155#0" expanded="true" />
-            <element signature="e#35193#35194#0" expanded="true" />
-            <element signature="e#35219#35220#0" expanded="true" />
-            <element signature="e#35260#35261#0" expanded="true" />
-            <element signature="e#35288#35289#0" expanded="true" />
-            <element signature="e#35329#35330#0" expanded="true" />
-            <element signature="e#35357#35358#0" expanded="true" />
-            <element signature="e#35388#35389#0" expanded="true" />
-            <element signature="e#35419#35420#0" expanded="true" />
-            <element signature="e#35785#35786#0" expanded="true" />
-            <element signature="e#35817#35818#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="185" column="15" selection-start="7645" selection-end="7645" vertical-scroll-proportion="0.0" vertical-offset="3145" max-vertical-offset="3264" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="30" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1139">
-          <folding>
-            <element signature="e#868#886#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="9299" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileListView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="37" selection-start="69" selection-end="69" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="2924" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="155" column="61" selection-start="6854" selection-end="6854" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15861">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="680">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Common.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="99" column="33" selection-start="3728" selection-end="3728" vertical-scroll-proportion="0.0" vertical-offset="1683" max-vertical-offset="4029" />
@@ -942,7 +845,7 @@
         <state line="4" column="0" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="9299" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java">
+    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooserDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="29" selection-start="1533" selection-end="1533" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3145" />
       </provider>
@@ -950,37 +853,81 @@
     <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="202" column="29" selection-start="7899" selection-end="7899" vertical-scroll-proportion="0.0" vertical-offset="3434" max-vertical-offset="5576">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="330" column="16" selection-start="14356" selection-end="14356" vertical-scroll-proportion="0.0" vertical-offset="5610" max-vertical-offset="15810">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5233#5343#0" expanded="true" />
+            <element signature="e#5336#5337#0" expanded="true" />
+            <element signature="e#9748#9766#0" expanded="true" />
+            <element signature="e#14587#14605#0" expanded="true" />
+            <element signature="e#15229#15246#0" expanded="true" />
+            <element signature="e#16379#16398#0" expanded="true" />
+            <element signature="e#16685#16704#0" expanded="true" />
+            <element signature="e#17055#17072#0" expanded="true" />
+            <element signature="e#18197#18216#0" expanded="true" />
+            <element signature="e#18503#18522#0" expanded="true" />
+            <element signature="e#18719#18735#0" expanded="true" />
+            <element signature="e#20626#20648#0" expanded="true" />
+            <element signature="e#21002#21018#0" expanded="true" />
+            <element signature="e#22897#22919#0" expanded="true" />
+            <element signature="e#23634#23656#0" expanded="true" />
+            <element signature="e#24692#24714#0" expanded="true" />
+            <element signature="e#24953#24971#0" expanded="true" />
+            <element signature="e#25566#25585#0" expanded="true" />
+            <element signature="e#25664#25690#0" expanded="true" />
+            <element signature="e#31750#31773#0" expanded="true" />
+            <element signature="e#32260#32278#0" expanded="true" />
+            <element signature="e#32815#32831#0" expanded="true" />
+            <element signature="e#32885#32916#0" expanded="true" />
+            <element signature="e#33102#33126#0" expanded="true" />
+            <element signature="e#33536#33549#0" expanded="true" />
+            <element signature="e#34457#34473#0" expanded="true" />
+            <element signature="e#36865#36887#0" expanded="true" />
+            <element signature="e#37653#37693#0" expanded="true" />
+            <element signature="e#39371#39393#0" expanded="true" />
+            <element signature="e#40156#40196#0" expanded="true" />
+            <element signature="e#41070#41083#0" expanded="true" />
+            <element signature="e#41113#41141#0" expanded="true" />
+            <element signature="e#41178#41195#0" expanded="true" />
+            <element signature="e#41484#41505#0" expanded="true" />
+            <element signature="e#41747#41768#0" expanded="true" />
+            <element signature="e#41912#41932#0" expanded="true" />
+            <element signature="e#42508#42524#0" expanded="true" />
+            <element signature="e#42568#42611#0" expanded="true" />
+            <element signature="e#42670#42687#0" expanded="true" />
+            <element signature="e#42965#42982#0" expanded="true" />
+            <element signature="e#43679#43695#0" expanded="true" />
+            <element signature="e#43736#43759#0" expanded="true" />
+            <element signature="e#43807#43822#0" expanded="true" />
+            <element signature="e#44062#44077#0" expanded="true" />
+            <element signature="e#44380#44396#0" expanded="true" />
+            <element signature="e#46942#46958#0" expanded="true" />
+            <element signature="e#46960#46978#0" expanded="true" />
+            <element signature="e#49509#49832#0" expanded="true" />
+            <element signature="e#49813#49814#0" expanded="true" />
+            <element signature="e#50755#51076#0" expanded="true" />
+            <element signature="e#51057#51058#0" expanded="true" />
+            <element signature="e#52095#52112#0" expanded="true" />
+            <element signature="e#52114#52131#0" expanded="true" />
+            <element signature="e#54039#54062#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="9282" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-nl/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="12" selection-start="2531" selection-end="2531" vertical-scroll-proportion="0.0" vertical-offset="640" max-vertical-offset="1836">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-zh/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="12" selection-start="2324" selection-end="2324" vertical-scroll-proportion="0.0" vertical-offset="623" max-vertical-offset="1836">
-          <folding />
-        </state>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/BuildConfig.java">
@@ -993,27 +940,17 @@
         <state line="5" column="19" selection-start="184" selection-end="184" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="54" selection-start="876" selection-end="876" vertical-scroll-proportion="0.33203885" vertical-offset="101" max-vertical-offset="1496" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/de/mkrtchyan/recoverytools/R.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="19" selection-start="177" selection-end="177" vertical-scroll-proportion="0.16098484" vertical-offset="0" max-vertical-offset="528" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DEVICES.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3791" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="44" selection-start="2010" selection-end="2010" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="2635" />
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/search_bg_shadow.9.png">
@@ -1026,17 +963,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/recovery_tools.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="48" selection-start="3275" selection-end="3275" vertical-scroll-proportion="0.12348668" vertical-offset="1224" max-vertical-offset="4335" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Downloader.java">
@@ -1059,62 +986,6 @@
         <state line="759" column="39" selection-start="25527" selection-end="25527" vertical-scroll-proportion="0.33216783" vertical-offset="12050" max-vertical-offset="13090" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/raw/img_sums">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="729" column="0" selection-start="65984" selection-end="65984" vertical-scroll-proportion="-0.022701476" vertical-offset="12413" max-vertical-offset="13294" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="192" column="11" selection-start="8371" selection-end="8371" vertical-scroll-proportion="0.0" vertical-offset="4237" max-vertical-offset="13566">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="9" selection-start="5750" selection-end="5750" vertical-scroll-proportion="0.0" vertical-offset="1806" max-vertical-offset="2805">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DeviceHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="31" selection-start="4247" selection-end="4247" vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="16201">
-          <folding>
-            <element signature="e#15596#15604#0" expanded="true" />
-            <element signature="e#15628#15636#0" expanded="true" />
-            <element signature="e#15660#15668#0" expanded="true" />
-            <element signature="e#35127#35128#0" expanded="true" />
-            <element signature="e#35154#35155#0" expanded="true" />
-            <element signature="e#35193#35194#0" expanded="true" />
-            <element signature="e#35219#35220#0" expanded="true" />
-            <element signature="e#35260#35261#0" expanded="true" />
-            <element signature="e#35288#35289#0" expanded="true" />
-            <element signature="e#35329#35330#0" expanded="true" />
-            <element signature="e#35357#35358#0" expanded="true" />
-            <element signature="e#35388#35389#0" expanded="true" />
-            <element signature="e#35419#35420#0" expanded="true" />
-            <element signature="e#35785#35786#0" expanded="true" />
-            <element signature="e#35817#35818#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="25" selection-start="4727" selection-end="4727" vertical-scroll-proportion="0.0" vertical-offset="1491" max-vertical-offset="5814">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-it/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="43" selection-start="4835" selection-end="4835" vertical-scroll-proportion="0.0" vertical-offset="1648" max-vertical-offset="2210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/values-tr/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="38" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0" vertical-offset="781" max-vertical-offset="1649">
@@ -1122,23 +993,313 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-nl/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-zh/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="46" selection-start="2443" selection-end="2443" vertical-scroll-proportion="0.05685619" vertical-offset="782" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-it/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="43" selection-start="4835" selection-end="4835" vertical-scroll-proportion="0.41248608" vertical-offset="1313" max-vertical-offset="2210">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable-nodpi/example_appwidget_preview.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-v14/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="11" selection-start="50" selection-end="50" vertical-scroll-proportion="0.030520646" vertical-offset="0" max-vertical-offset="557">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable-mdpi/ic_drawer.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../Libs/android-support-v13.jar!/android/support/v4/widget/DrawerLayout.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="16" selection-start="5746" selection-end="5746" vertical-scroll-proportion="0.33270678" vertical-offset="1965" max-vertical-offset="4607" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/com/android/internal/os/ZygoteInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="772" column="25" selection-start="26738" selection-end="26738" vertical-scroll-proportion="0.17594256" vertical-offset="12278" max-vertical-offset="12835" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2194" column="0" selection-start="93847" selection-end="93847" vertical-scroll-proportion="0.0" vertical-offset="34903" max-vertical-offset="83164" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/Notifyer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="165" column="24" selection-start="6464" selection-end="6464" vertical-scroll-proportion="0.33213645" vertical-offset="2076" max-vertical-offset="2856" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Utils-Library/src/de/mkrtchyan/utils/FileChooserDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="173" column="37" selection-start="6244" selection-end="6244" vertical-scroll-proportion="0.0" vertical-offset="2367" max-vertical-offset="2924">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/rebooter_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="557">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/bakmgr_kernel_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="41" selection-start="293" selection-end="293" vertical-scroll-proportion="0.30520648" vertical-offset="0" max-vertical-offset="557">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/custom_list_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="44" selection-start="455" selection-end="455" vertical-scroll-proportion="0.31954888" vertical-offset="0" max-vertical-offset="532">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="12" selection-start="266" selection-end="266" vertical-scroll-proportion="0.21364452" vertical-offset="0" max-vertical-offset="557">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/recovery_tools_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="39" selection-start="262" selection-end="262" vertical-scroll-proportion="0.18312387" vertical-offset="0" max-vertical-offset="557">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/recovery_tools.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="13" column="20" selection-start="532" selection-end="532" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1921">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/kernel_dialog.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="17" column="44" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="629">
+          <folding>
+            <element signature="e#698#714#0" expanded="false" />
+            <element signature="e#890#908#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/recovery_dialog.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="17" selection-start="245" selection-end="245" vertical-scroll-proportion="0.2236842" vertical-offset="0" max-vertical-offset="1173">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/android/content/res/Resources.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="238" column="16" selection-start="10000" selection-end="10000" vertical-scroll-proportion="-1.2513465" vertical-offset="4046" max-vertical-offset="40324" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Utils-Library/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="261" selection-end="261" vertical-scroll-proportion="0.2556391" vertical-offset="0" max-vertical-offset="532">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="32" selection-start="90" selection-end="90" vertical-scroll-proportion="-2.72" vertical-offset="0" max-vertical-offset="1156">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="22" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1139">
+        <state line="7" column="13" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1122">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="41" selection-start="5819" selection-end="5819" vertical-scroll-proportion="0.0" vertical-offset="1733" max-vertical-offset="2329">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/raw/img_sums">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1079" column="43" selection-start="96691" selection-end="96691" vertical-scroll-proportion="0.0" vertical-offset="18087" max-vertical-offset="18751">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/FlashUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="392" column="0" selection-start="17413" selection-end="17413" vertical-scroll-proportion="0.0" vertical-offset="6294" max-vertical-offset="6851">
           <folding>
-            <element signature="e#868#886#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/DonationsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="0" selection-start="3599" selection-end="3599" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="1394">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="994" column="48" selection-start="37559" selection-end="37559" vertical-scroll-proportion="0.0" vertical-offset="15979" max-vertical-offset="16643">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/bakmgr_recovery_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="7" selection-start="407" selection-end="407" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+          <folding>
+            <element signature="e#182#199#0" expanded="false" />
+            <element signature="e#278#294#0" expanded="false" />
+            <element signature="e#379#395#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/menu_drawer.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="34" selection-start="679" selection-end="679" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1513">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/backup_drawer.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="13" column="42" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/mkrtchyan/recoverytools/RecoveryTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="199" column="32" selection-start="8897" selection-end="8897" vertical-scroll-proportion="0.35781544" vertical-offset="3193" max-vertical-offset="19312">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5233#5343#0" expanded="true" />
+            <element signature="e#5336#5337#0" expanded="true" />
+            <element signature="e#9748#9766#0" expanded="true" />
+            <element signature="e#14587#14605#0" expanded="true" />
+            <element signature="e#15229#15246#0" expanded="true" />
+            <element signature="e#16379#16398#0" expanded="true" />
+            <element signature="e#16685#16704#0" expanded="true" />
+            <element signature="e#17055#17072#0" expanded="true" />
+            <element signature="e#18197#18216#0" expanded="true" />
+            <element signature="e#18503#18522#0" expanded="true" />
+            <element signature="e#18719#18735#0" expanded="true" />
+            <element signature="e#20626#20648#0" expanded="true" />
+            <element signature="e#21002#21018#0" expanded="true" />
+            <element signature="e#22897#22919#0" expanded="true" />
+            <element signature="e#23634#23656#0" expanded="true" />
+            <element signature="e#24692#24714#0" expanded="true" />
+            <element signature="e#24953#24971#0" expanded="true" />
+            <element signature="e#25566#25585#0" expanded="true" />
+            <element signature="e#25664#25690#0" expanded="true" />
+            <element signature="e#31750#31773#0" expanded="true" />
+            <element signature="e#32260#32278#0" expanded="true" />
+            <element signature="e#32815#32831#0" expanded="true" />
+            <element signature="e#32885#32916#0" expanded="true" />
+            <element signature="e#33102#33126#0" expanded="true" />
+            <element signature="e#33536#33549#0" expanded="true" />
+            <element signature="e#34457#34473#0" expanded="true" />
+            <element signature="e#36865#36887#0" expanded="true" />
+            <element signature="e#37653#37693#0" expanded="true" />
+            <element signature="e#39371#39393#0" expanded="true" />
+            <element signature="e#40156#40196#0" expanded="true" />
+            <element signature="e#41070#41083#0" expanded="true" />
+            <element signature="e#41113#41141#0" expanded="true" />
+            <element signature="e#41178#41195#0" expanded="true" />
+            <element signature="e#41484#41505#0" expanded="true" />
+            <element signature="e#41747#41768#0" expanded="true" />
+            <element signature="e#41912#41932#0" expanded="true" />
+            <element signature="e#42508#42524#0" expanded="true" />
+            <element signature="e#42568#42611#0" expanded="true" />
+            <element signature="e#42670#42687#0" expanded="true" />
+            <element signature="e#42965#42982#0" expanded="true" />
+            <element signature="e#43679#43695#0" expanded="true" />
+            <element signature="e#43736#43759#0" expanded="true" />
+            <element signature="e#43807#43822#0" expanded="true" />
+            <element signature="e#44062#44077#0" expanded="true" />
+            <element signature="e#44380#44396#0" expanded="true" />
+            <element signature="e#46942#46958#0" expanded="true" />
+            <element signature="e#46960#46978#0" expanded="true" />
+            <element signature="e#49509#49832#0" expanded="true" />
+            <element signature="e#49813#49814#0" expanded="true" />
+            <element signature="e#50755#51076#0" expanded="true" />
+            <element signature="e#51057#51058#0" expanded="true" />
+            <element signature="e#52095#52112#0" expanded="true" />
+            <element signature="e#52114#52131#0" expanded="true" />
+            <element signature="e#54039#54062#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="53" selection-end="156" vertical-scroll-proportion="0.13385826" vertical-offset="0" max-vertical-offset="9486">
+        <state line="11" column="48" selection-start="53" selection-end="310" vertical-scroll-proportion="0.35150376" vertical-offset="0" max-vertical-offset="9554">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>
