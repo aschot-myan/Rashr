@@ -976,7 +976,7 @@ public class Device {
     }
 
     public boolean isRecoveryOverRecovery() {
-        return RECOVERY_TYPE == PARTITION_TYPE_RECOVERY;
+        return RECOVERY_TYPE != PARTITION_TYPE_RECOVERY;
     }
 
 //    public boolean isMTK() {

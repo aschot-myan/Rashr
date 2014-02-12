@@ -2,6 +2,10 @@
 CHANGELOG
 ====================
 
+Update [1.8.1]
+
+-Recovery flash support recognition fixed
+
 Update [1.8.0]
 
 -Kernel Flash/Backup/Restore ADDED!!
