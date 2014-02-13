@@ -2,6 +2,11 @@
 CHANGELOG
 ====================
 
+Update [1.8.2]
+
+-MTD device recognition improvements
+-Recovery flash support recognition fixed
+
 Update [1.8.1]
 
 -Recovery flash support recognition fixed

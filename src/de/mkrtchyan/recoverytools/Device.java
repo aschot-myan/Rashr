@@ -476,6 +476,13 @@ public class Device {
                 KERNEL_TYPE = PARTITION_TYPE_MTD;
             }
         }
+        if (RecoveryPath.contains("mtd")) {
+            RECOVERY_TYPE = PARTITION_TYPE_MTD;
+        }
+
+        if (KernelPath.contains("mtd")) {
+            KERNEL_TYPE = PARTITION_TYPE_MTD;
+        }
     }
 
     private void getSupportedRecoverySystems() {
@@ -960,7 +967,7 @@ public class Device {
     }
 
     public boolean isRecoverySupported() {
-        return RECOVERY_TYPE == PARTITION_TYPE_NOT_SUPPORTED;
+        return RECOVERY_TYPE != PARTITION_TYPE_NOT_SUPPORTED;
     }
 
     public int getRecoveryType() {
@@ -976,7 +983,7 @@ public class Device {
     }
 
     public boolean isRecoveryOverRecovery() {
-        return RECOVERY_TYPE != PARTITION_TYPE_RECOVERY;
+        return RECOVERY_TYPE == PARTITION_TYPE_RECOVERY;
     }
 
 //    public boolean isMTK() {

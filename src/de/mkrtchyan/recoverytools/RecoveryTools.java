@@ -646,19 +646,23 @@ public class RecoveryTools extends ActionBarActivity {
                                         "\nModel: " + Build.MODEL +
                                         "\nFingerprint: " + Build.FINGERPRINT +
                                         "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")" +
+                                        "\nRecovery Supported: " + mDevice.isRecoverySupported() +
                                         "\nRecovery Path: " + mDevice.RecoveryPath +
-                                        "\nKernel Path: " + mDevice.KernelPath +
                                         "\nRecovery MTD: " + mDevice.isRecoveryMTD() +
                                         "\nRecovery DD: " + mDevice.isRecoveryDD() +
+                                        "\nKernel Supported: " + mDevice.isKernelSupported() +
+                                        "\nKernel Path: " + mDevice.KernelPath +
+                                        "\nKernel MTD: " + mDevice.isKernelMTD() +
+                                        "\nKernel DD: " + mDevice.isKernelDD() +
                                         "\n\nCWM: " + mDevice.isCwmSupported() +
                                         "\nTWRP: " + mDevice.isTwrpSupported() +
                                         "\nPHILZ: " + mDevice.isPhilzSupported() +
-                                        "\nOTHER: " + mDevice.isRecoverySupported() +
                                         "\n\n\n===========Comment==========\n" + comment +
                                         "\n===========Comment==========\n");
                                 File CommandLogs = new File(mContext.getFilesDir(), Shell.Logs);
-                                if (CommandLogs.exists())
+                                if (CommandLogs.exists()) {
                                     files.add(CommandLogs);
+                                }
                                 files.add(new File(getFilesDir(), "last_log.txt"));
                                 ArrayList<Uri> uris = new ArrayList<Uri>();
                                 for (File file : files) {
