@@ -10,9 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
+        <Button style="?button_style"
             android:id="@+id/bFlashOtherKernel"
-            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_flash"
@@ -20,14 +19,14 @@
             android:tag="kernel"
             android:text="@string/sOTHER" />
 
-        <Button
+        <Button style="?button_style"
             android:id="@+id/bRecoveryHistory"
-            style="?button_style"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawableLeft="@drawable/ic_history"
             android:onClick="showFlashHistory"
+            android:tag="kernel"
             android:text="@string/sHistory" />
     </LinearLayout>
 </ScrollView>
