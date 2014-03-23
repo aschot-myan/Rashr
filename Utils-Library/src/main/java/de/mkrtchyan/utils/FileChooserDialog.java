@@ -1,7 +1,7 @@
 package de.mkrtchyan.utils;
 
-/*
- * Copyright (c) 2013 Ashot Mkrtchyan
+/**
+ * Copyright (c) 2014 Ashot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights 
@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ import java.util.Collections;
 public class FileChooserDialog extends Dialog {
 
     private final File StartFolder;
-    final private FileListView lvFiles;
+    final private ListView lvFiles;
     private final Context mContext;
     private File currentPath;
     private boolean showHidden = false;
@@ -61,7 +62,6 @@ public class FileChooserDialog extends Dialog {
         layout.setOrientation(LinearLayout.VERTICAL);
 
         lvFiles = new FileListView(mContext);
-        lvFiles.setStartFolder(StartFolder);
         layout.addView(lvFiles);
         setContentView(layout);
 
@@ -81,10 +81,11 @@ public class FileChooserDialog extends Dialog {
         });
     }
 
-    public void reload() {
+    private void reload() {
         FileList.clear();
 
-        if (!currentPath.equals(StartFolder) || BrowseUpEnabled) {
+        if ((!currentPath.equals(StartFolder) || BrowseUpEnabled)
+                && currentPath.getParentFile().exists()) {
             FileList.add(currentPath.getParentFile());
         }
         try {
@@ -119,8 +120,9 @@ public class FileChooserDialog extends Dialog {
         String[] tmp = new String[FileList.toArray(new File[FileList.size()]).length];
         for (int i = 0; i < tmp.length; i++) {
 
-            if (i == 0 && BrowseUpEnabled || i == 0 && !currentPath.equals(StartFolder)) {
-                tmp[0] = currentPath.getParentFile().getAbsolutePath() + "/";
+            if (i == 0 && (BrowseUpEnabled || !currentPath.equals(StartFolder))
+                    && currentPath.getParentFile().exists()) {
+                    tmp[0] = currentPath.getParentFile().getAbsolutePath() + "/";
             } else {
                 if (FileList.get(i).isDirectory()) {
                     tmp[i] = FileList.get(i).getName() + "/";
@@ -173,7 +175,9 @@ public class FileChooserDialog extends Dialog {
             }
         }
         this.AllowedEXT = AllowedEXT;
-        reload();
+        if (isShowing()) {
+            reload();
+        }
     }
 
     public LinearLayout getLayout() {
@@ -181,21 +185,24 @@ public class FileChooserDialog extends Dialog {
     }
 
     public void setWarn(boolean warn) {
-        lvFiles.setWarnAtChoose(warn);
+        this.warn = warn;
     }
 
     public void setBrowseUpEnabled(boolean BrowseUpEnabled) {
-        lvFiles.setBrowseUpEnabled(BrowseUpEnabled);
-    }
-
-    public void showHiddenFiles(boolean showHidden) {
-        lvFiles.showHidden(showHidden);
+        this.BrowseUpEnabled = BrowseUpEnabled;
         if (isShowing()) {
             reload();
         }
     }
 
-    public FileListView getList() {
+    public void showHiddenFiles(boolean showHidden) {
+        this.showHidden = showHidden;
+        if (isShowing()) {
+            reload();
+        }
+    }
+
+    public ListView getList() {
         return lvFiles;
     }
 }
