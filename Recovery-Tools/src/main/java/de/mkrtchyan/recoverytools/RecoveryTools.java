@@ -135,7 +135,7 @@ public class RecoveryTools extends ActionBarActivity {
         @Override
         public void run() {
             if (fRECOVERY != null) {
-                if (fRECOVERY.exists() && fRECOVERY.getName().endsWith(mDevice.RECOVERY_EXT)) {
+                if (fRECOVERY.exists() && fRECOVERY.getName().endsWith(mDevice.getRecoveryExt())) {
                     if (!mDevice.isFOTAFlashed() && !mDevice.isRecoveryOverRecovery()) {
                         /** Flash not need to be handled specially */
                         rFlashRecovery.run();
@@ -160,7 +160,7 @@ public class RecoveryTools extends ActionBarActivity {
         public void run() {
             if (fKERNEL != null) {
                 if (fKERNEL.exists()) {
-                    if (fKERNEL.getName().endsWith(mDevice.KERNEL_EXT)) {
+                    if (fKERNEL.getName().endsWith(mDevice.getKernelExt())) {
                         rFlashKernel.run();
                     }
                 }
@@ -352,13 +352,13 @@ public class RecoveryTools extends ActionBarActivity {
              */
             String SYSTEM = view.getTag().toString();
             if (SYSTEM.equals("clockwork")) {
-                Versions = mDevice.CwmArrayList;
+                Versions = mDevice.getCWMVersions();
                 path = PathToCWM;
             } else if (SYSTEM.equals("twrp")) {
-                Versions = mDevice.TwrpArrayList;
+                Versions = mDevice.getTWRPVersions();
                 path = PathToTWRP;
             } else if (SYSTEM.equals("philz")) {
-                Versions = mDevice.PhilzArrayList;
+                Versions = mDevice.getPHILZVersions();
                 path = PathToPhilz;
             } else {
                 return;
@@ -410,7 +410,7 @@ public class RecoveryTools extends ActionBarActivity {
                 }
             });
             fcFlashOtherRecovery.setTitle(R.string.pick_file);
-            String AllowedEXT[] = {mDevice.RECOVERY_EXT};
+            String AllowedEXT[] = {mDevice.getRecoveryExt()};
             fcFlashOtherRecovery.setAllowedEXT(AllowedEXT);
             fcFlashOtherRecovery.setBrowseUpEnabled(true);
             fcFlashOtherRecovery.show();
@@ -433,7 +433,7 @@ public class RecoveryTools extends ActionBarActivity {
                 }
             });
             fcFlashOtherKernel.setTitle(R.string.pick_file);
-            String AllowedEXT[] = {mDevice.KERNEL_EXT};
+            String AllowedEXT[] = {mDevice.getKernelExt()};
             fcFlashOtherKernel.setAllowedEXT(AllowedEXT);
             fcFlashOtherKernel.setBrowseUpEnabled(true);
             fcFlashOtherKernel.setWarn(true);
@@ -511,7 +511,7 @@ public class RecoveryTools extends ActionBarActivity {
     }
 
     public void flashAs(View view) {
-        String path = "";
+        String path;
         keepAppOpen = false;
         if ((path = getIntent().getData().getPath()) != null) {
             final File IMG = new File(path);
@@ -585,12 +585,15 @@ public class RecoveryTools extends ActionBarActivity {
     public void createBackup(final boolean RecoveryBackup) {
         String prefix;
         String CurrentName;
+        String EXT;
         if (RecoveryBackup) {
             prefix = "recovery";
-            CurrentName = mDevice.CurrentRecoveryVersion;
+            EXT = mDevice.getRecoveryExt();
+            CurrentName = mDevice.getRecoveryVersion();
         } else {
             prefix = "kernel";
-            CurrentName = mDevice.CurrentKernelVersion;
+            EXT = mDevice.getKernelExt();
+            CurrentName = mDevice.getKernelVersion();
         }
         final Dialog dialog = new Dialog(mContext);
         dialog.setTitle(R.string.setname);
@@ -602,7 +605,7 @@ public class RecoveryTools extends ActionBarActivity {
                 + "-" + Calendar.getInstance().get(Calendar.MONTH)
                 + "-" + Calendar.getInstance().get(Calendar.YEAR)
                 + "-" + Calendar.getInstance().get(Calendar.HOUR)
-                + ":" + Calendar.getInstance().get(Calendar.MINUTE) + mDevice.RECOVERY_EXT;
+                + ":" + Calendar.getInstance().get(Calendar.MINUTE) + EXT;
         optName.setText(CurrentName);
         optName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -620,11 +623,11 @@ public class RecoveryTools extends ActionBarActivity {
                 File Path;
                 final int JOB;
                 if (RecoveryBackup) {
-                    EXT = mDevice.RECOVERY_EXT;
+                    EXT = mDevice.getRecoveryExt();
                     Path = PathToRecoveryBackups;
                     JOB = FlashUtil.JOB_BACKUP_RECOVERY;
                 } else {
-                    EXT = mDevice.KERNEL_EXT;
+                    EXT = mDevice.getKernelExt();
                     Path = PathToKernelBackups;
                     JOB = FlashUtil.JOB_BACKUP_KERNEL;
                 }
@@ -751,20 +754,20 @@ public class RecoveryTools extends ActionBarActivity {
                                         "\nVersionCode: " + pInfo.versionCode +
                                         "\n\n\nProduct Info: " +
                                         "\n\nManufacture: " + android.os.Build.MANUFACTURER +
-                                        "\nDevice: " + Build.DEVICE + " (" + mDevice.DEV_NAME + ")" +
+                                        "\nDevice: " + Build.DEVICE + " (" + mDevice.getDeviceName() + ")" +
                                         "\nBoard: " + Build.BOARD +
                                         "\nBrand: " + Build.BRAND +
                                         "\nModel: " + Build.MODEL +
                                         "\nFingerprint: " + Build.FINGERPRINT +
                                         "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")" +
                                         "\nRecovery Supported: " + mDevice.isRecoverySupported() +
-                                        "\nRecovery Path: " + mDevice.RecoveryPath +
-                                        "\nRecovery Version: " + mDevice.CurrentRecoveryVersion +
+                                        "\nRecovery Path: " + mDevice.getRecoveryPath() +
+                                        "\nRecovery Version: " + mDevice.getRecoveryVersion() +
                                         "\nRecovery MTD: " + mDevice.isRecoveryMTD() +
                                         "\nRecovery DD: " + mDevice.isRecoveryDD() +
                                         "\nKernel Supported: " + mDevice.isKernelSupported() +
-                                        "\nKernel Path: " + mDevice.KernelPath +
-                                        "\nKernel Version: " + mDevice.CurrentRecoveryVersion +
+                                        "\nKernel Path: " + mDevice.getKernelPath() +
+                                        "\nKernel Version: " + mDevice.getKernelVersion() +
                                         "\nKernel MTD: " + mDevice.isKernelMTD() +
                                         "\nKernel DD: " + mDevice.isKernelDD() +
                                         "\n\nCWM: " + mDevice.isCwmSupported() +
@@ -929,8 +932,8 @@ public class RecoveryTools extends ActionBarActivity {
                                         Name = String.valueOf(etFileName.getHint());
                                     }
 
-                                    if (!Name.endsWith(mDevice.RECOVERY_EXT)) {
-                                        Name = Name + mDevice.RECOVERY_EXT;
+                                    if (!Name.endsWith(mDevice.getRecoveryExt())) {
+                                        Name = Name + mDevice.getRecoveryExt();
                                     }
 
                                     final File renamedBackup = new File(PathToRecoveryBackups, Name);
@@ -976,8 +979,8 @@ public class RecoveryTools extends ActionBarActivity {
                                         Name = String.valueOf(etFileName.getHint());
                                     }
 
-                                    if (!Name.endsWith(mDevice.KERNEL_EXT)) {
-                                        Name = Name + mDevice.KERNEL_EXT;
+                                    if (!Name.endsWith(mDevice.getKernelExt())) {
+                                        Name = Name + mDevice.getKernelExt();
                                     }
 
                                     final File renamedBackup = new File(PathToKernelBackups, Name);
@@ -1252,7 +1255,7 @@ public class RecoveryTools extends ActionBarActivity {
                     }
 
                     final TextView RecoveryVersion = (TextView) findViewById(R.id.tvVersion);
-                    RecoveryVersion.setText(mDevice.CurrentRecoveryVersion + "\n" + mDevice.CurrentKernelVersion);
+                    RecoveryVersion.setText(mDevice.getRecoveryVersion() + "\n" + mDevice.getKernelVersion());
                     loadBackupDrawer();
 
                     if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {

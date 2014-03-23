@@ -96,17 +96,17 @@ public class Device {
      */
     private int RECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private int KERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
-    public String DEV_NAME = Build.DEVICE.toLowerCase();
-    public String RecoveryPath = "";
-    public String CurrentRecoveryVersion = "Not recognized Recovery";
-    public String CurrentKernelVersion = "Linux " + System.getProperty("os.version");
-    public String KernelPath = "";
-    public String RECOVERY_EXT = ".img";
-    public String KERNEL_EXT = ".img";
-    public boolean FOTA_FLASH = false;
-    public ArrayList<String> TwrpArrayList = new ArrayList<String>();
-    public ArrayList<String> CwmArrayList = new ArrayList<String>();
-    public ArrayList<String> PhilzArrayList = new ArrayList<String>();
+    private String DEV_NAME = Build.DEVICE.toLowerCase();
+    private String RecoveryPath = "";
+    private String RecoveryVersion = "Not recognized Recovery";
+    private String KernelVersion = "Linux " + System.getProperty("os.version");
+    private String KernelPath = "";
+    private String RECOVERY_EXT = ".img";
+    private String KERNEL_EXT = ".img";
+    private boolean FOTA_FLASH = false;
+    private ArrayList<String> TwrpArrayList = new ArrayList<String>();
+    private ArrayList<String> CwmArrayList = new ArrayList<String>();
+    private ArrayList<String> PhilzArrayList = new ArrayList<String>();
 
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
@@ -577,17 +577,17 @@ public class Device {
                 while ((line = br.readLine()) != null) {
                     line = line.replace("\"", "");
                     line = line.replace("\'", "");
-                    if (CurrentRecoveryVersion.equals("Not recognized Recovery")) {
+                    if (RecoveryVersion.equals("Not recognized Recovery")) {
                         if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
-                            CurrentRecoveryVersion = line;
+                            RecoveryVersion = line;
                         }
                         if (line.contains("Starting TWRP")) {
                             line = line.replace("Starting ", "");
                             line = line.split(" on")[0];
-                            CurrentRecoveryVersion = line;
+                            RecoveryVersion = line;
                         }
                         if (line.contains("PhilZ")) {
-                            CurrentRecoveryVersion = line;
+                            RecoveryVersion = line;
                         }
                     }
 
@@ -992,5 +992,45 @@ public class Device {
 
     public int getKernelType() {
         return KERNEL_TYPE;
+    }
+
+    public String getRecoveryExt() {
+        return RECOVERY_EXT;
+    }
+
+    public String getKernelExt() {
+        return KERNEL_EXT;
+    }
+
+    public ArrayList<String> getCWMVersions() {
+        return CwmArrayList;
+    }
+
+    public ArrayList<String> getTWRPVersions() {
+        return TwrpArrayList;
+    }
+
+    public ArrayList<String> getPHILZVersions() {
+        return PhilzArrayList;
+    }
+
+    public String getRecoveryVersion() {
+        return RecoveryVersion;
+    }
+
+    public String getKernelVersion() {
+        return KernelVersion;
+    }
+
+    public String getDeviceName() {
+        return DEV_NAME;
+    }
+
+    public String getRecoveryPath() {
+        return RecoveryPath;
+    }
+
+    public String getKernelPath() {
+        return KernelPath;
     }
 }

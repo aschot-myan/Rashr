@@ -115,7 +115,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
         try {
             if (isJobRecovery()) {
-                CurrentPartition = new File(mDevice.RecoveryPath);
+                CurrentPartition = new File(mDevice.getRecoveryPath());
                 switch (mDevice.getRecoveryType()) {
                     case Device.PARTITION_TYPE_MTD:
                         MTD();
@@ -132,7 +132,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 }
                 return false;
             } else if (isJobKernel()) {
-                CurrentPartition = new File(mDevice.KernelPath);
+                CurrentPartition = new File(mDevice.getKernelPath());
                 switch (mDevice.getKernelType()) {
                     case Device.PARTITION_TYPE_MTD:
                         MTD();
@@ -233,9 +233,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public void SONY() throws FailedExecuteCommand {
 
         String Command = "";
-        if (mDevice.DEV_NAME.equals("yuga")
-                || mDevice.DEV_NAME.equals("c6602")
-                || mDevice.DEV_NAME.equals("montblanc")) {
+        if (mDevice.getDeviceName().equals("yuga")
+                || mDevice.getDeviceName().equals("c6602")
+                || mDevice.getDeviceName().equals("montblanc")) {
             if (isJobFlash() || isJobRestore()) {
                 File charger = new File(RecoveryTools.PathToUtils, "charger");
                 File chargermon = new File(RecoveryTools.PathToUtils, "chargermon");
@@ -244,8 +244,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 try {
                     mToolbox.copyFile(charger, CurrentPartition.getParentFile(), true, false);
                     mToolbox.copyFile(chargermon, CurrentPartition.getParentFile(), true, false);
-                    if (mDevice.DEV_NAME.equals("yuga")
-                            || mDevice.DEV_NAME.equals("c6602")) {
+                    if (mDevice.getDeviceName().equals("yuga")
+                            || mDevice.getDeviceName().equals("c6602")) {
                         mToolbox.copyFile(ric, CurrentPartition.getParentFile(), true, false);
                         mToolbox.setFilePermissions(ric, "755");
                     }
