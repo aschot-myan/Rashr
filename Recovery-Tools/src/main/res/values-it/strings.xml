@@ -115,6 +115,7 @@
 
     <string name="styles">Stili</string>
     <string-array name="styles">
+        <item>Stile</item>
         <item>Stile Barra scusra Holo luminoso</item>
         <item>Stile Holo luminoso</item>
         <item>Stile Holo scuro</item>

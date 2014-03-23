@@ -413,6 +413,7 @@ public class RecoveryTools extends ActionBarActivity {
             String AllowedEXT[] = {mDevice.getRecoveryExt()};
             fcFlashOtherRecovery.setAllowedEXT(AllowedEXT);
             fcFlashOtherRecovery.setBrowseUpEnabled(true);
+            fcFlashOtherRecovery.setWarn(true);
             fcFlashOtherRecovery.show();
         } catch (NullPointerException e) {
             Notifyer.showExceptionToast(mContext, TAG, e);
@@ -1218,8 +1219,6 @@ public class RecoveryTools extends ActionBarActivity {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 switch (position) {
-                                    case 0:
-                                        return;
                                     case 1:
                                         Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
                                         restartActivity();

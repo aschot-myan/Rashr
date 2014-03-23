@@ -89,6 +89,7 @@
     <string name="no_history">Nie znaleziono historii</string>
     <string name="styles">Style</string>
     <string-array name="styles">
+        <item>Styles</item>
         <item>Jasny Holo Ciemny Pasek</item>
         <item>Jasny Holo</item>
         <item>Ciemny Holo</item>

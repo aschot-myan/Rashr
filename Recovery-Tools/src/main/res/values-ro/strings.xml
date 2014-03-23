@@ -110,6 +110,7 @@
 
     <string name="styles">Stiluri</string>
     <string-array name="styles">
+        <item>Stil</item>
         <item>Stil Holo Light Dark Bar</item>
         <item>Stil Holo Light</item>
         <item>Stil Holo Dark</item>

@@ -122,6 +122,7 @@
 
     <string name="styles">Styles</string>
     <string-array name="styles">
+        <item>Styles</item>
         <item>Holo Light Dark Bar Style</item>
         <item>Holo Light Style</item>
         <item>Holo Dark Style</item>
