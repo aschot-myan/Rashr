@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Recovery Tools</string>
+    <string name="settings">Нагодувања</string>
+    <string name="sHistory">Историја</string>
+    <string name="backups">Резервни копии</string>
+    <string name="go">ОК</string>
+    <string name="sRebooter">Рестартиран</string>
+    <string name="sClearCache">Исчисти ги симнатите датотеки</string>
+    <string name="report">Пријави грешка</string>
+    <string name="sExit">Излез</string>
+    <string name="xda">Отвори XDA тема</string>
+    <string name="rename">Доколку сакате можете да напишете име по ваша желба, во спротивно моменталното време/дата ќе бидат наместени како име.</string>
+    <string name="bak_warning">Пред да почнете да ја користите апликацијата Recovery Tools ве молиме прво направете резервна копија.
+        \nРезервните копии ќе бидат креирани во %s.
+        \nПрограмерот не е одговорен за можните штети.
+    </string>
+    <string name="risk">Го прифаќам ризикот</string>
+    <string name="sReboot">Рестартирај</string>
+    <string name="sRebootRecovery">Рестартирај во Recovery мод</string>
+    <string name="sRebootBootloader">Рестартирај во Bootloader мод</string>
+    <string name="info">Информации</string>
+    <string name="flashed">Новото Recovery е инсталирано.</string>
+    <string name="warning">Внимание!</string>
+    <string name="kernel_to">Инсталирањето на Recovery на овој уред може да предизвика проблеми, за секој случај зачувајте резервна копија од моменталното Recovery на вашиот компјутер.</string>
+    <string name="flash_over_recovery">Инсталирај Recovery? (потребно е рестартирање во Recovery мод)</string>
+    <string name="instructions">Инструкции</string>
+    <string name="instruction">CWM:
+        \nГлавно мени -> инсталирај zip од мемориската картичка -> избери zip од мемориската картичка
+        \n\nTWRP:
+        \nГлавно мени -> Инсталирај
+    </string>
+
+    <string name="bak_done">Креирањето на резервна копија заврши</string>
+    <string name="backupalready">Постои резервна копија со вакво име, ова ќе ја избрише веќепостоечката копија.
+        \n\nПродолжи?
+    </string>
+    <string name="no_backup">Не е пронајдена резервната копија (%s/Recovery-Tools/backups/)
+        \n\nКреирај?
+    </string>
+    <string name="error">Грешка</string>
+    <string name="noroot">"Вашиот уред не е рутиран. Повеќе информации за рутирање можете да најдете на
+        \n\nxda-developer.com"
+    </string>
+    <string name="using_dd">Користи dd.</string>
+    <string name="using_mtd">Користи flash/dump_image (MTD)</string>
+
+    <string name="Downloading">Превземање&#8230;</string>
+    <string name="commentar">Коментар</string>
+    <string name="commenthint">Оставете коментар во врска со проблемот што го имате
+    </string>
+    <string name="positive">Да, молам</string>
+    <string name="neutral">Не, благодарам</string>
+    <string name="negative">Откажи</string>
+
+    <string name="log">Лог датотека</string>
+    <string name="showlog">Покажи лог датотека</string>
+
+    <string name="sBackupMgr">Менаџер на резервни копии</string>
+    <string name="setname">Додади име на резервната копија</string>
+    <string name="reboot_recovery_now">Рестартирај во Recovery мод?</string>
+    <string name="flashing">Инсталирање&#8230;</string>
+    <string name="restoring">Враќање&#8230;</string>
+    <string name="creating_bak">Креирање на резервна копија&#8230;</string>
+
+    <string name="download_utils">За да ја користите оваа апликација треба да превземете мала датотека (околу 500KB).
+        Ова побарува интернет конекција.
+        \nПревземи сега?
+    </string>
+    <string name="over_recovery">Uredot \'e bide restartiran vo Recovery мод</string>
+    <string name="ShowAds">Прикажи реклами за поддршка</string>
+
+    <string name="please_restart">Рестартирајте ја апликацијата за да ги видите промените</string>
+    <string name="please_ads">Ве молам вклучете ги рекламите за да ја поддржите мојата работа! :(</string>
+    <string name="donate_to_support">Донирајте за да ја поддржите мојата работа :)</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Евра</item>
+        <item>1 Евро</item>
+        <item>2 Евра</item>
+        <item>3 Евра</item>
+        <item>5 Евра</item>
+    </string-array>
+    <string name="donate">Донирај</string>
+
+    <string name="never_again">Не прикажувај повторно</string>
+    <string name="try_again">Пробај повторно!</string>
+    <string name="later">Подоцна</string>
+
+    <string name="no_choosed">Не избравте датотека</string>
+    <string name="update">Превземи и инсталирај нов .IMG</string>
+    <string name="flash_error">Инсталирањето е неуспешно</string>
+    <string name="res_error">Враќањето е неуспешно</string>
+    <string name="bak_error">Креирањето резервна копија е неуспешно</string>
+    <string name="current_recovery">Моментално Recovery: %s</string>
+    <string name="stock">Сток</string>
+    <string name="changelog">Промени</string>
+
+    <string name="use_supersu">SuperSu од Chainfire не е пронајден на вашиот уред. Ве молиме инсталирајте го за да избегнете грешки. Превземи SuperSu (од Play Store)?</string>
+    <string name="bak_deleted">%s избришано</string>
+
+</resources>

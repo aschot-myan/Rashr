@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/RecoveryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bCWM"
+            style="?button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_cwm"
+            android:onClick="FlashSupportedRecovery"
+            android:tag="clockwork"
+            android:text="@string/sCWM"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/bTWRP"
+            style="?button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_twrp"
+            android:onClick="FlashSupportedRecovery"
+            android:tag="twrp"
+            android:text="@string/sTWRP" />
+
+        <Button
+            android:id="@+id/bPHILZ"
+            style="?button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="FlashSupportedRecovery"
+            android:tag="philz"
+            android:text="@string/sPhilz" />
+
+        <Button
+            android:id="@+id/bFlashOtherRecovery"
+            style="?button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_flash"
+            android:onClick="bFlashOtherRecovery"
+            android:text="@string/sOTHER" />
+
+        <Button
+            android:id="@+id/bRecoveryHistory"
+            style="?button_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_history"
+            android:onClick="showFlashHistory"
+            android:tag="recovery"
+            android:text="@string/sHistory" />
+    </LinearLayout>
+</ScrollView>

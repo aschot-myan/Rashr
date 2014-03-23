@@ -3,9 +3,16 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
-        <option name="externalProjectPath" value="C:\Users" />
-        <option name="gradleHome" value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.9-all/3jdgemv0iv8uqohg3kcp2o88r1/gradle-1.9/bin" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools" />
+            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools" />
+            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Utils-Library" />
+            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\root-commands" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

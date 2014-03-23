@@ -1,0 +1,40 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion '19.0.3'
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 18
+        versionCode 71
+        versionName "1.8.3"
+    }
+
+    signingConfigs {
+        DsLNeXuS {
+            storeFile file('C:/Users/ashot_000/Google Drive/workspace/Keystone.key')
+        }
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:support-v13:+'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':root-commands')
+    compile project(':Utils-Library')
+}

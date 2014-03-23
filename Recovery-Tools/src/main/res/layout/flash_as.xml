@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvFlashAs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:focusableInTouchMode="false"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/custom_green" />
+
+    <Button
+        android:id="@+id/bFlashAs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:enabled="false"
+        android:onClick="flashAs"
+        android:text="@string/go" />
+
+    <Button
+        android:id="@+id/bCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="bExit"
+        android:text="@string/negative" />
+
+    <RadioButton
+        android:id="@+id/optAsRecovery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:onClick="FlashAsOpt"
+        android:tag="recovery"
+        android:text="@string/recovery"
+        android:textSize="24sp" />
+
+    <RadioButton
+        android:id="@+id/optAsKernel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/optAsRecovery"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:onClick="FlashAsOpt"
+        android:tag="kernel"
+        android:text="@string/kernel"
+        android:textSize="24sp" />
+
+</RelativeLayout>

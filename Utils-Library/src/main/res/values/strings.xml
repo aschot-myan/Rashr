@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="info">Information</string>
+    <string name="download_now">Download %s now?</string>
+    <string name="corrupt_download">Downloaded file is corrupted.</string>
+    <string name="try_again">Try again!</string>
+    <string name="later">Later</string>
+    <string name="Downloading">Downloading&#8230;</string>
+    <string name="connecting">Connecting</string>
+    <string name="wrong_format">You have choose a false file. The File must be in %s format.
+    </string>
+    <string name="noconnection">No network available. Download canceled!</string>
+    <string name="failed_download">Oh no, a problem is occurred. Restart the
+        download.\n\n%s?
+    </string>
+    <string name="error">Error</string>
+    <string name="warning">Warning!</string>
+    <string name="logs_title">Logged Shell-Commands</string>
+    <string name="clear_logs">Clear Logs</string>
+
+    <string name="positive">Yes, please</string>
+    <string name="neutral">No, thanks</string>
+    <string name="negative">Cancel</string>
+
+    <string name="file_chooser">File Chooser</string>
+    <string name="empty_dir">Directory empty: %s</string>
+    <string name="choose_message">Choosing %s. Are you sure?</string>
+
+    <string name="noroot">Device not Rooted. Please Root it. More information at xda-developers.com</string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="rate_title">Rate my App!</string>
+    <string name="rate_message">Would you like to rate this app in the Play Store and support my work?</string>
+    <string name="never_ask">Never ask again</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Narzędzia Recovery</string>
+    <string name="settings">Ustawienia</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sFlashRecovery">Wgraj Recovery</string>
+    <string name="sFlashKernel">Wgraj Kernel</string>
+    <string name="sHistory">Historia</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="sOTHER">Inna z Pamięci</string>
+    <string name="sRecoveryBackup">Kopia zapasowa Recovery</string>
+    <string name="sKernelBackup">Kopia zapasowa Kernela</string>
+    <string name="backups">Kopie zapasowe</string>
+    <string name="go">Idź</string>
+    <string name="sRebooter">Rebooter</string>
+    <string name="restore">Przywróć</string>
+    <string name="rename">Zmień nazwę</string>
+    <string name="sClearCache">Usuń pobrane Recovery</string>
+    <string name="report">Zgłoś błąd</string>
+    <string name="sExit">Wyjdź</string>
+    <string name="xda">Otwórz temat na XDA</string>
+    <string name="set_name">Nazwa kopii zapasowej</string>
+    <string name="bak_warning">Zanim coś zrobisz zrób kopię zapasową i przenieś ją na PC. \nKopie zapasowe będą w %s. \nTwórca aplikacji nie jest odpowiedzialny za wyrządzone szkody.</string>
+    <string name="flash_options">Opcje wgrywania</string>
+    <string name="risk">Znam ryzyko</string>
+    <string name="sReboot">Uruchom ponownie</string>
+    <string name="sRebootRecovery">Uruchom ponownie w trybie Recovery</string>
+    <string name="sRebootBootloader">Uruchom ponownie w trybie Bootloader</string>
+    <string name="info">Informacje</string>
+    <string name="flashed">Partycja została zflashowana.</string>
+    <string name="warning">Uwaga!</string>
+    <string name="kernel_to">Wgranie Recovery na tych urządzeniach wgra fabryczny plik boot.img (Kernel) z customową Recovery (może spowodować bootloopy, zapisz kopię zapasową Boot.img na PC).</string>
+    <string name="flash_over_recovery">Czy chcesz teraz wgrać Recovery? (wymaga ponownego uruchomienia do trybu Recovery)</string>
+    <string name="instructions">Instrukcje</string>
+    <string name="instruction">CWM: \nMenu Główne -> install zip from sdcard -> choose zip from sdcard \n\nTWRP: \nMenu Główne -> Install</string>
+    <string name="bak_done">Kopia zapasowa zakończona powodzeniem</string>
+    <string name="backupalready">Kopia zapasowa już istnieje.</string>
+    <string name="no_backup">Nie znaleziono kopii zapasowej (%s/Recovery-Tools/backups/) \n\nCzy zrobić ją teraz?</string>
+    <string name="error">Błąd</string>
+    <string name="not_supportded">Twoje urządzenie nie jest na razie wspierane. Przeskanuj System i zgłoś niewspierane urządzenie lub spróbuj znaleść partycję (uruchomić ponownie do recovery)?</string>
+    <string name="no_root">Urządzenie nie jest zrootowane. Proszę abyś najpierw je zrootował. Więcej informacji na \n\nxda-developer.com"</string>
+    <string name="using_dd">Używam dd. Recovery w FS</string>
+    <string name="using_mtd">Użyj flash/dump_image (MTD)</string>
+    <string name="Downloading">Pobieranie&#8230;</string>
+    <string name="commentar">Komentarz</string>
+    <string name="commenthint">Napisz tutaj, co nie działa poprawnie (pobieranie, wgrywanie, wsparcie urządzeń lub inne)</string>
+    <string name="positive">Tak</string>
+    <string name="neutral">Nie, dziękuję</string>
+    <string name="negative">Odrzuć</string>
+    <string name="log">Loguj komendy powłoki</string>
+    <string name="showlog">Pokaż logi</string>
+    <string name="delete">Usuń</string>
+    <string name="sBackupMgr">Menedżer kopii zapasowych</string>
+    <string name="setname">Nazwij kopię zapasową</string>
+    <string name="reboot_recovery_now">Uruchomić ponownie w trybie Recovery?</string>
+    <string name="flashing">Wgrywanie&#8230;</string>
+    <string name="restoring">Przywracanie&#8230;</string>
+    <string name="creating_bak">Tworzenie kopii zapasowej&#8230;</string>
+    <string name="download_utils">Aby używać tej aplikacji musisz pobrać małe narzędzia (około 512KB). Będzie potrzebne połączenie internetowe. \nRozpocząć pobieranie?</string>
+    <string name="over_recovery">Do urządzenia zostanie wgrane Recovery</string>
+    <string name="ShowAds">Pokaż Reklamy dla wsparcia</string>
+    <string name="please_restart">Uruchom ponownie aplikację aby zastosować zmiany</string>
+    <string name="please_ads">Proszę, włącz reklamy żeby wspierać moją pracę! :(</string>
+    <string name="donate_to_support">Podaruj przez menu żeby wspierać moją pracę! :)</string>
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Euro</item>
+        <item>1 Euro</item>
+        <item>2 Euro</item>
+        <item>3 Euro</item>
+        <item>5 Euro</item>
+    </string-array>
+    <string name="donate">Podaruj</string>
+    <string name="never_again">Nie pokazuj więcej</string>
+    <string name="try_again">Spróbuj ponownie!</string>
+    <string name="later">Później</string>
+    <string name="no_choosed">Nie wybrano pliku</string>
+    <string name="update">Zaktualizuj listę Recovery</string>
+    <string name="pick_file">Wybierz plik</string>
+    <string name="flash_error">Wgrywanie zakończone niepowodzeniem</string>
+    <string name="res_error">Przywracanie zakończone niepowodzeniem</string>
+    <string name="bak_error">Tworzenie kopii zapasowej zakończone niepowodzeniem</string>
+    <string name="current_recovery">Bieżące Recovery: %s</string>
+    <string name="stock">Fabryczne</string>
+    <string name="changelog">Lista zmian</string>
+    <string name="use_supersu">SuperSu od Chainfire nie zostało znalezione na twoim urządzeniu. Używaj go aby uniknąć niepowodzeń. Czy pobrać SuperSu (ze Sklepu Play) teraz?</string>
+    <string name="bak_deleted">%s usunięty</string>
+    <string name="extract_failed">Wypakowywanie potrzebnych plików z aplikacji zakończone niepowodzeniem. Proszę uruchom aplikację ponownie.</string>
+    <string name="no_history">Nie znaleziono historii</string>
+    <string name="styles">Style</string>
+    <string-array name="styles">
+        <item>Jasny Holo Ciemny Pasek</item>
+        <item>Jasny Holo</item>
+        <item>Ciemny Holo</item>
+    </string-array>
+    <string name="appwidget_text">PRZYKŁAD</string>
+    <string name="add_widget">Dodaj widżet</string>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RecoveryToolsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/MainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button style="?button_style"
+                android:id="@+id/bFlashRecovery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_flash"
+                android:onClick="bFlashRecovery"
+                android:text="@string/sFlashRecovery" />
+
+            <Button style="?button_style"
+                android:id="@+id/bFlashKernel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_flash"
+                android:onClick="bFlashKernel"
+                android:text="@string/sFlashKernel" />
+
+            <com.google.ads.AdView xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="ca-app-pub-3591384811135190/6436276193"
+                ads:loadAdOnCreate="true"
+                ads:testDevices="TESST_EMULATOR, D8C221D153DA442260EA751810375941, 896047E1A726D481A3AD95454BD15606" />
+
+            <Button style="?button_style"
+                android:id="@+id/bClearCache"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_delete"
+                android:onClick="bClearCache"
+                android:text="@string/sClearCache" />
+
+            <Button style="?button_style"
+                android:id="@+id/bRebooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_reboot"
+                android:onClick="bRebooter"
+                android:text="@string/sRebooter" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/InfoLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center"
+            android:textColor="@color/custom_green" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

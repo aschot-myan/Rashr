@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backup_drawer"
+    android:layout_width="@dimen/navigation_drawer_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="#111"
+    android:divider="@android:color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button style="@style/nowCardDark"
+            android:id="@+id/bCreateRecoveryBackup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="bCreateBackup"
+            android:tag="recovery"
+            android:text="@string/sRecoveryBackup"
+            android:minHeight="74dp" />
+
+        <ListView
+            android:id="@+id/lvRecoveryBackups"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button style="@style/nowCardDark"
+            android:id="@+id/bCreateKernelBackup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="bCreateBackup"
+            android:minHeight="74dp"
+            android:tag="kernel"
+            android:text="@string/sKernelBackup" />
+
+        <ListView
+            android:id="@+id/lvKernelBackups"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</LinearLayout>

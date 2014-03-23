@@ -1,6 +1,15 @@
-====================
 CHANGELOG
 ====================
+
+Update [1.8.3]
+
+-Some Sony Xperia recovery flash supported (Only with FOTA Partition for example Xperia T)
+-Some Layout improvements
+-Now with Kernel Version  recognition
+-Improvements on Samsung Galaxy S3 recognition (m3)
+-Serbian/Croatian/Bosnian translation added by XDA-User askee
+-Italian Translation improved by Boriotti Roberto
+-Polish translation added by XDA-User teddy74eva
 
 Update [1.8.2]
 

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Recovery Tools</string>
+    <string name="settings">Impostazioni</string>
+    <string name="sCWM">Recovery CWM</string>
+    <string name="sFlashRecovery">Flash Recovery</string>
+    <string name="sFlashKernel">Flash Kernel</string>
+    <string name="sHistory">Cronologia</string>
+    <string name="sTWRP">Recovery TWRP</string>
+    <string name="sPhilz">Recovery Philz</string>
+    <string name="sOTHER">Altra recovery dalla memroia</string>
+    <string name="sKernelBackup">Backup kernel</string>
+    <string name="backups">Backup</string>
+    <string name="go">Avvia</string>
+    <string name="sRebooter">Riavvio</string>
+    <string name="rename">Rinomina</string>
+    <string name="sClearCache">Elimina le recovery scaricate</string>
+    <string name="report">Segnala un bug</string>
+    <string name="sExit">Esci</string>
+    <string name="xda">Apri il thread su XDA</string>
+    <string name="set_name">Nome del backup</string>
+    <string name="bak_warning">Prima di fare qualsiasi azione con Recovery-Tools crea un backup e salvalo nel tuo PC.\n
+        Il Backup sarà salvato in %s.\n
+        Lo sviluppatore non è responsabile per danni al tuo dispositivo.
+    </string>
+    <string name="flash_options">Opzioni flash</string>
+    <string name="risk">Conosco i rischi</string>
+    <string name="sReboot">Riavvia</string>
+    <string name="sRebootRecovery">Riavvia in recovery</string>
+    <string name="sRebootBootloader">Riavvia in bootloader</string>
+    <string name="info">Informazioni</string>
+    <string name="flashed">Recovery flashata.</string>
+    <string name="warning">Attenzione!</string>
+    <string name="kernel_to">Flashare la recovery su questo dispositivo flasherà il Boot.img (Kernel) stock con una recovery custom.</string>
+    <string name="flash_over_recovery">Flashare la recovery adesso? (necessità il Riavvio in</string>
+    <string name="instructions">Istruzioni</string>
+    <string name="instruction">CWM:\n
+        Main menu -> installa zip from sdcard -> choose zip from sdcard\n
+        TWRP:\n
+        Main Menu -> Install
+    </string>
+
+    <string name="bak_done">Backup completato</string>
+    <string name="backupalready">Esiste già un backup</string>
+    <string name="no_backup">Nessun backup esistente (%s/Recovery-Tools/backups/)
+        \n\nCrearne uno ora?
+    </string>
+    <string name="error">Errore</string>
+    <string name="noroot">"Dispositivo non rootato. Esegui il root. Maggiori informazioni su
+        \n\nxda-developer.com"
+    </string>
+    <string name="using_dd">Uso dd. Recovery in FS.</string>
+    <string name="using_mtd">Usa flash/dump_image (MTD)</string>
+
+    <string name="Downloading">Download…</string>
+    <string name="commentar">Commenti</string>
+    <string name="commenthint">Commenta qui cosa non funziona correttamente (download, flash,
+        supporto o altro)
+    </string>
+    <string name="positive">Si, grazie</string>
+    <string name="neutral">No, grazie</string>
+    <string name="negative">Annulla</string>
+
+    <string name="log">Registro comandi shell</string>
+    <string name="showlog">Visualizzi registri</string>
+
+    <string name="delete">Elimina</string>
+    <string name="sBackupMgr">Gestore backup</string>
+    <string name="setname">Imposta nome del backup</string>
+    <string name="reboot_recovery_now">Riavviare ora in recovery?</string>
+    <string name="flashing">Flash…</string>
+    <string name="restoring">Ripristino…</string>
+    <string name="creating_bak">Backup…</string>
+
+    <string name="download_utils">Per usare quest\'app hai bisogno di scaricare dei piccoli programmi (circa 512KB).
+        È richiesta la connessione internet.
+        \nScaricarli ora?
+    </string>
+    <string name="over_recovery">La recovery verrà installata al posto di quella attuale</string>
+    <string name="ShowAds">Visualizza pubblicità del supporto</string>
+
+    <string name="please_restart">Riavvia l\'App per applicare le modifiche</string>
+    <string name="please_ads">Abilita la pubblicità per supportare il mio lavoro! :(</string>
+    <string name="donate_to_support">Dona attraverso il menu per supportare il mio lavoro! :)</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Euro</item>
+        <item>1 Euro</item>
+        <item>2 Euro</item>
+        <item>3 Euro</item>
+        <item>5 Euro</item>
+    </string-array>
+
+    <string name="donate">Dona</string>
+
+    <string name="never_again">Non visualizzare più</string>
+    <string name="try_again">Riprova!</string>
+    <string name="later">Più tardi</string>
+
+    <string name="no_choosed">Nessun file selezionato</string>
+    <string name="update">Aggiorna elenco receovery</string>
+    <string name="flash_error">Flash fallito</string>
+    <string name="res_error">Rirpistino fallito</string>
+    <string name="bak_error">Backup fallito</string>
+    <string name="current_recovery">Recovery attuale: %s</string>
+    <string name="stock">Stock</string>
+    <string name="changelog">Modifiche</string>
+
+    <string name="use_supersu">SuperSu di Chainfire non riconosciuto nel dispositivo. Usalo epr evitare errori. Scaricare SuperSu (dal Play Store) ora?</string>
+    <string name="bak_deleted">%s eliminato</string>
+
+    <string name="extract_failed">Estrazione fallita dall\'App dei file necessari. Riavvia l\'App.</string>
+    <string name="no_history">Nessuna cronologia trovata</string>
+
+    <string name="styles">Stili</string>
+    <string-array name="styles">
+        <item>Stile Barra scusra Holo luminoso</item>
+        <item>Stile Holo luminoso</item>
+        <item>Stile Holo scuro</item>
+    </string-array>
+
+    <string name="appwidget_text">ESEMPIO</string>
+    <string name="add_widget">Aggiungi widget</string>
+</resources>

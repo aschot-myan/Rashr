@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Recovery Tools</string>
+    <string name="settings">Podesavanja</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sFlashRecovery">Flesuj Rekaveri</string>
+    <string name="sFlashKernel">Flesuj Kernel</string>
+    <string name="sHistory">Istorija</string>
+    <string name="sTWRP">TWRP Rekaveri</string>
+    <string name="sPhilz">Philz Rekaveri</string>
+    <string name="sOTHER">Ostalo iz memorije</string>
+    <string name="sRecoveryBackup">Bekapuj Rekaveri</string>
+    <string name="sKernelBackup">Bekapuj Kernel</string>
+    <string name="backups">Bekapi</string>
+    <string name="go">Kreni</string>
+    <string name="sRebooter">Restarter</string>
+    <string name="restore">Vratiti</string>
+    <string name="rename">Preimenuj</string>
+    <string name="sClearCache">Ocisti preuzete rekaverije</string>
+    <string name="report">Prijavi problem</string>
+    <string name="sExit">Izlaz</string>
+    <string name="xda">Otvori XDA-Temu</string>
+    <string name="set_name">Ime Bekapa</string>
+    <string name="bak_warning">Prije nego sto bilo sta uradite sa programom Recovery-Tools molimo Vas da kreirate bekap i sacuvate ga na Vas racunar.
+        \nBackups ce biti sacuvano u %s.
+        \nThe Kreator programa ne snosi posledice ukoliko nanesete stetu Vasem uredjaju.
+    </string>
+    <string name="flash_options">Opcije za flesovanje</string>
+    <string name="risk">Razumijem rizik</string>
+    <string name="sReboot">Restart</string>
+    <string name="sRebootRecovery">Restartuj Rekaveri</string>
+    <string name="sRebootBootloader">Restartuj Bootloader</string>
+    <string name="info">Informacije</string>
+    <string name="flashed">Particija flesovana.</string>
+    <string name="warning">Upozorenje!</string>
+    <string name="kernel_to">Flesovanje rekaverija na uredjaju ce flesovati boot.img (Kernel) iz Stock (standardni) u prepravljeni rekaveri (ovo moze da izazove konstantan restart telefona-bootloop, sacuvajte bekap boot.img na Vas racunar) .</string>
+    <string name="flash_over_recovery">Flesuj Rekaveri sada? (potreban restart u Rekaveri mod)</string>
+    <string name="instructions">Instrukcije</string>
+    <string name="instruction">CWM:
+        \nMain Menu -> Instaliraj zip sa sd kartice -> Izaberi zip sa sd kartice
+        \n\nTWRP:
+        \nMain Menu -> Instaliraj
+    </string>
+
+    <string name="bak_done">Bekap zavrsen</string>
+    <string name="backupalready">Bekap vec postoji.</string>
+    <string name="no_backup">Nije pronadjen ni jedan bekap (%s/Recovery-Tools/backups/)
+        \n\nKreirati sada?
+    </string>
+    <string name="error">Greska</string>
+    <string name="not_supportded">Vas uredjaj jos uvijek nije podrzan od strane programera. Skenirati sistem i prijaviti nepodrzan uredjaj ili pokusaj naci particiju (restartuj u rekaveri mod)?
+    </string>
+    <string name="no_root">"Uredjaj nije rutovan. Molimo rutujte uredjaj. Vise informacija ispod
+        \n\nxda-developer.com"
+    </string>
+    <string name="using_dd">Koristeci dd. Rekaveri iz FS</string>
+    <string name="using_mtd">Koristi flash/dump_image (MTD)</string>
+
+    <string name="Downloading">Preuzimanje&#8230;</string>
+    <string name="commentar">Komentar</string>
+    <string name="commenthint">Komentarisi ovde, sta ne radi uredno (preuzimanje, fles, podrska ili drugo)
+    </string>
+    <string name="positive">Da molim</string>
+    <string name="neutral">Ne, hvala</string>
+    <string name="negative">Otkazi</string>
+
+    <string name="log">Log Shell-Commande</string>
+    <string name="showlog">Prikazi Logove</string>
+
+    <string name="delete">Obrisi</string>
+    <string name="sBackupMgr">Menadzer Bekapa</string>
+    <string name="setname">Postavi ime Bekapa</string>
+    <string name="reboot_recovery_now">Restartuj u rekaveri sada?</string>
+    <string name="flashing">Flesujem&#8230;</string>
+    <string name="restoring">Vracanje&#8230;</string>
+    <string name="creating_bak">Kreiranje bekapa&#8230;</string>
+
+    <string name="download_utils">Da bi ste koristili ovu aplikaciju treba da preuzmete mali dodatak (oko 512KB).
+        Ovo zahtjeva internet konekciju.
+        \nPreuzeti sada?
+    </string>
+    <string name="over_recovery">Uredjaj ce biti flesovan preko rekoverija</string>
+    <string name="ShowAds">Prikazi reklame zbog podrske</string>
+
+    <string name="please_restart">Molimo restartujte aplikaciju da bi primjenili izmjene</string>
+    <string name="please_ads">Molimo ukljucite reklame da bi ste podrzali moj rad! :(</string>
+    <string name="donate_to_support">Donirajte preko menija da bi ste podrzali moj rad! :)</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Eura</item>
+        <item>1 Euro</item>
+        <item>2 Eura</item>
+        <item>3 Eura</item>
+        <item>5 Eura</item>
+    </string-array>
+
+    <string name="donate">Doniraj</string>
+
+    <string name="never_again">Ne prikazuj vise</string>
+    <string name="try_again">Pokusaj ponovo!</string>
+    <string name="later">Kasnije</string>
+
+    <string name="no_choosed">Nije odabrana datoteka</string>
+    <string name="update">Osvjezi listu rekaverija</string>
+    <string name="pick_file">Odaberi datoteku</string>
+    <string name="flash_error">Neuspjelo flesovanje</string>
+    <string name="res_error">Neuspjelo vracanje</string>
+    <string name="bak_error">Neuspjelo kreiranje bekapa</string>
+    <string name="current_recovery">Trenutni rekavri: %s</string>
+    <string name="stock">Stock-standardni</string>
+    <string name="changelog">Izmjene</string>
+
+    <string name="use_supersu">SuperSu od Chainfire nije prepoznat na Vasem uredjaju. Koristiti ga da bi se izbjegle greske. Preuzeti SuperSu (sa Play Store) sada?</string>
+    <string name="bak_deleted">%s obrisano</string>
+
+    <string name="extract_failed">Ekstraktovanje potrebnih fajlova iz aplikacije nije uspjelo. Molimo restartujte aplikaciju.</string>
+    <string name="no_history">Nije nadjena istorija</string>
+
+    <string name="styles">Izgledi</string>
+    <string-array name="styles">
+        <item>Izgledi</item>
+        <item>Holo svijetlo tamni izgled sa trakom</item>
+        <item>Holo svijetli izgled</item>
+        <item>Holo tamni izgled</item>
+    </string-array>
+
+    <string name="appwidget_text">Primjer</string>
+    <string name="add_widget">Dodaj widget</string>
+</resources>
