@@ -44,6 +44,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
@@ -59,6 +60,8 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.ads.AdView;
 
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
@@ -1257,27 +1260,45 @@ public class RecoveryTools extends ActionBarActivity {
                     RecoveryVersion.setText(mDevice.getRecoveryVersion() + "\n" + mDevice.getKernelVersion());
                     loadBackupDrawer();
 
+                    AdView adView = (AdView) findViewById(R.id.adView);
+                    ViewGroup MainParent = (ViewGroup) adView.getParent();
+                    /** Removing ads if user has turned off */
                     if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {
-                        mRecoveryToolsLayout.removeView(mRecoveryToolsLayout.findViewById(R.id.adView));
-                    }
-                    if (mDevice.isRecoveryOverRecovery() && mBackupDrawer != null) {
-                        mRecoveryToolsLayout.removeView(mBackupDrawer);
-                    }
-
-                    if (!mDevice.isKernelSupported()) {
-                        /** If Kernel flashing is not supported remove flash and backup options */
-                        mRecoveryToolsLayout.removeView((mRecoveryToolsLayout.findViewById(R.id.bFlashKernel)));
-                        if (mBackupDrawer != null) {
-                            mBackupDrawer.removeView(mBackupDrawer.findViewById(R.id.bCreateKernelBackup));
-                            mBackupDrawer.removeView(mBackupDrawer.findViewById(R.id.lvKernelBackups));
+                        if (adView != null && MainParent != null) {
+                            MainParent.removeView(adView);
                         }
                     }
-                    if (!mDevice.isRecoverySupported()) {
-                        /** If Recovery flashing is not supported remove flash and backup options */
-                        mRecoveryToolsLayout.removeView(findViewById(R.id.bFlashRecovery));
-                        if (mBackupDrawer != null) {
-                            mBackupDrawer.removeView(findViewById(R.id.bCreateRecoveryBackup));
-                            mBackupDrawer.removeView(findViewById(R.id.lvRecoveryBackups));
+
+                    if (MainParent != null) {
+                        if (!mDevice.isKernelSupported()) {
+                            /** If Kernel flashing is not supported remove flash options */
+                            MainParent.removeView(findViewById(R.id.bFlashKernel));
+                        }
+                        if (!mDevice.isRecoverySupported()) {
+                            /** If Recovery flashing is not supported remove flash options */
+                            MainParent.removeView(findViewById(R.id.bFlashRecovery));
+                        }
+                    }
+
+                    if (mBackupDrawer != null) {
+                        ViewGroup BackupDrawerParent = (ViewGroup) mBackupDrawer.getParent();
+                        if (mDevice.isRecoveryOverRecovery()) {
+                            BackupDrawerParent.removeView(mBackupDrawer);
+                        } else {
+                            View createKernelBackup = findViewById(R.id.bCreateKernelBackup);
+                            View kernelBackups = findViewById(R.id.lvKernelBackups);
+                            View createRecoveryBackup = findViewById(R.id.bCreateRecoveryBackup);
+                            View recoveryBackups = findViewById(R.id.lvRecoveryBackups);
+                            if (!mDevice.isKernelSupported()) {
+                                /** If Kernel flashing is not supported remove backup views */
+                                ((ViewGroup) createKernelBackup.getParent()).removeView(createKernelBackup);
+                                ((ViewGroup) kernelBackups.getParent()).removeView(kernelBackups);
+                            }
+                            if (!mDevice.isRecoverySupported()) {
+                                /** If Recovery flashing is not supported remove backup views */
+                                ((ViewGroup) createRecoveryBackup.getParent()).removeView(createRecoveryBackup);
+                                ((ViewGroup) recoveryBackups.getParent()).removeView(recoveryBackups);
+                            }
                         }
                     }
                 }
