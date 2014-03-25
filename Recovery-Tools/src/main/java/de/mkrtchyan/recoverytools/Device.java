@@ -42,7 +42,6 @@ import java.util.Collections;
 import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Unzipper;
 
-
 public class Device {
 
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
@@ -463,16 +462,20 @@ public class Device {
                 KERNEL_TYPE = PARTITION_TYPE_MTD;
             }
         }
-        if (RecoveryPath.contains("mtd")) {
-            RECOVERY_TYPE = PARTITION_TYPE_MTD;
-        } else {
-            RECOVERY_TYPE = PARTITION_TYPE_DD;
+        if (!RecoveryPath.equals("")) {
+            if (RecoveryPath.contains("mtd")) {
+                RECOVERY_TYPE = PARTITION_TYPE_MTD;
+            } else {
+                RECOVERY_TYPE = PARTITION_TYPE_DD;
+            }
         }
 
-        if (KernelPath.contains("mtd")) {
-            KERNEL_TYPE = PARTITION_TYPE_MTD;
-        } else {
-            KERNEL_TYPE = PARTITION_TYPE_DD;
+        if (!KernelPath.equals("")) {
+            if (KernelPath.contains("mtd")) {
+                KERNEL_TYPE = PARTITION_TYPE_MTD;
+            } else {
+                KERNEL_TYPE = PARTITION_TYPE_DD;
+            }
         }
     }
 
