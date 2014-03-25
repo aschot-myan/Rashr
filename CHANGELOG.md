@@ -1,6 +1,14 @@
 CHANGELOG
 ====================
 
+Update [1.8.4]
+
+-Layout optimize problems fixed (now Ads and Backup/Restore options disappears really if its turned off or not supported)
+-Recognition problems fixed (unsupported devices recognized as supported)
+-Style switching fixed
+-Apply properties fixed, File Chooser works again now you can choose imgs from external storage
+-Crash on showing kernel flash history fixed
+
 Update [1.8.3]
 
 -Some Sony Xperia recovery flash supported (Only with FOTA Partition for example Xperia T)

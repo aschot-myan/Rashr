@@ -1,4 +1,3 @@
-====================
 Recovery-Tools
 ====================
 
@@ -26,7 +25,6 @@ You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Re
 -[normally managed by SuperUser-App]Full access to all functions of the device: Flashing the recoveries
 
 
-===================================
 Compile instructions
 ===================================
 
@@ -34,19 +32,15 @@ To compile Recovery-Tools download the Source and needed Libraries:
 
 Recovery-Tools:     https://github.com/ashotmkrtchyan1995/Recovery-Tools
 
-[Libraries]
-Utils-Library:          https://github.com/ashotmkrtchyan1995/Utils-Library
-Root-Commands:          https://github.com/dschuermann/root-commands
-Android-Support-v13:    https://github.com/ashotmkrtchyan1995/Libs/blob/master/android-support-v13.jar
-Appcompact:             https://github.com/ashotmkrtchyan1995/Libs/tree/master/Appcompact
+[Libraries]:        All Libraries are included in the repository and pre-configured for
+                    gradle on Android Studio
 
 Import all Projects in to your IDE and set it on the dependencies list
 
-===================================
 COPYRIGHT
 ===================================
 
-Copyright (C) 2013  Ashot Mkrtchyan.
+Copyright (C) 2014  Ashot Mkrtchyan.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
