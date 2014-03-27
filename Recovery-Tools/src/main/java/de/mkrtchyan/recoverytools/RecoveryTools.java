@@ -97,6 +97,12 @@ public class RecoveryTools extends ActionBarActivity {
     private static final String PREF_KEY_FIRST_RUN = "first_run";
 
     /**
+     * Web Address for download Recovery and Kernel IMGs
+     */
+    private static final String RECOVERY_HOST_URL = "http://dslnexus.de/Android/recoveries";
+//    private static final String KERNEL_HOST_URL = "http://dslnexus.de/Android/kernel";
+
+    /**
      * Used paths and files
      */
     private static final File PathToSd = Environment.getExternalStorageDirectory();
@@ -114,6 +120,7 @@ public class RecoveryTools extends ActionBarActivity {
             PathToTWRP, PathToPhilz, PathToRecoveryBackups, PathToKernelBackups, PathToUtils};
     private final ActionBarActivity mActivity = this;
     private final Context mContext = this;
+
     /**
      * Declaring needed objects
      */
@@ -385,7 +392,8 @@ public class RecoveryTools extends ActionBarActivity {
                         fRECOVERY = new File(path, fileName);
 
                         if (!fRECOVERY.exists()) {
-                            Downloader RecoveryDownloader = new Downloader(mContext, Device.RECOVERY_HOST_URL, fRECOVERY, rRecoveryFlasher);
+                            Downloader RecoveryDownloader = new Downloader(mContext, RECOVERY_HOST_URL,
+                                    fRECOVERY, rRecoveryFlasher);
                             RecoveryDownloader.setRetry(true);
                             RecoveryDownloader.setAskBeforeDownload(true);
                             RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);

@@ -51,8 +51,6 @@ public class Device {
     public static final int PARTITION_TYPE_RECOVERY = 3;
     public static final int PARTITION_TYPE_SONY = 4;
 //    public static final int DEV_TYPE_MTK = 5;
-//    public static final String KERNEL_HOST_URL = "http://dslnexus.org/Android/kernel";
-    public static final String RECOVERY_HOST_URL = "http://dslnexus.org/Android/recoveries";
     private static final String TAG = "Device";
     private static final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
