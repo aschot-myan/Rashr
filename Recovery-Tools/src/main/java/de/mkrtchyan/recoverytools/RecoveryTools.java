@@ -36,12 +36,11 @@ import android.os.Environment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,6 +139,7 @@ public class RecoveryTools extends ActionBarActivity {
     private Toolbox mToolbox;
     private Device mDevice;
     private DrawerLayout mRecoveryToolsLayout = null;
+    private SwipeRefreshLayout mSwipeUpdater = null;
     private FileChooserDialog fcFlashOtherRecovery = null;
     private final Runnable rRecoveryFlasher = new Runnable() {
         @Override
@@ -828,32 +828,6 @@ public class RecoveryTools extends ActionBarActivity {
 
                 }
                 break;
-            case R.id.update:
-                Downloader updater = new Downloader(mContext, "http://dslnexus.org/Android/",
-                        "img_sums", RecoveryCollectionFile, new Runnable() {
-                    @Override
-                    public void run() {
-                        mDevice = new Device(mContext);
-                    }
-                }
-                );
-                updater.setOverrideFile(true);
-                updater.setRetry(true);
-                updater.execute();
-                break;
-//            case R.id.showProps:
-//                Dialog propsDialog = new Dialog(mContext);
-//                propsDialog.setTitle("Properties");
-//                ListView propsListView = new ListView(mContext);
-//                ArrayAdapter<String> propsAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1);
-//                propsListView.setAdapter(propsAdapter);
-//                propsDialog.setContentView(propsListView);
-//                propsDialog.show();
-//                for (Object prop : System.getProperties().stringPropertyNames().toArray()) {
-//                    propsAdapter.add(prop.toString());
-//                    propsAdapter.add(System.getProperty(prop.toString()));
-//                }
-//                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -1203,6 +1177,41 @@ public class RecoveryTools extends ActionBarActivity {
                     setContentView(R.layout.recovery_tools);
 
                     mRecoveryToolsLayout = (DrawerLayout) findViewById(R.id.RecoveryToolsLayout);
+                    mSwipeUpdater = (SwipeRefreshLayout) findViewById(R.id.swipe_updater);
+                    mSwipeUpdater.setColorScheme(R.color.custom_green,
+                            android.R.color.black,
+                            R.color.custom_green,
+                            android.R.color.darker_gray);
+                    mSwipeUpdater.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            Downloader updater = new Downloader(mContext, "http://dslnexus.de/Android/",
+                                    "img_sums", RecoveryCollectionFile, new Runnable() {
+                                @Override
+                                public void run() {
+                                    mDevice = new Device(mContext);
+                                }
+                            }
+                            );
+                            updater.setOverrideFile(true);
+                            updater.setRetry(true);
+                            updater.setHidden(true);
+                            Toast
+                                    .makeText(mContext, "Refreshing recovery list", Toast.LENGTH_SHORT)
+                                    .show();
+                            updater.setAfterDownload(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mSwipeUpdater.setRefreshing(false);
+                                    Toast
+                                            .makeText(mContext, "Update finished", Toast.LENGTH_SHORT)
+                                            .show();
+                                    mDevice.loadRecoveryList();
+                                }
+                            });
+                            updater.execute();
+                        }
+                    });
                     LayoutInflater layoutInflater = getLayoutInflater();
 
                     DrawerLayout mMenuDrawer =
@@ -1321,13 +1330,6 @@ public class RecoveryTools extends ActionBarActivity {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.recovery_tools_menu, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     public void exit() {
