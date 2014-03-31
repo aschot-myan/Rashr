@@ -114,8 +114,7 @@ public class Device {
         this.mContext = mContext;
         try {
             setPredefinedOptions();
-            getSupportedRecoverySystems();
-
+            loadRecoveryList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -477,7 +476,7 @@ public class Device {
         }
     }
 
-    private void getSupportedRecoverySystems() {
+    public void loadRecoveryList() {
 
         ArrayList<String> CWMList = new ArrayList<String>(), TWRPList = new ArrayList<String>(),
                 PHILZList = new ArrayList<String>();
@@ -502,6 +501,13 @@ public class Device {
             Collections.sort(CWMList);
             Collections.sort(TWRPList);
             Collections.sort(PHILZList);
+
+            /**
+             * First clear list before adding items (to avoid double entry on reload by update)
+             */
+            CwmArrayList.clear();
+            TwrpArrayList.clear();
+            PhilzArrayList.clear();
 
             /** Sort newest version to first place */
             for (Object i : CWMList.toArray()) {
