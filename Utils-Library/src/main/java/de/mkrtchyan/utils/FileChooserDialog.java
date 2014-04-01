@@ -85,7 +85,7 @@ public class FileChooserDialog extends Dialog {
         FileList.clear();
 
         if ((!currentPath.equals(StartFolder) || BrowseUpEnabled)
-                && currentPath.getParentFile().exists()) {
+                && currentPath.getParentFile()!= null) {
             FileList.add(currentPath.getParentFile());
         }
         try {
@@ -107,8 +107,9 @@ public class FileChooserDialog extends Dialog {
                 }
             }
         } catch (NullPointerException e) {
-            this.dismiss();
-            throw e;
+            if (isShowing()) {
+                dismiss();
+            }
         }
 
         try {
@@ -121,8 +122,12 @@ public class FileChooserDialog extends Dialog {
         for (int i = 0; i < tmp.length; i++) {
 
             if (i == 0 && (BrowseUpEnabled || !currentPath.equals(StartFolder))
-                    && currentPath.getParentFile().exists()) {
+                    && currentPath.getParentFile() != null) {
+                if (!currentPath.getParentFile().getAbsolutePath().equals("/")) {
                     tmp[0] = currentPath.getParentFile().getAbsolutePath() + "/";
+                } else {
+                    tmp[0] = currentPath.getParentFile().getAbsolutePath();
+                }
             } else {
                 if (FileList.get(i).isDirectory()) {
                     tmp[i] = FileList.get(i).getName() + "/";
