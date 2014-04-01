@@ -127,6 +127,11 @@ public class Device {
         String MANUFACTURE = Build.MANUFACTURER.toLowerCase();
 
         /** Set DEV_NAME predefined options */
+//      Unified Motorola CM Build
+        if (MANUFACTURE.equals("motorola") && BOARD.equals("msm8960")) {
+            DEV_NAME = "moto_msm8960";
+        }
+
 //      LG Optimus L7
         if (MODEL.equals("lg-p710")
                 || DEV_NAME.equals("vee7e"))
