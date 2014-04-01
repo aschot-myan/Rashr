@@ -12,6 +12,13 @@
         android:orientation="vertical">
 
         <Button style="@style/nowCardDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_recovery_script_manager"
+            android:onClick="bOpenRecoveryScriptManager"
+            android:id="@+id/bOpenRecoveryScriptManager" />
+
+        <Button style="@style/nowCardDark"
             android:id="@+id/bXDA"
             android:layout_width="match_parent"
             android:minHeight="74dp"

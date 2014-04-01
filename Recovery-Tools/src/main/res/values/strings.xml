@@ -25,8 +25,7 @@
     <string name="set_name">Name of Backup</string>
     <string name="bak_warning">Before you do some actions with Recovery-Tools please create an backup and store it on your PC.
         \nBackups will be created under\n%s.
-        \nThe DEV is not responsible on the damages of your device.
-    </string>
+        \nThe DEV is not responsible on the damages of your device.</string>
     <string name="flash_options">Flash Options</string>
     <string name="risk">I know the risk</string>
     <string name="sReboot">Reboot</string>
@@ -42,51 +41,39 @@
     <string name="instruction">CWM:
         \nMain Menu -> install zip from sdcard -> choose zip from sdcard
         \n\nTWRP:
-        \nMain Menu -> Install
-    </string>
-
+        \nMain Menu -> Install</string>
     <string name="bak_done">Backup completed</string>
     <string name="backupalready">Backup already exists.</string>
     <string name="no_backup">No existing Backup found (%s/Recovery-Tools/backups/)
-        \n\nCreate one now?
-    </string>
+        \n\nCreate one now?</string>
     <string name="error">Error</string>
     <string name="not_supportded">Your Device is not supported by the developer yet. Scan System and
-        Report unsupported Device or try to find partition (reboot once into recovery)?
-    </string>
+        Report unsupported Device or try to find partition (reboot once into recovery)?</string>
     <string name="no_root">"Device not Rooted. Please Root it. More information under
-        \n\nxda-developer.com"
-    </string>
+        \n\nxda-developer.com"</string>
     <string name="using_dd">Using dd. Recovery in FS</string>
     <string name="using_mtd">Use flash/dump_image (MTD)</string>
-
-    <string name="Downloading">Downloading&#8230;</string>
+    <string name="Downloading">Downloading…</string>
     <string name="commentar">Commentar</string>
     <string name="commenthint">Comment here, what is not working correctly (download, flash, common
-        support or other)
-    </string>
+        support or other)</string>
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
-
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Show Logs</string>
-
     <string name="delete">Delete</string>
     <string name="sBackupMgr">Backup Manager</string>
     <string name="setname">Set name of Backup</string>
     <string name="reboot_recovery_now">Reboot in to recovery now?</string>
-    <string name="flashing">Flashing&#8230;</string>
-    <string name="restoring">Restoring&#8230;</string>
-    <string name="creating_bak">Creating Backup&#8230;</string>
-
+    <string name="flashing">Flashing…</string>
+    <string name="restoring">Restoring…</string>
+    <string name="creating_bak">Creating Backup…</string>
     <string name="download_utils">To use this App you need to download small tools (around 512KB).
         This requires a internet connection.
-        \nDownload it now?
-    </string>
+        \nDownload it now?</string>
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="ShowAds">Show Ads to support</string>
-
     <string name="please_restart">Please restart the app to apply changes</string>
     <string name="please_ads">Please turn the Ads on to support my work! :(</string>
     <string name="donate_to_support">Donate over the menu to support my work! :)</string>
@@ -100,11 +87,9 @@
     </string-array>
 
     <string name="donate">Donate</string>
-
     <string name="never_again">Never show again</string>
     <string name="try_again">Try again!</string>
     <string name="later">Later</string>
-
     <string name="no_choosed">No File chosen</string>
     <string name="update">Update recovery list</string>
     <string name="pick_file">Pick File</string>
@@ -113,14 +98,12 @@
     <string name="bak_error">Failed to backup</string>
     <string name="stock">Stock</string>
     <string name="changelog">Changelog</string>
-
     <string name="use_supersu">SuperSu from Chainfire not recognized on your device. Please use it to avoid errors. Download SuperSu (from Play Store) now?</string>
     <string name="bak_deleted">%s deleted</string>
-
     <string name="extract_failed">Extract needed files from App failed. Please restart the App.</string>
     <string name="no_history">No history found</string>
-
     <string name="styles">Styles</string>
+
     <string-array name="styles">
         <item>Styles</item>
         <item>Holo Light Dark Bar Style</item>
@@ -135,4 +118,22 @@
     <string name="reading_device">Reading Device Infos</string>
     <string name="loading_ui">Loading UI</string>
     <string name="loading_data">Extracting data and creating needed Folder</string>
+    <string name="recovery_script_manager">Recovery-Script Manager</string>
+
+    <string name="bak_name">Custom Backup Name</string>
+    <string name="flash_queue">Flash Queue</string>
+    <string name="wipe_opts">Wipe Options</string>
+    <string name="add_queue">Add Zip to queue</string>
+    <string name="backup_opts">Backup Options</string>
+    <string name="system">System</string>
+    <string name="data">Data</string>
+    <string name="cache">Cache</string>
+    <string name="dalvik">Dalvik</string>
+    <string name="boot">Boot</string>
+
+    <string name="open_recovery_script_manager">Open Recovery-Script Manager</string>
+    <string name="recovery_script_mind">Please keep in mind, this will only work with TWRP or TWRP compatible recovery</string>
+    <string name="run">Run</string>
+    <string name="recovery_script_review">Script Preview</string>
+
 </resources>

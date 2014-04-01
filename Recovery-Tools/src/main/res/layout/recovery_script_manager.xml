@@ -1,0 +1,172 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="de.mkrtchyan.recoverytools.ZipInstaller">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/flash_queue"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvQueue"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_queue"
+            android:id="@+id/addZip"
+            android:onClick="addZip"
+            android:layout_gravity="center_horizontal" />
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/backup_opts"
+                    android:id="@+id/tvBackup"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/system"
+                        android:id="@+id/cbBackupSystem"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/data"
+                        android:id="@+id/cbBackupData"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cache"
+                        android:id="@+id/cbBackupCache"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recovery"
+                        android:id="@+id/cbBackupRecovery"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/boot"
+                        android:id="@+id/cbBackupBoot"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etBackupName"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="@string/bak_name"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/wipe_opts"
+                    android:id="@+id/tvWipe"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cbWipeCache"
+                        android:text="@string/cache"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dalvik"
+                        android:id="@+id/cbWipeDalvik"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/data"
+                        android:id="@+id/cbWipeData"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/go"
+            android:id="@+id/bFlashZip"
+            android:onClick="bFlashZip"
+            android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recovery_script_mind"
+        android:id="@+id/tvZipFlashInfo"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ff0000"
+        android:gravity="center" />
+
+</LinearLayout>

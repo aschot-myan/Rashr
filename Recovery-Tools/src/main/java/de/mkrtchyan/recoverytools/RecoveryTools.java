@@ -547,6 +547,10 @@ public class RecoveryTools extends ActionBarActivity {
     /**
      * Buttons from MenuDrawer
      */
+    public void bOpenRecoveryScriptManager(View view) {
+        startActivity(new Intent(this, RecoveryScriptManager.class));
+    }
+
     public void bDonate(View view) {
         startActivity(new Intent(view.getContext(), DonationsActivity.class));
     }
