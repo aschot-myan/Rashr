@@ -1,6 +1,15 @@
 CHANGELOG
 ====================
 
+Update [1.8.5]
+
+-Crash and bug fixed while choosing file
+-Recovery-Script Manager added TWRP ONLY! (now flash zip over Recovery-Tools :D)
+-Now can handle unified build source from Motorola MSM8960
+-Now refresh recovery list pulling down
+-New Hoster realized by donations THANKS
+-Italian translation improved by Roberto Boriotti
+
 Update [1.8.4]
 
 -Layout optimize problems fixed (now Ads and Backup/Restore options disappears really if its turned off or not supported)

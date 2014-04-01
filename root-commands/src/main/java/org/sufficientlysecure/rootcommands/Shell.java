@@ -400,7 +400,7 @@ public class Shell implements Closeable {
     public String execCommand(Command command) throws FailedExecuteCommand {
         final SimpleCommand simpleCommand = new SimpleCommand(command.getCommand());
         try {
-            this.add(command).waitForFinish();
+            this.add(simpleCommand).waitForFinish();
             String output = simpleCommand.getOutput();
             android.util.Log.i(TAG, simpleCommand.getCommand());
             logCommand(simpleCommand);
@@ -415,9 +415,9 @@ public class Shell implements Closeable {
         final SimpleCommand simpleCommand = new SimpleCommand(command.getCommand());
         try {
             if (waitForFinish) {
-                this.add(command).waitForFinish();
+                this.add(simpleCommand).waitForFinish();
             } else {
-                this.add(command);
+                this.add(simpleCommand);
             }
             String output = simpleCommand.getOutput();
             android.util.Log.i(TAG, simpleCommand.getCommand());
