@@ -95,7 +95,7 @@ public class Device {
     private int KERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private String DEV_NAME = Build.DEVICE.toLowerCase();
     private String RecoveryPath = "";
-    private String RecoveryVersion = "Not recognized Recovery";
+    private String RecoveryVersion = "Not recognized Recovery-Version";
     private String KernelVersion = "Linux " + System.getProperty("os.version");
     private String KernelPath = "";
     private String RECOVERY_EXT = ".img";
@@ -223,6 +223,11 @@ public class Device {
 
         if (DEV_NAME.equals("m7spr"))
             DEV_NAME = "m7wls";
+
+//      Samsung Galaxy Note 3 (unified build)
+        if (DEV_NAME.startsWith("hlte") && MANUFACTURE.equals("samsung")) {
+            DEV_NAME = "hlte";
+        }
 
 //      Samsung Galaxy S4 (i9505/jflte)
         if (DEV_NAME.equals("jflte"))
@@ -589,16 +594,16 @@ public class Device {
                 while ((line = br.readLine()) != null) {
                     line = line.replace("\"", "");
                     line = line.replace("\'", "");
-                    if (RecoveryVersion.equals("Not recognized Recovery")) {
+                    if (RecoveryVersion.equals("Not recognized Recovery-Version")) {
                         if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
                             RecoveryVersion = line;
-                        }
-                        if (line.contains("Starting TWRP")) {
+                        } else if (line.contains("TWRP")) {
                             line = line.replace("Starting ", "");
                             line = line.split(" on")[0];
                             RecoveryVersion = line;
-                        }
-                        if (line.contains("PhilZ")) {
+                        } else if (line.contains("PhilZ")) {
+                            RecoveryVersion = line;
+                        } else if (line.contains("4EXT")) {
                             RecoveryVersion = line;
                         }
                     }
