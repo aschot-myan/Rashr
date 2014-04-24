@@ -436,18 +436,15 @@ public class Shell implements Closeable {
                     String Log = "";
                     if (command.getExitCode() == 0) {
                         Log += "\nCommand:\n" + command.getCommand();
-                        if (!command.getOutput().equals("")) {
-                            Log += "\n\nOutput:\n" + command.getOutput();
-                        }
-
                     } else {
                         Log += "\nFailed execute:\n" + command.getCommand() + "\n";
-                        if (!command.getOutput().equals("")) {
-                            Log += "\n\nOutput:\n" + command.getOutput() + "\n";
-                        }
+                    }
+                    if (!command.getOutput().equals("")) {
+                        Log += "\n\nOutput:\n" + command.getOutput();
                     }
                     FileOutputStream fo = mContext.openFileOutput(Logs, Context.MODE_APPEND);
                     fo.write(Log.getBytes());
+                    fo.close();
                 }
             }
         } catch (FileNotFoundException e) {
