@@ -3,34 +3,43 @@ Recovery-Tools
 
 This app requires [ROOT] access!
 Please do not use this app thoughtless and evaluating them without deeper KNOWLEDGE for Android (Root, Custom Recovery, etc.)
-I'm working to improve this app.
 
 ----- Description -----
 
 This app flashes and backups your device recovery and kernel without rebooting it very fast and easy without a PC or any outside influence.
 
-This app have over 850 build-in recovery imgs (Clockworkmod/TWRP/philz) of course you can choose other imgs from internal and external storage.
+This app have over 1500 build-in recovery imgs (Clockworkmod/TWRP/philz) of course you can choose other imgs from internal and external storage.
 
 Over 90% of all devices will be supported by the App.
 
 This project is fully open-source if you want to help me with unsupported devices you can use the report button or contact me over XDA.
 
-You can find the source code on GitHub: https://github.com/ashotmkrtchyan1995/Recovery-Tools
+★Open-Source (on GitHub: https://github.com/dslnexus/Recovery-Tools)
+★OpenRecovery Script manager to flash ZIPs
+★Over 1500 Build-in Recoveries (Clockworkmod/Touch, Team Win Recovery Project and Philz-Touch)
+★Flash Kernel and Recoveries without PC
+★Flash already downloaded IMGs from internal and external storage
+★Backup Kernel and Recovery IMGs without PC
+★Needs Root
+★Full command logging for more control what this App is doing
+★If you don't want to support my work you are able to disable the Ads
+★Free full app without Ads and any restrictions
+
+★Support my Work only if you want (with Ads or In-App donations)
 
 ----- Rights explanation -----
 
--Read and write on external storage: save recoveries images
+-Read and write on external storage: save recoveries images or read already downloaded images
 -Full network access: download recoveries
 -Google Play billing: donations over Google Play
--[normally managed by SuperUser-App]Full access to all functions of the device: Flashing the recoveries
-
+-[normally managed by Superuser-App]Full access to all functions of the device: Flashing recoveries and kernel
 
 Compile instructions
 ===================================
 
 To compile Recovery-Tools download the Source and needed Libraries:
 
-Recovery-Tools:     https://github.com/ashotmkrtchyan1995/Recovery-Tools
+Recovery-Tools:     https://github.com/DsLNeXuS/Recovery-Tools
 
 [Libraries]:        All Libraries are included in the repository and pre-configured for
                     gradle on Android Studio

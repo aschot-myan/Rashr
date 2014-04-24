@@ -1,6 +1,15 @@
 CHANGELOG
 ====================
 
+Update [1.8.6]
+
+-Samsung Galaxy Note 3 (unified build handling)
+-Added AppMsg Library (Toast replacement)
+-Added Partition Layouts from Online Nandroid Backup
+-Better Error handling
+-New IMGs added
+-SU Logging problems fixed
+
 Update [1.8.5]
 
 -Crash and bug fixed while choosing file

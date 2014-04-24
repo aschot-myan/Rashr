@@ -5,9 +5,9 @@ android {
     buildToolsVersion '19.0.3'
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 18
-        versionCode 73
-        versionName "1.8.5"
+        targetSdkVersion 19
+        versionCode 74
+        versionName "1.8.6"
     }
 
     signingConfigs {
@@ -20,7 +20,6 @@ android {
         release {
             runProguard false
             debuggable false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 
@@ -37,4 +36,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':root-commands')
     compile project(':Utils-Library')
+    compile project(':AppMsg')
 }
