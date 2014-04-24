@@ -44,6 +44,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
@@ -58,13 +59,12 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.devspark.appmsg.AppMsg;
 import com.google.ads.AdView;
 
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
-import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -127,12 +127,6 @@ public class RecoveryTools extends ActionBarActivity {
     private final int APPCOMPAT_DARK = R.style.MyDark;
     private final int APPCOMPAT_LIGHT = R.style.MyLight;
     private final int APPCOMPAT_LIGHT_DARK_BAR = R.style.MyLightDarkBar;
-    private final Runnable ReloadBackupDrawer = new Runnable() {
-        @Override
-        public void run() {
-            loadBackupDrawer();
-        }
-    };
     private File RecoveryCollectionFile;
     private File fRECOVERY, fKERNEL;
     private Shell mShell;
@@ -154,7 +148,7 @@ public class RecoveryTools extends ActionBarActivity {
                         if (mDevice.isFOTAFlashed()) {
                             /** Show instructions if FOTAKernel will be flashed */
                             mNotifyer.createAlertDialog(R.string.warning, R.string.fota, rFlashRecovery).show();
-                        } else if (mDevice.isRecoveryOverRecovery()) {
+                        } else {
                             /** Get user input if user want to install over recovery now */
                             showOverRecoveryInstructions();
                         }
@@ -200,6 +194,8 @@ public class RecoveryTools extends ActionBarActivity {
         }
     };
 
+    private final ArrayList<String> ERRORS = new ArrayList<String>();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -232,87 +228,9 @@ public class RecoveryTools extends ActionBarActivity {
                         }
                     });
                     mShell = Shell.startRootShell(mContext);
-
-                    mToolbox = new Toolbox(mShell);
-                    try {
-                        File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
-                        mToolbox.setFilePermissions(LastLog, "644");
-                        mToolbox.copyFile(LastLog, LogCopy, false, false);
-                    } catch (FailedExecuteCommand failedExecuteCommand) {
-                        failedExecuteCommand.printStackTrace();
-                    }
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvLoading.setText(R.string.reading_device);
-                        }
-                    });
-                    mDevice = new Device(mContext);
-                    /** Creating needed folder and unpacking files */
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvLoading.setText(R.string.loading_data);
-                        }
-                    });
-                    for (File i : Folder) {
-                        if (!i.exists()) {
-                            i.mkdir();
-                        }
-                    }
-                    unpackFiles();
-                    /** If device is not supported, you can report it now or close the App */
-                    if (!mDevice.isRecoverySupported() && !mDevice.isKernelSupported()) {
-                        mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showDeviceNotSupportedDialog();
-                            }
-                        });
-                    } else {
-                        if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_FIRST_RUN)) {
-                            /** Setting first start configuration */
-                            Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
-                            Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS, true);
-                            Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
-                            mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    showUsageWarning();
-                                }
-                            });
-                        } else {
-                            /** Checking if version has changed */
-                            try {
-                                PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                                final int previous_version = Common.getIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER);
-                                final int current_version = pInfo.versionCode;
-                                version_changed = current_version > previous_version;
-                                Common.setIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER, current_version);
-                            } catch (Exception e) {
-                                version_changed = true;
-                            }
-                            if (version_changed) {
-                                Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS, true);
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        new File(mContext.getFilesDir(), Shell.Logs).delete();
-                                        Notifyer.showAppRateDialog(mContext);
-                                        showChangelog();
-                                    }
-                                });
-                            }
-                        }
-                    }
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            optimizeLayout();
-                            mDevice.downloadUtils(mContext);
-                        }
-                    });
                 } catch (IOException e) {
+
+                    ERRORS.add(e.toString());
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -321,7 +239,125 @@ public class RecoveryTools extends ActionBarActivity {
                             tvLoading.setText(R.string.no_root);
                         }
                     });
+                    return;
                 }
+
+                try {
+                    unpackFiles();
+                } catch (IOException e) {
+                    ERRORS.add(e.toString());
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvLoading.setText(R.string.failed_unpack_files);
+                            tvLoading.setTextColor(Color.RED);
+                        }
+                    });
+                    return;
+                }
+
+                mToolbox = new Toolbox(mShell);
+                try {
+                    File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
+                    mToolbox.setFilePermissions(LastLog, "644");
+                    mToolbox.copyFile(LastLog, LogCopy, false, false);
+                } catch (Exception e) {
+                    ERRORS.add(e.toString());
+                }
+                mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvLoading.setText(R.string.reading_device);
+                        }
+                    });
+                mDevice = new Device(mContext);
+                /** Creating needed folder and unpacking files */
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvLoading.setText(R.string.loading_data);
+                    }
+                });
+                for (File i : Folder) {
+                    if (!i.exists()) {
+                        i.mkdir();
+                    }
+                }
+
+                /** If device is not supported, you can report it now or close the App */
+                if (!mDevice.isRecoverySupported() && !mDevice.isKernelSupported()) {
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showDeviceNotSupportedDialog();
+                        }
+                    });
+                } else {
+                    if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_FIRST_RUN)) {
+                        /** Setting first start configuration */
+                        Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
+                        Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS, true);
+                        Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showUsageWarning();
+                            }
+                        });
+                    } else {
+                        /** Checking if version has changed */
+                        try {
+                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                            final int previous_version = Common.getIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER);
+                            final int current_version = pInfo.versionCode;
+                            version_changed = current_version > previous_version;
+                            Common.setIntegerPref(mContext, PREF_NAME, PREF_KEY_CUR_VER, current_version);
+                        } catch (Exception e) {
+                            ERRORS.add(e.toString());
+                            version_changed = true;
+                        }
+                        if (version_changed) {
+                            Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS, true);
+                            mActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Notifyer.showAppRateDialog(mContext);
+                                    showChangelog();
+                                }
+                            });
+                        }
+                    }
+                }
+                try {
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                                optimizeLayout();
+                            mDevice.downloadUtils(mContext);
+                        }
+                    });
+                } catch (NullPointerException e) {
+                    ERRORS.add(e.toString());
+                    try {
+                        tvLoading.setText(R.string.failed_setup_layout);
+                        tvLoading.setTextColor(Color.RED);
+                    } catch (RuntimeException ex) {
+                        ERRORS.add(ex.toString());
+                        ex.printStackTrace();
+
+                    }
+                }
+
+//                mActivity.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Dialog dialog = new Dialog(mContext);
+//                        ListView listView = new ListView(mContext);
+//                        dialog.setContentView(listView);
+//                        listView.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, ERRORS));
+//                        dialog.show();
+//                    }
+//                });
             }
         });
         StartThread.start();
@@ -427,7 +463,7 @@ public class RecoveryTools extends ActionBarActivity {
             fcFlashOtherRecovery.setWarn(true);
             fcFlashOtherRecovery.show();
         } catch (NullPointerException e) {
-            Notifyer.showExceptionToast(mContext, TAG, e);
+            ERRORS.add(e.toString());
         }
     }
 
@@ -451,7 +487,7 @@ public class RecoveryTools extends ActionBarActivity {
             fcFlashOtherKernel.setWarn(true);
             fcFlashOtherKernel.show();
         } catch (NullPointerException e) {
-            Notifyer.showExceptionToast(mContext, TAG, e);
+            ERRORS.add(e.toString());
         }
     }
 
@@ -493,7 +529,9 @@ public class RecoveryTools extends ActionBarActivity {
                     }
                     HistoryDialog.dismiss();
                 } else {
-                    Toast.makeText(mContext, R.string.no_choosed, Toast.LENGTH_SHORT).show();
+                    AppMsg
+                            .makeText(mActivity, R.string.no_choosed, AppMsg.STYLE_ALERT)
+                            .show();
                 }
             }
         });
@@ -501,8 +539,8 @@ public class RecoveryTools extends ActionBarActivity {
         if (HistoryFileNames.toArray().length > 0) {
             HistoryDialog.show();
         } else {
-            Toast
-                    .makeText(mContext, R.string.no_history, Toast.LENGTH_SHORT)
+            AppMsg
+                    .makeText(mActivity, R.string.no_history, AppMsg.STYLE_ALERT)
                     .show();
         }
 
@@ -666,24 +704,22 @@ public class RecoveryTools extends ActionBarActivity {
                 }
 
                 final File fBACKUP = new File(Path, Name);
-                Runnable rBackup = new Runnable() {
-                    @Override
-                    public void run() {
-                        FlashUtil BackupCreator = new FlashUtil(mShell, mContext, mDevice, fBACKUP,
-                                JOB);
-                        BackupCreator.setRunAtEnd(ReloadBackupDrawer);
-                        BackupCreator.execute();
-                    }
-                };
                 if (fBACKUP.exists()) {
-                    Toast
-                            .makeText(mContext, R.string.backupalready, Toast.LENGTH_SHORT)
+                    AppMsg
+                            .makeText(mActivity, R.string.backupalready, AppMsg.STYLE_ALERT)
                             .show();
                 } else {
-                    rBackup.run();
+                    FlashUtil BackupCreator = new FlashUtil(mShell, mContext, mDevice, fBACKUP,
+                            JOB);
+                    BackupCreator.setRunAtEnd(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadBackupDrawer();
+                        }
+                    });
+                    BackupCreator.execute();
                 }
                 dialog.dismiss();
-
             }
         });
         dialog.show();
@@ -710,6 +746,7 @@ public class RecoveryTools extends ActionBarActivity {
 
             FlashRecoveryDialog.show();
         } catch (NullPointerException e) {
+            ERRORS.add(e.toString());
             Notifyer.showExceptionToast(mContext, TAG, e);
         }
     }
@@ -735,8 +772,8 @@ public class RecoveryTools extends ActionBarActivity {
                     public void onClick(View v) {
 
                         if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS))
-                            Toast.makeText(mContext, R.string.please_ads, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(mContext, R.string.donate_to_support, Toast.LENGTH_SHORT).show();
+                            AppMsg.makeText(mActivity, R.string.please_ads, AppMsg.STYLE_ALERT).show();
+                        AppMsg.makeText(mActivity, R.string.donate_to_support, AppMsg.STYLE_ALERT).show();
                         try {
                             ArrayList<File> files = new ArrayList<File>();
                             File TestResults = new File(mContext.getFilesDir(), "results.txt");
@@ -752,7 +789,7 @@ public class RecoveryTools extends ActionBarActivity {
                                     files.add(TestResults);
                                 }
                             } catch (FileNotFoundException e) {
-                                e.printStackTrace();
+                                ERRORS.add(e.toString());
                             }
                             if (getPackageManager() != null) {
                                 PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -763,11 +800,11 @@ public class RecoveryTools extends ActionBarActivity {
                                 Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
                                 intent.setType("text/plain");
                                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools report");
-                                intent.putExtra(Intent.EXTRA_TEXT, "Package Infos:" +
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "Recovery-Tools" + pInfo.versionName + "report");
+                                String message = "Package Infos:" +
                                         "\n\nName: " + pInfo.packageName +
-                                        "\nVersionName: " + pInfo.versionName +
-                                        "\nVersionCode: " + pInfo.versionCode +
+                                        "\nVersion Code: " + pInfo.versionCode ;
+                                message +=
                                         "\n\n\nProduct Info: " +
                                         "\n\nManufacture: " + android.os.Build.MANUFACTURER +
                                         "\nDevice: " + Build.DEVICE + " (" + mDevice.getDeviceName() + ")" +
@@ -775,24 +812,46 @@ public class RecoveryTools extends ActionBarActivity {
                                         "\nBrand: " + Build.BRAND +
                                         "\nModel: " + Build.MODEL +
                                         "\nFingerprint: " + Build.FINGERPRINT +
-                                        "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")" +
-                                        "\nRecovery Supported: " + mDevice.isRecoverySupported() +
-                                        "\nRecovery Path: " + mDevice.getRecoveryPath() +
-                                        "\nRecovery Version: " + mDevice.getRecoveryVersion() +
-                                        "\nRecovery MTD: " + mDevice.isRecoveryMTD() +
-                                        "\nRecovery DD: " + mDevice.isRecoveryDD() +
-                                        "\nKernel Supported: " + mDevice.isKernelSupported() +
-                                        "\nKernel Path: " + mDevice.getKernelPath() +
-                                        "\nKernel Version: " + mDevice.getKernelVersion() +
-                                        "\nKernel MTD: " + mDevice.isKernelMTD() +
-                                        "\nKernel DD: " + mDevice.isKernelDD() +
-                                        "\n\nCWM: " + mDevice.isCwmSupported() +
-                                        "\nTWRP: " + mDevice.isTwrpSupported() +
-                                        "\nPHILZ: " + mDevice.isPhilzSupported() +
-                                        "\n\n\n===========COMMENT==========\n" + comment +
-                                        "\n===========COMMENT END==========\n" +
-                                        "\n===========PREFS==========\n" + getAllPrefs() +
-                                        "\n===========PREFS END==========\n");
+                                        "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
+
+
+                                if (mDevice.isRecoverySupported()) {
+                                    message += "\nRecovery Path: " + mDevice.getRecoveryPath() +
+                                            "\nRecovery Version: " + mDevice.getRecoveryVersion() +
+                                            "\nRecovery MTD: " + mDevice.isRecoveryMTD() +
+                                            "\nRecovery DD: " + mDevice.isRecoveryDD() +
+                                            "\n\nCWM: " + mDevice.isCwmSupported() +
+                                            "\nTWRP: " + mDevice.isTwrpSupported() +
+                                            "\nPHILZ: " + mDevice.isPhilzSupported();
+                                }
+                                if (mDevice.isKernelSupported()) {
+                                    message += "\nKernel Path: " + mDevice.getKernelPath() +
+                                            "\nKernel Version: " + mDevice.getKernelVersion() +
+                                            "\nKernel MTD: " + mDevice.isKernelMTD() +
+                                            "\nKernel DD: " + mDevice.isKernelDD();
+                                }
+                                if (!comment.equals("")) {
+                                    message += "\n\n\n===========COMMENT==========\n" + comment +
+                                            "\n===========COMMENT END==========\n" ;
+                                }
+                                message += "\n===========PREFS==========\n" + getAllPrefs() +
+                                        "\n===========PREFS END==========\n";
+
+                                if (ERRORS.size() > 0) {
+                                    message += "Recovery-Tools ERRORS:\n";
+                                    for (String error : ERRORS) {
+                                        message += error + "\n";
+                                    }
+                                }
+
+                                if (mDevice.getERRORS().size() > 0) {
+                                    message += "Device ERRORS:\n";
+                                    for (String error : mDevice.getERRORS()) {
+                                        message += error + "\n";
+                                    }
+                                }
+
+                                intent.putExtra(Intent.EXTRA_TEXT, message);
                                 File CommandLogs = new File(mContext.getFilesDir(), Shell.Logs);
                                 if (CommandLogs.exists()) {
                                     files.add(CommandLogs);
@@ -810,6 +869,7 @@ public class RecoveryTools extends ActionBarActivity {
                                 reportDialog.dismiss();
                             }
                         } catch (Exception e) {
+                            ERRORS.add(e.toString());
                             reportDialog.dismiss();
                             Notifyer.showExceptionToast(mContext, TAG, e);
                         }
@@ -841,6 +901,7 @@ public class RecoveryTools extends ActionBarActivity {
             AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
             dialog.setTitle(R.string.changelog);
             WebView changes = new WebView(mContext);
+            changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
             changes.setWebViewClient(new WebViewClient());
             changes.loadUrl("http://forum.xda-developers.com/showpost.php?p=42839595&postcount=3");
             dialog.setView(changes);
@@ -929,8 +990,8 @@ public class RecoveryTools extends ActionBarActivity {
                                     final File renamedBackup = new File(PathToRecoveryBackups, Name);
 
                                     if (renamedBackup.exists()) {
-                                        Toast
-                                                .makeText(mContext, R.string.backupalready, Toast.LENGTH_SHORT)
+                                        AppMsg
+                                                .makeText(mActivity, R.string.backupalready, AppMsg.STYLE_ALERT)
                                                 .show();
                                     } else {
                                         if (Backup.renameTo(renamedBackup)) {
@@ -945,8 +1006,8 @@ public class RecoveryTools extends ActionBarActivity {
                         case R.id.iDeleteRecoveryBackup:
                             if (((TextView) v).getText() != null) {
                                 if (new File(PathToRecoveryBackups, text).delete()) {
-                                    Toast.makeText(mContext, String.format(mContext.getString(R.string.bak_deleted),
-                                            ((TextView) v).getText()), Toast.LENGTH_SHORT).show();
+                                    AppMsg.makeText(mActivity, String.format(mContext.getString(R.string.bak_deleted),
+                                            ((TextView) v).getText()), AppMsg.STYLE_INFO).show();
                                     loadBackupDrawer();
                                 }
                             }
@@ -976,8 +1037,8 @@ public class RecoveryTools extends ActionBarActivity {
                                     final File renamedBackup = new File(PathToKernelBackups, Name);
 
                                     if (renamedBackup.exists()) {
-                                        Toast
-                                                .makeText(mContext, R.string.backupalready, Toast.LENGTH_SHORT)
+                                        AppMsg
+                                                .makeText(mActivity, R.string.backupalready, AppMsg.STYLE_ALERT)
                                                 .show();
                                     } else {
                                         if (Backup.renameTo(renamedBackup)) {
@@ -993,8 +1054,10 @@ public class RecoveryTools extends ActionBarActivity {
                         case R.id.iDeleteKernelBackup:
                             if (((TextView) v).getText() != null) {
                                 if (new File(PathToKernelBackups, text).delete()) {
-                                    Toast.makeText(mContext, String.format(mContext.getString(R.string.bak_deleted),
-                                            ((TextView) v).getText()), Toast.LENGTH_SHORT).show();
+                                    AppMsg
+                                            .makeText(mActivity, String.format(mContext.getString(R.string.bak_deleted),
+                                            ((TextView) v).getText()), AppMsg.STYLE_ALERT)
+                                            .show();
                                     loadBackupDrawer();
                                 }
                             }
@@ -1003,6 +1066,7 @@ public class RecoveryTools extends ActionBarActivity {
                             return false;
                     }
                 } catch (Exception e) {
+                    ERRORS.add(e.toString());
                     return false;
                 }
             }
@@ -1021,6 +1085,7 @@ public class RecoveryTools extends ActionBarActivity {
                         try {
                             mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
                         } catch (Exception e) {
+                            ERRORS.add(e.toString());
                             e.printStackTrace();
                         }
                     }
@@ -1070,6 +1135,7 @@ public class RecoveryTools extends ActionBarActivity {
                     try {
                         mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
                     } catch (Exception e) {
+                        ERRORS.add(e.toString());
                         e.printStackTrace();
                     }
                 }
@@ -1079,20 +1145,16 @@ public class RecoveryTools extends ActionBarActivity {
         DeviceNotSupported.show();
     }
 
-    private void unpackFiles() {
-        try {
-            if (mDevice.isRecoveryMTD() || mDevice.isKernelMTD()) {
-                File flash_image = new File(getFilesDir(), "flash_image");
-                Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image, version_changed);
-                File dump_image = new File(getFilesDir(), "dump_image");
-                Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image, version_changed);
-            }
-            File busybox = new File(mContext.getFilesDir(), "busybox");
-            Common.pushFileFromRAW(mContext, busybox, R.raw.busybox, version_changed);
-            Common.pushFileFromRAW(mContext, RecoveryCollectionFile, R.raw.img_sums, version_changed);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void unpackFiles() throws IOException {
+        File flash_image = new File(getFilesDir(), "flash_image");
+        Common.pushFileFromRAW(mContext, flash_image, R.raw.flash_image, version_changed);
+        File dump_image = new File(getFilesDir(), "dump_image");
+        Common.pushFileFromRAW(mContext, dump_image, R.raw.dump_image, version_changed);
+        File busybox = new File(mContext.getFilesDir(), "busybox");
+        Common.pushFileFromRAW(mContext, busybox, R.raw.busybox, version_changed);
+        Common.pushFileFromRAW(mContext, RecoveryCollectionFile, R.raw.img_sums, version_changed);
+        File PartLayoutsZip = new File(mContext.getFilesDir(), "partlayouts.zip");
+        Common.pushFileFromRAW(mContext, PartLayoutsZip, R.raw.partlayouts, version_changed);
     }
 
     public void loadBackupDrawer() {
@@ -1148,186 +1210,181 @@ public class RecoveryTools extends ActionBarActivity {
 
     public void optimizeLayout() throws NullPointerException {
 
-        try {
-            if (mDevice.isRecoverySupported() || mDevice.isKernelSupported()) {
-                /** If device is supported start setting up layout */
-                if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
-                    /** Setting layout for flashing over external App for example File Browser */
-                    setContentView(R.layout.flash_as);
-                    RelativeLayout FlashAsLayout = (RelativeLayout) findViewById(R.layout.flash_as);
-                    String path;
-                    if ((path = getIntent().getData().getPath()) != null) {
-                        final File IMG = new File(path);
-                        if (IMG.exists()) {
-                            TextView tvFlashAs = (TextView) findViewById(R.id.tvFlashAs);
-                            tvFlashAs.setText(String.format(getString(R.string.flash_as), IMG.getName()));
-                        } else {
-                            exit();
-                        }
-                        RadioButton optAsRecovery = (RadioButton) findViewById(R.id.optAsRecovery);
-                        RadioButton optAsKernel = (RadioButton) findViewById(R.id.optAsKernel);
-
-                        if (!mDevice.isRecoverySupported()) {
-                            FlashAsLayout.removeView(optAsRecovery);
-                            optAsKernel.setChecked(true);
-                        }
-                        if (!mDevice.isKernelSupported()) {
-                            FlashAsLayout.removeView((optAsKernel));
-                        }
+        if (mDevice.isRecoverySupported() || mDevice.isKernelSupported()) {
+            /** If device is supported start setting up layout */
+            if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+                /** Setting layout for flashing over external App for example File Browser */
+                setContentView(R.layout.flash_as);
+                RelativeLayout FlashAsLayout = (RelativeLayout) findViewById(R.layout.flash_as);
+                String path;
+                if ((path = getIntent().getData().getPath()) != null) {
+                    final File IMG = new File(path);
+                    if (IMG.exists()) {
+                        TextView tvFlashAs = (TextView) findViewById(R.id.tvFlashAs);
+                        tvFlashAs.setText(String.format(getString(R.string.flash_as), IMG.getName()));
                     } else {
                         exit();
                     }
+                    RadioButton optAsRecovery = (RadioButton) findViewById(R.id.optAsRecovery);
+                    RadioButton optAsKernel = (RadioButton) findViewById(R.id.optAsKernel);
+
+                    if (!mDevice.isRecoverySupported()) {
+                        FlashAsLayout.removeView(optAsRecovery);
+                        optAsKernel.setChecked(true);
+                    }
+                    if (!mDevice.isKernelSupported()) {
+                        FlashAsLayout.removeView((optAsKernel));
+                    }
                 } else {
-                    setContentView(R.layout.recovery_tools);
+                    exit();
+                }
+            } else {
+                setContentView(R.layout.recovery_tools);
 
-                    mRecoveryToolsLayout = (DrawerLayout) findViewById(R.id.RecoveryToolsLayout);
-                    mSwipeUpdater = (SwipeRefreshLayout) findViewById(R.id.swipe_updater);
-                    mSwipeUpdater.setColorScheme(R.color.custom_green,
-                            android.R.color.black,
-                            R.color.custom_green,
-                            android.R.color.darker_gray);
-                    mSwipeUpdater.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override
-                        public void onRefresh() {
-                            Downloader updater = new Downloader(mContext, "http://dslnexus.de/Android/",
-                                    "img_sums", RecoveryCollectionFile, new Runnable() {
-                                @Override
-                                public void run() {
-                                    mDevice = new Device(mContext);
-                                }
+                mRecoveryToolsLayout = (DrawerLayout) findViewById(R.id.RecoveryToolsLayout);
+                mSwipeUpdater = (SwipeRefreshLayout) findViewById(R.id.swipe_updater);
+                mSwipeUpdater.setColorScheme(R.color.custom_green,
+                        android.R.color.black,
+                        R.color.custom_green,
+                        android.R.color.darker_gray);
+                mSwipeUpdater.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Downloader updater = new Downloader(mContext, "http://dslnexus.de/Android/",
+                                "img_sums", RecoveryCollectionFile, new Runnable() {
+                            @Override
+                            public void run() {
+                                mDevice = new Device(mContext);
                             }
-                            );
-                            updater.setOverrideFile(true);
-                            updater.setRetry(true);
-                            updater.setHidden(true);
-                            Toast
-                                    .makeText(mContext, "Refreshing recovery list", Toast.LENGTH_SHORT)
-                                    .show();
-                            updater.setAfterDownload(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mSwipeUpdater.setRefreshing(false);
-                                    Toast
-                                            .makeText(mContext, "Update finished", Toast.LENGTH_SHORT)
-                                            .show();
-                                    mDevice.loadRecoveryList();
-                                }
-                            });
-                            updater.execute();
                         }
-                    });
-                    LayoutInflater layoutInflater = getLayoutInflater();
-
-                    DrawerLayout mMenuDrawer =
-                            (DrawerLayout) layoutInflater.inflate(R.layout.menu_drawer, mRecoveryToolsLayout, true);
-                    DrawerLayout mBackupDrawer =
-                            (DrawerLayout) layoutInflater.inflate(R.layout.backup_drawer, mRecoveryToolsLayout, true);
-                    mRecoveryToolsLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-                    ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(mActivity,
-                            mRecoveryToolsLayout, R.drawable.ic_drawer, R.string.settings, R.string.app_name);
-                    mRecoveryToolsLayout.setDrawerListener(mDrawerToggle);
-                    mDrawerToggle.syncState();
-                    mDrawerToggle.setDrawerIndicatorEnabled(true);
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    getSupportActionBar().setHomeButtonEnabled(true);
-
-                    String Styles[] = getResources().getStringArray(R.array.styles);
-                    if (mMenuDrawer != null) {
-                        Spinner spStyle = (Spinner) mMenuDrawer.findViewById(R.id.spStyle);
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity,
-                                R.layout.custom_list_item, Styles);
-                        adapter.setDropDownViewResource(R.layout.custom_list_item);
-
-                        spStyle.setAdapter(adapter);
-                        spStyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        );
+                        updater.setOverrideFile(true);
+                        updater.setRetry(true);
+                        updater.setHidden(true);
+                        AppMsg
+                                .makeText(mActivity, R.string.refresh_list, AppMsg.STYLE_INFO)
+                                .show();
+                        updater.setAfterDownload(new Runnable() {
                             @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                switch (position) {
-                                    case 1:
-                                        Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
-                                        restartActivity();
-                                        break;
-                                    case 2:
-                                        Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT);
-                                        restartActivity();
-                                        break;
-                                    case 3:
-                                        Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_DARK);
-                                        restartActivity();
-                                        break;
-                                }
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
+                            public void run() {
+                                mSwipeUpdater.setRefreshing(false);
+                                AppMsg
+                                        .makeText(mActivity, R.string.update_done, AppMsg.STYLE_INFO)
+                                        .show();
+                                mDevice.loadRecoveryList();
                             }
                         });
-                        CheckBox cbShowAds = (CheckBox) mMenuDrawer.findViewById(R.id.cbShowAds);
-                        CheckBox cbLog = (CheckBox) mMenuDrawer.findViewById(R.id.cbLog);
-
-                        cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
-                        cbLog.setChecked(Common.getBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG));
-                        if (cbLog.isChecked()) {
-                            findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
-                        } else {
-                            findViewById(R.id.bShowLogs).setVisibility(View.INVISIBLE);
-                        }
-                        cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
-
+                        updater.execute();
                     }
+                });
+                LayoutInflater layoutInflater = getLayoutInflater();
 
-                    final TextView RecoveryVersion = (TextView) findViewById(R.id.tvVersion);
-                    RecoveryVersion.setText(mDevice.getRecoveryVersion() + "\n" + mDevice.getKernelVersion());
-                    loadBackupDrawer();
+                DrawerLayout mMenuDrawer =
+                        (DrawerLayout) layoutInflater.inflate(R.layout.menu_drawer, mRecoveryToolsLayout, true);
+                DrawerLayout mBackupDrawer =
+                        (DrawerLayout) layoutInflater.inflate(R.layout.backup_drawer, mRecoveryToolsLayout, true);
+                mRecoveryToolsLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+                ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(mActivity,
+                        mRecoveryToolsLayout, R.drawable.ic_drawer, R.string.settings, R.string.app_name);
+                mRecoveryToolsLayout.setDrawerListener(mDrawerToggle);
+                mDrawerToggle.syncState();
+                mDrawerToggle.setDrawerIndicatorEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeButtonEnabled(true);
 
-                    AdView adView = (AdView) findViewById(R.id.adView);
-                    ViewGroup MainParent = (ViewGroup) adView.getParent();
-                    /** Removing ads if user has turned off */
-                    if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {
-                        if (adView != null && MainParent != null) {
-                            MainParent.removeView(adView);
+                String Styles[] = getResources().getStringArray(R.array.styles);
+                if (mMenuDrawer != null) {
+                    Spinner spStyle = (Spinner) mMenuDrawer.findViewById(R.id.spStyle);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity,
+                            R.layout.custom_list_item, Styles);
+                    adapter.setDropDownViewResource(R.layout.custom_list_item);
+
+                    spStyle.setAdapter(adapter);
+                    spStyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            switch (position) {
+                                case 1:
+                                    Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
+                                    restartActivity();
+                                    break;
+                                case 2:
+                                    Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT);
+                                    restartActivity();
+                                    break;
+                                case 3:
+                                    Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_DARK);
+                                    restartActivity();
+                                    break;
+                            }
                         }
-                    }
 
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                    CheckBox cbShowAds = (CheckBox) mMenuDrawer.findViewById(R.id.cbShowAds);
+                    CheckBox cbLog = (CheckBox) mMenuDrawer.findViewById(R.id.cbLog);
+
+                    cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
+                    cbLog.setChecked(Common.getBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG));
+                    if (cbLog.isChecked()) {
+                        findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
+                    } else {
+                        findViewById(R.id.bShowLogs).setVisibility(View.INVISIBLE);
+                    }
+                    cbShowAds.setChecked(Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS));
+
+                }
+
+                final TextView RecoveryVersion = (TextView) findViewById(R.id.tvVersion);
+                RecoveryVersion.setText(mDevice.getRecoveryVersion() + "\n" + mDevice.getKernelVersion());
+                loadBackupDrawer();
+
+                AdView adView = (AdView) findViewById(R.id.adView);
+                ViewGroup MainParent = (ViewGroup) adView.getParent();
+                /** Removing ads if user has turned off */
+                if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {
                     if (MainParent != null) {
-                        if (!mDevice.isKernelSupported()) {
-                            /** If Kernel flashing is not supported remove flash options */
-                            MainParent.removeView(findViewById(R.id.bFlashKernel));
-                        }
-                        if (!mDevice.isRecoverySupported()) {
-                            /** If Recovery flashing is not supported remove flash options */
-                            MainParent.removeView(findViewById(R.id.bFlashRecovery));
-                        }
-                    }
-
-                    if (mBackupDrawer != null) {
-                        ViewGroup BackupDrawerParent = (ViewGroup) mBackupDrawer.getParent();
-                        if (mDevice.isRecoveryOverRecovery()) {
-                            BackupDrawerParent.removeView(mBackupDrawer);
-                        } else {
-                            View createKernelBackup = findViewById(R.id.bCreateKernelBackup);
-                            View kernelBackups = findViewById(R.id.lvKernelBackups);
-                            View createRecoveryBackup = findViewById(R.id.bCreateRecoveryBackup);
-                            View recoveryBackups = findViewById(R.id.lvRecoveryBackups);
-                            if (!mDevice.isKernelSupported()) {
-                                /** If Kernel flashing is not supported remove backup views */
-                                ((ViewGroup) createKernelBackup.getParent()).removeView(createKernelBackup);
-                                ((ViewGroup) kernelBackups.getParent()).removeView(kernelBackups);
-                            }
-                            if (!mDevice.isRecoverySupported()) {
-                                /** If Recovery flashing is not supported remove backup views */
-                                ((ViewGroup) createRecoveryBackup.getParent()).removeView(createRecoveryBackup);
-                                ((ViewGroup) recoveryBackups.getParent()).removeView(recoveryBackups);
-                            }
-                        }
+                        MainParent.removeView(adView);
                     }
                 }
-            }
 
-        } catch (NullPointerException e) {
-            throw new NullPointerException("Error while setting up Layout " + e.getMessage());
-        }
+                if (MainParent != null) {
+                    if (!mDevice.isKernelSupported()) {
+                        /** If Kernel flashing is not supported remove flash options */
+                         MainParent.removeView(findViewById(R.id.bFlashKernel));
+                     }
+                     if (!mDevice.isRecoverySupported()) {
+                         /** If Recovery flashing is not supported remove flash options */
+                         MainParent.removeView(findViewById(R.id.bFlashRecovery));
+                     }
+                 }
+
+                 if (mBackupDrawer != null) {
+                     ViewGroup BackupDrawerParent = (ViewGroup) mBackupDrawer.getParent();
+                     if (mDevice.isRecoveryOverRecovery()) {
+                         BackupDrawerParent.removeView(mBackupDrawer);
+                     } else {
+                         View createKernelBackup = findViewById(R.id.bCreateKernelBackup);
+                         View kernelBackups = findViewById(R.id.lvKernelBackups);
+                         View createRecoveryBackup = findViewById(R.id.bCreateRecoveryBackup);
+                         View recoveryBackups = findViewById(R.id.lvRecoveryBackups);
+                         if (!mDevice.isKernelSupported()) {
+                             /** If Kernel flashing is not supported remove backup views */
+                             ((ViewGroup) createKernelBackup.getParent()).removeView(createKernelBackup);
+                             ((ViewGroup) kernelBackups.getParent()).removeView(kernelBackups);
+                         }
+                         if (!mDevice.isRecoverySupported()) {
+                             /** If Recovery flashing is not supported remove backup views */
+                             ((ViewGroup) createRecoveryBackup.getParent()).removeView(createRecoveryBackup);
+                             ((ViewGroup) recoveryBackups.getParent()).removeView(recoveryBackups);
+                         }
+                     }
+                 }
+             }
+         }
     }
 
     private void restartActivity() {
@@ -1360,7 +1417,7 @@ public class RecoveryTools extends ActionBarActivity {
                     Prefs += entry.getKey() + ": " + entry.getValue().toString() + "\n";
                 }
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                ERRORS.add(e.toString());
             }
         }
         return Prefs;

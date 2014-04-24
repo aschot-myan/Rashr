@@ -50,7 +50,7 @@
     <string name="not_supportded">Your Device is not supported by the developer yet. Scan System and
         Report unsupported Device or try to find partition (reboot once into recovery)?</string>
     <string name="no_root">"Device not Rooted. Please Root it. More information under
-        \n\nxda-developer.com"</string>
+        \n\nxda-developers.com"</string>
     <string name="using_dd">Using dd. Recovery in FS</string>
     <string name="using_mtd">Use flash/dump_image (MTD)</string>
     <string name="Downloading">Downloading…</string>
@@ -91,7 +91,7 @@
     <string name="try_again">Try again!</string>
     <string name="later">Later</string>
     <string name="no_choosed">No File chosen</string>
-    <string name="update">Update recovery list</string>
+    <string name="update_done">Recovery list updated</string>
     <string name="pick_file">Pick File</string>
     <string name="flash_error">Failed to flash</string>
     <string name="res_error">Failed to restore</string>
@@ -135,5 +135,10 @@
     <string name="recovery_script_mind">Please keep in mind, this will only work with TWRP or TWRP compatible recovery</string>
     <string name="run">Run</string>
     <string name="recovery_script_review">Script Preview</string>
+
+    <string name="failed_unpack_files">Failed to unpack files from App</string>
+    <string name="failed_setup_layout">Error setting up Layout</string>
+
+    <string name="refresh_list">Refreshing recovery list</string>
 
 </resources>
