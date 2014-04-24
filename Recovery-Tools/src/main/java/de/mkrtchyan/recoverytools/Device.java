@@ -25,19 +25,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
-import android.util.Log;
 
 import org.sufficientlysecure.rootcommands.Shell;
-import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Unzipper;
@@ -51,7 +51,6 @@ public class Device {
     public static final int PARTITION_TYPE_RECOVERY = 3;
     public static final int PARTITION_TYPE_SONY = 4;
 //    public static final int DEV_TYPE_MTK = 5;
-    private static final String TAG = "Device";
     private static final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
@@ -83,6 +82,7 @@ public class Device {
             new File("/dev/block/platform/sdhci-tegra.3/by-name/LNX"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/Kernel"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
+            new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
     /**
@@ -110,14 +110,12 @@ public class Device {
 
     private Context mContext;
 
+    private ArrayList<String> ERRORS = new ArrayList<String>();
+
     public Device(Context mContext) {
         this.mContext = mContext;
-        try {
-            setPredefinedOptions();
-            loadRecoveryList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setPredefinedOptions();
+        loadRecoveryList();
     }
 
     private void setPredefinedOptions() {
@@ -497,13 +495,15 @@ public class Device {
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 int NameStartAt = Line.lastIndexOf("/") + 1;
-                if (lowLine.contains(DEV_NAME) && lowLine.contains("clockwork") && lowLine.endsWith(RECOVERY_EXT)
-                        || lowLine.contains("cwm") && lowLine.contains(DEV_NAME) && lowLine.endsWith(RECOVERY_EXT)) {
-                    CWMList.add(Line.substring(NameStartAt));
-                } else if (lowLine.contains(DEV_NAME) && lowLine.contains("twrp") && lowLine.endsWith(RECOVERY_EXT)) {
-                    TWRPList.add(Line.substring(NameStartAt));
-                } else if (lowLine.contains(DEV_NAME) && lowLine.contains("philz") && lowLine.endsWith(RECOVERY_EXT)) {
-                    PHILZList.add(Line.substring(NameStartAt));
+                if (lowLine.endsWith(RECOVERY_EXT)) {
+                    if (lowLine.contains(DEV_NAME) && lowLine.contains("clockwork")
+                            || lowLine.contains("cwm") && lowLine.contains(DEV_NAME)) {
+                        CWMList.add(Line.substring(NameStartAt));
+                    } else if (lowLine.contains(DEV_NAME) && lowLine.contains("twrp")) {
+                        TWRPList.add(Line.substring(NameStartAt));
+                    } else if (lowLine.contains(DEV_NAME) && lowLine.contains("philz")) {
+                        PHILZList.add(Line.substring(NameStartAt));
+                    }
                 }
             }
             br.close();
@@ -530,10 +530,8 @@ public class Device {
                 PhilzArrayList.add(0, i.toString());
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            ERRORS.add(e.toString());
         }
     }
 
@@ -584,87 +582,64 @@ public class Device {
             }
         }
 
+        Shell mShell;
         try {
-            Shell mShell = Shell.startRootShell();
-            try {
-                String line;
-                File LogCopy = new File(mContext.getFilesDir(), RecoveryTools.LastLog.getName() + ".txt");
-                mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
-                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
-                while ((line = br.readLine()) != null) {
-                    line = line.replace("\"", "");
-                    line = line.replace("\'", "");
-                    if (RecoveryVersion.equals("Not recognized Recovery-Version")) {
-                        if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
-                            RecoveryVersion = line;
-                        } else if (line.contains("TWRP")) {
-                            line = line.replace("Starting ", "");
-                            line = line.split(" on")[0];
-                            RecoveryVersion = line;
-                        } else if (line.contains("PhilZ")) {
-                            RecoveryVersion = line;
-                        } else if (line.contains("4EXT")) {
-                            RecoveryVersion = line;
-                        }
+            mShell = Shell.startRootShell();
+            String line;
+            File LogCopy = new File(mContext.getFilesDir(), RecoveryTools.LastLog.getName() + ".txt");
+            mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
+            mShell.close();
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
+            while ((line = br.readLine()) != null) {
+                line = line.replace("\"", "");
+                line = line.replace("\'", "");
+                if (RecoveryVersion.equals("Not recognized Recovery-Version")) {
+                    if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
+                        RecoveryVersion = line;
+                    } else if (line.contains("TWRP")) {
+                        line = line.replace("Starting ", "");
+                        line = line.split(" on")[0];
+                        RecoveryVersion = line;
+                    } else if (line.contains("PhilZ")) {
+                        RecoveryVersion = line;
+                    } else if (line.contains("4EXT")) {
+                        RecoveryVersion = line;
                     }
-
-                    if (KernelPath.equals("")) {
-                        if (line.contains("/boot") && !line.contains("/bootloader")) {
-                            if (line.contains("mtd")) {
-                                KERNEL_TYPE = PARTITION_TYPE_MTD;
-                            } else if (line.contains("/dev/")) {
-                                for (String split : line.split(" ")) {
-                                    if (new File(split).exists()) {
-                                        KernelPath = split;
-                                        KERNEL_TYPE = PARTITION_TYPE_DD;
-                                    }
-                                }
-                            }
-                        }
-                    }
-//                else if (line.startsWith("bootimg") && line.endsWith("/dev/block/mmcblk0")) {
-//                    KernelPath = "/dev/block/mmcblk0";
-//                    for (String split : line.split(" ")) {
-//                        if (MTK_Kernel_Length_HEX.equals("") && split.startsWith("0x")) {
-//                            MTK_Kernel_Length_HEX = split.substring(2);
-//                        } else if (MTK_Kernel_START_HEX.equals("") && split.startsWith("0x")) {
-//                            MTK_Kernel_START_HEX = split.substring(2);
-//                        }
-//                    }
-//                }
-
-                    if (RecoveryPath.equals("")) {
-                        if (line.contains("/recovery")) {
-                            if (line.contains("mtd")) {
-                                RECOVERY_TYPE = PARTITION_TYPE_MTD;
-                            } else if (line.contains("/dev/")) {
-                                for (String split : line.split(" ")) {
-                                    if (new File(split).exists()) {
-                                        RecoveryPath = split;
-                                        RECOVERY_TYPE = PARTITION_TYPE_DD;
-                                    }
-                                }
-                            }
-                        }
-                    }
-//                    else if (line.startsWith("recovery") && line.endsWith("/dev/block/mmcblk0")) {
-//                        RecoveryPath = "/dev/block/mmcblk0";
-//                        for (String split : line.split(" ")) {
-//                            if (MTK_Recovery_Length_HEX.equals("") && split.startsWith("0x")) {
-//                                MTK_Recovery_Length_HEX = split.substring(2);
-//                            } else if (MTK_Recovery_START_HEX.equals("") && split.startsWith("0x")) {
-//                                MTK_Recovery_START_HEX = split.substring(2);
-//                            }
-//                        }
-//                    }
-
                 }
-                br.close();
-            } catch (FailedExecuteCommand e) {
-                Log.i(TAG, "Recovery Lastlog not found");
+
+                if (KernelPath.equals("")) {
+                    if (line.contains("/boot") && !line.contains("/bootloader")) {
+                        if (line.contains("mtd")) {
+                            KERNEL_TYPE = PARTITION_TYPE_MTD;
+                        } else if (line.contains("/dev/")) {
+                            for (String split : line.split(" ")) {
+                                if (new File(split).exists()) {
+                                    KernelPath = split;
+                                    KERNEL_TYPE = PARTITION_TYPE_DD;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (RecoveryPath.equals("")) {
+                    if (line.contains("/recovery")) {
+                        if (line.contains("mtd")) {
+                            RECOVERY_TYPE = PARTITION_TYPE_MTD;
+                        } else if (line.contains("/dev/")) {
+                            for (String split : line.split(" ")) {
+                                if (new File(split).exists()) {
+                                    RecoveryPath = split;
+                                    RECOVERY_TYPE = PARTITION_TYPE_DD;
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            br.close();
+        } catch (Exception e) {
+            ERRORS.add(e.toString());
         }
 
         if (RecoveryPath.equals("")) {
@@ -939,6 +914,46 @@ public class Device {
                     || DEV_NAME.equals("c_4"))
                 RecoveryPath = "/dev/block/mmcblk0p16";
         }
+        if (!isRecoverySupported() || !isKernelSupported()) {
+            File PartLayout = new File(mContext.getFilesDir(), Build.DEVICE + ".fstab");
+            if (!PartLayout.exists()) {
+                try {
+                    ZipFile PartLayoutsZip = new ZipFile(new File(mContext.getFilesDir(), "partlayouts.zip"));
+                    for (Enumeration e = PartLayoutsZip.entries(); e.hasMoreElements(); ) {
+                        ZipEntry entry = (ZipEntry) e.nextElement();
+                        if (entry.getName().equals(Build.DEVICE)) {
+                            Unzipper.unzipEntry(PartLayoutsZip, entry, mContext.getFilesDir());
+                            new File(mContext.getFilesDir(), entry.getName()).renameTo(PartLayout);
+                        }
+                    }
+                } catch (IOException e) {
+                    ERRORS.add(e.toString());
+                }
+            }
+            if (PartLayout.exists()) {
+                try {
+                    String Line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "IMG_SUMS"))));
+                    while ((Line = br.readLine()) != null) {
+                        Line = Line.replace('"', ' ').replace(':', ' ');
+                        File partition = new File("/dev/block/", Line.split(" ")[0]);
+                        if (!isRecoverySupported() && Line.contains("recovery")) {
+                            if (partition.exists()) {
+                                RecoveryPath = partition.getAbsolutePath();
+                                RECOVERY_TYPE = PARTITION_TYPE_DD;
+                            }
+                        } else if (!isKernelSupported() && Line.contains("boot") && !Line.contains("bootloader")) {
+                            if (partition.exists()) {
+                                KernelPath = partition.getAbsolutePath();
+                                KERNEL_TYPE = PARTITION_TYPE_DD;
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    ERRORS.add(e.toString());
+                }
+            }
+        }
     }
 
     public File getFlash_image(Context mContext) {
@@ -1049,5 +1064,9 @@ public class Device {
 
     public String getKernelPath() {
         return KernelPath;
+    }
+
+    public ArrayList<String> getERRORS() {
+        return ERRORS;
     }
 }
