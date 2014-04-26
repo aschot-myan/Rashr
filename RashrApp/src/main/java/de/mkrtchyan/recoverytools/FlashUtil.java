@@ -35,6 +35,7 @@ import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Notifyer;
@@ -57,11 +58,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     final private Shell mShell;
     final private Toolbox mToolbox;
     private final int JOB;
-    private final File CustomIMG;
+    private final File CustomIMG, busybox;
     private ProgressDialog pDialog;
     private File tmpFile, CurrentPartition;
     private boolean keepAppOpen = true;
     private Runnable RunAtEnd;
+
+    private ArrayList<String> ERRORS = new ArrayList<String>();
 
     private FailedExecuteCommand mFailedExecuteCommand = null;
 
@@ -71,6 +74,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         this.mDevice = mDevice;
         this.JOB = JOB;
         this.CustomIMG = CustomIMG;
+        this.busybox = new File(mContext.getFilesDir(), "busybox");
         mToolbox = new Toolbox(mShell);
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
     }
@@ -114,6 +118,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     protected Boolean doInBackground(Void... params) {
 
         try {
+            mToolbox.setFilePermissions(busybox, "744");
+            saveHistory();
             if (isJobRecovery()) {
                 CurrentPartition = new File(mDevice.getRecoveryPath());
                 switch (mDevice.getRecoveryType()) {
@@ -126,9 +132,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     case Device.PARTITION_TYPE_SONY:
                         SONY();
                         return true;
-//            case Device.DEV_TYPE_MTK:
-//                MTK();
-//                return true;
                 }
                 return false;
             } else if (isJobKernel()) {
@@ -140,9 +143,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     case Device.PARTITION_TYPE_DD:
                         DD();
                         return true;
-//            case Device.DEV_TYPE_MTK:
-//                MTK();
-//                return true;
                 }
             }
             return false;
@@ -154,9 +154,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean success) {
-        File tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
         pDialog.dismiss();
-        saveHistory();
         if (!success || mFailedExecuteCommand != null) {
             Notifyer.showExceptionToast(mContext, TAG, mFailedExecuteCommand);
         } else {
@@ -169,18 +167,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                         System.exit(0);
                     }
                 }
-            } else if (JOB == JOB_BACKUP_KERNEL || JOB == JOB_BACKUP_RECOVERY) {
-                Log.i(TAG, "Backup finished");
-                try {
-                    mShell.execCommand("chmod 777 \"" + tmpFile.getAbsolutePath() + "\"");
-                    Common.copyFile(tmpFile, CustomIMG);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Toast.makeText(mContext, R.string.bak_done, Toast.LENGTH_SHORT).show();
             }
+            placeImgBack();
         }
         tmpFile.delete();
         if (RunAtEnd != null) {
@@ -188,11 +176,28 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         }
     }
 
+    public void placeImgBack() {
+        if (isJobBackup()) {
+            Log.i(TAG, "Backup finished");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Common.copyFile(tmpFile, CustomIMG);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        ERRORS.add(e.toString());
+                    }
+                }
+            }).start();
+            Toast.makeText(mContext, R.string.bak_done, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void DD() throws FailedExecuteCommand {
         String Command = "";
         try {
-            File busybox = new File(mContext.getFilesDir(), "busybox");
-            mToolbox.setFilePermissions(busybox, "744");
+
             if (isJobFlash() || isJobRestore()) {
                 Log.i(TAG, "Flash started!");
                 Common.copyFile(CustomIMG, tmpFile);
@@ -206,6 +211,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             mShell.execCommand(Command);
         } catch (IOException e) {
             e.printStackTrace();
+            ERRORS.add(e.toString());
         }
     }
 
@@ -251,6 +257,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    ERRORS.add(e.toString());
                 }
                 mToolbox.setFilePermissions(charger, "755");
                 mToolbox.setFilePermissions(chargermon, "755");
@@ -266,43 +273,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         mShell.execCommand(Command);
     }
 
-//    public String MTK() throws FailedExecuteCommand {
-//        File busybox = new File(mContext.getFilesDir(), "busybox");
-//
-//        String Command = "";
-//
-//        switch (PARTITION) {
-//            case RECOVERY:
-//                if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
-//                    Command = busybox.getAbsolutePath() + " dd if=\"" + CustomIMG.getAbsolutePath() +
-//                            "\" of=\"" + CurrentPartition.getAbsolutePath() +
-//                            "\" count=" + Integer.parseInt(mDevice.MTK_Recovery_Length_HEX, 16) +
-//                            " seek=" + Integer.parseInt(mDevice.MTK_Recovery_START_HEX, 16);
-//                } else if (JOB == JOB_BACKUP) {
-//                    Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() +
-//                            "\" of=\"" + CustomIMG.getAbsolutePath() +
-//                            "\" count=" + Integer.parseInt(mDevice.MTK_Recovery_Length_HEX, 16) +
-//                            " seek=" + Integer.parseInt(mDevice.MTK_Recovery_START_HEX, 16);
-//                }
-//                break;
-//            case KERNEL:
-//                if (JOB == JOB_FLASH || JOB == JOB_RESTORE) {
-//                    Command = busybox.getAbsolutePath() + " dd if=\"" + CustomIMG.getAbsolutePath() +
-//                            "\" of=\"" + CurrentPartition.getAbsolutePath() +
-//                            "\" count=" + Integer.parseInt(mDevice.MTK_Kernel_Length_HEX, 16) +
-//                            " seek=" + Integer.parseInt(mDevice.MTK_Kernel_START_HEX, 16);
-//                } else if (JOB == JOB_BACKUP) {
-//                    Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() +
-//                            "\" of=\"" + CustomIMG.getAbsolutePath() +
-//                            "\" count=" + Integer.parseInt(mDevice.MTK_Kernel_Length_HEX, 16) +
-//                            " seek=" + Integer.parseInt(mDevice.MTK_Kernel_START_HEX, 16);
-//                }
-//                break;
-//        }
-//
-//        return mShell.execCommand(mContext, Command);
-//    }
-
     public void showRebootDialog() {
         new AlertDialog.Builder(mContext)
                 .setTitle(R.string.flashed)
@@ -317,6 +287,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                             Notifyer.showExceptionToast(mContext, TAG, e);
                         } catch (Exception e) {
                             e.printStackTrace();
+                            ERRORS.add(e.toString());
                         }
                     }
                 })
@@ -407,6 +378,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     public void setRunAtEnd(Runnable RunAtEnd) {
         this.RunAtEnd = RunAtEnd;
+    }
+
+    public ArrayList<String> getERRORS() {
+        return ERRORS;
     }
 
 }

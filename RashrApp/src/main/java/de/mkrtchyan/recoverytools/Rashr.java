@@ -182,6 +182,7 @@ public class Rashr extends ActionBarActivity {
                     FlashUtil.JOB_FLASH_RECOVERY);
             flashUtil.setKeepAppOpen(keepAppOpen);
             flashUtil.execute();
+            FlashUtils_ERRORS.addAll(flashUtil.getERRORS());
         }
     };
     private final Runnable rFlashKernel = new Runnable() {
@@ -191,10 +192,12 @@ public class Rashr extends ActionBarActivity {
                     FlashUtil.JOB_FLASH_KERNEL);
             flashUtil.setKeepAppOpen(keepAppOpen);
             flashUtil.execute();
+            FlashUtils_ERRORS.addAll(flashUtil.getERRORS());
         }
     };
 
     private final ArrayList<String> ERRORS = new ArrayList<String>();
+    private final ArrayList<String> FlashUtils_ERRORS = new ArrayList<String>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -718,6 +721,7 @@ public class Rashr extends ActionBarActivity {
                         }
                     });
                     BackupCreator.execute();
+                    FlashUtils_ERRORS.addAll(BackupCreator.getERRORS());
                 }
                 dialog.dismiss();
             }
@@ -851,6 +855,13 @@ public class Rashr extends ActionBarActivity {
                                     }
                                 }
 
+                                if (FlashUtils_ERRORS.size() > 0) {
+                                    message += "FlashUtils ERRORS:\n";
+                                    for (String error : FlashUtils_ERRORS) {
+                                        message += error + "\n";
+                                    }
+                                }
+
                                 intent.putExtra(Intent.EXTRA_TEXT, message);
                                 File CommandLogs = new File(mContext.getFilesDir(), Shell.Logs);
                                 if (CommandLogs.exists()) {
@@ -968,8 +979,10 @@ public class Rashr extends ActionBarActivity {
                             mToolbox.reboot(Toolbox.REBOOT_BOOTLOADER);
                             return true;
                         case R.id.iRestoreRecovery:
-                            new FlashUtil(mShell, mContext, mDevice, new File(PathToRecoveryBackups,
-                                    text), FlashUtil.JOB_RESTORE_RECOVERY).execute();
+                            FlashUtil RestoreRecoveryUtil = new FlashUtil(mShell, mContext, mDevice,
+                                    new File(PathToRecoveryBackups, text), FlashUtil.JOB_RESTORE_RECOVERY);
+                            RestoreRecoveryUtil.execute();
+                            FlashUtils_ERRORS.addAll(RestoreRecoveryUtil.getERRORS());
                             return true;
                         case R.id.iRenameRecovery:
                             etFileName.setHint(text);
@@ -1016,8 +1029,10 @@ public class Rashr extends ActionBarActivity {
                             }
                             return true;
                         case R.id.iRestoreKernel:
-                            new FlashUtil(mShell, mContext, mDevice, new File(PathToKernelBackups, text),
-                                    FlashUtil.JOB_RESTORE_KERNEL).execute();
+                            FlashUtil RestoreKernelUtil = new FlashUtil(mShell, mContext, mDevice, new File(PathToKernelBackups, text),
+                                    FlashUtil.JOB_RESTORE_KERNEL);
+                            RestoreKernelUtil.execute();
+                            FlashUtils_ERRORS.addAll(RestoreKernelUtil.getERRORS());
                             return true;
                         case R.id.iRenameKernel:
                             etFileName.setHint(text);
@@ -1059,7 +1074,7 @@ public class Rashr extends ActionBarActivity {
                                 if (new File(PathToKernelBackups, text).delete()) {
                                     AppMsg
                                             .makeText(mActivity, String.format(mContext.getString(R.string.bak_deleted),
-                                            ((TextView) v).getText()), AppMsg.STYLE_ALERT)
+                                            ((TextView) v).getText()), AppMsg.STYLE_INFO)
                                             .show();
                                     loadBackups();
                                 }
@@ -1161,54 +1176,79 @@ public class Rashr extends ActionBarActivity {
     }
 
     public void loadBackups() {
-        if (mDevice.isRecoveryDD() || mDevice.isRecoveryMTD()) {
-            if (PathToRecoveryBackups.listFiles() != null) {
-                ArrayList<File> RecoveryBakList = new ArrayList<File>();
-                File FileList[] = PathToRecoveryBackups.listFiles();
-                if (FileList != null) {
-                    RecoveryBakList.addAll(Arrays.asList(FileList));
-                }
-                String[] tmp = new String[RecoveryBakList.toArray(new File[RecoveryBakList.size()]).length];
-                for (int i = 0; i < tmp.length; i++) {
-                    tmp[i] = RecoveryBakList.get(i).getName();
-                }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (mDevice.isRecoveryDD() || mDevice.isRecoveryMTD()) {
+                    if (PathToRecoveryBackups.listFiles() != null) {
+                        ArrayList<File> RecoveryBakFiles = new ArrayList<File>();
+                        File FileList[] = PathToRecoveryBackups.listFiles();
+                        if (FileList != null) {
+                            RecoveryBakFiles.addAll(Arrays.asList(FileList));
+                        }
 
-                final ListView lvRecoveryBackups = (ListView) mActivity.findViewById(R.id.lvRecoveryBackups);
-                lvRecoveryBackups.setAdapter(new ArrayAdapter<String>(mContext, R.layout.custom_list_item, tmp));
-                lvRecoveryBackups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        ArrayList<String> RecoveryBakNames = new ArrayList<String>();
 
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                            long arg3) {
-                        showPopup(R.menu.bakmgr_recovery_menu, arg1);
+                        for (File backup : RecoveryBakFiles) {
+                            RecoveryBakNames.add(backup.getName());
+                        }
+
+                        final ArrayAdapter<String> RecoveryBakAdapter = new ArrayAdapter<String>(mContext, R.layout.custom_list_item, RecoveryBakNames);
+
+                        final ListView lvRecoveryBackups = (ListView) mActivity.findViewById(R.id.lvRecoveryBackups);
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                lvRecoveryBackups.setAdapter(RecoveryBakAdapter);
+                            }
+                        });
+                        lvRecoveryBackups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                                    long arg3) {
+                                showPopup(R.menu.bakmgr_recovery_menu, arg1);
+                            }
+                        });
                     }
-                });
-            }
-        }
-        if (mDevice.isKernelDD() || mDevice.isKernelMTD()) {
-            if (PathToKernelBackups.listFiles() != null) {
-                ArrayList<File> KernelBakList = new ArrayList<File>();
-                File FileList[] = PathToKernelBackups.listFiles();
-                if (FileList != null) {
-                    KernelBakList.addAll(Arrays.asList(FileList));
                 }
-                String[] tmp = new String[KernelBakList.toArray(new File[KernelBakList.size()]).length];
-                for (int i = 0; i < tmp.length; i++) {
-                    tmp[i] = KernelBakList.get(i).getName();
-                }
+                if (mDevice.isKernelDD() || mDevice.isKernelMTD()) {
+                    if (PathToKernelBackups.listFiles() != null) {
+                        ArrayList<File> KernelBakList = new ArrayList<File>();
+                        File FileList[] = PathToKernelBackups.listFiles();
+                        if (FileList != null) {
+                            KernelBakList.addAll(Arrays.asList(FileList));
+                        }
 
-                final ListView lvKernelBackups = (ListView) mActivity.findViewById(R.id.lvKernelBackups);
-                lvKernelBackups.setAdapter(new ArrayAdapter<String>(mContext, R.layout.custom_list_item, tmp));
-                lvKernelBackups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        ArrayList<String> KernelBakNames = new ArrayList<String>();
 
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                            long arg3) {
-                        showPopup(R.menu.bakmgr_kernel_menu, arg1);
+                        for (File backup : KernelBakList) {
+                            KernelBakNames.add(backup.getName());
+                        }
+
+                        final ArrayAdapter<String> KernelBakAdapter = new ArrayAdapter<String>(mContext, R.layout.custom_list_item, KernelBakNames);
+
+                        final ListView lvKernelBackups = (ListView) mActivity.findViewById(R.id.lvKernelBackups);
+
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                lvKernelBackups.setAdapter(KernelBakAdapter);
+                            }
+                        });
+                        lvKernelBackups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                                    long arg3) {
+                                showPopup(R.menu.bakmgr_kernel_menu, arg1);
+                            }
+                        });
                     }
-                });
+                }
             }
-        }
+        }).start();
+
     }
 
     public void optimizeLayout() throws NullPointerException {
@@ -1280,7 +1320,7 @@ public class Rashr extends ActionBarActivity {
     public void setupSwipeUpdater() {
         mSwipeUpdater = (SwipeRefreshLayout) findViewById(R.id.swipe_updater);
         mSwipeUpdater.setColorScheme(R.color.custom_green,
-                android.R.color.black,
+                R.color.custom_yellow,
                 R.color.custom_green,
                 android.R.color.darker_gray);
         mSwipeUpdater.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
