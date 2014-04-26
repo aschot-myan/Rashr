@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Recovery Tools</string>
     <string name="settings">Podesavanja</string>
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flesuj Rekaveri</string>
@@ -124,7 +123,4 @@
         <item>Holo svijetli izgled</item>
         <item>Holo tamni izgled</item>
     </string-array>
-
-    <string name="appwidget_text">Primjer</string>
-    <string name="add_widget">Dodaj widget</string>
 </resources>

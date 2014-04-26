@@ -11,7 +11,6 @@
     <string name="negative">Cancelar</string>
     <string name="file_chooser">Selector de archivos</string>
     <string name="choose_message">Seleccionando %s. ¿Estás seguro?</string>
-    <string name="app_name">Recovery-Tools</string>
     <string name="go">Seguir</string>
     <string name="sRebooter">Reiniciador</string>
     <string name="sClearCache">Eliminar Recuperadores descargados</string>

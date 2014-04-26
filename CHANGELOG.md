@@ -1,6 +1,14 @@
 CHANGELOG
 ====================
 
+Update [1.8.7]
+
+-New Icon
+-Background-Icon added
+-Renamed to Rashr - The mobile Android Flash-Tool
+-Samsung Galaxy S4 (unified builds)
+-Layout preparing optimized
+
 Update [1.8.6]
 
 -Samsung Galaxy Note 3 (unified build handling)

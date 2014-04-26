@@ -19,6 +19,7 @@ package com.devspark.appmsg;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -233,6 +234,9 @@ public class AppMsg {
         result.mView = view;
         result.mDuration = style.duration;
         result.mFloating = floating;
+
+        /** All Toasts on BOTTOM */
+        result.setLayoutGravity(Gravity.BOTTOM);
 
         return result;
     }

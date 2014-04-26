@@ -1,4 +1,4 @@
-Recovery-Tools
+Rashr - The mobile Android Flash-Tool
 ====================
 
 This app requires [ROOT] access!
@@ -8,7 +8,7 @@ Please do not use this app thoughtless and evaluating them without deeper KNOWLE
 
 This app flashes and backups your device recovery and kernel without rebooting it very fast and easy without a PC or any outside influence.
 
-This app have over 1500 build-in recovery imgs (Clockworkmod/TWRP/philz) of course you can choose other imgs from internal and external storage.
+This app have over 1500 build-in recovery IMGs (ClockworkMod/TWRP/Philz) of course you can choose other IMGs from internal and external storage.
 
 Over 90% of all devices will be supported by the App.
 
@@ -37,9 +37,9 @@ This project is fully open-source if you want to help me with unsupported device
 Compile instructions
 ===================================
 
-To compile Recovery-Tools download the Source and needed Libraries:
+To compile Rashr download the Source and needed Libraries:
 
-Recovery-Tools:     https://github.com/DsLNeXuS/Recovery-Tools
+Rashr:     https://github.com/DsLNeXuS/Recovery-Tools
 
 [Libraries]:        All Libraries are included in the repository and pre-configured for
                     gradle on Android Studio

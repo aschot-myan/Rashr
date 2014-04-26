@@ -50,7 +50,7 @@ public class Device {
     public static final int PARTITION_TYPE_MTD = 2;
     public static final int PARTITION_TYPE_RECOVERY = 3;
     public static final int PARTITION_TYPE_SONY = 4;
-//    public static final int DEV_TYPE_MTK = 5;
+
     private static final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
@@ -227,9 +227,11 @@ public class Device {
             DEV_NAME = "hlte";
         }
 
-//      Samsung Galaxy S4 (i9505/jflte)
-        if (DEV_NAME.equals("jflte"))
-            DEV_NAME = "jfltexx";
+//      Samsung Galaxy S4 (unified build)
+        if (MANUFACTURE.equals("samsung") && (DEV_NAME.startsWith("jflte")
+                || DEV_NAME.equals("jgedlte")) ) {
+            DEV_NAME = "jflte";
+        }
 
 //		Galaxy Note
         if (DEV_NAME.equals("gt-n7000")
@@ -496,13 +498,14 @@ public class Device {
                 String lowLine = Line.toLowerCase();
                 int NameStartAt = Line.lastIndexOf("/") + 1;
                 if (lowLine.endsWith(RECOVERY_EXT)) {
-                    if (lowLine.contains(DEV_NAME) && lowLine.contains("clockwork")
-                            || lowLine.contains("cwm") && lowLine.contains(DEV_NAME)) {
-                        CWMList.add(Line.substring(NameStartAt));
-                    } else if (lowLine.contains(DEV_NAME) && lowLine.contains("twrp")) {
-                        TWRPList.add(Line.substring(NameStartAt));
-                    } else if (lowLine.contains(DEV_NAME) && lowLine.contains("philz")) {
-                        PHILZList.add(Line.substring(NameStartAt));
+                    if (lowLine.contains(DEV_NAME.toLowerCase()) || lowLine.contains(Build.DEVICE.toLowerCase())) {
+                        if (lowLine.contains("clockwork") || lowLine.contains("cwm")) {
+                            CWMList.add(Line.substring(NameStartAt));
+                        } else if (lowLine.contains("twrp")) {
+                            TWRPList.add(Line.substring(NameStartAt));
+                        } else if (lowLine.contains("philz")) {
+                            PHILZList.add(Line.substring(NameStartAt));
+                        }
                     }
                 }
             }
@@ -537,7 +540,7 @@ public class Device {
 
     public boolean downloadUtils(final Context mContext) {
 
-        final File archive = new File(RecoveryTools.PathToUtils, DEV_NAME + ".zip");
+        final File archive = new File(Rashr.PathToUtils, DEV_NAME + ".zip");
 
         final AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
         mAlertDialog
@@ -552,7 +555,7 @@ public class Device {
                         new Downloader(mContext, "http://dslnexus.org/Android/utils/", archive.getName(), archive, new Runnable() {
                             @Override
                             public void run() {
-                                Unzipper.unzip(archive, new File(RecoveryTools.PathToUtils, DEV_NAME));
+                                Unzipper.unzip(archive, new File(Rashr.PathToUtils, DEV_NAME));
                             }
                         }).execute();
 
@@ -561,7 +564,7 @@ public class Device {
                 mAlertDialog.show();
                 return true;
             } else {
-                Unzipper.unzip(archive, new File(RecoveryTools.PathToUtils, DEV_NAME));
+                Unzipper.unzip(archive, new File(Rashr.PathToUtils, DEV_NAME));
                 return false;
             }
         }
@@ -586,7 +589,7 @@ public class Device {
         try {
             mShell = Shell.startRootShell();
             String line;
-            File LogCopy = new File(mContext.getFilesDir(), RecoveryTools.LastLog.getName() + ".txt");
+            File LogCopy = new File(mContext.getFilesDir(), Rashr.LastLog.getName() + ".txt");
             mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
             mShell.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));

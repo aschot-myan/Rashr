@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Recovery Tools</string>
     <string name="sHistory">Geschiedenis</string>
     <string name="go">Oké</string>
     <string name="sRebooter">herstarten</string>

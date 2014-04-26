@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Recovery Tools</string>
+    <string name="app_name">Rashr</string>
     <string name="settings">Settings</string>
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flash Recovery</string>
@@ -23,7 +23,7 @@
     <string name="sExit">Exit</string>
     <string name="xda">Open XDA-Thread</string>
     <string name="set_name">Name of Backup</string>
-    <string name="bak_warning">Before you do some actions with Recovery-Tools please create an backup and store it on your PC.
+    <string name="bak_warning">Before you do some actions with Rashr please create an backup and store it on your PC.
         \nBackups will be created under\n%s.
         \nThe DEV is not responsible on the damages of your device.</string>
     <string name="flash_options">Flash Options</string>
@@ -41,10 +41,11 @@
     <string name="instruction">CWM:
         \nMain Menu -> install zip from sdcard -> choose zip from sdcard
         \n\nTWRP:
-        \nMain Menu -> Install</string>
+        \nMain Menu -> Install
+    </string>
     <string name="bak_done">Backup completed</string>
     <string name="backupalready">Backup already exists.</string>
-    <string name="no_backup">No existing Backup found (%s/Recovery-Tools/backups/)
+    <string name="no_backup">No existing Backup found (%s/Rashr/backups/)
         \n\nCreate one now?</string>
     <string name="error">Error</string>
     <string name="not_supportded">Your Device is not supported by the developer yet. Scan System and
@@ -140,5 +141,7 @@
     <string name="failed_setup_layout">Error setting up Layout</string>
 
     <string name="refresh_list">Refreshing recovery list</string>
+
+    <string name="new_imgs_loaded">%s new IMGs loaded</string>
 
 </resources>

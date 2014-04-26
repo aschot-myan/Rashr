@@ -17,7 +17,7 @@
         android:theme="@style/MyLightDarkBar" >
 
         <activity
-            android:name="de.mkrtchyan.recoverytools.RecoveryTools"
+            android:name=".Rashr"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >

@@ -7,11 +7,11 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools" />
-            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\AppMsg" />
-            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools" />
-            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Utils-Library" />
-            <option value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\root-commands" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AppMsg" />
+            <option value="$PROJECT_DIR$/Recovery-Tools" />
+            <option value="$PROJECT_DIR$/Utils-Library" />
+            <option value="$PROJECT_DIR$/root-commands" />
           </set>
         </option>
       </GradleProjectSettings>

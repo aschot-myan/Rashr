@@ -237,9 +237,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 || mDevice.getDeviceName().equals("c6602")
                 || mDevice.getDeviceName().equals("montblanc")) {
             if (isJobFlash() || isJobRestore()) {
-                File charger = new File(RecoveryTools.PathToUtils, "charger");
-                File chargermon = new File(RecoveryTools.PathToUtils, "chargermon");
-                File ric = new File(RecoveryTools.PathToUtils, "ric");
+                File charger = new File(Rashr.PathToUtils, "charger");
+                File chargermon = new File(Rashr.PathToUtils, "chargermon");
+                File ric = new File(Rashr.PathToUtils, "ric");
                 mToolbox.remount(CurrentPartition, "RW");
                 try {
                     mToolbox.copyFile(charger, CurrentPartition.getParentFile(), true, false);
@@ -354,28 +354,28 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             String counter = "", history = "";
             if (isJobKernel()) {
                 counter = PREF_KEY_FLASH_KERNEL_COUNTER;
-                history = RecoveryTools.PREF_KEY_KERNEL_HISTORY;
+                history = Rashr.PREF_KEY_KERNEL_HISTORY;
             } else if (isJobRecovery()) {
                 counter = PREF_KEY_FLASH_RECOVERY_COUNTER;
-                history = RecoveryTools.PREF_KEY_RECOVERY_HISTORY;
+                history = Rashr.PREF_KEY_RECOVERY_HISTORY;
             }
-            switch (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, counter)) {
+            switch (Common.getIntegerPref(mContext, Rashr.PREF_NAME, counter)) {
                 case 0:
-                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, history +
-                                    String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, counter)),
+                    Common.setStringPref(mContext, Rashr.PREF_NAME, history +
+                                    String.valueOf(Common.getIntegerPref(mContext, Rashr.PREF_NAME, counter)),
                             CustomIMG.getAbsolutePath()
                     );
-                    Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, counter, 1);
+                    Common.setIntegerPref(mContext, Rashr.PREF_NAME, counter, 1);
                     return;
                 default:
-                    Common.setStringPref(mContext, RecoveryTools.PREF_NAME, history +
-                                    String.valueOf(Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, counter)),
+                    Common.setStringPref(mContext, Rashr.PREF_NAME, history +
+                                    String.valueOf(Common.getIntegerPref(mContext, Rashr.PREF_NAME, counter)),
                             CustomIMG.getAbsolutePath()
                     );
-                    Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, counter,
-                            Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, counter) + 1);
-                    if (Common.getIntegerPref(mContext, RecoveryTools.PREF_NAME, counter) == 5) {
-                        Common.setIntegerPref(mContext, RecoveryTools.PREF_NAME, counter, 0);
+                    Common.setIntegerPref(mContext, Rashr.PREF_NAME, counter,
+                            Common.getIntegerPref(mContext, Rashr.PREF_NAME, counter) + 1);
+                    if (Common.getIntegerPref(mContext, Rashr.PREF_NAME, counter) == 5) {
+                        Common.setIntegerPref(mContext, Rashr.PREF_NAME, counter, 0);
                     }
             }
         }
