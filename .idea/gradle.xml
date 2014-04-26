@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AppMsg" />
-            <option value="$PROJECT_DIR$/Recovery-Tools" />
+            <option value="$PROJECT_DIR$/RashrApp" />
             <option value="$PROJECT_DIR$/Utils-Library" />
             <option value="$PROJECT_DIR$/root-commands" />
           </set>
