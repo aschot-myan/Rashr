@@ -1,6 +1,12 @@
 CHANGELOG
 ====================
 
+Update [1.8.8]
+
+-Performance improvements creating backups
+-Some minor UI changes
+-Added loki_patch and loki_flash for LG G2 (workaround locked bootloader)
+
 Update [1.8.7]
 
 -New Icon

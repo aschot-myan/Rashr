@@ -17,35 +17,14 @@
   </component>
   <component name="AndroidLayouts">
     <shared>
-      <config />
+      <config>
+        <devices>
+          <device id="Nexus 5" />
+        </devices>
+      </config>
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/kernel_dialog.xml">
-        <config>
-          <theme>@style/MyLightDarkBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/loading_layout.xml">
-        <config>
-          <theme>@style/Theme.AppCompat.Light.DarkActionBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/menu_drawer.xml">
-        <config>
-          <theme>@style/MyLightDarkBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/rashr.xml">
-        <config>
-          <theme>@style/MyLightDarkBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/recovery_dialog.xml">
-        <config>
-          <theme>@style/MyLightDarkBar</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/recovery_script_manager.xml">
+      <layout url="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/rashr.xml">
         <config>
           <theme>@style/MyLightDarkBar</theme>
         </config>
@@ -57,227 +36,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ebdf845-b4cd-4b1a-9ade-eed2ebd16c4e" name="Default" comment="-New Hoster realized by donations THANKS">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/libs/GoogleAdMobAdsSdk.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/libs/Holoeverywhere-2.1.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/raw/busybox" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/drawer_shadow.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/drawer_shadow.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/drawer_shadow.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/raw/dump_image" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-nodpi/example_appwidget_preview.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/raw/flash_image" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_backup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_backup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_backup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_backup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_bak_mgr.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_bak_mgr.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_bak_mgr.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_bak_mgr.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_cross.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_cross.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_cross.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_cross.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_cwm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_flash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_history.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_history.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_history.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_history.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_launcher_web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_reboot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_reboot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_reboot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_reboot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_restore.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_restore.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_restore.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_restore.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_twrp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/ic_update.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-mdpi/ic_update.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_update.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-xxhdpi/ic_update.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/raw/partlayouts.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/search_bg_shadow.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable-hdpi/search_bg_shadow_dark.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/DonationsActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/Rashr-Rashr.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Rashr.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/RashrApp.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoveryScriptManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/attrs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/backup_drawer.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/menu/bakmgr_kernel_menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/menu/bakmgr_recovery_menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/custom_list_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_input.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-sw600dp/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-sw720dp-land/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-v14/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-w820dp/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/icon_background.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/raw/img_sums" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/kernel_dialog.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/menu_drawer.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/proguard-rules.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/rashr.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/menu/rebooter_menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/recovery_dialog.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/recovery_script_manager.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-bs/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-es/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-hr/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-it/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-mk/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-nl/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-pl/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-ro/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-sr/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-tr/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-zh/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\.idea\workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\Recovery-Tools-Recovery-Tools.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\libs\GoogleAdMobAdsSdk.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\libs\Holoeverywhere-2.1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\proguard-rules.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\java\de\mkrtchyan\recoverytools\Device.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\java\de\mkrtchyan\recoverytools\DonationsActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\java\de\mkrtchyan\recoverytools\FlashUtil.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\java\de\mkrtchyan\recoverytools\Rashr.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\java\de\mkrtchyan\recoverytools\RecoveryScriptManager.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\drawer_shadow.9.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_backup.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_bak_mgr.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_cross.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_delete.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_drawer.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_flash.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_history.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_reboot.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_restore.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\ic_update.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\search_bg_shadow.9.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-hdpi\search_bg_shadow_dark.9.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\drawer_shadow.9.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_backup.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_bak_mgr.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_cross.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_delete.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_drawer.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_flash.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_history.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_reboot.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_restore.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-mdpi\ic_update.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-nodpi\example_appwidget_preview.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\drawer_shadow.9.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_backup.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_bak_mgr.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_cross.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_delete.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_drawer.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_flash.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_history.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_reboot.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_restore.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xhdpi\ic_update.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_backup.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_bak_mgr.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_cross.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_delete.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_flash.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_history.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_reboot.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_restore.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxhdpi\ic_update.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable-xxxhdpi\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable\ic_cwm.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable\ic_launcher_web.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable\ic_twrp.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\drawable\icon_background.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\backup_drawer.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\custom_list_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\dialog_comment.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\dialog_input.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\flash_as.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\kernel_dialog.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\loading_layout.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\menu_drawer.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\rashr.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\recovery_dialog.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\layout\recovery_script_manager.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\menu\bakmgr_kernel_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\menu\bakmgr_recovery_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\menu\rebooter_menu.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\raw\busybox" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\raw\dump_image" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\raw\flash_image" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\raw\img_sums" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\raw\partlayouts.zip" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-bs\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-es\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-hr\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-it\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-mk\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-nl\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-pl\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-ro\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-sr\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-sw600dp\dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-sw720dp-land\dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-tr\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-v14\dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-w820dp\dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values-zh\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values\attrs.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values\color.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values\dimens.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values\strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\ashot_000\Google Drive\workspace\Rashr\Recovery-Tools\src\main\res\values\styles.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppMsg/AppMsg.iml" afterPath="$PROJECT_DIR$/AppMsg/AppMsg.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" afterPath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root-commands/root-commands.iml" afterPath="$PROJECT_DIR$/root-commands/root-commands.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rashr.apk" afterPath="$PROJECT_DIR$/Rashr.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="$PROJECT_DIR$/CHANGELOG.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/build.gradle" afterPath="$PROJECT_DIR$/RashrApp/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Recovery-Tools.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -341,51 +103,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CHANGELOG.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Device.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.245283" vertical-offset="15020" max-vertical-offset="17153">
+              <caret line="928" column="45" selection-start-line="928" selection-start-column="45" selection-end-line="928" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rashr.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.464286" vertical-offset="16773" max-vertical-offset="22202">
+              <caret line="1174" column="25" selection-start-line="1174" selection-start-column="25" selection-end-line="1174" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CHANGELOG.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="10438">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.120567374" vertical-offset="0" max-vertical-offset="10540">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="7" selection-end-column="73" />
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1207">
-              <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1275">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-              <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32008368" vertical-offset="0" max-vertical-offset="765">
-              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+            <state vertical-scroll-proportion="-8.84" vertical-offset="0" max-vertical-offset="765">
+              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".name" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/.name">
+      <file leaf-file-name="FlashUtil.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-              <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2754" max-vertical-offset="6188">
+              <caret line="188" column="0" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1989,7 +1764,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="8391225711264" />
+        <entry key="$PROJECT_DIR$" value="8391890046527" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2547,12 +2322,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/recovery_tools.xml" />
-        <option value="$PROJECT_DIR$/CardsUILib/src/main/java/com/fima/cardsui/cards/MyCard.java" />
-        <option value="$PROJECT_DIR$/CardsUILib/src/main/res/color/color.xml" />
-        <option value="$PROJECT_DIR$/CardsUILib/src/main/res/drawable/selectable_background_cardbank.xml" />
-        <option value="$PROJECT_DIR$/CardsUILib/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/CardsUILib/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/CardsUILib/src/main/java/com/fima/cardsui/cards/MyPlayCard.java" />
         <option value="$PROJECT_DIR$/CardsUILib/src/main/res/layout/card_picture.xml" />
         <option value="$PROJECT_DIR$/CardsUILib/src/main/java/com/fima/cardsui/cards/MyImageCard.java" />
@@ -2593,19 +2362,24 @@
         <option value="$PROJECT_DIR$/Recovery-Tools/src/main/res/drawable/background_center.xml" />
         <option value="$PROJECT_DIR$/Recovery-Tools/src/main/res/drawable/icon_background.xml" />
         <option value="$PROJECT_DIR$/Recovery-Tools/src/main/res/layout/rashr.xml" />
-        <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/Recovery-Tools/build.gradle" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/.idea/.name" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/rashr.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java" />
+        <option value="$PROJECT_DIR$/RashrApp/build.gradle" />
+        <option value="$PROJECT_DIR$/CHANGELOG.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="960" />
+    <option name="width" value="960" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -2633,10 +2407,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Problems" />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2665,12 +2435,122 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr - The mobile Android Flash-Tool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr - The mobile Android Flash-Tool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr - The mobile Android Flash-Tool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="raw" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr - The mobile Android Flash-Tool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recoverytools" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2693,19 +2573,20 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="YT9102XM01" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Small" />
-    <property name="ExportedModule" value="Recovery-Tools-Recovery-Tools" />
-    <property name="ExportedApkPath" value="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Rashr.apk" />
+    <property name="ExportedModule" value="RashrApp" />
+    <property name="ExportedApkPath" value="C:\Users\ashot_000\Google Drive\workspace\Rashr\Rashr.apk" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="LayoutCode.rearrangeEntries" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.WIDTH" value="421" />
     <property name="DEBUGGABLE_DEVICE" value="sony-xperia_t-YT9102XM01" />
     <property name="DEBUGGABLE_PROCESS" value="de.mkrtchyan.recoverytools" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="true" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="android.project.structure.last.selected" value="RashrApp" />
     <property name="android.project.structure.proportion" value="0.15" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.SHOW" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -2716,11 +2597,11 @@
       <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\CardsUILib\src\main\res\drawable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools\src\main\res" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools\src\main\res\drawable-xxhdpi" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools\src\main\res\drawable-xhdpi" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools\src\main\res\drawable-mdpi" />
-      <recent name="C:\Users\ashot_000\Google Drive\workspace\Recovery-Tools\Recovery-Tools\src\main\res\drawable-hdpi" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Rashr\RashrApp\src\main\res\raw" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Rashr\RashrApp\src\main\res\drawable-xxhdpi" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Rashr\RashrApp\src\main\res\drawable-xhdpi" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Rashr\RashrApp\src\main\res\drawable-mdpi" />
+      <recent name="C:\Users\ashot_000\Google Drive\workspace\Rashr\RashrApp\src\main\res\drawable-hdpi" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.RashrApp">
@@ -2988,11 +2869,19 @@
       <created>1398362356773</created>
       <updated>1398362356773</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="-Performance improvements creating backups&#10;-Some minor UI changes">
+      <created>1398545849317</created>
+      <updated>1398545849317</updated>
+    </task>
+    <task id="LOCAL-00022" summary="-Added loki_patch and loki_flash for LG G2">
+      <created>1399201783217</created>
+      <updated>1399201783217</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="960" y="0" width="960" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -3000,13 +2889,13 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45059717" sideWeight="0.62395835" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45745856" sideWeight="0.62395835" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43431053" sideWeight="0.37604168" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16197917" sideWeight="0.5079051" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31823203" sideWeight="0.5677966" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32944915" sideWeight="0.509165" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31813246" sideWeight="0.5677966" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3014,7 +2903,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16197917" sideWeight="0.49011856" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32944915" sideWeight="0.49083504" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -3091,7 +2980,9 @@
     <MESSAGE value="-Better Error handling" />
     <MESSAGE value="-New IMGs added" />
     <MESSAGE value="-Logging problems fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Logging problems fixed" />
+    <MESSAGE value="-Performance improvements creating backups&#10;-Some minor UI changes" />
+    <MESSAGE value="-Added loki_patch and loki_flash for LG G2" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Added loki_patch and loki_flash for LG G2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3114,6 +3005,12 @@
           <properties />
           <option name="timeStamp" value="83" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java</url>
+          <line>151</line>
+          <properties />
+          <option name="timeStamp" value="97" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -3125,30 +3022,56 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="91" />
+      <option name="time" value="102" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+    <entry file="file://$PROJECT_DIR$/.idea/.name">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="10438">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="27" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1207">
-          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10523">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-          <caret line="0" column="66" selection-start-line="0" selection-start-column="66" selection-end-line="0" selection-end-column="66" />
+          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="765">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="170">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14637" max-vertical-offset="25721">
+          <caret line="861" column="37" selection-start-line="861" selection-start-column="37" selection-end-line="861" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5219" max-vertical-offset="6664">
+          <caret line="307" column="25" selection-start-line="307" selection-start-column="25" selection-end-line="307" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -3157,7 +3080,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
           <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10438">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="765">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/.name">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -3165,7 +3115,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="10438">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="27" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1207">
+          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="66" selection-start-line="0" selection-start-column="66" selection-end-line="0" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/.name">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="10438">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -3173,7 +3150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1207">
           <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3181,7 +3157,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="10438">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3189,7 +3164,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1207">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3268,7 +3242,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11283186" vertical-offset="0" max-vertical-offset="452">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3323,59 +3296,110 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AppMsg/res/layout/app_msg.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6310044" vertical-offset="0" max-vertical-offset="458">
           <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1207">
-          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-          <folding />
+        <state vertical-scroll-proportion="0.037861917" vertical-offset="0" max-vertical-offset="1207">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
         </state>
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="10438">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="9" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/.name">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="893">
-          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
           <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/.name">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="893">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/drawable-xhdpi/ic_navigation_drawer.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <caret line="0" column="22" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/rashr.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1632">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2754" max-vertical-offset="6188">
+          <caret line="188" column="0" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.464286" vertical-offset="16773" max-vertical-offset="22202">
+          <caret line="1174" column="25" selection-start-line="1174" selection-start-column="25" selection-end-line="1174" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.245283" vertical-offset="15020" max-vertical-offset="17153">
+          <caret line="928" column="45" selection-start-line="928" selection-start-column="45" selection-end-line="928" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32008368" vertical-offset="0" max-vertical-offset="765">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+        <state vertical-scroll-proportion="-8.84" vertical-offset="0" max-vertical-offset="765">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.120567374" vertical-offset="0" max-vertical-offset="10540">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="7" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>
