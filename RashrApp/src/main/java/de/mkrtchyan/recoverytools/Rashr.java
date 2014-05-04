@@ -804,7 +804,7 @@ public class Rashr extends ActionBarActivity {
                                 Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
                                 intent.setType("text/plain");
                                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr" + pInfo.versionName + " report");
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + pInfo.versionName + " report");
                                 String message = "Package Infos:" +
                                         "\n\nName: " + pInfo.packageName +
                                         "\nVersion Code: " + pInfo.versionCode ;
@@ -818,28 +818,31 @@ public class Rashr extends ActionBarActivity {
                                         "\nFingerprint: " + Build.FINGERPRINT +
                                         "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
 
-
                                 if (mDevice.isRecoverySupported()) {
-                                    message += "\nRecovery Path: " + mDevice.getRecoveryPath() +
+                                    message += "\n\nRecovery Path: " + mDevice.getRecoveryPath() +
                                             "\nRecovery Version: " + mDevice.getRecoveryVersion() +
                                             "\nRecovery MTD: " + mDevice.isRecoveryMTD() +
                                             "\nRecovery DD: " + mDevice.isRecoveryDD() +
-                                            "\n\nCWM: " + mDevice.isCwmSupported() +
+                                            "\nCWM: " + mDevice.isCwmSupported() +
                                             "\nTWRP: " + mDevice.isTwrpSupported() +
                                             "\nPHILZ: " + mDevice.isPhilzSupported();
                                 }
                                 if (mDevice.isKernelSupported()) {
-                                    message += "\nKernel Path: " + mDevice.getKernelPath() +
+                                    message += "\n\nKernel Path: " + mDevice.getKernelPath() +
                                             "\nKernel Version: " + mDevice.getKernelVersion() +
                                             "\nKernel MTD: " + mDevice.isKernelMTD() +
                                             "\nKernel DD: " + mDevice.isKernelDD();
                                 }
                                 if (!comment.equals("")) {
-                                    message += "\n\n\n===========COMMENT==========\n" + comment +
-                                            "\n===========COMMENT END==========\n" ;
+                                    message +=
+                                            "\n\n\n===========COMMENT==========\n"
+                                                            + comment +
+                                                "\n=========COMMENT END========\n" ;
                                 }
-                                message += "\n===========PREFS==========\n" + getAllPrefs() +
-                                        "\n===========PREFS END==========\n";
+                                message +=
+                                        "\n===========PREFS==========\n"
+                                                + getAllPrefs() +
+                                        "\n=========PREFS END========\n";
 
                                 if (ERRORS.size() > 0) {
                                     message += "Rashr ERRORS:\n";
@@ -916,7 +919,7 @@ public class Rashr extends ActionBarActivity {
             WebView changes = new WebView(mContext);
             changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
             changes.setWebViewClient(new WebViewClient());
-            changes.loadUrl("http://forum.xda-developers.com/showpost.php?p=42839595&postcount=3");
+            changes.loadUrl("http://forum.xda-developers.com/showpost.php?p=42839595&postcount=2");
             changes.clearCache(true);
             dialog.setView(changes);
             dialog.show();
@@ -1173,6 +1176,10 @@ public class Rashr extends ActionBarActivity {
         Common.pushFileFromRAW(mContext, RecoveryCollectionFile, R.raw.img_sums, version_changed);
         File PartLayoutsZip = new File(mContext.getFilesDir(), "partlayouts.zip");
         Common.pushFileFromRAW(mContext, PartLayoutsZip, R.raw.partlayouts, version_changed);
+        File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
+        Common.pushFileFromRAW(mContext, loki_patch, R.raw.loki_patch, version_changed);
+        File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
+        Common.pushFileFromRAW(mContext, loki_flash, R.raw.loki_flash, version_changed);
     }
 
     public void loadBackups() {
@@ -1384,7 +1391,7 @@ public class Rashr extends ActionBarActivity {
 
         mRashrLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(mActivity,
-                mRashrLayout, R.drawable.ic_drawer, R.string.settings, R.string.app_name);
+                mRashrLayout, R.drawable.ic_navigation_drawer, R.string.settings, R.string.app_name);
         mRashrLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         mDrawerToggle.setDrawerIndicatorEnabled(true);

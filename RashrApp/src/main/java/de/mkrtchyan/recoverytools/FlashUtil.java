@@ -26,6 +26,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -199,10 +200,24 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         try {
 
             if (isJobFlash() || isJobRestore()) {
-                Log.i(TAG, "Flash started!");
-                Common.copyFile(CustomIMG, tmpFile);
-                Command = busybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
-                        "of=\"" + CurrentPartition.getAbsolutePath() + "\"";
+                if (isJobFlash()
+                        && mDevice.getDeviceName().startsWith("g2")
+                        && Build.MANUFACTURER.equals("lge")) {
+                    File aboot = new File("/dev/block/platform/msm_sdcc.1/by-name/aboot");
+                    File extracted_aboot = new File(mContext.getFilesDir(), "aboot.img");
+                    File patched_CustomIMG = new File(mContext.getFilesDir(), CustomIMG.getName() + ".lok");
+                    File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
+                    File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
+                    mShell.execCommand("dd if=" + aboot.getAbsolutePath() + " of=" + extracted_aboot.getAbsolutePath());
+                    mShell.execCommand(loki_patch.getAbsolutePath() + " recovery "
+                            + CustomIMG.getAbsolutePath() + " " + patched_CustomIMG.getAbsolutePath() + "  || exit 1");
+                    Command = loki_flash.getAbsolutePath() + " recovery " + patched_CustomIMG.getAbsolutePath() + " || exit 1";
+                } else {
+                    Log.i(TAG, "Flash started!");
+                    Common.copyFile(CustomIMG, tmpFile);
+                    Command = busybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
+                            "of=\"" + CurrentPartition.getAbsolutePath() + "\"";
+                }
             } else if (isJobBackup()) {
                 Log.i(TAG, "Backup started!");
                 Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() + "\" " +

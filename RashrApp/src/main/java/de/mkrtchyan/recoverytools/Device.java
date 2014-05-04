@@ -451,10 +451,6 @@ public class Device {
             RECOVERY_TYPE = PARTITION_TYPE_DD;
         }
 
-//        if (!MTK_Kernel_START_HEX.equals("") || !MTK_Recovery_START_HEX.equals("")) {
-//            DEV_TYPE = DEV_TYPE_MTK;
-//        }
-
 //		Devices who kernel will be flashed to
         if (DEV_NAME.equals("c6602")
                 || DEV_NAME.equals("yuga")) {
@@ -496,7 +492,7 @@ public class Device {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "IMG_SUMS"))));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
-                int NameStartAt = Line.lastIndexOf("/") + 1;
+                final int NameStartAt = Line.lastIndexOf("/") + 1;
                 if (lowLine.endsWith(RECOVERY_EXT)) {
                     if (lowLine.contains(DEV_NAME.toLowerCase()) || lowLine.contains(Build.DEVICE.toLowerCase())) {
                         if (lowLine.contains("clockwork") || lowLine.contains("cwm")) {
