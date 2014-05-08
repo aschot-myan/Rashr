@@ -4,8 +4,7 @@
     <string name="settings">Impostazioni</string>
     <string name="sCWM">Recovery CWM</string>
     <string name="sFlashRecovery">Flash Recovery</string>
-    <string name="sFlashKernel">Flash Kernel</strin<?xml version="1.0" encoding="utf-8"?>
-<resources>
+    <string name="sFlashKernel">Flash Kernel</string>
 
     <string name="settings">Impostazioni</string>
     <string name="sCWM">Recovery CWM</string>
