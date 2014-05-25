@@ -722,7 +722,7 @@ public class Device {
             if (PartLayout.exists()) {
                 try {
                     String Line;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "IMG_SUMS"))));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(PartLayout)));
                     while ((Line = br.readLine()) != null) {
                         Line = Line.replace('"', ' ').replace(':', ' ');
                         File partition = new File("/dev/block/", Line.split(" ")[0]);
