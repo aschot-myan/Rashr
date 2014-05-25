@@ -11,6 +11,16 @@
         android:orientation="vertical">
 
         <Button style="?button_style"
+            android:id="@+id/bStockKernel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_stock"
+            android:onClick="FlashSupportedRecovery"
+            android:tag="stock"
+            android:text="@string/stock"
+            android:visibility="visible" />
+
+        <Button style="?button_style"
             android:id="@+id/bFlashOtherKernel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

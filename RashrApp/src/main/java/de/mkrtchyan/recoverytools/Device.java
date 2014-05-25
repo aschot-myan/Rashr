@@ -94,6 +94,7 @@ public class Device {
     private int RECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private int KERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private String DEV_NAME = Build.DEVICE.toLowerCase();
+    private String MANUFACTURE = Build.MANUFACTURER.toLowerCase();
     private String RecoveryPath = "";
     private String RecoveryVersion = "Not recognized Recovery-Version";
     private String KernelVersion = "Linux " + System.getProperty("os.version");
@@ -101,9 +102,11 @@ public class Device {
     private String RECOVERY_EXT = ".img";
     private String KERNEL_EXT = ".img";
     private boolean FOTA_FLASH = false;
-    private ArrayList<String> TwrpArrayList = new ArrayList<String>();
-    private ArrayList<String> CwmArrayList = new ArrayList<String>();
-    private ArrayList<String> PhilzArrayList = new ArrayList<String>();
+    private ArrayList<String> StockRecoveryVersions = new ArrayList<String>();
+    private ArrayList<String> TwrpRecoveryVersions = new ArrayList<String>();
+    private ArrayList<String> CwmRecoveryVersions = new ArrayList<String>();
+    private ArrayList<String> PhilzRecoveryVersions = new ArrayList<String>();
+    private ArrayList<String> StockKernelVersions = new ArrayList<String>();
 
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
@@ -116,13 +119,13 @@ public class Device {
         this.mContext = mContext;
         setPredefinedOptions();
         loadRecoveryList();
+        loadKernelList();
     }
 
     private void setPredefinedOptions() {
 
         String BOARD = Build.BOARD.toLowerCase();
         String MODEL = Build.MODEL.toLowerCase();
-        String MANUFACTURE = Build.MANUFACTURER.toLowerCase();
 
         /** Set DEV_NAME predefined options */
 //      Unified Motorola CM Build
@@ -485,17 +488,19 @@ public class Device {
     public void loadRecoveryList() {
 
         ArrayList<String> CWMList = new ArrayList<String>(), TWRPList = new ArrayList<String>(),
-                PHILZList = new ArrayList<String>();
+                PHILZList = new ArrayList<String>(), StockList = new ArrayList<String>();
 
         try {
             String Line;
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "IMG_SUMS"))));
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "recovery_sums"))));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
                 if (lowLine.endsWith(RECOVERY_EXT)) {
                     if (lowLine.contains(DEV_NAME.toLowerCase()) || lowLine.contains(Build.DEVICE.toLowerCase())) {
-                        if (lowLine.contains("clockwork") || lowLine.contains("cwm")) {
+                        if (lowLine.contains("stock")) {
+                            StockList.add(Line.substring(NameStartAt));
+                        } else if (lowLine.contains("clockwork") || lowLine.contains("cwm")) {
                             CWMList.add(Line.substring(NameStartAt));
                         } else if (lowLine.contains("twrp")) {
                             TWRPList.add(Line.substring(NameStartAt));
@@ -507,6 +512,7 @@ public class Device {
             }
             br.close();
 
+            Collections.sort(StockList);
             Collections.sort(CWMList);
             Collections.sort(TWRPList);
             Collections.sort(PHILZList);
@@ -514,19 +520,59 @@ public class Device {
             /**
              * First clear list before adding items (to avoid double entry on reload by update)
              */
-            CwmArrayList.clear();
-            TwrpArrayList.clear();
-            PhilzArrayList.clear();
+            StockRecoveryVersions.clear();
+            CwmRecoveryVersions.clear();
+            TwrpRecoveryVersions.clear();
+            PhilzRecoveryVersions.clear();
 
             /** Sort newest version to first place */
-            for (Object i : CWMList.toArray()) {
-                CwmArrayList.add(0, i.toString());
+            for (Object i : StockList) {
+                StockRecoveryVersions.add(0, i.toString());
             }
-            for (Object i : TWRPList.toArray()) {
-                TwrpArrayList.add(0, i.toString());
+            for (Object i : CWMList) {
+                CwmRecoveryVersions.add(0, i.toString());
             }
-            for (Object i : PHILZList.toArray()) {
-                PhilzArrayList.add(0, i.toString());
+            for (Object i : TWRPList) {
+                TwrpRecoveryVersions.add(0, i.toString());
+            }
+            for (Object i : PHILZList) {
+                PhilzRecoveryVersions.add(0, i.toString());
+            }
+
+        } catch (Exception e) {
+            ERRORS.add(e.toString());
+        }
+    }
+
+    public void loadKernelList() {
+        ArrayList<String> StockKernel = new ArrayList<String>();
+
+        try {
+            String Line;
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(mContext.getFilesDir(), "kernel_sums"))));
+            while ((Line = br.readLine()) != null) {
+                String lowLine = Line.toLowerCase();
+                final int NameStartAt = Line.lastIndexOf("/") + 1;
+                if (lowLine.endsWith(KERNEL_EXT)) {
+                    if (lowLine.contains(DEV_NAME.toLowerCase()) || lowLine.contains(Build.DEVICE.toLowerCase())) {
+                        if (lowLine.contains("stock")) {
+                            StockKernel.add(Line.substring(NameStartAt));
+                        }
+                    }
+                }
+            }
+            br.close();
+
+            Collections.sort(StockKernel);
+
+            /**
+             * First clear list before adding items (to avoid double entry on reload by update)
+             */
+            StockKernelVersions.clear();
+
+            /** Sort newest version to first place */
+            for (Object i : StockKernel) {
+                StockKernelVersions.add(0, i.toString());
             }
 
         } catch (Exception e) {
@@ -548,7 +594,7 @@ public class Device {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        new Downloader(mContext, "http://dslnexus.org/Android/utils/", archive.getName(), archive, new Runnable() {
+                        new Downloader(mContext, "http://dslnexus.de/Android/utils/", archive.getName(), archive, new Runnable() {
                             @Override
                             public void run() {
                                 Unzipper.unzip(archive, new File(Rashr.PathToUtils, DEV_NAME));
@@ -969,16 +1015,24 @@ public class Device {
         return dump_image;
     }
 
-    public boolean isTwrpSupported() {
-        return TwrpArrayList.toArray().length > 0 && isRecoverySupported();
+    public boolean isStockRecoverySupported() {
+        return StockRecoveryVersions.size() > 0 && isRecoverySupported();
     }
 
-    public boolean isCwmSupported() {
-        return CwmArrayList.toArray().length > 0 && isRecoverySupported();
+    public boolean isTwrpRecoverySupported() {
+        return TwrpRecoveryVersions.size() > 0 && isRecoverySupported();
     }
 
-    public boolean isPhilzSupported() {
-        return PhilzArrayList.toArray().length > 0 && isRecoverySupported();
+    public boolean isCwmRecoverySupported() {
+        return CwmRecoveryVersions.size() > 0 && isRecoverySupported();
+    }
+
+    public boolean isPhilzRecoverySupported() {
+        return PhilzRecoveryVersions.size() > 0 && isRecoverySupported();
+    }
+
+    public boolean isStockKernelSupported() {
+        return StockKernelVersions.size() > 0 && isRecoverySupported();
     }
 
     public boolean isRecoverySupported() {
@@ -1000,10 +1054,6 @@ public class Device {
     public boolean isRecoveryOverRecovery() {
         return RECOVERY_TYPE == PARTITION_TYPE_RECOVERY;
     }
-
-//    public boolean isMTK() {
-//        return DEV_TYPE == DEV_TYPE_MTK;
-//    }
 
     public boolean isFOTAFlashed() {
         return FOTA_FLASH;
@@ -1033,16 +1083,24 @@ public class Device {
         return KERNEL_EXT;
     }
 
-    public ArrayList<String> getCWMVersions() {
-        return CwmArrayList;
+    public ArrayList<String> getStockRecoveryVersions() {
+        return StockRecoveryVersions;
     }
 
-    public ArrayList<String> getTWRPVersions() {
-        return TwrpArrayList;
+    public ArrayList<String> getCwmRecoveryVersions() {
+        return CwmRecoveryVersions;
     }
 
-    public ArrayList<String> getPHILZVersions() {
-        return PhilzArrayList;
+    public ArrayList<String> getTwrpRecoveryVersions() {
+        return TwrpRecoveryVersions;
+    }
+
+    public ArrayList<String> getPhilzRecoveryVersions() {
+        return PhilzRecoveryVersions;
+    }
+
+    public ArrayList<String> getStockKernelVersions() {
+        return StockKernelVersions;
     }
 
     public String getRecoveryVersion() {
@@ -1068,4 +1126,13 @@ public class Device {
     public ArrayList<String> getERRORS() {
         return ERRORS;
     }
+
+    public void setDevName(String DEV_NAME) {
+        this.DEV_NAME = DEV_NAME;
+    }
+
+    public String getManufacture() {
+        return MANUFACTURE;
+    }
+
 }
