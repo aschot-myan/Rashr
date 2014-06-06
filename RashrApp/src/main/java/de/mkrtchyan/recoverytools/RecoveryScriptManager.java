@@ -3,7 +3,7 @@ package de.mkrtchyan.recoverytools;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -56,13 +56,11 @@ public class RecoveryScriptManager extends ActionBarActivity {
                 }
             }
         });
-        try {
-            if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
-                File zip = new File(getIntent().getData().getPath());
-                addFileToQueue(zip);
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+
+        Uri path;
+        if ((path = getIntent().getData()) != null) {
+            File zip = new File(path.getPath());
+            addFileToQueue(zip);
         }
 
     }
@@ -109,7 +107,7 @@ public class RecoveryScriptManager extends ActionBarActivity {
             if (cbBakRecovery.isChecked()) command.append("R");
             if (cbBakSystem.isChecked()) command.append("S");
 
-            String BackupName = etBakName.getText().toString();
+            CharSequence BackupName = etBakName.getText();
             if (BackupName != null && !BackupName.equals("")) {
                 command.append(" ");
                 command.append(BackupName);
@@ -123,13 +121,7 @@ public class RecoveryScriptManager extends ActionBarActivity {
         if (cbWipeData.isChecked()) command.append("wipe data;");
 
         for (File i : mFileList) {
-            command.append("mount ");
-            command.append(i.getAbsolutePath());
-            command.append(CMD_END);
             command.append("install ");
-            command.append(i.getAbsolutePath());
-            command.append(CMD_END);
-            command.append("unmount ");
             command.append(i.getAbsolutePath());
             command.append(CMD_END);
         }
@@ -179,8 +171,6 @@ public class RecoveryScriptManager extends ActionBarActivity {
         } else {
             Toast.makeText(mContext, "No job to do :)", Toast.LENGTH_LONG).show();
         }
-
-
 
     }
 }

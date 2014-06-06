@@ -2,12 +2,12 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.3'
+    buildToolsVersion '19.1'
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 19
-        versionCode 76
-        versionName "1.8.8"
+        versionCode 77
+        versionName "1.8.9"
     }
 
     signingConfigs {

@@ -1,6 +1,17 @@
 CHANGELOG
 ====================
 
+Update [1.8.9]
+
+-Better unified builds handling
+-Stock recoveries and kernels added for nexus devices
+-New Images Added
+-New Icons
+-Onandroid Partition layouts implementation fixed
+-Backup function fixed
+-Many other bug fixes
+-New reboot methods added (shutdown)
+
 Update [1.8.8]
 
 -Performance improvements creating backups

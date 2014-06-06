@@ -29,8 +29,10 @@
     <string name="flash_options">Flash Options</string>
     <string name="risk">I know the risk</string>
     <string name="sReboot">Reboot</string>
+    <string name="sRebootHot">Hot Reboot</string>
     <string name="sRebootRecovery">Reboot Recovery</string>
     <string name="sRebootBootloader">Reboot Bootloader</string>
+    <string name="sRebootShutdown">Shutdown</string>
     <string name="info">Information</string>
     <string name="flashed">Partition flashed.</string>
     <string name="warning">Warning!</string>
@@ -41,8 +43,7 @@
     <string name="instruction">CWM:
         \nMain Menu -> install zip from sdcard -> choose zip from sdcard
         \n\nTWRP:
-        \nMain Menu -> Install
-    </string>
+        \nMain Menu -> Install</string>
     <string name="bak_done">Backup completed</string>
     <string name="backupalready">Backup already exists.</string>
     <string name="no_backup">No existing Backup found (%s/Rashr/backups/)
@@ -120,7 +121,6 @@
     <string name="loading_ui">Loading UI</string>
     <string name="loading_data">Extracting data and creating needed Folder</string>
     <string name="recovery_script_manager">Recovery-Script Manager</string>
-
     <string name="bak_name">Custom Backup Name</string>
     <string name="flash_queue">Flash Queue</string>
     <string name="wipe_opts">Wipe Options</string>
@@ -131,17 +131,19 @@
     <string name="cache">Cache</string>
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
-
     <string name="open_recovery_script_manager">Open Recovery-Script Manager</string>
     <string name="recovery_script_mind">Please keep in mind, this will only work with TWRP or TWRP compatible recovery</string>
     <string name="run">Run</string>
     <string name="recovery_script_review">Script Preview</string>
-
     <string name="failed_unpack_files">Failed to unpack files from App</string>
     <string name="failed_setup_layout">Error setting up Layout</string>
-
-    <string name="refresh_list">Refreshing recovery list</string>
-
+    <string name="refresh_list">Update started!</string>
     <string name="new_imgs_loaded">%s new IMGs loaded</string>
+    <string name="make_choice">Please make your choice</string>
+    <string name="unified_info">        This ROM ist using Unified CyanogenMod Sources.\n
+        Consequently it could be that Rashr isn\'t able to find Recovery or Kernel images.\n
+        In this case you can choose your real device. (do this if there aren\'t any images found)\n
+        BE CAREFUL WITH THIS OPTION!</string>
+    <string name="reloading">Reloading</string>
 
 </resources>

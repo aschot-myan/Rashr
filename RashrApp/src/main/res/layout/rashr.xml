@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/icon_background"
     tools:context=".Rashr">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -28,7 +27,7 @@
                     android:id="@+id/bFlashRecovery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_flash"
+                    android:drawableLeft="@drawable/ic_update"
                     android:onClick="bFlashRecovery"
                     android:text="@string/sFlashRecovery" />
 
@@ -48,7 +47,7 @@
                     ads:adSize="SMART_BANNER"
                     ads:adUnitId="ca-app-pub-3591384811135190/6436276193"
                     ads:loadAdOnCreate="true"
-                    ads:testDevices="TESST_EMULATOR, D8C221D153DA442260EA751810375941, 896047E1A726D481A3AD95454BD15606" />
+                    ads:testDevices="D8C221D153DA442260EA751810375941, 896047E1A726D481A3AD95454BD15606, B490C4995AB8573C496EF5F9D7FC3B47" />
 
                 <Button style="?button_style"
                     android:id="@+id/bClearCache"

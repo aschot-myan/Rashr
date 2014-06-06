@@ -369,12 +369,15 @@ public class Shell implements Closeable {
     public String execCommand(String Command) throws FailedExecuteCommand {
         final SimpleCommand command = new SimpleCommand(Command);
         try {
+            android.util.Log.i(TAG, Command);
             this.add(command).waitForFinish();
             String output = command.getOutput();
-            android.util.Log.i(TAG, Command);
             logCommand(command);
+            android.util.Log.i(TAG, output);
             return output;
         } catch (Exception e) {
+            logCommand(command);
+            android.util.Log.i(TAG, "Failed: " + command.getOutput());
             throw new FailedExecuteCommand(command);
         }
     }
@@ -382,17 +385,19 @@ public class Shell implements Closeable {
     public String execCommand(String Command, boolean waitForFinish) throws FailedExecuteCommand {
         final SimpleCommand command = new SimpleCommand(Command);
         try {
+            android.util.Log.i(TAG, Command);
             if (waitForFinish) {
                 this.add(command).waitForFinish();
             } else {
                 this.add(command);
             }
             String output = command.getOutput();
-            android.util.Log.i(TAG, Command);
             logCommand(command);
+            android.util.Log.i(TAG, output);
             return output;
         } catch (Exception e) {
             logCommand(command);
+            android.util.Log.i(TAG, "Failed: " + command.getOutput());
             throw new FailedExecuteCommand(command);
         }
     }
@@ -400,13 +405,15 @@ public class Shell implements Closeable {
     public String execCommand(Command command) throws FailedExecuteCommand {
         final SimpleCommand simpleCommand = new SimpleCommand(command.getCommand());
         try {
+            android.util.Log.i(TAG, simpleCommand.getCommand());
             this.add(simpleCommand).waitForFinish();
             String output = simpleCommand.getOutput();
-            android.util.Log.i(TAG, simpleCommand.getCommand());
             logCommand(simpleCommand);
+            android.util.Log.i(TAG, output);
             return output;
         } catch (Exception e) {
             logCommand(simpleCommand);
+            android.util.Log.i(TAG, "Failed: " + command.getCommand());
             throw new FailedExecuteCommand(command);
         }
     }

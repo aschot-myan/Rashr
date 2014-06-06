@@ -28,7 +28,6 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
@@ -59,7 +58,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     final private Shell mShell;
     final private Toolbox mToolbox;
     private final int JOB;
-    private final File CustomIMG, busybox;
+    private final File CustomIMG, busybox, flash_image, dump_image;
     private ProgressDialog pDialog;
     private File tmpFile, CurrentPartition;
     private boolean keepAppOpen = true;
@@ -67,7 +66,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private ArrayList<String> ERRORS = new ArrayList<String>();
 
-    private FailedExecuteCommand mFailedExecuteCommand = null;
+    private Exception mException = null;
 
     public FlashUtil(Shell mShell, Context mContext, Device mDevice, File CustomIMG, int JOB) {
         this.mShell = mShell;
@@ -75,40 +74,29 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         this.mDevice = mDevice;
         this.JOB = JOB;
         this.CustomIMG = CustomIMG;
-        this.busybox = new File(mContext.getFilesDir(), "busybox");
         mToolbox = new Toolbox(mShell);
+        busybox = new File(mContext.getFilesDir(), "busybox");
+        flash_image = mDevice.getFlash_image(mContext);
+        dump_image = mDevice.getDump_image(mContext);
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
     }
 
     protected void onPreExecute() {
         pDialog = new ProgressDialog(mContext);
 
-        switch (JOB) {
-            case JOB_FLASH_RECOVERY:
-                pDialog.setTitle(R.string.flashing);
-                Log.i(TAG, "Preparing to flash recovery");
-                break;
-            case JOB_BACKUP_RECOVERY:
-                pDialog.setTitle(R.string.creating_bak);
-                Log.i(TAG, "Preparing to backup recovery");
-                break;
-            case JOB_RESTORE_RECOVERY:
-                pDialog.setTitle(R.string.restoring);
-                Log.i(TAG, "Preparing to restore recovery");
-                break;
-            case JOB_FLASH_KERNEL:
-                pDialog.setTitle(R.string.flashing);
-                Log.i(TAG, "Preparing to flash kernel");
-                break;
-            case JOB_BACKUP_KERNEL:
-                pDialog.setTitle(R.string.creating_bak);
-                Log.i(TAG, "Preparing to backup kernel");
-                break;
-            case JOB_RESTORE_KERNEL:
-                pDialog.setTitle(R.string.restoring);
-                Log.i(TAG, "Preparing to restore kernel");
-                break;
+        setBinaryPermissions();
+
+        if (isJobFlash()) {
+            pDialog.setTitle(R.string.flashing);
+            Log.i(TAG, "Preparing to flash");
+        } else if (isJobBackup()) {
+            pDialog.setTitle(R.string.creating_bak);
+            Log.i(TAG, "Preparing to backup");
+        } else if (isJobRestore()) {
+            pDialog.setTitle(R.string.restoring);
+            Log.i(TAG, "Preparing to restore");
         }
+
         pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pDialog.setMessage(CustomIMG.getName());
         pDialog.setCancelable(false);
@@ -117,47 +105,39 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-
         try {
-            mToolbox.setFilePermissions(busybox, "744");
-            saveHistory();
+            int PartitionType = 0;
             if (isJobRecovery()) {
+                PartitionType = mDevice.getRecoveryType();
                 CurrentPartition = new File(mDevice.getRecoveryPath());
-                switch (mDevice.getRecoveryType()) {
-                    case Device.PARTITION_TYPE_MTD:
-                        MTD();
-                        return true;
-                    case Device.PARTITION_TYPE_DD:
-                        DD();
-                        return true;
-                    case Device.PARTITION_TYPE_SONY:
-                        SONY();
-                        return true;
-                }
-                return false;
             } else if (isJobKernel()) {
+                PartitionType = mDevice.getKernelType();
                 CurrentPartition = new File(mDevice.getKernelPath());
-                switch (mDevice.getKernelType()) {
-                    case Device.PARTITION_TYPE_MTD:
-                        MTD();
-                        return true;
-                    case Device.PARTITION_TYPE_DD:
-                        DD();
-                        return true;
-                }
             }
-            return false;
 
-        } catch (FailedExecuteCommand e) {
-            mFailedExecuteCommand = e;
+            switch (PartitionType) {
+                case Device.PARTITION_TYPE_MTD:
+                    MTD();
+                    break;
+                case Device.PARTITION_TYPE_DD:
+                    DD();
+                    break;
+                case Device.PARTITION_TYPE_SONY:
+                    SONY();
+                    break;
+            }
+            saveHistory();
+            return true;
+        } catch (Exception e) {
+            mException = e;
             return false;
         }
     }
 
     protected void onPostExecute(Boolean success) {
         pDialog.dismiss();
-        if (!success || mFailedExecuteCommand != null) {
-            Notifyer.showExceptionToast(mContext, TAG, mFailedExecuteCommand);
+        if (!success || mException != null) {
+            Notifyer.showExceptionToast(mContext, TAG, mException);
         } else {
             if (isJobFlash() || isJobRestore()) {
                 Log.i(TAG, "Flash finished");
@@ -169,68 +149,42 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     }
                 }
             }
-            placeImgBack();
         }
         tmpFile.delete();
-        if (RunAtEnd != null) {
-            RunAtEnd.run();
-        }
+        if (RunAtEnd != null) RunAtEnd.run();
     }
 
-    public void placeImgBack() {
-        if (isJobBackup()) {
-            Log.i(TAG, "Backup finished");
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Common.copyFile(tmpFile, CustomIMG);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        ERRORS.add(e.toString());
-                    }
-                }
-            }).start();
-            Toast.makeText(mContext, R.string.bak_done, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void DD() throws FailedExecuteCommand {
+    public void DD() throws FailedExecuteCommand, IOException, InterruptedException {
         String Command = "";
-        try {
-
-            if (isJobFlash() || isJobRestore()) {
-                if (isJobFlash()
-                        && mDevice.getDeviceName().startsWith("g2")
-                        && Build.MANUFACTURER.equals("lge")) {
-                    File aboot = new File("/dev/block/platform/msm_sdcc.1/by-name/aboot");
-                    File extracted_aboot = new File(mContext.getFilesDir(), "aboot.img");
-                    File patched_CustomIMG = new File(mContext.getFilesDir(), CustomIMG.getName() + ".lok");
-                    File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
-                    File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
-                    mShell.execCommand("dd if=" + aboot.getAbsolutePath() + " of=" + extracted_aboot.getAbsolutePath());
-                    mShell.execCommand(loki_patch.getAbsolutePath() + " recovery "
-                            + CustomIMG.getAbsolutePath() + " " + patched_CustomIMG.getAbsolutePath() + "  || exit 1");
-                    Command = loki_flash.getAbsolutePath() + " recovery " + patched_CustomIMG.getAbsolutePath() + " || exit 1";
-                } else {
-                    Log.i(TAG, "Flash started!");
-                    Common.copyFile(CustomIMG, tmpFile);
-                    Command = busybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
-                            "of=\"" + CurrentPartition.getAbsolutePath() + "\"";
-                }
-            } else if (isJobBackup()) {
-                Log.i(TAG, "Backup started!");
-                Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() + "\" " +
-                        "of=\"" + tmpFile.getAbsolutePath() + "\"";
+        if (isJobFlash() || isJobRestore()) {
+            if (mDevice.getName().startsWith("g2") && Build.MANUFACTURER.equals("lge")
+                    && isJobFlash()) {
+                File aboot = new File("/dev/block/platform/msm_sdcc.1/by-name/aboot");
+                File extracted_aboot = new File(mContext.getFilesDir(), "aboot.img");
+                File patched_CustomIMG = new File(mContext.getFilesDir(), CustomIMG.getName() + ".lok");
+                File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
+                File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
+                mShell.execCommand("dd if=" + aboot.getAbsolutePath() + " of=" + extracted_aboot.getAbsolutePath(), true);
+                mShell.execCommand(loki_patch.getAbsolutePath() + " recovery "
+                        + CustomIMG.getAbsolutePath() + " " + patched_CustomIMG.getAbsolutePath() + "  || exit 1", true);
+                Command = loki_flash.getAbsolutePath() + " recovery " + patched_CustomIMG.getAbsolutePath() + " || exit 1";
+            } else {
+                Log.i(TAG, "Flash started!");
+                Common.copyFile(CustomIMG, tmpFile);
+                Command = busybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
+                        "of=\"" + CurrentPartition.getAbsolutePath() + "\"";
             }
-            mShell.execCommand(Command);
-        } catch (IOException e) {
-            e.printStackTrace();
-            ERRORS.add(e.toString());
+        } else if (isJobBackup()) {
+            Log.i(TAG, "Backup started!");
+
+            Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() + "\" " +
+                    "of=\"" + tmpFile.getAbsolutePath() + "\"";
         }
+        mShell.execCommand(Command, true);
+        if (isJobBackup()) placeImgBack();
     }
 
-    public void MTD() throws FailedExecuteCommand {
+    public void MTD() throws FailedExecuteCommand, IOException, InterruptedException {
         String Command = "";
         if (isJobRecovery()) {
             Command = " recovery ";
@@ -238,25 +192,22 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             Command = " boot ";
         }
         if (isJobFlash() || isJobRestore()) {
-            File flash_image = mDevice.getFlash_image(mContext);
-            mToolbox.setFilePermissions(mDevice.getFlash_image(mContext), "741");
             Log.i(TAG, "Flash started!");
             Command = flash_image.getAbsolutePath() + Command + "\"" + tmpFile.getAbsolutePath() + "\"";
         } else if (isJobBackup()) {
-            File dump_image = mDevice.getDump_image(mContext);
-            mToolbox.setFilePermissions(dump_image, "741");
             Log.i(TAG, "Backup started!");
             Command = dump_image.getAbsolutePath() + Command + "\"" + tmpFile.getAbsolutePath() + "\"";
         }
-        mShell.execCommand(Command);
+        mShell.execCommand(Command, true);
+        if (isJobBackup()) placeImgBack();
     }
 
-    public void SONY() throws FailedExecuteCommand {
+    public void SONY() throws FailedExecuteCommand, IOException, InterruptedException {
 
         String Command = "";
-        if (mDevice.getDeviceName().equals("yuga")
-                || mDevice.getDeviceName().equals("c6602")
-                || mDevice.getDeviceName().equals("montblanc")) {
+        if (mDevice.getName().equals("yuga")
+                || mDevice.getName().equals("c6602")
+                || mDevice.getName().equals("montblanc")) {
             if (isJobFlash() || isJobRestore()) {
                 File charger = new File(Rashr.PathToUtils, "charger");
                 File chargermon = new File(Rashr.PathToUtils, "chargermon");
@@ -265,8 +216,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 try {
                     mToolbox.copyFile(charger, CurrentPartition.getParentFile(), true, false);
                     mToolbox.copyFile(chargermon, CurrentPartition.getParentFile(), true, false);
-                    if (mDevice.getDeviceName().equals("yuga")
-                            || mDevice.getDeviceName().equals("c6602")) {
+                    if (mDevice.getName().equals("yuga")
+                            || mDevice.getName().equals("c6602")) {
                         mToolbox.copyFile(ric, CurrentPartition.getParentFile(), true, false);
                         mToolbox.setFilePermissions(ric, "755");
                     }
@@ -285,7 +236,17 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Command = "cat " + CurrentPartition.getAbsolutePath() + " >> " + CustomIMG.getAbsolutePath();
             }
         }
-        mShell.execCommand(Command);
+        mShell.execCommand(Command, true);
+        if (isJobBackup()) placeImgBack();
+    }
+
+    private void setBinaryPermissions() {
+        busybox.setExecutable(true);
+        busybox.setReadable(true);
+        flash_image.setExecutable(true);
+        flash_image.setReadable(true);
+        dump_image.setExecutable(true);
+        dump_image.setReadable(true);
     }
 
     public void showRebootDialog() {
@@ -333,6 +294,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 })
                 .setCancelable(keepAppOpen)
                 .show();
+    }
+
+    private void placeImgBack() throws IOException, InterruptedException {
+        Thread.sleep(100);
+        tmpFile.setReadable(true);
+        tmpFile.setWritable(true);
+        Common.copyFile(tmpFile, CustomIMG);
     }
 
     public void saveHistory() {

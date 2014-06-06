@@ -200,7 +200,7 @@ public class Toolbox {
             throws FailedExecuteCommand, TimeoutException, IOException {
         Log.d(RootCommands.TAG, "Set permissions of " + file + " to " + permissions);
 
-        shell.execCommand("toolbox chmod " + permissions + " " + file);
+        shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
 
     }
 
@@ -208,7 +208,7 @@ public class Toolbox {
             throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Set permissions of " + file + " to " + permissions);
 
-        shell.execCommand("toolbox chmod " + permissions + " " + file);
+        shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
 
     }
 

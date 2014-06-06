@@ -194,14 +194,6 @@ public class Device {
         if (Name.equals("m7spr"))
             Name = "m7wls";
 
-//      Samsung Galaxy Note 3 (unified build)
-        if (Name.startsWith("hlte") && MANUFACTURE.equals("samsung")) Name = "hlte";
-
-//      Samsung Galaxy S4 (unified build)
-        if ((Name.startsWith("jflte") || Name.equals("jgedlte")) && MANUFACTURE.equals("samsung")) {
-            Name = "jflte";
-        }
-
 //		Galaxy Note
         if (Name.equals("gt-n7000") || Name.equals("n7000") || Name.equals("galaxynote")
                 || Name.equals("n7000") || BOARD.equals("gt-n7000") || BOARD.equals("n7000")
@@ -530,7 +522,6 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (new File(split).exists()) {
                                     KernelPath = split;
-                                    KERNEL_TYPE = PARTITION_TYPE_DD;
                                 }
                             }
                         }
@@ -545,7 +536,6 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (new File(split).exists()) {
                                     RecoveryPath = split;
-                                    RECOVERY_TYPE = PARTITION_TYPE_DD;
                                 }
                             }
                         }
@@ -703,6 +693,19 @@ public class Device {
                     || Name.equals("coeus") || Name.equals("c_4"))
                 RecoveryPath = "/dev/block/mmcblk0p16";
         }
+
+        if (!isRecoverySupported()) {
+            if (RecoveryPath.contains("/dev/block")) {
+                RECOVERY_TYPE = PARTITION_TYPE_DD;
+            }
+        }
+
+        if (!isKernelSupported()) {
+            if (KernelPath.contains("/dev/block")) {
+                KERNEL_TYPE = PARTITION_TYPE_DD;
+            }
+        }
+
         if (!isRecoverySupported() || !isKernelSupported()) {
             File PartLayout = new File(mContext.getFilesDir(), Build.DEVICE + ".fstab");
             if (!PartLayout.exists()) {
