@@ -829,8 +829,8 @@ public class Rashr extends ActionBarActivity {
 
             /** Check if device uses unified builds */
             if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED)) {
-                if ((mDevice.getName().equals("d2lte") || mDevice.getName().equals("hlte")
-                        || mDevice.getName().equals("jflte")) && (!mDevice.isStockRecoverySupported()
+                if ((mDevice.getName().startsWith("d2lte") || mDevice.getName().startsWith("hlte")
+                        || mDevice.getName().startsWith("jflte")) && (!mDevice.isStockRecoverySupported()
                         || !mDevice.isCwmRecoverySupported() || !mDevice.isTwrpRecoverySupported()
                         || !mDevice.isPhilzRecoverySupported())) {
                     showUnifiedBuildsDialog();
@@ -1658,15 +1658,16 @@ public class Rashr extends ActionBarActivity {
         UnifiedList.setAdapter(UnifiedAdapter);
 
         if (mDevice.getManufacture().equals("samsung")) {
-            String[] unifiedGalaxyS3 = {"d2att", "d2cri", "d2mtr", "d2spr", "d2tmo", "d2usc", "d2vzw"};
-            String[] unifiedGalaxyNote3 = {"hltespr", "hltetmo", "hltevzw", "htlexx"};
-            String[] unifiedGalaxyS4 = {"jflteatt", "jfltecan" ,"jfltecri", "jfltecsp", "jfltespr",
-                    "jfltetmo", "jflteusc", "jfltevzw", "jfltexx", "jgedlte"};
-            if (mDevice.getName().equals("d2lte")) {
+            String[] unifiedGalaxyS3 = {"d2lte", "d2att", "d2cri", "d2mtr",
+                    "d2spr", "d2tmo", "d2usc", "d2vzw"};
+            String[] unifiedGalaxyNote3 = {"hlte", "hltespr", "hltetmo", "hltevzw", "htlexx"};
+            String[] unifiedGalaxyS4 = {"jflte","jflteatt", "jfltecan" ,"jfltecri", "jfltecsp",
+                    "jfltespr", "jfltetmo", "jflteusc", "jfltevzw", "jfltexx", "jgedlte"};
+            if (mDevice.getName().startsWith("d2lte")) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS3));
-            } else if (mDevice.getName().equals("hlte")) {
+            } else if (mDevice.getName().startsWith("hlte")) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyNote3));
-            } else if (mDevice.getName().equals("jflte")) {
+            } else if (mDevice.getName().startsWith("jflte")) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS4));
             }
         }
@@ -1674,8 +1675,12 @@ public class Rashr extends ActionBarActivity {
         for (String i : DevName) {
             if (i.contains("att")) {
                 DevNamesCarriers.add(i + " (AT&T Mobility)");
+            } else if (i.contains("can")) {
+                DevNamesCarriers.add(i + " (Canada)");
             } else if (i.contains("cri")) {
                 DevNamesCarriers.add(i + " (Cricket Wireless)");
+            } else if (i.contains("csp")) {
+                DevNamesCarriers.add(i + " (C Spire Wireless)");
             } else if (i.contains("mtr")) {
                 DevNamesCarriers.add(i + " (MetroPCS)");
             } else if (i.contains("spr")) {
@@ -1690,6 +1695,8 @@ public class Rashr extends ActionBarActivity {
                 DevNamesCarriers.add(i + " (International)");
             } else if (i.contains("ged")) {
                 DevNamesCarriers.add(i + " (Google Play Edition)");
+            } else {
+                DevNamesCarriers.add(i + " (Unified)");
             }
         }
 
@@ -1720,7 +1727,7 @@ public class Rashr extends ActionBarActivity {
             }
         });
         Button KeepCurrent = (Button) UnifiedBuildsDialog.findViewById(R.id.bKeepCurrent);
-        KeepCurrent.setText(mDevice.getName());
+        KeepCurrent.setText(String.format(getString(R.string.keep_current_name), mDevice.getName()));
         KeepCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
