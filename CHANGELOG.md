@@ -1,6 +1,15 @@
 CHANGELOG
 ====================
 
+Update [1.9]
+
+-Unified Builds fixed
+-Onandroid Partition Layouts updated
+-Spanish translation updated by me
+-German translation added by me
+-Better version naming from openrecovery-twrp-codename-version to TWRP Version.
+-Backups fixed
+
 Update [1.8.9]
 
 -Better unified builds handling

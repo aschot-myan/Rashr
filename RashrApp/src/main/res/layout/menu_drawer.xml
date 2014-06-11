@@ -14,7 +14,7 @@
         <Button style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/open_recovery_script_manager"
+            android:text="@string/recovery_script_manager"
             android:onClick="bOpenRecoveryScriptManager"
             android:minHeight="74dp"
             android:id="@+id/bOpenRecoveryScriptManager" />

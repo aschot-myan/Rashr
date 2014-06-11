@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:background="#111"
     android:gravity="center_vertical|center_horizontal"
-    android:minHeight="32dp"
+    android:minHeight="40dp"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textColor="#707070"
     android:textSize="18sp" />

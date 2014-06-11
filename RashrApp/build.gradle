@@ -2,31 +2,29 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.1'
+    buildToolsVersion '19.1.0'
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 19
-        versionCode 77
-        versionName "1.8.9"
+        versionCode 78
+        versionName '1.9'
     }
-
     signingConfigs {
         DsLNeXuS {
             storeFile file('C:/Users/ashot_000/Google Drive/workspace/Keystone.key')
         }
     }
-
     buildTypes {
         release {
             runProguard false
             debuggable false
         }
     }
-
     lintOptions {
         abortOnError false
     }
-
+    productFlavors {
+    }
 }
 
 dependencies {
