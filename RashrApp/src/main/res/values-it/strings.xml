@@ -27,9 +27,11 @@
     <string name="flash_options">Opzioni flash</string>
     <string name="risk">Conosco i rischi</string>
     <string name="sReboot">Riavvia</string>
+    <string name="sRebootHot">Riavvio a caldo</string>
     <string name="sRebootRecovery">Riavvia in recovery</string>
     <string name="sRebootBootloader">Riavvia in bootloader</string>
     <string name="info">Informazioni</string>
+    <string name="sRebootShutdown">Spegnimento</string>
     <string name="flashed">Recovery flashata.</string>
     <string name="warning">Attenzione!</string>
     <string name="fota">Flashare la recovery su questo dispositivo flasherà il FOTAKernel.img (sostituzione partizione)
@@ -39,8 +41,7 @@
     <string name="instruction">CWM:\n
         Main menu -> install zip from sdcard -> choose zip from sdcard\n
         TWRP:\n
-        Main Menu -> Install
-	</string>
+        Main Menu -> Install</string>
     <string name="bak_done">Backup completato</string>
     <string name="backupalready">Esiste già un backup</string>
     <string name="no_backup">Nessun backup esistente (%s/Rashr/backups/)
@@ -137,9 +138,16 @@
 
     <string name="failed_unpack_files">Impossibile decomprimere file dall\'App</string>
     <string name="failed_setup_layout">Errore impostazione layout</string>
+    <string name="refresh_list">Aggiornamento avviato!</string>
 
     <string name="refresh_list">Aggiornamento elenco recovery</string>
 
     <string name="new_imgs_loaded">%s nuove immagini caricate</string>
+    <string name="make_choice">Fai la tua sceltae</string>
+    <string name="unified_info">        Questa ROM è stata creata usando Unified CyanogenMod Sources.\n
+        Conseguentemente potrebbe essere che Rashr non possa trovare le immagini Recovery o Kernel.\n
+        In questo caso scegli il tuo dispositivo reale. (fai ciò se non vinene trovata nessuna immagine)\n
+        USA CON CAUTELA QUESTA OPZIONE</string>
+    <string name="reloading">Ricaricamento</string>
 
 </resources>
