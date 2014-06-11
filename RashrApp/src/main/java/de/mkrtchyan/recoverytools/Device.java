@@ -71,6 +71,7 @@ public class Device {
             new File("/dev/block/platform/sdhci.1/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
+            new File("/system/bin/recovery.tar"),
             new File("/dev/block/recovery"),
             new File("/dev/block/nandg"),
             new File("/dev/block/acta"),
@@ -479,13 +480,17 @@ public class Device {
     private void readDeviceInfos() {
 
         for (File i : KernelList) {
-            if (i.exists()) {
+            if (i.exists() && KernelPath.equals("")) {
                 KernelPath = i.getAbsolutePath();
             }
         }
         for (File i : RecoveryList) {
             if (i.exists() && RecoveryPath.equals("")) {
                 RecoveryPath = i.getAbsolutePath();
+                if (RecoveryPath.endsWith(".tar")) {
+                    RECOVERY_EXT = ".tar";
+                    RECOVERY_TYPE = PARTITION_TYPE_SONY;
+                }
             }
         }
 
@@ -510,6 +515,7 @@ public class Device {
                     } else if (line.contains("PhilZ")) {
                         RecoveryVersion = line;
                     } else if (line.contains("4EXT")) {
+                        line = line.split("4EXT")[1];
                         RecoveryVersion = line;
                     }
                 }
@@ -662,9 +668,6 @@ public class Device {
             if (Name.equals("nozomi"))
                 RecoveryPath = "/dev/block/mmcblk0p3";
 
-            if (Name.equals("c6603") || Name.equals("c6602"))
-                RecoveryPath = "/system/bin/recovery.tar";
-
 //	    LG DEVICEs + Same
             if (Name.equals("p990") || Name.equals("tf300t"))
                 RecoveryPath = "/dev/block/mmcblk0p7";
@@ -707,7 +710,7 @@ public class Device {
         }
 
         if (!isRecoverySupported() || !isKernelSupported()) {
-            File PartLayout = new File(mContext.getFilesDir(), Build.DEVICE + ".fstab");
+            File PartLayout = new File(mContext.getFilesDir(), Build.DEVICE);
             if (!PartLayout.exists()) {
                 try {
                     ZipFile PartLayoutsZip = new ZipFile(new File(mContext.getFilesDir(), "partlayouts.zip"));
@@ -715,7 +718,9 @@ public class Device {
                         ZipEntry entry = (ZipEntry) e.nextElement();
                         if (entry.getName().equals(Build.DEVICE)) {
                             Unzipper.unzipEntry(PartLayoutsZip, entry, mContext.getFilesDir());
-                            new File(mContext.getFilesDir(), entry.getName()).renameTo(PartLayout);
+                            if (new File(mContext.getFilesDir(), entry.getName()).renameTo(PartLayout)) {
+                                throw new IOException("Failed rename File into " + PartLayout);
+                            }
                         }
                     }
                 } catch (IOException e) {
@@ -733,7 +738,8 @@ public class Device {
                             if (!isRecoverySupported() && Line.contains("recovery")) {
                                 RecoveryPath = partition.getAbsolutePath();
                                 RECOVERY_TYPE = PARTITION_TYPE_DD;
-                            } else if (!isKernelSupported() && Line.contains("boot") && !Line.contains("bootloader")) {
+                            } else if (!isKernelSupported() && Line.contains("boot")
+                                    && !Line.contains("bootloader")) {
                                 KernelPath = partition.getAbsolutePath();
                                 KERNEL_TYPE = PARTITION_TYPE_DD;
                             }
@@ -746,14 +752,14 @@ public class Device {
         }
     }
 
-    public File getFlash_image(Context mContext) {
+    public File getFlash_image() {
         if (!flash_image.exists()) {
             flash_image = new File(mContext.getFilesDir(), flash_image.getName());
         }
         return flash_image;
     }
 
-    public File getDump_image(Context mContext) {
+    public File getDump_image() {
         if (!dump_image.exists()) {
             dump_image = new File(mContext.getFilesDir(), dump_image.getName());
         }
