@@ -76,8 +76,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         this.CustomIMG = CustomIMG;
         mToolbox = new Toolbox(mShell);
         busybox = new File(mContext.getFilesDir(), "busybox");
-        flash_image = mDevice.getFlash_image(mContext);
-        dump_image = mDevice.getDump_image(mContext);
+        flash_image = mDevice.getFlash_image();
+        dump_image = mDevice.getDump_image();
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
     }
 
@@ -296,10 +296,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 .show();
     }
 
-    private void placeImgBack() throws IOException, InterruptedException {
-        Thread.sleep(100);
-        tmpFile.setReadable(true);
-        tmpFile.setWritable(true);
+    private void placeImgBack() throws IOException, FailedExecuteCommand {
+        mToolbox.setFilePermissions(tmpFile, "666");
         Common.copyFile(tmpFile, CustomIMG);
     }
 
