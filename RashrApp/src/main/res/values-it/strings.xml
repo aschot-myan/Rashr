@@ -130,7 +130,7 @@
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
 
-    <string name="open_recovery_script_manager">Apri egstore script recovery</string>
+    <string name="open_recovery_script_manager">Apri egstore script recovery</string>#######
     <string name="recovery_script_mind">Ricordati che funzionerà solo con  TWRP o recovery compatibili TWRP</string>
     <string name="run">Esegui</string>
     <string name="recovery_script_review">Anteprima script</string>

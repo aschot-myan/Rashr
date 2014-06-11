@@ -21,7 +21,7 @@
     <string name="sClearCache">Heruntergeladene daten löschen</string>
     <string name="report">Bug melden</string>
     <string name="sExit">Schließen</string>
-    <string name="xda">XDA-Thread Öffnen</string>
+    <string name="xda">XDA-Thread</string>
     <string name="set_name">Name der Sicherrung</string>
     <string name="bak_warning">
         Bevor Sie Rashr verwenden ist es empfehlenswert Sicherungen zu erstellen,
@@ -44,42 +44,46 @@
     </string>
     <string name="flash_over_recovery">Jetzt flashen? (Neustart in den Recovery erforderlich)</string>
     <string name="instructions">Anleitung</string>
-    <string name="instruction">CWM:
+    <string name="instruction">
+        CWM:
         \nMain Menu -> install zip from sdcard -> choose zip from sdcard
         \n\nTWRP:
-        \nMain Menu -> Install</string>
+        \nMain Menu -> Install
+    </string>
     <string name="bak_done">Backup vollständig</string>
     <string name="backupalready">Backup existiert bereits.</string>
-    <string name="no_backup">Keine Backups gefunden (%s/Rashr/backups/)
-        \n\nJetzt erstellen?</string>
     <string name="error">Fehler</string>
     <string name="not_supportded">
         Ihr Gerät ist zurzeit nicht untersützt. System scannen und Gerät den Entwikler melden?
         Oder versuchen die Partition zu finden indem neugestartet wird?
     </string>
-    <string name="no_root">Gerät nicht gerootet. Bitte tuen Sie dies um die App zu verwenden. Mehr informationen unter
-        \n\nxda-developers.com"</string>
+    <string name="no_root">
+        Gerät nicht gerootet. Bitte tuen Sie dies um die App zu verwenden. Mehr informationen unter
+        \n\nxda-developers.com
+    </string>
     <string name="using_dd">Using dd. Recovery in FS</string>
     <string name="using_mtd">Use flash/dump_image (MTD)</string>
     <string name="Downloading">Downloading…</string>
     <string name="commentar">Kommentar</string>
-    <string name="commenthint">Bitte komentieren Sie hier welches Problem Sie haben (Download, Installation,
-        Allgemein)</string>
+    <string name="commenthint">
+        Bitte komentieren Sie hier welches Problem Sie haben (Download, Installation, Allgemein)
+    </string>
     <string name="positive">Ja, bitte</string>
     <string name="neutral">Nein, danke</string>
     <string name="negative">Abbrechen</string>
-    <string name="log">Shell eingaben mitschreiben</string>
-    <string name="showlog">Eingaben zeigen</string>
+    <string name="log">Shell-Eingaben loggen</string>
+    <string name="showlog">Shell-Eingaben zeigen</string>
     <string name="delete">Löschen</string>
     <string name="sBackupMgr">Backup Manager</string>
     <string name="setname">Name des Backups</string>
     <string name="reboot_recovery_now">Jetzt in die Recovery neustarten?</string>
     <string name="flashing">Flashing…</string>
     <string name="restoring">Wiederherstellung…</string>
-    <string name="creating_bak">Erstellt Wiederherstellungspunkt…</string>
+    <string name="creating_bak">Erstelle Wiederherstellungspunkt</string>
     <string name="download_utils">
         Um diese App zu verwenden werden kleine Tools gebraucht (ungefär 512kb).
-        \nDownload it now?</string>
+        \nDownload it now?
+    </string>
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="ShowAds">Werbung aktivieren um den Entwikler zu untersützen</string>
     <string name="please_restart">Bitte App neustarten um änderungen anzuwenden</string>
@@ -101,13 +105,9 @@
     <string name="no_choosed">Keine Datei ausgewählt</string>
     <string name="update_done">Update fertiggestellt</string>
     <string name="pick_file">Datei aussuchen</string>
-    <string name="flash_error">Fehler beim Flash</string>
-    <string name="res_error">Fehler beim Wiederherstellen</string>
-    <string name="bak_error">Fehler beim erstellen eines Wiederherstellungspunktes</string>
     <string name="stock">Stock</string>
     <string name="changelog">Changelog</string>
-    <string name="bak_deleted">%s gelöscht</string>
-    <string name="extract_failed">Entpacken von erfordeliche Daten fehlgeschalten. Bitte App neustarten.</string>
+    <string name="bak_deleted">Wiederherstellungspunkt gelöscht</string>
     <string name="no_history">Kein Verlauf gefunden</string>
     <string name="styles">Styles</string>
 
@@ -136,19 +136,20 @@
     <string name="cache">Cache</string>
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
-    <string name="open_recovery_script_manager">Recovery-Script Manager öffnen</string>
     <string name="recovery_script_mind">Bitte merken Sie sich das dies nur mit TWRP kompatibele Recoveries funktionieren wird</string>
     <string name="run">Ausführen</string>
     <string name="recovery_script_review">Script Vorschau</string>
     <string name="failed_unpack_files">Fehler beim Entpacken der Daten von der App</string>
     <string name="failed_setup_layout">Fehler beim erstellen der UI</string>
     <string name="refresh_list">Update gestartet!</string>
-    <string name="new_imgs_loaded">%s neue Images geladet!</string>
+    <string name="new_imgs_loaded">%s neue Images geladen!</string>
     <string name="make_choice">Bitte treffen Sie ihre Wahl</string>
-    <string name="unified_info">Diese Rom nutzt den zusammengelegte CyanogenMod Code.\n
+    <string name="unified_info">
+        Diese Rom nutzt den zusammengelegte CyanogenMod Code.\n
         Es könnte sein das Rashr nicht die geeignete Images für ihr Gerät erkennt.\n
         Wenn dies der Fall ist bitte wählen Sie ihr Gerät in der Liste.\n
-        SEIEN SIE VORSICHTIG MIT DIESER OPTION!</string>
+        SEIEN SIE VORSICHTIG MIT DIESER OPTION!
+    </string>
     <string name="reloading">Neu laden</string>
     <string name="keep_current_name">Den Namen behalten (%s)</string>
 

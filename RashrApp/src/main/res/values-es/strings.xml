@@ -1,66 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Downloading">Descargando…</string>
-    <string name="failed_download">Descarga fallecida porfavor intentelo de nuevo.\n%s"
-    </string>
-    <string name="error">Error</string>
-    <string name="warning">¡Advertencia!</string>
-    <string name="positive">Si, por favor</string>
-    <string name="neutral">No, gracias</string>
-    <string name="negative">Cancelar</string>
-    <string name="file_chooser">Selector de archivos</string>
-    <string name="choose_message">Seleccionando %s. ¿Estás seguro?</string>
-    <string name="go">Seguir</string>
+
+    <string name="app_name">Rashr</string>
+    <string name="settings">Ajustes</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sFlashRecovery">Flash Recovery</string>
+    <string name="sFlashKernel">Flash Kernel</string>
+    <string name="sHistory">History</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="sOTHER">Otros de la memoria interna</string>
+    <string name="sRecoveryBackup">Backup Recovery</string>
+    <string name="sKernelBackup">Backup Kernel</string>
+    <string name="backups">Backups</string>
+    <string name="backup">Backup</string>
+    <string name="go">Go</string>
     <string name="sRebooter">Reiniciador</string>
+    <string name="restore">Restore</string>
+    <string name="rename">Renombrar</string>
     <string name="sClearCache">Eliminar imágenes descargadas</string>
-    <string name="report">Escanear systema y Reportar un problema</string>
-    <string name="sExit">Salir</string>
-    <string name="xda">Abrir XDA-Thread</string>
-    <string name="rename">Si desea usar un nombre personalizado para la de copia de
-        seguridad, escribelo. De otro modo se utilizara el tiempo actual.
-    </string>
-    <string name="bak_warning">Antes de que usen Rashr es mejor crear algunas copias de seguridad
-        y guárdelo en su Ordenador.
-        Las copias de seguridad se crean bajo *memoria interna*/Rashr/kernel-backups y
-        *memoria interna*/Rashr/recovery-backups.
-        El programador no se hace responsable de los daños y perjuicios de su dispositivo.
-    </string>
+    <string name="report">Report bug</string>
+    <string name="sExit">Salida</string>
+    <string name="xda">Thread de XDA</string>
+    <string name="set_name">Nombre del Backup</string>
+    <string name="bak_warning">Anted de que utilize Rashr haga backups y cuiden lo en su ordenador.
+        \nLos backups se crean en \n%s.
+        \nEl programador no es responsible si se daña su dispositivo.</string>
+    <string name="flash_options">Opciones de Flash</string>
     <string name="risk">Conozco el riesgo</string>
     <string name="sReboot">Reiniciar</string>
-    <string name="sRebootRecovery">Reinicio al Recuperador</string>
-    <string name="sRebootBootloader">Reinicio al Bootloader</string>
+    <string name="sRebootHot">Hot Reboot</string>
+    <string name="sRebootRecovery">Reiniciar Recovery</string>
+    <string name="sRebootBootloader">Reiniciar Bootloader</string>
+    <string name="sRebootShutdown">Apagar</string>
     <string name="info">Información</string>
-    <string name="flashed">Recuperador instalado.</string>
-    <string name="kernel_to">Si installan la recuperación también se cambiara el kernel de su dispositivo.
+    <string name="flashed">Partition flasheado.</string>
+    <string name="warning">Alarma!</string>
+    <string name="fota">
+        Si usted instala un Recovery en su sistema se utilizara la particion FOTAKernel.
+        Solo prodrá utilizarla si usan un Custom Kernel o Custom ROM. Quieren avanzar?
     </string>
-    <string name="flash_over_recovery">¿Instalar Recuperador ahora? (necesita Reiniciar en
-        Recuperador)
-    </string>
+    <string name="flash_over_recovery">Instalar Recovery ahora? (necesitan reiniciar)</string>
     <string name="instructions">Instrucciones</string>
-    <string name="bak_done">Copia de seguridad completada</string>
-    <string name="backupalready">Copia de seguridad ya existe. Si continua se sobrescribirá la existente.
-        ¿Continuar?
+    <string name="instruction">CWM:
+        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
+        \n\nTWRP:
+        \nMain Menu -> Install</string>
+    <string name="bak_done">Backup completada</string>
+    <string name="backupalready">Backup ya existe.</string>
+    <string name="error">Error</string>
+    <string name="not_supportded">
+        Su dispositivo no es suportado. Escanear sistema y enviar un reporte al programador o
+        reiniciar en el recovery (puede ayudar para encontrar la partición)?
     </string>
-    <string name="noroot">Dispositivo no ruteado. Pofavor rutearlo. Mas infomacion bajo
-        xda-developer.com
-    </string>
-    <string name="using_dd">Utilizando dd binario.</string>
-    <string name="using_mtd">Utilizando flash/dump_image (MTD)</string>
+    <string name="no_root">
+        Dispositivo sin Root. Porfavor rooten lo. Mas informaciones en
+        \n\nxda-developers.com</string>
+    <string name="using_dd">Using dd. Recovery in FS</string>
+    <string name="using_mtd">Use flash/dump_image (MTD)</string>
+    <string name="Downloading">Downloading…</string>
     <string name="commentar">Comentario</string>
-    <string name="commenthint">Comenten aquí, lo que no funcciona correcta mente (descarga,
-        instalación, soporte común u otro)
-    </string>
+    <string name="commenthint">Comenten aquí lo que no funciona (download, flash)</string>
+    <string name="positive">Si, porfavor</string>
+    <string name="neutral">No, gracias</string>
+    <string name="negative">Cancelar</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Ver Logs</string>
-    <string name="sBackupMgr">Abrir Backup Manager</string>
-    <string name="setname">Nombrar la Copia de seguridad</string>
-    <string name="reboot_recovery_now">¿Reiniciar en recuperador ahora?</string>
-    <string name="flashing">Instalando…</string>
-    <string name="creating_bak">Creando copia de seguridad…</string>
-    <string name="clear_logs">Eliminar Logs</string>
-    <string name="download_utils">Para utilizar esta aplicación es necesario descargar herramientas
-        pequeñas (alrededor de 512KB). Esto requiere una conexión a Internet.
-        ¿Descargar ahora?
+    <string name="delete">Eliminar</string>
+    <string name="sBackupMgr">Backup Manager</string>
+    <string name="setname">Nombrar el Backup</string>
+    <string name="reboot_recovery_now">Reiniciar en el recovery ahora?</string>
+    <string name="flashing">Flashing…</string>
+    <string name="restoring">Restaurando…</string>
+    <string name="creating_bak">Creando punto de restauración…</string>
+    <string name="download_utils">Para utilizar esta aplicación es necesario descargar datos (alrededor de 512KB).
+        \nDescargar ahora?</string>
+    <string name="over_recovery">Device will be flashed over recovery</string>
+    <string name="ShowAds">Enseñar anuncios para apoyar mi trabajo</string>
+    <string name="please_restart">Porfavor reinicie la aplicación</string>
+    <string name="please_ads">Porfavor encienda los anuncios para apoyar mi trabajo! :(</string>
+    <string name="donate_to_support">Done para apoyar mi trabajo! :)</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Euro</item>
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+        <item>3 Euros</item>
+        <item>5 Euros</item>
+    </string-array>
+
+    <string name="donate">Donar</string>
+    <string name="never_again">No enseñar mas</string>
+    <string name="try_again">Reintentar!</string>
+    <string name="later">Después</string>
+    <string name="no_choosed">Dato no eligido</string>
+    <string name="update_done">Actualizado</string>
+    <string name="pick_file">Elija un dato</string>
+    <string name="flash_error">Error</string>
+    <string name="stock">Stock</string>
+    <string name="changelog">Changelog</string>
+    <string name="bak_deleted">Punto de restauración eliminado</string>
+    <string name="styles">Styles</string>
+
+    <string-array name="styles">
+        <item>Styles</item>
+        <item>Holo Light Dark Bar Style</item>
+        <item>Holo Light Style</item>
+        <item>Holo Dark Style</item>
+    </string-array>
+
+    <string name="flash_as">Flash %s como</string>
+    <string name="recovery">Recovery</string>
+    <string name="kernel">Kernel</string>
+    <string name="getting_root">Obteniendo Root</string>
+    <string name="reading_device">Leyendo informaciones del sistema</string>
+    <string name="loading_ui">Loading UI</string>
+    <string name="loading_data">Extrayendo datos y creando carpetas necesarias</string>
+    <string name="recovery_script_manager">Recovery-Script Manager</string>
+    <string name="bak_name">Nombre del Backup</string>
+    <string name="flash_queue">Lista de Flash</string>
+    <string name="wipe_opts">Wipe Options</string>
+    <string name="add_queue">Añadir Zip</string>
+    <string name="backup_opts">Backup Options</string>
+    <string name="system">System</string>
+    <string name="data">Data</string>
+    <string name="cache">Cache</string>
+    <string name="dalvik">Dalvik</string>
+    <string name="boot">Boot</string>
+    <string name="recovery_script_mind">Esta funcción solamente va ha funcionar si utilizan TWRP</string>
+    <string name="run">Executar</string>
+    <string name="recovery_script_review">Script Preview</string>
+    <string name="failed_unpack_files">Decompresión de datos fallesido.</string>
+    <string name="failed_setup_layout">Error al crear la UI</string>
+    <string name="refresh_list">Update started!</string>
+    <string name="new_imgs_loaded">%s new IMGs loaded</string>
+    <string name="make_choice">Please make your choice</string>
+    <string name="unified_info">
+        This ROM ist using Unified CyanogenMod Sources.\n
+        Consequently it could be that Rashr isn\'t able to find Recovery or Kernel images.\n
+        In this case you can choose your real device. (do this if there aren\'t any images found)\n
+        BE CAREFUL WITH THIS OPTION!
     </string>
-    <string name="over_recovery">Dispositivo será flasheado sobre el Recuperador</string>
+    <string name="reloading">Reloading</string>
+    <string name="keep_current_name">Keep current name (%s)</string>
+
 </resources>
