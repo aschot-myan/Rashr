@@ -423,28 +423,66 @@ public class Rashr extends ActionBarActivity {
              * file for example recovery-clockwork-touch-6.0.3.1-grouper.img(read out from IMG_SUMS)
              */
             String SYSTEM = view.getTag().toString();
+            ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<String>(mContext,
+                    R.layout.custom_version_list_item);
             if (SYSTEM.equals("stock")) {
                 Versions = mDevice.getStockRecoveryVersions();
                 path = PathToStockRecovery;
+                for (String i : Versions) {
+                    try {
+                        VersionsAdapter.add("Stock " + i.split("-")[3].replace(mDevice.getRecoveryExt(), ""));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        VersionsAdapter.add(i);
+                    }
+                }
             } else if (SYSTEM.equals("clockwork")) {
+
                 Versions = mDevice.getCwmRecoveryVersions();
                 path = PathToCWM;
+                for (String i : Versions) {
+                    try {
+                        if (i.contains("-touch-")) {
+                            VersionsAdapter.add("ClockworkMod Touch " + i.split("-")[3]);
+                        } else {
+                            VersionsAdapter.add("ClockworkMod " + i.split("-")[2]);
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        VersionsAdapter.add(i);
+                    }
+                }
             } else if (SYSTEM.equals("twrp")) {
                 Versions = mDevice.getTwrpRecoveryVersions();
                 path = PathToTWRP;
+                for (String i : Versions) {
+                    try {
+                        if (i.contains("openrecovery")) {
+                            VersionsAdapter.add("TWRP " + i.split("-")[2]);
+                        } else {
+                            VersionsAdapter.add("TWRP " + i.split("-")[1]);
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        VersionsAdapter.add(i);
+                    }
+                }
             } else if (SYSTEM.equals("philz")) {
                 Versions = mDevice.getPhilzRecoveryVersions();
                 path = PathToPhilz;
+                for (String i : Versions) {
+                    try {
+                        VersionsAdapter.add("PhilZ Touch " + i.split("_")[2].split("-")[0]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        VersionsAdapter.add(i);
+                    }
+                }
             } else {
                 return;
             }
 
             final Dialog RecoveriesDialog = new Dialog(mContext);
-            RecoveriesDialog.setTitle(SYSTEM);
+            RecoveriesDialog.setTitle(SYSTEM.toUpperCase());
             ListView VersionList = new ListView(mContext);
             RecoveriesDialog.setContentView(VersionList);
-            ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<String>(mContext,
-                    android.R.layout.simple_list_item_1, Versions);
+
             VersionList.setAdapter(VersionsAdapter);
             RecoveriesDialog.show();
             VersionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -453,19 +491,18 @@ public class Rashr extends ActionBarActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                     RecoveriesDialog.dismiss();
-                    final CharSequence fileName;
-                    if ((fileName = ((TextView) view).getText()) != null) {
-                        fRECOVERY = new File(path, fileName.toString());
-                        if (!fRECOVERY.exists()) {
-                            Downloader RecoveryDownloader = new Downloader(mContext, RECOVERY_URL,
-                                    fRECOVERY, rRecoveryFlasher);
-                            RecoveryDownloader.setRetry(true);
-                            RecoveryDownloader.setAskBeforeDownload(true);
-                            RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);
-                            RecoveryDownloader.ask();
-                        } else {
-                            rRecoveryFlasher.run();
-                        }
+
+                    final String fileName = Versions.get(i);
+                    fRECOVERY = new File(path, fileName);
+                    if (!fRECOVERY.exists()) {
+                        Downloader RecoveryDownloader = new Downloader(mContext, RECOVERY_URL,
+                                fRECOVERY, rRecoveryFlasher);
+                        RecoveryDownloader.setRetry(true);
+                        RecoveryDownloader.setAskBeforeDownload(true);
+                        RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);
+                        RecoveryDownloader.ask();
+                    } else {
+                        rRecoveryFlasher.run();
                     }
                 }
             });
@@ -1138,12 +1175,10 @@ public class Rashr extends ActionBarActivity {
                                 dialog.show();
                                 return true;
                             case R.id.iDeleteRecoveryBackup:
-                                if (((TextView) v).getText() != null) {
-                                    if (new File(PathToRecoveryBackups, text.toString()).delete()) {
-                                        AppMsg.makeText(mActivity, String.format(mContext.getString(R.string.bak_deleted),
-                                                ((TextView) v).getText()), AppMsg.STYLE_INFO).show();
-                                        loadBackups();
-                                    }
+                                if (new File(PathToRecoveryBackups, text.toString()).delete()) {
+                                    AppMsg.makeText(mActivity, mContext.getString(R.string.bak_deleted),
+                                            AppMsg.STYLE_INFO).show();
+                                    loadBackups();
                                 }
                                 return true;
                             case R.id.iRestoreKernel:
@@ -1197,8 +1232,8 @@ public class Rashr extends ActionBarActivity {
 
                                 if (new File(PathToKernelBackups, text.toString()).delete()) {
                                     AppMsg
-                                            .makeText(mActivity, String.format(mContext.getString(R.string.bak_deleted),
-                                                    ((TextView) v).getText()), AppMsg.STYLE_INFO)
+                                            .makeText(mActivity, mContext.getString(R.string.bak_deleted),
+                                                    AppMsg.STYLE_INFO)
                                             .show();
                                     loadBackups();
                                 }
@@ -1418,14 +1453,13 @@ public class Rashr extends ActionBarActivity {
         mSwipeUpdater.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                final int recovery_img_count = mDevice.getStockRecoveryVersions().size()
+                final int img_count = mDevice.getStockRecoveryVersions().size()
                                 + mDevice.getCwmRecoveryVersions().size()
                                 + mDevice.getTwrpRecoveryVersions().size()
-                                + mDevice.getPhilzRecoveryVersions().size();
-                final int kernel_img_count = mDevice.getStockKernelVersions().size();
+                                + mDevice.getPhilzRecoveryVersions().size()
+                                + mDevice.getStockKernelVersions().size();
                 Downloader RecoveryUpdater = new Downloader(mContext, RECOVERY_SUMS_URL, RecoveryCollectionFile);
                 RecoveryUpdater.setOverrideFile(true);
-                RecoveryUpdater.setRetry(true);
                 RecoveryUpdater.setHidden(true);
 
                 AppMsg
@@ -1433,9 +1467,7 @@ public class Rashr extends ActionBarActivity {
                         .show();
                 final Downloader KernelUpdater = new Downloader(mContext, KERNEL_SUMS_URL, KernelCollectionFile);
                 KernelUpdater.setOverrideFile(true);
-                KernelUpdater.setRetry(true);
                 KernelUpdater.setHidden(true);
-
                 RecoveryUpdater.setAfterDownload(new Runnable() {
                     @Override
                     public void run() {
@@ -1443,25 +1475,6 @@ public class Rashr extends ActionBarActivity {
                             @Override
                             public void run() {
                                 mDevice.loadRecoveryList();
-                                final int new_img_count =
-                                        recovery_img_count - (mDevice.getStockRecoveryVersions().size()
-                                                + mDevice.getCwmRecoveryVersions().size()
-                                                + mDevice.getTwrpRecoveryVersions().size()
-                                                + mDevice.getPhilzRecoveryVersions().size());
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        AppMsg.Style style;
-                                        if (new_img_count > 0) {
-                                            style = AppMsg.STYLE_INFO;
-                                        } else {
-                                            style = AppMsg.STYLE_CONFIRM;
-                                        }
-                                        AppMsg
-                                                .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded), new_img_count), style)
-                                                .show();
-                                    }
-                                });
                                 KernelUpdater.execute();
                             }
                         }).start();
@@ -1473,19 +1486,17 @@ public class Rashr extends ActionBarActivity {
                     public void run() {
                         mDevice.loadKernelList();
                         mSwipeUpdater.setRefreshing(false);
-                        final int new_img_count =
-                                kernel_img_count - mDevice.getStockKernelVersions().size();
+                        final int new_img_count = (mDevice.getStockRecoveryVersions().size()
+                                + mDevice.getCwmRecoveryVersions().size()
+                                + mDevice.getTwrpRecoveryVersions().size()
+                                + mDevice.getPhilzRecoveryVersions().size()
+                                + mDevice.getStockKernelVersions().size()) - img_count;
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                AppMsg.Style style;
-                                if (new_img_count > 0) {
-                                    style = AppMsg.STYLE_INFO;
-                                } else {
-                                    style = AppMsg.STYLE_CONFIRM;
-                                }
                                 AppMsg
-                                        .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded), new_img_count), style)
+                                        .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
+                                                new_img_count), new_img_count > 0 ? AppMsg.STYLE_INFO : AppMsg.STYLE_CONFIRM)
                                         .show();
                             }
                         });
