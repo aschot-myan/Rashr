@@ -47,13 +47,13 @@ public class DonationsActivity extends FragmentActivity {
     private static final boolean PAYPAL = true;
     private static final String PAYPAL_USER = "ashotmkrtchyan1995@gmail.com";
     private static final String PAYPAL_CURRENCY_CODE = "EUR";
-    private static final String PAYPAL_ITEM_NAME = "Recovery-Tools donation";
+    private static final String PAYPAL_ITEM_NAME = "Rashr donation";
 
     /**
      * Flattr
      */
     private static final boolean FLATTR = true;
-    private static final String FLATTR_PROJECT_URL = "http://github.com/ashotmkrtchyan1995/Recovery-Tools";
+    private static final String FLATTR_PROJECT_URL = "http://github.com/DsLNeXuS/Rashr";
     private static final String FLATTR_URL = "flattr.com/thing/1853888/ashotmkrtchyan1995Recovery-Tools-on-GitHub";
 
     LinearLayout Layout;
