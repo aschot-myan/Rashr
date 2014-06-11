@@ -71,7 +71,7 @@ public class Shell implements Closeable {
     };
 
     private Shell(Context mContext, String shell, ArrayList<String> customEnv, String baseDirectory)
-            throws IOException, RootAccessDeniedException {
+            throws IOException {
 
         this.mContext = mContext;
         Log.d(RootCommands.TAG, "Starting shell: " + shell);
@@ -113,7 +113,7 @@ public class Shell implements Closeable {
      * @throws IOException
      */
     public static Shell startRootShell(Context mContext, ArrayList<String> customEnv, String baseDirectory)
-            throws IOException, RootAccessDeniedException {
+            throws IOException {
         Log.d(RootCommands.TAG, "Starting Root Shell!");
 
         // On some versions of Android (ICS) LD_LIBRARY_PATH is unset when using su
@@ -134,11 +134,11 @@ public class Shell implements Closeable {
      * @return
      * @throws IOException
      */
-    public static Shell startRootShell() throws IOException, RootAccessDeniedException {
+    public static Shell startRootShell() throws IOException {
         return startRootShell(null, null, null);
     }
 
-    public static Shell startRootShell(Context mContext) throws IOException, RootAccessDeniedException {
+    public static Shell startRootShell(Context mContext) throws IOException {
         return startRootShell(mContext, null, null);
     }
 

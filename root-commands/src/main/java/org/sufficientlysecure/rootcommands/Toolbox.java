@@ -89,8 +89,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws BrokenBusyboxException
      */
-    public boolean killAll(String processName) throws FailedExecuteCommand, TimeoutException,
-            IOException {
+    public boolean killAll(String processName) throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Killing process " + processName);
 
         PsCommand psCommand = new PsCommand(processName);
@@ -136,8 +135,7 @@ public class Toolbox {
      * @throws BrokenBusyboxException
      * @throws TimeoutException       (Could not determine if the process is running)
      */
-    public boolean isProcessRunning(String processName) throws FailedExecuteCommand,
-            TimeoutException, IOException {
+    public boolean isProcessRunning(String processName) throws FailedExecuteCommand {
         PsCommand psCommand = new PsCommand(processName);
 
         shell.execCommand(psCommand);
@@ -168,7 +166,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws BrokenBusyboxException
      */
-    public String getFilePermissions(String file) throws FailedExecuteCommand, BrokenBusyboxException,
+    public String getFilePermissions(String file) throws FailedExecuteCommand,
             IOException {
         Log.d(RootCommands.TAG, "Checking permissions for " + file);
 
@@ -196,8 +194,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws IOException
      */
-    public void setFilePermissions(String file, String permissions)
-            throws FailedExecuteCommand, TimeoutException, IOException {
+    public void setFilePermissions(String file, String permissions) throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Set permissions of " + file + " to " + permissions);
 
         shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
@@ -222,8 +219,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws BrokenBusyboxException
      */
-    public String getSymlink(String file) throws FailedExecuteCommand, TimeoutException,
-            IOException {
+    public String getSymlink(String file) throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Find symlink for " + file);
 
         String symlink;
@@ -251,7 +247,7 @@ public class Toolbox {
      * @throws TimeoutException
      */
     public void copyFile(File source, File destination, boolean remountAsRw,
-                         boolean preservePermissions) throws FailedExecuteCommand, FileNotFoundException,
+                         boolean preservePermissions) throws FailedExecuteCommand,
             IOException {
 
         /*
@@ -345,7 +341,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws BrokenBusyboxException
      */
-    public boolean fileExists(String file) throws FailedExecuteCommand, IOException {
+    public boolean fileExists(String file) throws FailedExecuteCommand {
         FileExistsCommand fileExistsCommand = new FileExistsCommand(file);
         shell.execCommand(fileExistsCommand);
 
@@ -522,8 +518,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws BrokenBusyboxException
      */
-    public void toggleAdbDaemon(boolean toggle) throws FailedExecuteCommand, TimeoutException,
-            IOException {
+    public void toggleAdbDaemon(boolean toggle) throws FailedExecuteCommand {
         SimpleCommand disableAdb = new SimpleCommand("setprop persist.service.adb.enable 0",
                 "stop adbd");
         SimpleCommand enableAdb = new SimpleCommand("setprop persist.service.adb.enable 1",

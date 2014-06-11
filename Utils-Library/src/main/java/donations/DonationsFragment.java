@@ -380,9 +380,6 @@ public class DonationsFragment extends Fragment {
         uriBuilder.appendQueryParameter("currency_code", mPaypalCurrencyCode);
         Uri payPalUri = uriBuilder.build();
 
-        if (mDebug)
-            Log.d(TAG, "Opening the browser with the url: " + payPalUri.toString());
-
         // Start your favorite browser
         try {
             Intent viewIntent = new Intent(Intent.ACTION_VIEW, payPalUri);

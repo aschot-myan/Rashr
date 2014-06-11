@@ -45,12 +45,18 @@ import de.mkrtchyan.utils.Unzipper;
 public class Device {
 
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
-
+    /**
+     * This class content all device specified information to provide
+     * all information for all other classes for example:
+     * What kind of partition and where is the recovery partition in the
+     * FileSystem
+     */
+    private int RECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
+    private int KERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     public static final int PARTITION_TYPE_DD = 1;
     public static final int PARTITION_TYPE_MTD = 2;
     public static final int PARTITION_TYPE_RECOVERY = 3;
     public static final int PARTITION_TYPE_SONY = 4;
-
     private static final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
@@ -86,14 +92,6 @@ public class Device {
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
-    /**
-     * This class content all device specified information to provide
-     * all information for all other classes for example:
-     * What kind of partition and where is the recovery partition in the
-     * FileSystem
-     */
-    private int RECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
-    private int KERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private String Name = Build.DEVICE.toLowerCase();
     private String MANUFACTURE = Build.MANUFACTURER.toLowerCase();
     private String RecoveryPath = "";
@@ -866,6 +864,10 @@ public class Device {
         return Name;
     }
 
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
     public String getRecoveryPath() {
         return RecoveryPath;
     }
@@ -876,10 +878,6 @@ public class Device {
 
     public ArrayList<String> getERRORS() {
         return ERRORS;
-    }
-
-    public void setName(String Name) {
-        this.Name = Name;
     }
 
     public String getManufacture() {

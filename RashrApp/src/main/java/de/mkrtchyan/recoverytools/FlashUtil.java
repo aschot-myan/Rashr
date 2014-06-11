@@ -154,7 +154,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (RunAtEnd != null) RunAtEnd.run();
     }
 
-    public void DD() throws FailedExecuteCommand, IOException, InterruptedException {
+    public void DD() throws FailedExecuteCommand, IOException {
         String Command = "";
         if (isJobFlash() || isJobRestore()) {
             if (mDevice.getName().startsWith("g2") && Build.MANUFACTURER.equals("lge")
@@ -184,7 +184,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (isJobBackup()) placeImgBack();
     }
 
-    public void MTD() throws FailedExecuteCommand, IOException, InterruptedException {
+    public void MTD() throws FailedExecuteCommand, IOException {
         String Command = "";
         if (isJobRecovery()) {
             Command = " recovery ";
@@ -202,7 +202,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (isJobBackup()) placeImgBack();
     }
 
-    public void SONY() throws FailedExecuteCommand, IOException, InterruptedException {
+    public void SONY() throws FailedExecuteCommand, IOException {
 
         String Command = "";
         if (mDevice.getName().equals("yuga")

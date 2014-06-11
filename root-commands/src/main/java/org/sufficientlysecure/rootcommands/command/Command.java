@@ -65,9 +65,10 @@ public abstract class Command {
      */
     public String getCommand() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < command.length; i++) {
+        for (String i : command) {
             // redirect stderr to stdout
-            sb.append(command[i] + " 2>&1");
+            sb.append(i);
+            sb.append(" 2>&1");
             sb.append('\n');
         }
         Log.d(RootCommands.TAG, "Sending command(s): " + sb.toString());

@@ -113,6 +113,18 @@ class MsgManager extends Handler implements Comparator<AppMsg> {
         }
     }
 
+    static void obtainShowing(Collection<AppMsg> from, Collection<AppMsg> appendTo) {
+        for (AppMsg msg : from) {
+            if (msg.isShowing()) {
+                appendTo.add(msg);
+            }
+        }
+    }
+
+    static int inverseCompareInt(int lhs, int rhs) {
+        return lhs < rhs ? 1 : (lhs == rhs ? 0 : -1);
+    }
+
     /**
      * Inserts a {@link AppMsg} to be displayed.
      *
@@ -135,7 +147,7 @@ class MsgManager extends Handler implements Comparator<AppMsg> {
      * Removes all {@link AppMsg} from the queue.
      */
     void clearMsg(AppMsg appMsg) {
-        if(msgQueue.contains(appMsg) || stickyQueue.contains(appMsg)){
+        if (msgQueue.contains(appMsg) || stickyQueue.contains(appMsg)) {
             // Avoid the message from being removed twice.
             removeMessages(MESSAGE_DISPLAY, appMsg);
             removeMessages(MESSAGE_ADD_VIEW, appMsg);
@@ -164,14 +176,6 @@ class MsgManager extends Handler implements Comparator<AppMsg> {
         obtainShowing(stickyQueue, showing);
         for (AppMsg msg : showing) {
             clearMsg(msg);
-        }
-    }
-
-    static void obtainShowing(Collection<AppMsg> from, Collection<AppMsg> appendTo) {
-        for (AppMsg msg : from) {
-            if (msg.isShowing()) {
-                appendTo.add(msg);
-            }
         }
     }
 
@@ -269,8 +273,8 @@ class MsgManager extends Handler implements Comparator<AppMsg> {
         return inverseCompareInt(lhs.mPriority, rhs.mPriority);
     }
 
-    static int inverseCompareInt(int lhs, int rhs) {
-        return lhs < rhs ? 1 : (lhs == rhs ? 0 : -1);
+    interface ReleaseCallbacks {
+        void register(Application application);
     }
 
     private static class OutAnimationListener implements Animation.AnimationListener {
@@ -310,13 +314,10 @@ class MsgManager extends Handler implements Comparator<AppMsg> {
         }
     }
 
-    interface ReleaseCallbacks {
-        void register(Application application);
-    }
-
     @TargetApi(ICE_CREAM_SANDWICH)
     static class ReleaseCallbacksIcs implements ActivityLifecycleCallbacks, ReleaseCallbacks {
         private WeakReference<Application> mLastApp;
+
         public void register(Application app) {
             if (mLastApp != null && mLastApp.get() == app) {
                 return; // Already registered with this app
@@ -330,11 +331,29 @@ class MsgManager extends Handler implements Comparator<AppMsg> {
         public void onActivityDestroyed(Activity activity) {
             release(activity);
         }
-        @Override public void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
-        @Override public void onActivityStarted(Activity activity) {}
-        @Override public void onActivityResumed(Activity activity) {}
-        @Override public void onActivityPaused(Activity activity) {}
-        @Override public void onActivityStopped(Activity activity) {}
-        @Override public void onActivitySaveInstanceState(Activity activity, Bundle outState) {}
+
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+        }
     }
 }

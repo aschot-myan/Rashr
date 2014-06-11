@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bStockKernel"
+            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_stock"
@@ -20,8 +21,9 @@
             android:text="@string/stock"
             android:visibility="visible" />
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bFlashOtherKernel"
+            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_flash"
@@ -29,8 +31,9 @@
             android:tag="kernel"
             android:text="@string/sOTHER" />
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bRecoveryHistory"
+            style="?button_style"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

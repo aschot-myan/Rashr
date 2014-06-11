@@ -44,7 +44,15 @@ public class AppMsg {
      * @see #setDuration
      */
     public static final int LENGTH_SHORT = 3000;
-
+    /**
+     * Show the text notification for a short period of time with a positive style.
+     */
+    public static final Style STYLE_CONFIRM = new Style(LENGTH_SHORT, R.color.confirm);
+    /**
+     * Show the text notification for a short period of time with a neutral style.
+     */
+    public static final Style STYLE_INFO = new Style(LENGTH_SHORT, R.color.info);
+    private int mDuration = LENGTH_SHORT;
     /**
      * Show the view or text notification for a long period of time. This time
      * could be user-definable.
@@ -52,20 +60,22 @@ public class AppMsg {
      * @see #setDuration
      */
     public static final int LENGTH_LONG = 5000;
-
+    /**
+     * Show the text notification for a long period of time with a negative style.
+     */
+    public static final Style STYLE_ALERT = new Style(LENGTH_LONG, R.color.alert);
     /**
      * <p>Show the view or text notification for an undefined amount of time
      * -Usually until an invocation of {@link #cancel()}, {@link #cancelAll(android.app.Activity)},
      * {@link #cancelAll()} or {@link android.app.Activity#onDestroy()}-,
      * stacking on top of any other {@link com.devspark.appmsg.AppMsg} with this duration.</p>
-     *
+     * <p/>
      * <p><b>Note</b>: You are responsible
      * for calling {@link #cancel()} on such {@link com.devspark.appmsg.AppMsg}.</p>
      *
      * @see #setDuration
      */
     public static final int LENGTH_STICKY = -1;
-
     /**
      * Lowest priority, messages with this priority will be showed after all messages with priority
      * {@link #PRIORITY_HIGH} and {@link #PRIORITY_NORMAL} have been shown.
@@ -80,36 +90,19 @@ public class AppMsg {
      * @see #setPriority(int)
      */
     public static final int PRIORITY_NORMAL = 0;
+    int mPriority = PRIORITY_NORMAL;
     /**
      * Highest priority, messages with this priority will be showed before any other message.
      *
      * @see #setPriority(int)
      */
     public static final int PRIORITY_HIGH = Integer.MAX_VALUE;
-
-    /**
-     * Show the text notification for a long period of time with a negative style.
-     */
-    public static final Style STYLE_ALERT = new Style(LENGTH_LONG, R.color.alert);
-
-    /**
-     * Show the text notification for a short period of time with a positive style.
-     */
-    public static final Style STYLE_CONFIRM = new Style(LENGTH_SHORT, R.color.confirm);
-
-    /**
-     * Show the text notification for a short period of time with a neutral style.
-     */
-    public static final Style STYLE_INFO = new Style(LENGTH_SHORT, R.color.info);
-
     private final Activity mActivity;
-    private int mDuration = LENGTH_SHORT;
+    Animation mInAnimation, mOutAnimation;
     private View mView;
     private ViewGroup mParent;
     private LayoutParams mLayoutParams;
     private boolean mFloating;
-    Animation mInAnimation, mOutAnimation;
-    int mPriority = PRIORITY_NORMAL;
 
     /**
      * Construct an empty AppMsg object. You must call {@link #setView} before
@@ -118,7 +111,7 @@ public class AppMsg {
      * @param activity {@link android.app.Activity} to use.
      */
     public AppMsg(Activity activity) {
-        mActivity =  activity;
+        mActivity = activity;
     }
 
     /**
@@ -132,15 +125,14 @@ public class AppMsg {
     public static AppMsg makeText(Activity context, CharSequence text, Style style) {
         return makeText(context, text, style, R.layout.app_msg);
     }
-    
+
     /**
-     * @author mengguoqiang 扩展支持设置字体大小
-     * Make a {@link AppMsg} that just contains a text view.
-     *
      * @param context The context to use. Usually your
      *                {@link android.app.Activity} object.
      * @param text    The text to show. Can be formatted text.
      * @param style   The style with a background and a duration.
+     * @author mengguoqiang 扩展支持设置字体大小
+     * Make a {@link AppMsg} that just contains a text view.
      */
     public static AppMsg makeText(Activity context, CharSequence text, Style style, float textSize) {
         return makeText(context, text, style, R.layout.app_msg, textSize);
@@ -161,15 +153,14 @@ public class AppMsg {
 
         return makeText(context, text, style, v, true);
     }
-    
+
     /**
-     * @author mengguoqiang 扩展支持字体大小
-     * Make a {@link AppMsg} with a custom layout. The layout must have a {@link TextView} com id {@link android.R.id.message}
-     *
      * @param context The context to use. Usually your
      *                {@link android.app.Activity} object.
      * @param text    The text to show. Can be formatted text.
      * @param style   The style with a background and a duration.
+     * @author mengguoqiang 扩展支持字体大小
+     * Make a {@link AppMsg} with a custom layout. The layout must have a {@link TextView} com id {@link android.R.id.message}
      */
     public static AppMsg makeText(Activity context, CharSequence text, Style style, int layoutId, float textSize) {
         LayoutInflater inflate = (LayoutInflater)
@@ -183,15 +174,14 @@ public class AppMsg {
      * Make a non-floating {@link AppMsg} with a custom view presented inside the layout.
      * It can be used to create non-floating notifications if floating is false.
      *
-     * @param context  The context to use. Usually your
-     *                 {@link android.app.Activity} object.
-     * @param customView
-     *                 View to be used.
-     * @param text     The text to show. Can be formatted text.
-     * @param style    The style with a background and a duration.
+     * @param context    The context to use. Usually your
+     *                   {@link android.app.Activity} object.
+     * @param customView View to be used.
+     * @param text       The text to show. Can be formatted text.
+     * @param style      The style with a background and a duration.
      */
     public static AppMsg makeText(Activity context, CharSequence text, Style style, View customView) {
-       return makeText(context, text, style, customView, false);
+        return makeText(context, text, style, customView, false);
     }
 
     /**
@@ -199,8 +189,7 @@ public class AppMsg {
      *
      * @param context  The context to use. Usually your
      *                 {@link android.app.Activity} object.
-     * @param view
-     *                 View to be used.
+     * @param view     View to be used.
      * @param text     The text to show. Can be formatted text.
      * @param style    The style with a background and a duration.
      * @param floating true if it'll float.
@@ -208,19 +197,16 @@ public class AppMsg {
     private static AppMsg makeText(Activity context, CharSequence text, Style style, View view, boolean floating) {
         return makeText(context, text, style, view, floating, 0);
     }
-    
+
     /**
-     * 
-     * @author mengguoqiang 扩展支持设置字体大小
-     * Make a {@link AppMsg} with a custom view. It can be used to create non-floating notifications if floating is false.
-     *
      * @param context  The context to use. Usually your
      *                 {@link android.app.Activity} object.
-     * @param view
-     *                 View to be used.
+     * @param view     View to be used.
      * @param text     The text to show. Can be formatted text.
      * @param style    The style with a background and a duration.
      * @param floating true if it'll float.
+     * @author mengguoqiang 扩展支持设置字体大小
+     * Make a {@link AppMsg} with a custom view. It can be used to create non-floating notifications if floating is false.
      */
     private static AppMsg makeText(Activity context, CharSequence text, Style style, View view, boolean floating, float textSize) {
         AppMsg result = new AppMsg(context);
@@ -228,7 +214,7 @@ public class AppMsg {
         view.setBackgroundResource(style.background);
 
         TextView tv = (TextView) view.findViewById(android.R.id.message);
-        if(textSize > 0) tv.setTextSize(textSize);
+        if (textSize > 0) tv.setTextSize(textSize);
         tv.setText(text);
 
         result.mView = view;
@@ -288,6 +274,24 @@ public class AppMsg {
     }
 
     /**
+     * Cancels all queued {@link AppMsg}s, in all Activities. If there is a {@link AppMsg}
+     * displayed currently, it will be the last one displayed.
+     */
+    public static void cancelAll() {
+        MsgManager.clearAll();
+    }
+
+    /**
+     * Cancels all queued {@link AppMsg}s, in given {@link android.app.Activity}.
+     * If there is a {@link AppMsg} displayed currently, it will be the last one displayed.
+     *
+     * @param activity
+     */
+    public static void cancelAll(Activity activity) {
+        MsgManager.release(activity);
+    }
+
+    /**
      * Show the view for the specified duration.
      */
     public void show() {
@@ -317,36 +321,10 @@ public class AppMsg {
     }
 
     /**
-     * Cancels all queued {@link AppMsg}s, in all Activities. If there is a {@link AppMsg}
-     * displayed currently, it will be the last one displayed.
-     */
-    public static void cancelAll() {
-        MsgManager.clearAll();
-    }
-
-    /**
-     * Cancels all queued {@link AppMsg}s, in given {@link android.app.Activity}.
-     * If there is a {@link AppMsg} displayed currently, it will be the last one displayed.
-     * @param activity
-     */
-    public static void cancelAll(Activity activity) {
-        MsgManager.release(activity);
-    }
-
-    /**
      * Return the activity.
      */
     public Activity getActivity() {
         return mActivity;
-    }
-
-    /**
-     * Set the view to show.
-     *
-     * @see #getView
-     */
-    public void setView(View view) {
-        mView = view;
     }
 
     /**
@@ -359,13 +337,12 @@ public class AppMsg {
     }
 
     /**
-     * Set how long to show the view for.
+     * Set the view to show.
      *
-     * @see #LENGTH_SHORT
-     * @see #LENGTH_LONG
+     * @see #getView
      */
-    public void setDuration(int duration) {
-        mDuration = duration;
+    public void setView(View view) {
+        mView = view;
     }
 
     /**
@@ -375,6 +352,16 @@ public class AppMsg {
      */
     public int getDuration() {
         return mDuration;
+    }
+
+    /**
+     * Set how long to show the view for.
+     *
+     * @see #LENGTH_SHORT
+     * @see #LENGTH_LONG
+     */
+    public void setDuration(int duration) {
+        mDuration = duration;
     }
 
     /**
@@ -457,7 +444,8 @@ public class AppMsg {
 
     /**
      * Sets the Animations to be used when displaying/removing the Crouton.
-     * @param inAnimation the Animation resource ID to be used when displaying.
+     *
+     * @param inAnimation  the Animation resource ID to be used when displaying.
      * @param outAnimation the Animation resource ID to be used when removing.
      */
     public AppMsg setAnimation(int inAnimation, int outAnimation) {
@@ -467,7 +455,8 @@ public class AppMsg {
 
     /**
      * Sets the Animations to be used when displaying/removing the Crouton.
-     * @param inAnimation the Animation to be used when displaying.
+     *
+     * @param inAnimation  the Animation to be used when displaying.
      * @param outAnimation the Animation to be used when removing.
      */
     public AppMsg setAnimation(Animation inAnimation, Animation outAnimation) {
@@ -477,9 +466,7 @@ public class AppMsg {
     }
 
     /**
-     * @return
-     * Current priority
-     *
+     * @return Current priority
      * @see #PRIORITY_HIGH
      * @see #PRIORITY_NORMAL
      * @see #PRIORITY_LOW
@@ -492,17 +479,15 @@ public class AppMsg {
      * <p>Set priority for this message</p>
      * <p><b>Note</b>: This only affects the order in which the messages get shown,
      * not the stacking order of the views.</p>
-     *
+     * <p/>
      * <p>Example: In the queue there are 3 messages [A, B, C],
      * all of them with priority {@link #PRIORITY_NORMAL}, currently message A is being shown
      * so we add a new message D with priority {@link #PRIORITY_HIGH}, after A goes away, given that
      * D has a higher priority than B an the reset, D will be shown, then once that D is gone,
      * B will be shown, and then finally C.</p>
      *
-     * @param priority
-     * A value indicating priority, although you can use any integer value, usage of already
-     * defined is highly encouraged.
-     *
+     * @param priority A value indicating priority, although you can use any integer value, usage of already
+     *                 defined is highly encouraged.
      * @see #PRIORITY_HIGH
      * @see #PRIORITY_NORMAL
      * @see #PRIORITY_LOW
@@ -512,8 +497,7 @@ public class AppMsg {
     }
 
     /**
-     * @return
-     * Provided parent to add {@link #getView()} to using {@link #getLayoutParams()}.
+     * @return Provided parent to add {@link #getView()} to using {@link #getLayoutParams()}.
      */
     public ViewGroup getParent() {
         return mParent;
@@ -521,23 +505,20 @@ public class AppMsg {
 
     /**
      * Provide a different parent than Activity decor view
-     * @param parent
-     * Provided parent to add {@link #getView()} to using {@link #getLayoutParams()}.
      *
+     * @param parentId Provided parent id to add {@link #getView()} to using {@link #getLayoutParams()}.
      */
-    public void setParent(ViewGroup parent) {
-        mParent = parent;
+    public void setParent(int parentId) {
+        setParent((ViewGroup) mActivity.findViewById(parentId));
     }
 
     /**
      * Provide a different parent than Activity decor view
      *
-     * @param parentId
-     * Provided parent id to add {@link #getView()} to using {@link #getLayoutParams()}.
-     *
+     * @param parent Provided parent to add {@link #getView()} to using {@link #getLayoutParams()}.
      */
-    public void setParent(int parentId) {
-        setParent((ViewGroup) mActivity.findViewById(parentId));
+    public void setParent(ViewGroup parent) {
+        mParent = parent;
     }
 
     /**

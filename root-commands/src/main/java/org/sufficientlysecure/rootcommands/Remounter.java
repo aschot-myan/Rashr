@@ -116,7 +116,7 @@ class Remounter {
             }
             if (!foundMount) {
                 try {
-                    file = (new File(file).getParent()).toString();
+                    file = (new File(file).getParent());
                 } catch (Exception e) {
                     Log.e(RootCommands.TAG, "Exception", e);
                     return false;

@@ -27,10 +27,8 @@ import de.mkrtchyan.utils.FileChooserDialog;
 
 public class RecoveryScriptManager extends ActionBarActivity {
 
-    private final String CMD_END = ";";
-
     final Context mContext = this;
-
+    private final String CMD_END = ";";
     ArrayList<File> mFileList;
     ArrayAdapter<String> mFileNameAdapter;
     ListView Queue;

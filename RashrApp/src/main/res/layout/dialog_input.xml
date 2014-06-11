@@ -15,12 +15,12 @@
     </EditText>
 
     <CheckBox
+        android:id="@+id/cbOptInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cbOptInput"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+        android:gravity="center" />
 
     <Button
         android:id="@+id/bGoBackup"

@@ -14,14 +14,15 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button style="@style/nowCardDark"
+        <Button
             android:id="@+id/bCreateRecoveryBackup"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="74dp"
             android:onClick="bCreateBackup"
             android:tag="recovery"
-            android:text="@string/sRecoveryBackup"
-            android:minHeight="74dp" />
+            android:text="@string/sRecoveryBackup" />
 
         <ListView
             android:id="@+id/lvRecoveryBackups"
@@ -36,12 +37,13 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button style="@style/nowCardDark"
+        <Button
             android:id="@+id/bCreateKernelBackup"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="bCreateBackup"
             android:minHeight="74dp"
+            android:onClick="bCreateBackup"
             android:tag="kernel"
             android:text="@string/sKernelBackup" />
 

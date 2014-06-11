@@ -43,6 +43,32 @@ public class Unzipper {
         new UnZipTask().execute(zipFile, OutputFolder);
     }
 
+    public static void unzipEntry(ZipFile zipfile, ZipEntry entry,
+                                  File outputDir) throws IOException {
+
+        if (entry.isDirectory()) {
+            new File(outputDir, entry.getName()).mkdir();
+            return;
+        }
+
+        File outputFile = new File(outputDir, entry.getName());
+        if (!outputFile.getParentFile().exists()) {
+            outputFile.getParentFile().mkdir();
+        }
+
+        Log.v(TAG, "Extracting: " + entry);
+        BufferedInputStream inputStream = new BufferedInputStream(zipfile.getInputStream(entry));
+        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
+
+        int bufferLength;
+        byte[] buffer = new byte[1024];
+        while ((bufferLength = inputStream.read(buffer)) > 0) {
+            outputStream.write(buffer, 0, bufferLength);
+        }
+        outputStream.close();
+        inputStream.close();
+    }
+
     private static class UnZipTask extends AsyncTask<File, Void, Boolean> {
 
         @SuppressWarnings("rawtypes")
@@ -66,32 +92,5 @@ public class Unzipper {
         }
 
 
-
-    }
-
-    public static void unzipEntry(ZipFile zipfile, ZipEntry entry,
-                           File outputDir) throws IOException {
-
-        if (entry.isDirectory()) {
-            new File(outputDir, entry.getName()).mkdir();
-            return;
-        }
-
-        File outputFile = new File(outputDir, entry.getName());
-        if (!outputFile.getParentFile().exists()) {
-            outputFile.getParentFile().mkdir();
-        }
-
-        Log.v(TAG, "Extracting: " + entry);
-        BufferedInputStream inputStream = new BufferedInputStream(zipfile.getInputStream(entry));
-        BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
-
-        int bufferLength;
-        byte[] buffer = new byte[1024];
-        while ((bufferLength = inputStream.read(buffer)) > 0) {
-            outputStream.write(buffer, 0, bufferLength);
-        }
-        outputStream.close();
-        inputStream.close();
     }
 }

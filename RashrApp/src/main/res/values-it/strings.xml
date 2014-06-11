@@ -140,8 +140,6 @@
     <string name="failed_setup_layout">Errore impostazione layout</string>
     <string name="refresh_list">Aggiornamento avviato!</string>
 
-    <string name="refresh_list">Aggiornamento elenco recovery</string>
-
     <string name="new_imgs_loaded">%s nuove immagini caricate</string>
     <string name="make_choice">Fai la tua sceltae</string>
     <string name="unified_info">        Questa ROM è stata creata usando Unified CyanogenMod Sources.\n

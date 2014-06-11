@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bCWM"
+            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_cwm"
@@ -21,8 +22,9 @@
             android:text="@string/sCWM"
             android:visibility="visible" />
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bTWRP"
+            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_twrp"
@@ -30,8 +32,9 @@
             android:tag="twrp"
             android:text="@string/sTWRP" />
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bPHILZ"
+            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -39,8 +42,9 @@
             android:tag="philz"
             android:text="@string/sPhilz" />
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bStockRecovery"
+            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_stock"
@@ -49,16 +53,18 @@
             android:text="@string/stock"
             android:visibility="visible" />
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bFlashOtherRecovery"
+            style="?button_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_flash"
             android:onClick="bFlashOtherRecovery"
             android:text="@string/sOTHER" />
 
-        <Button style="?button_style"
+        <Button
             android:id="@+id/bRecoveryHistory"
+            style="?button_style"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

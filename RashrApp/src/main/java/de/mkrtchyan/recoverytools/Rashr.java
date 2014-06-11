@@ -97,27 +97,24 @@ public class Rashr extends ActionBarActivity {
     private static final String PREF_KEY_CUR_VER = "current_version";
     private static final String PREF_KEY_FIRST_RUN = "first_run";
     private static final String PREF_KEY_SHOW_UNIFIED = "show_unified";
-
     /**
      * Web Address for download Recovery and Kernel IMGs
      */
     private static final String RECOVERY_URL = "http://dslnexus.de/Android/recoveries";
     private static final String KERNEL_URL = "http://dslnexus.de/Android/kernel";
-
     private static final String RECOVERY_SUMS_URL = "http://dslnexus.de/Android/";
     private static final String KERNEL_SUMS_URL = "http://dslnexus.de/Android/";
-
     /**
      * Used paths and files
      */
     private static final File PathToSd = Environment.getExternalStorageDirectory();
     private static final File PathToRashr = new File(PathToSd, "Rashr");
     private static final File PathToRecoveries = new File(PathToRashr, "recoveries");
-    private static final File PathToKernel = new File(PathToRashr, "kernel");
     public static final File PathToStockRecovery = new File(PathToRecoveries, "stock");
     public static final File PathToCWM = new File(PathToRecoveries, "clockworkmod");
     public static final File PathToTWRP = new File(PathToRecoveries, "twrp");
     public static final File PathToPhilz = new File(PathToRecoveries, "philz");
+    private static final File PathToKernel = new File(PathToRashr, "kernel");
     public static final File PathToStockKernel = new File(PathToKernel, "stock");
     public static final File PathToRecoveryBackups = new File(PathToRashr, "recovery-backups");
     public static final File PathToKernelBackups = new File(PathToRashr, "kernel-backups");
@@ -128,15 +125,16 @@ public class Rashr extends ActionBarActivity {
             PathToKernelBackups, PathToUtils};
     private final ActionBarActivity mActivity = this;
     private final Context mContext = this;
-    private final int EMAIL_REQ_CODE = 8451;
-
     /**
      * Declaring needed objects
      */
     private final Notifyer mNotifyer = new Notifyer(mContext);
+    private final int EMAIL_REQ_CODE = 8451;
     private final int APPCOMPAT_DARK = R.style.MyDark;
     private final int APPCOMPAT_LIGHT = R.style.MyLight;
     private final int APPCOMPAT_LIGHT_DARK_BAR = R.style.MyLightDarkBar;
+    private final ArrayList<String> ERRORS = new ArrayList<String>();
+    private final ArrayList<String> FlashUtils_ERRORS = new ArrayList<String>();
     private File RecoveryCollectionFile, KernelCollectionFile;
     private File fRECOVERY, fKERNEL;
     private Shell mShell;
@@ -145,8 +143,6 @@ public class Rashr extends ActionBarActivity {
     private DrawerLayout mRashrLayout = null;
     private SwipeRefreshLayout mSwipeUpdater = null;
     private FileChooserDialog fcFlashOtherRecovery = null;
-    private ArrayAdapter<String> RecoveryBakAdapter;
-    private ArrayAdapter<String> KernelBakAdapter;
     private final Runnable rRecoveryFlasher = new Runnable() {
         @Override
         public void run() {
@@ -171,6 +167,8 @@ public class Rashr extends ActionBarActivity {
             fcFlashOtherRecovery = null;
         }
     };
+    private ArrayAdapter<String> RecoveryBakAdapter;
+    private ArrayAdapter<String> KernelBakAdapter;
     private FileChooserDialog fcFlashOtherKernel = null;
     private final Runnable rKernelFlasher = new Runnable() {
         @Override
@@ -217,9 +215,6 @@ public class Rashr extends ActionBarActivity {
             flashUtil.execute();
         }
     };
-
-    private final ArrayList<String> ERRORS = new ArrayList<String>();
-    private final ArrayList<String> FlashUtils_ERRORS = new ArrayList<String>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,11 +286,11 @@ public class Rashr extends ActionBarActivity {
                     ERRORS.add(e.toString());
                 }
                 mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvLoading.setText(R.string.reading_device);
-                        }
-                    });
+                    @Override
+                    public void run() {
+                        tvLoading.setText(R.string.reading_device);
+                    }
+                });
                 mDevice = new Device(mContext);
                 /** Creating needed folder and unpacking files */
                 mActivity.runOnUiThread(new Runnable() {
@@ -949,16 +944,16 @@ public class Rashr extends ActionBarActivity {
                                 intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + pInfo.versionName + " report");
                                 String message = "Package Infos:" +
                                         "\n\nName: " + pInfo.packageName +
-                                        "\nVersion Code: " + pInfo.versionCode ;
+                                        "\nVersion Code: " + pInfo.versionCode;
                                 message +=
                                         "\n\n\nProduct Info: " +
-                                        "\n\nManufacture: " + Build.MANUFACTURER + " (" + mDevice.getManufacture() + ") " +
-                                        "\nDevice: " + Build.DEVICE + " (" + mDevice.getName() + ")" +
-                                        "\nBoard: " + Build.BOARD +
-                                        "\nBrand: " + Build.BRAND +
-                                        "\nModel: " + Build.MODEL +
-                                        "\nFingerprint: " + Build.FINGERPRINT +
-                                        "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
+                                                "\n\nManufacture: " + Build.MANUFACTURER + " (" + mDevice.getManufacture() + ") " +
+                                                "\nDevice: " + Build.DEVICE + " (" + mDevice.getName() + ")" +
+                                                "\nBoard: " + Build.BOARD +
+                                                "\nBrand: " + Build.BRAND +
+                                                "\nModel: " + Build.MODEL +
+                                                "\nFingerprint: " + Build.FINGERPRINT +
+                                                "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
 
                                 if (mDevice.isRecoverySupported()) {
                                     message += "\n\nRecovery Path: " + mDevice.getRecoveryPath() +
@@ -979,13 +974,13 @@ public class Rashr extends ActionBarActivity {
                                 if (!comment.equals("")) {
                                     message +=
                                             "\n\n\n===========COMMENT==========\n"
-                                                            + comment +
-                                                "\n=========COMMENT END========\n" ;
+                                                    + comment +
+                                                    "\n=========COMMENT END========\n";
                                 }
                                 message +=
                                         "\n===========PREFS==========\n"
                                                 + getAllPrefs() +
-                                        "\n=========PREFS END========\n";
+                                                "\n=========PREFS END========\n";
 
                                 if (ERRORS.size() > 0) {
                                     message += "Rashr ERRORS:\n";
@@ -1201,7 +1196,7 @@ public class Rashr extends ActionBarActivity {
 
                                         String Name;
                                         if (etFileName.getText() != null && etFileName.isEnabled()
-                                                &&!etFileName.getText().toString().equals("")) {
+                                                && !etFileName.getText().toString().equals("")) {
                                             Name = etFileName.getText().toString();
                                         } else {
                                             Name = String.valueOf(etFileName.getHint());
@@ -1454,10 +1449,10 @@ public class Rashr extends ActionBarActivity {
             @Override
             public void onRefresh() {
                 final int img_count = mDevice.getStockRecoveryVersions().size()
-                                + mDevice.getCwmRecoveryVersions().size()
-                                + mDevice.getTwrpRecoveryVersions().size()
-                                + mDevice.getPhilzRecoveryVersions().size()
-                                + mDevice.getStockKernelVersions().size();
+                        + mDevice.getCwmRecoveryVersions().size()
+                        + mDevice.getTwrpRecoveryVersions().size()
+                        + mDevice.getPhilzRecoveryVersions().size()
+                        + mDevice.getStockKernelVersions().size();
                 Downloader RecoveryUpdater = new Downloader(mContext, RECOVERY_SUMS_URL, RecoveryCollectionFile);
                 RecoveryUpdater.setOverrideFile(true);
                 RecoveryUpdater.setHidden(true);
@@ -1636,7 +1631,7 @@ public class Rashr extends ActionBarActivity {
     public String getAllPrefs() {
         SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         String Prefs = "";
-        Map<String,?> prefsMap = prefs.getAll();
+        Map<String, ?> prefsMap = prefs.getAll();
         for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
             /**
              * Skip following Prefs (PREF_KEY_KERNEL_HISTORY, PREF_KEY_RECOVERY_HISTORY ...)
@@ -1672,7 +1667,7 @@ public class Rashr extends ActionBarActivity {
             String[] unifiedGalaxyS3 = {"d2lte", "d2att", "d2cri", "d2mtr",
                     "d2spr", "d2tmo", "d2usc", "d2vzw"};
             String[] unifiedGalaxyNote3 = {"hlte", "hltespr", "hltetmo", "hltevzw", "htlexx"};
-            String[] unifiedGalaxyS4 = {"jflte","jflteatt", "jfltecan" ,"jfltecri", "jfltecsp",
+            String[] unifiedGalaxyS4 = {"jflte", "jflteatt", "jfltecan", "jfltecri", "jfltecsp",
                     "jfltespr", "jfltetmo", "jflteusc", "jfltevzw", "jfltexx", "jgedlte"};
             if (mDevice.getName().startsWith("d2lte")) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS3));

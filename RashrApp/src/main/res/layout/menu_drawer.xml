@@ -4,39 +4,43 @@
     android:layout_width="@dimen/navigation_drawer_width"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="#111" >
+    android:background="#111">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button style="@style/nowCardDark"
+        <Button
+            android:id="@+id/bOpenRecoveryScriptManager"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/recovery_script_manager"
+            android:minHeight="74dp"
             android:onClick="bOpenRecoveryScriptManager"
-            android:minHeight="74dp"
-            android:id="@+id/bOpenRecoveryScriptManager" />
+            android:text="@string/recovery_script_manager" />
 
-        <Button style="@style/nowCardDark"
+        <Button
             android:id="@+id/bXDA"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
-            android:minHeight="74dp"
             android:layout_height="wrap_content"
+            android:minHeight="74dp"
             android:onClick="bXDA"
             android:text="@string/xda" />
 
-        <Button style="@style/nowCardDark"
+        <Button
             android:id="@+id/bReport"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
-            android:minHeight="74dp"
             android:layout_height="wrap_content"
+            android:minHeight="74dp"
             android:onClick="bReport"
             android:text="@string/report" />
 
-        <Spinner style="@style/spinnerStyleView"
+        <Spinner
             android:id="@+id/spStyle"
+            style="@style/spinnerStyleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/styles" />
@@ -47,7 +51,7 @@
             android:layout_height="wrap_content"
             android:onClick="cbShowAds"
             android:text="@string/ShowAds"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
         <CheckBox
             android:id="@+id/cbLog"
@@ -57,27 +61,30 @@
             android:text="@string/log"
             android:textColor="@android:color/white" />
 
-        <Button style="@style/nowCardDark"
+        <Button
             android:id="@+id/bShowLogs"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
-            android:minHeight="74dp"
             android:layout_height="wrap_content"
+            android:minHeight="74dp"
             android:onClick="bShowLogs"
-            android:text="@string/showlog"  />
+            android:text="@string/showlog" />
 
-        <Button style="@style/nowCardDark"
+        <Button
             android:id="@+id/bDonate"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
-            android:minHeight="74dp"
             android:layout_height="wrap_content"
+            android:minHeight="74dp"
             android:onClick="bDonate"
             android:text="@string/donate" />
 
-        <Button style="@style/nowCardDark"
+        <Button
             android:id="@+id/bExit"
+            style="@style/nowCardDark"
             android:layout_width="match_parent"
-            android:minHeight="74dp"
             android:layout_height="wrap_content"
+            android:minHeight="74dp"
             android:onClick="bExit"
             android:text="@string/sExit" />
 
