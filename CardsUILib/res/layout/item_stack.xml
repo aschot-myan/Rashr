@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/stackRoot"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp">
+
+    <TextView
+        android:id="@+id/stackTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:paddingTop="8dp"
+        android:textColor="@color/card_title_text"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/stackContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+
+</LinearLayout>

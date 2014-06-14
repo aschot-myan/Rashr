@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <com.fima.cardsui.views.QuickReturnListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:scrollbars="vertical" >
+    </com.fima.cardsui.views.QuickReturnListView>
+
+    <FrameLayout
+        android:id="@+id/sticky"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+</FrameLayout>

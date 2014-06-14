@@ -1,0 +1,69 @@
+<resources>
+
+    <!--
+          <style name="CardTitle">
+        <item name="android:id">@android:id/title</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+    -->
+
+    <style name="CardText">
+        <item name="android:textSize">@dimen/card_small_text</item>
+        <item name="android:textColor">@color/card_text</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="CardLightText" parent="@style/CardText">
+        <item name="android:textColor">@color/card_light_text</item>
+    </style>
+
+    <style name="CardTitle" parent="@style/CardText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/card_large_text</item>
+        <item name="android:textColor">@color/card_title_text</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+       <style name="CardTitleBold" parent="@style/CardText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/card_large_text</item>
+        <item name="android:textColor">@color/card_title_text</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="StackTitle" parent="@style/CardText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">27sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/card_title_text</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">300dp</item>
+    </style>
+
+    <style name="Item.Top">
+        <item name="android:background">#eeeeee</item>
+    </style>
+
+    <style name="Item.Sticky">
+        <item name="android:background">#eeeeee</item>
+        <item name="android:layout_height">@dimen/sticky_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+</resources>
