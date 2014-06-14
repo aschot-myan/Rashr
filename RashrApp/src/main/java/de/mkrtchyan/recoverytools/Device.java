@@ -89,11 +89,13 @@ public class Device {
             new File("/dev/block/platform/sdhci-tegra.3/by-name/LNX"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/Kernel"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
+            new File("/dev/block/platform/sdhci.1/by-name/KERNEL"),
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
     private String Name = Build.DEVICE.toLowerCase();
     private String MANUFACTURE = Build.MANUFACTURER.toLowerCase();
+    private String BOARD = Build.BOARD.toLowerCase();
     private String RecoveryPath = "";
     private String RecoveryVersion = "Not recognized Recovery-Version";
     private String KernelVersion = "Linux " + System.getProperty("os.version");
@@ -122,7 +124,6 @@ public class Device {
 
     private void setPredefinedOptions() {
 
-        String BOARD = Build.BOARD.toLowerCase();
         String MODEL = Build.MODEL.toLowerCase();
 
         /** Set Name and predefined options */
@@ -882,6 +883,10 @@ public class Device {
 
     public String getManufacture() {
         return MANUFACTURE;
+    }
+
+    public String getBOARD() {
+        return BOARD;
     }
 
 }

@@ -63,6 +63,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.devspark.appmsg.AppMsg;
+import com.fima.cardsui.objects.Card;
+import com.fima.cardsui.objects.CardStack;
+import com.fima.cardsui.views.CardUI;
+import com.fima.cardsui.views.MyCard;
+import com.fima.cardsui.views.MyImageCard;
 import com.google.ads.AdView;
 
 import org.sufficientlysecure.rootcommands.Shell;
@@ -280,7 +285,7 @@ public class Rashr extends ActionBarActivity {
 
                 try {
                     File LogCopy = new File(mContext.getFilesDir(), LastLog.getName() + ".txt");
-                    mToolbox.setFilePermissions(LastLog, "644");
+                    mToolbox.setFilePermissions(LastLog, "666");
                     mToolbox.copyFile(LastLog, LogCopy, false, false);
                 } catch (Exception e) {
                     ERRORS.add(e.toString());
@@ -385,30 +390,9 @@ public class Rashr extends ActionBarActivity {
     }
 
     /**
-     * Buttons on Rashr Layout
-     */
-    public void bFlashRecovery(View view) {
-        showFlashRecoveryDialog();
-    }
-
-    public void bFlashKernel(View view) {
-        showFlashKernelDialog();
-    }
-
-    public void bClearCache(View view) {
-        Common.deleteFolder(PathToCWM, false);
-        Common.deleteFolder(PathToTWRP, false);
-        Common.deleteFolder(PathToPhilz, false);
-    }
-
-    public void bRebooter(View view) {
-        showPopup(R.menu.rebooter_menu, view);
-    }
-
-    /**
      * Buttons on FlashRecovery and FlashKernel Dialog
      */
-    public void FlashSupportedRecovery(View view) {
+    public void FlashSupportedRecovery(Card card) {
         fRECOVERY = null;
         final File path;
         final ArrayList<String> Versions;
@@ -417,7 +401,7 @@ public class Rashr extends ActionBarActivity {
              * If there files be needed to flash download it and listing device specified recovery
              * file for example recovery-clockwork-touch-6.0.3.1-grouper.img(read out from IMG_SUMS)
              */
-            String SYSTEM = view.getTag().toString();
+            String SYSTEM = card.getData().toString();
             ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<String>(mContext,
                     R.layout.custom_version_list_item);
             if (SYSTEM.equals("stock")) {
@@ -437,9 +421,21 @@ public class Rashr extends ActionBarActivity {
                 for (String i : Versions) {
                     try {
                         if (i.contains("-touch-")) {
-                            VersionsAdapter.add("ClockworkMod Touch " + i.split("-")[3]);
+                            String device = "(";
+                            for (int splitNr = 4; splitNr < i.split("-").length; splitNr++) {
+                                if (!device.equals("(")) device += "-";
+                                device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                            }
+                            device += ")";
+                            VersionsAdapter.add("ClockworkMod Touch " + i.split("-")[3] + " " + device);
                         } else {
-                            VersionsAdapter.add("ClockworkMod " + i.split("-")[2]);
+                            String device = "(";
+                            for (int splitNr = 3; splitNr < i.split("-").length; splitNr++) {
+                                if (!device.equals("(")) device += "-";
+                                device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                            }
+                            device += ")";
+                            VersionsAdapter.add("ClockworkMod " + i.split("-")[2] + " " + device);
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         VersionsAdapter.add(i);
@@ -451,9 +447,15 @@ public class Rashr extends ActionBarActivity {
                 for (String i : Versions) {
                     try {
                         if (i.contains("openrecovery")) {
-                            VersionsAdapter.add("TWRP " + i.split("-")[2]);
+                            String device = "(";
+                            for (int splitNr = 3; splitNr < i.split("-").length; splitNr++) {
+                                if (!device.equals("(")) device += "-";
+                                device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                            }
+                            device += ")";
+                            VersionsAdapter.add("TWRP " + i.split("-")[2] + " " + device);
                         } else {
-                            VersionsAdapter.add("TWRP " + i.split("-")[1]);
+                            VersionsAdapter.add("TWRP " + i.split("-")[1].replace(mDevice.getRecoveryExt(), "") + ")");
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
                         VersionsAdapter.add(i);
@@ -464,7 +466,13 @@ public class Rashr extends ActionBarActivity {
                 path = PathToPhilz;
                 for (String i : Versions) {
                     try {
-                        VersionsAdapter.add("PhilZ Touch " + i.split("_")[2].split("-")[0]);
+                        String device = "(";
+                        for (int splitNr = 1; splitNr < i.split("-").length; splitNr++) {
+                            if (!device.equals("(")) device += "-";
+                            device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                        }
+                        device += ")";
+                        VersionsAdapter.add("PhilZ Touch " + i.split("_")[2].split("-")[0] + " " + device);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         VersionsAdapter.add(i);
                     }
@@ -528,7 +536,7 @@ public class Rashr extends ActionBarActivity {
         }
     }
 
-    public void FlashSupportedKernel(View view) {
+    public void FlashSupportedKernel(Card card) {
         fKERNEL = null;
         final File path;
         ArrayList<String> Versions;
@@ -537,7 +545,7 @@ public class Rashr extends ActionBarActivity {
              * If there files be needed to flash download it and listing device specified recovery
              * file for example stock-boot-grouper-4.4.img (read out from kernel_sums)
              */
-            String SYSTEM = view.getTag().toString();
+            String SYSTEM = card.getData().toString();
             if (SYSTEM.equals("stock")) {
                 Versions = mDevice.getStockKernelVersions();
                 path = PathToStockKernel;
@@ -601,8 +609,8 @@ public class Rashr extends ActionBarActivity {
         }
     }
 
-    public void showFlashHistory(View view) {
-        final boolean RecoveryHistory = view.getTag().toString().equals("recovery");
+    public void showFlashHistory(Card card) {
+        final boolean RecoveryHistory = card.getData().toString().equals("recovery");
         String PREF_KEY;
         if (RecoveryHistory) {
             PREF_KEY = PREF_KEY_RECOVERY_HISTORY;
@@ -838,67 +846,170 @@ public class Rashr extends ActionBarActivity {
 
     private void showFlashRecoveryDialog() {
         final Dialog FlashRecoveryDialog = new Dialog(mContext);
-        LayoutInflater inflater = getLayoutInflater();
         FlashRecoveryDialog.setTitle(R.string.flash_options);
-        try {
-            final ScrollView RecoveryLayout = (ScrollView) inflater.inflate(R.layout.recovery_dialog, null);
-            FlashRecoveryDialog.setContentView(RecoveryLayout);
-            LinearLayout layout;
-            if ((layout = (LinearLayout) RecoveryLayout.getChildAt(0)) != null) {
-                if (!mDevice.isStockRecoverySupported()) {
-                    layout.removeView(FlashRecoveryDialog.findViewById(R.id.bStockRecovery));
+        final ScrollView RecoveryLayout = new ScrollView(mContext);
+        final LinearLayout lRecoveryLayout = new LinearLayout(mContext);
+        lRecoveryLayout.setOrientation(LinearLayout.VERTICAL);
+        RecoveryLayout.addView(lRecoveryLayout);
+        if (mDevice.isCwmRecoverySupported()) {
+            CardUI CWMCards = new CardUI(mContext);
+            final MyImageCard CWMCard = new MyImageCard(getString(R.string.sCWM), R.drawable.ic_cwm,
+                    getString(R.string.cwm_description));
+            CWMCard.setData("clockwork");
+            CWMCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlashSupportedRecovery(CWMCard);
                 }
-                if (!mDevice.isCwmRecoverySupported()) {
-                    layout.removeView(FlashRecoveryDialog.findViewById(R.id.bCWM));
+            });
+            CWMCards.addCard(CWMCard, true);
+            lRecoveryLayout.addView(CWMCards);
+        }
+        if (mDevice.isTwrpRecoverySupported()) {
+            CardUI TWRPCards = new CardUI(mContext);
+            final MyImageCard TWRPCard = new MyImageCard(getString(R.string.sTWRP), R.drawable.ic_twrp,
+                    getString(R.string.twrp_description));
+            TWRPCard.setData("twrp");
+            TWRPCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlashSupportedRecovery(TWRPCard);
                 }
-                if (!mDevice.isTwrpRecoverySupported()) {
-                    layout.removeView(FlashRecoveryDialog.findViewById(R.id.bTWRP));
+            });
+            TWRPCards.addCard(TWRPCard, true);
+            lRecoveryLayout.addView(TWRPCards);
+        }
+        if (mDevice.isPhilzRecoverySupported()) {
+            CardUI PHILZCards = new CardUI(mContext);
+            final MyCard PHILZCard = new MyCard(getString(R.string.sPhilz), getString(R.string.philz_description));
+            PHILZCard.setData("philz");
+            PHILZCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlashSupportedRecovery(PHILZCard);
                 }
-                if (!mDevice.isPhilzRecoverySupported()) {
-                    layout.removeView(FlashRecoveryDialog.findViewById(R.id.bPHILZ));
+            });
+            PHILZCards.addCard(PHILZCard, true);
+            lRecoveryLayout.addView(PHILZCards);
+        }
+        if (mDevice.isStockRecoverySupported()) {
+            CardUI StockCards = new CardUI(mContext);
+            final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
+                    getString(R.string.stock_recovery_description));
+            StockCard.setData("stock");
+            StockCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlashSupportedRecovery(StockCard);
                 }
-            }
+            });
+            StockCards.addCard(StockCard, true);
+            lRecoveryLayout.addView(StockCards);
+        }
 
-            /** Check if device uses unified builds */
-            if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED)) {
-                if ((mDevice.getName().startsWith("d2lte") || mDevice.getName().startsWith("hlte")
-                        || mDevice.getName().startsWith("jflte")) && (!mDevice.isStockRecoverySupported()
-                        || !mDevice.isCwmRecoverySupported() || !mDevice.isTwrpRecoverySupported()
-                        || !mDevice.isPhilzRecoverySupported())) {
-                    showUnifiedBuildsDialog();
-                } else {
-                    FlashRecoveryDialog.show();
-                }
+        CardUI OtherCards = new CardUI(mContext);
+        final MyCard OtherCard = new MyCard(getString(R.string.sOTHER), getString(R.string.other_storage_description));
+        OtherCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bFlashOtherRecovery(v);
+            }
+        });
+        OtherCards.addCard(OtherCard, true);
+        lRecoveryLayout.addView(OtherCards);
+
+        final CardUI HistoryCards = new CardUI(mContext);
+        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory), getString(R.string.sHistory));
+        HistoryCard.setData("recovery");
+        OtherCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFlashHistory(HistoryCard);
+            }
+        });
+        OtherCards.addCard(HistoryCard, true);
+        lRecoveryLayout.addView(HistoryCards);
+
+        FlashRecoveryDialog.setContentView(RecoveryLayout);
+
+        /** Check if device uses unified builds */
+        if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED)) {
+            if ((mDevice.getName().startsWith("d2lte") || mDevice.getName().startsWith("hlte")
+                    || mDevice.getName().startsWith("jflte")
+                    || (mDevice.getManufacture().equals("motorola") && mDevice.getBOARD().equals("msm8960")))
+                    && (!mDevice.isStockRecoverySupported() || !mDevice.isCwmRecoverySupported()
+                    || !mDevice.isTwrpRecoverySupported() || !mDevice.isPhilzRecoverySupported())) {
+                showUnifiedBuildsDialog();
             } else {
                 FlashRecoveryDialog.show();
             }
-        } catch (NullPointerException e) {
-            ERRORS.add(e.toString());
-            Notifyer.showExceptionToast(mContext, TAG, e);
+        } else {
+            FlashRecoveryDialog.show();
         }
     }
 
     private void showFlashKernelDialog() {
         final Dialog FlashKernelDialog = new Dialog(mContext);
-        LayoutInflater inflater = getLayoutInflater();
         FlashKernelDialog.setTitle(R.string.flash_options);
-        try {
-            final ScrollView KernelLayout = (ScrollView) inflater.inflate(R.layout.kernel_dialog, null);
-            FlashKernelDialog.setContentView(KernelLayout);
-            LinearLayout layout;
-
-            if ((layout = (LinearLayout) KernelLayout.getChildAt(0)) != null) {
-                if (!mDevice.isStockKernelSupported()) {
-                    layout.removeView(FlashKernelDialog.findViewById(R.id.bStockKernel));
+        final ScrollView KernelLayout = new ScrollView(mContext);
+        final LinearLayout lKernelLayout = new LinearLayout(mContext);
+        lKernelLayout.setOrientation(LinearLayout.VERTICAL);
+        KernelLayout.addView(lKernelLayout);
+        if (mDevice.isStockKernelSupported()) {
+            CardUI StockCards = new CardUI(mContext);
+            final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
+                    getString(R.string.stock_kernel_description));
+            StockCard.setData("stock");
+            StockCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlashSupportedKernel(StockCard);
                 }
-            }
-
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            ERRORS.add(e.toString());
+            });
+            StockCards.addCard(StockCard, true);
+            lKernelLayout.addView(StockCards);
         }
 
+        CardUI OtherCards = new CardUI(mContext);
+        final MyCard OtherCard = new MyCard(getString(R.string.sOTHER),
+                getString(R.string.other_storage_description));
+        OtherCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bFlashOtherKernel(v);
+            }
+        });
+        OtherCards.addCard(OtherCard, true);
+        lKernelLayout.addView(OtherCards);
+        FlashKernelDialog.setContentView(KernelLayout);
+
+        final CardUI HistoryCards = new CardUI(mContext);
+        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory), getString(R.string.sHistory));
+        HistoryCard.setData("kernel");
+        OtherCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFlashHistory(HistoryCard);
+            }
+        });
+        OtherCards.addCard(HistoryCard, true);
+        lKernelLayout.addView(HistoryCards);
+
         FlashKernelDialog.show();
+
+        /** Check if device uses unified builds */
+        if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED)) {
+            if ((mDevice.getName().startsWith("d2lte") || mDevice.getName().startsWith("hlte")
+                    || mDevice.getName().startsWith("jflte") || mDevice.getName().equals("moto_msm8960"))
+                    && (!mDevice.isStockRecoverySupported() || !mDevice.isCwmRecoverySupported()
+                    || !mDevice.isTwrpRecoverySupported() || !mDevice.isPhilzRecoverySupported())) {
+                showUnifiedBuildsDialog();
+            } else {
+                FlashKernelDialog.show();
+            }
+        } else {
+            FlashKernelDialog.show();
+        }
     }
 
     public void report(final boolean isCancelable) {
@@ -1010,7 +1121,7 @@ public class Rashr extends ActionBarActivity {
                                 for (File file : files) {
                                     if (file.exists()) {
                                         try {
-                                            mToolbox.setFilePermissions(file, "644");
+                                            mToolbox.setFilePermissions(file, "666");
                                             uris.add(Uri.fromFile(file));
                                         } catch (FailedExecuteCommand e) {
                                             ERRORS.add(e.toString());
@@ -1161,8 +1272,14 @@ public class Rashr extends ActionBarActivity {
                                                     .show();
                                         } else {
                                             File Backup = new File(PathToRecoveryBackups, FileName);
-                                            Backup.renameTo(renamedBackup);
-                                            loadBackups();
+                                            if (Backup.renameTo(renamedBackup)) {
+                                                loadBackups();
+                                            } else {
+                                                AppMsg
+                                                        .makeText(mActivity, R.string.rename_failed, AppMsg.STYLE_ALERT)
+                                                        .show();
+                                            }
+
                                         }
                                         dialog.dismiss();
                                     }
@@ -1214,8 +1331,13 @@ public class Rashr extends ActionBarActivity {
                                                     .show();
                                         } else {
                                             File Backup = new File(PathToKernelBackups, FileName);
-                                            Backup.renameTo(renamedBackup);
-                                            loadBackups();
+                                            if (Backup.renameTo(renamedBackup)) {
+                                                loadBackups();
+                                            } else {
+                                                AppMsg
+                                                        .makeText(mActivity, R.string.rename_failed, AppMsg.STYLE_ALERT)
+                                                        .show();
+                                            }
                                         }
                                         dialog.dismiss();
 
@@ -1398,17 +1520,195 @@ public class Rashr extends ActionBarActivity {
                         /** Removing ads if user has turned off */
                         MainParent.removeView(adView);
                     }
-                    if (!mDevice.isKernelSupported()) {
-                        /** If Kernel flashing is not supported remove flash options */
-                        MainParent.removeView(findViewById(R.id.bFlashKernel));
-                    }
-                    if (!mDevice.isRecoverySupported()) {
-                        /** If Recovery flashing is not supported remove flash options */
-                        MainParent.removeView(findViewById(R.id.bFlashRecovery));
-                    }
                 }
+
+                CardUI mFlashCards = (CardUI) findViewById(R.id.FlashCards);
+
+                CardStack FlashStack = new CardStack();
+                FlashStack.setTitle(getString(R.string.flash));
+
+                if (mDevice.isKernelSupported()) {
+                    MyImageCard KernelCard = new MyImageCard(getString(R.string.kernel), R.drawable.ic_flash,
+                            getString(R.string.kernel_description));
+                    KernelCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showFlashKernelDialog();
+                        }
+                    });
+                    FlashStack.add(KernelCard);
+                }
+
+                if (mDevice.isRecoverySupported()) {
+                    MyImageCard RecoveryCard = new MyImageCard(getString(R.string.recovery), R.drawable.ic_update,
+                            getString(R.string.recovery_description));
+                    RecoveryCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showFlashRecoveryDialog();
+                        }
+                    });
+                    FlashStack.add(RecoveryCard);
+                }
+
+                mFlashCards.addStack(FlashStack, true);
+
+                CardUI mOptionsCards = (CardUI) findViewById(R.id.Options);
+
+                CardStack CacheStack = new CardStack(getString(R.string.options));
+
+                MyImageCard ClearCache = new MyImageCard(getString(R.string.sClearCache), R.drawable.ic_delete,
+                        getString(R.string.clear_cache_description));
+                ClearCache.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(mContext);
+                        ConfirmationDialog.setTitle(R.string.warning);
+                        ConfirmationDialog.setMessage(R.string.delete_confirmation);
+                        ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Common.deleteFolder(PathToCWM, false);
+                                Common.deleteFolder(PathToTWRP, false);
+                                Common.deleteFolder(PathToPhilz, false);
+                                Common.deleteFolder(PathToStockRecovery, false);
+                                Common.deleteFolder(PathToStockKernel,false);
+                            }
+                        });
+                        ConfirmationDialog.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        ConfirmationDialog.show();
+                    }
+                });
+                CacheStack.add(ClearCache);
+                mOptionsCards.addStack(CacheStack, true);
+
+                CardUI mRebootCards = (CardUI) findViewById(R.id.Rebooter);
+
+                CardStack RebooterStack = new CardStack(getString(R.string.sRebooter));
+
+                MyCard Reboot = new MyCard(getString(R.string.sReboot), getString(R.string.reboot_description));
+                Reboot.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+                        final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(mContext);
+                        ConfirmationDialog.setTitle(R.string.warning);
+                        ConfirmationDialog.setMessage(R.string.reboot_confirmation);
+                        ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    mToolbox.reboot(Toolbox.REBOOT_REBOOT);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        ConfirmationDialog.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        ConfirmationDialog.show();
+                    }
+                });
+                MyCard RebootRecovery = new MyCard(getString(R.string.sRebootRecovery),
+                        getString(R.string.reboot_recovery_description));
+                RebootRecovery.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(mContext);
+                        ConfirmationDialog.setTitle(R.string.warning);
+                        ConfirmationDialog.setMessage(R.string.reboot_confirmation);
+                        ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        ConfirmationDialog.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        ConfirmationDialog.show();
+                    }
+                });
+                MyCard RebootBootloader = new MyCard(getString(R.string.sRebootBootloader),
+                        getString(R.string.reboot_bootloader_description));
+                RebootBootloader.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(mContext);
+                        ConfirmationDialog.setTitle(R.string.warning);
+                        ConfirmationDialog.setMessage(R.string.reboot_confirmation);
+                        ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    mToolbox.reboot(Toolbox.REBOOT_BOOTLOADER);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        ConfirmationDialog.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        ConfirmationDialog.show();
+                    }
+                });
+                MyCard Shutdown = new MyCard(getString(R.string.sRebootShutdown),
+                        getString(R.string.shutdown_description));
+                Shutdown.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(mContext);
+                        ConfirmationDialog.setTitle(R.string.warning);
+                        ConfirmationDialog.setMessage(R.string.shutdown_confirmation);
+                        ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    mToolbox.reboot(Toolbox.REBOOT_SHUTDOWN);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        ConfirmationDialog.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        ConfirmationDialog.show();
+                    }
+                });
+
+                RebooterStack.add(Shutdown);
+                RebooterStack.add(RebootBootloader);
+                RebooterStack.add(RebootRecovery);
+                RebooterStack.add(Reboot);
+
+                mRebootCards.addStack(RebooterStack, true);
             }
         }
+
+
     }
 
     public void startFlashAs() throws NullPointerException {
@@ -1577,8 +1877,13 @@ public class Rashr extends ActionBarActivity {
                 View recoveryBackups = findViewById(R.id.lvRecoveryBackups);
                 if (!mDevice.isKernelSupported()) {
                     /** If Kernel flashing is not supported remove backup views */
-                    ((ViewGroup) createKernelBackup.getParent()).removeView(createKernelBackup);
-                    ((ViewGroup) kernelBackups.getParent()).removeView(kernelBackups);
+                    ViewGroup parent;
+                    if ((parent = (ViewGroup) createKernelBackup.getParent()) != null) {
+                        parent.removeView(createKernelBackup);
+                    }
+                    if ((parent = (ViewGroup) kernelBackups.getParent()) != null) {
+                        parent.removeView(kernelBackups);
+                    }
                 } else {
                     KernelBakAdapter = new ArrayAdapter<String>(mContext, R.layout.custom_list_item);
                     final ListView lvKernelBackups = (ListView) mActivity.findViewById(R.id.lvKernelBackups);
@@ -1594,8 +1899,13 @@ public class Rashr extends ActionBarActivity {
                 }
                 if (!mDevice.isRecoverySupported()) {
                     /** If Recovery flashing is not supported remove backup views */
-                    ((ViewGroup) createRecoveryBackup.getParent()).removeView(createRecoveryBackup);
-                    ((ViewGroup) recoveryBackups.getParent()).removeView(recoveryBackups);
+                    ViewGroup parent;
+                    if ((parent = (ViewGroup) createRecoveryBackup.getParent()) != null) {
+                        parent.removeView(createRecoveryBackup);
+                    }
+                    if ((parent = (ViewGroup) recoveryBackups.getParent()) != null) {
+                        parent.removeView(recoveryBackups);
+                    }
                 } else {
                     RecoveryBakAdapter = new ArrayAdapter<String>(mContext, R.layout.custom_list_item);
                     final ListView lvRecoveryBackups = (ListView) mActivity.findViewById(R.id.lvRecoveryBackups);
@@ -1632,21 +1942,26 @@ public class Rashr extends ActionBarActivity {
         SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         String Prefs = "";
         Map<String, ?> prefsMap = prefs.getAll();
-        for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
-            /**
-             * Skip following Prefs (PREF_KEY_KERNEL_HISTORY, PREF_KEY_RECOVERY_HISTORY ...)
-             */
-            try {
-                if (!entry.getKey().contains(PREF_KEY_KERNEL_HISTORY)
-                        && !entry.getKey().contains(PREF_KEY_RECOVERY_HISTORY)
-                        && !entry.getKey().contains(FlashUtil.PREF_KEY_FLASH_KERNEL_COUNTER)
-                        && !entry.getKey().contains(FlashUtil.PREF_KEY_FLASH_RECOVERY_COUNTER)) {
-                    Prefs += entry.getKey() + ": " + entry.getValue().toString() + "\n";
+        try {
+            for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
+                /**
+                 * Skip following Prefs (PREF_KEY_KERNEL_HISTORY, PREF_KEY_RECOVERY_HISTORY ...)
+                 */
+                try {
+                    if (!entry.getKey().contains(PREF_KEY_KERNEL_HISTORY)
+                            && !entry.getKey().contains(PREF_KEY_RECOVERY_HISTORY)
+                            && !entry.getKey().contains(FlashUtil.PREF_KEY_FLASH_KERNEL_COUNTER)
+                            && !entry.getKey().contains(FlashUtil.PREF_KEY_FLASH_RECOVERY_COUNTER)) {
+                        Prefs += entry.getKey() + ": " + entry.getValue().toString() + "\n";
+                    }
+                } catch (NullPointerException e) {
+                    ERRORS.add(e.toString());
                 }
-            } catch (NullPointerException e) {
-                ERRORS.add(e.toString());
             }
+        } catch (NullPointerException e) {
+            ERRORS.add(e.toString());
         }
+
         return Prefs;
     }
 
@@ -1675,6 +1990,13 @@ public class Rashr extends ActionBarActivity {
                 DevName.addAll(Arrays.asList(unifiedGalaxyNote3));
             } else if (mDevice.getName().startsWith("jflte")) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS4));
+            }
+        }
+
+        if (mDevice.getManufacture().equals("motorola")) {
+            String[] unifiedMsm8960 = {"moto_msm8960"};
+            if (mDevice.getBOARD().equals("msm8960")) {
+                DevName.addAll(Arrays.asList(unifiedMsm8960));
             }
         }
 
