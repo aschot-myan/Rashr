@@ -18,31 +18,31 @@
     <string name="sRebooter">Rebooter</string>
     <string name="restore">Wiederherstellen</string>
     <string name="rename">Umbenenen</string>
-    <string name="sClearCache">Heruntergeladene daten löschen</string>
+    <string name="sClearCache">Heruntergeladene Dateien löschen</string>
     <string name="report">Bug melden</string>
     <string name="sExit">Schließen</string>
     <string name="xda">XDA-Thread</string>
-    <string name="set_name">Name der Sicherrung</string>
+    <string name="set_name">Name der Sicherung</string>
     <string name="bak_warning">
         Bevor Sie Rashr verwenden ist es empfehlenswert Sicherungen zu erstellen,
         \ndiese werden unter \n%s\n erstellt.
-        \nDer Entwikler ist nicht an Schäden ihres Gerätes verantwortlich.
+        \nDer Entwickler ist nicht für Schäden an ihrem Gerät verantwortlich.
     </string>
-    <string name="flash_options">Flash optionen</string>
+    <string name="flash_options">Flash Optionen</string>
     <string name="risk">Ich kenne das Risiko</string>
     <string name="sReboot">Neustarten</string>
     <string name="sRebootHot">Hot Reboot</string>
-    <string name="sRebootRecovery">In den Recovery neustarten</string>
-    <string name="sRebootBootloader">In den Bootloader neustarten</string>
+    <string name="sRebootRecovery">Neustart in die Recovery</string>
+    <string name="sRebootBootloader">Neustart in den Bootloader</string>
     <string name="sRebootShutdown">Ausschalten</string>
-    <string name="info">Informazion</string>
+    <string name="info">Information</string>
     <string name="flashed">Partition geflasht.</string>
     <string name="warning">Warnung!</string>
     <string name="fota">
         Zum Flashen dieses Gerätes wird die FOTAKernel Partition genutzt und wird nur funktionieren
         wenn sie eine modifizierte Versions des Systemes oder Kernels installiert haben.
     </string>
-    <string name="flash_over_recovery">Jetzt flashen? (Neustart in den Recovery erforderlich)</string>
+    <string name="flash_over_recovery">Jetzt flashen? (Neustart in die Recovery erforderlich)</string>
     <string name="instructions">Anleitung</string>
     <string name="instruction">
         CWM:
@@ -50,15 +50,15 @@
         \n\nTWRP:
         \nMain Menu -> Install
     </string>
-    <string name="bak_done">Backup vollständig</string>
+    <string name="bak_done">Backup fertig</string>
     <string name="backupalready">Backup existiert bereits.</string>
     <string name="error">Fehler</string>
     <string name="not_supportded">
-        Ihr Gerät ist zurzeit nicht untersützt. System scannen und Gerät den Entwikler melden?
-        Oder versuchen die Partition zu finden indem neugestartet wird?
+        Ihr Gerät wird zurzeit nicht untersützt. System scannen und Gerät dem Entwickler melden?
+        Oder versuchen die Partition zu finden, indem neugestartet wird?
     </string>
     <string name="no_root">
-        Gerät nicht gerootet. Bitte tuen Sie dies um die App zu verwenden. Mehr informationen unter
+        Gerät nicht gerootet. Bitte tun Sie dies, um die App zu verwenden. Mehr Informationen unter
         \n\nxda-developers.com
     </string>
     <string name="using_dd">Using dd. Recovery in FS</string>
@@ -66,7 +66,7 @@
     <string name="Downloading">Downloading…</string>
     <string name="commentar">Kommentar</string>
     <string name="commenthint">
-        Bitte komentieren Sie hier welches Problem Sie haben (Download, Installation, Allgemein)
+        Bitte kommentieren Sie hier, welches Problem Sie haben (Download, Installation, Allgemein)
     </string>
     <string name="positive">Ja, bitte</string>
     <string name="neutral">Nein, danke</string>
@@ -79,16 +79,16 @@
     <string name="reboot_recovery_now">Jetzt in die Recovery neustarten?</string>
     <string name="flashing">Flashing…</string>
     <string name="restoring">Wiederherstellung…</string>
-    <string name="creating_bak">Erstelle Wiederherstellungspunkt</string>
+    <string name="creating_bak">Erstelle Backup</string>
     <string name="download_utils">
         Um diese App zu verwenden werden kleine Tools gebraucht (ungefär 512kb).
-        \nDownload it now?
+        \nJetzt herunterladen?
     </string>
     <string name="over_recovery">Device will be flashed over recovery</string>
-    <string name="ShowAds">Werbung aktivieren um den Entwikler zu untersützen</string>
-    <string name="please_restart">Bitte App neustarten um änderungen anzuwenden</string>
-    <string name="please_ads">Bitte schalten Sie die Werbung ein um meine Arbeit zu unterstützen! :(</string>
-    <string name="donate_to_support">Bitte spenden Sie im Menü um meine Arbeit zu unterstützen! :)</string>
+    <string name="ShowAds">Werbung aktivieren, um den Entwickler zu untersützen</string>
+    <string name="please_restart">Bitte App neustarten, um Änderungen anzuwenden</string>
+    <string name="please_ads">Bitte schalten Sie die Werbung ein, um meine Arbeit zu unterstützen! :(</string>
+    <string name="donate_to_support">Bitte spenden Sie im Menü, um meine Arbeit zu unterstützen! :)</string>
 
     <string-array name="donation_google_catalog_values">
         <item>0,50 Euro</item>
@@ -107,7 +107,7 @@
     <string name="pick_file">Datei aussuchen</string>
     <string name="stock">Stock</string>
     <string name="changelog">Changelog</string>
-    <string name="bak_deleted">Wiederherstellungspunkt gelöscht</string>
+    <string name="bak_deleted">Backup gelöscht</string>
     <string name="no_history">Kein Verlauf gefunden</string>
     <string name="styles">Styles</string>
 
@@ -124,7 +124,7 @@
     <string name="getting_root">Versuche Root-Rechte zu erlangen</string>
     <string name="reading_device">Geräte Informationen werden eingelesen</string>
     <string name="loading_ui">Lade UI</string>
-    <string name="loading_data">Erforderliche Order und Dateien werden entpackt und erstellt</string>
+    <string name="loading_data">Erforderliche Ordner und Dateien werden entpackt und erstellt</string>
     <string name="recovery_script_manager">Recovery-Script Manager</string>
     <string name="bak_name">Backup Name</string>
     <string name="flash_queue">Flash Liste</string>
@@ -136,18 +136,18 @@
     <string name="cache">Cache</string>
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
-    <string name="recovery_script_mind">Bitte merken Sie sich das dies nur mit TWRP kompatibele Recoveries funktionieren wird</string>
+    <string name="recovery_script_mind">Bitte merken Sie sich, dass dies nur mit TWRP kompatiblen Recoveries funktionieren wird</string>
     <string name="run">Ausführen</string>
     <string name="recovery_script_review">Script Vorschau</string>
     <string name="failed_unpack_files">Fehler beim Entpacken der Daten von der App</string>
-    <string name="failed_setup_layout">Fehler beim erstellen der UI</string>
+    <string name="failed_setup_layout">Fehler beim Erstellen der UI</string>
     <string name="refresh_list">Update gestartet!</string>
     <string name="new_imgs_loaded">%s neue Images geladen!</string>
     <string name="make_choice">Bitte treffen Sie ihre Wahl</string>
     <string name="unified_info">
-        Diese Rom nutzt den zusammengelegte CyanogenMod Code.\n
-        Es könnte sein das Rashr nicht die geeignete Images für ihr Gerät erkennt.\n
-        Wenn dies der Fall ist bitte wählen Sie ihr Gerät in der Liste.\n
+        Dieser Rom nutzt den zusammengelegten (Unified) CyanogenMod Code.\n
+        Es könnte sein, dass Rashr nicht die geeigneten Images für ihr Gerät erkennt.\n
+        Wenn dies der Fall ist, bitte wählen Sie ihr Gerät in der Liste.\n
         SEIEN SIE VORSICHTIG MIT DIESER OPTION!
     </string>
     <string name="reloading">Neu laden</string>
