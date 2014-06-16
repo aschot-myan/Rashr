@@ -54,11 +54,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -847,12 +845,9 @@ public class Rashr extends ActionBarActivity {
     private void showFlashRecoveryDialog() {
         final Dialog FlashRecoveryDialog = new Dialog(mContext);
         FlashRecoveryDialog.setTitle(R.string.flash_options);
-        final ScrollView RecoveryLayout = new ScrollView(mContext);
-        final LinearLayout lRecoveryLayout = new LinearLayout(mContext);
-        lRecoveryLayout.setOrientation(LinearLayout.VERTICAL);
-        RecoveryLayout.addView(lRecoveryLayout);
+        CardUI RecoveryCards = new CardUI(mContext);
+        FlashRecoveryDialog.setContentView(RecoveryCards);
         if (mDevice.isCwmRecoverySupported()) {
-            CardUI CWMCards = new CardUI(mContext);
             final MyImageCard CWMCard = new MyImageCard(getString(R.string.sCWM), R.drawable.ic_cwm,
                     getString(R.string.cwm_description));
             CWMCard.setData("clockwork");
@@ -862,11 +857,9 @@ public class Rashr extends ActionBarActivity {
                     FlashSupportedRecovery(CWMCard);
                 }
             });
-            CWMCards.addCard(CWMCard, true);
-            lRecoveryLayout.addView(CWMCards);
+            RecoveryCards.addCard(CWMCard, true);
         }
         if (mDevice.isTwrpRecoverySupported()) {
-            CardUI TWRPCards = new CardUI(mContext);
             final MyImageCard TWRPCard = new MyImageCard(getString(R.string.sTWRP), R.drawable.ic_twrp,
                     getString(R.string.twrp_description));
             TWRPCard.setData("twrp");
@@ -876,11 +869,9 @@ public class Rashr extends ActionBarActivity {
                     FlashSupportedRecovery(TWRPCard);
                 }
             });
-            TWRPCards.addCard(TWRPCard, true);
-            lRecoveryLayout.addView(TWRPCards);
+            RecoveryCards.addCard(TWRPCard);
         }
         if (mDevice.isPhilzRecoverySupported()) {
-            CardUI PHILZCards = new CardUI(mContext);
             final MyCard PHILZCard = new MyCard(getString(R.string.sPhilz), getString(R.string.philz_description));
             PHILZCard.setData("philz");
             PHILZCard.setOnClickListener(new View.OnClickListener() {
@@ -889,11 +880,9 @@ public class Rashr extends ActionBarActivity {
                     FlashSupportedRecovery(PHILZCard);
                 }
             });
-            PHILZCards.addCard(PHILZCard, true);
-            lRecoveryLayout.addView(PHILZCards);
+            RecoveryCards.addCard(PHILZCard, true);
         }
         if (mDevice.isStockRecoverySupported()) {
-            CardUI StockCards = new CardUI(mContext);
             final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
                     getString(R.string.stock_recovery_description));
             StockCard.setData("stock");
@@ -903,11 +892,9 @@ public class Rashr extends ActionBarActivity {
                     FlashSupportedRecovery(StockCard);
                 }
             });
-            StockCards.addCard(StockCard, true);
-            lRecoveryLayout.addView(StockCards);
+            RecoveryCards.addCard(StockCard, true);
         }
 
-        CardUI OtherCards = new CardUI(mContext);
         final MyCard OtherCard = new MyCard(getString(R.string.sOTHER), getString(R.string.other_storage_description));
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -915,11 +902,10 @@ public class Rashr extends ActionBarActivity {
                 bFlashOtherRecovery(v);
             }
         });
-        OtherCards.addCard(OtherCard, true);
-        lRecoveryLayout.addView(OtherCards);
+        RecoveryCards.addCard(OtherCard, true);
 
-        final CardUI HistoryCards = new CardUI(mContext);
-        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory), getString(R.string.sHistory));
+        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory),
+                getString(R.string.history_description));
         HistoryCard.setData("recovery");
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -927,10 +913,7 @@ public class Rashr extends ActionBarActivity {
                 showFlashHistory(HistoryCard);
             }
         });
-        OtherCards.addCard(HistoryCard, true);
-        lRecoveryLayout.addView(HistoryCards);
-
-        FlashRecoveryDialog.setContentView(RecoveryLayout);
+        RecoveryCards.addCard(HistoryCard, true);
 
         /** Check if device uses unified builds */
         if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED)) {
@@ -951,12 +934,9 @@ public class Rashr extends ActionBarActivity {
     private void showFlashKernelDialog() {
         final Dialog FlashKernelDialog = new Dialog(mContext);
         FlashKernelDialog.setTitle(R.string.flash_options);
-        final ScrollView KernelLayout = new ScrollView(mContext);
-        final LinearLayout lKernelLayout = new LinearLayout(mContext);
-        lKernelLayout.setOrientation(LinearLayout.VERTICAL);
-        KernelLayout.addView(lKernelLayout);
+        CardUI KernelCards = new CardUI(mContext);
+        FlashKernelDialog.setContentView(KernelCards);
         if (mDevice.isStockKernelSupported()) {
-            CardUI StockCards = new CardUI(mContext);
             final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
                     getString(R.string.stock_kernel_description));
             StockCard.setData("stock");
@@ -966,11 +946,9 @@ public class Rashr extends ActionBarActivity {
                     FlashSupportedKernel(StockCard);
                 }
             });
-            StockCards.addCard(StockCard, true);
-            lKernelLayout.addView(StockCards);
+            KernelCards.addCard(StockCard, true);
         }
 
-        CardUI OtherCards = new CardUI(mContext);
         final MyCard OtherCard = new MyCard(getString(R.string.sOTHER),
                 getString(R.string.other_storage_description));
         OtherCard.setOnClickListener(new View.OnClickListener() {
@@ -979,12 +957,10 @@ public class Rashr extends ActionBarActivity {
                 bFlashOtherKernel(v);
             }
         });
-        OtherCards.addCard(OtherCard, true);
-        lKernelLayout.addView(OtherCards);
-        FlashKernelDialog.setContentView(KernelLayout);
+        KernelCards.addCard(OtherCard, true);
 
-        final CardUI HistoryCards = new CardUI(mContext);
-        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory), getString(R.string.sHistory));
+        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory),
+                getString(R.string.history_description));
         HistoryCard.setData("kernel");
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -992,8 +968,7 @@ public class Rashr extends ActionBarActivity {
                 showFlashHistory(HistoryCard);
             }
         });
-        OtherCards.addCard(HistoryCard, true);
-        lKernelLayout.addView(HistoryCards);
+        KernelCards.addCard(HistoryCard, true);
 
         FlashKernelDialog.show();
 
@@ -1555,7 +1530,24 @@ public class Rashr extends ActionBarActivity {
 
                 CardUI mOptionsCards = (CardUI) findViewById(R.id.Options);
 
-                CardStack CacheStack = new CardStack(getString(R.string.options));
+                CardStack OptionsStack = new CardStack(getString(R.string.options));
+
+                MyCard ResetCard = new MyCard(getString(R.string.reset_app),
+                        getString(R.string.reset_app_description));
+                ResetCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+                        editor.clear().commit();
+                        editor = getSharedPreferences(FlashUtil.PREF_NAME, MODE_PRIVATE).edit();
+                        editor.clear().commit();
+                        editor = getSharedPreferences(Shell.PREF_NAME, MODE_PRIVATE).edit();
+                        editor.clear().commit();
+                        restartActivity();
+                    }
+                });
+
+                OptionsStack.add(ResetCard);
 
                 MyImageCard ClearCache = new MyImageCard(getString(R.string.sClearCache), R.drawable.ic_delete,
                         getString(R.string.clear_cache_description));
@@ -1584,8 +1576,8 @@ public class Rashr extends ActionBarActivity {
                         ConfirmationDialog.show();
                     }
                 });
-                CacheStack.add(ClearCache);
-                mOptionsCards.addStack(CacheStack, true);
+                OptionsStack.add(ClearCache);
+                mOptionsCards.addStack(OptionsStack, true);
 
                 CardUI mRebootCards = (CardUI) findViewById(R.id.Rebooter);
 

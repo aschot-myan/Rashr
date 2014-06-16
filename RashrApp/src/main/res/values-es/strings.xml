@@ -144,4 +144,57 @@
     <string name="reloading">Reloading</string>
     <string name="keep_current_name">Keep current name (%s)</string>
 
+    <string name="rename_failed">Renombrar fallecido</string>
+
+    <string name="flash">Flash</string>
+    <string name="recovery_description">
+        Con esta función pueden instalar Custom Recoveries a su dispositivo.
+    </string>
+    <string name="kernel_description">
+        Con esta función pueden instalar Kernels a su dispositivo.
+    </string>
+    <string name="options">Opciones</string>
+    <string name="clear_cache_description">
+        Borrar todas las imagénes descargadas
+    </string>
+    <string name="reboot_description">Reiniciar dispositivo</string>
+    <string name="reboot_recovery_description">
+        Reiniciar dispositivo en el recovery
+    </string>
+    <string name="reboot_bootloader_description">
+        Reiniciar dispositivo en el bootloader
+    </string>
+    <string name="shutdown_description">Apagar dispositivo</string>
+    <string name="cwm_description">
+        ClockworkMod Recovery es la custom recovery mas untilizada para Android
+    </string>
+    <string name="twrp_description">
+        Team Winn Recovery Project (TWRP) es un Recovery-MOD muy desaroyado y con una interfaz de usuario
+        controlable por touch
+    </string>
+    <string name="philz_description">
+        PhilZ Touch Recovery basea en ClockworkMod y tiene funciones mas avanzadas
+    </string>
+    <string name="stock_recovery_description">
+        Las Stock Recoveries son las recoveries que estaban instaladas al comprar el dispositivo.
+        Esta función se puede utilizar para restaurar su dispositivo.
+    </string>
+    <string name="stock_kernel_description">
+        Los Stock Kernels son los Kernels que estaban instaladas al comprar el dispositivo.
+        Esta función se puede utilizar para restaurar su dispositivo.
+    </string>
+    <string name="delete_confirmation">
+        Seguro que quieren borrar todas las imagénes descargadas?
+    </string>
+    <string name="other_storage_description">
+        Con esta función pueden instalar imagénes deste la memoria interna del dispositivo.
+    </string>
+    <string name="reboot_confirmation">Reiniciar ahora?</string>
+    <string name="shutdown_confirmation">Apagar ahora?</string>
+
+    <string name="reset_app">Reconfigurar App</string>
+    <string name="reset_app_description">
+        Reconfigurar App? Todos los ajustes que ha echo se van ha borrar
+    </string>
+
 </resources>

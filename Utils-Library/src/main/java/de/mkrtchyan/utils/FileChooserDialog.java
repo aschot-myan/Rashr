@@ -52,6 +52,7 @@ public class FileChooserDialog extends Dialog {
 
     public FileChooserDialog(final Context mContext, final File StartFolder, Runnable runAtChoose) throws NullPointerException {
         super(mContext);
+        this.setTitle("Pick a file");
 
         this.StartFolder = StartFolder;
         this.mContext = mContext;

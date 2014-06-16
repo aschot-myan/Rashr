@@ -107,9 +107,13 @@
     <string name="bak_error">Failed to backup</string>
     <string name="stock">Stock</string>
     <string name="changelog">Changelog</string>
-    <string name="use_supersu">SuperSu from Chainfire not recognized on your device. Please use it to avoid errors. Download SuperSu (from Play Store) now?</string>
+    <string name="use_supersu">
+        SuperSu from Chainfire not recognized on your device. Please use it to avoid errors. Download SuperSu (from Play Store) now?
+    </string>
     <string name="bak_deleted">Backup deleted</string>
-    <string name="extract_failed">Extract needed files from App failed. Please restart the App.</string>
+    <string name="extract_failed">
+        Extract needed files from App failed. Please restart the App.
+    </string>
     <string name="no_history">No history found</string>
     <string name="styles">Styles</string>
 
@@ -138,7 +142,9 @@
     <string name="cache">Cache</string>
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
-    <string name="recovery_script_mind">Please keep in mind, this will only work with TWRP compatible recovery</string>
+    <string name="recovery_script_mind">
+        Please keep in mind, this will only work with TWRP compatible recovery
+    </string>
     <string name="run">Run</string>
     <string name="recovery_script_review">Script Preview</string>
     <string name="failed_unpack_files">Failed to unpack files from App</string>
@@ -154,5 +160,49 @@
     </string>
     <string name="reloading">Reloading</string>
     <string name="keep_current_name">Keep current name (%s)</string>
+
+    <string name="rename_failed">Rename failed</string>
+
+    <string name="flash">Flash</string>
+    <string name="recovery_description">
+        With this function you are able to flash your devices build-in recovery partition with one click!
+    </string>
+    <string name="kernel_description">
+        With this function you are able to flash your devices build-in kernel/boot partition with one click!
+    </string>
+    <string name="options">Options</string>
+    <string name="clear_cache_description">Delete all downloaded recovery/kernel images</string>
+    <string name="reboot_description">Let your device reboot instantly</string>
+    <string name="reboot_recovery_description">Let your device reboot into recovery instantly</string>
+    <string name="reboot_bootloader_description">
+        Let your device reboot into bootloader/download mode instantly
+    </string>
+    <string name="shutdown_description">Let your device shutdown instantly</string>
+    <string name="cwm_description">
+        ClockworkMod Recovery is the most known Custom Recovery for Android
+    </string>
+    <string name="twrp_description">
+        Team Winn Recovery Project (TWRP) is a full touch controllable Custom Recovery
+    </string>
+    <string name="philz_description">
+        PhilZ Touch Recovery is a improved advanced version of ClockworkMod
+    </string>
+    <string name="stock_recovery_description">
+        Stock recoveries are the standard recovery, here you can return to your stock recovery.
+    </string>
+    <string name="stock_kernel_description">
+        Stock kernel are the standard kernel, here you can return to your stock kernel.
+    </string>
+    <string name="delete_confirmation">
+        Did you really want to delete all downloaded images?
+    </string>
+    <string name="other_storage_description">
+        This option allows you to flash already downloaded Recovery files stored on your device.
+    </string>
+    <string name="reboot_confirmation">Reboot now?</string>
+    <string name="shutdown_confirmation">Shutdown now?</string>
+    <string name="history_description">Here you can find the last 5 flashed images</string>
+    <string name="reset_app">Reset App</string>
+    <string name="reset_app_description">Reset app settings with the standard</string>
 
 </resources>

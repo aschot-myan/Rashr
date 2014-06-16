@@ -4,10 +4,10 @@ android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 8
         targetSdkVersion 19
-        versionCode 78
-        versionName '1.9'
+        versionCode 79
+        versionName '2.0'
     }
     signingConfigs {
         DsLNeXuS {
@@ -35,4 +35,5 @@ dependencies {
     compile project(':root-commands')
     compile project(':Utils-Library')
     compile project(':AppMsg')
+    compile project(':CardsUILib')
 }

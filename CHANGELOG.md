@@ -1,6 +1,13 @@
 CHANGELOG
 ====================
 
+Update [2.0]
+
+-New layouts now in Google Now style
+-Motorola unified builds fixed
+-CardsUI implemented
+-Better Motorola unified builds handling
+
 Update [1.9]
 
 -Unified Builds fixed

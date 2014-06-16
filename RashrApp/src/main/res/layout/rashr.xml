@@ -24,23 +24,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/bFlashRecovery"
-                    style="?button_style"
+                <com.fima.cardsui.views.CardUI
+                    android:id="@+id/FlashCards"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_update"
-                    android:onClick="bFlashRecovery"
-                    android:text="@string/sFlashRecovery" />
-
-                <Button
-                    android:id="@+id/bFlashKernel"
-                    style="?button_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_flash"
-                    android:onClick="bFlashKernel"
-                    android:text="@string/sFlashKernel" />
+                    android:layout_height="match_parent" />
 
                 <com.google.ads.AdView xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
                     android:id="@+id/adView"
@@ -52,45 +39,18 @@
                     ads:loadAdOnCreate="true"
                     ads:testDevices="D8C221D153DA442260EA751810375941, 896047E1A726D481A3AD95454BD15606, B490C4995AB8573C496EF5F9D7FC3B47" />
 
-                <Button
-                    android:id="@+id/bClearCache"
-                    style="?button_style"
+                <com.fima.cardsui.views.CardUI
+                    android:id="@+id/Options"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_delete"
-                    android:onClick="bClearCache"
-                    android:text="@string/sClearCache" />
+                    android:layout_height="match_parent" />
 
-                <Button
-                    android:id="@+id/bRebooter"
-                    style="?button_style"
+                <com.fima.cardsui.views.CardUI
+                    android:id="@+id/Rebooter"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_reboot"
-                    android:onClick="bRebooter"
-                    android:text="@string/sRebooter" />
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <LinearLayout
-        android:id="@+id/InfoLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvVersion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/custom_green" />
-
-    </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
