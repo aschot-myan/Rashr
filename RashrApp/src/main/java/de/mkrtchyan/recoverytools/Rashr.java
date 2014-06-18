@@ -659,7 +659,6 @@ public class Rashr extends ActionBarActivity {
                     .makeText(mActivity, R.string.no_history, AppMsg.STYLE_ALERT)
                     .show();
         }
-
     }
 
     /**
@@ -907,7 +906,7 @@ public class Rashr extends ActionBarActivity {
         final MyCard HistoryCard = new MyCard(getString(R.string.sHistory),
                 getString(R.string.history_description));
         HistoryCard.setData("recovery");
-        OtherCard.setOnClickListener(new View.OnClickListener() {
+        HistoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFlashHistory(HistoryCard);
@@ -962,7 +961,7 @@ public class Rashr extends ActionBarActivity {
         final MyCard HistoryCard = new MyCard(getString(R.string.sHistory),
                 getString(R.string.history_description));
         HistoryCard.setData("kernel");
-        OtherCard.setOnClickListener(new View.OnClickListener() {
+        HistoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFlashHistory(HistoryCard);

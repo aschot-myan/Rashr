@@ -1,6 +1,10 @@
 CHANGELOG
 ====================
 
+Update [2.0.1]
+
+-Flash Other and history problems fixed
+
 Update [2.0]
 
 -New layouts now in Google Now style
