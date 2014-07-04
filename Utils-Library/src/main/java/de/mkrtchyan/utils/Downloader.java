@@ -45,7 +45,6 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
     private Context mContext;
     private ProgressDialog downloadDialog;
     private boolean first_start = true;
-    private Runnable AfterDownload;
     private String URL;
     private String FileName;
     private File outputFile;
@@ -57,6 +56,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
     private File ChecksumFile = null;
     private Downloader thisDownloader = this;
     private boolean askBeforeDownload = false;
+    private OnDownloadListener onDownloadListener = null;
 
     private IOException ioException;
     private MalformedURLException urlException;
@@ -68,12 +68,13 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
         this.outputFile = outputFile;
     }
 
-    public Downloader(Context mContext, String URL, String FileName, File outputFile, Runnable AfterDownload) {
+    public Downloader(Context mContext, String URL, String FileName, File outputFile,
+                      OnDownloadListener onDownloadListener) {
         this.mContext = mContext;
         this.URL = URL;
         this.FileName = FileName;
         this.outputFile = outputFile;
-        this.AfterDownload = AfterDownload;
+        this.onDownloadListener = onDownloadListener;
     }
 
     public Downloader(Context mContext, String URL, File outputFile) {
@@ -83,23 +84,19 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
         this.outputFile = outputFile;
     }
 
-    public Downloader(Context mContext, String URL, File outputFile, Runnable AfterDownload) {
+    public Downloader(Context mContext, String URL, File outputFile,
+                      OnDownloadListener onDownloadListener) {
         this.mContext = mContext;
         this.URL = URL;
         this.FileName = outputFile.getName();
         this.outputFile = outputFile;
-        this.AfterDownload = AfterDownload;
+        this.onDownloadListener = onDownloadListener;
     }
 
     public void ask() {
         final Downloader thisDownloader = this;
         if (askBeforeDownload) {
-            new Notifyer(mContext).createAlertDialog(R.string.info, String.format(mContext.getString(R.string.download_now), outputFile.getName()), new Runnable() {
-                @Override
-                public void run() {
-                    thisDownloader.execute();
-                }
-            }).show();
+            showDownloadNowDialog();
         } else {
             thisDownloader.execute();
         }
@@ -111,12 +108,13 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
         if (!outputFile.getParentFile().exists()) {
             outputFile.getParentFile().mkdir();
         }
+
+        if (!URL.endsWith("/"))
+            URL = URL + "/";
+        if (!URL.startsWith("http://")
+                && !URL.startsWith("https://"))
+            URL = "http://" + URL;
         if (!hide) {
-            if (!URL.endsWith("/"))
-                URL = URL + "/";
-            if (!URL.startsWith("http://")
-                    && !URL.startsWith("https://"))
-                URL = "http://" + URL;
             downloadDialog = new ProgressDialog(mContext);
             downloadDialog.setTitle(mContext.getResources().getString(R.string.connecting));
             downloadDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -189,7 +187,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
                 return false;
             }
         }
-        return !checkFile || !isDowloadCorrupt();
+        return !checkFile || !isDownloadCorrupt();
     }
 
     @Override
@@ -230,15 +228,18 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
             }
         }
         if (success) {
-            if (AfterDownload != null) {
-                AfterDownload.run();
+            if (onDownloadListener != null) {
+                onDownloadListener.success(outputFile);
             }
         } else {
             if (!hide) {
-                if (ioException != null)
-                    Notifyer.showExceptionToast(mContext, TAG, ioException);
-                if (urlException != null)
-                    Notifyer.showExceptionToast(mContext, TAG, urlException);
+                if (onDownloadListener != null) {
+                    if (ioException != null)
+                        onDownloadListener.failed(ioException);
+                    if (urlException != null)
+                        onDownloadListener.failed(urlException);
+                }
+
             }
             if (outputFile.delete() || retry) {
                 loop();
@@ -247,7 +248,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
 
     }
 
-    public boolean isDowloadCorrupt() {
+    public boolean isDownloadCorrupt() {
         try {
             return !SHA1.verifyChecksum(outputFile, ChecksumFile);
         } catch (IOException e) {
@@ -262,7 +263,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
 
     private void loop() {
         final Downloader loop_downloader = new Downloader(mContext, URL, FileName, outputFile);
-        loop_downloader.setAfterDownload(AfterDownload);
+        loop_downloader.setOnDownloadListener(onDownloadListener);
         loop_downloader.setOverrideFile(overrideFile);
         loop_downloader.setCancelable(cancelable);
         loop_downloader.setHidden(hide);
@@ -293,10 +294,6 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
         }
     }
 
-    public void setAfterDownload(Runnable AfterDownload) {
-        this.AfterDownload = AfterDownload;
-    }
-
     public void setChecksumFile(File ChecksumFile) {
         this.ChecksumFile = ChecksumFile;
         checkFile = ChecksumFile != null;
@@ -320,5 +317,27 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
 
     public void setAskBeforeDownload(boolean askBeforeDownload) {
         this.askBeforeDownload = askBeforeDownload;
+    }
+
+    public void setOnDownloadListener(OnDownloadListener onDownloadListener) {
+        this.onDownloadListener = onDownloadListener;
+    }
+
+    private void showDownloadNowDialog() {
+        new AlertDialog.Builder(mContext)
+                .setTitle(R.string.info)
+                .setMessage(String.format(mContext.getString(R.string.download_now), outputFile.getName()))
+                .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        thisDownloader.execute();
+                    }
+                })
+                .show();
+    }
+
+    public abstract interface OnDownloadListener {
+        void success(File file);
+        void failed(Exception e);
     }
 }

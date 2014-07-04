@@ -37,34 +37,40 @@ import java.util.Collections;
 
 public class FileChooserDialog extends Dialog {
 
-    private final File StartFolder;
+    private File StartFolder = File.listRoots()[0];
     final private ListView lvFiles;
     private final Context mContext;
     private File currentPath;
     private boolean showHidden = false;
     private File selectedFile;
     private ArrayList<File> FileList = new ArrayList<File>();
-    private Runnable runAtChoose;
+    private ArrayAdapter<String> FilesAdapter = null;
+    private OnFileChooseListener onFileChooseListener = null;
+    private OnFolderChooseListener onFolderChooseListener = null;
     private String AllowedEXT[] = {""};
     private LinearLayout layout;
     private boolean warn = true;
-    private boolean BrowseUpEnabled = false;
+    private boolean BrowseUpAllowed = false;
 
-    public FileChooserDialog(final Context mContext, final File StartFolder, Runnable runAtChoose) throws NullPointerException {
+    public FileChooserDialog(final Context mContext) {
         super(mContext);
-        this.setTitle("Pick a file");
-
-        this.StartFolder = StartFolder;
         this.mContext = mContext;
+        lvFiles = new FileListView(mContext);
+        setup();
+    }
+
+    private void setup() {
+        this.setTitle(R.string.file_chooser_dialog_title);
         currentPath = StartFolder;
-        this.runAtChoose = runAtChoose;
+        FilesAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1);
 
         layout = new LinearLayout(mContext);
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        lvFiles = new FileListView(mContext);
         layout.addView(lvFiles);
         setContentView(layout);
+
+        lvFiles.setAdapter(FilesAdapter);
 
         lvFiles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -83,14 +89,18 @@ public class FileChooserDialog extends Dialog {
     }
 
     private void reload() {
+        ArrayList<String> tmp = new ArrayList<String>();
+        tmp.clear();
         FileList.clear();
+        FilesAdapter.clear();
 
-        if ((!currentPath.equals(StartFolder) || BrowseUpEnabled)
+        if ((!currentPath.equals(StartFolder) || BrowseUpAllowed)
                 && currentPath.getParentFile() != null) {
             FileList.add(currentPath.getParentFile());
         }
-        try {
-            for (File i : currentPath.listFiles()) {
+        File fileList[] = currentPath.listFiles();
+        if (fileList != null) {
+            for (File i : fileList) {
                 if (showHidden || !i.getName().startsWith(".")) {
                     if (!AllowedEXT[0].equals("") || AllowedEXT.length > 1) {
                         if (i.isDirectory()) {
@@ -99,6 +109,7 @@ public class FileChooserDialog extends Dialog {
                             for (String EXT : AllowedEXT) {
                                 if (i.getName().endsWith(EXT)) {
                                     FileList.add(i);
+                                    break;
                                 }
                             }
                         }
@@ -107,71 +118,63 @@ public class FileChooserDialog extends Dialog {
                     }
                 }
             }
-        } catch (NullPointerException e) {
-            if (isShowing()) {
-                dismiss();
-            }
-        }
-
-        try {
             Collections.sort(FileList);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
         }
 
-        String[] tmp = new String[FileList.toArray(new File[FileList.size()]).length];
-        for (int i = 0; i < tmp.length; i++) {
+        boolean parent = currentPath.getParentFile() != null;
 
-            if (i == 0 && (BrowseUpEnabled || !currentPath.equals(StartFolder))
-                    && currentPath.getParentFile() != null) {
-                if (!currentPath.getParentFile().getAbsolutePath().equals("/")) {
-                    tmp[0] = currentPath.getParentFile().getAbsolutePath() + "/";
+        for (File i : FileList) {
+            if (i.isDirectory()) {
+                if (parent) {
+                    if (!i.toString().equals("/")) {
+                        tmp.add(i + "/");
+                    } else {
+                        tmp.add(i.getAbsolutePath());
+                    }
+                    parent = false;
                 } else {
-                    tmp[0] = currentPath.getParentFile().getAbsolutePath();
+                    tmp.add(i.getName() + "/");
                 }
             } else {
-                if (FileList.get(i).isDirectory()) {
-                    tmp[i] = FileList.get(i).getName() + "/";
-                } else {
-                    tmp[i] = FileList.get(i).getName();
-                }
+                tmp.add(i.getName());
             }
         }
-        lvFiles.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, tmp));
+        for (String i : tmp) {
+            FilesAdapter.add(i);
+        }
     }
 
     private void fileSelected() {
-        if (warn) {
-            AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
-            mAlertDialog
-                    .setTitle(R.string.warning)
-                    .setMessage(String.format(mContext.getString(R.string.choose_message), selectedFile.getName()))
-                    .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            runAtChoose.run();
-                            dismiss();
-                        }
-                    })
-                    .setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .show();
-        } else {
-            runAtChoose.run();
-            this.dismiss();
+        if (onFileChooseListener != null) {
+            if (warn) {
+                AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
+                mAlertDialog
+                        .setTitle(R.string.warning)
+                        .setMessage(String.format(mContext.getString(R.string.choose_message), selectedFile.getName()))
+                        .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                onFileChooseListener.OnFileChoose(selectedFile);
+                                dismiss();
+                            }
+                        })
+                        .setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .show();
+            } else {
+                onFileChooseListener.OnFileChoose(selectedFile);
+                this.dismiss();
+            }
         }
     }
 
     public void show() {
         super.show();
+        currentPath = StartFolder;
         reload();
-    }
-
-    public File getSelectedFile() {
-        return selectedFile;
     }
 
     public void setAllowedEXT(String AllowedEXT[]) {
@@ -194,8 +197,8 @@ public class FileChooserDialog extends Dialog {
         this.warn = warn;
     }
 
-    public void setBrowseUpEnabled(boolean BrowseUpEnabled) {
-        this.BrowseUpEnabled = BrowseUpEnabled;
+    public void setBrowseUpAllowed(boolean BrowseUpAllowed) {
+        this.BrowseUpAllowed = BrowseUpAllowed;
         if (isShowing()) {
             reload();
         }
@@ -208,7 +211,26 @@ public class FileChooserDialog extends Dialog {
         }
     }
 
-    public ListView getList() {
+    public ListView getListView() {
         return lvFiles;
+    }
+
+    public void setOnFileChooseListener(OnFileChooseListener listener) {
+        onFileChooseListener = listener;
+    }
+
+    public boolean setStartFolder(File StartFolder) {
+        if (StartFolder.isDirectory()) {
+            this.StartFolder = StartFolder;
+        }
+        return StartFolder.isDirectory();
+    }
+
+    public abstract interface OnFileChooseListener {
+        void OnFileChoose(File file);
+    }
+
+    public abstract interface OnFolderChooseListener {
+        void OnFolderChoose(File folder);
     }
 }

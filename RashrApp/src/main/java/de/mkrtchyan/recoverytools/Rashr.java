@@ -99,6 +99,7 @@ public class Rashr extends ActionBarActivity {
     private static final String PREF_KEY_ADS = "show_ads";
     private static final String PREF_KEY_CUR_VER = "current_version";
     private static final String PREF_KEY_FIRST_RUN = "first_run";
+    private static final String PREF_KEY_HIDE_RATER = "show_rater";
     private static final String PREF_KEY_SHOW_UNIFIED = "show_unified";
     /**
      * Web Address for download Recovery and Kernel IMGs
@@ -108,7 +109,7 @@ public class Rashr extends ActionBarActivity {
     private static final String RECOVERY_SUMS_URL = "http://dslnexus.de/Android/";
     private static final String KERNEL_SUMS_URL = "http://dslnexus.de/Android/";
     /**
-     * Used paths and files
+     * Used folder and files
      */
     private static final File PathToSd = Environment.getExternalStorageDirectory();
     private static final File PathToRashr = new File(PathToSd, "Rashr");
@@ -131,7 +132,6 @@ public class Rashr extends ActionBarActivity {
     /**
      * Declaring needed objects
      */
-    private final Notifyer mNotifyer = new Notifyer(mContext);
     private final int EMAIL_REQ_CODE = 8451;
     private final int APPCOMPAT_DARK = R.style.MyDark;
     private final int APPCOMPAT_LIGHT = R.style.MyLight;
@@ -158,8 +158,23 @@ public class Rashr extends ActionBarActivity {
                     } else {
                         /** Flashing needs to be handled specially (not standard flash method)*/
                         if (mDevice.isFOTAFlashed()) {
-                            /** Show instructions if FOTAKernel will be flashed */
-                            mNotifyer.createAlertDialog(R.string.warning, R.string.fota, rFlashRecovery).show();
+                            /** Show warning if FOTAKernel will be flashed */
+                            new AlertDialog.Builder(mContext)
+                                    .setTitle(R.string.warning)
+                                    .setMessage(R.string.fota)
+                                    .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            rFlashRecovery.run();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    })
+                                    .show();
                         } else {
                             /** Get user input if user want to install over recovery now */
                             showOverRecoveryInstructions();
@@ -243,14 +258,15 @@ public class Rashr extends ActionBarActivity {
         final Thread StartThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    /** Try to get root access */
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvLoading.setText(R.string.getting_root);
-                        }
-                    });
+                /** Try to get root access */
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvLoading.setText(R.string.getting_root);
+                    }
+                });
+
+	            try {
                     mShell = Shell.startRootShell(mContext);
                     mToolbox = new Toolbox(mShell);
                 } catch (IOException e) {
@@ -356,7 +372,9 @@ public class Rashr extends ActionBarActivity {
                             mActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Notifyer.showAppRateDialog(mContext);
+                                    if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_HIDE_RATER)) {
+                                        Notifyer.showAppRateDialog(mContext, PREF_NAME, PREF_KEY_HIDE_RATER);
+                                    }
                                     showChangelog();
                                 }
                             });
@@ -396,8 +414,9 @@ public class Rashr extends ActionBarActivity {
         final ArrayList<String> Versions;
         if (!mDevice.downloadUtils(mContext)) {
             /**
-             * If there files be needed to flash download it and listing device specified recovery
-             * file for example recovery-clockwork-touch-6.0.3.1-grouper.img(read out from IMG_SUMS)
+             * If there files be needed to flash download it and listing device specified
+             * recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
+             * (read out from RECOVERY_SUMS)
              */
             String SYSTEM = card.getData().toString();
             ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<String>(mContext,
@@ -409,11 +428,11 @@ public class Rashr extends ActionBarActivity {
                     try {
                         VersionsAdapter.add("Stock " + i.split("-")[3].replace(mDevice.getRecoveryExt(), ""));
                     } catch (ArrayIndexOutOfBoundsException e) {
+	                    ERRORS.add(e.toString() + " failed while formatting version (Stock Recovery)");
                         VersionsAdapter.add(i);
                     }
                 }
             } else if (SYSTEM.equals("clockwork")) {
-
                 Versions = mDevice.getCwmRecoveryVersions();
                 path = PathToCWM;
                 for (String i : Versions) {
@@ -427,7 +446,7 @@ public class Rashr extends ActionBarActivity {
                             device += ")";
                             VersionsAdapter.add("ClockworkMod Touch " + i.split("-")[3] + " " + device);
                         } else {
-                            String device = "(";
+							String device = "(";
                             for (int splitNr = 3; splitNr < i.split("-").length; splitNr++) {
                                 if (!device.equals("(")) device += "-";
                                 device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
@@ -436,6 +455,7 @@ public class Rashr extends ActionBarActivity {
                             VersionsAdapter.add("ClockworkMod " + i.split("-")[2] + " " + device);
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
+	                    ERRORS.add(e.toString() + " failed while formatting version (CWM Recovery)");
                         VersionsAdapter.add(i);
                     }
                 }
@@ -456,6 +476,7 @@ public class Rashr extends ActionBarActivity {
                             VersionsAdapter.add("TWRP " + i.split("-")[1].replace(mDevice.getRecoveryExt(), "") + ")");
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
+	                    ERRORS.add(e.toString() + " failed while formatting version (TWRP Recovery)");
                         VersionsAdapter.add(i);
                     }
                 }
@@ -472,6 +493,7 @@ public class Rashr extends ActionBarActivity {
                         device += ")";
                         VersionsAdapter.add("PhilZ Touch " + i.split("_")[2].split("-")[0] + " " + device);
                     } catch (ArrayIndexOutOfBoundsException e) {
+	                    ERRORS.add(e.toString() + " failed while formatting version (PHILZ Recovery)");
                         VersionsAdapter.add(i);
                     }
                 }
@@ -497,7 +519,17 @@ public class Rashr extends ActionBarActivity {
                     fRECOVERY = new File(path, fileName);
                     if (!fRECOVERY.exists()) {
                         Downloader RecoveryDownloader = new Downloader(mContext, RECOVERY_URL,
-                                fRECOVERY, rRecoveryFlasher);
+                                fRECOVERY, new Downloader.OnDownloadListener() {
+                            @Override
+                            public void success(File file) {
+                                rRecoveryFlasher.run();
+                            }
+
+                            @Override
+                            public void failed(Exception e) {
+	                            ERRORS.add(e.toString());
+                            }
+                        });
                         RecoveryDownloader.setRetry(true);
                         RecoveryDownloader.setAskBeforeDownload(true);
                         RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);
@@ -515,23 +547,22 @@ public class Rashr extends ActionBarActivity {
      */
     public void bFlashOtherRecovery(View view) {
         fRECOVERY = null;
-        try {
-            fcFlashOtherRecovery = new FileChooserDialog(view.getContext(), PathToSd, new Runnable() {
+        if (fcFlashOtherRecovery == null) {
+            String AllowedEXT[] = {mDevice.getRecoveryExt()};
+            fcFlashOtherRecovery = new FileChooserDialog(view.getContext());
+            fcFlashOtherRecovery.setAllowedEXT(AllowedEXT);
+            fcFlashOtherRecovery.setBrowseUpAllowed(true);
+            fcFlashOtherRecovery.setOnFileChooseListener(new FileChooserDialog.OnFileChooseListener() {
                 @Override
-                public void run() {
-                    fRECOVERY = fcFlashOtherRecovery.getSelectedFile();
+                public void OnFileChoose(File file) {
+                    fRECOVERY = file;
                     rRecoveryFlasher.run();
                 }
             });
-            fcFlashOtherRecovery.setTitle(R.string.pick_file);
-            String AllowedEXT[] = {mDevice.getRecoveryExt()};
-            fcFlashOtherRecovery.setAllowedEXT(AllowedEXT);
-            fcFlashOtherRecovery.setBrowseUpEnabled(true);
+            fcFlashOtherRecovery.setStartFolder(PathToSd);
             fcFlashOtherRecovery.setWarn(true);
-            fcFlashOtherRecovery.show();
-        } catch (NullPointerException e) {
-            ERRORS.add(e.toString());
         }
+        fcFlashOtherRecovery.show();
     }
 
     public void FlashSupportedKernel(Card card) {
@@ -569,7 +600,17 @@ public class Rashr extends ActionBarActivity {
 
                         if (!fKERNEL.exists()) {
                             Downloader RecoveryDownloader = new Downloader(mContext, KERNEL_URL,
-                                    fKERNEL, rRecoveryFlasher);
+                                    fKERNEL, new Downloader.OnDownloadListener() {
+                                @Override
+                                public void success(File file) {
+                                    rRecoveryFlasher.run();
+                                }
+
+                                @Override
+                                public void failed(Exception e) {
+
+                                }
+                            });
                             RecoveryDownloader.setRetry(true);
                             RecoveryDownloader.setAskBeforeDownload(true);
                             RecoveryDownloader.setChecksumFile(KernelCollectionFile);
@@ -588,33 +629,28 @@ public class Rashr extends ActionBarActivity {
      */
     public void bFlashOtherKernel(View view) {
         fKERNEL = null;
-        try {
-            fcFlashOtherKernel = new FileChooserDialog(view.getContext(), PathToSd, new Runnable() {
+        if (fcFlashOtherKernel == null) {
+            String AllowedEXT[] = {mDevice.getKernelExt()};
+            fcFlashOtherKernel = new FileChooserDialog(view.getContext());
+            fcFlashOtherKernel.setOnFileChooseListener(new FileChooserDialog.OnFileChooseListener() {
                 @Override
-                public void run() {
-                    fKERNEL = fcFlashOtherKernel.getSelectedFile();
+                public void OnFileChoose(File file) {
+                    fKERNEL = file;
                     rKernelFlasher.run();
                 }
             });
-            fcFlashOtherKernel.setTitle(R.string.pick_file);
-            String AllowedEXT[] = {mDevice.getKernelExt()};
+            fcFlashOtherKernel.setStartFolder(PathToSd);
             fcFlashOtherKernel.setAllowedEXT(AllowedEXT);
-            fcFlashOtherKernel.setBrowseUpEnabled(true);
+            fcFlashOtherKernel.setBrowseUpAllowed(true);
             fcFlashOtherKernel.setWarn(true);
-            fcFlashOtherKernel.show();
-        } catch (NullPointerException e) {
-            ERRORS.add(e.toString());
         }
+        fcFlashOtherKernel.show();
     }
 
     public void showFlashHistory(Card card) {
         final boolean RecoveryHistory = card.getData().toString().equals("recovery");
-        String PREF_KEY;
-        if (RecoveryHistory) {
-            PREF_KEY = PREF_KEY_RECOVERY_HISTORY;
-        } else {
-            PREF_KEY = PREF_KEY_KERNEL_HISTORY;
-        }
+        final String PREF_KEY = RecoveryHistory ? PREF_KEY_RECOVERY_HISTORY : PREF_KEY_KERNEL_HISTORY;
+        final String EXT = RecoveryHistory ? mDevice.getRecoveryExt() : mDevice.getKernelExt();
         final ArrayList<File> HistoryFiles = new ArrayList<File>();
         final ArrayList<String> HistoryFileNames = new ArrayList<String>();
         final Dialog HistoryDialog = new Dialog(mContext);
@@ -623,11 +659,11 @@ public class Rashr extends ActionBarActivity {
         File tmp;
         for (int i = 0; i < 5; i++) {
             tmp = new File(Common.getStringPref(mContext, PREF_NAME, PREF_KEY + String.valueOf(i)));
-            if (!tmp.exists())
-                Common.setStringPref(mContext, PREF_NAME, PREF_KEY + String.valueOf(i), "");
-            else {
+            if (tmp.exists() && !tmp.isDirectory() && tmp.getName().endsWith(EXT)) {
                 HistoryFiles.add(tmp);
                 HistoryFileNames.add(tmp.getName());
+            } else {
+                Common.setStringPref(mContext, PREF_NAME, PREF_KEY + String.valueOf(i), "");
             }
         }
         HistoryList.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, HistoryFileNames));
@@ -987,7 +1023,10 @@ public class Rashr extends ActionBarActivity {
     }
 
     public void report(final boolean isCancelable) {
-        final Dialog reportDialog = mNotifyer.createDialog(R.string.commentar, R.layout.dialog_comment, false, true);
+        final Dialog reportDialog = new Dialog(mContext);
+        reportDialog.setTitle(R.string.commentar);
+        reportDialog.setContentView(R.layout.dialog_comment);
+        reportDialog.setCancelable(isCancelable);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1196,18 +1235,6 @@ public class Rashr extends ActionBarActivity {
 
 
                         switch (menuItem.getItemId()) {
-                            case R.id.iReboot:
-                                mToolbox.reboot(Toolbox.REBOOT_REBOOT);
-                                return true;
-                            case R.id.iRebootRecovery:
-                                mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
-                                return true;
-                            case R.id.iRebootBootloader:
-                                mToolbox.reboot(Toolbox.REBOOT_BOOTLOADER);
-                                return true;
-                            case R.id.iRebootShutdown:
-                                mToolbox.reboot(Toolbox.REBOOT_SHUTDOWN);
-                                break;
                             case R.id.iRestoreRecovery:
                                 final FlashUtil RestoreRecoveryUtil = new FlashUtil(mShell, mContext, mDevice,
                                         new File(PathToRecoveryBackups, FileName), FlashUtil.JOB_RESTORE_RECOVERY);
@@ -1559,11 +1586,19 @@ public class Rashr extends ActionBarActivity {
                         ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Common.deleteFolder(PathToCWM, false);
-                                Common.deleteFolder(PathToTWRP, false);
-                                Common.deleteFolder(PathToPhilz, false);
-                                Common.deleteFolder(PathToStockRecovery, false);
-                                Common.deleteFolder(PathToStockKernel,false);
+                                if (!Common.deleteFolder(PathToCWM, false)
+                                    || !Common.deleteFolder(PathToTWRP, false)
+                                    || !Common.deleteFolder(PathToPhilz, false)
+                                    || !Common.deleteFolder(PathToStockRecovery, false)
+                                    || !Common.deleteFolder(PathToStockKernel,false)) {
+                                    AppMsg
+                                            .makeText(mActivity, R.string.delete_failed, AppMsg.STYLE_CONFIRM)
+                                            .show();
+                                } else {
+                                    AppMsg
+                                            .makeText(mActivity, R.string.files_deleted, AppMsg.STYLE_INFO)
+                                            .show();
+                                }
                             }
                         });
                         ConfirmationDialog.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
@@ -1595,6 +1630,7 @@ public class Rashr extends ActionBarActivity {
                                 try {
                                     mToolbox.reboot(Toolbox.REBOOT_REBOOT);
                                 } catch (Exception e) {
+	                                ERRORS.add(e.toString());
                                     e.printStackTrace();
                                 }
                             }
@@ -1622,6 +1658,7 @@ public class Rashr extends ActionBarActivity {
                                 try {
                                     mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
                                 } catch (Exception e) {
+	                                ERRORS.add(e.toString());
                                     e.printStackTrace();
                                 }
                             }
@@ -1649,6 +1686,7 @@ public class Rashr extends ActionBarActivity {
                                 try {
                                     mToolbox.reboot(Toolbox.REBOOT_BOOTLOADER);
                                 } catch (Exception e) {
+	                                ERRORS.add(e.toString());
                                     e.printStackTrace();
                                 }
                             }
@@ -1676,6 +1714,7 @@ public class Rashr extends ActionBarActivity {
                                 try {
                                     mToolbox.reboot(Toolbox.REBOOT_SHUTDOWN);
                                 } catch (Exception e) {
+	                                ERRORS.add(e.toString());
                                     e.printStackTrace();
                                 }
                             }
@@ -1698,7 +1737,6 @@ public class Rashr extends ActionBarActivity {
                 mRebootCards.addStack(RebooterStack, true);
             }
         }
-
 
     }
 
@@ -1732,7 +1770,7 @@ public class Rashr extends ActionBarActivity {
 
     public void setupSwipeUpdater() {
         mSwipeUpdater = (SwipeRefreshLayout) findViewById(R.id.swipe_updater);
-        mSwipeUpdater.setColorScheme(R.color.custom_green,
+	    mSwipeUpdater.setColorSchemeColors(R.color.custom_green,
                 R.color.custom_yellow,
                 R.color.custom_green,
                 android.R.color.darker_gray);
@@ -1754,9 +1792,9 @@ public class Rashr extends ActionBarActivity {
                 final Downloader KernelUpdater = new Downloader(mContext, KERNEL_SUMS_URL, KernelCollectionFile);
                 KernelUpdater.setOverrideFile(true);
                 KernelUpdater.setHidden(true);
-                RecoveryUpdater.setAfterDownload(new Runnable() {
+                RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
                     @Override
-                    public void run() {
+                    public void success(File file) {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -1765,11 +1803,19 @@ public class Rashr extends ActionBarActivity {
                             }
                         }).start();
                     }
+
+                    @Override
+                    public void failed(Exception e) {
+	                    ERRORS.add(e.toString());
+                        AppMsg
+                                .makeText(mActivity, e.getMessage(), AppMsg.STYLE_ALERT)
+                                .show();
+                    }
                 });
 
-                KernelUpdater.setAfterDownload(new Runnable() {
+                KernelUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
                     @Override
-                    public void run() {
+                    public void success(File file) {
                         mDevice.loadKernelList();
                         mSwipeUpdater.setRefreshing(false);
                         final int new_img_count = (mDevice.getStockRecoveryVersions().size()
@@ -1786,6 +1832,14 @@ public class Rashr extends ActionBarActivity {
                                         .show();
                             }
                         });
+                    }
+
+                    @Override
+                    public void failed(Exception e) {
+	                    ERRORS.add(e.toString());
+                        AppMsg
+                                .makeText(mActivity, e.getMessage(), AppMsg.STYLE_ALERT)
+                                .show();
                     }
                 });
                 RecoveryUpdater.execute();

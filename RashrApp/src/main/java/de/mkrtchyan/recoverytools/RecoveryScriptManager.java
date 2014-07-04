@@ -64,15 +64,16 @@ public class RecoveryScriptManager extends ActionBarActivity {
     }
 
     public void addZip(View view) {
-        fileChooser = new FileChooserDialog(mContext, new File("/"), new Runnable() {
+        fileChooser = new FileChooserDialog(mContext);
+        fileChooser.setOnFileChooseListener(new FileChooserDialog.OnFileChooseListener() {
             @Override
-            public void run() {
-                addFileToQueue(fileChooser.getSelectedFile());
+            public void OnFileChoose(File file) {
+                addFileToQueue(file);
             }
         });
         String EXT[] = {"zip"};
         fileChooser.setAllowedEXT(EXT);
-        fileChooser.setBrowseUpEnabled(true);
+        fileChooser.setBrowseUpAllowed(true);
         fileChooser.setWarn(false);
         fileChooser.show();
     }
@@ -95,7 +96,7 @@ public class RecoveryScriptManager extends ActionBarActivity {
         CheckBox cbWipeDalvik = (CheckBox) findViewById(R.id.cbWipeDalvik);
         CheckBox cbWipeData = (CheckBox) findViewById(R.id.cbWipeData);
         final StringBuilder command = new StringBuilder();
-        command.append("echo #####Script created by Recovery-Tools#####;");
+        command.append("echo #####Script created by Rashr#####;");
         if (cbBakBoot.isChecked() || cbBakCache.isChecked() || cbBakData.isChecked()
                 || cbBakRecovery.isChecked() || cbBakSystem.isChecked()) {
             command.append("backup ");

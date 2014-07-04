@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="info">Information</string>
+    <string name="download_now">%s jetzt herunterladen?</string>
+    <string name="corrupt_download">Heruntergeladene Datei ist beschädigt</string>
+    <string name="try_again">Erneut versuchen!</string>
+    <string name="later">Später</string>
+    <string name="Downloading">Lade herunter&#8230;</string>
+    <string name="connecting">Verbinde</string>
+    <string name="no_connection">
+        Sie sind mit keinen Netztwerk verbunden. Download wurde abgebrochen!
+    </string>
+    <string name="failed_download">
+        Ein Fehler während des Downloads von %s ist aufgetreten möchten Sie es wiederholen?
+    </string>
+    <string name="error">Fehler</string>
+    <string name="warning">Warnung!</string>
+    <string name="logs_title">Mitgeschriebene Shell-Befehle</string>
+    <string name="clear_logs">Logs säubern</string>
+
+    <string name="positive">Ja</string>
+    <string name="neutral">Nein</string>
+    <string name="negative">Abbrechen</string>
+
+    <string name="file_chooser_dialog_title">Datei auswählen</string>
+    <string name="choose_message">Sind Sie sicher das Sie %s auswählen möchten?</string>
+
+    <string name="no_root">Root-Zugriff verweigert! Mehr Infos unter xda-developers.com</string>
+
+    <string name="cancel">Abbrechen</string>
+
+    <string name="rate_title">Bewerten Sie meine App!</string>
+    <string name="rate_message">
+        Möchten Sie diese App im Play Store bewerten und meine Arbeit untersützen?
+    </string>
+    <string name="never_ask">Nie wieder fragen</string>
+    <string name="delete_failed">Löschen fehlgeschlagen</string>
+</resources>

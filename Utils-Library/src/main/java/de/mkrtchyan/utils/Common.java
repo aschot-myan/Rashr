@@ -31,7 +31,6 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,21 +57,26 @@ public class Common {
         }
     }
 
-    public static void deleteFolder(File Folder, boolean AndFolder) {
+    public static boolean deleteFolder(File Folder, boolean AndFolder) {
+        boolean failed = false;
         if (Folder.exists()
                 && Folder.isDirectory()) {
             File[] files = Folder.listFiles();
-            for (File i : files) {
-                if (i.isDirectory()) {
-                    deleteFolder(i, AndFolder);
-                } else {
-                    i.delete();
+            if (files != null) {
+                for (File i : files) {
+                    if (i.isDirectory()) {
+                        /** Recursive delete */
+                        failed = failed || !deleteFolder(i, AndFolder);
+                    } else {
+                        failed = failed || !i.delete();
+                    }
                 }
             }
             if (AndFolder) {
-                Folder.delete();
+                failed = failed || !Folder.delete();
             }
         }
+        return !failed;
     }
 
     public static boolean getBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY) {
@@ -110,16 +114,20 @@ public class Common {
     }
 
     public static void showLogs(final Context mContext) {
-        final Notifyer mNotifyer = new Notifyer(mContext);
-        final Dialog LogDialog = mNotifyer.createDialog(R.string.logs_title, R.layout.dialog_command_logs, false, true);
+        final Dialog LogDialog = new Dialog(mContext);
+        LogDialog.setTitle(R.string.logs_title);
+        LogDialog.setContentView(R.layout.dialog_command_logs);
         final TextView tvLog = (TextView) LogDialog.findViewById(R.id.tvSuLogs);
         final Button bClearLog = (Button) LogDialog.findViewById(R.id.bClearLog);
         bClearLog.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                new File(mContext.getFilesDir(), "commands.txt").delete();
-                tvLog.setText("");
+                if (new File(mContext.getFilesDir(), "commands.txt").delete()) {
+                    tvLog.setText("");
+                } else {
+                    tvLog.setText(R.string.delete_failed);
+                }
             }
         });
         String sLog = "";
@@ -132,9 +140,7 @@ public class Common {
             }
             br.close();
             tvLog.setText(sLog);
-        } catch (FileNotFoundException e) {
-            LogDialog.dismiss();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogDialog.dismiss();
         }
         LogDialog.show();

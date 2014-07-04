@@ -457,10 +457,15 @@ public class Device {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        new Downloader(mContext, "http://dslnexus.de/Android/utils/", archive.getName(), archive, new Runnable() {
+                        new Downloader(mContext, "http://dslnexus.de/Android/utils/", archive.getName(), archive, new Downloader.OnDownloadListener() {
                             @Override
-                            public void run() {
+                            public void success(File file) {
                                 Unzipper.unzip(archive, new File(Rashr.PathToUtils, Name));
+                            }
+
+                            @Override
+                            public void failed(Exception e) {
+
                             }
                         }).execute();
 

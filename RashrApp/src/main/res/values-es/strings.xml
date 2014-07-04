@@ -197,4 +197,6 @@
         Reconfigurar App? Todos los ajustes que ha echo se van ha borrar
     </string>
 
+    <string name="files_deleted">Archivos borrados</string>
+
 </resources>

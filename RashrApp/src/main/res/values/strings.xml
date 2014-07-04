@@ -205,4 +205,6 @@
     <string name="reset_app">Reset App</string>
     <string name="reset_app_description">Reset app settings with the standard</string>
 
+    <string name="files_deleted">Files deleted</string>
+
 </resources>

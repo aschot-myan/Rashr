@@ -84,7 +84,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     protected void onPreExecute() {
         pDialog = new ProgressDialog(mContext);
 
-        setBinaryPermissions();
+        try {
+            setBinaryPermissions();
+        } catch (FailedExecuteCommand failedExecuteCommand) {
+            ERRORS.add(failedExecuteCommand.toString());
+        }
 
         if (isJobFlash()) {
             pDialog.setTitle(R.string.flashing);
@@ -138,7 +142,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         pDialog.dismiss();
         if (!success || mException != null) {
             Notifyer.showExceptionToast(mContext, TAG, mException);
-        } else {
+        } else if (tmpFile.delete()) {
+            if (RunAtEnd != null) RunAtEnd.run();
             if (isJobFlash() || isJobRestore()) {
                 Log.i(TAG, "Flash finished");
                 if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_HIDE_REBOOT)) {
@@ -150,8 +155,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 }
             }
         }
-        tmpFile.delete();
-        if (RunAtEnd != null) RunAtEnd.run();
     }
 
     public void DD() throws FailedExecuteCommand, IOException {
@@ -185,11 +188,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     public void MTD() throws FailedExecuteCommand, IOException {
-        String Command = "";
+        String Command;
         if (isJobRecovery()) {
             Command = " recovery ";
         } else if (isJobKernel()) {
             Command = " boot ";
+        } else {
+            return;
         }
         if (isJobFlash() || isJobRestore()) {
             Log.i(TAG, "Flash started!");
@@ -240,13 +245,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (isJobBackup()) placeImgBack();
     }
 
-    private void setBinaryPermissions() {
-        busybox.setExecutable(true);
-        busybox.setReadable(true);
-        flash_image.setExecutable(true);
-        flash_image.setReadable(true);
-        dump_image.setExecutable(true);
-        dump_image.setReadable(true);
+    private void setBinaryPermissions() throws FailedExecuteCommand {
+        mToolbox.setFilePermissions(busybox, "755");
+        mToolbox.setFilePermissions(flash_image, "755");
+        mToolbox.setFilePermissions(dump_image, "755");
     }
 
     public void showRebootDialog() {

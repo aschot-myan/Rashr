@@ -54,7 +54,7 @@
     <string name="backupalready">Backup existiert bereits.</string>
     <string name="error">Fehler</string>
     <string name="not_supportded">
-        Ihr Gerät ist zurzeit nicht untersützt. System scannen und Gerät den Entwikler melden?
+        Ihr Gerät ist zurzeit nicht untersützt. System scannen und Gerät den Entwickler melden?
         Oder versuchen die Partition zu finden indem neugestartet wird?
     </string>
     <string name="no_root">
@@ -207,4 +207,6 @@
         App zu standard Einstellungen zurücksetzen (alle von Ihnen vorgenomenne Einstellungen werden
         gelöscht)
     </string>
+
+    <string name="files_deleted">Dateien gelöscht</string>
 </resources>
