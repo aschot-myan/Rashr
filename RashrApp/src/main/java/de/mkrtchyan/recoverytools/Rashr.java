@@ -46,6 +46,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -1756,12 +1757,17 @@ public class Rashr extends ActionBarActivity {
             RadioButton optAsRecovery = (RadioButton) findViewById(R.id.optAsRecovery);
             RadioButton optAsKernel = (RadioButton) findViewById(R.id.optAsKernel);
 
+	        ViewGroup parent;
             if (!mDevice.isRecoverySupported()) {
-                FlashAsLayout.removeView(optAsRecovery);
-                optAsKernel.setChecked(true);
+	            if ((parent = (ViewGroup) optAsRecovery.getParent()) != null) {
+		            parent.removeView(optAsRecovery);
+		            optAsKernel.setChecked(true);
+	            }
             }
             if (!mDevice.isKernelSupported()) {
-                FlashAsLayout.removeView((optAsKernel));
+	            if ((parent = (ViewGroup) optAsKernel.getParent()) != null) {
+		            parent.removeView((optAsKernel));
+	            }
             }
         } else {
             exit();
