@@ -46,7 +46,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -57,7 +56,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -1744,7 +1742,6 @@ public class Rashr extends ActionBarActivity {
     public void startFlashAs() throws NullPointerException {
         /** Setting layout for flashing over external App for example File Browser */
         setContentView(R.layout.flash_as);
-        RelativeLayout FlashAsLayout = (RelativeLayout) findViewById(R.layout.flash_as);
         Uri path;
         if ((path = getIntent().getData()) != null) {
             final File IMG = new File(path.getPath());

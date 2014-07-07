@@ -1,6 +1,11 @@
 CHANGELOG
 ====================
 
+Update [2.0.2]
+
+-Flash from file browser fixed
+-Partition layouts updated
+
 Update [2.0.1]
 
 -Flash Other and history problems fixed
