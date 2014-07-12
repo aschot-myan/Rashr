@@ -197,7 +197,7 @@
         Did you really want to delete all downloaded images?
     </string>
     <string name="other_storage_description">
-        This option allows you to flash already downloaded Recovery files stored on your device.
+        This option allows you to flash already downloaded images stored on your device.
     </string>
     <string name="reboot_confirmation">Reboot now?</string>
     <string name="shutdown_confirmation">Shutdown now?</string>
