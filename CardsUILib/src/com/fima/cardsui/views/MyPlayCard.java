@@ -11,10 +11,21 @@ import com.fima.cardsui.objects.RecyclableCard;
 
 public class MyPlayCard extends RecyclableCard {
 
+	int backgroundColor = 0;
+
 	public MyPlayCard(String titlePlay, String description, String color,
 			String titleColor, Boolean hasOverflow, Boolean isClickable) {
 		super(titlePlay, description, color, titleColor, hasOverflow,
 				isClickable);
+	}
+
+	public MyPlayCard(String titlePlay, String description, String color,
+	                  String titleColor, Boolean hasOverflow, Boolean isClickable,
+	                  int backgroundColor) {
+		super(titlePlay, description, color, titleColor, hasOverflow,
+				isClickable);
+		this.backgroundColor = backgroundColor;
+
 	}
 
 	@Override
@@ -42,5 +53,8 @@ public class MyPlayCard extends RecyclableCard {
 		else
 			((ImageView) convertView.findViewById(R.id.overflow))
 					.setVisibility(View.GONE);
+
+		if (backgroundColor != 0)
+			convertView.setBackgroundColor(backgroundColor);
 	}
 }
