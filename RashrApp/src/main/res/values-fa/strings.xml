@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">تنظیمات</string>
+    <string name="sCWM">CWM ریکاوری</string>
+    <string name="sFlashRecovery">فلش کردن ریکاوری</string>
+    <string name="sFlashKernel">فلش زدن کرنل</string>
+    <string name="sHistory">تاریخچه</string>
+    <string name="sTWRP">TWRP ریکاوری</string>
+    <string name="sPhilz">Philz ریکاوری</string>
+    <string name="sOTHER">انتخاب چیز دیگری از داخل حافظه</string>
+    <string name="sRecoveryBackup">بک آپ از ریکاوری</string>
+    <string name="sKernelBackup">بک آپ از کرنل</string>
+    <string name="backups">فابل های پشتیبان</string>
+    <string name="backup">پشتیبان</string>
+    <string name="go">برو</string>
+    <string name="sRebooter">ریبوت کننده</string>
+    <string name="restore">بازگردانی</string>
+    <string name="rename">تغییر نام</string>
+    <string name="sClearCache">پاکسازی دانلودها</string>
+    <string name="report">گزارش اشکالات</string>
+    <string name="sExit">خروج</string>
+    <string name="xda">XDA-Thread</string>
+    <string name="set_name">نام فایل بک آپ</string>
+    <string name="bak_warning">
+        قبل از اینکه با این برنامه هرکاری بکنید لطفا یه بک آپ از گوشیتون تهیه کرده و در کامپیوتر خودتون ذخیره کنید
+        \ساخته میشوند n%s فایل های پشتیبانی توی شاخه ی
+        \توسعه دهنده مسئولیتی در قبال خطرات احتمالی نداره
+    </string>
+    <string name="flash_options">گزینه های فلش زدن</string>
+    <string name="risk">خطرشو میدونم</string>
+    <string name="sReboot">ریستارت کردن</string>
+    <string name="sRebootHot">ریبوت سریع</string>
+    <string name="sRebootRecovery">ریبوت ریکاوری</string>
+    <string name="sRebootBootloader">ریبوت بوت لودر</string>
+    <string name="sRebootShutdown">خاموش کردن</string>
+    <string name="info">اطلاعات</string>
+    <string name="flashed">.پارتیشن فلش شد</string>
+    <string name="warning">!!!هـشـدار</string>
+    <string name="fota">
+      (تغییر پارتیشن) را تغییر میدهد FOTA  فلش کردن ریکاوری روی این دستگاه کرنل
+        این مورد فقط روی کرنل های دارای این قابلیت قابل انجام شدن است و بیشتر کرنل ها این قبلیت را دارند
+    </string>
+    <string name="flash_over_recovery">ریکاوری را همین الان فلش میکنید؟ نیاز به ریبوت شدن به ریکاوری دارید</string>
+    <string name="instructions">دستور العمل ها</string>
+    <string name="instruction">
+        CWM:
+        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
+        \n\nTWRP:
+        \nMain Menu -> Install
+    </string>
+    <string name="bak_done">بک آپ کامل شد</string>
+    <string name="backupalready">بک آپ از قبل وجود داشته</string>
+    <string name="error">خـطـا</string>
+    <string name="not_supportded">
+        دستگاه شما هنوز پشتیبانی نمیشود سیستم را اسکن کرده و دستگاه های پشتیبانی نشده را گزارش دهید یا
+        تلاش کنید که پارتیشن مورد نظر رو پیدا کنید
+    </string>
+    <string name="no_root">
+       دستگاه روت نشده . لطفا آن را روت کنید. اطلاعات بیشتر در
+        \n\nxda-developers.com
+    </string>
+    <string name="commenthint">
+        اینجا نظر دهید که چه چیزی کار نمیکند
+    </string>
+    <string name="positive">بله . لطفا</string>
+    <string name="neutral">نه. مرسی</string>
+    <string name="negative">لغو</string>
+    <string name="log">گزراش پوسته فرمان</string>
+    <string name="showlog">نماش گزارش ها</string>
+    <string name="delete">Delete</string>
+    <string name="sBackupMgr">مدیریت بک آپ</string>
+    <string name="setname">نام بک آپ را مشخص کنید</string>
+    <string name="reboot_recovery_now">همین الان به ریکاوری میروید؟</string>
+    <string name="download_utils">
+        برای استفاده از این برنامه نیاز به دانلود اسمال اپ در حجمی کمتر از یک مگابایت دارید و به اینترنت نیاز دارید
+        \الان دانلود میکنید؟
+    </string>
+    <string name="over_recovery">دستگاه از طریق ریکاوری فلش خواهد شد</string>
+    <string name="ShowAds">نمایش تبلیغات برای حمایت</string>
+    <string name="please_restart">برای انجام تغییرات برنامه را دوباره اجرا کنید</string>
+    <string name="please_ads">لطفا نمایش تبلیغات را روشن کنید تا از من حمایت کرده باشد</string>
+    <string name="donate_to_support">از طریق منو هدیه ای به عنوان حمایت به من بدهید</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Euro</item>
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+        <item>3 Euros</item>
+        <item>5 Euros</item>
+    </string-array>
+
+    <string name="donate">هدیه</string>
+    <string name="never_again">دیگه نمایش نده</string>
+    <string name="try_again">دوباره تلاش کن</string>
+    <string name="later">بعدا</string>
+    <string name="update_done">آپدیت تمام شد</string>
+    <string name="pick_file">انتخاب فایل</string>
+    <string name="flash_error">فلش نشد</string>
+    <string name="res_error">باز گردانی نشد</string>
+    <string name="bak_error">بک آپ گرفته نشد</string>
+    <string name="stock">پایه</string>
+    <string name="changelog">تغییرات</string>
+    <string name="use_supersu">
+        سوپر یوزر دستگاه شما رو نشناخته لطفا برای جلوگیری از خطاهای بعدی از آن استفاده کنید همین الان سوپر یوزر رو دانلود میکنید؟
+    </string>
+    <string name="bak_deleted">بک آپ پاک شد</string>
+    <string name="extract_failed">
+        استخراج فایل ها از برنامه امکان پذیر نیست لطفا برنامه را دوباره اجرا کنید
+    </string>
+    <string name="no_history">تاریخچه ای پیدا نشد</string>
+    <string name="styles">سبک  های نمایش برنامه</string>
+
+    <string-array name="styles">
+        <item>انواع سبک ها</item>
+        <item>Holo Light Dark Bar Style</item>
+        <item>Holo Light Style</item>
+        <item>Holo Dark Style</item>
+    </string-array>
+
+    <string name="flash_as">فلش به عنوان</string>
+    <string name="recovery">ریکاوری</string>
+    <string name="kernel">کرنل</string>
+    <string name="getting_root">تلاش برای دستیابی به روت</string>
+    <string name="reading_device">در حال خواندن مشخصات دستگاه</string>
+    <string name="loading_ui">بارگزاری پوسته</string>
+    <string name="loading_data">در حال استخراج اطلاعات و ساخت پوشه</string>
+    <string name="recovery_script_manager">مدیریت ریکاوری</string>
+    <string name="bak_name">نام بک آپ سفارشی</string>
+    <string name="flash_queue">صف فلش</string>
+    <string name="wipe_opts">گزینه های پاک کردن</string>
+    <string name="add_queue">اضافه کردن فایل زیپ به صف</string>
+    <string name="backup_opts">گزینه های بک آپ</string>
+    <string name="system">سیستم</string>
+    <string name="data">اطلاعات</string>
+    <string name="cache">کش</string>
+    <string name="dalvik">Dalvik</string>
+    <string name="boot">Boot</string>
+    <string name="recovery_script_mind">
+        کار میکند TWRP لطفا به خاطر داشته باشید که این فقط با ریکاوری
+    </string>
+    <string name="run">اجرا</string>
+    <string name="recovery_script_review">پیش مشاهده اسکریپت</string>
+    <string name="failed_unpack_files">فایل ها از برنامه استخراج نشد</string>
+    <string name="failed_setup_layout">خطای راه اندازی</string>
+    <string name="refresh_list">به روزرسانی آغاز شد</string>
+    <string name="new_imgs_loaded">%s new IMGs loaded</string>
+    <string name="make_choice">لطفا انتخاب کنید</string>
+    <string name="unified_info">
+        This ROM ist using Unified CyanogenMod Sources.\n
+        Consequently it could be that Rashr isn\'t able to find Recovery or Kernel images.\n
+        In this case you can choose your real device. (do this if there aren\'t any images found)\n
+        BE CAREFUL WITH THIS OPTION!
+    </string>
+    <string name="reloading">بارگیری مجدد</string>
+    <string name="keep_current_name">اسم کنونی را حفظ کن (%s)</string>
+
+    <string name="rename_failed">تغییر نام داده نشد</string>
+
+    <string name="flash">فلش زدن</string>
+    <string name="recovery_description">
+        با این خصئصیت میتونید دستگاه خدتون رو به راحتی یک کلیک با ریکاوری  فلش کنید
+    </string>
+    <string name="kernel_description">
+       با این قابلیت میتونید با یک کلیک و به راحتی کرنل خود را فلش کنید
+    </string>
+    <string name="options">گزینه ها</string>
+    <string name="clear_cache_description">همه ی ریکاوری ها و کرنل های دانلود شده رو پاک کن</string>
+    <string name="reboot_description">اجازه دهید خود دستگاه مجددا  ره اندازی شود</string>
+    <string name="reboot_recovery_description">اجازه دهید دستگاه به ریکاوری برود</string>
+    <string name="reboot_bootloader_description">
+        اجازه دهید دستگاه به بوت لودر ریبوت شود
+    </string>
+    <string name="shutdown_description">اجازه دهید دستگاه خاموش شود</string>
+    <string name="cwm_description">
+        این ریکاوری شناخته شده ترین ریکاوری برای دستگاه های اندرویدی است
+    </string>
+    <string name="twrp_description">
+        این ریکاوری یک ریکاوری تمام لمسی اس
+    </string>
+    <string name="philz_description">
+       یک ورژن بهبود یافته از ریکاوری معمولی به نام فیلیز
+    </string>
+    <string name="stock_recovery_description">
+        ریکاوری استوک یک ریکاوری استاندارد است از این جا میتونید به این ریکاوری دست پیدا کنید
+    </string>
+    <string name="stock_kernel_description">
+        کرنل استوک کرنل استاندارد خود گوشی است از اینجا میتونید به اون دست پیدا کنید
+    </string>
+    <string name="delete_confirmation">
+       آیا واقعا میخواید همه رو پاک کنید؟
+    </string>
+    <string name="other_storage_description">
+        .این گزینه اجاره میدهد که شما ریکاوری هایی که تا کنون دانلود شده را فلش کنید
+    </string>
+    <string name="reboot_confirmation">الان دستگاه را ریبوت میکنید؟</string>
+    <string name="shutdown_confirmation">الان دستگاه را خاموش میکنید؟</string>
+    <string name="history_description">اینجا میتونید پنج ریکاوری فلش شده آخر را پیدا کنید</string>
+    <string name="reset_app">راه اندای مجدد برنامه</string>
+    <string name="reset_app_description">بازگردانی تنظیمات برنامه به تنظیمات پیش فرض</string>
+
+</resources>
