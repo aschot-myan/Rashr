@@ -14,7 +14,7 @@ package de.mkrtchyan.recoverytools;
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -131,12 +131,13 @@ public class Rashr extends ActionBarActivity {
     /**
      * Declaring needed objects
      */
-    private final int EMAIL_REQ_CODE = 8451;
-    private final int APPCOMPAT_DARK = R.style.MyDark;
-    private final int APPCOMPAT_LIGHT = R.style.MyLight;
-    private final int APPCOMPAT_LIGHT_DARK_BAR = R.style.MyLightDarkBar;
+    private final int APPCOMPAT_DARK = R.style.Theme_AppCompat;
+    private final int APPCOMPAT_LIGHT = R.style.Theme_AppCompat_Light;
+    private final int APPCOMPAT_LIGHT_DARK_BAR = R.style.Theme_AppCompat_Light_DarkActionBar;
     private final ArrayList<String> ERRORS = new ArrayList<String>();
     private final ArrayList<String> FlashUtils_ERRORS = new ArrayList<String>();
+	private int cardColor = android.R.color.transparent;
+	private int fontColor = R.color.card_light_text;
     private File RecoveryCollectionFile, KernelCollectionFile;
     private File fRECOVERY, fKERNEL;
     private Shell mShell;
@@ -176,7 +177,9 @@ public class Rashr extends ActionBarActivity {
                                     .show();
                         } else {
                             /** Get user input if user want to install over recovery now */
-                            showOverRecoveryInstructions();
+                            Intent intent = new Intent(mActivity, RecoveryScriptManager.class);
+	                        intent.setData(Uri.fromFile(fRECOVERY));
+	                        mActivity.startActivity(intent);
                         }
                     }
                 }
@@ -247,10 +250,19 @@ public class Rashr extends ActionBarActivity {
             setTheme(APPCOMPAT_LIGHT_DARK_BAR);
         } else {
             /** Using predefined theme */
-            setTheme(Common.getIntegerPref(mContext, PREF_NAME, PREF_STYLE));
+            int Theme = Common.getIntegerPref(mContext, PREF_NAME, PREF_STYLE);
+            setTheme(Theme);
+	        if (Theme == APPCOMPAT_DARK) {
+		        cardColor = R.color.black_light;
+		        fontColor = R.color.stroke;
+	        }
         }
-
-        setContentView(R.layout.loading_layout);
+		try {
+			setContentView(R.layout.loading_layout);
+		} catch (RuntimeException e) {
+			Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, R.style.Theme_AppCompat_Light_DarkActionBar);
+			restartActivity();
+		}
 
         final TextView tvLoading = (TextView) findViewById(R.id.tvLoading);
 
@@ -266,10 +278,9 @@ public class Rashr extends ActionBarActivity {
                 });
 
 	            try {
-                    mShell = Shell.startRootShell(mContext);
-                    mToolbox = new Toolbox(mShell);
+		            mShell = Shell.startRootShell(mContext);
+		            mToolbox = new Toolbox(mShell);
                 } catch (IOException e) {
-
                     ERRORS.add(e.toString());
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
@@ -309,7 +320,8 @@ public class Rashr extends ActionBarActivity {
                         tvLoading.setText(R.string.reading_device);
                     }
                 });
-                mDevice = new Device(mContext);
+	            if (mDevice == null)
+		            mDevice = new Device(mContext);
                 /** Creating needed folder and unpacking files */
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
@@ -883,7 +895,8 @@ public class Rashr extends ActionBarActivity {
         FlashRecoveryDialog.setContentView(RecoveryCards);
         if (mDevice.isCwmRecoverySupported()) {
             final MyImageCard CWMCard = new MyImageCard(getString(R.string.sCWM), R.drawable.ic_cwm,
-                    getString(R.string.cwm_description));
+                    getString(R.string.cwm_description), getResources().getColor(cardColor),
+		            getResources().getColor(fontColor));
             CWMCard.setData("clockwork");
             CWMCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -895,7 +908,8 @@ public class Rashr extends ActionBarActivity {
         }
         if (mDevice.isTwrpRecoverySupported()) {
             final MyImageCard TWRPCard = new MyImageCard(getString(R.string.sTWRP), R.drawable.ic_twrp,
-                    getString(R.string.twrp_description));
+                    getString(R.string.twrp_description), getResources().getColor(cardColor),
+		            getResources().getColor(fontColor));
             TWRPCard.setData("twrp");
             TWRPCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -906,7 +920,9 @@ public class Rashr extends ActionBarActivity {
             RecoveryCards.addCard(TWRPCard);
         }
         if (mDevice.isPhilzRecoverySupported()) {
-            final MyCard PHILZCard = new MyCard(getString(R.string.sPhilz), getString(R.string.philz_description));
+            final MyCard PHILZCard = new MyCard(getString(R.string.sPhilz),
+		            getString(R.string.philz_description), getResources().getColor(cardColor),
+		            getResources().getColor(fontColor));
             PHILZCard.setData("philz");
             PHILZCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -918,7 +934,8 @@ public class Rashr extends ActionBarActivity {
         }
         if (mDevice.isStockRecoverySupported()) {
             final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
-                    getString(R.string.stock_recovery_description));
+                    getString(R.string.stock_recovery_description),
+		            getResources().getColor(cardColor), getResources().getColor(fontColor));
             StockCard.setData("stock");
             StockCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -929,7 +946,9 @@ public class Rashr extends ActionBarActivity {
             RecoveryCards.addCard(StockCard, true);
         }
 
-        final MyCard OtherCard = new MyCard(getString(R.string.sOTHER), getString(R.string.other_storage_description));
+        final MyCard OtherCard = new MyCard(getString(R.string.sOTHER),
+		        getString(R.string.other_storage_description), getResources().getColor(cardColor),
+		        getResources().getColor(fontColor));
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -938,8 +957,9 @@ public class Rashr extends ActionBarActivity {
         });
         RecoveryCards.addCard(OtherCard, true);
 
-        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory),
-                getString(R.string.history_description));
+        final MyImageCard HistoryCard = new MyImageCard(getString(R.string.sHistory),
+		        R.drawable.ic_history, getString(R.string.history_description),
+		        getResources().getColor(cardColor), getResources().getColor(fontColor));
         HistoryCard.setData("recovery");
         HistoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -951,13 +971,9 @@ public class Rashr extends ActionBarActivity {
 
         /** Check if device uses unified builds */
         if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED)) {
-            if ((mDevice.getName().startsWith("d2lte") || mDevice.getName().startsWith("hlte")
-                    || mDevice.getName().startsWith("jflte")
-                    || (mDevice.getManufacture().equals("motorola") && mDevice.getBOARD().equals("msm8960")))
+	        if (!showUnifiedBuildsDialog()
                     && (!mDevice.isStockRecoverySupported() || !mDevice.isCwmRecoverySupported()
                     || !mDevice.isTwrpRecoverySupported() || !mDevice.isPhilzRecoverySupported())) {
-                showUnifiedBuildsDialog();
-            } else {
                 FlashRecoveryDialog.show();
             }
         } else {
@@ -972,7 +988,8 @@ public class Rashr extends ActionBarActivity {
         FlashKernelDialog.setContentView(KernelCards);
         if (mDevice.isStockKernelSupported()) {
             final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
-                    getString(R.string.stock_kernel_description));
+                    getString(R.string.stock_kernel_description), getResources().getColor(cardColor),
+		            getResources().getColor(fontColor));
             StockCard.setData("stock");
             StockCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -984,7 +1001,8 @@ public class Rashr extends ActionBarActivity {
         }
 
         final MyCard OtherCard = new MyCard(getString(R.string.sOTHER),
-                getString(R.string.other_storage_description));
+                getString(R.string.other_storage_description), getResources().getColor(cardColor),
+		        getResources().getColor(fontColor));
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -993,8 +1011,9 @@ public class Rashr extends ActionBarActivity {
         });
         KernelCards.addCard(OtherCard, true);
 
-        final MyCard HistoryCard = new MyCard(getString(R.string.sHistory),
-                getString(R.string.history_description));
+        final MyImageCard HistoryCard = new MyImageCard(getString(R.string.sHistory),
+		        R.drawable.ic_history, getString(R.string.history_description),
+		        getResources().getColor(cardColor), getResources().getColor(fontColor));
         HistoryCard.setData("kernel");
         HistoryCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1141,8 +1160,7 @@ public class Rashr extends ActionBarActivity {
                                     }
                                 }
                                 intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-                                startActivityForResult(Intent.createChooser(intent, "Send over Gmail"),
-                                        EMAIL_REQ_CODE);
+                                startActivity(Intent.createChooser(intent, "Send over Gmail"));
                                 reportDialog.dismiss();
                             }
                         } catch (Exception e) {
@@ -1368,7 +1386,7 @@ public class Rashr extends ActionBarActivity {
         });
         popup.show();
     }
-
+/*
     public void showOverRecoveryInstructions() {
         final AlertDialog.Builder Instructions = new AlertDialog.Builder(mContext);
         Instructions
@@ -1406,6 +1424,7 @@ public class Rashr extends ActionBarActivity {
                 })
                 .show();
     }
+*/
 
     private void showDeviceNotSupportedDialog() {
         AlertDialog.Builder DeviceNotSupported = new AlertDialog.Builder(mContext);
@@ -1529,7 +1548,8 @@ public class Rashr extends ActionBarActivity {
 
                 if (mDevice.isKernelSupported()) {
                     MyImageCard KernelCard = new MyImageCard(getString(R.string.kernel), R.drawable.ic_flash,
-                            getString(R.string.kernel_description));
+                            getString(R.string.kernel_description), getResources().getColor(cardColor),
+		                    getResources().getColor(fontColor));
                     KernelCard.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1541,7 +1561,8 @@ public class Rashr extends ActionBarActivity {
 
                 if (mDevice.isRecoverySupported()) {
                     MyImageCard RecoveryCard = new MyImageCard(getString(R.string.recovery), R.drawable.ic_update,
-                            getString(R.string.recovery_description));
+                            getString(R.string.recovery_description), getResources().getColor(cardColor),
+		                    getResources().getColor(fontColor));
                     RecoveryCard.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1558,7 +1579,8 @@ public class Rashr extends ActionBarActivity {
                 CardStack OptionsStack = new CardStack(getString(R.string.options));
 
                 MyCard ResetCard = new MyCard(getString(R.string.reset_app),
-                        getString(R.string.reset_app_description));
+                        getString(R.string.reset_app_description), getResources().getColor(cardColor),
+		                getResources().getColor(fontColor));
                 ResetCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -1575,7 +1597,8 @@ public class Rashr extends ActionBarActivity {
                 OptionsStack.add(ResetCard);
 
                 MyImageCard ClearCache = new MyImageCard(getString(R.string.sClearCache), R.drawable.ic_delete,
-                        getString(R.string.clear_cache_description));
+                        getString(R.string.clear_cache_description), getResources().getColor(cardColor),
+		                getResources().getColor(fontColor));
                 ClearCache.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -1616,7 +1639,8 @@ public class Rashr extends ActionBarActivity {
 
                 CardStack RebooterStack = new CardStack(getString(R.string.sRebooter));
 
-                MyCard Reboot = new MyCard(getString(R.string.sReboot), getString(R.string.reboot_description));
+                MyCard Reboot = new MyCard(getString(R.string.sReboot), getString(R.string.reboot_description),
+		                getResources().getColor(cardColor), getResources().getColor(fontColor));
                 Reboot.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(final View v) {
@@ -1644,7 +1668,8 @@ public class Rashr extends ActionBarActivity {
                     }
                 });
                 MyCard RebootRecovery = new MyCard(getString(R.string.sRebootRecovery),
-                        getString(R.string.reboot_recovery_description));
+                        getString(R.string.reboot_recovery_description),
+		                getResources().getColor(cardColor), getResources().getColor(fontColor));
                 RebootRecovery.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -1672,7 +1697,8 @@ public class Rashr extends ActionBarActivity {
                     }
                 });
                 MyCard RebootBootloader = new MyCard(getString(R.string.sRebootBootloader),
-                        getString(R.string.reboot_bootloader_description));
+                        getString(R.string.reboot_bootloader_description),
+		                getResources().getColor(cardColor), getResources().getColor(fontColor));
                 RebootBootloader.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -1700,7 +1726,8 @@ public class Rashr extends ActionBarActivity {
                     }
                 });
                 MyCard Shutdown = new MyCard(getString(R.string.sRebootShutdown),
-                        getString(R.string.shutdown_description));
+                        getString(R.string.shutdown_description), getResources().getColor(cardColor),
+		                getResources().getColor(fontColor));
                 Shutdown.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2013,7 +2040,7 @@ public class Rashr extends ActionBarActivity {
         return Prefs;
     }
 
-    public void showUnifiedBuildsDialog() {
+    public boolean showUnifiedBuildsDialog() {
 
         final Dialog UnifiedBuildsDialog = new Dialog(mContext);
         UnifiedBuildsDialog.setTitle(R.string.make_choice);
@@ -2032,11 +2059,11 @@ public class Rashr extends ActionBarActivity {
             String[] unifiedGalaxyNote3 = {"hlte", "hltespr", "hltetmo", "hltevzw", "htlexx"};
             String[] unifiedGalaxyS4 = {"jflte", "jflteatt", "jfltecan", "jfltecri", "jfltecsp",
                     "jfltespr", "jfltetmo", "jflteusc", "jfltevzw", "jfltexx", "jgedlte"};
-            if (mDevice.getName().startsWith("d2lte")) {
+            if (Common.stringEndsWithArray(mDevice.getName(), unifiedGalaxyS3)) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS3));
-            } else if (mDevice.getName().startsWith("hlte")) {
+            } else if (Common.stringEndsWithArray(mDevice.getName(), unifiedGalaxyS3)) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyNote3));
-            } else if (mDevice.getName().startsWith("jflte")) {
+            } else if (Common.stringEndsWithArray(mDevice.getName(), unifiedGalaxyS4)) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS4));
             }
         }
@@ -2112,14 +2139,19 @@ public class Rashr extends ActionBarActivity {
                 showFlashRecoveryDialog();
             }
         });
-        UnifiedBuildsDialog.show();
 
-        UnifiedBuildsDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED, false);
-                showFlashRecoveryDialog();
-            }
-        });
+	    if (DevName.size() > 0) {
+		    UnifiedBuildsDialog.show();
+		    UnifiedBuildsDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			    @Override
+			    public void onCancel(DialogInterface dialog) {
+				    Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED, false);
+				    showFlashRecoveryDialog();
+			    }
+		    });
+		    return true;
+	    } else {
+		    return false;
+	    }
     }
 }
