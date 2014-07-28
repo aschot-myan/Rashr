@@ -1,6 +1,10 @@
 CHANGELOG
 ====================
 
+Update [2.0.4]
+
+-Flash recovery fixed on devices that support all recoveries (like Nexus 4, Nexus 5......)
+
 Update [2.0.3]
 
 -New Changelog

@@ -971,9 +971,7 @@ public class Rashr extends ActionBarActivity {
 
         /** Check if device uses unified builds */
         if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_SHOW_UNIFIED)) {
-	        if (!showUnifiedBuildsDialog()
-                    && (!mDevice.isStockRecoverySupported() || !mDevice.isCwmRecoverySupported()
-                    || !mDevice.isTwrpRecoverySupported() || !mDevice.isPhilzRecoverySupported())) {
+	        if (!showUnifiedBuildsDialog()) {
                 FlashRecoveryDialog.show();
             }
         } else {
