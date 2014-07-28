@@ -75,6 +75,7 @@
     <string name="sBackupMgr">Backup Manager</string>
     <string name="setname">Set name of Backup</string>
     <string name="reboot_recovery_now">Reboot in to recovery now?</string>
+    <string name="reboot_now">Reboot now?</string>
     <string name="flashing">Flashing…</string>
     <string name="restoring">Restoring…</string>
     <string name="creating_bak">Creating Backup…</string>

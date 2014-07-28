@@ -44,9 +44,6 @@
         \n\n%s
     </string>
     <string name="error">Error</string>
-    <string name="noroot">"Apparaat is niet geroot, root uw mobiel. Meer informatie hier
-        \n\nxda-developer.com"
-    </string>
     <string name="using_dd">gebruik dd. Recovery in FS</string>
     <string name="using_mtd">gebruik flash/dump_image (MTD)</string>
 

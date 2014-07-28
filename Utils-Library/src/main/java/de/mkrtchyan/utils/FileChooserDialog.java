@@ -106,12 +106,9 @@ public class FileChooserDialog extends Dialog {
                         if (i.isDirectory()) {
                             FileList.add(i);
                         } else {
-                            for (String EXT : AllowedEXT) {
-                                if (i.getName().endsWith(EXT)) {
-                                    FileList.add(i);
-                                    break;
-                                }
-                            }
+	                        if (Common.stringEndsWithArray(i.getName(), AllowedEXT)) {
+		                        FileList.add(i);
+	                        }
                         }
                     } else {
                         FileList.add(i);
@@ -119,6 +116,12 @@ public class FileChooserDialog extends Dialog {
                 }
             }
             Collections.sort(FileList);
+	        lvFiles.post(new Runnable() {
+		        @Override
+		        public void run() {
+			        lvFiles.smoothScrollToPosition(0);
+		        }
+	        });
         }
 
         boolean parent = currentPath.getParentFile() != null;
@@ -142,6 +145,7 @@ public class FileChooserDialog extends Dialog {
         for (String i : tmp) {
             FilesAdapter.add(i);
         }
+
     }
 
     private void fileSelected() {

@@ -1,6 +1,16 @@
 CHANGELOG
 ====================
 
+Update [2.0.3]
+
+-New Changelog
+-UI improvements
+-Now normal reboot after kernel flashing instead of recovery reboot
+-Turkish translations fixed and updated by Fathi Firinci
+-Persian translation by arkaftoosian@ALEZ
+-Better unified builds handling
+-Style fixes (cards now dark to)
+
 Update [2.0.2]
 
 -Flash from file browser fixed
