@@ -1,88 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="add_queue">Kuyruğa Zip ekle</string>
     <string name="app_name">Rashr</string>
-    <string name="settings">Ayarlar</string>
-    <string name="sCWM">CWM Recovery</string>
-    <string name="sFlashRecovery">Recovery Yükle</string>
-    <string name="sFlashKernel">Kernel Yükle</string>
-    <string name="sHistory">Geçmiş</string>
-    <string name="sTWRP">TWRP Recovery</string>
-    <string name="sPhilz">Philz Recovery</string>
-    <string name="sOTHER">Depolamadan Seç</string>
-    <string name="sRecoveryBackup">Recovery Yedekle</string>
-    <string name="sKernelBackup">Kernel Yedekle</string>
-    <string name="backups">Yedekler</string>
     <string name="backup">Yedekle</string>
-    <string name="go">Tamam</string>
-    <string name="sRebooter">Yeniden başlatıcı</string>
-    <string name="restore">Geri yükle</string>
-    <string name="rename">Yeniden adlandır</string>
-    <string name="sClearCache">İndirilenleri temizle</string>
-    <string name="report">Hata raporu</string>
-    <string name="sExit">Çıkış</string>
-    <string name="xda">XDA-Konusu</string>
-    <string name="set_name">Yedekleme Adı</string>
-    <string name="bak_warning">"Rashr ile bazı eylemleri yapmadan önce lütfen bir yedek oluşturun ve PC'nizde saklayın. 
-Yedekler 
-%s altında oluşturulacaktır. 
-Geliştirici cihazınızda oluşabilecek zararlardan sorumlu değildir."</string>
-    <string name="flash_options">Yükleme Seçenekleri</string>
-    <string name="risk">Tehlikenin farkındayım</string>
-    <string name="sReboot">Yeniden başlat</string>
-    <string name="sRebootHot">Hot Reboot</string>
-    <string name="sRebootRecovery">"Recovery'yi başlat"</string>
-    <string name="sRebootBootloader">"Bootloader'ı başlat"</string>
-    <string name="sRebootShutdown">Kapat</string>
-    <string name="info">Bilgi</string>
-    <string name="flashed">Bölüm flashlandı.</string>
-    <string name="warning">Uyarı!</string>
-    <string name="fota">
-        Flashing Recovery System on this devices will change the FOTAKernel (replacement partition)
-        this will only work if your kernel support it (The most Custom Kernel and ROM does it).
-    </string>
-    <string name="flash_over_recovery">Recovery şimdi yüklensin mi? (yeniden başlatma gerektirir)</string>
-    <string name="instructions">Talimatlar</string>
-    <string name="instruction">
-        CWM:
-        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
-        \n\nTWRP:
-        \nMain Menu -> Install
-    </string>
-    <string name="bak_done">Yedekleme tamamlandı</string>
+    <string name="backup_opts">Yedekleme Seçenekleri</string>
     <string name="backupalready">Yedek zaten mevcut.</string>
-    <string name="error">Hata</string>
-    <string name="not_supportded">
-        Cihazınız henüz desteklenmiyor. Sistem taransın ve desteklenmeyen aygıt bildirilsin veya bölüm bulunsun mu??
+    <string name="backups">Yedekler</string>
+    <string name="bak_deleted">%s silindi</string>
+    <string name="bak_done">Yedekleme tamamlandı</string>
+    <string name="bak_error">Yedekleme başarısız</string>
+    <string name="bak_name">Özel Yedekleme Adı</string>
+    <string name="bak_warning">
+        Rashr ile bazı eylemleri yapmadan önce lütfen bir yedek oluşturun ve PC\'nizde saklayın.
+        Yedekler %s altında oluşturulacaktır. Geliştirici cihazınızda oluşabilecek zararlardan
+        sorumlu değildir.
     </string>
-    <string name="no_root">""
-        Cihaz Root'lu değil. Lütfen Root'layın. Aşağıda daha fazla bilgi bulabilirsiniz
-        \n\nxda-developers.com
-    "</string>
-    <string name="Downloading">İndiriliyor…</string>
+    <string name="boot">Boot</string>
+    <string name="cache">Cache</string>
+    <string name="cancel">İptal</string>
+    <string name="changelog">Değişiklikler</string>
+    <string name="choose_message">%s seçildi. Emin misiniz?</string>
+    <string name="clear_cache_description">İndirilen tüm recovery/kernel dosyalarını sil</string>
+    <string name="clear_logs">Kayıtları Temizle</string>
     <string name="commentar">Yorum</string>
     <string name="commenthint">
         Buraya neyin düzgün çalışmadığını yazın (indirme, yükleme, genel destek veya diğer)
     </string>
-    <string name="positive">Evet, lütfen</string>
-    <string name="neutral">Hayır, teşekkürler</string>
-    <string name="negative">İptal</string>
-    <string name="log">Shell-Komutları Kaydı</string>
-    <string name="showlog">Kayıtları Göster</string>
-    <string name="delete">Sil</string>
-    <string name="sBackupMgr">Yedekleme Yöneticisi</string>
-    <string name="setname">Yedekleme için ad girin</string>
-    <string name="reboot_recovery_now">Şimdi recovery modunda yeniden başlatılsın mı?</string>
-    <string name="flashing">Yükleniyor…</string>
-    <string name="restoring">Geri Yükleniyor…</string>
+    <string name="connecting">Bağlanıyor</string>
+    <string name="corrupt_download">İndirilen dosya bozuk.</string>
     <string name="creating_bak">Yedek Oluşturuluyor…</string>
-    <string name="download_utils">"Bu uygulamayı kullanmak için küçük araçları (512KB civarında) yüklemeniz gerekiyor. Bu bir internet bağlantısı gerektirir. 
-Şimdi indirilsin mi?"</string>
-    <string name="over_recovery">Cihaz recovery üzerinde flashlanacaktır</string>
-    <string name="ShowAds">Reklamları göster</string>
-    <string name="please_restart">Değişikliklerin uygulanması için lütfen uygulamayı yeniden başlatın</string>
-    <string name="please_ads">Çalışmalarını desteklemek için lütfen Reklamları açın! :(</string>
+    <string name="cwm_description">
+        ClockworkMod Recovery Android için en çok bilinen Özel Recovery\'dir
+    </string>
+    <string name="dalvik">Dalvik</string>
+    <string name="data">Data</string>
+    <string name="delete">Sil</string>
+    <string name="delete_confirmation">
+        İndirilen tüm imaj dosyalarını silmek istiyor musunuz?
+    </string>
+    <string name="delete_failed">Silme başarısız</string>
+    <string name="donate">Bağış yap</string>
     <string name="donate_to_support">Çalışmamı desteklemek için menüden bağış yapın! :)</string>
+    <string name="donations__alert_dialog_no_browser">
+        Web sitesini açmak için tarayıcı bulunamadı!
+    </string>
+    <string name="donations__alert_dialog_title">Bir hata oluştu</string>
+    <string name="donations__button_close">Kapat</string>
+    <string name="donations__description">
+        Bu uygulamayı yararlı buluyor musunuz? Geliştiriciye bağış göndererek gelişimini destekleyin!
+    </string>
+    <string name="donations__flattr">Flattr</string>
+    <string name="donations__flattr_description">Flattr her ay %10 ücret alır!</string>
+    <string name="donations__google_android_market">Google Play Store</string>
+    <string name="donations__google_android_market_description">Google her bağıştan %30 pay alır!</string>
+    <string name="donations__google_android_market_donate_button">Bağış yap!</string>
+    <string name="donations__google_android_market_not_supported">Uygulama içi bağış desteklenmiyor. Google Play Store düzgün yüklendi mi?</string>
+    <string name="donations__google_android_market_not_supported_title">Uygulama içi bağış desteklenmiyor.</string>
+    <string name="donations__google_android_market_text">Ne kadar?</string>
+    <string name="donations__paypal">PayPal</string>
+    <string name="donations__paypal_description">Düğmeye tıkladıktan sonra ne kadar bağış yapmak istediğinizi seçebilirsiniz!</string>
+    <string name="donations__thanks_dialog">Bağış için teşekkürler! Gerçekten minnettarım!</string>
+    <string name="donations__thanks_dialog_title">Teşekkürler!</string>
+    <string name="download_now">%s şimdi indirilsin mi?</string>
+    <string name="download_utils">
+        Bu uygulamayı kullanmak için küçük araçları (512KB civarında) yüklemeniz gerekiyor. Bu bir
+        internet bağlantısı gerektirir. Şimdi indirilsin mi?
+    </string>
+    <string name="empty_dir">Klasör boş: %s</string>
+    <string name="error">Hata</string>
+    <string name="extract_failed">
+        Uygulamadan gerekli dosyalar çıkartılamadı. Lütfen uygulamayı yeniden başlatın.
+    </string>
+    <string name="failed_download">
+        Hayır olamaz, bir sorun oluştu. İndirmeyi yeniden başlatın. %s?
+    </string>
+    <string name="failed_setup_layout">Yerleşim ayarlama hatası</string>
+    <string name="failed_unpack_files">Uygulamadaki dosyalar açılamadı</string>
+    <string name="file_chooser_dialog_title">Bir dosya seçin</string>
+    <string name="files_deleted">Dosyalar silindi</string>
+    <string name="flash">Yükle</string>
+    <string name="flash_as">%s gibi yükle</string>
+    <string name="flash_error">Yükleme başarısız</string>
+    <string name="flash_options">Yükleme Seçenekleri</string>
+    <string name="flash_over_recovery">Recovery şimdi yüklensin mi? (yeniden başlatma gerektirir)</string>
+    <string name="flash_queue">Yükleme Kuyruğu</string>
+    <string name="flashed">Recovery yüklendi.</string>
+    <string name="flashing">Yükleniyor…</string>
+    <string name="getting_root">Root Erişimi almak için çalışılıyor</string>
+    <string name="go">Tamam</string>
+    <string name="history_description">Burada son yüklenen 5 imaj dosyasını bulabilirsiniz</string>
+    <string name="info">Bilgi</string>
+    <string name="instruction">
+        CWM:\n
+        Main Menu -> install zip from sdcard -> choose zip from sdcard\n
+        \n
+        TWRP:\n
+        Main Menu -> Install</string>
+    <string name="instructions">Talimatlar</string>
+    <string name="keep_current_name">Geçerli adı koru (%s)</string>
+    <string name="kernel">Kernel</string>
+    <string name="kernel_description">
+        Bu fonksiyon ile cihazlarınıza tek bir tıklama ile kernel yükleyebilirsiniz!
+    </string>
+    <string name="later">Sonra</string>
+    <string name="loading_data">
+        Veriler çıkartılıyor ve gerekli klasör oluşturuluyor
+    </string>
+    <string name="loading_ui">UI yükleniyor</string>
+    <string name="log">Shell-Komutları Kaydı</string>
+    <string name="logs_title">Kayıtlı Shell-Komutları</string>
+    <string name="make_choice">Lütfen seçiminizi yapın</string>
+    <string name="negative">İptal</string>
+    <string name="neutral">Hayır, teşekkürler</string>
+    <string name="never_again">Tekrar gösterme</string>
+    <string name="never_ask">Tekrar sorma</string>
+    <string name="new_imgs_loaded">%s yeni IMG yüklendi</string>
+    <string name="no_connection">Ağ mevcut değil. İndirme iptal edildi!</string>
+    <string name="no_history">Geçmiş bulunamadı</string>
+    <string name="no_root">
+        Cihaz Root\'lu değil. Lütfen Root\'layın. Aşağıda daha fazla bilgi bulabilirsiniz\n
+        \n
+        xda-developers.com
+    </string>
+    <string name="not_supportded">
+        Cihazınız henüz desteklenmiyor. Sistem taransın ve desteklenmeyen aygıt bildirilsin veya bölüm bulunsun mu?
+    </string>
+    <string name="options">Seçenekler</string>
+    <string name="other_storage_description">
+        Bu seçenek cihazınızda depolanan önceden indirilen Recovery dosyalarını yüklemeyi sağlar.
+    </string>
+    <string name="over_recovery">Cihaz recovery üzerinde flashlanır</string>
+    <string name="philz_description">
+        PhilZ Touch Recovery ClockworkMod\'un geliştirilmiş gelişmiş bir sürümüdür
+    </string>
+    <string name="pick_file">Dosya seç</string>
+    <string name="please_ads">Çalışmalarını desteklemek için lütfen Reklamları açın! :(</string>
+    <string name="please_restart">
+        Değişikliklerin uygulanması için lütfen uygulamayı yeniden başlatın
+    </string>
+    <string name="positive">Evet, lütfen</string>
+    <string name="rate_message">
+        Play Store\'da bu uygulamayı değerlendirmek ve çalışmamı desteklemek ister misiniz?
+    </string>
+    <string name="rate_title">Uygulamamı değerlendirin!</string>
+    <string name="reading_device">Cihaz Bilgileri Okunuyor</string>
+    <string name="reboot_bootloader_description">
+        Cihazınız anında bootloader/download modunda yeniden başlatılır
+    </string>
+    <string name="reboot_confirmation">Şimdi yeniden başlatılsın mı?</string>
+    <string name="reboot_description">Cihazınız anında yeniden başlatılır</string>
+    <string name="reboot_recovery_description">Cihazınız anında recovery modunda yeniden başlatılır</string>
+    <string name="reboot_recovery_now">Şimdi recovery modunda yeniden başlatılsın mı?</string>
+    <string name="recovery">Recovery</string>
+    <string name="recovery_description">
+        Bu fonksiyon ile cihazlarınıza tek bir tıklama ile recovery yükleyebilirsiniz!
+    </string>
+    <string name="recovery_script_manager">Recovery-Betik Yöneticisi</string>
+    <string name="recovery_script_mind">
+        Lütfen unutmayın, bu sadece TWRP uyumlu recovery ile çalışır
+    </string>
+    <string name="recovery_script_review">Betik Önizleme</string>
+    <string name="refresh_list">Güncelleme başlatıldı!</string>
+    <string name="reloading">Yeniden yükleniyor</string>
+    <string name="rename">Yeniden adlandır</string>
+    <string name="rename_failed">Yeniden adlandırma başarısız</string>
+    <string name="report">Hata raporu</string>
+    <string name="res_error">Geri yükleme başarısız</string>
+    <string name="reset_app">Uygulamayı Sıfırla</string>
+    <string name="reset_app_description">Uygulamayı varsayılan ayarlarına sıfırla</string>
+    <string name="restore">Geri yükle</string>
+    <string name="restoring">Geri yükleniyor…</string>
+    <string name="risk">Tehlikenin farkındayım</string>
+    <string name="run">Çalıştır</string>
+    <string name="sBackupMgr">Yedekleme Yöneticisi</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sClearCache">İndirilenleri temizle</string>
+    <string name="sExit">Çıkış</string>
+    <string name="sFlashKernel">Kernel Yükle</string>
+    <string name="sFlashRecovery">Recovery Yükle</string>
+    <string name="sHistory">Geçmiş</string>
+    <string name="sKernelBackup">Kernel Yedekle</string>
+    <string name="sOTHER">Depolamadan Seç</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="sReboot">Yeniden başlat</string>
+    <string name="sRebootBootloader">Bootloader\'ı başlat</string>
+    <string name="sRebootHot">Hot Reboot</string>
+    <string name="sRebootRecovery">Recovery\'yi başlat</string>
+    <string name="sRebootShutdown">Kapat</string>
+    <string name="sRebooter">Yeniden başlatıcı</string>
+    <string name="sRecoveryBackup">Recovery Yedekle</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="set_name">Yedekleme Adı</string>
+    <string name="setname">Yedekleme için ad girin</string>
+    <string name="settings">Ayarlar</string>
+    <string name="showlog">Kayıtları Göster</string>
+    <string name="shutdown_confirmation">Şimdi kapatılsın mı?</string>
+    <string name="shutdown_description">Cihazınız anında kapatılır</string>
+    <string name="stock">Stock</string>
+    <string name="stock_kernel_description">
+        Stock kernel are the standard kernel, here you can return to your stock kernel.
+    </string>
+    <string name="stock_recovery_description">
+        Stock recoveries are the standard recovery, here you can return to your stock recovery.
+    </string>
+    <string name="styles">Stiller</string>
+    <string name="system">System</string>
+    <string name="try_again">Tekrar dene!</string>
+    <string name="twrp_description">Team Winn Recovery Project (TWRP) tam dokunmatik kontrollü Özel Recovery\'dir</string>
+    <string name="unified_info">
+        Bu ROM Tümleşik CyanogenMod Kaynakları kullanıyor. Dolayısıyla Rashr Recovery ve Kernel
+        imajlarını bulamayabilir. Bu durumda gerçek cihazınızı seçebilirsiniz. (herhangi bir imaj
+        bulunamamışsa bunu yapın) BU SEÇENEĞİ KULLANIRKEN DİKKATLİ OLUN!
+    </string>
+    <string name="update_done">Güncelleme tamamlandı</string>
+    <string name="use_supersu">
+        Chainfire\'dan gelen SuperSu cihazınızda tanınmadı. Hataları önlemek için lütfen bunu
+        kullanın. Şimdi (Play Store\'dan) SuperSu indirilsin mi?
+    </string>
+    <string name="warning">Uyarı!</string>
+    <string name="wipe_opts">Wipe Seçenekleri</string>
+    <string name="wrong_format">Yanlış dosya seçtiniz. Dosya %s biçiminde olmalıdır.</string>
+    <string name="xda">XDA-Konusu</string>
 
     <string-array name="donation_google_catalog_values">
         <item>0,50 Avro</item>
@@ -91,113 +230,10 @@ Geliştirici cihazınızda oluşabilecek zararlardan sorumlu değildir."</string
         <item>3 Avro</item>
         <item>5 Avro</item>
     </string-array>
-
-    <string name="donate">Bağış yap</string>
-    <string name="never_again">Tekrar gösterme</string>
-    <string name="try_again">Tekrar dene!</string>
-    <string name="later">Sonra</string>
-    <string name="update_done">Güncelleme tamamlandı</string>
-    <string name="pick_file">Dosya seç</string>
-    <string name="flash_error">Yükleme başarısız</string>
-    <string name="res_error">Geri yükleme başarısız</string>
-    <string name="bak_error">Yedekleme başarısız</string>
-    <string name="stock">Stock</string>
-    <string name="changelog">Değişiklikler</string>
-    <string name="use_supersu">Chainfire\'dan gelen SuperSu cihazınızda tanınmadı. Hataları önlemek için lütfen bunu kullanın. Şimdi (Play Store\'dan) SuperSu indirilsin mi?
-    </string>
-    <string name="bak_deleted">Yedekleme silindi</string>
-    <string name="extract_failed">
-        Uygulamadan gerekli dosyalar çıkartılamadı. Lütfen uygulamayı yeniden başlatın.
-    </string>
-    <string name="no_history">Geçmiş bulunamadı</string>
-    <string name="styles">Stiller</string>
-
     <string-array name="styles">
         <item>Stiller</item>
         <item>Holo Parlak Koyu Bar Stili</item>
         <item>Holo Parlak Stili</item>
         <item>Holo Koyu Stili</item>
     </string-array>
-
-    <string name="flash_as">%s gibi yükle</string>
-    <string name="recovery">Recovery</string>
-    <string name="kernel">Kernel</string>
-    <string name="getting_root">Root Erişimi almak için çalışılıyor</string>
-    <string name="reading_device">Cihaz Bilgileri Okunuyor</string>
-    <string name="loading_ui">UI Yükleniyor</string>
-    <string name="loading_data">Veriler çıkartılıyor ve gerekli klasör oluşturuluyor</string>
-    <string name="recovery_script_manager">Recovery-Betik Yöneticisi</string>
-    <string name="bak_name">Özel Yedekleme Adı</string>
-    <string name="flash_queue">Yükleme Kuyruğu</string>
-    <string name="wipe_opts">Wipe Seçenekleri</string>
-    <string name="add_queue">Kuyruğa Zip Ekle</string>
-    <string name="backup_opts">Yedekleme Seçenekleri</string>
-    <string name="system">System</string>
-    <string name="data">Data</string>
-    <string name="cache">Cache</string>
-    <string name="dalvik">Dalvik</string>
-    <string name="boot">Boot</string>
-    <string name="recovery_script_mind">
-        Lütfen unutmayın, bu sadece TWRP uyumlu recovery ile çalışır
-    </string>
-    <string name="run">Çalıştır</string>
-    <string name="recovery_script_review">Betik Önizleme</string>
-    <string name="failed_unpack_files">Uygulamadan dosyalar çıkartılamadı</string>
-    <string name="failed_setup_layout">Yerleşim ayarlanamadı</string>
-    <string name="refresh_list">Güncelleme başlatıldı!</string>
-    <string name="new_imgs_loaded">%s yeni IMG yüklendi</string>
-    <string name="make_choice">Lütfen seçiminizi yapın</string>
-    <string name="unified_info">"Bu ROM Tümleşik CyanogenMod Kaynakları kullanıyor.
- Dolayısıyla Rashr Recovery ve Kernel imajlarını bulamayabilir.
- Bu durumda gerçek cihazınızı seçebilirsiniz. (herhangi bir imaj bulunamamışsa bunu yapın)
- BU SEÇENEĞİ KULLANIRKEN DİKKATLİ OLUN!"</string>
-    <string name="reloading">Yeniden yükleniyor</string>
-    <string name="keep_current_name">Geçerli adı koru (%s)</string>
-
-    <string name="rename_failed">Yeniden adlandırma başarısız</string>
-
-    <string name="flash">Yükle</string>
-    <string name="recovery_description">
-        Bu fonksiyon ile cihazlarınıza tek bir tıklama ile recovery yükleyebilirsiniz!
-    </string>
-    <string name="kernel_description">
-        Bu fonksiyon ile cihazlarınıza tek bir tıklama ile kernel yükleyebilirsiniz!
-    </string>
-    <string name="options">Seçenekler</string>
-    <string name="clear_cache_description">İndirilen tüm recovery/kernel imajlarını sil</string>
-    <string name="reboot_description">Cihazınız anında yeniden başlatılır</string>
-    <string name="reboot_recovery_description">Cihazınız anında recovery modunda yeniden başlatılır</string>
-    <string name="reboot_bootloader_description">
-        Cihazınız anında bootloader/download modunda yeniden başlatılır
-    </string>
-    <string name="shutdown_description">Cihazınız anında kapatılır</string>
-    <string name="cwm_description">
-        ClockworkMod Recovery Android için en çok bilinen Özel Recovery\'dir
-    </string>
-    <string name="twrp_description">
-        Team Winn Recovery Project (TWRP) tam dokunmatik kontrollü Özel Recovery\'dir
-    </string>
-    <string name="philz_description">
-        PhilZ Touch Recovery ClockworkMod\'un geliştirilmiş gelişmiş bir sürümüdür
-    </string>
-    <string name="stock_recovery_description">
-        Stock recoveries are the standard recovery, here you can return to your stock recovery.
-    </string>
-    <string name="stock_kernel_description">
-        Stock kernel are the standard kernel, here you can return to your stock kernel.
-    </string>
-    <string name="delete_confirmation">
-        İndirilen tüm imaj dosyalarını silmek istiyor musunuz?
-    </string>
-    <string name="other_storage_description">
-        Bu seçenek cihazınızda depolanan önceden indirilen Recovery dosyalarını yüklemeyi sağlar.
-    </string>
-    <string name="reboot_confirmation">Şimdi yeniden başlatılsın mı?</string>
-    <string name="shutdown_confirmation">Şimdi kapatılsın mı?</string>
-    <string name="history_description">Burada son yüklenen 5 imaj dosyasını bulabilirsiniz</string>
-    <string name="reset_app">Uygulamayı Sıfırla</string>
-    <string name="reset_app_description">Uygulamayı varsayılan ayarlarına sıfırla</string>
-
-    <string name="files_deleted">Dosyalar silindi</string>
-
 </resources>
