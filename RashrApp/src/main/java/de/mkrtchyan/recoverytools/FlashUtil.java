@@ -14,7 +14,7 @@ package de.mkrtchyan.recoverytools;
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -252,22 +252,32 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     public void showRebootDialog() {
+	    int Message;
+	    final int REBOOT_JOB;
+	    if (isJobKernel()) {
+		    Message = R.string.reboot_now;
+		    REBOOT_JOB = Toolbox.REBOOT_REBOOT;
+	    } else {
+		    Message = R.string.reboot_recovery_now;
+		    REBOOT_JOB = Toolbox.REBOOT_RECOVERY;
+	    }
+
         new AlertDialog.Builder(mContext)
                 .setTitle(R.string.flashed)
-                .setMessage(mContext.getString(R.string.reboot_recovery_now))
+                .setMessage(Message)
                 .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+	                @Override
+	                public void onClick(DialogInterface dialogInterface, int i) {
 
-                        try {
-                            mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
-                        } catch (FailedExecuteCommand e) {
-                            Notifyer.showExceptionToast(mContext, TAG, e);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ERRORS.add(e.toString());
-                        }
-                    }
+		                try {
+			                mToolbox.reboot(REBOOT_JOB);
+		                } catch (FailedExecuteCommand e) {
+			                Notifyer.showExceptionToast(mContext, TAG, e);
+		                } catch (Exception e) {
+			                e.printStackTrace();
+			                ERRORS.add(e.toString());
+		                }
+	                }
                 })
                 .setNeutralButton(R.string.neutral, new DialogInterface.OnClickListener() {
                     @Override
