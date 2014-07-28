@@ -17,35 +17,36 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            style="@style/CardText"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/custom_green" />
 
         <Button
+            style="@style/flatButton"
             android:id="@+id/bOpenRecoveryScriptManager"
-            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="74dp"
             android:onClick="bOpenRecoveryScriptManager"
             android:text="@string/recovery_script_manager" />
 
         <Button
+            style="@style/flatButton"
             android:id="@+id/bXDA"
-            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="74dp"
             android:onClick="bXDA"
-            android:text="@string/xda" />
+            android:text="@string/xda"
+            android:layout_marginTop="1dp"/>
 
         <Button
+            style="@style/flatButton"
             android:id="@+id/bReport"
-            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="74dp"
             android:onClick="bReport"
-            android:text="@string/report" />
+            android:text="@string/report"
+            android:layout_marginTop="1dp"/>
 
         <Spinner
             android:id="@+id/spStyle"
@@ -71,8 +72,8 @@
             android:textColor="@android:color/white" />
 
         <Button
+            style="@style/flatButton"
             android:id="@+id/bShowLogs"
-            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="74dp"
@@ -80,22 +81,24 @@
             android:text="@string/showlog" />
 
         <Button
+            style="@style/flatButton"
             android:id="@+id/bDonate"
-            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="74dp"
             android:onClick="bDonate"
-            android:text="@string/donate" />
+            android:text="@string/donate"
+            android:layout_marginTop="1dp"/>
 
         <Button
+            style="@style/flatButton"
             android:id="@+id/bExit"
-            style="@style/nowCardDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="74dp"
             android:onClick="bExit"
-            android:text="@string/sExit" />
+            android:text="@string/sExit"
+            android:layout_marginTop="1dp"/>
 
     </LinearLayout>
 

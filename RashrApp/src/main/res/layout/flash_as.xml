@@ -16,6 +16,7 @@
         android:textColor="@color/custom_green" />
 
     <Button
+        style="@style/flatButton"
         android:id="@+id/bFlashAs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
         android:text="@string/go" />
 
     <Button
+        style="@style/flatButton"
         android:id="@+id/bCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
