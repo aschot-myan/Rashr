@@ -1200,7 +1200,7 @@ public class Rashr extends ActionBarActivity {
             WebView changes = new WebView(mContext);
             changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
             changes.setWebViewClient(new WebViewClient());
-            changes.loadUrl("http://forum.xda-developers.com/showpost.php?p=42839329&postcount=2");
+            changes.loadUrl("https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/CHANGELOG.md");
             changes.clearCache(true);
             dialog.setView(changes);
             dialog.show();
