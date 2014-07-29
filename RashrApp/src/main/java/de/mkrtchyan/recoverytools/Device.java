@@ -1,7 +1,7 @@
 package de.mkrtchyan.recoverytools;
 
 /**
- * Copyright (c) 2014 Ashot Mkrtchyan
+ * Copyright (c) 2014 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -253,7 +253,7 @@ public class Device {
             Name = "skyrocket";
 
 //      Galaxy S3 (International/i9300)
-        if (Name.equals("m3") && MANUFACTURE.equals("samsung")) Name = "i9300";
+        if (Name.equals("m3") && MANUFACTURE.equals("samsung")) Name = "i9305";
 
 //      Galaxy S (i9000)
         if (Name.equals("galaxys") || Name.equals("galaxysmtd") || Name.equals("gt-i9000")
