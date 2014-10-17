@@ -208,4 +208,5 @@
 
     <string name="files_deleted">Files deleted</string>
 
+    <string name="onlyLanguage">Please only write in Spanish, German or English</string>
 </resources>

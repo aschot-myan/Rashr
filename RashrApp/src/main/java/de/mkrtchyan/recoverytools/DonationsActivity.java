@@ -64,7 +64,7 @@ public class DonationsActivity extends FragmentActivity {
 
         Layout = new LinearLayout(this);
         Layout.setHorizontalGravity(LinearLayout.HORIZONTAL);
-        Layout.setId(1111111);
+//        Layout.setId(1111111);
 
         setContentView(Layout);
 

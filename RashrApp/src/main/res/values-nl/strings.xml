@@ -22,9 +22,6 @@
     <string name="info">Infomatie</string>
     <string name="flashed">Recovery geflashed</string>
     <string name="warning">Waarschuwing!</string>
-    <string name="kernel_to">Als je de recovery System flasht op dit apparaat zal de Boot.img flashen (kernel) naar 
-                    stock met een eigen recovery, maak alsjeblieft een reservekopie van je Boot.img.
-    </string>
     <string name="flash_over_recovery"> Uw recovery is geflashed, wilt u herstarten? (je zal moeten herstarten naar recovery)</string>
     <string name="instructions">Instructie</string>
     <string name="instruction">CWM:
@@ -36,16 +33,7 @@
     <string name="bak_done">Backup voltooid</string>
     <string name="backupalready">Backup bestaat al. Dit zal de huidige backup overschrijven, toch doorgaan?
     </string>
-    <string name="no_backup">geen bestaande Backup gevonden (%s/Recovery-Tools/backups/).
-         Nu een nieuwe maken?
-    </string>
-    <string name="noconnection">Geen internetverbinding beschikbaar, download wordt geannuleerd!</string>
-    <string name="failed_download">Oh nee, er is een probleem gevonden! Herstart de download alsjeblieft.
-        \n\n%s
-    </string>
     <string name="error">Error</string>
-    <string name="using_dd">gebruik dd. Recovery in FS</string>
-    <string name="using_mtd">gebruik flash/dump_image (MTD)</string>
 
     <string name="Downloading">Downloading&#8230;</string>
     <string name="commentar">commentaar</string>
@@ -62,7 +50,6 @@
     <string name="reboot_recovery_now">Wenst u nu herstarten naar recovery?</string>
     <string name="flashing">Flashing&#8230;</string>
     <string name="creating_bak">Backup maken&#8230;</string>
-    <string name="clear_logs">Verwijder logs</string>
     <string name="download_utils">Als u deze app wilt gebruiken, is deze download verplicht (ongeveer 512KB)
         \nNu Downloaden?
     </string>

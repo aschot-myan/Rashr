@@ -23,7 +23,6 @@
     <string name="later">稍后</string>
     <string name="Downloading">正在下载</string>
     <string name="wrong_format">文件格式错误. 文件格式只能为 %s</string>
-    <string name="noconnection">无可用网络. 下载已取消!</string>
     <string name="failed_download">"抱歉, 出现意外错误. 请重新下载. 
 
 %s"</string>
@@ -32,12 +31,7 @@
     <string name="positive">确定</string>
     <string name="neutral">不用了</string>
     <string name="negative">取消</string>
-    <string name="file_chooser">选择文件</string>
     <string name="choose_message">已选择 %s. 您确定吗?</string>
-    <string name="noroot">"设备没有 Root 权限. 请 Root 您对设备. 更多信息请访问
-        
-
-xda-developer.com"</string>
 
     <string name="app_name">Recovery工具箱</string>
     <string name="go">确定</string>
@@ -59,7 +53,6 @@ XDACN汉化组 OPkyd汉化
     <string name="sRebootBootloader">重启到 Bootloader</string>
     <string name="info">信息</string>
     <string name="flashed">Recovery 刷入完成.</string>
-    <string name="kernel_to">在您的设备上刷入 Recovery 系统同时也将通过 第三方 Recovery 刷入 Boot.img (内核) 到原生系统.</string>
     <string name="flash_over_recovery">是否立即刷入 Recovery? (需要重启到 Recovery 模式)</string>
     <string name="instructions">介绍</string>
     <string name="instruction">"CWM: 
@@ -71,9 +64,6 @@ TWRP:
 主菜单 -> 安装"</string>
     <string name="bak_done">备份完成</string>
     <string name="backupalready">备份已存在. 将覆盖现有备份. 是否继续?</string>
-    <string name="no_backup">备份不存在 (%s/Recovery-Tools/backups/). 是否立即创建?</string>
-    <string name="using_dd">强制使用 dd. Recovery</string>
-    <string name="using_mtd">使用 flash/dump_image (MTD)</string>
     <string name="commentar">注释</string>
     <string name="commenthint">在这里发表评论, 哪些功能不能正常使用 (下载, 刷入, 设备支持或其他内容)</string>
     <string name="log">Shell命令日志</string>

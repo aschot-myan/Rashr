@@ -60,6 +60,13 @@ public class RecoveryScriptManager extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Common.getIntegerPref(mContext, Rashr.PREF_NAME, Rashr.PREF_STYLE) != 0) {
+            /** Using predefined theme */
+            int Theme = Common.getIntegerPref(mContext, Rashr.PREF_NAME, Rashr.PREF_STYLE);
+            setTheme(Theme);
+        }
+
         setContentView(R.layout.recovery_script_manager);
 
         mFileNameAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1);

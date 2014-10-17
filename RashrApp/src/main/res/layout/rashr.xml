@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RashrLayout"
     android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/MainLayout"
+                android:id="@+id/CardsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -30,27 +31,18 @@
                 <com.fima.cardsui.views.CardUI
                     android:id="@+id/FlashCards"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
-                <com.google.ads.AdView xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-                    android:id="@+id/adView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    ads:adSize="SMART_BANNER"
-                    ads:adUnitId="ca-app-pub-3591384811135190/6436276193"
-                    ads:loadAdOnCreate="true"
-                    ads:testDevices="D8C221D153DA442260EA751810375941, 896047E1A726D481A3AD95454BD15606, B490C4995AB8573C496EF5F9D7FC3B47" />
 
                 <com.fima.cardsui.views.CardUI
                     android:id="@+id/Options"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
                 <com.fima.cardsui.views.CardUI
                     android:id="@+id/Rebooter"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
         </ScrollView>

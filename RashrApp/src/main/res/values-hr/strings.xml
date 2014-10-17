@@ -33,7 +33,6 @@
     <string name="info">Informacije</string>
     <string name="flashed">Particija flesovana.</string>
     <string name="warning">Upozorenje!</string>
-    <string name="kernel_to">Flesovanje rekaverija na uredjaju ce flesovati boot.img (Kernel) iz Stock (standardni) u prepravljeni rekaveri (ovo moze da izazove konstantan restart telefona-bootloop, sacuvajte bekap boot.img na Vas racunar) .</string>
     <string name="flash_over_recovery">Flesuj Rekaveri sada? (potreban restart u Rekaveri mod)</string>
     <string name="instructions">Instrukcije</string>
     <string name="instruction">CWM:
@@ -44,17 +43,12 @@
 
     <string name="bak_done">Bekap zavrsen</string>
     <string name="backupalready">Bekap vec postoji.</string>
-    <string name="no_backup">Nije pronadjen ni jedan bekap (%s/Recovery-Tools/backups/)
-        \n\nKreirati sada?
-    </string>
     <string name="error">Greska</string>
     <string name="not_supportded">Vas uredjaj jos uvijek nije podrzan od strane programera. Skenirati sistem i prijaviti nepodrzan uredjaj ili pokusaj naci particiju (restartuj u rekaveri mod)?
     </string>
     <string name="no_root">"Uredjaj nije rutovan. Molimo rutujte uredjaj. Vise informacija ispod
         \n\nxda-developer.com"
     </string>
-    <string name="using_dd">Koristeci dd. Rekaveri iz FS</string>
-    <string name="using_mtd">Koristi flash/dump_image (MTD)</string>
 
     <string name="Downloading">Preuzimanje&#8230;</string>
     <string name="commentar">Komentar</string>
@@ -79,7 +73,6 @@
         Ovo zahtjeva internet konekciju.
         \nPreuzeti sada?
     </string>
-    <string name="over_recovery">Uredjaj ce biti flesovan preko rekoverija</string>
     <string name="ShowAds">Prikazi reklame zbog podrske</string>
 
     <string name="please_restart">Molimo restartujte aplikaciju da bi primjenili izmjene</string>
@@ -100,13 +93,10 @@
     <string name="try_again">Pokusaj ponovo!</string>
     <string name="later">Kasnije</string>
 
-    <string name="no_choosed">Nije odabrana datoteka</string>
-    <string name="update">Osvjezi listu rekaverija</string>
     <string name="pick_file">Odaberi datoteku</string>
     <string name="flash_error">Neuspjelo flesovanje</string>
     <string name="res_error">Neuspjelo vracanje</string>
     <string name="bak_error">Neuspjelo kreiranje bekapa</string>
-    <string name="current_recovery">Trenutni rekavri: %s</string>
     <string name="stock">Stock-standardni</string>
     <string name="changelog">Izmjene</string>
 

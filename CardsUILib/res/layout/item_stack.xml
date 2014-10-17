@@ -15,7 +15,7 @@
         android:paddingTop="8dp"
         android:textColor="@color/card_title_text"
         android:textSize="16sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/stackContainer"

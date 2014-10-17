@@ -61,8 +61,6 @@
         Gerät nicht gerootet. Bitte tuen Sie dies um die App zu verwenden. Mehr informationen unter
         \n\nxda-developers.com
     </string>
-    <string name="using_dd">Using dd. Recovery in FS</string>
-    <string name="using_mtd">Use flash/dump_image (MTD)</string>
     <string name="Downloading">Downloading…</string>
     <string name="commentar">Kommentar</string>
     <string name="commenthint">
@@ -103,7 +101,6 @@
     <string name="never_again">Nicht mehr zeigen</string>
     <string name="try_again">Erneut versuchen!</string>
     <string name="later">Später</string>
-    <string name="no_choosed">Keine Datei ausgewählt</string>
     <string name="update_done">Update fertiggestellt</string>
     <string name="pick_file">Datei aussuchen</string>
     <string name="stock">Stock</string>
@@ -210,4 +207,6 @@
     </string>
 
     <string name="files_deleted">Dateien gelöscht</string>
+
+    <string name="onlyLanguage">Bitten schreiben Sie nur auf Deutsch, Spanisch oder Englisch</string>
 </resources>

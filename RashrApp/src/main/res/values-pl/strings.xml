@@ -30,18 +30,14 @@
     <string name="info">Informacje</string>
     <string name="flashed">Partycja została zflashowana.</string>
     <string name="warning">Uwaga!</string>
-    <string name="kernel_to">Wgranie Recovery na tych urządzeniach wgra fabryczny plik boot.img (Kernel) z customową Recovery (może spowodować bootloopy, zapisz kopię zapasową Boot.img na PC).</string>
     <string name="flash_over_recovery">Czy chcesz teraz wgrać Recovery? (wymaga ponownego uruchomienia do trybu Recovery)</string>
     <string name="instructions">Instrukcje</string>
     <string name="instruction">CWM: \nMenu Główne -> install zip from sdcard -> choose zip from sdcard \n\nTWRP: \nMenu Główne -> Install</string>
     <string name="bak_done">Kopia zapasowa zakończona powodzeniem</string>
     <string name="backupalready">Kopia zapasowa już istnieje.</string>
-    <string name="no_backup">Nie znaleziono kopii zapasowej (%s/Recovery-Tools/backups/) \n\nCzy zrobić ją teraz?</string>
     <string name="error">Błąd</string>
     <string name="not_supportded">Twoje urządzenie nie jest na razie wspierane. Przeskanuj System i zgłoś niewspierane urządzenie lub spróbuj znaleść partycję (uruchomić ponownie do recovery)?</string>
     <string name="no_root">Urządzenie nie jest zrootowane. Proszę abyś najpierw je zrootował. Więcej informacji na \n\nxda-developer.com"</string>
-    <string name="using_dd">Używam dd. Recovery w FS</string>
-    <string name="using_mtd">Użyj flash/dump_image (MTD)</string>
     <string name="Downloading">Pobieranie&#8230;</string>
     <string name="commentar">Komentarz</string>
     <string name="commenthint">Napisz tutaj, co nie działa poprawnie (pobieranie, wgrywanie, wsparcie urządzeń lub inne)</string>
@@ -72,15 +68,11 @@
     </string-array>
     <string name="donate">Podaruj</string>
     <string name="never_again">Nie pokazuj więcej</string>
-    <string name="try_again">Spróbuj ponownie!</string>
     <string name="later">Później</string>
-    <string name="no_choosed">Nie wybrano pliku</string>
-    <string name="update">Zaktualizuj listę Recovery</string>
     <string name="pick_file">Wybierz plik</string>
     <string name="flash_error">Wgrywanie zakończone niepowodzeniem</string>
     <string name="res_error">Przywracanie zakończone niepowodzeniem</string>
     <string name="bak_error">Tworzenie kopii zapasowej zakończone niepowodzeniem</string>
-    <string name="current_recovery">Bieżące Recovery: %s</string>
     <string name="stock">Fabryczne</string>
     <string name="changelog">Lista zmian</string>
     <string name="use_supersu">SuperSu od Chainfire nie zostało znalezione na twoim urządzeniu. Używaj go aby uniknąć niepowodzeń. Czy pobrać SuperSu (ze Sklepu Play) teraz?</string>
@@ -94,6 +86,4 @@
         <item>Jasny Holo</item>
         <item>Ciemny Holo</item>
     </string-array>
-    <string name="appwidget_text">PRZYKŁAD</string>
-    <string name="add_widget">Dodaj widżet</string>
 </resources>

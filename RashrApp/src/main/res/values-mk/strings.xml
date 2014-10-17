@@ -22,7 +22,6 @@
     <string name="info">Информации</string>
     <string name="flashed">Новото Recovery е инсталирано.</string>
     <string name="warning">Внимание!</string>
-    <string name="kernel_to">Инсталирањето на Recovery на овој уред може да предизвика проблеми, за секој случај зачувајте резервна копија од моменталното Recovery на вашиот компјутер.</string>
     <string name="flash_over_recovery">Инсталирај Recovery? (потребно е рестартирање во Recovery мод)</string>
     <string name="instructions">Инструкции</string>
     <string name="instruction">CWM:
@@ -35,15 +34,7 @@
     <string name="backupalready">Постои резервна копија со вакво име, ова ќе ја избрише веќепостоечката копија.
         \n\nПродолжи?
     </string>
-    <string name="no_backup">Не е пронајдена резервната копија (%s/Recovery-Tools/backups/)
-        \n\nКреирај?
-    </string>
     <string name="error">Грешка</string>
-    <string name="noroot">"Вашиот уред не е рутиран. Повеќе информации за рутирање можете да најдете на
-        \n\nxda-developer.com"
-    </string>
-    <string name="using_dd">Користи dd.</string>
-    <string name="using_mtd">Користи flash/dump_image (MTD)</string>
 
     <string name="Downloading">Превземање&#8230;</string>
     <string name="commentar">Коментар</string>
@@ -87,12 +78,9 @@
     <string name="try_again">Пробај повторно!</string>
     <string name="later">Подоцна</string>
 
-    <string name="no_choosed">Не избравте датотека</string>
-    <string name="update">Превземи и инсталирај нов .IMG</string>
     <string name="flash_error">Инсталирањето е неуспешно</string>
     <string name="res_error">Враќањето е неуспешно</string>
     <string name="bak_error">Креирањето резервна копија е неуспешно</string>
-    <string name="current_recovery">Моментално Recovery: %s</string>
     <string name="stock">Сток</string>
     <string name="changelog">Промени</string>
 

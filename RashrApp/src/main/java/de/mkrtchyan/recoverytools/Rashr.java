@@ -1,7 +1,7 @@
 package de.mkrtchyan.recoverytools;
 
 /**
- * Copyright (c) 2014 Ashot Mkrtchyan
+ * Copyright (c) 2014 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights 
@@ -54,6 +54,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -65,6 +66,8 @@ import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.CardUI;
 import com.fima.cardsui.views.MyCard;
 import com.fima.cardsui.views.MyImageCard;
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
 import org.sufficientlysecure.rootcommands.Shell;
@@ -94,7 +97,7 @@ public class Rashr extends ActionBarActivity {
     public static final String PREF_NAME = "rashr";
     public static final String PREF_KEY_RECOVERY_HISTORY = "last_recovery_history_";
     public static final String PREF_KEY_KERNEL_HISTORY = "last_kernel_history_";
-    private static final String PREF_STYLE = "style";
+    public static final String PREF_STYLE = "style";
     private static final String PREF_KEY_ADS = "show_ads";
     private static final String PREF_KEY_CUR_VER = "current_version";
     private static final String PREF_KEY_FIRST_RUN = "first_run";
@@ -137,7 +140,7 @@ public class Rashr extends ActionBarActivity {
     private final ArrayList<String> ERRORS = new ArrayList<String>();
     private final ArrayList<String> FlashUtils_ERRORS = new ArrayList<String>();
 	private int cardColor = android.R.color.transparent;
-	private int fontColor = R.color.card_light_text;
+	private int fontColor = R.color.card_text;
     private File RecoveryCollectionFile, KernelCollectionFile;
     private File fRECOVERY, fKERNEL;
     private Shell mShell;
@@ -248,6 +251,7 @@ public class Rashr extends ActionBarActivity {
              * using AppCompat_Light_Dark_Bar theme
              */
             setTheme(APPCOMPAT_LIGHT_DARK_BAR);
+            Common.setIntegerPref(mContext, PREF_NAME, PREF_STYLE, APPCOMPAT_LIGHT_DARK_BAR);
         } else {
             /** Using predefined theme */
             int Theme = Common.getIntegerPref(mContext, PREF_NAME, PREF_STYLE);
@@ -677,7 +681,8 @@ public class Rashr extends ActionBarActivity {
                 Common.setStringPref(mContext, PREF_NAME, PREF_KEY + String.valueOf(i), "");
             }
         }
-        HistoryList.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, HistoryFileNames));
+        HistoryList.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1,
+                HistoryFileNames));
         HistoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -691,10 +696,6 @@ public class Rashr extends ActionBarActivity {
                         rKernelFlasher.run();
                     }
                     HistoryDialog.dismiss();
-                } else {
-                    AppMsg
-                            .makeText(mActivity, R.string.no_choosed, AppMsg.STYLE_ALERT)
-                            .show();
                 }
             }
         });
@@ -1248,7 +1249,6 @@ public class Rashr extends ActionBarActivity {
                         final Button bGo = (Button) dialog.findViewById(R.id.bGoBackup);
                         final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
 
-
                         switch (menuItem.getItemId()) {
                             case R.id.iRestoreRecovery:
                                 final FlashUtil RestoreRecoveryUtil = new FlashUtil(mShell, mContext, mDevice,
@@ -1529,16 +1529,6 @@ public class Rashr extends ActionBarActivity {
                 final TextView RecoveryVersion = (TextView) findViewById(R.id.tvVersion);
                 RecoveryVersion.setText(mDevice.getRecoveryVersion() + "\n" + mDevice.getKernelVersion());
 
-                AdView adView = (AdView) findViewById(R.id.adView);
-                ViewGroup MainParent = (ViewGroup) adView.getParent();
-
-                if (MainParent != null) {
-                    if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {
-                        /** Removing ads if user has turned off */
-                        MainParent.removeView(adView);
-                    }
-                }
-
                 CardUI mFlashCards = (CardUI) findViewById(R.id.FlashCards);
 
                 CardStack FlashStack = new CardStack();
@@ -1759,6 +1749,14 @@ public class Rashr extends ActionBarActivity {
                 RebooterStack.add(Reboot);
 
                 mRebootCards.addStack(RebooterStack, true);
+                if (Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_ADS)) {
+                    LinearLayout layout;
+                    if ((layout = (LinearLayout) findViewById(R.id.CardsLayout)) != null) {
+                        AdView ads = new AdView(mActivity, AdSize.SMART_BANNER, "ca-app-pub-3591384811135190/6436276193");
+                        layout.addView(ads);
+                        ads.loadAd(new AdRequest());
+                    }
+                }
             }
         }
 
@@ -1798,7 +1796,7 @@ public class Rashr extends ActionBarActivity {
 
     public void setupSwipeUpdater() {
         mSwipeUpdater = (SwipeRefreshLayout) findViewById(R.id.swipe_updater);
-	    mSwipeUpdater.setColorSchemeColors(R.color.custom_green,
+	    mSwipeUpdater.setColorSchemeResources(R.color.custom_green,
                 R.color.custom_yellow,
                 R.color.custom_green,
                 android.R.color.darker_gray);

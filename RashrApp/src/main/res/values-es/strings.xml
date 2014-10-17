@@ -56,8 +56,6 @@
     <string name="no_root">
         Dispositivo sin Root. Porfavor rooten lo. Mas informaciones en
         \n\nxda-developers.com</string>
-    <string name="using_dd">Using dd. Recovery in FS</string>
-    <string name="using_mtd">Use flash/dump_image (MTD)</string>
     <string name="Downloading">Downloading…</string>
     <string name="commentar">Comentario</string>
     <string name="commenthint">Comenten aquí lo que no funciona (download, flash)</string>
@@ -94,7 +92,6 @@
     <string name="never_again">No enseñar mas</string>
     <string name="try_again">Reintentar!</string>
     <string name="later">Después</string>
-    <string name="no_choosed">Dato no eligido</string>
     <string name="update_done">Actualizado</string>
     <string name="pick_file">Elija un dato</string>
     <string name="flash_error">Error</string>
@@ -199,5 +196,7 @@
     </string>
 
     <string name="files_deleted">Archivos borrados</string>
+
+    <string name="onlyLanguage">Porfavor solamente escriban en Alemàn, Inglès o en Castellano</string>
 
 </resources>

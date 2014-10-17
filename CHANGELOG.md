@@ -1,6 +1,12 @@
 CHANGELOG
 ====================
 
+Update [2.1.0]
+
+-New partitions added (More devices supported)
+-Fixed recognition Samsung Galaxy S3 LTE (international/GT-I9305/m3)
+-Italian translation updated by Roberto Boriotti
+
 Update [2.0.4]
 
 -Flash recovery fixed on devices that support all recoveries (like Nexus 4, Nexus 5......)

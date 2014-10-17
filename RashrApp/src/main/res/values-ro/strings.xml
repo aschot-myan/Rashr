@@ -26,7 +26,6 @@
     <string name="info">Informatie</string>
     <string name="flashed">Recovery a fost scris.</string>
     <string name="warning">Atentie !</string>
-    <string name="kernel_to">Scrierea sistemului Recovery System pe acest echipament va scrie boot.img (Kernel) varianta standard (Stock), impreuna cu Recovery non-standard (asta poate duce la reporniri continue ale aparatului, va rugam salvati o copie a Boot.img pe PC).</string>
     <string name="flash_over_recovery">Scriu Recovery acum? (necesita repornire in mod Recovery)</string>
     <string name="instructions">Instructiuni</string>
     <string name="instruction">CWM:
@@ -37,17 +36,12 @@
 
     <string name="bak_done">Copie de siguranta salvata</string>
     <string name="backupalready">Copia de siguranta exista deja.</string>
-    <string name="no_backup">Copie de siguranta nu a fost gasita (%s/Recovery-Tools/backups/)
-        \n\nCreez una acum ?
-    </string>
     <string name="error">Eroare</string>
     <string name="not_supportded">Aplicatia nu a fost parametrizata pentru acest echipament. Vreti sa scanam sistemul si sa raportam informatii despre acest echipament pentru a incerca sa gasim partitia ? (necesita restart in mod Recovery)?
     </string>
     <string name="no_root">"Acces Root indisponibil pe acest echipament. Va rugam activati acces Root. Mai multe detalii pe
         \n\nxda-developer.com"
     </string>
-    <string name="using_dd">Folosesc dd. Recovery in FS</string>
-    <string name="using_mtd">Folosesc flash/dump_image (MTD)</string>
 
     <string name="Downloading">Descarc&#8230;</string>
     <string name="commentar">Commentariu</string>
@@ -92,12 +86,9 @@
     <string name="try_again">Incearca din nou !</string>
     <string name="later">Mai tarziu</string>
 
-    <string name="no_choosed">Nu ati ales nici un fisier</string>
-    <string name="update">Actualizare lista Recovery</string>
     <string name="flash_error">Eroare la scriere</string>
     <string name="res_error">Eroarea la restaurare</string>
     <string name="bak_error">Eroare la salvare copie de siguranta</string>
-    <string name="current_recovery">Recovery actual: %s</string>
     <string name="stock">Stock (standard)</string>
     <string name="changelog">Jurnal modificari</string>
 

@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="154dp"
-            android:layout_height="127dp"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
             android:adjustViewBounds="true"
             android:baselineAlignBottom="true"
             android:scaleType="centerCrop" />

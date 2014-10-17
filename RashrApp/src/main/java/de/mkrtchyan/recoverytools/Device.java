@@ -90,6 +90,7 @@ public class Device {
             new File("/dev/block/platform/msm_sdcc.1/by-name/Kernel"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
             new File("/dev/block/platform/sdhci.1/by-name/KERNEL"),
+            new File("/dev/block/platform/sdhci.1/by-name/boot"),
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
@@ -486,6 +487,7 @@ public class Device {
         for (File i : KernelList) {
             if (i.exists() && KernelPath.equals("")) {
                 KernelPath = i.getAbsolutePath();
+                break;
             }
         }
         for (File i : RecoveryList) {
@@ -495,6 +497,7 @@ public class Device {
                     RECOVERY_EXT = ".tar";
                     RECOVERY_TYPE = PARTITION_TYPE_SONY;
                 }
+                break;
             }
         }
 
@@ -522,6 +525,8 @@ public class Device {
                         line = line.split("4EXT")[1];
                         RecoveryVersion = line;
                     }
+                } else if (!KernelPath.equals("") && !RecoveryPath.equals("")) {
+                    break;
                 }
 
                 if (KernelPath.equals("")) {

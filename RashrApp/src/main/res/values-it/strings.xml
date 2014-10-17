@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Rashr</string>
     <string name="settings">Impostazioni</string>
     <string name="sCWM">Recovery CWM</string>
     <string name="sFlashRecovery">Flash Recovery</string>
@@ -16,11 +18,11 @@
     <string name="sRebooter">Riavvio</string>
     <string name="restore">Ripristno</string>
     <string name="rename">Rinomina</string>
-    <string name="sClearCache">Elimina le recovery scaricate</string>
+    <string name="sClearCache">Elimina recovery scaricate</string>
     <string name="report">Segnala un bug</string>
     <string name="sExit">Esci</string>
-    <string name="xda">Apri il thread su XDA</string>
-    <string name="set_name">Nome del backup</string>
+    <string name="xda">Apri thread su XDA</string>
+    <string name="set_name">Nome backup</string>
     <string name="bak_warning">
         Prima di fare qualsiasi azione con Rashr crea un backup e salvalo nel tuo PC.
         \nIl Backup sarà salvato in %s.
@@ -40,25 +42,23 @@
         Flashare la recovery su questo dispositivo flasherà il FOTAKernel.img (sostituzione partizione)
         Questo funzionerà solo se il tuo kernel lo supporta (la maggior parte dei kernel e ROM custom lo supportano).
     </string>
-    <string name="flash_over_recovery">Flashare la recovery adesso? (necessità il riavvio in recovery)</string>
+    <string name="flash_over_recovery">
+        Flashare la recovery adesso? (necessità il riavvio in recovery)
+    </string>
     <string name="instructions">Istruzioni</string>
     <string name="instruction">
-        CWM:\n
-        Main menu -> install zip from sdcard -> choose zip from sdcard\n
-        TWRP:\n
-        Main Menu -> Install
+        CWM:
+        \nMain menu -> install zip from sdcard -> choose zip from sdcard
+        \nTWRP:
+        \nMain Menu -> Install
     </string>
     <string name="bak_done">Backup completato</string>
     <string name="backupalready">Esiste già un backup</string>
-    <string name="no_backup">Nessun backup esistente (%s/Rashr/backups/)
-        \n\nCrearne uno ora?</string>
     <string name="error">Errore</string>
-    <string name="not_supportded">Il tuo dispositivo non è supportato dallo sviluppatore. Analizzare il sistema e
-        segnalare il dispositivo non supportato o provare a cercare la partizione (riavvia una volta in recovery)?</string>
-    <string name="not_root">"Dispositivo non rootato. Esegui il root. Maggiori informazioni su
-        \n\nxda-developers.com"</string>
-    <string name="using_dd">Uso dd. Recovery in FS.</string>
-    <string name="using_mtd">Usa flash/dump_image (MTD)</string>
+    <string name="not_supportded">
+        Il tuo dispositivo non è supportato dallo sviluppatore. Analizzare il sistema e segnalare il
+        dispositivo non supportato o provare a cercare la partizione (riavvia una volta in recovery)?
+    </string>
     <string name="Downloading">Download&#8230;</string>
     <string name="commentar">Commenti</string>
     <string name="commenthint">
@@ -73,13 +73,14 @@
     <string name="sBackupMgr">Gestore backup</string>
     <string name="setname">Imposta nome backup</string>
     <string name="reboot_recovery_now">Riavviare ora in recovery?</string>
-    <string name="flashing">Flash&#8230;</string>
-    <string name="restoring">Ripristino&#8230;</string>
-    <string name="creating_bak">Backup&#8230;</string>
+    <string name="reboot_now">Riavviare ora?</string>
+    <string name="flashing">Flashing…</string>
+    <string name="restoring">Ripristino…</string>
+    <string name="creating_bak">Creazione backup…</string>
     <string name="download_utils">
-        Per usare quest\'app hai bisogno di scaricare dei piccoli programmi (circa 512KB). È richiesta
-        la connessione internet.\n
-        Scaricarli ora?
+        Per usare quest\'app hai bisogno di scaricare dei piccoli programmi (circa 512KB).
+        È richiesta la connessione internet.
+        \nScaricarli ora?
     </string>
     <string name="over_recovery">La recovery verrà installata al posto di quella attuale</string>
     <string name="ShowAds">Visualizza pubblicità del supporto</string>
@@ -107,12 +108,12 @@
     <string name="stock">Stock</string>
     <string name="changelog">Modifiche</string>
     <string name="use_supersu">
-        SuperSu di Chainfire non riconosciuto nel dispositivo. Usalo per evitare errori. Scaricare
-        SuperSu (dal Play Store) ora?
+        SuperSu di Chainfire non riconosciuto nel dispositivo. Usalo per evitare errori.
+        Scaricare SuperSu (dal Play Store) ora?
     </string>
     <string name="bak_deleted">%s eliminato</string>
     <string name="extract_failed">
-        Estrazione fallita dall\'app dei file necessari. Riavvia l\'app.
+        Estrazione fallita dei file necessari dall\'app. Riavvia l\'app.
     </string>
     <string name="no_history">Nessuna cronologia trovata</string>
     <string name="styles">Stili</string>
@@ -151,7 +152,7 @@
     <string name="failed_setup_layout">Errore impostazione layout</string>
     <string name="refresh_list">Aggiornamento avviato!</string>
     <string name="new_imgs_loaded">%s nuove immagini caricate</string>
-    <string name="make_choice">Fai la tua sceltae</string>
+    <string name="make_choice">Fai la tua scelta</string>
     <string name="unified_info">
         Questa ROM è stata creata usando Unified CyanogenMod Sources.\n
         Conseguentemente potrebbe essere che Rashr non possa trovare le immagini Recovery o Kernel.\n
@@ -165,7 +166,7 @@
 
     <string name="flash">Flash</string>
     <string name="recovery_description">
-        Con questa funzione puoi puoi flashare la partizione recovery con un solo clic!
+        Con questa funzione puoi flashare la partizione recovery con un solo clic!
     </string>
     <string name="kernel_description">
         Con questa funzione puoi flashare la partizione kernel/boot con un solo clic!
