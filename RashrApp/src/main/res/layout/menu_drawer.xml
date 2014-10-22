@@ -35,18 +35,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="bXDA"
-            android:text="@string/xda"
-            android:layout_marginTop="1dp"/>
+            android:text="@string/xda" />
 
         <Button
             style="@style/flatButton"
             android:id="@+id/bReport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="74dp"
             android:onClick="bReport"
-            android:text="@string/report"
-            android:layout_marginTop="1dp"/>
+            android:text="@string/report" />
 
         <Spinner
             android:id="@+id/spStyle"
@@ -76,16 +73,15 @@
             android:id="@+id/bShowLogs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="74dp"
             android:onClick="bShowLogs"
-            android:text="@string/showlog" />
+            android:text="@string/showlog"
+            android:layout_margin="1dp" />
 
         <Button
             style="@style/flatButton"
             android:id="@+id/bDonate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="74dp"
             android:onClick="bDonate"
             android:text="@string/donate"
             android:layout_marginTop="1dp"/>
@@ -95,7 +91,6 @@
             android:id="@+id/bExit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="74dp"
             android:onClick="bExit"
             android:text="@string/sExit"
             android:layout_marginTop="1dp"/>

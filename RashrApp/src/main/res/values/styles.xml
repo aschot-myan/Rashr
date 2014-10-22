@@ -6,9 +6,11 @@
 
     <style name="flatButton" parent="CardText">
         <item name="android:background">@color/black_light</item>
-        <item name="android:height">74dp</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:minHeight">62dp</item>
+
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/stroke</item>
+        <item name="android:layout_margin">1dp</item>
     </style>
     <style name="flatButton.Small" parent="flatButton">
         <item name="android:height">22dp</item>
