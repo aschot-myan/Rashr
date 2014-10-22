@@ -64,14 +64,17 @@ public class DonationsActivity extends FragmentActivity {
 
         Layout = new LinearLayout(this);
         Layout.setHorizontalGravity(LinearLayout.HORIZONTAL);
-//        Layout.setId(1111111);
+        Layout.setId(1111111);
 
         setContentView(Layout);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         DonationsFragment donationsFragment;
-        donationsFragment = DonationsFragment.newInstance(BuildConfig.DEBUG, GOOGLE_PLAY, GOOGLE_PUBKEY, GOOGLE_CATALOG,
-                getResources().getStringArray(R.array.donation_google_catalog_values), PAYPAL, PAYPAL_USER, PAYPAL_CURRENCY_CODE, PAYPAL_ITEM_NAME, FLATTR, FLATTR_PROJECT_URL, FLATTR_URL);
+        donationsFragment =
+                DonationsFragment.newInstance(BuildConfig.DEBUG, GOOGLE_PLAY, GOOGLE_PUBKEY, GOOGLE_CATALOG,
+                getResources().getStringArray(R.array.donation_google_catalog_values),
+                        PAYPAL, PAYPAL_USER, PAYPAL_CURRENCY_CODE, PAYPAL_ITEM_NAME,
+                        FLATTR, FLATTR_PROJECT_URL, FLATTR_URL);
 
         ft.replace(Layout.getId(), donationsFragment, "donationsFragment");
         ft.commit();
