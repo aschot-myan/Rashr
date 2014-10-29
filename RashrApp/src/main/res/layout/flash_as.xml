@@ -20,23 +20,21 @@
         android:id="@+id/bFlashAs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:enabled="false"
         android:onClick="flashAs"
-        android:text="@string/go" />
+        android:text="@string/go"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
 
     <Button
         style="@style/flatButton"
         android:id="@+id/bCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:onClick="bExit"
-        android:text="@string/negative" />
+        android:text="@string/negative"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
 
     <RadioButton
         android:id="@+id/optAsRecovery"

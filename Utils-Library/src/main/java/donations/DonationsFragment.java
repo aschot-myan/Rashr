@@ -404,9 +404,9 @@ public class DonationsFragment extends Fragment {
         mLoadingFrame = (FrameLayout) getActivity().findViewById(R.id.donations__loading_frame);
 
         // disable hardware acceleration for this webview to get transparent background working
-        if (Build.VERSION.SDK_INT >= 11) {
-            mFlattrWebview.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
+        //if (Build.VERSION.SDK_INT >= 11) {
+        //    mFlattrWebview.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        //}
 
         // define own webview client to override loading behaviour
         mFlattrWebview.setWebViewClient(new WebViewClient() {

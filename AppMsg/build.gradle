@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
 android {
-    compileSdkVersion 19
+    compileSdkVersion 16
     buildToolsVersion '20.0.0'
     defaultConfig {
         versionCode 1
         versionName '1.0'
         minSdkVersion 4
-        targetSdkVersion 19
     }
     sourceSets {
         main {
@@ -14,8 +13,6 @@ android {
             java.srcDirs = ['src']
             res.srcDirs = ['res']
         }
-    }
-    productFlavors {
     }
     buildTypes {
     }

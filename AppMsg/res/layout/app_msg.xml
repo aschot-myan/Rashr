@@ -13,7 +13,6 @@
         android:gravity="center"
         android:padding="8dp"
         android:textColor="?android:textColorPrimaryInverse"
-        android:textIsSelectable="false"
         android:textSize="14sp"
         android:textStyle="bold" />
 

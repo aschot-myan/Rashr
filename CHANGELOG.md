@@ -1,6 +1,12 @@
 CHANGELOG
 ====================
 
+Update [2.1.1]
+
+-Donations fixed
+-Small UI changes
+-Librarys updated
+
 Update [2.1.0]
 
 -New partitions added (More devices supported)

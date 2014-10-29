@@ -21,13 +21,18 @@
         <devices>
           <device id="Nexus 4" />
         </devices>
-        <target>android-19</target>
+        <target>android-21</target>
       </config>
     </shared>
     <layouts>
       <layout url="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/backup_drawer.xml">
         <config>
           <theme>@style/Theme.AppCompat.Light.DarkActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml">
+        <config>
+          <theme>@android:style/Theme.DeviceDefault.Dialog</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/menu_drawer.xml">
@@ -45,6 +50,11 @@
           <theme>@style/Theme.Base.AppCompat.Light.DarkActionBar</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/Utils-Library/src/main/res/layout/dialog_command_logs.xml">
+        <config>
+          <theme>@android:style/Theme</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AndroidLogFilters">
@@ -52,46 +62,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ebdf845-b4cd-4b1a-9ade-eed2ebd16c4e" name="Default" comment="-CardsUI implemented">
-      <change type="DELETED" beforePath="C:\Users\Ashot\Google Drive\workspace\Rashr\AppMsg\AppMsg.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ashot\Google Drive\workspace\Rashr\CardsUILib\CardsUILib.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ashot\Google Drive\workspace\Rashr\RashrApp\Rashr-Rashr.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ashot\Google Drive\workspace\Rashr\RashrApp\RashrApp.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ashot\Google Drive\workspace\Rashr\Utils-Library\Utils-Library.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Ashot\Google Drive\workspace\Rashr\root-commands\root-commands.iml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/RashrApp-release.apk" afterPath="$PROJECT_DIR$/RashrApp/RashrApp-release.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppMsg/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AppMsg/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/AndroidManifest.xml" afterPath="$PROJECT_DIR$/CardsUILib/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppMsg/AppMsg.iml" afterPath="$PROJECT_DIR$/AppMsg/AppMsg.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="$PROJECT_DIR$/CHANGELOG.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/DonationsActivity.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/DonationsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoveryScriptManager.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoveryScriptManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/CardsUILib.iml" afterPath="$PROJECT_DIR$/CardsUILib/CardsUILib.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/src/main/java/donations/DonationsFragment.java" afterPath="$PROJECT_DIR$/Utils-Library/src/main/java/donations/DonationsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/RashrApp.iml" afterPath="$PROJECT_DIR$/RashrApp/RashrApp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" afterPath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppMsg/res/layout/app_msg.xml" afterPath="$PROJECT_DIR$/AppMsg/res/layout/app_msg.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppMsg/build.gradle" afterPath="$PROJECT_DIR$/AppMsg/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/build.gradle" afterPath="$PROJECT_DIR$/CardsUILib/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/build.gradle" afterPath="$PROJECT_DIR$/RashrApp/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/build.gradle" afterPath="$PROJECT_DIR$/Utils-Library/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root-commands/build.gradle" afterPath="$PROJECT_DIR$/root-commands/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/src/main/res/layout/dialog_command_logs.xml" afterPath="$PROJECT_DIR$/Utils-Library/src/main/res/layout/dialog_command_logs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/item_stack.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/item_stack.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/rashr.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/rashr.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-bs/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-bs/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-de/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-de/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-es/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-es/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-hr/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-hr/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-it/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-it/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-mk/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-mk/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-nl/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-nl/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-pl/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-pl/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-ro/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-ro/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-sr/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-sr/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-zh/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-zh/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root-commands/root-commands.iml" afterPath="$PROJECT_DIR$/root-commands/root-commands.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Recovery-Tools.iws" />
@@ -156,15 +145,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="card_picture.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
-              <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+              <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
               <folding />
             </state>
           </provider>
-          <provider selected="true" editor-type-id="android-designer">
+        </entry>
+      </file>
+      <file leaf-file-name="flash_as.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.925926" vertical-offset="625" max-vertical-offset="1156">
+              <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+              <folding>
+                <element signature="e#883#895#0" expanded="true" />
+                <element signature="e#1217#1235#0" expanded="true" />
+                <element signature="e#1694#1712#0" expanded="true" />
+                <element signature="e#2110#2126#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CHANGELOG.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.595186" vertical-offset="0" max-vertical-offset="11594">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
             <state />
           </provider>
         </entry>
@@ -173,66 +190,312 @@
         <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3689">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CHANGELOG.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
-          </provider>
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CardsUILib/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.703704" vertical-offset="0" max-vertical-offset="11492">
-              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+              <caret line="40" column="46" selection-start-line="40" selection-start-column="46" selection-end-line="40" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="Rashr.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13737373" vertical-offset="0" max-vertical-offset="495">
-              <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-              <folding />
+            <state vertical-scroll-proportion="-3.5357144" vertical-offset="4950" max-vertical-offset="36448">
+              <caret line="297" column="17" selection-start-line="297" selection-start-column="17" selection-end-line="297" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6287#6295#0" expanded="true" />
+                <element signature="e#6368#6376#0" expanded="true" />
+                <element signature="e#6866#9048#0" expanded="true" />
+                <element signature="e#7690#7706#0" expanded="true" />
+                <element signature="e#7756#7769#0" expanded="true" />
+                <element signature="e#7826#7843#0" expanded="true" />
+                <element signature="e#7845#8177#0" expanded="true" />
+                <element signature="e#8138#8139#0" expanded="true" />
+                <element signature="e#8234#8251#0" expanded="true" />
+                <element signature="e#9041#9042#0" expanded="true" />
+                <element signature="e#9255#9623#0" expanded="true" />
+                <element signature="e#9616#9617#0" expanded="true" />
+                <element signature="e#9836#10357#0" expanded="true" />
+                <element signature="e#10127#10306#0" expanded="true" />
+                <element signature="e#10291#10292#0" expanded="true" />
+                <element signature="e#10350#10351#0" expanded="true" />
+                <element signature="e#10401#10918#0" expanded="true" />
+                <element signature="e#10688#10867#0" expanded="true" />
+                <element signature="e#10852#10853#0" expanded="true" />
+                <element signature="e#10911#10912#0" expanded="true" />
+                <element signature="e#12191#18986#0" expanded="true" />
+                <element signature="e#12348#12540#0" expanded="true" />
+                <element signature="e#12477#12498#0" expanded="true" />
+                <element signature="e#12521#12522#0" expanded="true" />
+                <element signature="e#12796#13154#0" expanded="true" />
+                <element signature="e#13088#13104#0" expanded="true" />
+                <element signature="e#13131#13132#0" expanded="true" />
+                <element signature="e#13393#13675#0" expanded="true" />
+                <element signature="e#13534#13562#0" expanded="true" />
+                <element signature="e#13652#13653#0" expanded="true" />
+                <element signature="e#14124#14318#0" expanded="true" />
+                <element signature="e#14253#14276#0" expanded="true" />
+                <element signature="e#14299#14300#0" expanded="true" />
+                <element signature="e#14507#14699#0" expanded="true" />
+                <element signature="e#14636#14657#0" expanded="true" />
+                <element signature="e#14680#14681#0" expanded="true" />
+                <element signature="e#15193#15395#0" expanded="true" />
+                <element signature="e#15372#15373#0" expanded="true" />
+                <element signature="e#16010#16220#0" expanded="true" />
+                <element signature="e#16193#16194#0" expanded="true" />
+                <element signature="e#17648#18131#0" expanded="true" />
+                <element signature="e#18100#18101#0" expanded="true" />
+                <element signature="e#18266#18515#0" expanded="true" />
+                <element signature="e#18492#18493#0" expanded="true" />
+                <element signature="e#18683#18711#0" expanded="true" />
+                <element signature="e#18975#18976#0" expanded="true" />
+                <element signature="e#19664#19672#0" expanded="true" />
+                <element signature="e#24446#25794#0" expanded="true" />
+                <element signature="e#25779#25780#0" expanded="true" />
+                <element signature="e#26321#26561#0" expanded="true" />
+                <element signature="e#26546#26547#0" expanded="true" />
+                <element signature="e#27803#29254#0" expanded="true" />
+                <element signature="e#29239#29240#0" expanded="true" />
+                <element signature="e#29648#29884#0" expanded="true" />
+                <element signature="e#29869#29870#0" expanded="true" />
+                <element signature="e#30546#30552#0" expanded="true" />
+                <element signature="e#30620#30628#0" expanded="true" />
+                <element signature="e#30722#30739#0" expanded="true" />
+                <element signature="e#31451#32087#0" expanded="true" />
+                <element signature="e#32076#32077#0" expanded="true" />
+                <element signature="e#32305#32324#0" expanded="true" />
+                <element signature="e#35795#35811#0" expanded="true" />
+                <element signature="e#36555#36732#0" expanded="true" />
+                <element signature="e#36721#36722#0" expanded="true" />
+                <element signature="e#36811#38875#0" expanded="true" />
+                <element signature="e#38198#38220#0" expanded="true" />
+                <element signature="e#38486#38752#0" expanded="true" />
+                <element signature="e#38729#38730#0" expanded="true" />
+                <element signature="e#38864#38865#0" expanded="true" />
+                <element signature="e#39055#39077#0" expanded="true" />
+                <element signature="e#39296#39320#0" expanded="true" />
+                <element signature="e#39361#39396#0" expanded="true" />
+                <element signature="e#39566#39751#0" expanded="true" />
+                <element signature="e#39736#39737#0" expanded="true" />
+                <element signature="e#39920#39945#0" expanded="true" />
+                <element signature="e#39987#40023#0" expanded="true" />
+                <element signature="e#40190#40376#0" expanded="true" />
+                <element signature="e#40361#40362#0" expanded="true" />
+                <element signature="e#40532#40558#0" expanded="true" />
+                <element signature="e#40574#40611#0" expanded="true" />
+                <element signature="e#40781#40968#0" expanded="true" />
+                <element signature="e#40953#40954#0" expanded="true" />
+                <element signature="e#41141#41166#0" expanded="true" />
+                <element signature="e#41209#41255#0" expanded="true" />
+                <element signature="e#41425#41612#0" expanded="true" />
+                <element signature="e#41597#41598#0" expanded="true" />
+                <element signature="e#41722#41748#0" expanded="true" />
+                <element signature="e#41760#41805#0" expanded="true" />
+                <element signature="e#41927#42083#0" expanded="true" />
+                <element signature="e#42072#42073#0" expanded="true" />
+                <element signature="e#42191#42219#0" expanded="true" />
+                <element signature="e#42254#42293#0" expanded="true" />
+                <element signature="e#42458#42621#0" expanded="true" />
+                <element signature="e#42610#42611#0" expanded="true" />
+                <element signature="e#43123#43145#0" expanded="true" />
+                <element signature="e#43360#43385#0" expanded="true" />
+                <element signature="e#43428#43472#0" expanded="true" />
+                <element signature="e#43642#43827#0" expanded="true" />
+                <element signature="e#43812#43813#0" expanded="true" />
+                <element signature="e#43935#43961#0" expanded="true" />
+                <element signature="e#43979#44024#0" expanded="true" />
+                <element signature="e#44146#44300#0" expanded="true" />
+                <element signature="e#44289#44290#0" expanded="true" />
+                <element signature="e#44406#44434#0" expanded="true" />
+                <element signature="e#44469#44508#0" expanded="true" />
+                <element signature="e#44671#44834#0" expanded="true" />
+                <element signature="e#44823#44824#0" expanded="true" />
+                <element signature="e#45785#45803#0" expanded="true" />
+                <element signature="e#45937#54176#0" expanded="true" />
+                <element signature="e#46221#54150#0" expanded="true" />
+                <element signature="e#46474#46493#0" expanded="true" />
+                <element signature="e#46574#46600#0" expanded="true" />
+                <element signature="e#46725#46731#0" expanded="true" />
+                <element signature="e#54131#54132#0" expanded="true" />
+                <element signature="e#54165#54166#0" expanded="true" />
+                <element signature="e#55044#55062#0" expanded="true" />
+                <element signature="e#55710#55726#0" expanded="true" />
+                <element signature="e#55780#55811#0" expanded="true" />
+                <element signature="e#55932#55947#0" expanded="true" />
+                <element signature="e#55949#56383#0" expanded="true" />
+                <element signature="e#56368#56369#0" expanded="true" />
+                <element signature="e#56430#56443#0" expanded="true" />
+                <element signature="e#56445#56710#0" expanded="true" />
+                <element signature="e#56695#56696#0" expanded="true" />
+                <element signature="e#57023#65307#0" expanded="true" />
+                <element signature="e#57453#57469#0" expanded="true" />
+                <element signature="e#58136#58425#0" expanded="true" />
+                <element signature="e#58390#58391#0" expanded="true" />
+                <element signature="e#58708#60788#0" expanded="true" />
+                <element signature="e#59876#59898#0" expanded="true" />
+                <element signature="e#60461#60483#0" expanded="true" />
+                <element signature="e#60753#60754#0" expanded="true" />
+                <element signature="e#61104#61144#0" expanded="true" />
+                <element signature="e#61691#61978#0" expanded="true" />
+                <element signature="e#61943#61944#0" expanded="true" />
+                <element signature="e#62253#64331#0" expanded="true" />
+                <element signature="e#63421#63443#0" expanded="true" />
+                <element signature="e#64004#64026#0" expanded="true" />
+                <element signature="e#64296#64297#0" expanded="true" />
+                <element signature="e#64689#64729#0" expanded="true" />
+                <element signature="e#65296#65297#0" expanded="true" />
+                <element signature="e#67235#67251#0" expanded="true" />
+                <element signature="e#67292#67315#0" expanded="true" />
+                <element signature="e#67363#67378#0" expanded="true" />
+                <element signature="e#67380#67570#0" expanded="true" />
+                <element signature="e#67559#67560#0" expanded="true" />
+                <element signature="e#67618#67633#0" expanded="true" />
+                <element signature="e#67635#67818#0" expanded="true" />
+                <element signature="e#67807#67808#0" expanded="true" />
+                <element signature="e#67902#67918#0" expanded="true" />
+                <element signature="e#67920#68348#0" expanded="true" />
+                <element signature="e#68333#68334#0" expanded="true" />
+                <element signature="e#69970#69976#0" expanded="true" />
+                <element signature="e#70691#70697#0" expanded="true" />
+                <element signature="e#72125#72150#0" expanded="true" />
+                <element signature="e#72266#72292#0" expanded="true" />
+                <element signature="e#72343#72381#0" expanded="true" />
+                <element signature="e#72528#72745#0" expanded="true" />
+                <element signature="e#72722#72723#0" expanded="true" />
+                <element signature="e#72931#72959#0" expanded="true" />
+                <element signature="e#73011#73051#0" expanded="true" />
+                <element signature="e#73200#73419#0" expanded="true" />
+                <element signature="e#73396#73397#0" expanded="true" />
+                <element signature="e#73680#73707#0" expanded="true" />
+                <element signature="e#73757#73786#0" expanded="true" />
+                <element signature="e#73812#73853#0" expanded="true" />
+                <element signature="e#73991#74631#0" expanded="true" />
+                <element signature="e#74612#74613#0" expanded="true" />
+                <element signature="e#74738#74769#0" expanded="true" />
+                <element signature="e#74817#74860#0" expanded="true" />
+                <element signature="e#74999#76959#0" expanded="true" />
+                <element signature="e#75266#75282#0" expanded="true" />
+                <element signature="e#75339#75367#0" expanded="true" />
+                <element signature="e#75431#75448#0" expanded="true" />
+                <element signature="e#75450#76564#0" expanded="true" />
+                <element signature="e#76131#76153#0" expanded="true" />
+                <element signature="e#76379#76401#0" expanded="true" />
+                <element signature="e#76537#76538#0" expanded="true" />
+                <element signature="e#76628#76645#0" expanded="true" />
+                <element signature="e#76940#76941#0" expanded="true" />
+                <element signature="e#77202#77231#0" expanded="true" />
+                <element signature="e#77278#77305#0" expanded="true" />
+                <element signature="e#77307#77345#0" expanded="true" />
+                <element signature="e#77480#78870#0" expanded="true" />
+                <element signature="e#77753#77769#0" expanded="true" />
+                <element signature="e#77826#77854#0" expanded="true" />
+                <element signature="e#77918#77935#0" expanded="true" />
+                <element signature="e#77937#78475#0" expanded="true" />
+                <element signature="e#78448#78449#0" expanded="true" />
+                <element signature="e#78539#78556#0" expanded="true" />
+                <element signature="e#78851#78852#0" expanded="true" />
+                <element signature="e#78924#78959#0" expanded="true" />
+                <element signature="e#78985#79032#0" expanded="true" />
+                <element signature="e#79175#80561#0" expanded="true" />
+                <element signature="e#79442#79458#0" expanded="true" />
+                <element signature="e#79515#79543#0" expanded="true" />
+                <element signature="e#79607#79624#0" expanded="true" />
+                <element signature="e#79626#80166#0" expanded="true" />
+                <element signature="e#80139#80140#0" expanded="true" />
+                <element signature="e#80230#80247#0" expanded="true" />
+                <element signature="e#80542#80543#0" expanded="true" />
+                <element signature="e#80617#80654#0" expanded="true" />
+                <element signature="e#80680#80729#0" expanded="true" />
+                <element signature="e#80874#82262#0" expanded="true" />
+                <element signature="e#81141#81157#0" expanded="true" />
+                <element signature="e#81214#81242#0" expanded="true" />
+                <element signature="e#81306#81323#0" expanded="true" />
+                <element signature="e#81325#81867#0" expanded="true" />
+                <element signature="e#81840#81841#0" expanded="true" />
+                <element signature="e#81931#81948#0" expanded="true" />
+                <element signature="e#82243#82244#0" expanded="true" />
+                <element signature="e#82310#82345#0" expanded="true" />
+                <element signature="e#82371#82411#0" expanded="true" />
+                <element signature="e#82548#83936#0" expanded="true" />
+                <element signature="e#82815#82831#0" expanded="true" />
+                <element signature="e#82888#82918#0" expanded="true" />
+                <element signature="e#82982#82999#0" expanded="true" />
+                <element signature="e#83001#83541#0" expanded="true" />
+                <element signature="e#83514#83515#0" expanded="true" />
+                <element signature="e#83605#83622#0" expanded="true" />
+                <element signature="e#83917#83918#0" expanded="true" />
+                <element signature="e#85174#85202#0" expanded="true" />
+                <element signature="e#86330#89860#0" expanded="true" />
+                <element signature="e#87070#87091#0" expanded="true" />
+                <element signature="e#87569#87844#0" expanded="true" />
+                <element signature="e#87817#87818#0" expanded="true" />
+                <element signature="e#88950#89434#0" expanded="true" />
+                <element signature="e#89167#89202#0" expanded="true" />
+                <element signature="e#89407#89408#0" expanded="true" />
+                <element signature="e#89849#89850#0" expanded="true" />
+                <element signature="e#90195#90212#0" expanded="true" />
+                <element signature="e#90214#90231#0" expanded="true" />
+                <element signature="e#90990#90998#0" expanded="true" />
+                <element signature="e#94643#94988#0" expanded="true" />
+                <element signature="e#94965#94966#0" expanded="true" />
+                <element signature="e#95906#96253#0" expanded="true" />
+                <element signature="e#96230#96231#0" expanded="true" />
+                <element signature="e#97898#97918#0" expanded="true" />
+                <element signature="e#97976#97984#0" expanded="true" />
+                <element signature="e#98046#98054#0" expanded="true" />
+                <element signature="e#98292#98300#0" expanded="true" />
+                <element signature="e#100989#102161#0" expanded="true" />
+                <element signature="e#101315#101353#0" expanded="true" />
+                <element signature="e#101465#102126#0" expanded="true" />
+                <element signature="e#101814#102084#0" expanded="true" />
+                <element signature="e#102057#102058#0" expanded="true" />
+                <element signature="e#102107#102108#0" expanded="true" />
+                <element signature="e#102150#102151#0" expanded="true" />
+                <element signature="e#102297#102334#0" expanded="true" />
+                <element signature="e#102396#102692#0" expanded="true" />
+                <element signature="e#102681#102682#0" expanded="true" />
+                <element signature="e#102807#103052#0" expanded="true" />
+                <element signature="e#103043#103044#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="card_play.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_play.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1258">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="card_ex.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_ex.xml">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppMsg/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.518518" vertical-offset="338" max-vertical-offset="884">
-              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state vertical-scroll-proportion="-4.76" vertical-offset="0" max-vertical-offset="442">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/root-commands/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="374">
+              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecoveryScriptManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoveryScriptManager.java">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Utils-Library/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="833" max-vertical-offset="3638">
-              <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+              <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -1910,9 +2173,9 @@
                 <option name="name" value="prepareComAndroidSupportAppcompatV72000Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-v4:20.0.0" />
+                <option name="description" value="Prepare com.android.support:support-v4:21.0.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/RashrApp" />
-                <option name="name" value="prepareComAndroidSupportSupportV42000Library" />
+                <option name="name" value="prepareComAndroidSupportSupportV42100Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/RashrApp" />
@@ -2371,9 +2634,9 @@
                 <option name="name" value="preReleaseBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-v4:20.0.0" />
+                <option name="description" value="Prepare com.android.support:support-v4:21.0.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/Utils-Library" />
-                <option name="name" value="prepareComAndroidSupportSupportV42000Library" />
+                <option name="name" value="prepareComAndroidSupportSupportV42100Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/Utils-Library" />
@@ -2853,7 +3116,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="9864800574605" />
+        <entry key="$PROJECT_DIR$" value="9898287814616" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -3158,11 +3421,11 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/5043bfebc3db072ed80fbd362e7caf00e885d8ae/commons-logging-1.1.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.4/5310da9f90e843883309e9e0bf5950faa79882a0/commons-codec-1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.4/4216af16d38465bbab0f3dff8efa14204f7a399a/commons-codec-1.4.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/20.0.0/support-v4-20.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/20.0.0/support-v4-20.0.0.aar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.0/support-v4-21.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.0/support-v4-21.0.0.aar" />
                             <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/appcompat-v7/20.0.0/appcompat-v7-20.0.0.aar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar" />
                             <option value="$MODULE_DIR$/libs/GoogleAdMobAdsSdk.jar" />
                             <option value="$MODULE_DIR$/libs/Holoeverywhere-2.1.0.jar" />
                           </list>
@@ -3240,10 +3503,10 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/5043bfebc3db072ed80fbd362e7caf00e885d8ae/commons-logging-1.1.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.4/5310da9f90e843883309e9e0bf5950faa79882a0/commons-codec-1.4-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.4/4216af16d38465bbab0f3dff8efa14204f7a399a/commons-codec-1.4.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/20.0.0/support-v4-20.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/20.0.0/support-v4-20.0.0.aar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.0/support-v4-21.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.0/support-v4-21.0.0.aar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/Utils-Library" />
@@ -3433,18 +3696,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Utils-Library/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/FileChooserDialog.java" />
-        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoveryScript.java" />
-        <option value="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/RecyclableCard.java" />
-        <option value="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/MyPlayCard.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/build/intermediates/manifests/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/backup_drawer.xml" />
         <option value="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/MyImageCard.java" />
         <option value="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/MyCard.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/unified_build_dialog.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-fa/strings.xml" />
@@ -3455,11 +3709,8 @@
         <option value="$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/menu_drawer.xml" />
         <option value="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/CardStack.java" />
-        <option value="$PROJECT_DIR$/AppMsg/build.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/CardsUILib/build.gradle" />
         <option value="$PROJECT_DIR$/Utils-Library/src/main/res/layout/donations__fragment_flattr.xml" />
-        <option value="$PROJECT_DIR$/Utils-Library/build.gradle" />
         <option value="$PROJECT_DIR$/AppMsg/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/DonationsActivity.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-zh/strings.xml" />
@@ -3469,21 +3720,33 @@
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-bs/strings.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoveryScriptManager.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/rashr.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/build.gradle" />
-        <option value="$PROJECT_DIR$/CHANGELOG.md" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-es/strings.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-de/strings.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-it/strings.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-pl/strings.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-hr/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-nl/strings.xml" />
         <option value="$PROJECT_DIR$/CardsUILib/res/layout/card_ex.xml" />
         <option value="$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/settings.gradle" />
+        <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values-v21/values.xml" />
+        <option value="$PROJECT_DIR$/AppMsg/res/layout/app_msg.xml" />
+        <option value="$PROJECT_DIR$/root-commands/src/main/java/org/sufficientlysecure/rootcommands/command/BinaryCommand.java" />
+        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/donations/DonationsFragment.java" />
+        <option value="$PROJECT_DIR$/Utils-Library/src/main/res/layout/dialog_command_logs.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/Rashr/CardsUILib/unspecified/res/values/values.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml" />
+        <option value="$PROJECT_DIR$/AppMsg/build.gradle" />
+        <option value="$PROJECT_DIR$/Utils-Library/build.gradle" />
+        <option value="$PROJECT_DIR$/root-commands/build.gradle" />
+        <option value="$PROJECT_DIR$/CardsUILib/build.gradle" />
+        <option value="$PROJECT_DIR$/RashrApp/build.gradle" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml" />
       </list>
     </option>
   </component>
@@ -3574,8 +3837,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -3605,6 +3868,112 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Utils-Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Utils-Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Utils-Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Utils-Library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="root-commands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="RashrApp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -3654,96 +4023,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values-es" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values-de" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3831,33 +4110,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="CardsUILib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CardsUILib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
+              <option name="myItemId" value="AppMsg" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3873,18 +4126,19 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="options.lastSelected" value="http.proxy" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="FullScreen" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0149CBF309013008" />
-    <property name="android.project.structure.last.selected" value="RashrApp" />
+    <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="DEBUGGABLE_DEVICE" value="samsung-galaxy_nexus-0149CBF309013008" />
+    <property name="DEBUGGABLE_DEVICE" value="a [emulator-5554]" />
     <property name="DEBUGGABLE_PROCESS" value="de.mkrtchyan.recoverytools" />
     <property name="SHOW_ALL_PROCESSES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Keystone.key" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="a" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -4325,16 +4579,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41824248" sideWeight="0.5996802" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4304783" sideWeight="0.5954158" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19583334" sideWeight="0.5185811" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41824248" sideWeight="0.4003198" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35447338" sideWeight="0.37777779" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.057291668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -4342,12 +4596,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23507462" sideWeight="0.4814189" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22814499" sideWeight="0.4814189" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.4991453" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35038933" sideWeight="0.62366736" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34816462" sideWeight="0.6211111" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -4405,19 +4659,19 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Recovery-Tools/src/main/java/de/mkrtchyan/recoverytools/Device.java</url>
           <line>644</line>
           <properties />
           <option name="timeStamp" value="81" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Recovery-Tools/src/main/java/de/mkrtchyan/recoverytools/Device.java</url>
           <line>932</line>
           <properties />
           <option name="timeStamp" value="82" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/Recovery-Tools/src/main/java/de/mkrtchyan/recoverytools/Device.java</url>
           <line>955</line>
           <properties />
@@ -4438,110 +4692,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/custom_version_list_item.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="289">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="746" max-vertical-offset="1258">
-          <caret line="44" column="50" selection-start-line="44" selection-start-column="50" selection-end-line="44" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppMsg/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="493">
-          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/res/values/donations__strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.44" vertical-offset="0" max-vertical-offset="646">
-          <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.44" vertical-offset="0" max-vertical-offset="391">
-          <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4" vertical-offset="0" max-vertical-offset="833">
-          <caret line="5" column="56" selection-start-line="5" selection-start-column="56" selection-end-line="5" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/res/layout/donations__fragment_flattr.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.346154" vertical-offset="603" max-vertical-offset="1190">
-          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.76" vertical-offset="0" max-vertical-offset="408">
-          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppMsg/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="187">
-          <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="255">
-          <caret line="7" column="36" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/CardUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6273">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/donations/google/util/Base64.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5627" max-vertical-offset="9758">
-          <caret line="366" column="33" selection-start-line="366" selection-start-column="33" selection-end-line="366" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/CardStack.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2737" max-vertical-offset="8619">
           <caret line="199" column="8" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/donations/DonationsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2363" max-vertical-offset="7803">
-          <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -4577,7 +4731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1547">
           <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4585,7 +4738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1103" max-vertical-offset="1615">
           <caret line="82" column="76" selection-start-line="82" selection-start-column="76" selection-end-line="82" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4593,7 +4745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1381" max-vertical-offset="1921">
           <caret line="90" column="74" selection-start-line="90" selection-start-column="74" selection-end-line="90" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4601,7 +4752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1462" max-vertical-offset="2108">
           <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4609,40 +4759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="2091">
           <caret line="99" column="64" selection-start-line="99" selection-start-column="64" selection-end-line="99" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="1190">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-20/android.jar!/android/widget/ScrollView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2410072" vertical-offset="206" max-vertical-offset="1887">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-20/android.jar!/android/view/Choreographer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4650,60 +4766,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="6545">
           <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1056" max-vertical-offset="14161">
-          <caret line="93" column="41" selection-start-line="93" selection-start-column="41" selection-end-line="93" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/res/drawable-hdpi/abc_menu_dropdown_panel_holo_light.9.png">
-      <provider editor-type-id="images">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="ninepatcheditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-de/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8633754" vertical-offset="2818" max-vertical-offset="3689">
           <caret line="210" column="92" selection-start-line="210" selection-start-column="92" selection-end-line="210" selection-end-column="92" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29276693" vertical-offset="0" max-vertical-offset="871">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54383886" vertical-offset="0" max-vertical-offset="844">
-          <caret line="27" column="15" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
-          <folding>
-            <element signature="e#855#877#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-es/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.84385765" vertical-offset="2648" max-vertical-offset="3519">
           <caret line="199" column="93" selection-start-line="199" selection-start-column="93" selection-end-line="199" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4711,7 +4787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="969">
           <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4722,7 +4797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="3672">
           <caret line="60" column="13" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4730,7 +4804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1041" max-vertical-offset="1598">
           <caret line="70" column="41" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4738,7 +4811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1020">
           <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4749,7 +4821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1870">
           <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4760,31 +4831,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="2057">
           <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoveryScriptManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="3230">
-          <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="17848" max-vertical-offset="36448">
-          <caret line="1072" column="33" selection-start-line="1072" selection-start-column="33" selection-end-line="1072" selection-end-column="33" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1343" max-vertical-offset="3638">
+          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -4792,7 +4845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="719" max-vertical-offset="1394">
           <caret line="51" column="60" selection-start-line="51" selection-start-column="60" selection-end-line="51" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4800,7 +4852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44990548" vertical-offset="0" max-vertical-offset="529">
           <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -4811,7 +4862,6 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1258">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer">
@@ -4820,8 +4870,107 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_ex.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.518518" vertical-offset="338" max-vertical-offset="884">
+        <state vertical-scroll-proportion="0.0" vertical-offset="338" max-vertical-offset="884">
           <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07906977" vertical-offset="0" max-vertical-offset="430">
+          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="534">
+          <caret line="0" column="34" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6353712" vertical-offset="749" max-vertical-offset="1207">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41463414" vertical-offset="0" max-vertical-offset="533">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppMsg/res/layout/app_msg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="408">
+          <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppMsg/src/com/devspark/appmsg/MsgManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4922" max-vertical-offset="5848">
+          <caret line="316" column="17" selection-start-line="316" selection-start-column="17" selection-end-line="316" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/donations/DonationsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="10.145162" vertical-offset="765" max-vertical-offset="8245">
+          <caret line="421" column="71" selection-start-line="421" selection-start-column="71" selection-end-line="421" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/root-commands/src/main/java/org/sufficientlysecure/rootcommands/command/BinaryCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="400" max-vertical-offset="884">
+          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CardsUILib/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9" max-vertical-offset="1258">
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/res/layout/dialog_command_logs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="510">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -4829,10 +4978,363 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml">
+    <entry file="file://$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/Rashr/CardsUILib/unspecified/res/values/values.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3519" max-vertical-offset="4182">
+          <caret line="207" column="20" selection-start-line="207" selection-start-column="20" selection-end-line="207" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils-Library/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/root-commands/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.48" vertical-offset="0" max-vertical-offset="374">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppMsg/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.76" vertical-offset="0" max-vertical-offset="442">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values-v11/values.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="442" max-vertical-offset="6273">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res/values-v21/values.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6018">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9247311" vertical-offset="4780" max-vertical-offset="5338">
+          <caret line="239" column="49" selection-start-line="239" selection-start-column="43" selection-end-line="239" selection-end-column="49" />
+          <folding>
+            <element signature="e#4248#4302#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Rashr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.5357144" vertical-offset="4950" max-vertical-offset="36448">
+          <caret line="297" column="17" selection-start-line="297" selection-start-column="17" selection-end-line="297" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6287#6295#0" expanded="true" />
+            <element signature="e#6368#6376#0" expanded="true" />
+            <element signature="e#6866#9048#0" expanded="true" />
+            <element signature="e#7690#7706#0" expanded="true" />
+            <element signature="e#7756#7769#0" expanded="true" />
+            <element signature="e#7826#7843#0" expanded="true" />
+            <element signature="e#7845#8177#0" expanded="true" />
+            <element signature="e#8138#8139#0" expanded="true" />
+            <element signature="e#8234#8251#0" expanded="true" />
+            <element signature="e#9041#9042#0" expanded="true" />
+            <element signature="e#9255#9623#0" expanded="true" />
+            <element signature="e#9616#9617#0" expanded="true" />
+            <element signature="e#9836#10357#0" expanded="true" />
+            <element signature="e#10127#10306#0" expanded="true" />
+            <element signature="e#10291#10292#0" expanded="true" />
+            <element signature="e#10350#10351#0" expanded="true" />
+            <element signature="e#10401#10918#0" expanded="true" />
+            <element signature="e#10688#10867#0" expanded="true" />
+            <element signature="e#10852#10853#0" expanded="true" />
+            <element signature="e#10911#10912#0" expanded="true" />
+            <element signature="e#12191#18986#0" expanded="true" />
+            <element signature="e#12348#12540#0" expanded="true" />
+            <element signature="e#12477#12498#0" expanded="true" />
+            <element signature="e#12521#12522#0" expanded="true" />
+            <element signature="e#12796#13154#0" expanded="true" />
+            <element signature="e#13088#13104#0" expanded="true" />
+            <element signature="e#13131#13132#0" expanded="true" />
+            <element signature="e#13393#13675#0" expanded="true" />
+            <element signature="e#13534#13562#0" expanded="true" />
+            <element signature="e#13652#13653#0" expanded="true" />
+            <element signature="e#14124#14318#0" expanded="true" />
+            <element signature="e#14253#14276#0" expanded="true" />
+            <element signature="e#14299#14300#0" expanded="true" />
+            <element signature="e#14507#14699#0" expanded="true" />
+            <element signature="e#14636#14657#0" expanded="true" />
+            <element signature="e#14680#14681#0" expanded="true" />
+            <element signature="e#15193#15395#0" expanded="true" />
+            <element signature="e#15372#15373#0" expanded="true" />
+            <element signature="e#16010#16220#0" expanded="true" />
+            <element signature="e#16193#16194#0" expanded="true" />
+            <element signature="e#17648#18131#0" expanded="true" />
+            <element signature="e#18100#18101#0" expanded="true" />
+            <element signature="e#18266#18515#0" expanded="true" />
+            <element signature="e#18492#18493#0" expanded="true" />
+            <element signature="e#18683#18711#0" expanded="true" />
+            <element signature="e#18975#18976#0" expanded="true" />
+            <element signature="e#19664#19672#0" expanded="true" />
+            <element signature="e#24446#25794#0" expanded="true" />
+            <element signature="e#25779#25780#0" expanded="true" />
+            <element signature="e#26321#26561#0" expanded="true" />
+            <element signature="e#26546#26547#0" expanded="true" />
+            <element signature="e#27803#29254#0" expanded="true" />
+            <element signature="e#29239#29240#0" expanded="true" />
+            <element signature="e#29648#29884#0" expanded="true" />
+            <element signature="e#29869#29870#0" expanded="true" />
+            <element signature="e#30546#30552#0" expanded="true" />
+            <element signature="e#30620#30628#0" expanded="true" />
+            <element signature="e#30722#30739#0" expanded="true" />
+            <element signature="e#31451#32087#0" expanded="true" />
+            <element signature="e#32076#32077#0" expanded="true" />
+            <element signature="e#32305#32324#0" expanded="true" />
+            <element signature="e#35795#35811#0" expanded="true" />
+            <element signature="e#36555#36732#0" expanded="true" />
+            <element signature="e#36721#36722#0" expanded="true" />
+            <element signature="e#36811#38875#0" expanded="true" />
+            <element signature="e#38198#38220#0" expanded="true" />
+            <element signature="e#38486#38752#0" expanded="true" />
+            <element signature="e#38729#38730#0" expanded="true" />
+            <element signature="e#38864#38865#0" expanded="true" />
+            <element signature="e#39055#39077#0" expanded="true" />
+            <element signature="e#39296#39320#0" expanded="true" />
+            <element signature="e#39361#39396#0" expanded="true" />
+            <element signature="e#39566#39751#0" expanded="true" />
+            <element signature="e#39736#39737#0" expanded="true" />
+            <element signature="e#39920#39945#0" expanded="true" />
+            <element signature="e#39987#40023#0" expanded="true" />
+            <element signature="e#40190#40376#0" expanded="true" />
+            <element signature="e#40361#40362#0" expanded="true" />
+            <element signature="e#40532#40558#0" expanded="true" />
+            <element signature="e#40574#40611#0" expanded="true" />
+            <element signature="e#40781#40968#0" expanded="true" />
+            <element signature="e#40953#40954#0" expanded="true" />
+            <element signature="e#41141#41166#0" expanded="true" />
+            <element signature="e#41209#41255#0" expanded="true" />
+            <element signature="e#41425#41612#0" expanded="true" />
+            <element signature="e#41597#41598#0" expanded="true" />
+            <element signature="e#41722#41748#0" expanded="true" />
+            <element signature="e#41760#41805#0" expanded="true" />
+            <element signature="e#41927#42083#0" expanded="true" />
+            <element signature="e#42072#42073#0" expanded="true" />
+            <element signature="e#42191#42219#0" expanded="true" />
+            <element signature="e#42254#42293#0" expanded="true" />
+            <element signature="e#42458#42621#0" expanded="true" />
+            <element signature="e#42610#42611#0" expanded="true" />
+            <element signature="e#43123#43145#0" expanded="true" />
+            <element signature="e#43360#43385#0" expanded="true" />
+            <element signature="e#43428#43472#0" expanded="true" />
+            <element signature="e#43642#43827#0" expanded="true" />
+            <element signature="e#43812#43813#0" expanded="true" />
+            <element signature="e#43935#43961#0" expanded="true" />
+            <element signature="e#43979#44024#0" expanded="true" />
+            <element signature="e#44146#44300#0" expanded="true" />
+            <element signature="e#44289#44290#0" expanded="true" />
+            <element signature="e#44406#44434#0" expanded="true" />
+            <element signature="e#44469#44508#0" expanded="true" />
+            <element signature="e#44671#44834#0" expanded="true" />
+            <element signature="e#44823#44824#0" expanded="true" />
+            <element signature="e#45785#45803#0" expanded="true" />
+            <element signature="e#45937#54176#0" expanded="true" />
+            <element signature="e#46221#54150#0" expanded="true" />
+            <element signature="e#46474#46493#0" expanded="true" />
+            <element signature="e#46574#46600#0" expanded="true" />
+            <element signature="e#46725#46731#0" expanded="true" />
+            <element signature="e#54131#54132#0" expanded="true" />
+            <element signature="e#54165#54166#0" expanded="true" />
+            <element signature="e#55044#55062#0" expanded="true" />
+            <element signature="e#55710#55726#0" expanded="true" />
+            <element signature="e#55780#55811#0" expanded="true" />
+            <element signature="e#55932#55947#0" expanded="true" />
+            <element signature="e#55949#56383#0" expanded="true" />
+            <element signature="e#56368#56369#0" expanded="true" />
+            <element signature="e#56430#56443#0" expanded="true" />
+            <element signature="e#56445#56710#0" expanded="true" />
+            <element signature="e#56695#56696#0" expanded="true" />
+            <element signature="e#57023#65307#0" expanded="true" />
+            <element signature="e#57453#57469#0" expanded="true" />
+            <element signature="e#58136#58425#0" expanded="true" />
+            <element signature="e#58390#58391#0" expanded="true" />
+            <element signature="e#58708#60788#0" expanded="true" />
+            <element signature="e#59876#59898#0" expanded="true" />
+            <element signature="e#60461#60483#0" expanded="true" />
+            <element signature="e#60753#60754#0" expanded="true" />
+            <element signature="e#61104#61144#0" expanded="true" />
+            <element signature="e#61691#61978#0" expanded="true" />
+            <element signature="e#61943#61944#0" expanded="true" />
+            <element signature="e#62253#64331#0" expanded="true" />
+            <element signature="e#63421#63443#0" expanded="true" />
+            <element signature="e#64004#64026#0" expanded="true" />
+            <element signature="e#64296#64297#0" expanded="true" />
+            <element signature="e#64689#64729#0" expanded="true" />
+            <element signature="e#65296#65297#0" expanded="true" />
+            <element signature="e#67235#67251#0" expanded="true" />
+            <element signature="e#67292#67315#0" expanded="true" />
+            <element signature="e#67363#67378#0" expanded="true" />
+            <element signature="e#67380#67570#0" expanded="true" />
+            <element signature="e#67559#67560#0" expanded="true" />
+            <element signature="e#67618#67633#0" expanded="true" />
+            <element signature="e#67635#67818#0" expanded="true" />
+            <element signature="e#67807#67808#0" expanded="true" />
+            <element signature="e#67902#67918#0" expanded="true" />
+            <element signature="e#67920#68348#0" expanded="true" />
+            <element signature="e#68333#68334#0" expanded="true" />
+            <element signature="e#69970#69976#0" expanded="true" />
+            <element signature="e#70691#70697#0" expanded="true" />
+            <element signature="e#72125#72150#0" expanded="true" />
+            <element signature="e#72266#72292#0" expanded="true" />
+            <element signature="e#72343#72381#0" expanded="true" />
+            <element signature="e#72528#72745#0" expanded="true" />
+            <element signature="e#72722#72723#0" expanded="true" />
+            <element signature="e#72931#72959#0" expanded="true" />
+            <element signature="e#73011#73051#0" expanded="true" />
+            <element signature="e#73200#73419#0" expanded="true" />
+            <element signature="e#73396#73397#0" expanded="true" />
+            <element signature="e#73680#73707#0" expanded="true" />
+            <element signature="e#73757#73786#0" expanded="true" />
+            <element signature="e#73812#73853#0" expanded="true" />
+            <element signature="e#73991#74631#0" expanded="true" />
+            <element signature="e#74612#74613#0" expanded="true" />
+            <element signature="e#74738#74769#0" expanded="true" />
+            <element signature="e#74817#74860#0" expanded="true" />
+            <element signature="e#74999#76959#0" expanded="true" />
+            <element signature="e#75266#75282#0" expanded="true" />
+            <element signature="e#75339#75367#0" expanded="true" />
+            <element signature="e#75431#75448#0" expanded="true" />
+            <element signature="e#75450#76564#0" expanded="true" />
+            <element signature="e#76131#76153#0" expanded="true" />
+            <element signature="e#76379#76401#0" expanded="true" />
+            <element signature="e#76537#76538#0" expanded="true" />
+            <element signature="e#76628#76645#0" expanded="true" />
+            <element signature="e#76940#76941#0" expanded="true" />
+            <element signature="e#77202#77231#0" expanded="true" />
+            <element signature="e#77278#77305#0" expanded="true" />
+            <element signature="e#77307#77345#0" expanded="true" />
+            <element signature="e#77480#78870#0" expanded="true" />
+            <element signature="e#77753#77769#0" expanded="true" />
+            <element signature="e#77826#77854#0" expanded="true" />
+            <element signature="e#77918#77935#0" expanded="true" />
+            <element signature="e#77937#78475#0" expanded="true" />
+            <element signature="e#78448#78449#0" expanded="true" />
+            <element signature="e#78539#78556#0" expanded="true" />
+            <element signature="e#78851#78852#0" expanded="true" />
+            <element signature="e#78924#78959#0" expanded="true" />
+            <element signature="e#78985#79032#0" expanded="true" />
+            <element signature="e#79175#80561#0" expanded="true" />
+            <element signature="e#79442#79458#0" expanded="true" />
+            <element signature="e#79515#79543#0" expanded="true" />
+            <element signature="e#79607#79624#0" expanded="true" />
+            <element signature="e#79626#80166#0" expanded="true" />
+            <element signature="e#80139#80140#0" expanded="true" />
+            <element signature="e#80230#80247#0" expanded="true" />
+            <element signature="e#80542#80543#0" expanded="true" />
+            <element signature="e#80617#80654#0" expanded="true" />
+            <element signature="e#80680#80729#0" expanded="true" />
+            <element signature="e#80874#82262#0" expanded="true" />
+            <element signature="e#81141#81157#0" expanded="true" />
+            <element signature="e#81214#81242#0" expanded="true" />
+            <element signature="e#81306#81323#0" expanded="true" />
+            <element signature="e#81325#81867#0" expanded="true" />
+            <element signature="e#81840#81841#0" expanded="true" />
+            <element signature="e#81931#81948#0" expanded="true" />
+            <element signature="e#82243#82244#0" expanded="true" />
+            <element signature="e#82310#82345#0" expanded="true" />
+            <element signature="e#82371#82411#0" expanded="true" />
+            <element signature="e#82548#83936#0" expanded="true" />
+            <element signature="e#82815#82831#0" expanded="true" />
+            <element signature="e#82888#82918#0" expanded="true" />
+            <element signature="e#82982#82999#0" expanded="true" />
+            <element signature="e#83001#83541#0" expanded="true" />
+            <element signature="e#83514#83515#0" expanded="true" />
+            <element signature="e#83605#83622#0" expanded="true" />
+            <element signature="e#83917#83918#0" expanded="true" />
+            <element signature="e#85174#85202#0" expanded="true" />
+            <element signature="e#86330#89860#0" expanded="true" />
+            <element signature="e#87070#87091#0" expanded="true" />
+            <element signature="e#87569#87844#0" expanded="true" />
+            <element signature="e#87817#87818#0" expanded="true" />
+            <element signature="e#88950#89434#0" expanded="true" />
+            <element signature="e#89167#89202#0" expanded="true" />
+            <element signature="e#89407#89408#0" expanded="true" />
+            <element signature="e#89849#89850#0" expanded="true" />
+            <element signature="e#90195#90212#0" expanded="true" />
+            <element signature="e#90214#90231#0" expanded="true" />
+            <element signature="e#90990#90998#0" expanded="true" />
+            <element signature="e#94643#94988#0" expanded="true" />
+            <element signature="e#94965#94966#0" expanded="true" />
+            <element signature="e#95906#96253#0" expanded="true" />
+            <element signature="e#96230#96231#0" expanded="true" />
+            <element signature="e#97898#97918#0" expanded="true" />
+            <element signature="e#97976#97984#0" expanded="true" />
+            <element signature="e#98046#98054#0" expanded="true" />
+            <element signature="e#98292#98300#0" expanded="true" />
+            <element signature="e#100989#102161#0" expanded="true" />
+            <element signature="e#101315#101353#0" expanded="true" />
+            <element signature="e#101465#102126#0" expanded="true" />
+            <element signature="e#101814#102084#0" expanded="true" />
+            <element signature="e#102057#102058#0" expanded="true" />
+            <element signature="e#102107#102108#0" expanded="true" />
+            <element signature="e#102150#102151#0" expanded="true" />
+            <element signature="e#102297#102334#0" expanded="true" />
+            <element signature="e#102396#102692#0" expanded="true" />
+            <element signature="e#102681#102682#0" expanded="true" />
+            <element signature="e#102807#103052#0" expanded="true" />
+            <element signature="e#103043#103044#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/flash_as.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.925926" vertical-offset="625" max-vertical-offset="1156">
+          <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+          <folding>
+            <element signature="e#883#895#0" expanded="true" />
+            <element signature="e#1217#1235#0" expanded="true" />
+            <element signature="e#1694#1712#0" expanded="true" />
+            <element signature="e#2110#2126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.87396693" vertical-offset="1311" max-vertical-offset="14161">
+          <caret line="121" column="27" selection-start-line="121" selection-start-column="27" selection-end-line="121" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml">
       <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1003">
-          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="87" max-vertical-offset="578">
+          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -4840,31 +5342,31 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CardsUILib/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+          <caret line="40" column="46" selection-start-line="40" selection-start-column="46" selection-end-line="40" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3689">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.595186" vertical-offset="0" max-vertical-offset="11594">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.703704" vertical-offset="0" max-vertical-offset="11492">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13737373" vertical-offset="0" max-vertical-offset="495">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-          <folding />
-        </state>
       </provider>
     </entry>
   </component>
