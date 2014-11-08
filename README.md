@@ -14,7 +14,7 @@ Over 90% of all devices will be supported by the App.
 
 This project is fully open-source if you want to help me with unsupported devices you can use the report button or contact me over XDA.
 
-★Open-Source (on GitHub: https://github.com/dslnexus/Recovery-Tools)
+★Open-Source (on GitHub: https://github.com/dslnexus/Rashr)
 ★OpenRecovery Script manager to flash ZIPs
 ★Over 1500 Build-in Recoveries (Clockworkmod/Touch, Team Win Recovery Project and Philz-Touch)
 ★Flash Kernel and Recoveries without PC
