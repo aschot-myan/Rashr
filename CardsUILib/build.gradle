@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+        classpath 'com.android.tools.build:gradle:0.14.4'
     }
 }
 apply plugin: 'com.android.library'
@@ -14,8 +14,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 16
-    buildToolsVersion '21.0.0'
+    compileSdkVersion 21
+    buildToolsVersion '21.1.1'
 
     sourceSets {
         main {

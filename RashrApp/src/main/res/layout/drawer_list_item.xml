@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Rashr.Text"
     android:id="@android:id/text1"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+    android:background="@drawable/flatt_green_background"
+    android:text="Sample Text"
     android:gravity="center_vertical|center_horizontal"
-    android:minHeight="40dp"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="#707070"
-    android:textSize="18sp" />
+    android:textStyle="italic"
+    android:padding="20dp"
+    android:textSize="22sp"
+    android:textIsSelectable="false" />

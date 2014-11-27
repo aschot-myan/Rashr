@@ -1,11 +1,17 @@
 CHANGELOG
 ====================
 
+Update [2.2.0]
+
+-MANY UI changes (please report bugs or improvements) :D
+-Lollipop fixed
+-Flash supported Kernel fixed
+
 Update [2.1.1]
 
 -Donations fixed
 -Small UI changes
--Librarys updated
+-Libraries updated
 
 Update [2.1.0]
 

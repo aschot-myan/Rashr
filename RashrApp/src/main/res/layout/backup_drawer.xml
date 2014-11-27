@@ -4,7 +4,7 @@
     android:layout_width="@dimen/navigation_drawer_width"
     android:layout_height="match_parent"
     android:layout_gravity="end"
-    android:background="#111"
+    android:background="@color/darker_green"
     android:divider="@android:color/transparent"
     android:orientation="vertical">
 
@@ -15,7 +15,6 @@
         android:orientation="vertical">
 
         <Button
-            style="@style/flatButton"
             android:id="@+id/bCreateRecoveryBackup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +36,6 @@
         android:orientation="vertical">
 
         <Button
-            style="@style/flatButton"
             android:id="@+id/bCreateKernelBackup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

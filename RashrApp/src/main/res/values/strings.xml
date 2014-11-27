@@ -6,10 +6,12 @@
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flash Recovery</string>
     <string name="sFlashKernel">Flash Kernel</string>
-    <string name="sHistory">History</string>
+    <string name="recovery_history">Recovery History</string>
+    <string name="kernel_history">Kernel History</string>
     <string name="sTWRP">TWRP Recovery</string>
     <string name="sPhilz">Philz Recovery</string>
-    <string name="sOTHER">Other from Storage</string>
+    <string name="other_recovery">Recovery from Storage</string>
+    <string name="other_kernel">Kernel from Storage</string>
     <string name="sRecoveryBackup">Backup Recovery</string>
     <string name="sKernelBackup">Backup Kernel</string>
     <string name="backups">Backups</string>
@@ -23,11 +25,9 @@
     <string name="sExit">Exit</string>
     <string name="xda">XDA-Thread</string>
     <string name="set_name">Name of Backup</string>
-    <string name="bak_warning">
-        Before you do some actions with Rashr please create an backup and store it on your PC.
+    <string name="bak_warning">        Before you do some actions with Rashr please create an backup and store it on your PC.
         \nBackups will be created under\n%s.
-        \nThe DEV is not responsible on the damages of your device.
-    </string>
+        \nThe DEV is not responsible on the damages of your device.</string>
     <string name="flash_options">Flash Options</string>
     <string name="risk">I know the risk</string>
     <string name="sReboot">Reboot</string>
@@ -38,34 +38,24 @@
     <string name="info">Information</string>
     <string name="flashed">Partition flashed.</string>
     <string name="warning">Warning!</string>
-    <string name="fota">
-        Flashing Recovery System on this devices will change the FOTAKernel (replacement partition)
-        this will only work if your kernel support it (The most Custom Kernel and ROM does it).
-    </string>
+    <string name="fota">        Flashing Recovery System on this devices will change the FOTAKernel (replacement partition)
+        this will only work if your kernel support it (The most Custom Kernel and ROM does it).</string>
     <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
     <string name="instructions">Instructions</string>
-    <string name="instruction">
-        CWM:
+    <string name="instruction">        CWM:
         \nMain Menu -> install zip from sdcard -> choose zip from sdcard
         \n\nTWRP:
-        \nMain Menu -> Install
-    </string>
+        \nMain Menu -> Install</string>
     <string name="bak_done">Backup completed</string>
     <string name="backupalready">Backup already exists.</string>
     <string name="error">Error</string>
-    <string name="not_supportded">
-        Your Device is not supported yet. Scan System and Report unsupported Device or
-        try to find partition (reboot once into recovery)?
-    </string>
-    <string name="no_root">
-        Device not Rooted. Please Root it. More information under
-        \n\nxda-developers.com
-    </string>
+    <string name="not_supportded">        Your Device is not supported yet. Scan System and Report unsupported Device or
+        try to find partition (reboot once into recovery)?</string>
+    <string name="no_root">        Device not Rooted. Please Root it. More information under
+        \n\nxda-developers.com</string>
     <string name="Downloading">Downloading…</string>
     <string name="commentar">Commentar</string>
-    <string name="commenthint">
-        Comment here, what is not working correctly (download, flash, common support or other)
-    </string>
+    <string name="commenthint">        Comment here, what is not working correctly (download, flash, common support or other)</string>
     <string name="positive">Yes, please</string>
     <string name="neutral">No, thanks</string>
     <string name="negative">Cancel</string>
@@ -79,10 +69,8 @@
     <string name="flashing">Flashing…</string>
     <string name="restoring">Restoring…</string>
     <string name="creating_bak">Creating Backup…</string>
-    <string name="download_utils">
-        To use this App you need to download small tools (around 512KB). This requires a internet connection.
-        \nDownload it now?
-    </string>
+    <string name="download_utils">        To use this App you need to download small tools (around 512KB). This requires a internet connection.
+        \nDownload it now?</string>
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="ShowAds">Show Ads to support</string>
     <string name="please_restart">Please restart the app to apply changes</string>
@@ -108,13 +96,9 @@
     <string name="bak_error">Failed to backup</string>
     <string name="stock">Stock</string>
     <string name="changelog">Changelog</string>
-    <string name="use_supersu">
-        SuperSu from Chainfire not recognized on your device. Please use it to avoid errors. Download SuperSu (from Play Store) now?
-    </string>
+    <string name="use_supersu">        SuperSu from Chainfire not recognized on your device. Please use it to avoid errors. Download SuperSu (from Play Store) now?</string>
     <string name="bak_deleted">Backup deleted</string>
-    <string name="extract_failed">
-        Extract needed files from App failed. Please restart the App.
-    </string>
+    <string name="extract_failed">        Extract needed files from App failed. Please restart the App.</string>
     <string name="no_history">No history found</string>
     <string name="styles">Styles</string>
 
@@ -143,9 +127,7 @@
     <string name="cache">Cache</string>
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
-    <string name="recovery_script_mind">
-        Please keep in mind, this will only work with TWRP compatible recovery
-    </string>
+    <string name="recovery_script_mind">        Please keep in mind, this will only work with TWRP compatible recovery</string>
     <string name="run">Run</string>
     <string name="recovery_script_review">Script Preview</string>
     <string name="failed_unpack_files">Failed to unpack files from App</string>
@@ -153,60 +135,39 @@
     <string name="refresh_list">Update started!</string>
     <string name="new_imgs_loaded">%s new IMGs loaded</string>
     <string name="make_choice">Please make your choice</string>
-    <string name="unified_info">
-        This ROM ist using Unified CyanogenMod Sources.\n
+    <string name="unified_info">        This ROM ist using Unified CyanogenMod Sources.\n
         Consequently it could be that Rashr isn\'t able to find Recovery or Kernel images.\n
         In this case you can choose your real device. (do this if there aren\'t any images found)\n
-        BE CAREFUL WITH THIS OPTION!
-    </string>
+        BE CAREFUL WITH THIS OPTION!</string>
     <string name="reloading">Reloading</string>
     <string name="keep_current_name">Keep current name (%s)</string>
-
     <string name="rename_failed">Rename failed</string>
-
     <string name="flash">Flash</string>
-    <string name="recovery_description">
-        With this function you are able to flash your devices build-in recovery partition with one click!
-    </string>
-    <string name="kernel_description">
-        With this function you are able to flash your devices build-in kernel/boot partition with one click!
-    </string>
+    <string name="recovery_description">        With this function you are able to flash your devices build-in recovery partition with one click!</string>
+    <string name="kernel_description">        With this function you are able to flash your devices build-in kernel/boot partition with one click!</string>
     <string name="options">Options</string>
     <string name="clear_cache_description">Delete all downloaded recovery/kernel images</string>
     <string name="reboot_description">Let your device reboot instantly</string>
     <string name="reboot_recovery_description">Let your device reboot into recovery instantly</string>
-    <string name="reboot_bootloader_description">
-        Let your device reboot into bootloader/download mode instantly
-    </string>
+    <string name="reboot_bootloader_description">        Let your device reboot into bootloader/download mode instantly</string>
     <string name="shutdown_description">Let your device shutdown instantly</string>
-    <string name="cwm_description">
-        ClockworkMod Recovery is the most known Custom Recovery for Android
-    </string>
-    <string name="twrp_description">
-        Team Winn Recovery Project (TWRP) is a full touch controllable Custom Recovery
-    </string>
-    <string name="philz_description">
-        PhilZ Touch Recovery is a improved advanced version of ClockworkMod
-    </string>
-    <string name="stock_recovery_description">
-        Stock recoveries are the standard recovery, here you can return to your stock recovery.
-    </string>
-    <string name="stock_kernel_description">
-        Stock kernel are the standard kernel, here you can return to your stock kernel.
-    </string>
-    <string name="delete_confirmation">
-        Did you really want to delete all downloaded images?
-    </string>
-    <string name="other_storage_description">
-        This option allows you to flash already downloaded images stored on your device.
-    </string>
+    <string name="cwm_description">        ClockworkMod Recovery is the most known Custom Recovery for Android</string>
+    <string name="twrp_description">        Team Winn Recovery Project (TWRP) is a full touch controllable Custom Recovery</string>
+    <string name="philz_description">        PhilZ Touch Recovery is a improved advanced version of ClockworkMod</string>
+    <string name="stock_recovery_description">        Stock recoveries are the standard recovery, here you can return to your stock recovery.</string>
+    <string name="stock_kernel_description">        Stock kernel are the standard kernel, here you can return to your stock kernel.</string>
+    <string name="delete_confirmation">        Did you really want to delete all downloaded images?</string>
+    <string name="other_storage_description">        This option allows you to flash already downloaded images stored on your device.</string>
     <string name="reboot_confirmation">Reboot now?</string>
     <string name="shutdown_confirmation">Shutdown now?</string>
     <string name="history_description">Here you can find the last 5 flashed images</string>
     <string name="reset_app">Reset App</string>
     <string name="reset_app_description">Reset app settings with the standard</string>
-
     <string name="files_deleted">Files deleted</string>
-
     <string name="onlyLanguage">Please only write in Spanish, German or English</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="flasher">Flasher</string>
+    <string name="history">History</string>
+    <string name="exit_app">Exit App?</string>
+
 </resources>

@@ -1,7 +1,7 @@
 package de.mkrtchyan.utils;
 
-/*
- * Copyright (c) 2013 Ashot Mkrtchyan
+/**
+ * Copyright (c) 2014 Ashot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights 
@@ -47,11 +47,9 @@ public class Notifyer {
                 .show();
     }
 
-    public static void showExceptionToast(Context mContext, String TAG, Exception e) {
+    public static void showExceptionToast(Context mContext, Exception e) {
         if (e != null) {
-            Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-            Log.e(TAG, e.getMessage());
+            Toast.makeText(mContext, e.toString() + " PLEASE REPORT!!", Toast.LENGTH_SHORT).show();
         }
     }
 

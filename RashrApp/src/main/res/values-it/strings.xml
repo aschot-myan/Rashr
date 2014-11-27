@@ -6,10 +6,10 @@
     <string name="sCWM">Recovery CWM</string>
     <string name="sFlashRecovery">Flash Recovery</string>
     <string name="sFlashKernel">Flash Kernel</string>
-    <string name="sHistory">Cronologia</string>
+    <string name="recovery_history">Cronologia</string>
     <string name="sTWRP">Recovery TWRP</string>
     <string name="sPhilz">Recovery Philz</string>
-    <string name="sOTHER">Altra recovery dalla memoria</string>
+    <string name="other_recovery">Altra recovery dalla memoria</string>
     <string name="sRecoveryBackup">Backup recovery</string>
     <string name="sKernelBackup">Backup kernel</string>
     <string name="backups">Backup</string>

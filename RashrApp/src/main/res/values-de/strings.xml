@@ -6,10 +6,10 @@
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flash Recovery</string>
     <string name="sFlashKernel">Flash Kernel</string>
-    <string name="sHistory">Verlauf</string>
+    <string name="recovery_history">Recovery-Verlauf</string>
     <string name="sTWRP">TWRP Recovery</string>
     <string name="sPhilz">Philz Recovery</string>
-    <string name="sOTHER">Andere vom Speicher</string>
+    <string name="other_recovery">Recovery aus dem Speicher</string>
     <string name="sRecoveryBackup">Recovery sichern</string>
     <string name="sKernelBackup">Kernel sichern</string>
     <string name="backups">Backups</string>
@@ -54,7 +54,7 @@
     <string name="backupalready">Backup existiert bereits.</string>
     <string name="error">Fehler</string>
     <string name="not_supportded">
-        Ihr Gerät ist zurzeit nicht untersützt. System scannen und Gerät den Entwickler melden?
+        Ihr Gerät ist zurzeit nicht unterstützt. System scannen und Gerät den Entwickler melden?
         Oder versuchen die Partition zu finden indem neugestartet wird?
     </string>
     <string name="no_root">
@@ -84,7 +84,7 @@
         \nDownload it now?
     </string>
     <string name="over_recovery">Device will be flashed over recovery</string>
-    <string name="ShowAds">Werbung aktivieren um den Entwikler zu untersützen</string>
+    <string name="ShowAds">Werbung aktivieren um den Entwikler zu unterstützen</string>
     <string name="please_restart">Bitte App neustarten um änderungen anzuwenden</string>
     <string name="please_ads">Bitte schalten Sie die Werbung ein um meine Arbeit zu unterstützen! :(</string>
     <string name="donate_to_support">Bitte spenden Sie im Menü um meine Arbeit zu unterstützen! :)</string>
@@ -209,4 +209,9 @@
     <string name="files_deleted">Dateien gelöscht</string>
 
     <string name="onlyLanguage">Bitten schreiben Sie nur auf Deutsch, Spanisch oder Englisch</string>
+    <string name="flasher">Flasher</string>
+    <string name="other_kernel">Kernel aus dem Speicher</string>
+    <string name="kernel_history">Kernel-Verlauf</string>
+    <string name="history">Verlauf</string>
+    <string name="exit_app">App verlassen?</string>
 </resources>

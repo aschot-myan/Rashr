@@ -5,10 +5,10 @@
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Wgraj Recovery</string>
     <string name="sFlashKernel">Wgraj Kernel</string>
-    <string name="sHistory">Historia</string>
+    <string name="recovery_history">Historia</string>
     <string name="sTWRP">TWRP Recovery</string>
     <string name="sPhilz">Philz Recovery</string>
-    <string name="sOTHER">Inna z Pamięci</string>
+    <string name="other_recovery">Inna z Pamięci</string>
     <string name="sRecoveryBackup">Kopia zapasowa Recovery</string>
     <string name="sKernelBackup">Kopia zapasowa Kernela</string>
     <string name="backups">Kopie zapasowe</string>

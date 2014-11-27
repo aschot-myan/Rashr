@@ -22,8 +22,7 @@
     <string name="try_again">重试!</string>
     <string name="later">稍后</string>
     <string name="Downloading">正在下载</string>
-    <string name="wrong_format">文件格式错误. 文件格式只能为 %s</string>
-    <string name="failed_download">"抱歉, 出现意外错误. 请重新下载. 
+    <string name="failed_download">"抱歉, 出现意外错误. 请重新下载.
 
 %s"</string>
     <string name="error">错误</string>

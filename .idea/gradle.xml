@@ -3,13 +3,12 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-2.0" />
+        <option name="gradleHome" value="C:\Users\Ashot\AppData\Local\Android\android-studio\gradle\gradle-2.2.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/AppMsg" />
             <option value="$PROJECT_DIR$/CardsUILib" />
             <option value="$PROJECT_DIR$/RashrApp" />
             <option value="$PROJECT_DIR$/Utils-Library" />

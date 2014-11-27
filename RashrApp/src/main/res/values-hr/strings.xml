@@ -5,10 +5,10 @@
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flesuj Rekaveri</string>
     <string name="sFlashKernel">Flesuj Kernel</string>
-    <string name="sHistory">Istorija</string>
+    <string name="recovery_history">Istorija</string>
     <string name="sTWRP">TWRP Rekaveri</string>
     <string name="sPhilz">Philz Rekaveri</string>
-    <string name="sOTHER">Ostalo iz memorije</string>
+    <string name="other_recovery">Ostalo iz memorije</string>
     <string name="sRecoveryBackup">Bekapuj Rekaveri</string>
     <string name="sKernelBackup">Bekapuj Kernel</string>
     <string name="backups">Bekapi</string>

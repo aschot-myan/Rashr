@@ -1,1 +1,1 @@
-include ':RashrApp', ':Utils-Library', ':root-commands', ':AppMsg', ':CardsUILib'
+include ':RashrApp', ':Utils-Library', ':root-commands', ':CardsUILib'

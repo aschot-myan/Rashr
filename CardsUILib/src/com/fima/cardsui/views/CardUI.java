@@ -12,6 +12,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -377,6 +378,10 @@ public class CardUI extends FrameLayout {
                 .get(getLastCardStackPosition());
         cardStack.setTitle(title);
 
+    }
+
+    public ListView getListView() {
+        return mListView;
     }
 
     public OnRenderedListener getOnRenderedListener() {

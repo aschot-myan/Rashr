@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="sHistory">Geschiedenis</string>
+    <string name="history">Geschiedenis</string>
     <string name="go">Oké</string>
     <string name="sRebooter">herstarten</string>
     <string name="sClearCache">Verwijder gedownload recoveries</string>

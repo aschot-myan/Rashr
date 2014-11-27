@@ -2,7 +2,7 @@
 <resources>
 
     <string name="settings">Нагодувања</string>
-    <string name="sHistory">Историја</string>
+    <string name="history">Историја</string>
     <string name="backups">Резервни копии</string>
     <string name="go">ОК</string>
     <string name="sRebooter">Рестартиран</string>

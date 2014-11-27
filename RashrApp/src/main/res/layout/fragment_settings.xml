@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
+    tools:context=".SettingsFragment">
+
+    <Button
+        android:id="@+id/bReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/report" />
+
+    <Button
+        android:id="@+id/bShowLogs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/showlog" />
+    <Button
+        android:id="@+id/bReset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/reset_app"/>
+    <Button
+        android:id="@+id/bClearCache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sClearCache"/>
+
+    <CheckBox
+        android:id="@+id/cbShowAds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ShowAds" />
+
+    <CheckBox
+        android:id="@+id/cbLog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/log" />
+</LinearLayout>

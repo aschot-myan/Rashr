@@ -4,10 +4,10 @@
     <string name="sCWM">CWM ریکاوری</string>
     <string name="sFlashRecovery">فلش کردن ریکاوری</string>
     <string name="sFlashKernel">فلش زدن کرنل</string>
-    <string name="sHistory">تاریخچه</string>
+    <string name="recovery_history">تاریخچه</string>
     <string name="sTWRP">TWRP ریکاوری</string>
     <string name="sPhilz">Philz ریکاوری</string>
-    <string name="sOTHER">انتخاب چیز دیگری از داخل حافظه</string>
+    <string name="other_recovery">انتخاب چیز دیگری از داخل حافظه</string>
     <string name="sRecoveryBackup">بک آپ از ریکاوری</string>
     <string name="sKernelBackup">بک آپ از کرنل</string>
     <string name="backups">فابل های پشتیبان</string>

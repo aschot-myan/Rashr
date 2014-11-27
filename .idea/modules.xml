@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppMsg/AppMsg.iml" filepath="$PROJECT_DIR$/AppMsg/AppMsg.iml" />
       <module fileurl="file://$PROJECT_DIR$/CardsUILib/CardsUILib.iml" filepath="$PROJECT_DIR$/CardsUILib/CardsUILib.iml" />
       <module fileurl="file://$PROJECT_DIR$/Rashr.iml" filepath="$PROJECT_DIR$/Rashr.iml" />
       <module fileurl="file://$PROJECT_DIR$/RashrApp/RashrApp.iml" filepath="$PROJECT_DIR$/RashrApp/RashrApp.iml" />

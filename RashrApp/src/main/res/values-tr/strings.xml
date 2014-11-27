@@ -179,9 +179,9 @@
     <string name="sExit">Çıkış</string>
     <string name="sFlashKernel">Kernel Yükle</string>
     <string name="sFlashRecovery">Recovery Yükle</string>
-    <string name="sHistory">Geçmiş</string>
+    <string name="recovery_history">Geçmiş</string>
     <string name="sKernelBackup">Kernel Yedekle</string>
-    <string name="sOTHER">Depolamadan Seç</string>
+    <string name="other_recovery">Depolamadan Seç</string>
     <string name="sPhilz">Philz Recovery</string>
     <string name="sReboot">Yeniden başlat</string>
     <string name="sRebootBootloader">Bootloader\'ı başlat</string>
@@ -220,7 +220,6 @@
     </string>
     <string name="warning">Uyarı!</string>
     <string name="wipe_opts">Wipe Seçenekleri</string>
-    <string name="wrong_format">Yanlış dosya seçtiniz. Dosya %s biçiminde olmalıdır.</string>
     <string name="xda">XDA-Konusu</string>
 
     <string-array name="donation_google_catalog_values">

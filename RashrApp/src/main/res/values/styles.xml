@@ -1,19 +1,42 @@
 <resources>
 
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@color/darker_green</item>
+        <item name="actionBarStyle">@style/MyActionbar</item>
+        <item name="android:buttonStyle">@style/Rashr.Button</item>
+    </style>
+
     <style name="spinnerStyleView">
-        <item name="android:textColor">@color/stroke</item>
+        <item name="android:textColor">@color/custom_yellow</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="flatButton" parent="CardText">
-        <item name="android:background">@color/black_light</item>
+    <style name="Rashr.Button" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/flatt_green_background</item>
         <item name="android:minHeight">62dp</item>
-
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/stroke</item>
-        <item name="android:layout_margin">1dp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/custom_yellow</item>
     </style>
-    <style name="flatButton.Small" parent="flatButton">
-        <item name="android:height">22dp</item>
+
+    <style name="Rashr.Button.Small" parent="Rashr.Button">
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Rashr.Text" parent="CardText">
+        <item name="android:textStyle">italic</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/custom_yellow</item>
+    </style>
+    <style name="MyActionbar" parent="Widget.AppCompat.Light.ActionBar">
+        <item name="background">@color/darker_green</item>
+        <item name="titleTextStyle">@style/MyActionbar.Title</item>
+    </style>
+
+    <style name="MyActionbar.Title" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/custom_yellow</item>
+        <item name="android:textStyle">italic</item>
     </style>
 </resources>

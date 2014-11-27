@@ -2,7 +2,7 @@
 <resources>
 
     <string name="settings">Setari</string>
-    <string name="sHistory">Istoric</string>
+    <string name="history">Istoric</string>
     <string name="sRecoveryBackup">Salvare setari curente Recovery</string>
     <string name="sKernelBackup">Salvare Kernel curent</string>
     <string name="backups">Salvari</string>

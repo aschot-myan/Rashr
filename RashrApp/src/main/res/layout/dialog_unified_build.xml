@@ -21,7 +21,6 @@
         android:layout_weight="90" />
 
     <Button
-        style="@style/flatButton"
         android:id="@+id/bKeepCurrent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

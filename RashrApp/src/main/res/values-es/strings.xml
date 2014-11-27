@@ -6,10 +6,10 @@
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flash Recovery</string>
     <string name="sFlashKernel">Flash Kernel</string>
-    <string name="sHistory">History</string>
+    <string name="recovery_history">History</string>
     <string name="sTWRP">TWRP Recovery</string>
     <string name="sPhilz">Philz Recovery</string>
-    <string name="sOTHER">Otros de la memoria interna</string>
+    <string name="other_recovery">Recovery de la memoria interna</string>
     <string name="sRecoveryBackup">Backup Recovery</string>
     <string name="sKernelBackup">Backup Kernel</string>
     <string name="backups">Backups</string>
@@ -198,5 +198,7 @@
     <string name="files_deleted">Archivos borrados</string>
 
     <string name="onlyLanguage">Porfavor solamente escriban en Alemàn, Inglès o en Castellano</string>
+    <string name="other_kernel">Kernel de la memoria interna</string>
+    <string name="exit_app">Salir de la App?</string>
 
 </resources>

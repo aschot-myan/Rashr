@@ -8,6 +8,7 @@
         android:id="@+id/pbLoading"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
@@ -19,7 +20,7 @@
         android:layout_below="@+id/pbLoading"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/custom_green"
+        android:textSize="20sp"
+        android:textColor="@color/custom_yellow"
         android:textStyle="bold" />
 </RelativeLayout>
