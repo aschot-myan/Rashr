@@ -386,7 +386,7 @@ public class FlashFragment extends Fragment {
                 if (HistoryFiles.get(arg2).exists()) {
                     mActivity.getIntent().setData(Uri.fromFile(HistoryFiles.get(arg2)));
                     if (mListener != null)
-                        mListener.onFragmentInteraction(Constants.OPEN_FLASHAS_FRAGMENT);
+                        mListener.onFragmentInteraction(Constants.OPEN_FLASH_AS_FRAGMENT);
                     HistoryDialog.dismiss();
                 }
             }

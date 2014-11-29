@@ -53,11 +53,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     final private Shell mShell;
     final private Toolbox mToolbox;
     private final int mJOB;
-    private final File mCustomIMG, busybox, flash_image, dump_image;
+    private final File mCustomIMG, mBusybox, flash_image, dump_image;
     private ProgressDialog pDialog;
     private File tmpFile, CurrentPartition;
     private boolean keepAppOpen = true;
     private Runnable RunAtEnd;
+    private boolean mOperationFailed = false;
 
     private Exception mException = null;
 
@@ -68,8 +69,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         mDevice = activity.getDevice();
         mJOB = job;
         mCustomIMG = CustomIMG;
-        mToolbox = new Toolbox(mShell);
-        busybox = new File(mContext.getFilesDir(), "busybox");
+        mToolbox = activity.getToolbox();
+        mBusybox = new File(mContext.getFilesDir(), "busybox");
         flash_image = mDevice.getFlash_image();
         dump_image = mDevice.getDump_image();
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
@@ -80,22 +81,23 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
         try {
             setBinaryPermissions();
+            if (isJobFlash()) {
+                pDialog.setTitle(R.string.flashing);
+            } else if (isJobBackup()) {
+                pDialog.setTitle(R.string.creating_bak);
+            } else if (isJobRestore()) {
+                pDialog.setTitle(R.string.restoring);
+            }
+
+            pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pDialog.setMessage(mCustomIMG.getName());
+            pDialog.setCancelable(false);
+            pDialog.show();
         } catch (FailedExecuteCommand e) {
             mActivity.addError(Constants.FLASH_UTIL_TAG, e, true);
         }
 
-        if (isJobFlash()) {
-            pDialog.setTitle(R.string.flashing);
-        } else if (isJobBackup()) {
-            pDialog.setTitle(R.string.creating_bak);
-        } else if (isJobRestore()) {
-            pDialog.setTitle(R.string.restoring);
-        }
 
-        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pDialog.setMessage(mCustomIMG.getName());
-        pDialog.setCancelable(false);
-        pDialog.show();
     }
 
     @Override
@@ -165,12 +167,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Command = loki_flash.getAbsolutePath() + " recovery " + patched_CustomIMG.getAbsolutePath() + " || exit 1";
             } else {
                 Common.copyFile(mCustomIMG, tmpFile);
-                Command = busybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
+                Command = mBusybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
                         "of=\"" + CurrentPartition.getAbsolutePath() + "\"";
             }
         } else if (isJobBackup()) {
 
-            Command = busybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() + "\" " +
+            Command = mBusybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() + "\" " +
                     "of=\"" + tmpFile.getAbsolutePath() + "\"";
         }
         mShell.execCommand(Command, true);
@@ -231,7 +233,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     private void setBinaryPermissions() throws FailedExecuteCommand {
-        mToolbox.setFilePermissions(busybox, "755");
+        mToolbox.setFilePermissions(mBusybox, "755");
         mToolbox.setFilePermissions(flash_image, "755");
         mToolbox.setFilePermissions(dump_image, "755");
     }

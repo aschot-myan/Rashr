@@ -1,10 +1,13 @@
 CHANGELOG
 ====================
 
-Update [2.2.0]
+Update [2.2.1]
+
+-All errors fixed (Flash/Backup/Restore)
+
+Update [2.2.0 beta]
 
 -MANY UI changes (please report bugs or improvements) :D
--Lollipop fixed
 -Flash supported Kernel fixed
 
 Update [2.1.1]

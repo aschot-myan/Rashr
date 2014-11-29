@@ -513,7 +513,6 @@ public class Device {
             String line;
             File LogCopy = new File(mContext.getFilesDir(), Constants.LastLog.getName() + ".txt");
             mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
-            mShell.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
             while ((line = br.readLine()) != null) {
                 line = line.replace("\"", "");

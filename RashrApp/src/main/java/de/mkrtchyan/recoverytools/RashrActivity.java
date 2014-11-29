@@ -387,10 +387,12 @@ public class RashrActivity extends ActionBarActivity implements
         dialog.show();
     }
 
-    public void report(final boolean isCancelable) {
+    public void report(final boolean isCancelable, final String message) {
         final Dialog reportDialog = new Dialog(mContext);
         reportDialog.setTitle(R.string.commentar);
         reportDialog.setContentView(R.layout.dialog_comment);
+        final EditText text = (EditText) reportDialog.findViewById(R.id.etComment);
+        if (!message.equals("")) text.setText(message);
         reportDialog.setCancelable(isCancelable);
         new Thread(new Runnable() {
             @Override
@@ -424,12 +426,12 @@ public class RashrActivity extends ActionBarActivity implements
                                     files.add(TestResults);
                                 }
                             } catch (Exception e) {
-                                mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                                mActivity.addError(Constants.RASHR_TAG, e, false);
                             }
                             if (getPackageManager() != null) {
                                 PackageInfo pInfo = mActivity.getPackageManager()
                                         .getPackageInfo(mActivity.getPackageName(), 0);
-                                EditText text = (EditText) reportDialog.findViewById(R.id.etComment);
+
                                 String comment = "";
                                 if (text.getText() != null) comment = text.getText().toString();
                                 Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
@@ -713,7 +715,7 @@ public class RashrActivity extends ActionBarActivity implements
         DeviceNotSupported.setPositiveButton(R.string.report, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                report(false);
+                report(false, "");
             }
         });
         DeviceNotSupported.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -939,7 +941,7 @@ public class RashrActivity extends ActionBarActivity implements
     @Override
     public void onFragmentInteraction(int id) {
         if (id == R.id.bReport) {
-            report(true);
+            report(true, "");
         } else if (id == Constants.OPEN_RASHR_FRAGMENT) {
             FragmentManager fm = getSupportFragmentManager();
             Fragment fragment = FlashFragment.newInstance(this);
@@ -981,7 +983,7 @@ public class RashrActivity extends ActionBarActivity implements
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        report(false);
+                        report(true, e.toString());
                         Notifyer.showExceptionToast(mContext, e);
                     }
                 });
