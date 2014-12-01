@@ -5,8 +5,8 @@ android {
     buildToolsVersion '21.1.1'
     defaultConfig {
         minSdkVersion 9
-        versionCode 87
-        versionName '2.2.1'
+        versionCode 88
+        versionName '2.2.2'
     }
     signingConfigs {
         DsLNeXuS {

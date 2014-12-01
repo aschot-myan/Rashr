@@ -1,6 +1,11 @@
 CHANGELOG
 ====================
 
+Update [2.2.2]
+
+-Lollipop fix :D
+-Startup crash fixed (allowStateLost)
+
 Update [2.2.1]
 
 -All errors fixed (Flash/Backup/Restore)
