@@ -494,19 +494,39 @@ public class Device {
     private void readDeviceInfos() {
 
         for (File i : KernelList) {
-            if (i.exists() && mKernelPath.equals("")) {
-                mKernelPath = i.getAbsolutePath();
-                break;
+            if (mKernelPath.equals("")) {
+                try {
+                    mShell.execCommand("ls " + i.getAbsolutePath());
+                    mKernelPath = i.getAbsolutePath();
+                    break;
+                } catch (FailedExecuteCommand e) {
+                    e.printStackTrace();
+                    /**
+                     * Partition doesn't exist LOLLIPOP Workaround
+                     * File.exists() returns always false if file is in hidden FS
+                     * Lollipop marks /dev/.... as hidden
+                     */
+                }
             }
         }
         for (File i : RecoveryList) {
-            if (i.exists() && mRecoveryPath.equals("")) {
-                mRecoveryPath = i.getAbsolutePath();
-                if (mRecoveryPath.endsWith(EXT_TAR)) {
-                    mRECOVERY_EXT = EXT_TAR;
-                    mRECOVERY_TYPE = PARTITION_TYPE_SONY;
+            if (mRecoveryPath.equals("")) {
+                try {
+                    mShell.execCommand("ls " + i.getAbsolutePath());
+                    mRecoveryPath = i.getAbsolutePath();
+                    if (mRecoveryPath.endsWith(EXT_TAR)) {
+                        mRECOVERY_EXT = EXT_TAR;
+                        mRECOVERY_TYPE = PARTITION_TYPE_SONY;
+                    }
+                    break;
+                } catch (FailedExecuteCommand e) {
+                    e.printStackTrace();
+                    /**
+                     * Partition doesn't exist LOLLIPOP Workaround
+                     * File.exists() returns always false if file is in hidden FS
+                     * Lollipop marks /dev/.... as hidden
+                     */
                 }
-                break;
             }
         }
 

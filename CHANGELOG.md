@@ -1,6 +1,10 @@
 CHANGELOG
 ====================
 
+Update [2.2.3]
+
+-More devices recognized on Lollipop!
+
 Update [2.2.2]
 
 -Lollipop fix :D
