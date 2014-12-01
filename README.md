@@ -37,11 +37,11 @@ This project is fully open-source if you want to help me with unsupported device
 Screenshots
 ===================================
 
-[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/main.jpg)]
-[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/main-reboot.jpg)]
-[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/menu-drawer.jpg)]
-[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/recovery-script.jpg)]
-[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/settings.jpg)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/main.png)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/main-reboot.png)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/menu-drawer.png)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/recovery-script.png)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/settings.png)]
 
 Compile instructions
 ===================================
