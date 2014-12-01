@@ -51,15 +51,10 @@ public class SettingsFragment extends Fragment {
      * @return A new instance of fragment SettingsFragment.
      */
     public static SettingsFragment newInstance() {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new SettingsFragment();
     }
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
+    public SettingsFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +78,8 @@ public class SettingsFragment extends Fragment {
                 onButtonPressed(view);
             }
         });
-        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), RashrActivity.PREF_NAME, Constants.PREF_KEY_ADS));
+        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), RashrActivity.PREF_NAME,
+				Constants.PREF_KEY_ADS));
         cbLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
         cbLog.setOnClickListener(new View.OnClickListener() {
             @Override

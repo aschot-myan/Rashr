@@ -436,7 +436,7 @@ public class FlashFragment extends Fragment {
                                 .beginTransaction()
                                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                                 .replace(R.id.container, fragment)
-                                .commit();
+								.commitAllowingStateLoss();
                     }
                 }
             }

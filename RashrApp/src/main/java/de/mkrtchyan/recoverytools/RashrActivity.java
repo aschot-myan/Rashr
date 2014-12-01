@@ -128,7 +128,7 @@ public class RashrActivity extends ActionBarActivity implements
 		            mShell = Shell.startRootShell(mContext);
 		            mToolbox = new Toolbox(mShell);
                 } catch (IOException e) {
-                    mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                    mActivity.addError(Constants.RASHR_TAG, e, false);
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -143,7 +143,7 @@ public class RashrActivity extends ActionBarActivity implements
                 try {
                     unpackFiles();
                 } catch (IOException e) {
-                    mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                    mActivity.addError(Constants.RASHR_TAG, e, true);
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -159,7 +159,7 @@ public class RashrActivity extends ActionBarActivity implements
                     mToolbox.setFilePermissions(Constants.LastLog, "666");
                     mToolbox.copyFile(Constants.LastLog, LogCopy, false, false);
                 } catch (Exception e) {
-                    mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                    mActivity.addError(Constants.RASHR_TAG, e, false);
                 }
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
@@ -179,8 +179,8 @@ public class RashrActivity extends ActionBarActivity implements
                 for (File i : Folder) {
                     if (!i.exists()) {
                         if (i.mkdir()) {
-                            mERRORS.add(Constants.RASHR_TAG + ": " +
-                                    i.getAbsolutePath() + " can't be created!");
+                            mActivity.addError(Constants.RASHR_TAG,
+                                    new IOException(i.getAbsolutePath() + " can't be created!"), true);
                         }
                     }
                 }
@@ -224,7 +224,7 @@ public class RashrActivity extends ActionBarActivity implements
                                 mVersionChanged = true;
                             }
                         } catch (PackageManager.NameNotFoundException e) {
-                            mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                            mActivity.addError(Constants.RASHR_TAG, e, false);
                             mVersionChanged = true;
                         }
                         if (mVersionChanged) {
@@ -273,12 +273,12 @@ public class RashrActivity extends ActionBarActivity implements
                             }
                             onNavigationDrawerItemSelected(0);
                         } catch (NullPointerException e) {
-                            mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                            mActivity.addError(Constants.RASHR_TAG, e, false);
                             try {
                                 tvLoading.setText(R.string.failed_setup_layout);
                                 tvLoading.setTextColor(Color.RED);
                             } catch (RuntimeException ex) {
-                                mERRORS.add(Constants.RASHR_TAG + ": " + ex.toString());
+                                mActivity.addError(Constants.RASHR_TAG, e, true);
                                 ex.printStackTrace();
 
                             }
@@ -487,7 +487,7 @@ public class RashrActivity extends ActionBarActivity implements
                                         mToolbox.setFilePermissions(i, "666");
                                         uris.add(Uri.fromFile(i));
                                     } catch (Exception e) {
-                                        mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                                        mActivity.addError(Constants.RASHR_TAG, e, false);
                                     }
                                 }
                                 if (mERRORS.size() > 0) {
@@ -503,7 +503,7 @@ public class RashrActivity extends ActionBarActivity implements
                             }
                         } catch (Exception e) {
                             reportDialog.dismiss();
-                            Notifyer.showExceptionToast(mContext, e);
+                            mActivity.addError(Constants.RASHR_TAG, e, false);
                         }
                     }
                 });
@@ -699,7 +699,7 @@ public class RashrActivity extends ActionBarActivity implements
                         }
                     }
                 } catch (Exception e) {
-                    mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                    mActivity.addError(Constants.RASHR_TAG, e, true);
                     return false;
                 }
                 return false;
@@ -731,8 +731,7 @@ public class RashrActivity extends ActionBarActivity implements
                     try {
                         mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
                     } catch (Exception e) {
-                        mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
-                        e.printStackTrace();
+                        mActivity.addError(Constants.RASHR_TAG, e, false);
                     }
                 }
             });
@@ -883,11 +882,11 @@ public class RashrActivity extends ActionBarActivity implements
                         Prefs += entry.getKey() + ": " + entry.getValue().toString() + "\n";
                     }
                 } catch (NullPointerException e) {
-                    mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+                    mActivity.addError(Constants.RASHR_TAG, e, false);
                 }
             }
         } catch (NullPointerException e) {
-            mERRORS.add(Constants.RASHR_TAG + ": " + e.toString());
+            mActivity.addError(Constants.RASHR_TAG, e, false);
         }
 
         return Prefs;
@@ -934,7 +933,7 @@ public class RashrActivity extends ActionBarActivity implements
             ft
                     .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
                     .replace(R.id.container, fragment)
-                    .commit();
+					.commitAllowingStateLoss();
         }
     }
 
@@ -948,7 +947,7 @@ public class RashrActivity extends ActionBarActivity implements
             fm.beginTransaction()
                     .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
                     .replace(R.id.container, fragment)
-                    .commit();
+					.commitAllowingStateLoss();
         } else if (id == Constants.OPEN_FLASH_AS_FRAGMENT) {
             File img = new File(getIntent().getData().getPath());
             if (img.exists()) {
@@ -957,7 +956,7 @@ public class RashrActivity extends ActionBarActivity implements
                 fm.beginTransaction()
                         .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
                         .replace(R.id.container, fragment)
-                        .commit();
+						.commitAllowingStateLoss();
             }
         }
     }
@@ -967,15 +966,15 @@ public class RashrActivity extends ActionBarActivity implements
     }
 
     /**
-     * Share one Shell-Instance with root access instance with all other Classes
+     * Share instances with root access instance with all other Classes
      */
     public Shell getShell() {
         return mShell;
     }
-
     public Toolbox getToolbox() {
         return mToolbox;
     }
+
     public void addError(String TAG, final Exception e, boolean serious) {
         mERRORS.add(TAG + ": " + (e != null ? e.toString() : ""));
         if (e != null) {

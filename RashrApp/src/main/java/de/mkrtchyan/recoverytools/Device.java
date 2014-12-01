@@ -564,7 +564,7 @@ public class Device {
             }
             br.close();
         } catch (Exception e) {
-            mActivity.addError(Constants.DEVICE_TAG, e, true);
+            mActivity.addError(Constants.DEVICE_TAG, e, false);
         }
 
         if (mRecoveryPath.equals("")) {
