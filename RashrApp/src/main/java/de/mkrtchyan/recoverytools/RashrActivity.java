@@ -273,7 +273,7 @@ public class RashrActivity extends ActionBarActivity implements
                             }
                             onNavigationDrawerItemSelected(0);
                         } catch (NullPointerException e) {
-                            mActivity.addError(Constants.RASHR_TAG, e, false);
+                            mActivity.addError(Constants.RASHR_TAG, e, true);
                             try {
                                 tvLoading.setText(R.string.failed_setup_layout);
                                 tvLoading.setTextColor(Color.RED);

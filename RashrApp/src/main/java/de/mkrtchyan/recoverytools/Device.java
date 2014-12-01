@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Build;
 
 import org.sufficientlysecure.rootcommands.Shell;
+import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -540,9 +541,22 @@ public class Device {
                             mKERNEL_TYPE = PARTITION_TYPE_MTD;
                         } else if (line.contains("/dev/")) {
                             for (String split : line.split(" ")) {
-                                if (new File(split).exists()) {
-                                    mKernelPath = split;
+
+                                if (split.startsWith("/dev") || split.startsWith("/system")) {
+                                    try {
+                                        mShell.execCommand("ls " + split);
+                                        mKernelPath = split;
+                                        break;
+                                    } catch (FailedExecuteCommand e) {
+                                        e.printStackTrace();
+                                        /**
+                                         * Partition doesn't exist LOLLIPOP Workaround
+                                         * File.exists() returns always false if file is in hidden FS
+                                         * Lollipop marks /dev/.... as hidden
+                                         */
+                                    }
                                 }
+
                             }
                         }
                     }
@@ -554,8 +568,19 @@ public class Device {
                             mRECOVERY_TYPE = PARTITION_TYPE_MTD;
                         } else if (line.contains("/dev/")) {
                             for (String split : line.split(" ")) {
-                                if (new File(split).exists()) {
-                                    mRecoveryPath = split;
+                                if (split.startsWith("/dev") || split.startsWith("/system")) {
+                                    try {
+                                        mShell.execCommand("ls " + split);
+                                        mRecoveryPath = split;
+                                        break;
+                                    } catch (FailedExecuteCommand e) {
+                                        e.printStackTrace();
+                                        /**
+                                         * Partition doesn't exist LOLLIPOP Workaround
+                                         * File.exists() returns always false if file is in hidden FS
+                                         * Lollipop marks /dev/.... as hidden
+                                         */
+                                    }
                                 }
                             }
                         }
