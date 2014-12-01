@@ -34,12 +34,21 @@ This project is fully open-source if you want to help me with unsupported device
 -Google Play billing: donations over Google Play
 -[normally managed by Superuser-App]Full access to all functions of the device: Flashing recoveries and kernel
 
+Screenshots
+===================================
+
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/main.jpg)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/main-reboot.jpg)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/menu-drawer.jpg)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/recovery-script.jpg)]
+[![Screenshot](https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/Screenshots/settings.jpg)]
+
 Compile instructions
 ===================================
 
 To compile Rashr download the Source and needed Libraries:
 
-Rashr:     https://github.com/DsLNeXuS/Recovery-Tools
+Rashr:     https://github.com/DsLNeXuS/Rashr
 
 [Libraries]:        All Libraries are included in the repository and pre-configured for
                     gradle on Android Studio
