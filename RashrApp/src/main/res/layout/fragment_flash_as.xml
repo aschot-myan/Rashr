@@ -10,8 +10,8 @@
         android:layout_centerHorizontal="true"
         android:focusableInTouchMode="false"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/custom_green" />
+        android:textColor="@color/custom_yellow"
+        android:layout_marginTop="10dp" />
 
     <RadioButton
         android:id="@+id/optAsRecovery"

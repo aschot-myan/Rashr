@@ -1681,8 +1681,8 @@ f288200a07b174a6caa851957ced4b6263938cb6 recoveries/openrecovery-twrp-2.6.3.0-t0
 5274777b1b07daf428baf3a485edc102989168d2 recoveries/openrecovery-twrp-2.6.3.0-t0lteatt.img
 62a9fa5e766092a1f988a346d3d0ba5499039ff7 recoveries/openrecovery-twrp-2.6.3.0-t0ltecan.img
 fab5bbf6af7a95f6f5839fef36d1e2f0a372f8b3 recoveries/openrecovery-twrp-2.6.3.0-t0lte.img
-b71e412bc987b0f345c65e64d17fe256089788fd recoveries/openrecovery-twrp-2.6.3.0-t0ltektt.img
-1559e5afec2acf86a3bb019c189b1b64f5ab0d80 recoveries/openrecovery-twrp-2.6.3.0-t0lteskt.img
+5b630f6bcb1d1652443d4fb9ddbe3fc85e5060f2 recoveries/openrecovery-twrp-2.6.3.0-t0ltektt.img
+848dd50774fa9c985d71ed02ce5fc8b8017d2c99 recoveries/openrecovery-twrp-2.6.3.0-t0lteskt.img
 e5deac4230562d9b31454214a4510bc7bae35913 recoveries/openrecovery-twrp-2.6.3.0-t0ltespr.img
 5b17a3c91e292394b2ad8537998d79656e70dd31 recoveries/openrecovery-twrp-2.6.3.0-t0ltetmo.img
 eb5b402d81ba704026af8aab713b614b9cdef4b6 recoveries/openrecovery-twrp-2.6.3.0-t0lteusc.img
@@ -1950,14 +1950,14 @@ eb4cd3a8728cc6568dc10340664a00e1684a0d3d recoveries/openrecovery-twrp-2.7.0.0-su
 2fb553be70945aabc69c5b5105b385f495bde7a9 recoveries/openrecovery-twrp-2.7.0.0-t03g.img
 19b73f9a28dd1e911def67dcbc499f1e411249e8 recoveries/openrecovery-twrp-2.7.0.0-t03gub.img
 86fad1f0f0d88777763e61163ec5b3a43d1454ce recoveries/openrecovery-twrp-2.7.0.0-t0lteatt.img
-b6e95ab62e39fdb7e0cf57319782d74409c2654b recoveries/openrecovery-twrp-2.7.0.0-t0ltecan.img
+0d3e0e35dfaaefe450f7a5022289a7efe8f923bd recoveries/openrecovery-twrp-2.7.0.0-t0ltecan.img
 9a2ec2ccfba246376d13122cc4dfd430e50fe48e recoveries/openrecovery-twrp-2.7.0.0-t0lte.img
 4e8ffe4bad683e6c8de52b40840e0c5716b2bca1 recoveries/openrecovery-twrp-2.7.0.0-t0ltektt.img
 282648f5645f8c36d7ebc6ebc1770494f4944fae recoveries/openrecovery-twrp-2.7.0.0-t0lteskt.img
 5b49818ec7b8f2888bcd09bef22baac5ff41e274 recoveries/openrecovery-twrp-2.7.0.0-t0ltespr.img
 9553a842846af2ba2b63c91d2c41c6645a139629 recoveries/openrecovery-twrp-2.7.0.0-t0ltetmo.img
 cb86cab57c1c988a281c02f328d00b7b60613096 recoveries/openrecovery-twrp-2.7.0.0-t0lteusc.img
-cb7abcc8e778ca9f4e321bad1af325eed776f4e8 recoveries/openrecovery-twrp-2.7.0.0-t0ltevzw.img
+3965b7aadf8b154f4727ef97598db5df10c35a7a recoveries/openrecovery-twrp-2.7.0.0-t0ltevzw.img
 094f22b4111a4a5d73848c961e81c56f54ffae54 recoveries/openrecovery-twrp-2.7.0.0-t6spr.img
 c7fe61d9c70e5a2e3b7d7e8c01702fd0d4ee1b1d recoveries/openrecovery-twrp-2.7.0.0-t6ul.img
 2d0f3ca4cea6af16ef3f6e12e563006163abc8e5 recoveries/openrecovery-twrp-2.7.0.0-t6vzw.img
@@ -2187,7 +2187,7 @@ a56caedad6e47f60cbe8facccc365edbf26201ef recoveries/openrecovery-twrp-2.7.1.0-ru
 fd9dff082f443fd3f8b248c732db1651703d786d recoveries/openrecovery-twrp-2.7.1.0-shooteru.img
 53734218e8772e7c8b7a8f1938947d7f0685bdac recoveries/openrecovery-twrp-2.7.1.0-sirius.img
 246f196e7b1c7c278be44ee3f6d2a3e8b031bc00 recoveries/openrecovery-twrp-2.7.1.0-skyrocket.img
-9ec377d92e8bb51df9e00bf5f7cb8e7b77aeab5e recoveries/openrecovery-twrp-2.7.1.0-sprat.img
+52ecf9675be150898a27ffcf83754b45ff21b758 recoveries/openrecovery-twrp-2.7.1.0-sprat.img
 bb1f23d3e31aeccb9e7e42bfac301f910c4dd98b recoveries/openrecovery-twrp-2.7.1.0-su640.img
 3b60af42d4574bd74639a70d73665619b1923562 recoveries/openrecovery-twrp-2.7.1.0-t03gduoszn.img
 115e8236657385bd17292c52cf98971678863b7d recoveries/openrecovery-twrp-2.7.1.0-t03g.img
@@ -2197,8 +2197,8 @@ bb1f23d3e31aeccb9e7e42bfac301f910c4dd98b recoveries/openrecovery-twrp-2.7.1.0-su
 357cfb44e06efa79a8bb7f0986a68a060f823388 recoveries/openrecovery-twrp-2.7.1.0-t0lte.img
 e020e6afc58d287b42ec0cb2fd7deb184b1d94b7 recoveries/openrecovery-twrp-2.7.1.0-t0ltektt.img
 2e6528ee50c3f6a5675aedaab4ae57d94a5544e6 recoveries/openrecovery-twrp-2.7.1.0-t0lteskt.img
-fed2be4c0e9133cb00621f6b3e4a1bc5b5f5fbc9 recoveries/openrecovery-twrp-2.7.1.0-t0ltespr.img
-d54dd65ee5241a719f987674dd563f691a8707c2 recoveries/openrecovery-twrp-2.7.1.0-t0ltetmo.img
+c3a0c4e62c98d02fd45e0611fe5653e598810325 recoveries/openrecovery-twrp-2.7.1.0-t0ltespr.img
+4d1a184e229095b2da596fece65ee7e772ad7ef9 recoveries/openrecovery-twrp-2.7.1.0-t0ltetmo.img
 e226c2a5d452d2b447e940de0506a745ec500045 recoveries/openrecovery-twrp-2.7.1.0-t0lteusc.img
 8ddad2edf8237d77dcdd5727c8d26333b3ae3ec5 recoveries/openrecovery-twrp-2.7.1.0-t0ltevzw.img
 87be39e4c52023fd7dde4d29abe71460802f8e06 recoveries/openrecovery-twrp-2.7.1.0-t6spr.img
@@ -2275,7 +2275,7 @@ aedf606540ae27f95d372f098d95799ef1b24489 recoveries/openrecovery-twrp-2.7.2.0-t0
 41e9abe57ecf2c79bfb8dc976aa928da1353543d recoveries/openrecovery-twrp-2.7.2.0-t0ltevzw.img
 c8691d471508949b64f7ac709cde6f57b48ea1fa recoveries/openrecovery-twrp-2.7.2.1-hlte-4.4.img
 04dbf86cb3e41546ada3c007448b83c2fa22d09f recoveries/openrecovery-twrp-2.7.2.1-t03g.img
-7c340cac78ad07651cafc6abec6c25aa982b4076 recoveries/openrecovery-twrp-2.7.2.1-t0lteatt.img
+91aaa54543d5781301cc88cd82a0e05d0e72d51e recoveries/openrecovery-twrp-2.7.2.1-t0lteatt.img
 eea3db900014f36d4518b88c3ff00a64a9c03939 recoveries/openrecovery-twrp-2.7.2.1-t0lte.img
 7d43ded573fb637add296cca82afbf51db21e9e5 recoveries/openrecovery-twrp-2.7.2.1-t0ltevzw.img
 3b0063c1041a49a137f8db6f0965ae62988ba371 recoveries/openrecovery-twrp-2.7.2.2-t0lteatt.img
@@ -2332,7 +2332,7 @@ a9b08cf978216293d0221c7662b52b99cfccf1c6 recoveries/openrecovery-twrp-2.8.0.0-ha
 d8eb025c3b81f7badf06fa8101d2490e1b6a35c8 recoveries/openrecovery-twrp-2.8.0.0-hercules.img
 f318af3112142cfb7d5b8ca4a5bf6f1ab6cefd9b recoveries/openrecovery-twrp-2.8.0.0-hlltexx.img
 5a3d25f10f19efae69dcaf5b918747d4c885e6cf recoveries/openrecovery-twrp-2.8.0.0-hlte-4.3.img
-840f21d87046778d13ccf792f74a596d4ca135bf recoveries/openrecovery-twrp-2.8.0.0-hlte-4.4.img
+7695ef62658ec6b402b38172ed22627e190ccfda recoveries/openrecovery-twrp-2.8.0.0-hlte-4.4.img
 8e9cb086dc7cdc767741267ddf07272fe18b76e9 recoveries/openrecovery-twrp-2.8.0.0-hltecan-4.3.img
 0704f21892d9f88b11d8bdb549ca6c1b01eb7691 recoveries/openrecovery-twrp-2.8.0.0-hltecan-4.4.img
 fab3970bf66e7e3149ee9a3b3866c9ebfa1dadd1 recoveries/openrecovery-twrp-2.8.0.0-hlteskt.img
@@ -2403,7 +2403,7 @@ fb247e4fe000451a23ffa5e90f16ff7141c6279e recoveries/openrecovery-twrp-2.8.0.0-p5
 c17387d4072cee11dbb3266f5c4864c70b5fe4c4 recoveries/openrecovery-twrp-2.8.0.0-p880.img
 175b09579372e175e5008dddc5215f2c8af56328 recoveries/openrecovery-twrp-2.8.0.0-p930.img
 1156b90a4a5cce0a16be894f573064f2a28a9794 recoveries/openrecovery-twrp-2.8.0.0-picassoltexx.img
-bb6fcdab707ff4774964ab019036f56103cd9694 recoveries/openrecovery-twrp-2.8.0.0-picassowifi.img
+82d560b6cd0ba3a97e3434cfe10923fc3326c640 recoveries/openrecovery-twrp-2.8.0.0-picassowifi.img
 3eddd8298ca9b44fe6a2012b72112527dedd464b recoveries/openrecovery-twrp-2.8.0.0-pollux_windy.img
 de3587fc33b283bad39f10a9d43e9202c63cfe98 recoveries/openrecovery-twrp-2.8.0.0-protou.img
 209f927f07cf53b1765fc279d0f5497c5fcce5d3 recoveries/openrecovery-twrp-2.8.0.0-quincyatt.img
@@ -2443,7 +2443,7 @@ aa6e9a17e745d9a5c7d7568af37d46585dca4fbc recoveries/openrecovery-twrp-2.8.0.0-u8
 fb3d60cb6dc4185f100a12dc4baea64d612c125a recoveries/openrecovery-twrp-2.8.0.0-u8833.img
 a55755832aa069279150742b6508d78e7ea03c73 recoveries/openrecovery-twrp-2.8.0.0-u8951.img
 b62c5ac503e71604deb5e0ac9d549ae93b6cffef recoveries/openrecovery-twrp-2.8.0.0-v1a3gxx.img
-174a1391cff3fe2fb4e07f8d53075f8ea04049b8 recoveries/openrecovery-twrp-2.8.0.0-v1awifi.img
+4f101a0d3bbe3af35eff76d4b08bf60f50e6acc6 recoveries/openrecovery-twrp-2.8.0.0-v1awifi.img
 c9eb6073795122f2ad915f46388310df5d03beb6 recoveries/openrecovery-twrp-2.8.0.0-v2wifixx.img
 23cb4aafde9127d0af1f44cf66df356f076fc784 recoveries/openrecovery-twrp-2.8.0.0-victara.img
 01f7eb627f86141dd96819127ff370db848466c1 recoveries/openrecovery-twrp-2.8.0.0-viennaltexx.img
@@ -2510,7 +2510,7 @@ c4e6bbcf609a779da6bd014f2653eb0014454327 recoveries/openrecovery-twrp-2.8.0.1-go
 392baaee56f62ebfbdc0c918544044faeab776cc recoveries/openrecovery-twrp-2.8.0.1-hlte-4.4.img
 5dc6bce4bb45af2b28b8dcf34861ae99dc0aa6a2 recoveries/openrecovery-twrp-2.8.0.1-hltetmo-4.3.img
 b844fcf5d13f08eb106063e74e96024f34c64580 recoveries/openrecovery-twrp-2.8.0.1-hltetmo-4.4.img
-aab54b74997d16581c60ce09641ef6d39778b87f recoveries/openrecovery-twrp-2.8.0.1-hltevzw.img
+3dec7fe75585a158259b33f58dd5f7ac68da7df1 recoveries/openrecovery-twrp-2.8.0.1-hltevzw.img
 961aa855fdcc84b0b0322fa5e203950715c0e60e recoveries/openrecovery-twrp-2.8.0.1-hws7300u.img
 289067e8385ad92fef2702653253f7e711833ae1 recoveries/openrecovery-twrp-2.8.0.1-i9300.img
 a68950c638f533f2d471b7ceb32dbfe9a0bd7876 recoveries/openrecovery-twrp-2.8.0.1-i9500.img
@@ -2620,6 +2620,7 @@ d0ba3a3569381e2a4d7a2ce989a5b8d12025f912 recoveries/openrecovery-twrp-2.8.0.2-s2
 e24aa1e80c06606aa45ebc1902de5493c833799a recoveries/openrecovery-twrp-2.8.0.3-m8.img
 e24aa1e80c06606aa45ebc1902de5493c833799a recoveries/openrecovery-twrp-2.8.0.3-m8_whl.img
 e24aa1e80c06606aa45ebc1902de5493c833799a recoveries/openrecovery-twrp-2.8.0.3-m8_wlv.img
+55c7244b89a3b3a3027c222f53f850a043f870c6 recoveries/openrecovery-twrp-2.8.1.0-a11.img
 42db2cebb539daa6eca2fc3a003d9de2954671a7 recoveries/openrecovery-twrp-2.8.1.0-a3ul.img
 85769344a08ae2cb55269d05523921c1252fc408 recoveries/openrecovery-twrp-2.8.1.0-a5.img
 a3fb17a434d330377f655e40c7f3a6a8818fac11 recoveries/openrecovery-twrp-2.8.1.0-A66.img
@@ -2776,6 +2777,7 @@ c33460da9d40146bfee24865a8cae06703bb83c6 recoveries/openrecovery-twrp-2.8.1.0-t6
 55a3445dcf9bd66f94a767777980256cafde6853 recoveries/openrecovery-twrp-2.8.1.0-toro.img
 5fe1883bdf6f2160c431ff5402234fd775e1846d recoveries/openrecovery-twrp-2.8.1.0-toroplus.img
 b8bdada19141e6a7fdb76e51e3aa2f0bfb9131d9 recoveries/openrecovery-twrp-2.8.1.0-totemc2.img
+102ee7d99f74cc92d42e3603eb7aabdf378273ca recoveries/openrecovery-twrp-2.8.1.0-treltexx.img
 c69d1654dc8a6968f385445431a883736b4924a8 recoveries/openrecovery-twrp-2.8.1.0-trltecan.img
 08881e39115919139b6ee577ee9887cc30c2423f recoveries/openrecovery-twrp-2.8.1.0-trltedt.img
 4f7135c9360d3696d53baa47ab2bce682c5cd136 recoveries/openrecovery-twrp-2.8.1.0-trltespr.img
@@ -2797,6 +2799,8 @@ c62826017d7f37a1a510277afe4646ebbdb6391a recoveries/openrecovery-twrp-2.8.1.0-za
 f5e8f18f1d89b94bcc5f4b4cfba2f573130dc11f recoveries/openrecovery-twrp-2.8.1.1-armani.img
 f486001d2b0811e64d33d727bdfb0a5dafcedb66 recoveries/openrecovery-twrp-2.8.1.1-curie2qc.img
 5174e408031dbb1b7766c5ff13ec2f2c1d99154a recoveries/openrecovery-twrp-2.8.1.1-edison2qc.img
+360fc44a61da17d322039514483641b43ae103c0 recoveries/openrecovery-twrp-2.8.1.1-hltecan-4.3.img
+fd5cf360405a5893748538ea6871c2bedcfb53d3 recoveries/openrecovery-twrp-2.8.1.1-hltecan-4.4.img
 eeed1d3e7d944d29d375730b52df3bdd29e2cfc6 recoveries/openrecovery-twrp-2.8.1.1-hltevzw-4.3.img
 951e5aa0e32bf166d108e65849ea54a76db24094 recoveries/openrecovery-twrp-2.8.1.1-hltevzw-4.4.img
 45a12ba713de64cec6fe08974dd3c965f2dd1e11 recoveries/openrecovery-twrp-2.8.1.1-maxwell2.img
@@ -2804,6 +2808,7 @@ eeed1d3e7d944d29d375730b52df3bdd29e2cfc6 recoveries/openrecovery-twrp-2.8.1.1-hl
 00e014c9dc7274f90828513fa405787ee1e296ba recoveries/openrecovery-twrp-2.8.1.1-maxwell2plus.img
 d8542b09fa8e6421d8c8fd8cfd359f981fa8d494 recoveries/openrecovery-twrp-2.8.1.1-maxwell2qc.img
 e39ab987782573e96f1b7d0ffaaea9324468046c recoveries/openrecovery-twrp-2.8.1.1-mondrian3g.img
+8789dab974b8eab8547d0b697bf34f7eb252f408 recoveries/openrecovery-twrp-2.8.1.1-picassowifi.img
 7b853274ddc9456133bb16d335da59ec57898ba0 recoveries/openrecovery-twrp-2.8.1.1-slte.img
 1b91e26e48a9dbf17a4be146fcd0aa75a6b2e708 recoveries/openrecovery-twrp-2.8.1.1-treltexx.img
 3a353390e1170e807cc724c0ead0dff1f7164bf1 recoveries/openrecovery-twrp-2.8.1.1-trltespr.img
@@ -2812,6 +2817,12 @@ a247212050da3cd163c6c30b34bbdfc9c3d5a16a recoveries/openrecovery-twrp-2.8.1.1-tr
 7ca16cd5565f1f0d01bfa6018748c037ee400a76 recoveries/openrecovery-twrp-2.8.1.1-v1a3gxx.img
 a70730eed0d741deb5321d1b3cebf48591424653 recoveries/openrecovery-twrp-2.8.1.1-v1awifi.img
 2b53b47ae292429505e0d6a1ffc99d9d200b4614 recoveries/openrecovery-twrp-2.8.1.1-viennaltexx.img
+14b2e649059a656c2df233bb1dd38e760e22490f recoveries/openrecovery-twrp-2.8.1.2-hltecan-4.3.img
+8ccfcc4b9e6172efc231e378b2fa9b60767328f2 recoveries/openrecovery-twrp-2.8.1.2-hltecan-4.4.img
+4ec50381ca5cbd6bf9bb348d632f5f85818087c8 recoveries/openrecovery-twrp-2.8.1.2-treltexx.img
+2e5477690298ce1e28ca9ce764387688d805e92c recoveries/openrecovery-twrp-2.8.2.0-a117.img
+8e2548cc5a2d5e0908929af879177c38d09958f9 recoveries/openrecovery-twrp-2.8.2.0-deb.img
+8fc4f53e0458809a97c25cbe579c076f744b4b7c recoveries/openrecovery-twrp-2.8.2.0-flo.img
 ddd86dc93e767ae7a0e6785b4e2d2fc53f13308f recoveries/openrecovery-twrp-2.8.2.0-grouper.img
 23c07a65b1f701fc4404925ce50eaf1eb0d1c7ba recoveries/openrecovery-twrp-2.8.2.0-hammerhead.img
 3742ccc64fcbb9df6b70c2f39eaa9636a9049b01 recoveries/openrecovery-twrp-2.8.2.0-mako.img
@@ -2819,7 +2830,11 @@ ddd86dc93e767ae7a0e6785b4e2d2fc53f13308f recoveries/openrecovery-twrp-2.8.2.0-gr
 b60e471fd33f49038467faf1da0b369f9cb7b828 recoveries/openrecovery-twrp-2.8.2.0-shamu.img
 4af1cc63b4b0097cb845e4546eada7aba7963d0e recoveries/openrecovery-twrp-2.8.2.0-tilapia.img
 7f46e9ef0f1715ff9cec5d1993c1f29c339964aa recoveries/openrecovery-twrp-2.8.2.0-volantis.img
+565ffeede930fb3dbffb56c2aabb6315b9d62fba recoveries/openrecovery-twrp-2.8.2.1-deb.img
+6027b3c670147cdc7aea96f926606abfedd82fae recoveries/openrecovery-twrp-2.8.2.1-flo.img
 ec40b0eddff0eb2c91fed99e2fcbe1b27e594308 recoveries/openrecovery-twrp-2.8.2.1-volantis.img
+41529128e69c0f213b82c2bf1424eca5321a1565 recoveries/openrecovery-twrp-2.8.2.2-deb.img
+811916152125c7d38988f2c72be87a79b9632482 recoveries/openrecovery-twrp-2.8.2.2-flo.img
 f498210c9ad870b076f5d0915c1813a58568cad3 recoveries/openrecovery-twrp-ace-2.1.1.img
 bd7184a4791a8af090445aa5999e2edc10d1e19e recoveries/openrecovery-twrp-blaze-2.1.1.img
 27d8cd4f12f2888c17e547235e42091ecac0ff17 recoveries/openrecovery-twrp-crespo-2.1.1.img

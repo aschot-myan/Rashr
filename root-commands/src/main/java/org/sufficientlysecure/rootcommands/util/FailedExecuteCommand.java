@@ -36,5 +36,7 @@ public class FailedExecuteCommand extends Exception {
     public SimpleCommand getCommand() {
         return (SimpleCommand) command;
     }
-
+    public String toString() {
+        return "Failed execute: " + command.getCommand() + "////" + ((SimpleCommand)command).getOutput();
+    }
 }

@@ -374,6 +374,9 @@ public class Shell implements Closeable {
             String output = command.getOutput();
             logCommand(command);
             android.util.Log.i(TAG, output);
+            if (command.getExitCode() != 0) {
+                throw new Exception("Exit-Code not 0");
+            }
             return output;
         } catch (Exception e) {
             logCommand(command);
@@ -394,6 +397,9 @@ public class Shell implements Closeable {
             String output = command.getOutput();
             logCommand(command);
             android.util.Log.i(TAG, output);
+            if (command.getExitCode() != 0) {
+                throw new Exception("Exit-Code not 0");
+            }
             return output;
         } catch (Exception e) {
             logCommand(command);
@@ -410,6 +416,9 @@ public class Shell implements Closeable {
             String output = simpleCommand.getOutput();
             logCommand(simpleCommand);
             android.util.Log.i(TAG, output);
+            if (simpleCommand.getExitCode() != 0) {
+                throw new Exception("Exit-Code not 0");
+            }
             return output;
         } catch (Exception e) {
             logCommand(simpleCommand);
@@ -429,6 +438,9 @@ public class Shell implements Closeable {
             String output = simpleCommand.getOutput();
             android.util.Log.i(TAG, simpleCommand.getCommand());
             logCommand(simpleCommand);
+            if (simpleCommand.getExitCode() != 0) {
+                throw new Exception("Exit-Code not 0");
+            }
             return output;
         } catch (Exception e) {
             logCommand(simpleCommand);
@@ -454,8 +466,6 @@ public class Shell implements Closeable {
                     fo.close();
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

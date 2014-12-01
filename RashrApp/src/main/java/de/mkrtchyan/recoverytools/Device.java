@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Build;
 
 import org.sufficientlysecure.rootcommands.Shell;
+import org.sufficientlysecure.rootcommands.command.SimpleCommand;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.BufferedReader;
@@ -561,8 +562,7 @@ public class Device {
                             mKERNEL_TYPE = PARTITION_TYPE_MTD;
                         } else if (line.contains("/dev/")) {
                             for (String split : line.split(" ")) {
-
-                                if (split.startsWith("/dev") || split.startsWith("/system")) {
+                                if (split.startsWith("/dev")) {
                                     try {
                                         mShell.execCommand("ls " + split);
                                         mKernelPath = split;
