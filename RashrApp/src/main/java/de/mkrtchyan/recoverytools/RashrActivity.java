@@ -178,7 +178,7 @@ public class RashrActivity extends ActionBarActivity implements
                 });
                 for (File i : Folder) {
                     if (!i.exists()) {
-                        if (i.mkdir()) {
+                        if (!i.mkdir()) {
                             mActivity.addError(Constants.RASHR_TAG,
                                     new IOException(i.getAbsolutePath() + " can't be created!"), true);
                         }
@@ -273,7 +273,7 @@ public class RashrActivity extends ActionBarActivity implements
                             }
                             onNavigationDrawerItemSelected(0);
                         } catch (NullPointerException e) {
-                            mActivity.addError(Constants.RASHR_TAG, e, true);
+                            mActivity.addError(Constants.RASHR_TAG, e, false);
                             try {
                                 tvLoading.setText(R.string.failed_setup_layout);
                                 tvLoading.setTextColor(Color.RED);
@@ -285,8 +285,6 @@ public class RashrActivity extends ActionBarActivity implements
                         }
                     }
                 });
-
-
             }
         });
         StartThread.start();
@@ -477,15 +475,18 @@ public class RashrActivity extends ActionBarActivity implements
                                         "\n===========PREFS==========\n"
                                                 + getAllPrefs() +
                                                 "\n=========PREFS END========\n";
-
-                                intent.putExtra(Intent.EXTRA_TEXT, message);
                                 files.add(new File(mContext.getFilesDir(), Shell.Logs));
                                 files.add(new File(mContext.getFilesDir(), "last_log.txt"));
                                 ArrayList<Uri> uris = new ArrayList<>();
+								File tmpFolder = new File(mContext.getFilesDir(), "tmp");
+								if (tmpFolder.mkdir()) tmpFolder.deleteOnExit();
                                 for (File i : files) {
                                     try {
-                                        mToolbox.setFilePermissions(i, "666");
-                                        uris.add(Uri.fromFile(i));
+										File tmp = new File(tmpFolder, i.getName());
+										mToolbox.setFilePermissions(tmp, "777");
+										mToolbox.copyFile(i, tmp, true, false);
+										mToolbox.setFilePermissions(tmp, "777");
+                                        uris.add(Uri.fromFile(tmp));
                                     } catch (Exception e) {
                                         mActivity.addError(Constants.RASHR_TAG, e, false);
                                     }
@@ -497,6 +498,7 @@ public class RashrActivity extends ActionBarActivity implements
                                     }
                                 }
 
+								intent.putExtra(Intent.EXTRA_TEXT, message);
                                 intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
                                 startActivity(Intent.createChooser(intent, "Send over Gmail"));
                                 reportDialog.dismiss();

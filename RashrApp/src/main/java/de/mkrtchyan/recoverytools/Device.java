@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.os.Build;
 
 import org.sufficientlysecure.rootcommands.Shell;
-import org.sufficientlysecure.rootcommands.command.SimpleCommand;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.BufferedReader;
