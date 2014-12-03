@@ -1,6 +1,14 @@
 CHANGELOG
 ====================
 
+Update [2.2.4]
+
+-Fixed first start error
+-Report improved
+-Fix flash MTD on roms with implemented MTD-Tools (flash_image; dump_image)
+-Lollipop donation fixed
+-ScriptManager MD5 generation skip added
+
 Update [2.2.3]
 
 -More devices recognized on Lollipop!

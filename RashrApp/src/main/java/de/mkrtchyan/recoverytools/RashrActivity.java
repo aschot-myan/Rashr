@@ -435,10 +435,10 @@ public class RashrActivity extends ActionBarActivity implements
                                 Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
                                 intent.setType("text/plain");
                                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + pInfo.versionName + " report");
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + pInfo.versionCode + " report");
                                 String message = "Package Infos:" +
                                         "\n\nName: " + pInfo.packageName +
-                                        "\nVersion Code: " + pInfo.versionCode;
+                                        "\nVersion Name: " + pInfo.versionName;
                                 message +=
                                         "\n\n\nProduct Info: " +
                                                 "\n\nManufacture: " + Build.MANUFACTURER + " (" + mDevice.getManufacture() + ") " +
