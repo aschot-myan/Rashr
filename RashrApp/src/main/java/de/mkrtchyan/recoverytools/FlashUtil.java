@@ -58,7 +58,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     private File tmpFile, CurrentPartition;
     private boolean keepAppOpen = true;
     private Runnable RunAtEnd;
-    private boolean mOperationFailed = false;
 
     private Exception mException = null;
 
@@ -234,8 +233,20 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private void setBinaryPermissions() throws FailedExecuteCommand {
         mToolbox.setFilePermissions(mBusybox, "755");
-        mToolbox.setFilePermissions(flash_image, "755");
-        mToolbox.setFilePermissions(dump_image, "755");
+		try {
+			mToolbox.setFilePermissions(flash_image, "755");
+		} catch (FailedExecuteCommand e) {
+			mToolbox.remount(flash_image, "rw");
+			mToolbox.setFilePermissions(flash_image, "755");
+			mToolbox.remount(flash_image, "ro");
+		}
+		try {
+			mToolbox.setFilePermissions(dump_image, "755");
+		} catch (FailedExecuteCommand e) {
+			mToolbox.remount(dump_image, "rw");
+			mToolbox.setFilePermissions(dump_image, "755");
+			mToolbox.remount(dump_image, "ro");
+		}
     }
 
     public void showRebootDialog() {
