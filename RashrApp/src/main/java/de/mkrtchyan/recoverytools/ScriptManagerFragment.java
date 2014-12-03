@@ -143,6 +143,7 @@ public class ScriptManagerFragment extends Fragment {
                 CheckBox cbBakCache = (CheckBox) mRootView.findViewById(R.id.cbBackupCache);
                 CheckBox cbBakRecovery = (CheckBox) mRootView.findViewById(R.id.cbBackupRecovery);
                 CheckBox cbBakBoot = (CheckBox) mRootView.findViewById(R.id.cbBackupBoot);
+				CheckBox cbSkipMD5 = (CheckBox) mRootView.findViewById(R.id.cbSkipMD5);
                 EditText etBakName = (EditText) mRootView.findViewById(R.id.etBackupName);
                 CheckBox cbWipeCache = (CheckBox) mRootView.findViewById(R.id.cbWipeCache);
                 CheckBox cbWipeDalvik = (CheckBox) mRootView.findViewById(R.id.cbWipeDalvik);
@@ -157,6 +158,7 @@ public class ScriptManagerFragment extends Fragment {
                     if (cbBakData.isChecked()) command.append("D");
                     if (cbBakRecovery.isChecked()) command.append("R");
                     if (cbBakSystem.isChecked()) command.append("S");
+					if (cbSkipMD5.isChecked()) command.append("M");
 
                     CharSequence BackupName = etBakName.getText();
                     if (BackupName != null && !BackupName.equals("")) {

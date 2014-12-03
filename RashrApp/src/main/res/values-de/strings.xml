@@ -214,4 +214,5 @@
     <string name="kernel_history">Kernel-Verlauf</string>
     <string name="history">Verlauf</string>
     <string name="exit_app">App verlassen?</string>
+    <string name="skip_md5">MD5 Überspringen</string>
 </resources>

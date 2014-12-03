@@ -86,6 +86,13 @@
             android:gravity="center"
             android:text="@string/boot" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/skip_md5"
+            android:id="@+id/cbSkipMD5"
+            android:layout_weight="1"/>
+
     </LinearLayout>
 
     <EditText

@@ -169,5 +169,6 @@
     <string name="flasher">Flasher</string>
     <string name="history">History</string>
     <string name="exit_app">Exit App?</string>
+    <string name="skip_md5">Skip MD5</string>
 
 </resources>

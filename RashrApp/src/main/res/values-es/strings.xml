@@ -200,5 +200,6 @@
     <string name="onlyLanguage">Porfavor solamente escriban en Alemàn, Inglès o en Castellano</string>
     <string name="other_kernel">Kernel de la memoria interna</string>
     <string name="exit_app">Salir de la App?</string>
+    <string name="skip_md5">Sobresaltar MD5</string>
 
 </resources>
