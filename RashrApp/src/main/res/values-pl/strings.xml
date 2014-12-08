@@ -3,7 +3,6 @@
 
     <string name="settings">Ustawienia</string>
     <string name="sCWM">CWM Recovery</string>
-    <string name="sFlashRecovery">Wgraj Recovery</string>
     <string name="sFlashKernel">Wgraj Kernel</string>
     <string name="recovery_history">Historia</string>
     <string name="sTWRP">TWRP Recovery</string>
@@ -31,8 +30,6 @@
     <string name="flashed">Partycja została zflashowana.</string>
     <string name="warning">Uwaga!</string>
     <string name="flash_over_recovery">Czy chcesz teraz wgrać Recovery? (wymaga ponownego uruchomienia do trybu Recovery)</string>
-    <string name="instructions">Instrukcje</string>
-    <string name="instruction">CWM: \nMenu Główne -> install zip from sdcard -> choose zip from sdcard \n\nTWRP: \nMenu Główne -> Install</string>
     <string name="bak_done">Kopia zapasowa zakończona powodzeniem</string>
     <string name="backupalready">Kopia zapasowa już istnieje.</string>
     <string name="error">Błąd</string>

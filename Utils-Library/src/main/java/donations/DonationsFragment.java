@@ -42,6 +42,7 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import de.mkrtchyan.utils.BuildConfig;
 import de.mkrtchyan.utils.R;
 import donations.google.util.IabHelper;
 import donations.google.util.IabResult;
@@ -64,7 +65,7 @@ public class DonationsFragment extends Fragment {
 
     private static final String[] CATALOG_DEBUG = new String[]{"android.test.purchased",
             "android.test.canceled", "android.test.refunded", "android.test.item_unavailable"};
-    protected boolean mDebug = false;
+    protected boolean mDebug = BuildConfig.DEBUG;
     protected boolean mGoogleEnabled = false;
     protected String mGooglePubkey = "";
     protected String[] mGoogleCatalog = new String[]{};
@@ -168,9 +169,7 @@ public class DonationsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.donations__fragment, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.donations__fragment, container, false);
     }
 
     @Override
@@ -327,11 +326,6 @@ public class DonationsFragment extends Fragment {
 
         mFlattrWebview = (WebView) getActivity().findViewById(R.id.donations__flattr_webview);
         mLoadingFrame = (FrameLayout) getActivity().findViewById(R.id.donations__loading_frame);
-
-        // disable hardware acceleration for this webview to get transparent background working
-        //if (Build.VERSION.SDK_INT >= 11) {
-        //    mFlattrWebview.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        //}
 
         // define own webview client to override loading behaviour
         mFlattrWebview.setWebViewClient(new WebViewClient() {

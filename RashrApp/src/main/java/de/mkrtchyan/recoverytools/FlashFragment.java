@@ -27,7 +27,6 @@ import com.fima.cardsui.views.CardUI;
 import com.fima.cardsui.views.MyCard;
 import com.fima.cardsui.views.MyImageCard;
 
-import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
 
 import java.io.File;
@@ -64,7 +63,6 @@ public class FlashFragment extends Fragment {
     private File RecoveryCollectionFile, KernelCollectionFile;
 
     private Device mDevice;
-    private Shell mShell;
     private Toolbox mToolbox;
     private Context mContext;
     private RashrActivity mActivity;
@@ -75,7 +73,6 @@ public class FlashFragment extends Fragment {
         FlashFragment fragment = new FlashFragment();
         fragment.setActivity(activity);
         fragment.setDevice(activity.getDevice());
-        fragment.setShell(activity.getShell());
         fragment.setToolbox(activity.getToolbox());
         return fragment;
     }
@@ -503,7 +500,7 @@ public class FlashFragment extends Fragment {
         }
     }
 
-    public boolean showUnifiedBuildsDialog() {
+    public void showUnifiedBuildsDialog() {
 
         final Dialog UnifiedBuildsDialog = new Dialog(mContext);
         UnifiedBuildsDialog.setTitle(R.string.make_choice);
@@ -612,9 +609,6 @@ public class FlashFragment extends Fragment {
                             false);
                 }
             });
-            return true;
-        } else {
-            return false;
         }
     }
     public void setupSwipeUpdater(View root) {
@@ -899,9 +893,6 @@ public class FlashFragment extends Fragment {
 
     public void setDevice(Device device) {
         mDevice = device;
-    }
-    public void setShell(Shell shell) {
-        mShell = shell;
     }
     public void setToolbox(Toolbox toolbox) {
         mToolbox = toolbox;

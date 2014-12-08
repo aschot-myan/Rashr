@@ -77,7 +77,6 @@ import donations.DonationsFragment;
 public class RashrActivity extends ActionBarActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks,
         FlashFragment.OnFragmentInteractionListener,
-        ScriptManagerFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener,
         FlashAsFragment.OnFragmentInteractionListener {
 

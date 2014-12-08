@@ -40,19 +40,16 @@ public class MyPlayCard extends RecyclableCard {
 				.parseColor(titleColor));
 		((TextView) convertView.findViewById(R.id.description))
 				.setText(description);
-		((ImageView) convertView.findViewById(R.id.stripe))
-				.setBackgroundColor(Color.parseColor(color));
+		convertView.findViewById(R.id.stripe).setBackgroundColor(Color.parseColor(color));
 
-		if (isClickable == true)
-			((LinearLayout) convertView.findViewById(R.id.contentLayout))
+		if (isClickable)
+			convertView.findViewById(R.id.contentLayout)
 					.setBackgroundResource(R.drawable.selectable_background_cardbank);
 
-		if (hasOverflow == true)
-			((ImageView) convertView.findViewById(R.id.overflow))
-					.setVisibility(View.VISIBLE);
+		if (hasOverflow)
+			convertView.findViewById(R.id.overflow).setVisibility(View.VISIBLE);
 		else
-			((ImageView) convertView.findViewById(R.id.overflow))
-					.setVisibility(View.GONE);
+			convertView.findViewById(R.id.overflow).setVisibility(View.GONE);
 
 		if (backgroundColor != 0)
 			convertView.setBackgroundColor(backgroundColor);

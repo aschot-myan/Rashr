@@ -66,6 +66,7 @@ public class FileListView extends ListView {
     private boolean BrowseUpEnabled = false;
     private OnFileClickListener mFileClickListener = null;
     private OnFolderClickListener mFolderClickListener = null;
+	// TODO: Implement onFolderClickListener
 
     public FileListView(Context mContext) {
         super(mContext);

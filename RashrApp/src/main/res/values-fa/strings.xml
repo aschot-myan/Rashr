@@ -2,8 +2,6 @@
 <resources>
     <string name="settings">تنظیمات</string>
     <string name="sCWM">CWM ریکاوری</string>
-    <string name="sFlashRecovery">فلش کردن ریکاوری</string>
-    <string name="sFlashKernel">فلش زدن کرنل</string>
     <string name="recovery_history">تاریخچه</string>
     <string name="sTWRP">TWRP ریکاوری</string>
     <string name="sPhilz">Philz ریکاوری</string>
@@ -41,13 +39,6 @@
         این مورد فقط روی کرنل های دارای این قابلیت قابل انجام شدن است و بیشتر کرنل ها این قبلیت را دارند
     </string>
     <string name="flash_over_recovery">ریکاوری را همین الان فلش میکنید؟ نیاز به ریبوت شدن به ریکاوری دارید</string>
-    <string name="instructions">دستور العمل ها</string>
-    <string name="instruction">
-        CWM:
-        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
-        \n\nTWRP:
-        \nMain Menu -> Install
-    </string>
     <string name="bak_done">بک آپ کامل شد</string>
     <string name="backupalready">بک آپ از قبل وجود داشته</string>
     <string name="error">خـطـا</string>

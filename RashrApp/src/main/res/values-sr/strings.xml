@@ -3,7 +3,6 @@
 
     <string name="settings">Podesavanja</string>
     <string name="sCWM">CWM Recovery</string>
-    <string name="sFlashRecovery">Flesuj Rekaveri</string>
     <string name="sFlashKernel">Flesuj Kernel</string>
     <string name="recovery_history">Istorija</string>
     <string name="sTWRP">TWRP Rekaveri</string>
@@ -34,13 +33,6 @@
     <string name="flashed">Particija flesovana.</string>
     <string name="warning">Upozorenje!</string>
     <string name="flash_over_recovery">Flesuj Rekaveri sada? (potreban restart u Rekaveri mod)</string>
-    <string name="instructions">Instrukcije</string>
-    <string name="instruction">CWM:
-        \nMain Menu -> Instaliraj zip sa sd kartice -> Izaberi zip sa sd kartice
-        \n\nTWRP:
-        \nMain Menu -> Instaliraj
-    </string>
-
     <string name="bak_done">Bekap zavrsen</string>
     <string name="backupalready">Bekap vec postoji.</string>
     <string name="error">Greska</string>

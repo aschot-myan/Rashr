@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import org.sufficientlysecure.rootcommands.Shell;
-
 import java.io.File;
 
 /**
@@ -40,7 +38,6 @@ import java.io.File;
 public class FlashAsFragment extends Fragment {
 
     private Device mDevice;
-    private Shell mShell;
     private Context mContext;
     private File mImg;
     private RashrActivity mActivity;
@@ -54,7 +51,6 @@ public class FlashAsFragment extends Fragment {
         FlashAsFragment fragment = new FlashAsFragment();
         fragment.setActivity(activity);
         fragment.setDevice(activity.getDevice());
-        fragment.setShell(activity.getShell());
         fragment.setImg(img);
         fragment.setCloseApp(CloseApp);
         return fragment;
@@ -62,11 +58,6 @@ public class FlashAsFragment extends Fragment {
 
     public FlashAsFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -82,30 +73,29 @@ public class FlashAsFragment extends Fragment {
         ButCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
-                abuilder
-                        .setTitle(R.string.exit_app)
-                        .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                mActivity.finish();
-                            }
-                        })
-                        .setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (mCloseApp) {
-                                    mActivity.finish();
-                                } else {
-                                    if (mListener != null) {
-                                        mListener.onFragmentInteraction(Constants.OPEN_RASHR_FRAGMENT);
-                                    }
-                                }
-                            }
-                        })
-                        .setCancelable(false)
-                        .show();
-
+				if (!mCloseApp) {
+					AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
+					abuilder
+							.setTitle(R.string.exit_app)
+							.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									mActivity.finish();
+								}
+							})
+							.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									if (mListener != null) {
+										mListener.onFragmentInteraction(Constants.OPEN_RASHR_FRAGMENT);
+									}
+								}
+							})
+							.setCancelable(false)
+							.show();
+				} else {
+					mActivity.finish();
+				}
             }
         });
         View.OnClickListener listener = new View.OnClickListener() {
@@ -174,9 +164,6 @@ public class FlashAsFragment extends Fragment {
 
     public void setDevice(Device device) {
         mDevice = device;
-    }
-    public void setShell(Shell shell) {
-        mShell = shell;
     }
     public void setActivity(RashrActivity activity) {
         mActivity = activity;

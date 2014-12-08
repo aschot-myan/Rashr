@@ -45,13 +45,6 @@
     <string name="flash_over_recovery">
         Flashare la recovery adesso? (necessità il riavvio in recovery)
     </string>
-    <string name="instructions">Istruzioni</string>
-    <string name="instruction">
-        CWM:
-        \nMain menu -> install zip from sdcard -> choose zip from sdcard
-        \nTWRP:
-        \nMain Menu -> Install
-    </string>
     <string name="bak_done">Backup completato</string>
     <string name="backupalready">Esiste già un backup</string>
     <string name="error">Errore</string>

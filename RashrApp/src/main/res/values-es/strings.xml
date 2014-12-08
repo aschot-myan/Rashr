@@ -4,7 +4,6 @@
     <string name="app_name">Rashr</string>
     <string name="settings">Ajustes</string>
     <string name="sCWM">CWM Recovery</string>
-    <string name="sFlashRecovery">Flash Recovery</string>
     <string name="sFlashKernel">Flash Kernel</string>
     <string name="recovery_history">History</string>
     <string name="sTWRP">TWRP Recovery</string>
@@ -41,11 +40,6 @@
         Solo prodrá utilizarla si usan un Custom Kernel o Custom ROM. Quieren avanzar?
     </string>
     <string name="flash_over_recovery">Instalar Recovery ahora? (necesitan reiniciar)</string>
-    <string name="instructions">Instrucciones</string>
-    <string name="instruction">CWM:
-        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
-        \n\nTWRP:
-        \nMain Menu -> Install</string>
     <string name="bak_done">Backup completada</string>
     <string name="backupalready">Backup ya existe.</string>
     <string name="error">Error</string>

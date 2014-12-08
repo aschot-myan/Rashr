@@ -27,12 +27,6 @@
     <string name="flashed">Recovery a fost scris.</string>
     <string name="warning">Atentie !</string>
     <string name="flash_over_recovery">Scriu Recovery acum? (necesita repornire in mod Recovery)</string>
-    <string name="instructions">Instructiuni</string>
-    <string name="instruction">CWM:
-        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
-        \n\nTWRP:
-        \nMain Menu -> Install
-    </string>
 
     <string name="bak_done">Copie de siguranta salvata</string>
     <string name="backupalready">Copia de siguranta exista deja.</string>

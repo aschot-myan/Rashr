@@ -121,8 +121,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws IOException
      */
-    public boolean killAllBinary(String binaryName) throws FailedExecuteCommand,
-            TimeoutException, IOException {
+    public boolean killAllBinary(String binaryName) throws FailedExecuteCommand {
         return killAll(BinaryCommand.BINARY_PREFIX + binaryName + BinaryCommand.BINARY_SUFFIX);
     }
 
@@ -153,8 +152,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws IOException
      */
-    public boolean isBinaryRunning(String binaryName) throws FailedExecuteCommand,
-            TimeoutException, IOException {
+    public boolean isBinaryRunning(String binaryName) throws FailedExecuteCommand {
         return isProcessRunning(BinaryCommand.BINARY_PREFIX + binaryName
                 + BinaryCommand.BINARY_SUFFIX);
     }
@@ -162,12 +160,9 @@ public class Toolbox {
     /**
      * @param file String that represent the file, including the full path to the file and its name.
      * @return File permissions as String, for example: 777, returns null on error
-     * @throws IOException
-     * @throws TimeoutException
-     * @throws BrokenBusyboxException
+     * @throws FailedExecuteCommand
      */
-    public String getFilePermissions(String file) throws FailedExecuteCommand,
-            IOException {
+    public String getFilePermissions(String file) throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Checking permissions for " + file);
 
         String permissions = null;
@@ -304,7 +299,7 @@ public class Toolbox {
      * @throws TimeoutException
      * @throws BrokenBusyboxException
      */
-    public void reboot(int action) throws FailedExecuteCommand, TimeoutException, IOException {
+    public void reboot(int action) throws FailedExecuteCommand {
         if (action == REBOOT_HOTREBOOT) {
             killAll("system_server");
             // or: killAll("zygote");
@@ -358,7 +353,7 @@ public class Toolbox {
      * @throws IOException
      */
     public void withPermission(String file, String permission, WithPermissions withPermissions)
-            throws FailedExecuteCommand, TimeoutException, IOException {
+            throws FailedExecuteCommand, IOException {
         String oldPermissions = getFilePermissions(file);
 
         // set permissions (If set to 666, then Dalvik VM can also write to that file!)

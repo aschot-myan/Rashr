@@ -91,13 +91,6 @@
     <string name="go">Tamam</string>
     <string name="history_description">Burada son yüklenen 5 imaj dosyasını bulabilirsiniz</string>
     <string name="info">Bilgi</string>
-    <string name="instruction">
-        CWM:\n
-        Main Menu -> install zip from sdcard -> choose zip from sdcard\n
-        \n
-        TWRP:\n
-        Main Menu -> Install</string>
-    <string name="instructions">Talimatlar</string>
     <string name="keep_current_name">Geçerli adı koru (%s)</string>
     <string name="kernel">Kernel</string>
     <string name="kernel_description">

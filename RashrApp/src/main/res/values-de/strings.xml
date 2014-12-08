@@ -4,7 +4,6 @@
     <string name="app_name">Rashr</string>
     <string name="settings">Einstellungen</string>
     <string name="sCWM">CWM Recovery</string>
-    <string name="sFlashRecovery">Flash Recovery</string>
     <string name="sFlashKernel">Flash Kernel</string>
     <string name="recovery_history">Recovery-Verlauf</string>
     <string name="sTWRP">TWRP Recovery</string>
@@ -43,13 +42,6 @@
         wenn sie eine modifizierte Versions des Systemes oder Kernels installiert haben.
     </string>
     <string name="flash_over_recovery">Jetzt flashen? (Neustart in den Recovery erforderlich)</string>
-    <string name="instructions">Anleitung</string>
-    <string name="instruction">
-        CWM:
-        \nMain Menu -> install zip from sdcard -> choose zip from sdcard
-        \n\nTWRP:
-        \nMain Menu -> Install
-    </string>
     <string name="bak_done">Backup vollständig</string>
     <string name="backupalready">Backup existiert bereits.</string>
     <string name="error">Fehler</string>

@@ -46,7 +46,8 @@ public class Common {
     public static void pushFileFromRAW(Context mContext, File outputFile, int RAW, boolean Override) throws IOException {
         if (!outputFile.exists() || Override) {
             if (Override)
-                outputFile.delete();
+                if (!outputFile.delete())
+					throw new IOException(outputFile.getName() + " can't be deleted!");
             InputStream is = mContext.getResources().openRawResource(RAW);
             OutputStream os = new FileOutputStream(outputFile);
             byte[] data = new byte[is.available()];
@@ -86,7 +87,7 @@ public class Common {
     public static void setBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY, Boolean value) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).edit();
         editor.putBoolean(PREF_KEY, value);
-        editor.commit();
+        editor.apply();
     }
 
     public static void toggleBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY) {
@@ -100,7 +101,7 @@ public class Common {
     public static void setStringPref(Context mContext, String PrefName, String key, String value) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public static Integer getIntegerPref(Context mContext, String PrefName, String key) {
@@ -110,7 +111,7 @@ public class Common {
     public static void setIntegerPref(Context mContext, String PrefName, String key, int value) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public static void showLogs(final Context mContext) {

@@ -3,7 +3,6 @@
 
     <string name="history">Geschiedenis</string>
     <string name="go">Oké</string>
-    <string name="sRebooter">herstarten</string>
     <string name="sClearCache">Verwijder gedownload recoveries</string>
     <string name="report">rapporteer bug</string>
     <string name="sExit">Uitgang</string>
@@ -23,12 +22,6 @@
     <string name="flashed">Recovery geflashed</string>
     <string name="warning">Waarschuwing!</string>
     <string name="flash_over_recovery"> Uw recovery is geflashed, wilt u herstarten? (je zal moeten herstarten naar recovery)</string>
-    <string name="instructions">Instructie</string>
-    <string name="instruction">CWM:
-        \n\nMain Menu -> install zip from sdcard -> choose zip from sdcard
-        \n\nTWRP:
-        \n\nMain Menu -> Install
-    </string>
 
     <string name="bak_done">Backup voltooid</string>
     <string name="backupalready">Backup bestaat al. Dit zal de huidige backup overschrijven, toch doorgaan?
