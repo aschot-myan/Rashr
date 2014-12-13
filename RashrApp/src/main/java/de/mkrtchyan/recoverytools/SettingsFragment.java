@@ -10,6 +10,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -42,8 +45,6 @@ public class SettingsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private Context mContext;
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -66,6 +67,9 @@ public class SettingsFragment extends Fragment {
         final CheckBox cbDarkUI = (CheckBox) root.findViewById(R.id.cbDarkUI);
         final Button bShowLogs = (Button) root.findViewById(R.id.bShowLogs);
         final Button bReport = (Button) root.findViewById(R.id.bReport);
+        final Button bShowChangelog = (Button) root.findViewById(R.id.bShowChangelog);
+        final Button ResetButton = (Button) root.findViewById(R.id.bReset);
+        final Button ClearCache = (Button) root.findViewById(R.id.bClearCache);
 
         bReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,16 +85,16 @@ public class SettingsFragment extends Fragment {
         cbDarkUI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Common.toggleBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_DARK_UI);
-                cbDarkUI.setChecked(Common.getBooleanPref(mContext, Constants.PREF_NAME,
+                Common.toggleBooleanPref(v.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_DARK_UI);
+                cbDarkUI.setChecked(Common.getBooleanPref(v.getContext(), Constants.PREF_NAME,
                         Constants.PREF_KEY_DARK_UI));
             }
         });
         cbLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Common.toggleBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG);
-                cbLog.setChecked(Common.getBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG));
+                Common.toggleBooleanPref(view.getContext(), Shell.PREF_NAME, Shell.PREF_LOG);
+                cbLog.setChecked(Common.getBooleanPref(view.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
                 if (cbLog.isChecked()) {
                     root.findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
                 } else {
@@ -116,7 +120,6 @@ public class SettingsFragment extends Fragment {
         bShowLogs.setVisibility(cbLog.isChecked() ? View.VISIBLE : View.INVISIBLE);
         cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS));
 
-        Button ResetButton = (Button) root.findViewById(R.id.bReset);
         ResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,12 +136,11 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        Button ClearCache = (Button) root.findViewById(R.id.bClearCache);
         ClearCache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Activity activity = getActivity();
-                final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(mContext);
+                final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(v.getContext());
                 ConfirmationDialog.setTitle(R.string.warning);
                 ConfirmationDialog.setMessage(R.string.delete_confirmation);
                 ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
@@ -168,7 +170,12 @@ public class SettingsFragment extends Fragment {
                 ConfirmationDialog.show();
             }
         });
-        mContext = root.getContext();
+        bShowChangelog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingsFragment.showChangelog(v.getContext());
+            }
+        });
         return root;
     }
 
@@ -197,6 +204,18 @@ public class SettingsFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(int id);
+    }
+
+    public static void showChangelog(Context AppContext) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(AppContext);
+        dialog.setTitle(R.string.changelog);
+        WebView changes = new WebView(AppContext);
+        changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        changes.setWebViewClient(new WebViewClient());
+        changes.loadUrl(Constants.CHANGELOG_URL);
+        changes.clearCache(true);
+        dialog.setView(changes);
+        dialog.show();
     }
 
 }

@@ -239,7 +239,7 @@ public class RashrActivity extends ActionBarActivity implements
                                                 Constants.PREF_KEY_HIDE_RATER);
                                     }
                                     if (mVersionChanged) {
-                                        showChangelog();
+                                        SettingsFragment.showChangelog(mContext);
                                     }
                                 }
                             });
@@ -529,18 +529,6 @@ public class RashrActivity extends ActionBarActivity implements
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showChangelog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-        dialog.setTitle(R.string.changelog);
-        WebView changes = new WebView(mContext);
-        changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        changes.setWebViewClient(new WebViewClient());
-        changes.loadUrl("https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/CHANGELOG.md");
-        changes.clearCache(true);
-        dialog.setView(changes);
-        dialog.show();
     }
 
     private void showUsageWarning() {

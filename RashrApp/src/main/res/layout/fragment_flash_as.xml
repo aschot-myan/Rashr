@@ -13,30 +13,6 @@
         android:textColor="@color/custom_yellow"
         android:layout_marginTop="10dp" />
 
-    <RadioButton
-        android:id="@+id/optAsRecovery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:tag="recovery"
-        android:text="@string/recovery"
-        android:textSize="24sp"
-        android:layout_margin="10dp" />
-
-    <RadioButton
-        android:id="@+id/optAsKernel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/optAsRecovery"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:tag="kernel"
-        android:text="@string/kernel"
-        android:textSize="24sp"
-        android:layout_margin="10dp" />
-
     <Button
         android:id="@+id/bFlashAs"
         android:layout_width="match_parent"
@@ -55,4 +31,32 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/tvFlashAs" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true">
+
+        <RadioButton
+            android:id="@+id/optAsKernel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:tag="kernel"
+            android:text="@string/kernel"
+            android:textSize="24sp"
+            android:layout_margin="10dp" />
+
+        <RadioButton
+            android:id="@+id/optAsRecovery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:tag="recovery"
+            android:text="@string/recovery"
+            android:textSize="24sp"
+            android:layout_margin="10dp" />
+    </LinearLayout>
 </RelativeLayout>

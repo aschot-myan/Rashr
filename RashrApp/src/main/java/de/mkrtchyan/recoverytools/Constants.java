@@ -70,6 +70,8 @@ public class Constants {
     public static final String KERNEL_URL          =     "http://dslnexus.de/Android/kernel";
     public static final String RECOVERY_SUMS_URL   =     "http://dslnexus.de/Android/";
     public static final String KERNEL_SUMS_URL     =     "http://dslnexus.de/Android/";
+
+    public static final String CHANGELOG_URL       =     "https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/CHANGELOG.md";
     /**
      * Used folder and files
      */

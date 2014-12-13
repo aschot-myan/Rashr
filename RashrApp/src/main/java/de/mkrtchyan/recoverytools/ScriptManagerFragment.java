@@ -9,6 +9,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -233,6 +236,4 @@ public class ScriptManagerFragment extends Fragment {
             mFileNameAdapter.add(file.getName());
         }
     }
-
-
 }

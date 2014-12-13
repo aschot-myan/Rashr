@@ -4,23 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        style="?android:attr/progressBarStyleLarge"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
-    <TextView
-        android:id="@+id/tvLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pbLoading"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/custom_yellow"
-        android:textStyle="bold" />
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tvLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/custom_yellow"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
 </RelativeLayout>
