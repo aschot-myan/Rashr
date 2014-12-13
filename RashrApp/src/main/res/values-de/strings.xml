@@ -207,4 +207,5 @@
     <string name="history">Verlauf</string>
     <string name="exit_app">App verlassen?</string>
     <string name="skip_md5">MD5 Überspringen</string>
+    <string name="UseDarkUI">Dunkele UI benutzen</string>
 </resources>

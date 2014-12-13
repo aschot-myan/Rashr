@@ -310,25 +310,25 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     public void saveHistory() {
         if (isJobFlash()) {
-            switch (Common.getIntegerPref(mContext, RashrActivity.PREF_NAME, PREF_KEY_FLASH_COUNTER)) {
+            switch (Common.getIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER)) {
                 case 0:
-                    Common.setStringPref(mContext, RashrActivity.PREF_NAME, Constants.PREF_KEY_HISTORY +
-                                    String.valueOf(Common.getIntegerPref(mContext, RashrActivity.PREF_NAME,
+                    Common.setStringPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_HISTORY +
+                                    String.valueOf(Common.getIntegerPref(mContext, Constants.PREF_NAME,
                                             PREF_KEY_FLASH_COUNTER)),
                             mCustomIMG.getAbsolutePath()
                     );
-                    Common.setIntegerPref(mContext, RashrActivity.PREF_NAME, PREF_KEY_FLASH_COUNTER, 1);
+                    Common.setIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER, 1);
                     return;
                 default:
-                    Common.setStringPref(mContext, RashrActivity.PREF_NAME, Constants.PREF_KEY_HISTORY +
-                                    String.valueOf(Common.getIntegerPref(mContext, RashrActivity.PREF_NAME,
+                    Common.setStringPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_HISTORY +
+                                    String.valueOf(Common.getIntegerPref(mContext, Constants.PREF_NAME,
                                             PREF_KEY_FLASH_COUNTER)),
                             mCustomIMG.getAbsolutePath()
                     );
-                    Common.setIntegerPref(mContext, RashrActivity.PREF_NAME, PREF_KEY_FLASH_COUNTER,
-                            Common.getIntegerPref(mContext, RashrActivity.PREF_NAME, PREF_KEY_FLASH_COUNTER) + 1);
-                    if (Common.getIntegerPref(mContext, RashrActivity.PREF_NAME, PREF_KEY_FLASH_COUNTER) == 5) {
-                        Common.setIntegerPref(mContext, RashrActivity.PREF_NAME, PREF_KEY_FLASH_COUNTER, 0);
+                    Common.setIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER,
+                            Common.getIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER) + 1);
+                    if (Common.getIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER) == 5) {
+                        Common.setIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER, 0);
                     }
             }
         }

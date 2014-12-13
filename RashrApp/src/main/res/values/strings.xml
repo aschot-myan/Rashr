@@ -201,5 +201,6 @@
     <string name="history">History</string>
     <string name="exit_app">Exit App?</string>
     <string name="skip_md5">Skip MD5</string>
+    <string name="UseDarkUI">Use dark UI</string>
 
 </resources>

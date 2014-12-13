@@ -34,12 +34,14 @@ public class Constants {
     /**
      * Declaring setting names
      */
+    public static final String PREF_NAME = "rashr";
     public static final String PREF_KEY_HISTORY     =    "last__history_";
     public static final String PREF_KEY_ADS         =    "show_ads";
     public static final String PREF_KEY_CUR_VER     =    "current_version";
     public static final String PREF_KEY_FIRST_RUN   =    "first_run";
     public static final String PREF_KEY_HIDE_RATER  =    "show_rater";
     public static final String PREF_KEY_SHOW_UNIFIED =   "show_unified";
+    public static final String PREF_KEY_DARK_UI     =    "use_dark_ui";
 
     /**
      * Google

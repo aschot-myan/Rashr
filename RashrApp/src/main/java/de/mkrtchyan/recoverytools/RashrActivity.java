@@ -80,8 +80,6 @@ public class RashrActivity extends ActionBarActivity implements
         SettingsFragment.OnFragmentInteractionListener,
         FlashAsFragment.OnFragmentInteractionListener {
 
-    public static final String PREF_NAME = "rashr";
-
     private final File Folder[] = {
             Constants.PathToRashr, Constants.PathToRecoveries, Constants.PathToKernel,
             Constants.PathToStockRecovery, Constants.PathToCWM, Constants.PathToTWRP,
@@ -193,10 +191,13 @@ public class RashrActivity extends ActionBarActivity implements
                         }
                     });
                 } else {
-                    Common.setBooleanPref(mContext, PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED, true);
-                    if (!Common.getBooleanPref(mContext, PREF_NAME, Constants.PREF_KEY_FIRST_RUN)) {
+                    Common.setBooleanPref(mContext, Constants.PREF_NAME,
+                            Constants.PREF_KEY_SHOW_UNIFIED, true);
+                    if (!Common.getBooleanPref(mContext, Constants.PREF_NAME,
+                            Constants.PREF_KEY_FIRST_RUN)) {
                         /** Setting first start configuration */
-                        Common.setBooleanPref(mContext, PREF_NAME, Constants.PREF_KEY_ADS, true);
+                        Common.setBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_ADS,
+                                true);
                         Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
@@ -213,12 +214,12 @@ public class RashrActivity extends ActionBarActivity implements
                             if ((pName = getPackageName()) != null
                                     && (pManager = getPackageManager()) != null
                                     && (pInfo = pManager.getPackageInfo(pName, 0)) != null) {
-                                final int previous_version = Common.getIntegerPref(mContext, PREF_NAME,
-                                        Constants.PREF_KEY_CUR_VER);
+                                final int previous_version = Common.getIntegerPref(mContext,
+                                        Constants.PREF_NAME, Constants.PREF_KEY_CUR_VER);
                                 final int current_version = pInfo.versionCode;
                                 mVersionChanged = current_version > previous_version;
-                                Common.setIntegerPref(mContext, PREF_NAME, Constants.PREF_KEY_CUR_VER,
-                                        current_version);
+                                Common.setIntegerPref(mContext, Constants.PREF_NAME,
+                                        Constants.PREF_KEY_CUR_VER, current_version);
                             } else {
                                 mVersionChanged = true;
                             }
@@ -227,13 +228,14 @@ public class RashrActivity extends ActionBarActivity implements
                             mVersionChanged = true;
                         }
                         if (mVersionChanged) {
-                            Common.setBooleanPref(mContext, PREF_NAME, Constants.PREF_KEY_ADS, true);
+                            Common.setBooleanPref(mContext, Constants.PREF_NAME,
+                                    Constants.PREF_KEY_ADS, true);
                             mActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (!Common.getBooleanPref(mContext, PREF_NAME,
+                                    if (!Common.getBooleanPref(mContext, Constants.PREF_NAME,
                                             Constants.PREF_KEY_HIDE_RATER)) {
-                                        Notifyer.showAppRateDialog(mContext, PREF_NAME,
+                                        Notifyer.showAppRateDialog(mContext, Constants.PREF_NAME,
                                                 Constants.PREF_KEY_HIDE_RATER);
                                     }
                                     if (mVersionChanged) {
@@ -261,7 +263,7 @@ public class RashrActivity extends ActionBarActivity implements
                                     (RelativeLayout) findViewById(R.id.containerLayout);
                             AdView ads = (AdView) containerLayout.findViewById(R.id.ads);
                             if (ads != null) {
-                                if (Common.getBooleanPref(mContext, RashrActivity.PREF_NAME,
+                                if (Common.getBooleanPref(mContext, Constants.PREF_NAME,
                                         Constants.PREF_KEY_ADS)) {
                                     ads.loadAd(new AdRequest.Builder()
                                             .addTestDevice("53B35F6E356EB90AD09B357DF092BC8F")
@@ -401,7 +403,8 @@ public class RashrActivity extends ActionBarActivity implements
                     @Override
                     public void onClick(View v) {
 
-                        if (!Common.getBooleanPref(mContext, PREF_NAME, Constants.PREF_KEY_ADS))
+                        if (!Common.getBooleanPref(mContext, Constants.PREF_NAME,
+                                Constants.PREF_KEY_ADS))
                             Toast
                                     .makeText(mActivity, R.string.please_ads, Toast.LENGTH_SHORT)
                                     .show();
@@ -552,13 +555,15 @@ public class RashrActivity extends ActionBarActivity implements
 
                     createBackup(mDevice.isRecoveryDD() || mDevice.isRecoveryMTD());
                     createBackup(!mDevice.isKernelDD() && !mDevice.isKernelMTD());
-                    Common.setBooleanPref(mContext, PREF_NAME, Constants.PREF_KEY_FIRST_RUN, true);
+                    Common.setBooleanPref(mContext, Constants.PREF_NAME,
+                            Constants.PREF_KEY_FIRST_RUN, true);
                 }
             });
             WarningDialog.setNegativeButton(R.string.risk, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Common.setBooleanPref(mContext, PREF_NAME, Constants.PREF_KEY_FIRST_RUN, true);
+                    Common.setBooleanPref(mContext, Constants.PREF_NAME,
+                            Constants.PREF_KEY_FIRST_RUN, true);
                 }
             });
             WarningDialog.setCancelable(false);
@@ -869,7 +874,7 @@ public class RashrActivity extends ActionBarActivity implements
      * @return All Preferences as String
      */
     public String getAllPrefs() {
-        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE);
         String Prefs = "";
         Map<String, ?> prefsMap = prefs.getAll();
         try {

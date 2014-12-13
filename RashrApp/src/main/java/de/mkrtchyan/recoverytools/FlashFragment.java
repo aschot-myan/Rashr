@@ -67,6 +67,8 @@ public class FlashFragment extends Fragment {
     private Context mContext;
     private RashrActivity mActivity;
 
+    private int CardFontColor, CardBackgroundColor;
+
     private OnFragmentInteractionListener mListener;
 
     public static FlashFragment newInstance(RashrActivity activity) {
@@ -91,14 +93,27 @@ public class FlashFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_rashr, container, false);
         /** Check if device uses unified builds */
-        if (Common.getBooleanPref(mContext, RashrActivity.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED)
+        if (Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED)
                 && ((mDevice.getName().startsWith("d2lte") || mDevice.getName().startsWith("hlte")
                 || mDevice.getName().startsWith("jflte") || mDevice.getName().equals("moto_msm8960"))
                 && (!mDevice.isStockRecoverySupported() || !mDevice.isCwmRecoverySupported()
                 || !mDevice.isTwrpRecoverySupported() || !mDevice.isPhilzRecoverySupported()))) {
             showUnifiedBuildsDialog();
         }
+        boolean IsDarkTheme = Common.getBooleanPref(mContext, Constants.PREF_NAME,
+                Constants.PREF_KEY_DARK_UI);
+        int BackgroundColor;
+        if (IsDarkTheme) {
+            BackgroundColor = getResources().getColor(R.color.primary_dark_material_dark);
+            CardBackgroundColor = getResources().getColor(R.color.background_material_dark);
+            CardFontColor = getResources().getColor(R.color.secondary_text_default_material_dark);
+        } else {
+            BackgroundColor = getResources().getColor(R.color.primary_material_light);
+            CardBackgroundColor = getResources().getColor(R.color.background_material_light);
+            CardFontColor = getResources().getColor(R.color.secondary_text_default_material_light);
+        }
         optimizeLayout(root);
+        root.setBackgroundColor(BackgroundColor);
         return root;
     }
 
@@ -363,13 +378,13 @@ public class FlashFragment extends Fragment {
         ListView HistoryList = new ListView(mContext);
         File tmp;
         for (int i = 0; i < 5; i++) {
-            tmp = new File(Common.getStringPref(mContext, RashrActivity.PREF_NAME,
+            tmp = new File(Common.getStringPref(mContext, Constants.PREF_NAME,
                     Constants.PREF_KEY_HISTORY + String.valueOf(i)));
             if (tmp.exists() && !tmp.isDirectory()) {
                 HistoryFiles.add(tmp);
                 HistoryFileNames.add(tmp.getName());
             } else {
-                Common.setStringPref(mContext, RashrActivity.PREF_NAME,
+                Common.setStringPref(mContext, Constants.PREF_NAME,
                         Constants.PREF_KEY_HISTORY + String.valueOf(i), "");
             }
         }
@@ -486,7 +501,8 @@ public class FlashFragment extends Fragment {
             }
 
             final MyImageCard HistoryCard = new MyImageCard(getString(R.string.history),
-                    R.drawable.ic_history, getString(R.string.history_description));
+                    R.drawable.ic_history, getString(R.string.history_description),
+                    CardBackgroundColor, CardFontColor);
             HistoryCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -573,7 +589,7 @@ public class FlashFragment extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Common.setBooleanPref(mContext, RashrActivity.PREF_NAME,
+                        Common.setBooleanPref(mContext, Constants.PREF_NAME,
                                 Constants.PREF_KEY_SHOW_UNIFIED, false);
                         mDevice.setName(DevName.get(position));
                         mDevice.loadRecoveryList();
@@ -595,7 +611,7 @@ public class FlashFragment extends Fragment {
         KeepCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Common.setBooleanPref(mContext, RashrActivity.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED, false);
+                Common.setBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED, false);
                 UnifiedBuildsDialog.dismiss();
             }
         });
@@ -605,7 +621,7 @@ public class FlashFragment extends Fragment {
             UnifiedBuildsDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    Common.setBooleanPref(mContext, RashrActivity.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED,
+                    Common.setBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED,
                             false);
                 }
             });
@@ -695,7 +711,7 @@ public class FlashFragment extends Fragment {
 
         if (mDevice.isCwmRecoverySupported()) {
             final MyImageCard CWMCard = new MyImageCard(getString(R.string.sCWM), R.drawable.ic_cwm,
-                    getString(R.string.cwm_description));
+                    getString(R.string.cwm_description), CardBackgroundColor, CardFontColor);
             CWMCard.setData("clockwork");
             CWMCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -707,7 +723,7 @@ public class FlashFragment extends Fragment {
         }
         if (mDevice.isTwrpRecoverySupported()) {
             final MyImageCard TWRPCard = new MyImageCard(getString(R.string.sTWRP), R.drawable.ic_twrp,
-                    getString(R.string.twrp_description));
+                    getString(R.string.twrp_description), CardBackgroundColor, CardFontColor);
             TWRPCard.setData("twrp");
             TWRPCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -719,7 +735,7 @@ public class FlashFragment extends Fragment {
         }
         if (mDevice.isPhilzRecoverySupported()) {
             final MyCard PHILZCard = new MyCard(getString(R.string.sPhilz),
-                    getString(R.string.philz_description));
+                    getString(R.string.philz_description), CardBackgroundColor, CardFontColor);
             PHILZCard.setData("philz");
             PHILZCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -731,7 +747,8 @@ public class FlashFragment extends Fragment {
         }
         if (mDevice.isStockRecoverySupported()) {
             final MyImageCard StockCard = new MyImageCard(getString(R.string.stock),
-                    R.drawable.ic_update, getString(R.string.stock_recovery_description));
+                    R.drawable.ic_update, getString(R.string.stock_recovery_description),
+                    CardBackgroundColor, CardFontColor);
             StockCard.setData("stock");
             StockCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -743,7 +760,7 @@ public class FlashFragment extends Fragment {
         }
 
         final MyCard OtherCard = new MyCard(getString(R.string.other_recovery),
-                getString(R.string.other_storage_description));
+                getString(R.string.other_storage_description), CardBackgroundColor, CardFontColor);
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -755,7 +772,7 @@ public class FlashFragment extends Fragment {
     public void addKernelCards(CardUI cardUI) {
         if (mDevice.isStockKernelSupported()) {
             final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
-                    getString(R.string.stock_kernel_description));
+                    getString(R.string.stock_kernel_description), CardBackgroundColor, CardFontColor);
             StockCard.setData("stock");
             StockCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -767,7 +784,7 @@ public class FlashFragment extends Fragment {
         }
 
         final MyCard OtherCard = new MyCard(getString(R.string.other_kernel),
-                getString(R.string.other_storage_description));
+                getString(R.string.other_storage_description), CardBackgroundColor, CardFontColor);
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -778,7 +795,8 @@ public class FlashFragment extends Fragment {
         cardUI.addCard(OtherCard, true);
     }
     public void addRebooterCards(CardUI cardUI) {
-        MyCard Reboot = new MyCard(getString(R.string.sReboot), getString(R.string.reboot_description));
+        MyCard Reboot = new MyCard(getString(R.string.sReboot), getString(R.string.reboot_description),
+                CardBackgroundColor, CardFontColor);
         Reboot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -805,7 +823,7 @@ public class FlashFragment extends Fragment {
             }
         });
         MyCard RebootRecovery = new MyCard(getString(R.string.sRebootRecovery),
-                getString(R.string.reboot_recovery_description));
+                getString(R.string.reboot_recovery_description), CardBackgroundColor, CardFontColor);
         RebootRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -832,7 +850,7 @@ public class FlashFragment extends Fragment {
             }
         });
         MyCard RebootBootloader = new MyCard(getString(R.string.sRebootBootloader),
-                getString(R.string.reboot_bootloader_description));
+                getString(R.string.reboot_bootloader_description), CardBackgroundColor, CardFontColor);
         RebootBootloader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -859,7 +877,7 @@ public class FlashFragment extends Fragment {
             }
         });
         MyCard Shutdown = new MyCard(getString(R.string.sRebootShutdown),
-                getString(R.string.shutdown_description));
+                getString(R.string.shutdown_description), CardBackgroundColor, CardFontColor);
         Shutdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

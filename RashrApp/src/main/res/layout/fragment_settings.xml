@@ -36,4 +36,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/log" />
+
+    <CheckBox
+        android:id="@+id/cbDarkUI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/UseDarkUI" />
 </LinearLayout>

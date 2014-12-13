@@ -61,11 +61,11 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
-        CheckBox cbShowAds = (CheckBox) root.findViewById(R.id.cbShowAds);
-        CheckBox cbLog = (CheckBox) root.findViewById(R.id.cbLog);
-        Button bShowLogs = (Button) root.findViewById(R.id.bShowLogs);
-        Button bReport = (Button) root.findViewById(R.id.bReport);
-
+        final CheckBox cbShowAds = (CheckBox) root.findViewById(R.id.cbShowAds);
+        final CheckBox cbLog = (CheckBox) root.findViewById(R.id.cbLog);
+        final CheckBox cbDarkUI = (CheckBox) root.findViewById(R.id.cbDarkUI);
+        final Button bShowLogs = (Button) root.findViewById(R.id.bShowLogs);
+        final Button bReport = (Button) root.findViewById(R.id.bReport);
 
         bReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,15 +73,23 @@ public class SettingsFragment extends Fragment {
                 onButtonPressed(view);
             }
         });
-        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), RashrActivity.PREF_NAME,
+        cbDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
+                Constants.PREF_KEY_DARK_UI));
+        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
 				Constants.PREF_KEY_ADS));
         cbLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
+        cbDarkUI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.toggleBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_DARK_UI);
+                cbDarkUI.setChecked(Common.getBooleanPref(mContext, Constants.PREF_NAME,
+                        Constants.PREF_KEY_DARK_UI));
+            }
+        });
         cbLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CheckBox cbLog = (CheckBox) view;
-                Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG,
-                        !Common.getBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG));
+                Common.toggleBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG);
                 cbLog.setChecked(Common.getBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG));
                 if (cbLog.isChecked()) {
                     root.findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
@@ -99,22 +107,22 @@ public class SettingsFragment extends Fragment {
         cbShowAds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Common.setBooleanPref(view.getContext(), RashrActivity.PREF_NAME, Constants.PREF_KEY_ADS,
-                        !Common.getBooleanPref(view.getContext(), RashrActivity.PREF_NAME, Constants.PREF_KEY_ADS));
+                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS,
+                        !Common.getBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS));
                 ((CheckBox) view).setChecked(
-                        Common.getBooleanPref(view.getContext(), RashrActivity.PREF_NAME, Constants.PREF_KEY_ADS));
+                        Common.getBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS));
             }
         });
         bShowLogs.setVisibility(cbLog.isChecked() ? View.VISIBLE : View.INVISIBLE);
-        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), RashrActivity.PREF_NAME, Constants.PREF_KEY_ADS));
+        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS));
 
         Button ResetButton = (Button) root.findViewById(R.id.bReset);
         ResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Activity activity = getActivity();
-                SharedPreferences.Editor editor = activity.getSharedPreferences(
-                        RashrActivity.PREF_NAME, Context.MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = activity.getSharedPreferences(Constants.PREF_NAME,
+                        Context.MODE_PRIVATE).edit();
                 editor.clear().apply();
                 editor = activity.getSharedPreferences(FlashUtil.PREF_NAME,
                         Context.MODE_PRIVATE).edit();

@@ -195,5 +195,6 @@
     <string name="other_kernel">Kernel de la memoria interna</string>
     <string name="exit_app">Salir de la App?</string>
     <string name="skip_md5">Sobresaltar MD5</string>
+    <string name="UseDarkUI">Utilizar interfaz oscuro</string>
 
 </resources>
