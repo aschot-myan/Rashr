@@ -1,6 +1,11 @@
 CHANGELOG
 ====================
 
+Update [2.2.5]
+
+-Dark UI added
+-Changelog added to Settings
+
 Update [2.2.4]
 
 -Fixed first start error

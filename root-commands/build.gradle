@@ -2,16 +2,13 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '21.1.1'
+    buildToolsVersion '21.1.2'
     defaultConfig {
         minSdkVersion 9
         versionCode 1
         versionName '1.0'
     }
-    buildTypes {
+    dependencies {
+        compile fileTree(dir: 'libs', include: ['*.jar'])
     }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
 }

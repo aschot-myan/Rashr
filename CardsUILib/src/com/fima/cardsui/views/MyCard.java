@@ -43,8 +43,8 @@ public class MyCard extends RecyclableCard {
 	    if (fontColor != 0) {
 		    ((TextView) convertView.findViewById(R.id.title)).setTextColor(fontColor);
 	    }
-        if (!this.description.equals("")) {
-	        ((TextView) convertView.findViewById(R.id.description)).setText(this.description);
+        if (!description.equals("")) {
+	        ((TextView) convertView.findViewById(R.id.description)).setText(description);
 	        if (fontColor != 0)
 		        ((TextView) convertView.findViewById(R.id.description)).setTextColor(fontColor);
         }

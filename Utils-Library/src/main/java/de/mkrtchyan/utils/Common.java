@@ -1,7 +1,7 @@
 package de.mkrtchyan.utils;
 
 /**
- * Copyright (c) 2014 Ashot Mkrtchyan
+ * Copyright (c) 2014 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights 
@@ -40,8 +40,6 @@ import java.nio.channels.FileChannel;
 
 
 public class Common {
-
-    public static final String PREF_NAME = "de_mkrtchyan_utils_common";
 
     public static void pushFileFromRAW(Context mContext, File outputFile, int RAW, boolean Override) throws IOException {
         if (!outputFile.exists() || Override) {

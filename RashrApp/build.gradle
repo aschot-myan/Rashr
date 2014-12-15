@@ -2,35 +2,28 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '21.1.1'
+    buildToolsVersion '21.1.2'
     defaultConfig {
         minSdkVersion 9
-        versionCode 91
-        versionName '2.2.4'
+        versionCode 92
+        versionName '2.2.5'
     }
     signingConfigs {
         DsLNeXuS {
             storeFile file('C:/Users/ashot_000/Google Drive/workspace/Keystone.key')
         }
     }
-    buildTypes {
-        release {
-            debuggable false
-        }
-    }
     lintOptions {
         abortOnError false
     }
-    productFlavors {
-    }
-}
 
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':root-commands')
-    compile project(':Utils-Library')
-    compile project(':CardsUILib')
-    compile 'com.android.support:support-v4:21.0.2'
-    compile 'com.android.support:appcompat-v7:21.0.2'
-    compile 'com.google.android.gms:play-services:6.1.71'
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+        compile project(':root-commands')
+        compile project(':Utils-Library')
+        compile project(':CardsUILib')
+        compile 'com.android.support:support-v4:21.0.3'
+        compile 'com.android.support:appcompat-v7:21.0.3'
+        compile 'com.google.android.gms:play-services:6.5.87'
+    }
 }
