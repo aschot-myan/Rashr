@@ -54,8 +54,8 @@
         \n\nxda-developers.com
     </string>
     <string name="Downloading">Downloading…</string>
-    <string name="commentar">Kommentar</string>
-    <string name="commenthint">
+    <string name="comment">Kommentar</string>
+    <string name="comment_hint">
         Bitte komentieren Sie hier welches Problem Sie haben (Download, Installation, Allgemein)
     </string>
     <string name="positive">Ja, bitte</string>
@@ -208,4 +208,9 @@
     <string name="exit_app">App verlassen?</string>
     <string name="skip_md5">MD5 Überspringen</string>
     <string name="UseDarkUI">Dunkele UI benutzen</string>
+    <string name="check_app_updates">Beim Start auf Updates prüfen</string>
+    <string name="failed_update">Fehler beim Überprüfen von Updates</string>
+    <string name="update_available">Update verfügbar</string>
+    <string name="download_update">Bitte laden Sie den Update herunter um auf der sichere Seite zu sein und die neuesten Funktionen benutzen zu können</string>
+    <string name="open_playstore">Play Store öffnen</string>
 </resources>

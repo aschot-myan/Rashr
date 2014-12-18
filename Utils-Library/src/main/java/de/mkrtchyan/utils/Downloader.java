@@ -44,53 +44,27 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
 
     private Context mContext;
     private ProgressDialog downloadDialog;
-    private boolean first_start = true;
-    private String URL;
-    private String FileName;
-    private File outputFile;
-    private boolean checkFile = false;
-    private boolean overrideFile = false;
-    private boolean hide = false;
-    private boolean retry = false;
-    private boolean cancelable = true;
+    private boolean mFirstStart = true;
+    private URL mURL;
+    private File mOutputFile;
+    private boolean mCheckSHA1 = false;
+    private boolean mOverrideFile = false;
+    private boolean mHide = false;
+    private boolean mRetry = false;
+    private boolean mCancelable = true;
     private File ChecksumFile = null;
     private Downloader thisDownloader = this;
     private boolean askBeforeDownload = false;
     private OnDownloadListener onDownloadListener = null;
+    private boolean mErrorOccurred = false;
 
     private IOException ioException;
     private MalformedURLException urlException;
 
-    public Downloader(Context mContext, String URL, String FileName, File outputFile) {
-        this.mContext = mContext;
-        this.URL = URL;
-        this.FileName = FileName;
-        this.outputFile = outputFile;
-    }
-
-    public Downloader(Context mContext, String URL, String FileName, File outputFile,
-                      OnDownloadListener onDownloadListener) {
-        this.mContext = mContext;
-        this.URL = URL;
-        this.FileName = FileName;
-        this.outputFile = outputFile;
-        this.onDownloadListener = onDownloadListener;
-    }
-
-    public Downloader(Context mContext, String URL, File outputFile) {
-        this.mContext = mContext;
-        this.URL = URL;
-        this.FileName = outputFile.getName();
-        this.outputFile = outputFile;
-    }
-
-    public Downloader(Context mContext, String URL, File outputFile,
-                      OnDownloadListener onDownloadListener) {
-        this.mContext = mContext;
-        this.URL = URL;
-        this.FileName = outputFile.getName();
-        this.outputFile = outputFile;
-        this.onDownloadListener = onDownloadListener;
+    public Downloader(Context context, URL url, File outputFile) {
+        mContext = context;
+        mURL = url;
+        mOutputFile = outputFile;
     }
 
     public void ask() {
@@ -103,30 +77,25 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
     }
 
     protected void onPreExecute() {
-        if (overrideFile)
-            outputFile.delete();
-        if (!outputFile.getParentFile().exists()) {
-            outputFile.getParentFile().mkdir();
+        if (mOverrideFile)
+            mErrorOccurred = mErrorOccurred || !mOutputFile.delete();
+        if (!mOutputFile.getParentFile().exists()) {
+            mErrorOccurred = mErrorOccurred || !mOutputFile.getParentFile().mkdir();
         }
 
-        if (!URL.endsWith("/"))
-            URL = URL + "/";
-        if (!URL.startsWith("http://")
-                && !URL.startsWith("https://"))
-            URL = "http://" + URL;
-        if (!hide) {
+        if (!mHide) {
             downloadDialog = new ProgressDialog(mContext);
             downloadDialog.setTitle(mContext.getResources().getString(R.string.connecting));
             downloadDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             downloadDialog.setCancelable(false);
-            downloadDialog.setMessage(URL);
-            if (cancelable)
+            downloadDialog.setMessage(mURL.toString());
+            if (mCancelable)
                 downloadDialog.setButton(DialogInterface.BUTTON_NEGATIVE, mContext.getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         thisDownloader.cancel(false);
-                        if (outputFile.exists())
-                            outputFile.delete();
+                        if (mOutputFile.exists())
+                            mErrorOccurred = mErrorOccurred || !mOutputFile.delete();
                     }
                 });
             downloadDialog.show();
@@ -135,7 +104,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
 
     protected Boolean doInBackground(Void... params) {
 
-        if (!outputFile.exists() || overrideFile) {
+        if (!mOutputFile.exists() || mOverrideFile) {
             ConnectivityManager connMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
@@ -143,13 +112,13 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
                     && networkInfo.isConnected()) {
                 try {
 
-                    Log.i(TAG, "Connecting to " + URL);
-                    URLConnection connection = new URL(URL + FileName).openConnection();
+                    Log.i(TAG, "Connecting to " + mURL.getHost());
+                    URLConnection connection = mURL.openConnection();
 
                     connection.setDoOutput(true);
                     connection.connect();
 
-                    FileOutputStream fileOutput = new FileOutputStream(outputFile);
+                    FileOutputStream fileOutput = new FileOutputStream(mOutputFile);
 
                     InputStream inputStream = connection.getInputStream();
 
@@ -159,12 +128,12 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
                     int bufferLength;
                     int downloaded = 0;
 
-                    Log.i(TAG, "Downloading " + outputFile.getName());
+                    Log.i(TAG, "Downloading " + mOutputFile.getName());
 
                     while ((bufferLength = inputStream.read(buffer)) > 0) {
                         fileOutput.write(buffer, 0, bufferLength);
                         downloaded += bufferLength;
-                        if (!hide)
+                        if (!mHide)
                             publishProgress(downloaded, fullLength);
                     }
 
@@ -187,25 +156,25 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
                 return false;
             }
         }
-        return !checkFile || !isDownloadCorrupt();
+        return !mCheckSHA1 || !isDownloadCorrupt();
     }
 
     @Override
     protected void onProgressUpdate(final Integer... progress) {
         super.onProgressUpdate(progress);
-        if (first_start) {
+        if (mFirstStart) {
             downloadDialog.dismiss();
             downloadDialog = new ProgressDialog(mContext);
             downloadDialog.setTitle(R.string.Downloading);
-            downloadDialog.setMessage(FileName);
+            downloadDialog.setMessage(mOutputFile.getName());
             downloadDialog.setCancelable(false);
-            if (cancelable)
+            if (mCancelable)
                 downloadDialog.setButton(DialogInterface.BUTTON_NEGATIVE, mContext.getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         thisDownloader.cancel(false);
-                        if (outputFile.exists())
-                            outputFile.delete();
+                        if (mOutputFile.exists())
+                            mOutputFile.delete();
                     }
                 });
             if (progress[1] >= 0) {
@@ -216,23 +185,23 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
             downloadDialog.show();
             downloadDialog.setMax(progress[1]);
             downloadDialog.setCancelable(false);
-            first_start = false;
+            mFirstStart = false;
         }
         downloadDialog.setProgress(progress[0]);
     }
 
     protected void onPostExecute(Boolean success) {
-        if (!hide) {
+        if (!mHide) {
             if (downloadDialog.isShowing()) {
                 downloadDialog.dismiss();
             }
         }
         if (success) {
             if (onDownloadListener != null) {
-                onDownloadListener.success(outputFile);
+                onDownloadListener.success(mOutputFile);
             }
         } else {
-            if (!hide) {
+            if (!mHide) {
                 if (onDownloadListener != null) {
                     if (ioException != null)
                         onDownloadListener.failed(ioException);
@@ -241,7 +210,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
                 }
 
             }
-            if (outputFile.delete() || retry) {
+            if (mOutputFile.delete() || mRetry) {
                 loop();
             }
         }
@@ -250,7 +219,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
 
     public boolean isDownloadCorrupt() {
         try {
-            return !SHA1.verifyChecksum(outputFile, ChecksumFile);
+            return !SHA1.verifyChecksum(mOutputFile, ChecksumFile);
         } catch (IOException e) {
             Log.d(TAG, e.getMessage());
             e.printStackTrace();
@@ -262,24 +231,23 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
     }
 
     private void loop() {
-        final Downloader loop_downloader = new Downloader(mContext, URL, FileName, outputFile);
-        loop_downloader.setOnDownloadListener(onDownloadListener);
-        loop_downloader.setOverrideFile(overrideFile);
-        loop_downloader.setCancelable(cancelable);
-        loop_downloader.setHidden(hide);
-        loop_downloader.setAskBeforeDownload(askBeforeDownload);
-        loop_downloader.setRetry(retry);
-        if (checkFile)
-            loop_downloader.setChecksumFile(ChecksumFile);
-        if (!hide) {
+        final Downloader newInstance = new Downloader(mContext, mURL, mOutputFile);
+        newInstance.setOnDownloadListener(onDownloadListener);
+        newInstance.setOverrideFile(mOverrideFile);
+        newInstance.setCancelable(mCancelable);
+        newInstance.setHidden(mHide);
+        newInstance.setAskBeforeDownload(askBeforeDownload);
+        newInstance.setRetry(mRetry);
+        if (mCheckSHA1)
+            newInstance.setChecksumFile(ChecksumFile);
+        if (!mHide) {
             final AlertDialog.Builder tryAgain = new AlertDialog.Builder(mContext);
             tryAgain
-                    .setMessage(String.format(mContext.getString(R.string.failed_download), outputFile.getName()))
+                    .setMessage(String.format(mContext.getString(R.string.failed_download), mOutputFile.getName()))
                     .setPositiveButton(R.string.try_again, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
-                            loop_downloader.execute();
+                            newInstance.execute();
                         }
                     })
                     .setNegativeButton(R.string.later, new DialogInterface.OnClickListener() {
@@ -290,29 +258,29 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
                     .setTitle(R.string.warning)
                     .show();
         } else {
-            loop_downloader.execute();
+            newInstance.execute();
         }
     }
 
-    public void setChecksumFile(File ChecksumFile) {
-        this.ChecksumFile = ChecksumFile;
-        checkFile = ChecksumFile != null;
+    public void setChecksumFile(File checksumFile) {
+        ChecksumFile = checksumFile;
+        mCheckSHA1 = ChecksumFile != null;
     }
 
     public void setOverrideFile(boolean overrideFile) {
-        this.overrideFile = overrideFile;
+        this.mOverrideFile = overrideFile;
     }
 
     public void setHidden(boolean hide) {
-        this.hide = hide;
+        this.mHide = hide;
     }
 
     public void setRetry(boolean retry) {
-        this.retry = retry;
+        this.mRetry = retry;
     }
 
     public void setCancelable(boolean cancelable) {
-        this.cancelable = cancelable;
+        mCancelable = cancelable;
     }
 
     public void setAskBeforeDownload(boolean askBeforeDownload) {
@@ -326,7 +294,7 @@ public class Downloader extends AsyncTask<Void, Integer, Boolean> {
     private void showDownloadNowDialog() {
         new AlertDialog.Builder(mContext)
                 .setTitle(R.string.info)
-                .setMessage(String.format(mContext.getString(R.string.download_now), outputFile.getName()))
+                .setMessage(String.format(mContext.getString(R.string.download_now), mOutputFile.getName()))
                 .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

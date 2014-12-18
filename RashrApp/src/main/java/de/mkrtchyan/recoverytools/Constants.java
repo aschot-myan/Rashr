@@ -42,6 +42,7 @@ public class Constants {
     public static final String PREF_KEY_HIDE_RATER  =    "show_rater";
     public static final String PREF_KEY_SHOW_UNIFIED =   "show_unified";
     public static final String PREF_KEY_DARK_UI     =    "use_dark_ui";
+    public static final String PREF_KEY_CHECK_UPDATES =  "check_updates";
 
     /**
      * Google
@@ -66,10 +67,12 @@ public class Constants {
     /**
      * Web Address for download Recovery and Kernel IMGs
      */
-    public static final String RECOVERY_URL        =     "http://dslnexus.de/Android/recoveries";
-    public static final String KERNEL_URL          =     "http://dslnexus.de/Android/kernel";
-    public static final String RECOVERY_SUMS_URL   =     "http://dslnexus.de/Android/";
-    public static final String KERNEL_SUMS_URL     =     "http://dslnexus.de/Android/";
+    public static final String BASE_URL            =     "http://dslnexus.de/Android";
+    public static final String RECOVERY_URL        =     BASE_URL + "/recoveries";
+    public static final String KERNEL_URL          =     BASE_URL + "/kernel";
+    public static final String RECOVERY_SUMS_URL   =     BASE_URL + "/recovery_sums";
+    public static final String KERNEL_SUMS_URL     =     BASE_URL + "/kernel_sums";
+    public static final String RASHR_VERSION_URL   =     BASE_URL + "/rashr/version";
 
     public static final String CHANGELOG_URL       =     "https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/CHANGELOG.md";
     /**

@@ -36,8 +36,8 @@
     <string name="not_supportded">Twoje urządzenie nie jest na razie wspierane. Przeskanuj System i zgłoś niewspierane urządzenie lub spróbuj znaleść partycję (uruchomić ponownie do recovery)?</string>
     <string name="no_root">Urządzenie nie jest zrootowane. Proszę abyś najpierw je zrootował. Więcej informacji na \n\nxda-developer.com"</string>
     <string name="Downloading">Pobieranie&#8230;</string>
-    <string name="commentar">Komentarz</string>
-    <string name="commenthint">Napisz tutaj, co nie działa poprawnie (pobieranie, wgrywanie, wsparcie urządzeń lub inne)</string>
+    <string name="comment">Komentarz</string>
+    <string name="comment_hint">Napisz tutaj, co nie działa poprawnie (pobieranie, wgrywanie, wsparcie urządzeń lub inne)</string>
     <string name="positive">Tak</string>
     <string name="neutral">Nie, dziękuję</string>
     <string name="negative">Odrzuć</string>

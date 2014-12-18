@@ -51,8 +51,8 @@
         Dispositivo sin Root. Porfavor rooten lo. Mas informaciones en
         \n\nxda-developers.com</string>
     <string name="Downloading">Downloading…</string>
-    <string name="commentar">Comentario</string>
-    <string name="commenthint">Comenten aquí lo que no funciona (download, flash)</string>
+    <string name="comment">Comentario</string>
+    <string name="comment_hint">Comenten aquí lo que no funciona (download, flash)</string>
     <string name="positive">Si, porfavor</string>
     <string name="neutral">No, gracias</string>
     <string name="negative">Cancelar</string>
@@ -196,5 +196,10 @@
     <string name="exit_app">Salir de la App?</string>
     <string name="skip_md5">Sobresaltar MD5</string>
     <string name="UseDarkUI">Utilizar interfaz oscuro</string>
+    <string name="check_app_updates">Buscar updates al inicio</string>
+    <string name="failed_update">Error al buscar updates</string>
+    <string name="update_available">Update disponible</string>
+    <string name="download_update">Actualizen la app para utilizar nuevas funciones y evitar problemas</string>
+    <string name="open_playstore">Abrir Play Store</string>
 
 </resources>

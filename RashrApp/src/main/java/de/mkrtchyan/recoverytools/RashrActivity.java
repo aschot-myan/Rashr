@@ -35,7 +35,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
@@ -62,12 +61,14 @@ import org.sufficientlysecure.rootcommands.Toolbox;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Map;
 
 import de.mkrtchyan.utils.Common;
+import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Notifyer;
 import donations.DonationsFragment;
 
@@ -196,6 +197,8 @@ public class RashrActivity extends ActionBarActivity implements
                         Common.setBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_ADS,
                                 true);
                         Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
+                        Common.setBooleanPref(mContext, Constants.PREF_NAME,
+                                Constants.PREF_KEY_CHECK_UPDATES, true);
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -217,6 +220,7 @@ public class RashrActivity extends ActionBarActivity implements
                                 mVersionChanged = current_version > previous_version;
                                 Common.setIntegerPref(mContext, Constants.PREF_NAME,
                                         Constants.PREF_KEY_CUR_VER, current_version);
+                                checkUpdates(current_version);
                             } else {
                                 mVersionChanged = true;
                             }
@@ -385,7 +389,7 @@ public class RashrActivity extends ActionBarActivity implements
 
     public void report(final boolean isCancelable, final String message) {
         final Dialog reportDialog = new Dialog(mContext);
-        reportDialog.setTitle(R.string.commentar);
+        reportDialog.setTitle(R.string.comment);
         reportDialog.setContentView(R.layout.dialog_comment);
         final EditText text = (EditText) reportDialog.findViewById(R.id.etComment);
         if (!message.equals("")) text.setText(message);
@@ -885,7 +889,6 @@ public class RashrActivity extends ActionBarActivity implements
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment fragment = null;
         position++;
         String action;
@@ -921,7 +924,8 @@ public class RashrActivity extends ActionBarActivity implements
             }
         }
         if (fragment != null) {
-            ft
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
                     .replace(R.id.container, fragment)
 					.commitAllowingStateLoss();
@@ -979,5 +983,47 @@ public class RashrActivity extends ActionBarActivity implements
                 });
             }
         }
+    }
+
+    public void checkUpdates(final int currentVersion) {
+        try {
+            File versionsFile = new File(mContext.getFilesDir(), "version");
+            Downloader version = new Downloader(mContext, new URL(Constants.RASHR_VERSION_URL), versionsFile);
+            version.setOverrideFile(true);
+            version.setHidden(true);
+            version.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                @Override
+                public void success(File file) {
+                    if (currentVersion < Integer.valueOf(Common.fileContent(file))) {
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                new AlertDialog.Builder(mContext)
+                                        .setTitle(R.string.update_available)
+                                        .setMessage(R.string.download_update)
+                                        .setPositiveButton(R.string.open_playstore, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                startActivity(new Intent(Intent.ACTION_VIEW,
+                                                        Uri.parse("market://details?id=" + getPackageName())));
+                                            }
+                                        })
+                                        .setCancelable(false)
+                                        .show();
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void failed(Exception e) {
+                    Toast.makeText(mContext, R.string.failed_update, Toast.LENGTH_SHORT).show();
+                }
+            });
+            version.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

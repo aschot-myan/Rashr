@@ -55,8 +55,8 @@ XDACN汉化组 OPkyd汉化
     <string name="flash_over_recovery">是否立即刷入 Recovery? (需要重启到 Recovery 模式)</string>
     <string name="bak_done">备份完成</string>
     <string name="backupalready">备份已存在. 将覆盖现有备份. 是否继续?</string>
-    <string name="commentar">注释</string>
-    <string name="commenthint">在这里发表评论, 哪些功能不能正常使用 (下载, 刷入, 设备支持或其他内容)</string>
+    <string name="comment">注释</string>
+    <string name="comment_hint">在这里发表评论, 哪些功能不能正常使用 (下载, 刷入, 设备支持或其他内容)</string>
     <string name="log">Shell命令日志</string>
     <string name="showlog">显示日志</string>
     <string name="sBackupMgr">打开备份管理器</string>

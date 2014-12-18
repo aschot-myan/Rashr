@@ -23,8 +23,8 @@
     <string name="choose_message">%s seçildi. Emin misiniz?</string>
     <string name="clear_cache_description">İndirilen tüm recovery/kernel dosyalarını sil</string>
     <string name="clear_logs">Kayıtları Temizle</string>
-    <string name="commentar">Yorum</string>
-    <string name="commenthint">
+    <string name="comment">Yorum</string>
+    <string name="comment_hint">
         Buraya neyin düzgün çalışmadığını yazın (indirme, yükleme, genel destek veya diğer)
     </string>
     <string name="connecting">Bağlanıyor</string>

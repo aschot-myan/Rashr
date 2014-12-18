@@ -50,7 +50,7 @@
        دستگاه روت نشده . لطفا آن را روت کنید. اطلاعات بیشتر در
         \n\nxda-developers.com
     </string>
-    <string name="commenthint">
+    <string name="comment_hint">
         اینجا نظر دهید که چه چیزی کار نمیکند
     </string>
     <string name="positive">بله . لطفا</string>

@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -466,19 +468,21 @@ public class Device {
                 mAlertDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            URL url = new URL("http://dslnexus.de/Android/utils/" + archive.getName());
+                            Downloader downloader = new Downloader(mContext, url, archive);
+                            downloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                @Override
+                                public void success(File file) {
+                                    Unzipper.unzip(archive, new File(Constants.PathToUtils, mName));
+                                }
 
-                        new Downloader(mContext, "http://dslnexus.de/Android/utils/", archive.getName(), archive, new Downloader.OnDownloadListener() {
-                            @Override
-                            public void success(File file) {
-                                Unzipper.unzip(archive, new File(Constants.PathToUtils, mName));
-                            }
+                                @Override
+                                public void failed(Exception e) {
 
-                            @Override
-                            public void failed(Exception e) {
-
-                            }
-                        }).execute();
-
+                                }
+                            });
+                        } catch (MalformedURLException e) {}
                     }
                 });
                 mAlertDialog.show();

@@ -29,8 +29,8 @@
     <string name="error">Error</string>
 
     <string name="Downloading">Downloading&#8230;</string>
-    <string name="commentar">commentaar</string>
-    <string name="commenthint"> commentaar hier als iets niet werkt of bugs enzovoort&#8230;
+    <string name="comment">commentaar</string>
+    <string name="comment_hint"> commentaar hier als iets niet werkt of bugs enzovoort&#8230;
     </string>
     <string name="positive">Ja, graag</string>
     <string name="neutral">Nee, bedankt</string>

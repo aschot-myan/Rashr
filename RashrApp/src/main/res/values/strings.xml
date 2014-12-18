@@ -57,8 +57,8 @@
         \n\nxda-developers.com
     </string>
     <string name="Downloading">Downloading…</string>
-    <string name="commentar">Commentar</string>
-    <string name="commenthint">
+    <string name="comment">Comment</string>
+    <string name="comment_hint">
         Comment here, what is not working correctly (download, flash, common support or other)
     </string>
     <string name="positive">Yes, please</string>
@@ -202,5 +202,10 @@
     <string name="exit_app">Exit App?</string>
     <string name="skip_md5">Skip MD5</string>
     <string name="UseDarkUI">Use dark UI</string>
+    <string name="check_app_updates">Check updates on start</string>
+    <string name="failed_update">Check for updates failed</string>
+    <string name="update_available">Upadate available</string>
+    <string name="download_update">Please download the update to keep secure and get the latest features</string>
+    <string name="open_playstore">Open Play Store</string>
 
 </resources>

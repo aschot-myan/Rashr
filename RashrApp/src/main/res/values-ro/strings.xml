@@ -38,8 +38,8 @@
     </string>
 
     <string name="Downloading">Descarc&#8230;</string>
-    <string name="commentar">Commentariu</string>
-    <string name="commenthint">Va rugam detaliati mai jos ce anume nu functioneaza corect (descarcarea, scrierea, info suport sau altceva)
+    <string name="comment">Commentariu</string>
+    <string name="comment_hint">Va rugam detaliati mai jos ce anume nu functioneaza corect (descarcarea, scrierea, info suport sau altceva)
     </string>
     <string name="positive">Da, va rog</string>
     <string name="neutral">Nu, multumesc</string>

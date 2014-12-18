@@ -65,6 +65,7 @@ public class SettingsFragment extends Fragment {
         final CheckBox cbShowAds = (CheckBox) root.findViewById(R.id.cbShowAds);
         final CheckBox cbLog = (CheckBox) root.findViewById(R.id.cbLog);
         final CheckBox cbDarkUI = (CheckBox) root.findViewById(R.id.cbDarkUI);
+        final CheckBox cbCheckUpdates = (CheckBox) root.findViewById(R.id.cbCheckUpdates);
         final Button bShowLogs = (Button) root.findViewById(R.id.bShowLogs);
         final Button bReport = (Button) root.findViewById(R.id.bReport);
         final Button bShowChangelog = (Button) root.findViewById(R.id.bShowChangelog);
@@ -100,6 +101,15 @@ public class SettingsFragment extends Fragment {
                 } else {
                     root.findViewById(R.id.bShowLogs).setVisibility(View.INVISIBLE);
                 }
+            }
+        });
+        cbCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_CHECK_UPDATES));
+        cbCheckUpdates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.toggleBooleanPref(v.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_CHECK_UPDATES);
+                cbCheckUpdates.setChecked(Common.getBooleanPref(v.getContext(), Constants.PREF_NAME,
+                        Constants.PREF_KEY_CHECK_UPDATES));
             }
         });
         bShowLogs.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +149,6 @@ public class SettingsFragment extends Fragment {
         ClearCache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Activity activity = getActivity();
                 final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(v.getContext());
                 ConfirmationDialog.setTitle(R.string.warning);
                 ConfirmationDialog.setMessage(R.string.delete_confirmation);
@@ -152,11 +161,11 @@ public class SettingsFragment extends Fragment {
                                 || !Common.deleteFolder(Constants.PathToStockRecovery, false)
                                 || !Common.deleteFolder(Constants.PathToStockKernel,false)) {
                             Toast
-                                    .makeText(activity, R.string.delete_failed, Toast.LENGTH_SHORT)
+                                    .makeText(getActivity(), R.string.delete_failed, Toast.LENGTH_SHORT)
                                     .show();
                         } else {
                             Toast
-                                    .makeText(activity, R.string.files_deleted, Toast.LENGTH_SHORT)
+                                    .makeText(getActivity(), R.string.files_deleted, Toast.LENGTH_SHORT)
                                     .show();
                         }
                     }

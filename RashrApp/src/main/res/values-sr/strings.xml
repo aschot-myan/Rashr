@@ -43,8 +43,8 @@
     </string>
 
     <string name="Downloading">Preuzimanje&#8230;</string>
-    <string name="commentar">Komentar</string>
-    <string name="commenthint">Komentarisi ovde, sta ne radi uredno (preuzimanje, fles, podrska ili drugo)
+    <string name="comment">Komentar</string>
+    <string name="comment_hint">Komentarisi ovde, sta ne radi uredno (preuzimanje, fles, podrska ili drugo)
     </string>
     <string name="positive">Da molim</string>
     <string name="neutral">Ne, hvala</string>

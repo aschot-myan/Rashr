@@ -30,6 +30,8 @@ import com.fima.cardsui.views.MyImageCard;
 import org.sufficientlysecure.rootcommands.Toolbox;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -250,22 +252,25 @@ public class FlashFragment extends Fragment {
                     final String fileName = Versions.get(i);
                     final File recovery = new File(path, fileName);
                     if (!recovery.exists()) {
-                        Downloader RecoveryDownloader = new Downloader(mContext, Constants.RECOVERY_URL,
-                                recovery, new Downloader.OnDownloadListener() {
-                            @Override
-                            public void success(File file) {
-                                flashRecovery(file);
-                            }
+                        try {
+                            URL url = new URL(Constants.RECOVERY_URL);
+                            Downloader RecoveryDownloader = new Downloader(mContext, url, recovery);
+                            RecoveryDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                @Override
+                                public void success(File file) {
+                                    flashRecovery(file);
+                                }
 
-                            @Override
-                            public void failed(Exception e) {
+                                @Override
+                                public void failed(Exception e) {
 
-                            }
-                        });
-                        RecoveryDownloader.setRetry(true);
-                        RecoveryDownloader.setAskBeforeDownload(true);
-                        RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);
-                        RecoveryDownloader.ask();
+                                }
+                            });
+                            RecoveryDownloader.setRetry(true);
+                            RecoveryDownloader.setAskBeforeDownload(true);
+                            RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);
+                            RecoveryDownloader.ask();
+                        } catch (MalformedURLException e) {}
                     } else {
                         flashRecovery(recovery);
                     }
@@ -326,22 +331,25 @@ public class FlashFragment extends Fragment {
                         final File kernel = new File(path, fileName);
 
                         if (!kernel.exists()) {
-                            Downloader KernelDownloader = new Downloader(mContext, Constants.KERNEL_URL,
-                                    kernel, new Downloader.OnDownloadListener() {
-                                @Override
-                                public void success(File file) {
-                                    flashKernel(file);
-                                }
+                            try {
+                                URL url = new URL(Constants.KERNEL_URL);
+                                Downloader KernelDownloader = new Downloader(mContext, url, kernel);
+                                KernelDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                    @Override
+                                    public void success(File file) {
+                                        flashKernel(file);
+                                    }
 
-                                @Override
-                                public void failed(Exception e) {
+                                    @Override
+                                    public void failed(Exception e) {
 
-                                }
-                            });
-                            KernelDownloader.setRetry(true);
-                            KernelDownloader.setAskBeforeDownload(true);
-                            KernelDownloader.setChecksumFile(KernelCollectionFile);
-                            KernelDownloader.ask();
+                                    }
+                                });
+                                KernelDownloader.setRetry(true);
+                                KernelDownloader.setAskBeforeDownload(true);
+                                KernelDownloader.setChecksumFile(KernelCollectionFile);
+                                KernelDownloader.ask();
+                            } catch (MalformedURLException e) {}
                         } else {
                             flashKernel(kernel);
                         }
@@ -636,72 +644,76 @@ public class FlashFragment extends Fragment {
         mSwipeUpdater.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                final int img_count = mDevice.getStockRecoveryVersions().size()
-                        + mDevice.getCwmRecoveryVersions().size()
-                        + mDevice.getTwrpRecoveryVersions().size()
-                        + mDevice.getPhilzRecoveryVersions().size()
-                        + mDevice.getStockKernelVersions().size();
-                Downloader RecoveryUpdater = new Downloader(mContext, Constants.RECOVERY_SUMS_URL,
-                        RecoveryCollectionFile);
-                RecoveryUpdater.setOverrideFile(true);
-                RecoveryUpdater.setHidden(true);
+                try {
+                    final int img_count = mDevice.getStockRecoveryVersions().size()
+                            + mDevice.getCwmRecoveryVersions().size()
+                            + mDevice.getTwrpRecoveryVersions().size()
+                            + mDevice.getPhilzRecoveryVersions().size()
+                            + mDevice.getStockKernelVersions().size();
+                    URL recoveryURL = new URL(Constants.RECOVERY_URL);
+                    Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
+                            RecoveryCollectionFile);
+                    RecoveryUpdater.setOverrideFile(true);
+                    RecoveryUpdater.setHidden(true);
 
-                Toast
-                        .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
-                        .show();
-                final Downloader KernelUpdater = new Downloader(mContext, Constants.KERNEL_SUMS_URL,
-                        KernelCollectionFile);
-                KernelUpdater.setOverrideFile(true);
-                KernelUpdater.setHidden(true);
-                RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                    @Override
-                    public void success(File file) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mDevice.loadRecoveryList();
-                                KernelUpdater.execute();
-                            }
-                        }).start();
-                    }
+                    Toast
+                            .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
+                            .show();
+                    URL kernelURL = new URL(Constants.KERNEL_URL);
+                    final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
+                            KernelCollectionFile);
+                    KernelUpdater.setOverrideFile(true);
+                    KernelUpdater.setHidden(true);
+                    RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                        @Override
+                        public void success(File file) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mDevice.loadRecoveryList();
+                                    KernelUpdater.execute();
+                                }
+                            }).start();
+                        }
 
-                    @Override
-                    public void failed(Exception e) {
-                        Toast
-                                .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                });
+                        @Override
+                        public void failed(Exception e) {
+                            Toast
+                                    .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    });
 
-                KernelUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                    @Override
-                    public void success(File file) {
-                        mDevice.loadKernelList();
-                        mSwipeUpdater.setRefreshing(false);
-                        final int new_img_count = (mDevice.getStockRecoveryVersions().size()
-                                + mDevice.getCwmRecoveryVersions().size()
-                                + mDevice.getTwrpRecoveryVersions().size()
-                                + mDevice.getPhilzRecoveryVersions().size()
-                                + mDevice.getStockKernelVersions().size()) - img_count;
-                        mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast
-                                        .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
-                                                new_img_count), Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
-                    }
+                    KernelUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                        @Override
+                        public void success(File file) {
+                            mDevice.loadKernelList();
+                            mSwipeUpdater.setRefreshing(false);
+                            final int new_img_count = (mDevice.getStockRecoveryVersions().size()
+                                    + mDevice.getCwmRecoveryVersions().size()
+                                    + mDevice.getTwrpRecoveryVersions().size()
+                                    + mDevice.getPhilzRecoveryVersions().size()
+                                    + mDevice.getStockKernelVersions().size()) - img_count;
+                            mActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast
+                                            .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
+                                                    new_img_count), Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            });
+                        }
 
-                    @Override
-                    public void failed(Exception e) {
-                        Toast
-                                .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                });
-                RecoveryUpdater.execute();
+                        @Override
+                        public void failed(Exception e) {
+                            Toast
+                                    .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    });
+                    RecoveryUpdater.execute();
+                } catch (MalformedURLException e) {}
             }
         });
 
