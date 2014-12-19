@@ -239,9 +239,6 @@ public class RashrActivity extends ActionBarActivity implements
                                         Notifyer.showAppRateDialog(mContext, Constants.PREF_NAME,
                                                 Constants.PREF_KEY_HIDE_RATER);
                                     }
-                                    if (mVersionChanged) {
-                                        SettingsFragment.showChangelog(mContext);
-                                    }
                                 }
                             });
                         }

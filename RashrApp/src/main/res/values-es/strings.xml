@@ -201,5 +201,7 @@
     <string name="update_available">Update disponible</string>
     <string name="download_update">Actualizen la app para utilizar nuevas funciones y evitar problemas</string>
     <string name="open_playstore">Abrir Play Store</string>
+    <string name="uptodate"></string>
+    <string name="update">Update</string>
 
 </resources>

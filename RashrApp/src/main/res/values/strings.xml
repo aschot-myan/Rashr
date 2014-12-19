@@ -207,5 +207,8 @@
     <string name="update_available">Upadate available</string>
     <string name="download_update">Please download the update to keep secure and get the latest features</string>
     <string name="open_playstore">Open Play Store</string>
+    <string name="uptodate">Up to date :D</string>
+    <string name="update">Update</string>
+    <string name="lists_outdated">The list with avaliable recoveries and kernels are outdated. To flash your device with the latest recoveries and kernels update.\nNot all devices are supported!</string>
 
 </resources>

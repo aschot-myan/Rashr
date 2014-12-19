@@ -4,10 +4,13 @@
         <item name="android:windowBackground">@color/darker_green</item>
         <item name="actionBarStyle">@style/MyActionbar</item>
         <item name="android:buttonStyle">@style/Rashr.Button</item>
+        <item name="colorPrimary">@color/custom_green</item>
+        <item name="colorPrimaryDark">@color/darker_green</item>
+        <item name="colorAccent">@color/golden</item>
     </style>
 
     <style name="spinnerStyleView">
-        <item name="android:textColor">@color/custom_yellow</item>
+        <item name="android:textColor">@color/golden</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
@@ -17,7 +20,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textColor">@color/custom_yellow</item>
+        <item name="android:textColor">@color/golden</item>
     </style>
 
     <style name="Rashr.Button.Small" parent="Rashr.Button">
@@ -28,7 +31,7 @@
     <style name="Rashr.Text" parent="CardText">
         <item name="android:textStyle">italic</item>
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textColor">@color/custom_yellow</item>
+        <item name="android:textColor">@color/golden</item>
     </style>
     <style name="MyActionbar" parent="Widget.AppCompat.Light.ActionBar">
         <item name="background">@color/darker_green</item>
@@ -36,7 +39,7 @@
     </style>
 
     <style name="MyActionbar.Title" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/custom_yellow</item>
+        <item name="android:textColor">@color/golden</item>
         <item name="android:textStyle">italic</item>
     </style>
 </resources>
