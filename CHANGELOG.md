@@ -1,6 +1,16 @@
 CHANGELOG
 ====================
 
+Update [2.2.6]
+
+-Update checker added (recovery-list, kernel-list, and app)
+-Update message added to void bricks and outdated versions.
+ All new versions will be blocked if a new version ist out.
+ For example:
+ Version 92 will work for ever
+ Version 93 will work until version 94 isn't released
+-Italian translation updated by XDA-Member bovirus
+
 Update [2.2.5]
 
 -Dark UI added

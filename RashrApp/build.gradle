@@ -5,13 +5,8 @@ android {
     buildToolsVersion '21.1.2'
     defaultConfig {
         minSdkVersion 9
-        versionCode 92
-        versionName '2.2.5'
-    }
-    signingConfigs {
-        DsLNeXuS {
-            storeFile file('C:/Users/ashot_000/Google Drive/workspace/Keystone.key')
-        }
+        versionCode 93
+        versionName '2.2.6'
     }
     lintOptions {
         abortOnError false
