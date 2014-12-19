@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import org.sufficientlysecure.rootcommands.Shell;
@@ -62,15 +63,57 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
-        final CheckBox cbShowAds = (CheckBox) root.findViewById(R.id.cbShowAds);
-        final CheckBox cbLog = (CheckBox) root.findViewById(R.id.cbLog);
-        final CheckBox cbDarkUI = (CheckBox) root.findViewById(R.id.cbDarkUI);
-        final CheckBox cbCheckUpdates = (CheckBox) root.findViewById(R.id.cbCheckUpdates);
+        final SwitchCompat swShowAds = (SwitchCompat) root.findViewById(R.id.cbShowAds);
+        final SwitchCompat swLog = (SwitchCompat) root.findViewById(R.id.cbLog);
+        final SwitchCompat swDarkUI = (SwitchCompat) root.findViewById(R.id.cbDarkUI);
+        final SwitchCompat swCheckUpdates = (SwitchCompat) root.findViewById(R.id.cbCheckUpdates);
         final Button bShowLogs = (Button) root.findViewById(R.id.bShowLogs);
         final Button bReport = (Button) root.findViewById(R.id.bReport);
         final Button bShowChangelog = (Button) root.findViewById(R.id.bShowChangelog);
-        final Button ResetButton = (Button) root.findViewById(R.id.bReset);
-        final Button ClearCache = (Button) root.findViewById(R.id.bClearCache);
+        final Button bReset = (Button) root.findViewById(R.id.bReset);
+        final Button bClearCache = (Button) root.findViewById(R.id.bClearCache);
+
+        swDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
+                Constants.PREF_KEY_DARK_UI));
+        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
+                Constants.PREF_KEY_ADS));
+        swLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
+        swCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
+                Constants.PREF_KEY_CHECK_UPDATES));
+        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
+                Constants.PREF_KEY_ADS));
+
+        swDarkUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME,
+                        Constants.PREF_KEY_DARK_UI, isChecked);
+            }
+        });
+        swLog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                Common.setBooleanPref(view.getContext(), Shell.PREF_NAME, Shell.PREF_LOG, isChecked);
+                root.findViewById(R.id.bShowLogs)
+                        .setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
+        swCheckUpdates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME,
+                        Constants.PREF_KEY_CHECK_UPDATES, isChecked);
+                swCheckUpdates.setChecked(isChecked);
+            }
+        });
+        swShowAds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS,
+                        isChecked);
+                swShowAds.setChecked(isChecked);
+            }
+        });
 
         bReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,59 +121,17 @@ public class SettingsFragment extends Fragment {
                 onButtonPressed(view);
             }
         });
-        cbDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
-                Constants.PREF_KEY_DARK_UI));
-        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
-				Constants.PREF_KEY_ADS));
-        cbLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
-        cbDarkUI.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Common.toggleBooleanPref(v.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_DARK_UI);
-                cbDarkUI.setChecked(Common.getBooleanPref(v.getContext(), Constants.PREF_NAME,
-                        Constants.PREF_KEY_DARK_UI));
-            }
-        });
-        cbLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Common.toggleBooleanPref(view.getContext(), Shell.PREF_NAME, Shell.PREF_LOG);
-                cbLog.setChecked(Common.getBooleanPref(view.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
-                if (cbLog.isChecked()) {
-                    root.findViewById(R.id.bShowLogs).setVisibility(View.VISIBLE);
-                } else {
-                    root.findViewById(R.id.bShowLogs).setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-        cbCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_CHECK_UPDATES));
-        cbCheckUpdates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Common.toggleBooleanPref(v.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_CHECK_UPDATES);
-                cbCheckUpdates.setChecked(Common.getBooleanPref(v.getContext(), Constants.PREF_NAME,
-                        Constants.PREF_KEY_CHECK_UPDATES));
-            }
-        });
+
         bShowLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Common.showLogs(view.getContext());
             }
         });
-        cbShowAds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS,
-                        !Common.getBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS));
-                ((CheckBox) view).setChecked(
-                        Common.getBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS));
-            }
-        });
-        bShowLogs.setVisibility(cbLog.isChecked() ? View.VISIBLE : View.INVISIBLE);
-        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS));
 
-        ResetButton.setOnClickListener(new View.OnClickListener() {
+        bShowLogs.setVisibility(swLog.isChecked() ? View.VISIBLE : View.INVISIBLE);
+
+        bReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Activity activity = getActivity();
@@ -146,7 +147,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        ClearCache.setOnClickListener(new View.OnClickListener() {
+        bClearCache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder ConfirmationDialog = new AlertDialog.Builder(v.getContext());
@@ -159,7 +160,7 @@ public class SettingsFragment extends Fragment {
                                 || !Common.deleteFolder(Constants.PathToTWRP, false)
                                 || !Common.deleteFolder(Constants.PathToPhilz, false)
                                 || !Common.deleteFolder(Constants.PathToStockRecovery, false)
-                                || !Common.deleteFolder(Constants.PathToStockKernel,false)) {
+                                || !Common.deleteFolder(Constants.PathToStockKernel, false)) {
                             Toast
                                     .makeText(getActivity(), R.string.delete_failed, Toast.LENGTH_SHORT)
                                     .show();
