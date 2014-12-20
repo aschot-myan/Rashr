@@ -209,6 +209,6 @@
     <string name="open_playstore">Open Play Store</string>
     <string name="uptodate">Up to date :D</string>
     <string name="update">Update</string>
-    <string name="lists_outdated">The list with avaliable recoveries and kernels are outdated. To flash your device with the latest recoveries and kernels update.\nNot all devices are supported!</string>
+    <string name="lists_outdated">The list with available recoveries and kernels are outdated. To flash your device with the latest recoveries and kernels update.\nNot all devices are supported!</string>
 
 </resources>

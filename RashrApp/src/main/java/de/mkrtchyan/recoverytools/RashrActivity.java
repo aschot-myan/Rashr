@@ -38,6 +38,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,6 +94,7 @@ public class RashrActivity extends ActionBarActivity implements
     private Shell mShell;
     private Toolbox mToolbox;
     private Device mDevice;
+    private Toolbar mToolbar;
 
     private ArrayAdapter<String> RecoveryBakAdapter;
     private ArrayAdapter<String> KernelBakAdapter;
@@ -250,6 +252,8 @@ public class RashrActivity extends ActionBarActivity implements
 
                         try {
                             setContentView(R.layout.activity_rashr);
+                            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+                            setSupportActionBar(mToolbar);
                             mDevice.downloadUtils(mContext);
                             mNavigationDrawerFragment = (NavigationDrawerFragment)
                                     getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -1022,5 +1026,8 @@ public class RashrActivity extends ActionBarActivity implements
             e.printStackTrace();
         }
 
+    }
+    public Toolbar getToolbar() {
+        return mToolbar;
     }
 }

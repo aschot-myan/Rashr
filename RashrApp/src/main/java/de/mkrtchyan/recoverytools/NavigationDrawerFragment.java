@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -73,17 +72,6 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<>(
-                getSupportActivity().getSupportActionBar().getThemedContext(),
-                R.layout.drawer_list_item,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.flasher),
-                        getString(R.string.recovery_script_manager),
-                        getString(R.string.donate),
-                        getString(R.string.settings),
-                        getString(R.string.xda)
-                }));
         return mDrawerListView;
     }
 
@@ -112,6 +100,18 @@ public class NavigationDrawerFragment extends Fragment {
 
         mDrawerLayout = drawerLayout;
 
+        mDrawerListView.setAdapter(new ArrayAdapter<>(
+                getSupportActivity().getSupportActionBar().getThemedContext(),
+                R.layout.drawer_list_item,
+                android.R.id.text1,
+                new String[]{
+                        getString(R.string.flasher),
+                        getString(R.string.recovery_script_manager),
+                        getString(R.string.donate),
+                        getString(R.string.settings),
+                        getString(R.string.xda)
+                }));
+
         // set up the drawer's list view with items and click listener
         ActionBar actionBar = getSupportActivity().getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -121,6 +121,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
+                getSupportActivity().getToolbar(),
                 R.string.app_name,                /* "open drawer" description for accessibility */
                 R.string.app_name                 /* "close drawer" description for accessibility */
         ) {
@@ -207,7 +208,7 @@ public class NavigationDrawerFragment extends Fragment {
         void onNavigationDrawerItemSelected(int position);
     }
 
-    private ActionBarActivity getSupportActivity() {
-        return (ActionBarActivity)getActivity();
+    private RashrActivity getSupportActivity() {
+        return (RashrActivity)getActivity();
     }
 }
