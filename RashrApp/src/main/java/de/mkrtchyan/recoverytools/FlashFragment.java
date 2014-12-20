@@ -10,7 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -893,113 +896,113 @@ public class FlashFragment extends Fragment {
                                 + mDevice.getTwrpRecoveryVersions().size()
                                 + mDevice.getPhilzRecoveryVersions().size()
                                 + mDevice.getStockKernelVersions().size();
-                        URL recoveryURL = new URL(Constants.RECOVERY_SUMS_URL);
-                        final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
-                                RecoveryCollectionFile);
-                        RecoveryUpdater.setOverrideFile(true);
-                        RecoveryUpdater.setHidden(true);
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast
-                                        .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
+                                try {
+                                    URL recoveryURL = new URL(Constants.RECOVERY_SUMS_URL);
+                                    final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
+                                            RecoveryCollectionFile);
+                                    RecoveryUpdater.setOverrideFile(true);
+                                    mActivity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast
+                                                    .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
+                                                    .show();
+                                        }
+                                    });
 
-                        URL kernelURL = new URL(Constants.KERNEL_SUMS_URL);
-                        final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
-                                KernelCollectionFile);
-                        KernelUpdater.setOverrideFile(true);
-                        KernelUpdater.setHidden(true);
-                        KernelUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                            @Override
-                            public void success(File file) {
-                                mDevice.loadKernelList();
-                                isKernelListUpToDate = true;
-                                mSwipeUpdater.setRefreshing(false);
-                                final int new_img_count = (mDevice.getStockRecoveryVersions().size()
-                                        + mDevice.getCwmRecoveryVersions().size()
-                                        + mDevice.getTwrpRecoveryVersions().size()
-                                        + mDevice.getPhilzRecoveryVersions().size()
-                                        + mDevice.getStockKernelVersions().size()) - img_count;
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast
-                                                .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
-                                                        new_img_count), Toast.LENGTH_SHORT)
-                                                .show();
-                                        mSwipeUpdater.setRefreshing(false);
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void failed(final Exception e) {
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast
-                                                .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                                .show();
-                                    }
-                                });
-                            }
-                        });
-                        RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                            @Override
-                            public void success(File file) {
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mDevice.loadRecoveryList();
-                                        isRecoveryListUpToDate = true;
-                                        KernelUpdater.execute();
-                                    }
-                                }).start();
-                            }
-
-                            @Override
-                            public void failed(final Exception e) {
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast
-                                                .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                                .show();
-                                        mSwipeUpdater.setRefreshing(false);
-                                    }
-                                });
-                            }
-                        });
-
-                        if (ask) {
-                            mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    AlertDialog.Builder updateDialog = new AlertDialog.Builder(mContext);
-                                    updateDialog
-                                            .setTitle(R.string.update_available)
-                                            .setMessage(R.string.lists_outdated)
-                                            .setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
+                                    URL kernelURL = new URL(Constants.KERNEL_SUMS_URL);
+                                    final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
+                                            KernelCollectionFile);
+                                    KernelUpdater.setOverrideFile(true);
+                                    KernelUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                        @Override
+                                        public void success(File file) {
+                                            mDevice.loadKernelList();
+                                            isKernelListUpToDate = true;
+                                            mSwipeUpdater.setRefreshing(false);
+                                            final int new_img_count = (mDevice.getStockRecoveryVersions().size()
+                                                    + mDevice.getCwmRecoveryVersions().size()
+                                                    + mDevice.getTwrpRecoveryVersions().size()
+                                                    + mDevice.getPhilzRecoveryVersions().size()
+                                                    + mDevice.getStockKernelVersions().size()) - img_count;
+                                            mActivity.runOnUiThread(new Runnable() {
                                                 @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    RecoveryUpdater.execute();
+                                                public void run() {
+                                                    Toast
+                                                            .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
+                                                                    new_img_count), Toast.LENGTH_SHORT)
+                                                            .show();
+                                                    mSwipeUpdater.setRefreshing(false);
                                                 }
-                                            })
-                                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
+                                            });
+                                        }
 
+                                        @Override
+                                        public void failed(final Exception e) {
+                                            mActivity.runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast
+                                                            .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                                            .show();
                                                 }
-                                            })
-                                            .show();
-                                }
-                            });
-                        } else {
-                            RecoveryUpdater.execute();
-                        }
+                                            });
+                                        }
+                                    });
+                                    RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                        @Override
+                                        public void success(File file) {
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    mDevice.loadRecoveryList();
+                                                    isRecoveryListUpToDate = true;
+                                                    KernelUpdater.execute();
+                                                }
+                                            }).start();
+                                        }
+
+                                        @Override
+                                        public void failed(final Exception e) {
+                                            mActivity.runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast
+                                                            .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                                            .show();
+                                                    mSwipeUpdater.setRefreshing(false);
+                                                }
+                                            });
+                                        }
+                                    });
+
+                                    if (ask) {
+                                        AlertDialog.Builder updateDialog = new AlertDialog.Builder(mContext);
+                                        updateDialog
+                                                .setTitle(R.string.update_available)
+                                                .setMessage(R.string.lists_outdated)
+                                                .setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        RecoveryUpdater.execute();
+                                                    }
+                                                })
+                                                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+
+                                                    }
+                                                })
+                                                .show();
+                                    } else {
+                                        RecoveryUpdater.execute();
+                                    }
+                                } catch (MalformedURLException e) {}
+                            }
+                        });
 
                     } else {
                         mActivity.runOnUiThread(new Runnable() {
