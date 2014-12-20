@@ -1008,6 +1008,7 @@ public class FlashFragment extends Fragment {
                                 Toast
                                         .makeText(mContext, R.string.uptodate, Toast.LENGTH_SHORT)
                                         .show();
+                                mSwipeUpdater.setRefreshing(false);
                             }
                         });
                     }
