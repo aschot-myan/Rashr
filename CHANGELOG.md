@@ -1,6 +1,10 @@
 CHANGELOG
 ====================
 
+Update [2.2.7]
+
+-Startup-Crash on Android <= 4.0 fixed
+
 Update [2.2.6]
 
 -Update checker added (recovery-list, kernel-list, and app)
