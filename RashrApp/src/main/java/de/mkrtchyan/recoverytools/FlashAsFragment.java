@@ -1,6 +1,5 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,8 +44,6 @@ public class FlashAsFragment extends Fragment {
     private Button mButFlashAs;
     private boolean mCloseApp;
 
-    private OnFragmentInteractionListener mListener;
-
     public static FlashAsFragment newInstance(RashrActivity activity, File img, boolean CloseApp) {
         FlashAsFragment fragment = new FlashAsFragment();
         fragment.setActivity(activity);
@@ -74,8 +71,7 @@ public class FlashAsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 				if (!mCloseApp) {
-					AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
-					abuilder
+                    new AlertDialog.Builder(mContext)
 							.setTitle(R.string.exit_app)
 							.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
 								@Override
@@ -86,9 +82,7 @@ public class FlashAsFragment extends Fragment {
 							.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									if (mListener != null) {
-										mListener.onFragmentInteraction(Constants.OPEN_RASHR_FRAGMENT);
-									}
+									mActivity.switchTo(FlashFragment.newInstance(mActivity));
 								}
 							})
 							.setCancelable(false)
@@ -138,28 +132,6 @@ public class FlashAsFragment extends Fragment {
             }
         }
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            mActivity.addError(Constants.FLASH_AS_TAG, e, true);
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(int id);
     }
 
     public void setDevice(Device device) {

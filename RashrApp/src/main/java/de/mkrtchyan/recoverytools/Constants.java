@@ -34,7 +34,7 @@ public class Constants {
     /**
      * Declaring setting names
      */
-    public static final String PREF_NAME = "rashr";
+    public static final String PREF_NAME            =    "rashr";
     public static final String PREF_KEY_HISTORY     =    "last__history_";
     public static final String PREF_KEY_ADS         =    "show_ads";
     public static final String PREF_KEY_CUR_VER     =    "current_version";
@@ -91,10 +91,4 @@ public class Constants {
     public static final File PathToKernelBackups   =      new File(PathToRashr, "kernel-backups");
     public static final File PathToUtils           =      new File(PathToRashr, "utils");
     public static final File LastLog               =      new File("/cache/recovery/last_log");
-
-    /**
-     * OnFragmentInteraction Constants
-     */
-    public static final int OPEN_RASHR_FRAGMENT    =      19273;     /** Random constant No */
-    public static final int OPEN_FLASH_AS_FRAGMENT  =      12309;
 }

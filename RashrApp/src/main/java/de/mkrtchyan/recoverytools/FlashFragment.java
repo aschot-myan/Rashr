@@ -1,20 +1,17 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -77,8 +74,6 @@ public class FlashFragment extends Fragment {
 
     private int CardFontColor, CardBackgroundColor;
 
-    private OnFragmentInteractionListener mListener;
-
     public static FlashFragment newInstance(RashrActivity activity) {
         FlashFragment fragment = new FlashFragment();
         fragment.setActivity(activity);
@@ -94,8 +89,19 @@ public class FlashFragment extends Fragment {
         super.onCreate(savedInstanceState);
         RecoveryCollectionFile = new File(mContext.getFilesDir(), "recovery_sums");
         KernelCollectionFile = new File(mContext.getFilesDir(), "kernel_sums");
+        setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        /**
+         * Backups menu only accessible if backups are possible
+         */
+        if (mDevice.isRecoveryDD() || mDevice.isKernelDD()
+                || mDevice.isRecoveryMTD() || mDevice.isKernelMTD())
+            inflater.inflate(R.menu.flash_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -122,30 +128,22 @@ public class FlashFragment extends Fragment {
         }
         optimizeLayout(root);
         root.setBackgroundColor(BackgroundColor);
-        if (Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_CHECK_UPDATES))
+        if (Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_CHECK_UPDATES)
+                && RashrActivity.FirstSession) {
             catchUpdates(true);
+            RashrActivity.FirstSession = false;
+        }
         return root;
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.BackupItem:
+                mActivity.switchTo(BackupRestoreFragment.newInstance(mActivity));
+                break;
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(int id);
+        return false;
     }
 
     /**
@@ -278,7 +276,7 @@ public class FlashFragment extends Fragment {
                             RecoveryDownloader.setAskBeforeDownload(true);
                             RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);
                             RecoveryDownloader.ask();
-                        } catch (MalformedURLException e) {}
+                        } catch (MalformedURLException ignored) {}
                     } else {
                         flashRecovery(recovery);
                     }
@@ -357,7 +355,7 @@ public class FlashFragment extends Fragment {
                                 KernelDownloader.setAskBeforeDownload(true);
                                 KernelDownloader.setChecksumFile(KernelCollectionFile);
                                 KernelDownloader.ask();
-                            } catch (MalformedURLException e) {}
+                            } catch (MalformedURLException ignored) {}
                         } else {
                             flashKernel(kernel);
                         }
@@ -412,9 +410,8 @@ public class FlashFragment extends Fragment {
                                     long arg3) {
 
                 if (HistoryFiles.get(arg2).exists()) {
-                    mActivity.getIntent().setData(Uri.fromFile(HistoryFiles.get(arg2)));
-                    if (mListener != null)
-                        mListener.onFragmentInteraction(Constants.OPEN_FLASH_AS_FRAGMENT);
+                    mActivity.switchTo(FlashAsFragment.newInstance(mActivity,
+                            HistoryFiles.get(arg2), true));
                     HistoryDialog.dismiss();
                 }
             }
@@ -457,14 +454,7 @@ public class FlashFragment extends Fragment {
                                 })
                                 .show();
                     } else {
-                        FragmentManager fm = mActivity.getSupportFragmentManager();
-                        ScriptManagerFragment fragment = ScriptManagerFragment.newInstance(mActivity,
-                                recovery);
-                        fm
-                                .beginTransaction()
-                                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                                .replace(R.id.container, fragment)
-								.commitAllowingStateLoss();
+                        mActivity.switchTo(ScriptManagerFragment.newInstance(mActivity, recovery));
                     }
                 }
             }
@@ -613,8 +603,7 @@ public class FlashFragment extends Fragment {
                             @Override
                             public void run() {
                                 reloading.dismiss();
-                                if (mListener != null)
-                                    mListener.onFragmentInteraction(Constants.OPEN_RASHR_FRAGMENT);
+                                mActivity.switchTo(FlashFragment.newInstance(mActivity));
                             }
                         });
                     }
@@ -904,14 +893,9 @@ public class FlashFragment extends Fragment {
                                     final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
                                             RecoveryCollectionFile);
                                     RecoveryUpdater.setOverrideFile(true);
-                                    mActivity.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast
-                                                    .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
-                                                    .show();
-                                        }
-                                    });
+                                    Toast
+                                            .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
+                                            .show();
 
                                     URL kernelURL = new URL(Constants.KERNEL_SUMS_URL);
                                     final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
@@ -942,14 +926,9 @@ public class FlashFragment extends Fragment {
 
                                         @Override
                                         public void failed(final Exception e) {
-                                            mActivity.runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast
-                                                            .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                                            .show();
-                                                }
-                                            });
+                                            Toast
+                                                    .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                                    .show();
                                         }
                                     });
                                     RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
@@ -967,15 +946,10 @@ public class FlashFragment extends Fragment {
 
                                         @Override
                                         public void failed(final Exception e) {
-                                            mActivity.runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast
-                                                            .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                                            .show();
-                                                    mSwipeUpdater.setRefreshing(false);
-                                                }
-                                            });
+                                            Toast
+                                                    .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                                    .show();
+                                            mSwipeUpdater.setRefreshing(false);
                                         }
                                     });
 
@@ -1000,10 +974,9 @@ public class FlashFragment extends Fragment {
                                     } else {
                                         RecoveryUpdater.execute();
                                     }
-                                } catch (MalformedURLException e) {}
+                                } catch (MalformedURLException ignored) {}
                             }
                         });
-
                     } else {
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
@@ -1015,11 +988,9 @@ public class FlashFragment extends Fragment {
                             }
                         });
                     }
-
                 } catch (Exception e) {
                     mActivity.addError(Constants.RASHR_TAG, e, false);
                 }
-
             }
         });
         updateThread.start();

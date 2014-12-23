@@ -48,10 +48,10 @@ public class Device {
 
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
     /**
-     * This class content all device specified information to provide
+     * This class contains all device specified information to provide
      * all information for all other classes for example:
      * What kind of partition and where is the recovery partition in the
-     * FileSystem
+     * FileSystem an how to flash
      */
     private int mRECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private int mKERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
@@ -482,7 +482,7 @@ public class Device {
 
                                 }
                             });
-                        } catch (MalformedURLException e) {}
+                        } catch (MalformedURLException ignored) {}
                     }
                 });
                 mAlertDialog.show();

@@ -1,12 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/backup_drawer"
-    android:layout_width="@dimen/navigation_drawer_width"
-    android:layout_height="match_parent"
-    android:layout_gravity="end"
-    android:background="@color/darker_green"
-    android:divider="@android:color/transparent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:divider="@android:color/transparent"
+    android:orientation="vertical" tools:context=".BackupRestoreFragment">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -18,7 +13,6 @@
             android:id="@+id/bCreateRecoveryBackup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="bCreateBackup"
             android:tag="recovery"
             android:text="@string/sRecoveryBackup" />
 
@@ -39,7 +33,6 @@
             android:id="@+id/bCreateKernelBackup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="bCreateBackup"
             android:tag="kernel"
             android:text="@string/sKernelBackup" />
 
@@ -49,5 +42,4 @@
             android:layout_height="match_parent"
             android:textColor="@color/stroke" />
     </LinearLayout>
-
 </LinearLayout>

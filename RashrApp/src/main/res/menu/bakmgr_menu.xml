@@ -3,15 +3,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/iRestoreKernel"
+        android:id="@+id/iRestore"
         android:title="@string/restore" />
 
     <item
-        android:id="@+id/iRenameKernel"
+        android:id="@+id/iRename"
         android:title="@string/rename" />
 
     <item
-        android:id="@+id/iDeleteKernelBackup"
+        android:id="@+id/iDeleteBackup"
         android:title="@string/delete" />
 
 </menu>

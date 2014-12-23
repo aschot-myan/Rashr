@@ -44,8 +44,6 @@ import de.mkrtchyan.utils.Common;
  */
 public class SettingsFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -115,10 +113,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        final RashrActivity activity = (RashrActivity) getActivity();
+
         bReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onButtonPressed(view);
+                ReportDialog dialog = new ReportDialog(activity, "");
+                dialog.show();
             }
         });
 
@@ -187,33 +188,6 @@ public class SettingsFragment extends Fragment {
             }
         });
         return root;
-    }
-
-    public void onButtonPressed(View view) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(view.getId());
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(int id);
     }
 
     public static void showChangelog(Context AppContext) {
