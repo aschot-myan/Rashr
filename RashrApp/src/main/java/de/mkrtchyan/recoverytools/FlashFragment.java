@@ -167,7 +167,9 @@ public class FlashFragment extends Fragment {
                     path = Constants.PathToStockRecovery;
                     for (String i : Versions) {
                         try {
-                            VersionsAdapter.add("Stock " + i.split("-")[3].replace(mDevice.getRecoveryExt(), ""));
+                            String version = i.split("-")[3].replace(mDevice.getRecoveryExt(), "");
+                            String deviceName = i.split("-")[2];
+                            VersionsAdapter.add("Stock Recovery " + version + " (" + deviceName + ")");
                         } catch (ArrayIndexOutOfBoundsException e) {
                             VersionsAdapter.add(i);
                         }
@@ -178,23 +180,22 @@ public class FlashFragment extends Fragment {
                     path = Constants.PathToCWM;
                     for (String i : Versions) {
                         try {
+                            int startIndex;
+                            String version = "";
                             if (i.contains("-touch-")) {
-                                String device = "(";
-                                for (int splitNr = 4; splitNr < i.split("-").length; splitNr++) {
-                                    if (!device.equals("(")) device += "-";
-                                    device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
-                                }
-                                device += ")";
-                                VersionsAdapter.add("ClockworkMod Touch " + i.split("-")[3] + " " + device);
+                                startIndex = 4;
+                                version = "Touch ";
                             } else {
-                                String device = "(";
-                                for (int splitNr = 3; splitNr < i.split("-").length; splitNr++) {
-                                    if (!device.equals("(")) device += "-";
-                                    device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
-                                }
-                                device += ")";
-                                VersionsAdapter.add("ClockworkMod " + i.split("-")[2] + " " + device);
+                                startIndex = 3;
                             }
+                            version += i.split("-")[startIndex-1];
+                            String device = "(";
+                            for (int splitNr = startIndex; splitNr < i.split("-").length; splitNr++) {
+                                if (!device.equals("(")) device += "-";
+                                device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                            }
+                            device += ")";
+                            VersionsAdapter.add("ClockworkMod " + version + " " + device);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             VersionsAdapter.add(i);
                         }
@@ -307,6 +308,7 @@ public class FlashFragment extends Fragment {
     public void FlashSupportedKernel(Card card) {
         final File path;
         ArrayList<String> Versions;
+        ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext, R.layout.custom_list_item);
         if (!mDevice.downloadUtils(mContext)) {
             /**
              * If there files be needed to flash download it and listing device specified recovery
@@ -316,6 +318,15 @@ public class FlashFragment extends Fragment {
             if (SYSTEM.equals("stock")) {
                 Versions = mDevice.getStockKernelVersions();
                 path = Constants.PathToStockKernel;
+                for (String i : Versions) {
+                    try {
+                        String version = i.split("-")[3].replace(mDevice.getRecoveryExt(), "");
+                        String deviceName = i.split("-")[2];
+                        VersionsAdapter.add("Stock Kernel " + version + " (" + deviceName + ")");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        VersionsAdapter.add(i);
+                    }
+                }
             } else {
                 return;
             }
@@ -324,7 +335,7 @@ public class FlashFragment extends Fragment {
             KernelDialog.setTitle(SYSTEM);
             ListView VersionList = new ListView(mContext);
             KernelDialog.setContentView(VersionList);
-            VersionList.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, Versions));
+            VersionList.setAdapter(VersionsAdapter);
             KernelDialog.show();
             VersionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -686,7 +697,7 @@ public class FlashFragment extends Fragment {
             cardUI.addCard(PHILZCard, true);
         }
         if (mDevice.isStockRecoverySupported()) {
-            final MyImageCard StockCard = new MyImageCard(getString(R.string.stock),
+            final MyImageCard StockCard = new MyImageCard(getString(R.string.stock_recovery),
                     R.drawable.ic_update, getString(R.string.stock_recovery_description),
                     CardBackgroundColor, CardFontColor);
             StockCard.setData("stock");
@@ -711,7 +722,7 @@ public class FlashFragment extends Fragment {
     }
     public void addKernelCards(CardUI cardUI) {
         if (mDevice.isStockKernelSupported()) {
-            final MyImageCard StockCard = new MyImageCard(getString(R.string.stock), R.drawable.ic_stock,
+            final MyImageCard StockCard = new MyImageCard(getString(R.string.stock_kernel), R.drawable.ic_stock,
                     getString(R.string.stock_kernel_description), CardBackgroundColor, CardFontColor);
             StockCard.setData("stock");
             StockCard.setOnClickListener(new View.OnClickListener() {
