@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -112,11 +111,6 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.xda)
                 }));
 
-        // set up the drawer's list view with items and click listener
-        ActionBar actionBar = getSupportActivity().getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
         // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
@@ -140,7 +134,6 @@ public class NavigationDrawerFragment extends Fragment {
                 if (!isAdded()) {
                     return;
                 }
-//
                 getSupportActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };

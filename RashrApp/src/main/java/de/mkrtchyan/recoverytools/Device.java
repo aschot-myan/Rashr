@@ -446,8 +446,8 @@ public class Device {
             mStockKernel.clear();
 
             /** Sort newest version to first place */
-            for (Object i : StockKernel) {
-                mStockKernel.add(0, i.toString());
+            for (String i : StockKernel) {
+                mStockKernel.add(0, i);
             }
 
         } catch (Exception e) {
@@ -469,7 +469,7 @@ public class Device {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            URL url = new URL("http://dslnexus.de/Android/utils/" + archive.getName());
+                            URL url = new URL(Constants.UTILS_URL + "/" + archive.getName());
                             Downloader downloader = new Downloader(mContext, url, archive);
                             downloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
                                 @Override
@@ -503,12 +503,11 @@ public class Device {
                     mShell.execCommand("ls " + i.getAbsolutePath());
                     mKernelPath = i.getAbsolutePath();
                     break;
-                } catch (FailedExecuteCommand e) {
-                    e.printStackTrace();
+                } catch (FailedExecuteCommand ignore) {
                     /**
-                     * Partition doesn't exist LOLLIPOP Workaround
-                     * File.exists() returns always false if file is in hidden FS
-                     * Lollipop marks /dev/.... as hidden
+                     * Partition doesn't exist LOLLIPOP Workaround File.exists() returns always
+                     * false if file is in hidden FS. Lollipop marks /dev/.... as hidden
+                     * Check over RootShell (if throws exception partition not found check next
                      */
                 }
             }
@@ -523,96 +522,18 @@ public class Device {
                         mRECOVERY_TYPE = PARTITION_TYPE_SONY;
                     }
                     break;
-                } catch (FailedExecuteCommand e) {
-                    e.printStackTrace();
+                } catch (FailedExecuteCommand ignore) {
                     /**
-                     * Partition doesn't exist LOLLIPOP Workaround
-                     * File.exists() returns always false if file is in hidden FS
-                     * Lollipop marks /dev/.... as hidden
+                     * Partition doesn't exist LOLLIPOP Workaround File.exists() returns always
+                     * false if file is in hidden FS. Lollipop marks /dev/.... as hidden
+                     * Check over RootShell (if throws exception partition not found check next
                      */
                 }
             }
         }
 
-        try {
-            String line;
-            File LogCopy = new File(mContext.getFilesDir(), Constants.LastLog.getName() + ".txt");
-            mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
-            while ((line = br.readLine()) != null) {
-                line = line.replace("\"", "");
-                line = line.replace("\'", "");
-                if (mRecoveryVersion.equals("Not recognized Recovery-Version")) {
-                    if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
-                        mRecoveryVersion = line;
-                    } else if (line.contains("TWRP")) {
-                        line = line.replace("Starting ", "");
-                        line = line.split(" on")[0];
-                        mRecoveryVersion = line;
-                    } else if (line.contains("PhilZ")) {
-                        mRecoveryVersion = line;
-                    } else if (line.contains("4EXT")) {
-                        line = line.split("4EXT")[1];
-                        mRecoveryVersion = line;
-                    }
-                } else if (!mKernelPath.equals("") && !mRecoveryPath.equals("")) {
-                    break;
-                }
-
-                if (mKernelPath.equals("")) {
-                    if (line.contains("/boot") && !line.contains("/bootloader")) {
-                        if (line.contains("mtd")) {
-                            mKERNEL_TYPE = PARTITION_TYPE_MTD;
-                        } else if (line.contains("/dev/")) {
-                            for (String split : line.split(" ")) {
-                                if (split.startsWith("/dev")) {
-                                    try {
-                                        mShell.execCommand("ls " + split);
-                                        mKernelPath = split;
-                                        break;
-                                    } catch (FailedExecuteCommand e) {
-                                        e.printStackTrace();
-                                        /**
-                                         * Partition doesn't exist LOLLIPOP Workaround
-                                         * File.exists() returns always false if file is in hidden FS
-                                         * Lollipop marks /dev/.... as hidden
-                                         */
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                if (mRecoveryPath.equals("")) {
-                    if (line.contains("/recovery")) {
-                        if (line.contains("mtd")) {
-                            mRECOVERY_TYPE = PARTITION_TYPE_MTD;
-                        } else if (line.contains("/dev/")) {
-                            for (String split : line.split(" ")) {
-                                if (split.startsWith("/dev") || split.startsWith("/system")) {
-                                    try {
-                                        mShell.execCommand("ls " + split);
-                                        mRecoveryPath = split;
-                                        break;
-                                    } catch (FailedExecuteCommand e) {
-                                        e.printStackTrace();
-                                        /**
-                                         * Partition doesn't exist LOLLIPOP Workaround
-                                         * File.exists() returns always false if file is in hidden FS
-                                         * Lollipop marks /dev/.... as hidden
-                                         */
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            br.close();
-        } catch (Exception e) {
-            mActivity.addError(Constants.DEVICE_TAG, e, false);
+        if (RashrActivity.LastLogExists) {
+            readLastLog();
         }
 
         if (mRecoveryPath.equals("")) {
@@ -772,45 +693,7 @@ public class Device {
         }
 
         if (!isRecoverySupported() || !isKernelSupported()) {
-            File PartLayout = new File(mContext.getFilesDir(), Build.DEVICE);
-            if (!PartLayout.exists()) {
-                try {
-                    ZipFile PartLayoutsZip = new ZipFile(new File(mContext.getFilesDir(), "partlayouts.zip"));
-                    for (Enumeration e = PartLayoutsZip.entries(); e.hasMoreElements(); ) {
-                        ZipEntry entry = (ZipEntry) e.nextElement();
-                        if (entry.getName().equals(Build.DEVICE)) {
-                            Unzipper.unzipEntry(PartLayoutsZip, entry, mContext.getFilesDir());
-                            if (new File(mContext.getFilesDir(), entry.getName()).renameTo(PartLayout)) {
-                                throw new IOException("Failed rename File into " + PartLayout);
-                            }
-                        }
-                    }
-                } catch (IOException e) {
-                    mActivity.addError(Constants.DEVICE_TAG, e, false);
-                }
-            }
-            if (PartLayout.exists()) {
-                try {
-                    String Line;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(PartLayout)));
-                    while ((Line = br.readLine()) != null) {
-                        Line = Line.replace('"', ' ').replace(':', ' ');
-                        File partition = new File("/dev/block/", Line.split(" ")[0]);
-                        if (partition.exists()) {
-                            if (!isRecoverySupported() && Line.contains("recovery")) {
-                                mRecoveryPath = partition.getAbsolutePath();
-                                mRECOVERY_TYPE = PARTITION_TYPE_DD;
-                            } else if (!isKernelSupported() && Line.contains("boot")
-                                    && !Line.contains("bootloader")) {
-                                mKernelPath = partition.getAbsolutePath();
-                                mKERNEL_TYPE = PARTITION_TYPE_DD;
-                            }
-                        }
-                    }
-                } catch (IOException e) {
-                    mActivity.addError(Constants.DEVICE_TAG, e, false);
-                }
-            }
+            readPartLayouts();
         }
     }
 
@@ -948,5 +831,128 @@ public class Device {
         return mBoard;
     }
 
+    private void readLastLog() {
+        try {
+            String line;
+            File LogCopy = new File(mContext.getFilesDir(), Constants.LastLog.getName() + ".txt");
+            mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
+            while ((line = br.readLine()) != null) {
+                line = line.replace("\"", "");
+                line = line.replace("\'", "");
+                if (mRecoveryVersion.equals("Not recognized Recovery-Version")) {
+                    if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
+                        mRecoveryVersion = line;
+                    } else if (line.contains("TWRP")) {
+                        line = line.replace("Starting ", "");
+                        line = line.split(" on")[0];
+                        mRecoveryVersion = line;
+                    } else if (line.contains("PhilZ")) {
+                        mRecoveryVersion = line;
+                    } else if (line.contains("4EXT")) {
+                        line = line.split("4EXT")[1];
+                        mRecoveryVersion = line;
+                    }
+                } else if (!mKernelPath.equals("") && !mRecoveryPath.equals("")) {
+                    break;
+                }
+
+                if (mKernelPath.equals("")) {
+                    if (line.contains("/boot") && !line.contains("/bootloader")) {
+                        if (line.contains("mtd")) {
+                            mKERNEL_TYPE = PARTITION_TYPE_MTD;
+                        } else if (line.contains("/dev/")) {
+                            for (String split : line.split(" ")) {
+                                if (split.startsWith("/dev")) {
+                                    try {
+                                        mShell.execCommand("ls " + split);
+                                        mKernelPath = split;
+                                        break;
+                                    } catch (FailedExecuteCommand e) {
+                                        e.printStackTrace();
+                                        /**
+                                         * Partition doesn't exist LOLLIPOP Workaround
+                                         * File.exists() returns always false if file is in hidden FS
+                                         * Lollipop marks /dev/.... as hidden
+                                         */
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+                if (mRecoveryPath.equals("")) {
+                    if (line.contains("/recovery")) {
+                        if (line.contains("mtd")) {
+                            mRECOVERY_TYPE = PARTITION_TYPE_MTD;
+                        } else if (line.contains("/dev/")) {
+                            for (String split : line.split(" ")) {
+                                if (split.startsWith("/dev") || split.startsWith("/system")) {
+                                    try {
+                                        mShell.execCommand("ls " + split);
+                                        mRecoveryPath = split;
+                                        break;
+                                    } catch (FailedExecuteCommand ignore) {
+                                        /**
+                                         * Partition doesn't exist LOLLIPOP Workaround
+                                         * File.exists() returns always false if file is in hidden FS
+                                         * Lollipop marks /dev/.... as hidden
+                                         */
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            br.close();
+        } catch (Exception e) {
+            mActivity.addError(Constants.DEVICE_TAG, e, false);
+        }
+    }
+
+    private void readPartLayouts() {
+        File PartLayout = new File(mContext.getFilesDir(), Build.DEVICE);
+        if (!PartLayout.exists()) {
+            try {
+                ZipFile PartLayoutsZip = new ZipFile(new File(mContext.getFilesDir(), "partlayouts.zip"));
+                for (Enumeration e = PartLayoutsZip.entries(); e.hasMoreElements(); ) {
+                    ZipEntry entry = (ZipEntry) e.nextElement();
+                    if (entry.getName().equals(Build.DEVICE)) {
+                        Unzipper.unzipEntry(PartLayoutsZip, entry, mContext.getFilesDir());
+                        if (new File(mContext.getFilesDir(), entry.getName()).renameTo(PartLayout)) {
+                            throw new IOException("Failed rename File into " + PartLayout);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                mActivity.addError(Constants.DEVICE_TAG, e, false);
+            }
+        }
+        if (PartLayout.exists()) {
+            try {
+                String Line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(PartLayout)));
+                while ((Line = br.readLine()) != null) {
+                    Line = Line.replace('"', ' ').replace(':', ' ');
+                    File partition = new File("/dev/block/", Line.split(" ")[0]);
+                    if (partition.exists()) {
+                        if (!isRecoverySupported() && Line.contains("recovery")) {
+                            mRecoveryPath = partition.getAbsolutePath();
+                            mRECOVERY_TYPE = PARTITION_TYPE_DD;
+                        } else if (!isKernelSupported() && Line.contains("boot")
+                                && !Line.contains("bootloader")) {
+                            mKernelPath = partition.getAbsolutePath();
+                            mKERNEL_TYPE = PARTITION_TYPE_DD;
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                mActivity.addError(Constants.DEVICE_TAG, e, false);
+            }
+        }
+    }
 
 }

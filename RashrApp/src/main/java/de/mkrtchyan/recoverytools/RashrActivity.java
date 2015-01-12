@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +28,7 @@ import org.sufficientlysecure.rootcommands.Toolbox;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
@@ -62,6 +62,7 @@ public class RashrActivity extends ActionBarActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     static boolean FirstSession = true;
+    static boolean LastLogExists = true;
 
     private final File Folder[] = {
             Constants.PathToRashr, Constants.PathToRecoveries, Constants.PathToKernel,
@@ -137,6 +138,7 @@ public class RashrActivity extends ActionBarActivity implements
                     mToolbox.setFilePermissions(Constants.LastLog, "666");
                     mToolbox.copyFile(Constants.LastLog, LogCopy, false, false);
                 } catch (Exception e) {
+                    LastLogExists = false;
                     mActivity.addError(Constants.RASHR_TAG, e, false);
                 }
                 mActivity.runOnUiThread(new Runnable() {
@@ -253,7 +255,7 @@ public class RashrActivity extends ActionBarActivity implements
                                 if (Common.getBooleanPref(mContext, Constants.PREF_NAME,
                                         Constants.PREF_KEY_ADS)) {
                                     ads.loadAd(new AdRequest.Builder()
-                                            .addTestDevice("53B35F6E356EB90AD09B357DF092BC8F")
+                                            .addTestDevice("7C7C4F8B3603E7BA327F75CDC8C6A896")
                                             .build());
                                 } else {
                                     containerLayout.removeView(ads);
@@ -386,7 +388,7 @@ public class RashrActivity extends ActionBarActivity implements
         try {
             for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
                 /**
-                 * Skip following Prefs (PREF_KEY_KERNEL_HISTORY, PREF_KEY_RECOVERY_HISTORY ...)
+                 * Skip following Prefs (PREF_KEY_HISTORY, ...)
                  */
                 try {
                     if (!entry.getKey().contains(Constants.PREF_KEY_HISTORY)
@@ -507,9 +509,7 @@ public class RashrActivity extends ActionBarActivity implements
                 }
             });
             version.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (MalformedURLException ignore) {}
 
     }
     public Toolbar getToolbar() {
@@ -517,8 +517,8 @@ public class RashrActivity extends ActionBarActivity implements
     }
 
     public void switchTo(Fragment fragment) {
-        FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
                 .replace(R.id.container, fragment)
                 .commitAllowingStateLoss();
