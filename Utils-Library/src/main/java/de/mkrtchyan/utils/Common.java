@@ -45,9 +45,9 @@ public class Common {
 
     public static void pushFileFromRAW(Context mContext, File outputFile, int RAW, boolean Override) throws IOException {
         if (!outputFile.exists() || Override) {
-            if (Override)
-                if (!outputFile.delete())
-					throw new IOException(outputFile.getName() + " can't be deleted!");
+            if (Override && outputFile.exists()) if (!outputFile.delete()) {
+                throw new IOException(outputFile.getName() + " can't be deleted!");
+            }
             InputStream is = mContext.getResources().openRawResource(RAW);
             OutputStream os = new FileOutputStream(outputFile);
             byte[] data = new byte[is.available()];

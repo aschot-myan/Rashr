@@ -6,7 +6,6 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/flatt_green_background"
     android:text="Sample Text"
     android:gravity="center_vertical|center_horizontal"
     android:textStyle="italic"

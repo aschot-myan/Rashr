@@ -177,5 +177,7 @@
     <string name="update">Update</string>
     <string name="lists_outdated">The list with available recoveries and kernels are outdated. To flash your device with the latest recoveries and kernels update.\nNot all devices are supported!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stock_recovery">Stock Recovery</string>
+    <string name="stock_kernel">Stock Kernel</string>
 
 </resources>

@@ -216,4 +216,6 @@
     <string name="uptodate">Listen sind aktuell</string>
     <string name="update">Update</string>
     <string name="lists_outdated">Die Listen an verfügbare Recoveires und Kernel ist veraltet. Updaten Sie diese um die neuesten Recoveries und Kernels zu flashen.\nNicht alle Geräte sind von diesen Recoveries unterstützt</string>
+    <string name="stock_recovery">Stock Recovery</string>
+    <string name="stock_kernel">Stock Kernel</string>
 </resources>

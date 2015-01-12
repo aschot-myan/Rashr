@@ -50,7 +50,6 @@ public class Constants {
     public static final boolean GOOGLE_PLAY        =     true;
     public static final String GOOGLE_PUBKEY       =     "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhHa/9/sYU2dbF6nQqGzNktvxb+83Ed/inkK8cbiEkcRjw/t/Okge6UghlyYEXcZLJL9TDPAlraktUZZ/XH8+ZpgdNlO+UeQTD4Yl9ReZ/ujQ151g/RLrVNi7NF4SQ1jD20RmX2lCUhbl5cPi6UKL/bHFeZwjE0pOr48svW0nXbRfpgSSk3V/DaV1igTX66DuFUITKi0gQGD8XAVsrOcQRQtr4wHfdgyMQR9m0vPPzpFoDD8SZZFCp9UgvuzqdwYqY8kr7ZcyxuQhaNlcx74hpFQ9MJteRTII+ii/pHfWDh0hDMqcodm4UD9rISmPSvlLR3amfSg4Vm6ObWFiVe4qVwIDAQAB";
     public static final String[] GOOGLE_CATALOG    =    {
-                                                         "donate_0_50",
                                                          "donate_1",
                                                          "donate_2",
                                                          "donate_3",
@@ -73,6 +72,7 @@ public class Constants {
     public static final String RECOVERY_SUMS_URL   =     BASE_URL + "/recovery_sums";
     public static final String KERNEL_SUMS_URL     =     BASE_URL + "/kernel_sums";
     public static final String RASHR_VERSION_URL   =     BASE_URL + "/rashr/version";
+    public static final String UTILS_URL           =     BASE_URL + "/utils";
 
     public static final String CHANGELOG_URL       =     "https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/CHANGELOG.md";
     /**
