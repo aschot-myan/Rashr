@@ -877,37 +877,39 @@ public class FlashFragment extends Fragment {
             @Override
             public void run() {
                 try {
+                    /** Check changes on server */
                     final URL recoveryUrl = new URL(Constants.RECOVERY_SUMS_URL);
                     URLConnection recoveryCon = recoveryUrl.openConnection();
                     long recoveryListSize = recoveryCon.getContentLength();
                     long recoveryListLocalSize = RecoveryCollectionFile.length();
-                    if (recoveryListSize > 0)
+                    if (recoveryListSize > 0) {
                         isRecoveryListUpToDate = recoveryListLocalSize == recoveryListSize;
+                    }
                     final URL kernelUrl = new URL(Constants.KERNEL_SUMS_URL);
                     URLConnection kernelCon = kernelUrl.openConnection();
                     long kernelListSize = kernelCon.getContentLength();
                     long kernelListLocalSize = KernelCollectionFile.length();
-                    if (kernelListSize > 0)
+                    if (kernelListSize > 0) {
                         isKernelListUpToDate = kernelListLocalSize == kernelListSize;
-
+                    }
                     if (!isRecoveryListUpToDate || !isKernelListUpToDate) {
+                        /** Counting current images */
                         final int img_count = mDevice.getStockRecoveryVersions().size()
                                 + mDevice.getCwmRecoveryVersions().size()
                                 + mDevice.getTwrpRecoveryVersions().size()
                                 + mDevice.getPhilzRecoveryVersions().size()
                                 + mDevice.getStockKernelVersions().size();
-                        mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    URL recoveryURL = new URL(Constants.RECOVERY_SUMS_URL);
-                                    final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
-                                            RecoveryCollectionFile);
-                                    RecoveryUpdater.setOverrideFile(true);
-                                    Toast
-                                            .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
-                                            .show();
 
+                        URL recoveryURL = new URL(Constants.RECOVERY_SUMS_URL);
+                        final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
+                                RecoveryCollectionFile);
+                        RecoveryUpdater.setOverrideFile(true);
+                        RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                            @Override
+                            public void success(File file) {
+                                mDevice.loadRecoveryList();
+                                isRecoveryListUpToDate = true;
+                                try {
                                     URL kernelURL = new URL(Constants.KERNEL_SUMS_URL);
                                     final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
                                             KernelCollectionFile);
@@ -917,7 +919,7 @@ public class FlashFragment extends Fragment {
                                         public void success(File file) {
                                             mDevice.loadKernelList();
                                             isKernelListUpToDate = true;
-                                            mSwipeUpdater.setRefreshing(false);
+                                            /** Counting added images (after update) */
                                             final int new_img_count = (mDevice.getStockRecoveryVersions().size()
                                                     + mDevice.getCwmRecoveryVersions().size()
                                                     + mDevice.getTwrpRecoveryVersions().size()
@@ -942,28 +944,23 @@ public class FlashFragment extends Fragment {
                                                     .show();
                                         }
                                     });
-                                    RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                                        @Override
-                                        public void success(File file) {
-                                            new Thread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    mDevice.loadRecoveryList();
-                                                    isRecoveryListUpToDate = true;
-                                                    KernelUpdater.execute();
-                                                }
-                                            }).start();
-                                        }
+                                    KernelUpdater.execute();
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
-                                        @Override
-                                        public void failed(final Exception e) {
-                                            Toast
-                                                    .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                                    .show();
-                                            mSwipeUpdater.setRefreshing(false);
-                                        }
-                                    });
-
+                            @Override
+                            public void failed(final Exception e) {
+                                Toast
+                                        .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                        .show();
+                                mSwipeUpdater.setRefreshing(false);
+                            }
+                        });
+                        mActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
                                     if (ask) {
                                         AlertDialog.Builder updateDialog = new AlertDialog.Builder(mContext);
                                         updateDialog
@@ -972,6 +969,9 @@ public class FlashFragment extends Fragment {
                                                 .setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
+                                                        Toast
+                                                                .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
+                                                                .show();
                                                         RecoveryUpdater.execute();
                                                     }
                                                 })
@@ -983,9 +983,11 @@ public class FlashFragment extends Fragment {
                                                 })
                                                 .show();
                                     } else {
+                                        Toast
+                                                .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
+                                                .show();
                                         RecoveryUpdater.execute();
                                     }
-                                } catch (MalformedURLException ignored) {}
                             }
                         });
                     } else {
