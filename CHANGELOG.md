@@ -1,6 +1,14 @@
 CHANGELOG
 ====================
 
+Update [2.2.8]
+
+-Cannot send report if comment is to big fixed (thanks for reporting XDA-Member Stilez)
+-Update crashes fixed!
+-Better version formating for stock images
+-Chinese translation by XDA-Member dlhxr
+-UI changes
+
 Update [2.2.7]
 
 -Startup-Crash on Android <= 4.0 fixed
