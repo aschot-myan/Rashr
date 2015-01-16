@@ -243,7 +243,7 @@ public class BackupRestoreFragment extends Fragment {
                 + "-" + Calendar.getInstance().get(Calendar.MONTH)
                 + "-" + Calendar.getInstance().get(Calendar.YEAR)
                 + "-" + Calendar.getInstance().get(Calendar.HOUR)
-                + ":" + Calendar.getInstance().get(Calendar.MINUTE) + EXT;
+                + "-" + Calendar.getInstance().get(Calendar.MINUTE) + EXT;
         optName.setText(CurrentName);
         optName.setOnClickListener(new View.OnClickListener() {
             @Override
