@@ -56,7 +56,7 @@
         Zariadenie nemá root. Prosíme aby ste si zariadenie root-li. Viac informácií na
         \n\nxda-developers.com
     </string>
-    <string name="Downloading">Sťahuje sa...</string>
+    <string name="Downloading">Sťahuje sa…</string>
     <string name="comment">Komentovať</string>
     <string name="comment_hint">
 	    Tu komentujte čo nefunguje správne (sťahovanie, napaľovanie, bežná podpora alebo iné)
@@ -72,8 +72,8 @@
     <string name="setname">Nastavte názov zálohy</string>
     <string name="reboot_recovery_now">Reštartovať do Recovery teraz?</string>
     <string name="reboot_now">Reštartovať teraz?</string>
-    <string name="flashing">Napaľujem...</string>
-    <string name="restoring">Obnovujem...</string>
+    <string name="flashing">Napaľujem…</string>
+    <string name="restoring">Obnovujem…</string>
     <string name="creating_bak">Vytváram zálohu</string>
     <string name="download_utils">
         Na používanie tejto aplikácie je potrebné stiahnúť malé nástroje (okolo 512KB). Toto vyžaduje internetové pripojenie.
