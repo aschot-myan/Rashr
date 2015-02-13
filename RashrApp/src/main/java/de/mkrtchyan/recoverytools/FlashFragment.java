@@ -30,6 +30,7 @@ import com.fima.cardsui.views.MyImageCard;
 import org.sufficientlysecure.rootcommands.Toolbox;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -873,15 +874,15 @@ public class FlashFragment extends Fragment {
 
     public void catchUpdates(final boolean ask) {
         mSwipeUpdater.setRefreshing(true);
-        Thread updateThread = new Thread(new Runnable() {
+        final Thread updateThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     /** Check changes on server */
                     final URL recoveryUrl = new URL(Constants.RECOVERY_SUMS_URL);
                     URLConnection recoveryCon = recoveryUrl.openConnection();
-                    long recoveryListSize = recoveryCon.getContentLength();
-                    long recoveryListLocalSize = RecoveryCollectionFile.length();
+                    long recoveryListSize = recoveryCon.getContentLength();         //returns size of file on server
+                    long recoveryListLocalSize = RecoveryCollectionFile.length();   //returns size of local file
                     if (recoveryListSize > 0) {
                         isRecoveryListUpToDate = recoveryListLocalSize == recoveryListSize;
                     }
@@ -892,25 +893,43 @@ public class FlashFragment extends Fragment {
                     if (kernelListSize > 0) {
                         isKernelListUpToDate = kernelListLocalSize == kernelListSize;
                     }
-                    if (!isRecoveryListUpToDate || !isKernelListUpToDate) {
-                        /** Counting current images */
-                        final int img_count = mDevice.getStockRecoveryVersions().size()
-                                + mDevice.getCwmRecoveryVersions().size()
-                                + mDevice.getTwrpRecoveryVersions().size()
-                                + mDevice.getPhilzRecoveryVersions().size()
-                                + mDevice.getStockKernelVersions().size();
-
-                        URL recoveryURL = new URL(Constants.RECOVERY_SUMS_URL);
-                        final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
-                                RecoveryCollectionFile);
-                        RecoveryUpdater.setOverrideFile(true);
-                        RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                            @Override
-                            public void success(File file) {
-                                mDevice.loadRecoveryList();
-                                isRecoveryListUpToDate = true;
-                                try {
-                                    URL kernelURL = new URL(Constants.KERNEL_SUMS_URL);
+                } catch (IOException e) {
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast
+                                    .makeText(mContext, R.string.check_connection, Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    });
+                    mActivity.addError(Constants.RASHR_TAG, e, false);
+                }
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!isRecoveryListUpToDate || !isKernelListUpToDate) {
+                            /** Counting current images */
+                            final int img_count = mDevice.getStockRecoveryVersions().size()
+                                    + mDevice.getCwmRecoveryVersions().size()
+                                    + mDevice.getTwrpRecoveryVersions().size()
+                                    + mDevice.getPhilzRecoveryVersions().size()
+                                    + mDevice.getStockKernelVersions().size();
+                            final URL recoveryURL;
+                            final URL kernelURL;
+                            try {
+                                recoveryURL = new URL(Constants.RECOVERY_SUMS_URL);
+                                kernelURL = new URL(Constants.KERNEL_SUMS_URL);
+                            } catch (MalformedURLException e) {
+                                return;
+                            }
+                            final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
+                                    RecoveryCollectionFile);
+                            RecoveryUpdater.setOverrideFile(true);
+                            RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                @Override
+                                public void success(File file) {
+                                    mDevice.loadRecoveryList();
+                                    isRecoveryListUpToDate = true;
                                     final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
                                             KernelCollectionFile);
                                     KernelUpdater.setOverrideFile(true);
@@ -928,10 +947,12 @@ public class FlashFragment extends Fragment {
                                             mActivity.runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    Toast
-                                                            .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
-                                                                    new_img_count), Toast.LENGTH_SHORT)
-                                                            .show();
+                                                    if (isAdded()) {
+                                                        Toast
+                                                                .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
+                                                                        new_img_count), Toast.LENGTH_SHORT)
+                                                                .show();
+                                                    }
                                                     mSwipeUpdater.setRefreshing(false);
                                                 }
                                             });
@@ -942,25 +963,23 @@ public class FlashFragment extends Fragment {
                                             Toast
                                                     .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
                                                     .show();
+                                            mSwipeUpdater.setRefreshing(false);
                                         }
                                     });
                                     KernelUpdater.execute();
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
                                 }
-                            }
 
-                            @Override
-                            public void failed(final Exception e) {
-                                Toast
-                                        .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
-                                        .show();
-                                mSwipeUpdater.setRefreshing(false);
-                            }
-                        });
-                        mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+                                @Override
+                                public void failed(final Exception e) {
+                                    Toast
+                                            .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                            .show();
+                                    mSwipeUpdater.setRefreshing(false);
+                                }
+                            });
+                            mActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
                                     if (ask) {
                                         AlertDialog.Builder updateDialog = new AlertDialog.Builder(mContext);
                                         updateDialog
@@ -988,22 +1007,21 @@ public class FlashFragment extends Fragment {
                                                 .show();
                                         RecoveryUpdater.execute();
                                     }
-                            }
-                        });
-                    } else {
-                        mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast
-                                        .makeText(mContext, R.string.uptodate, Toast.LENGTH_SHORT)
-                                        .show();
-                                mSwipeUpdater.setRefreshing(false);
-                            }
-                        });
+                                }
+                            });
+                        } else {
+                            mActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast
+                                            .makeText(mContext, R.string.uptodate, Toast.LENGTH_SHORT)
+                                            .show();
+                                    mSwipeUpdater.setRefreshing(false);
+                                }
+                            });
+                        }
                     }
-                } catch (Exception e) {
-                    mActivity.addError(Constants.RASHR_TAG, e, false);
-                }
+                });
             }
         });
         updateThread.start();
