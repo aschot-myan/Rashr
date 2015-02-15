@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import org.sufficientlysecure.donations.DonationsFragment;
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
 
@@ -36,7 +37,6 @@ import java.util.Map;
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Notifyer;
-import donations.DonationsFragment;
 
 /**
  * Copyright (c) 2014 Aschot Mkrtchyan
@@ -81,13 +81,16 @@ public class RashrActivity extends ActionBarActivity implements
     private Device mDevice;
     private Toolbar mToolbar;
 
+    public static boolean IsDark;
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private boolean mVersionChanged = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        IsDark = Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_DARK_UI);
+        setTheme(!IsDark ? R.style.Rashr : R.style.Rashr_Dark);
         setContentView(R.layout.loading_layout);
 
         final TextView tvLoading = (TextView) findViewById(R.id.tvLoading);
@@ -221,6 +224,7 @@ public class RashrActivity extends ActionBarActivity implements
                         if (mVersionChanged) {
                             Common.setBooleanPref(mContext, Constants.PREF_NAME,
                                     Constants.PREF_KEY_ADS, true);
+                            Common.deleteLogs(mContext);
                             mActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -324,14 +328,6 @@ public class RashrActivity extends ActionBarActivity implements
         AlertDialog.Builder DeviceNotSupported = new AlertDialog.Builder(mContext);
         DeviceNotSupported.setTitle(R.string.warning);
         DeviceNotSupported.setMessage(R.string.not_supportded);
-        DeviceNotSupported.setPositiveButton(R.string.report, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                ReportDialog dialog = new ReportDialog(mActivity, "");
-                dialog.setCancelable(false);
-                dialog.show();
-            }
-        });
         DeviceNotSupported.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -412,10 +408,13 @@ public class RashrActivity extends ActionBarActivity implements
         position++;
         String action;
         if ((action = mActivity.getIntent().getAction()) != null && action.equals(Intent.ACTION_VIEW)) {
+            /** Rashr is opened by other app to flash supported files (.zip) or (.img) */
             if (mActivity.getIntent().getData().toString().endsWith(".zip")) {
+                /** If it is a zip file open the ScriptManager */
                 File zip = new File(getIntent().getData().getPath());
                 if (zip.exists()) fragment = ScriptManagerFragment.newInstance(this, zip);
             } else {
+                /** If it is a img file open FlashAs to choose mode (recovery or kernel) */
                 File img = new File(getIntent().getData().getPath());
                 if (img.exists()) fragment = FlashAsFragment.newInstance(this, img, true);
             }
@@ -428,10 +427,10 @@ public class RashrActivity extends ActionBarActivity implements
                     fragment = ScriptManagerFragment.newInstance(this, null);
                     break;
                 case 3:
-                    fragment = DonationsFragment.newInstance(BuildConfig.DEBUG, Constants.GOOGLE_PLAY,
+                    fragment =
+                            DonationsFragment.newInstance(BuildConfig.DEBUG,
                             Constants.GOOGLE_PUBKEY, Constants.GOOGLE_CATALOG,
-                            getResources().getStringArray(R.array.donation_google_catalog_values),
-                            Constants.FLATTR, Constants.FLATTR_PROJECT_URL, Constants.FLATTR_URL);
+                            getResources().getStringArray(R.array.donation_google_catalog_values));
                     break;
                 case 4:
                     fragment = SettingsFragment.newInstance();
