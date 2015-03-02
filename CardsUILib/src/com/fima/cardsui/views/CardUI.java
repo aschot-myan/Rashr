@@ -2,6 +2,8 @@ package com.fima.cardsui.views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -16,11 +18,13 @@ import android.widget.ListView;
 import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.fima.cardsui.R;
 import com.fima.cardsui.StackAdapter;
 import com.fima.cardsui.objects.AbstractCard;
 import com.fima.cardsui.objects.Card;
+import com.fima.cardsui.objects.CardColorScheme;
 import com.fima.cardsui.objects.CardStack;
 
 import java.util.ArrayList;
@@ -64,6 +68,7 @@ public class CardUI extends FrameLayout {
     private OnRenderedListener onRenderedListener;
     private StackAdapter mAdapter;
     private View mHeader;
+    private CardColorScheme mScheme;
 
     /**
      * Constructor
