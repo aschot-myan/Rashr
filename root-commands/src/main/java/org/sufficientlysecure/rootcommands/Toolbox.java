@@ -185,23 +185,23 @@ public class Toolbox {
      *
      * @param file        absolute path to file
      * @param permissions String like 777
-     * @throws BrokenBusyboxException
-     * @throws TimeoutException
-     * @throws IOException
      */
     public void setFilePermissions(String file, String permissions) throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Set permissions of " + file + " to " + permissions);
-
-        shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
-
+        try {
+            shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
+        } catch (FailedExecuteCommand e) {
+            shell.execCommand("busybox chmod " + permissions + " \"" + file + "\"");
+        }
     }
 
-    public void setFilePermissions(File file, String permissions)
-            throws FailedExecuteCommand {
+    public void setFilePermissions(File file, String permissions) throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Set permissions of " + file + " to " + permissions);
-
-        shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
-
+        try {
+            shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
+        } catch (FailedExecuteCommand e) {
+            shell.execCommand("busybox chmod " + permissions + " \"" + file + "\"");
+        }
     }
 
     /**
@@ -210,9 +210,6 @@ public class Toolbox {
      * @param file The path to the file to get the Symlink for. (must have absolute path)
      * @return A String that represent the symlink for a specified file or null if no symlink
      * exists.
-     * @throws IOException
-     * @throws TimeoutException
-     * @throws BrokenBusyboxException
      */
     public String getSymlink(String file) throws FailedExecuteCommand {
         Log.d(RootCommands.TAG, "Find symlink for " + file);
@@ -239,7 +236,6 @@ public class Toolbox {
      * @return true if it was successfully copied
      * @throws BrokenBusyboxException
      * @throws IOException
-     * @throws TimeoutException
      */
     public void copyFile(File source, File destination, boolean remountAsRw,
                          boolean preservePermissions) throws FailedExecuteCommand,
@@ -293,11 +289,6 @@ public class Toolbox {
     /**
      * Shutdown or reboot device. Possible actions are REBOOT_HOTREBOOT, REBOOT_REBOOT,
      * REBOOT_SHUTDOWN, REBOOT_RECOVERY
-     *
-     * @param action
-     * @throws IOException
-     * @throws TimeoutException
-     * @throws BrokenBusyboxException
      */
     public void reboot(int action) throws FailedExecuteCommand {
         if (action == REBOOT_HOTREBOOT) {
@@ -332,9 +323,6 @@ public class Toolbox {
      *
      * @param file String that represent the file, including the full path to the file and its name.
      * @return a boolean that will indicate whether or not the file exists.
-     * @throws IOException
-     * @throws TimeoutException
-     * @throws BrokenBusyboxException
      */
     public boolean fileExists(String file) throws FailedExecuteCommand {
         FileExistsCommand fileExistsCommand = new FileExistsCommand(file);
