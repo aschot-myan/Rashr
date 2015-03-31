@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rashr</string>
+    <string name="settings">Configurações</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sFlashRecovery">Flashear Recovery</string>
+    <string name="sFlashKernel">Flashear Kernel</string>
+    <string name="recovery_history">Histórico do Recovery</string>
+    <string name="kernel_history">Histórico do Kernel</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="other_recovery">Flashear Recovery pelo Armazenamento</string>
+    <string name="other_kernel">Flashear Kernel pelo Armazenamento</string>
+    <string name="sRecoveryBackup">Backup Recovery</string>
+    <string name="sKernelBackup">Backup Kernel</string>
+    <string name="backups">Backups</string>
+    <string name="backup">Backup</string>
+    <string name="go">Ir</string>
+    <string name="sRebooter">Reiniciador</string>
+    <string name="restore">Restaurar</string>
+    <string name="rename">Renomear</string>
+    <string name="sClearCache">Limpar downloads</string>
+    <string name="report">Reportar bug</string>
+    <string name="sExit">Sair</string>
+    <string name="xda">XDA-Thread</string>
+    <string name="set_name">Nome do Backup</string>
+    <string name="bak_warning">Antes de fazer alterações com o Rashr, faça um Backup e salve-o em seu PC.
+        \nBackups vão ser criados em\n%s.
+        \nO Desenvolvedor não são responsável por danos.</string>
+    <string name="flash_options">Opções do Flash</string>
+    <string name="risk">Eu sei do risco</string>
+    <string name="sReboot">Reiniciar</string>
+    <string name="sRebootHot">Reinício Rápido</string>
+    <string name="sRebootRecovery">Reiniciar no Recovery</string>
+    <string name="sRebootBootloader">Reiniciar no Bootloader</string>
+    <string name="sRebootShutdown">Desligar</string>
+    <string name="info">Informação</string>
+    <string name="flashed">Partição flasheada.</string>
+    <string name="warning">Opa!</string>
+    <string name="fota">Flasheando o Recovery System nesse dispositivo vai mudar o FOTAKernel (partição de substituição)
+        isso só vai funcionar se o seu kernel tiver suporte (A maioria dos Custom Kernels and ROMs fazem isso).</string>
+    <string name="flash_over_recovery">Flashear Recovery agora? (Precisa reiniciar no Recovery)</string>
+    <string name="bak_done">Backup completo</string>
+    <string name="backupalready">Backup já existe.</string>
+    <string name="error">Erro</string>
+    <string name="not_supportded">Seu dispositivo não é suportado ainda. Escaneie o Sistema e reporte o dispositivo ou
+        tente encontrar a partição (reiniciar no recovery)?</string>
+    <string name="no_root">Hehehe Seu dispositivo não esté rooteado. Por favor rooteie ele. Mais informações em
+        \n\nxda-developers.com</string>
+    <string name="Downloading">Baixando…</string>
+    <string name="comment">Comentar</string>
+    <string name="comment_hint">Comente aqui, o que estiver bugado (download, flash, suporte ou outro)</string>
+    <string name="positive">Sim, Por favor</string>
+    <string name="neutral">Não, valeu</string>
+    <string name="negative">Cancelar</string>
+    <string name="log">Log Shell-Commands</string>
+    <string name="showlog">mostrar Logs</string>
+    <string name="delete">Apagar</string>
+    <string name="sBackupMgr">Gerenciador de Backup</string>
+    <string name="setname">defina o nome do Backup</string>
+    <string name="reboot_recovery_now">Reiniciar no Recovery agora?</string>
+    <string name="reboot_now">Reiniciar agora?</string>
+    <string name="flashing">Flasheando…</string>
+    <string name="restoring">Restaurando…</string>
+    <string name="creating_bak">Criando Backup…</string>
+    <string name="download_utils">Para usar esse aplicativo você precisa baixar pequenas ferramentas (em torno de 512KB). Isso requer uma conecção com a internet.
+        \nBaixar agora?</string>
+    <string name="over_recovery">O dispositivo vai ser flashado pelo recovery</string>
+    <string name="ShowAds">Mostrar Ads para apoio</string>
+    <string name="please_restart">Por favor, reinicie o app para aplicar as mudanças</string>
+    <string name="please_ads">Ei cara! Por favor ligue os anúncios para apoiar meu trabalho! :(</string>
+    <string name="donate_to_support">Doe pelo menu para apoiar meu trabalho! :)</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Euro</item>
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+        <item>3 Euros</item>
+        <item>5 Euros</item>
+    </string-array>
+
+    <string name="donate">Doar</string>
+    <string name="never_again">Nunca mostre isso</string>
+    <string name="try_again">Tente de novo!</string>
+    <string name="later">Mais tarde</string>
+    <string name="update_done">Atualização feita</string>
+    <string name="pick_file">Pegar arquivo</string>
+    <string name="flash_error">Flash falhou</string>
+    <string name="res_error">Restauração falhou</string>
+    <string name="bak_error">Backup bugou</string>
+    <string name="stock">Stock</string>
+    <string name="changelog">Changelog</string>
+    <string name="use_supersu">SuperSu por Chainfire não foi reconhecido no seu dispositivo. Por favor use-o para evitar erros.
+        Download SuperSu (pela Play Store) agora?</string>
+    <string name="bak_deleted">Backup apagado</string>
+    <string name="extract_failed">Extração dos arquivos necessários falhou. Por favor reinicie o aplicativo.</string>
+    <string name="no_history">Não tem nada aqui</string>
+    <string name="styles">Estilos</string>
+
+    <string-array name="styles">
+        <item>Estilos</item>
+        <item>Estilo Holo Light com Barra Escura</item>
+        <item>Estilo Holo Light</item>
+        <item>Estilo Holo Dark</item>
+    </string-array>
+
+    <string name="flash_as">Flashear %s como</string>
+    <string name="recovery">Recovery</string>
+    <string name="kernel">Kernel</string>
+    <string name="getting_root">Tentando obter Acesso Root</string>
+    <string name="reading_device">Lendo informação do dispositivo</string>
+    <string name="loading_ui">Carregando UI</string>
+    <string name="loading_data">Extraindo dados e criando pastas</string>
+    <string name="recovery_script_manager">Gerenciador de Recovery-Script</string>
+    <string name="bak_name">Nome Personalizado do Backup</string>
+    <string name="flash_queue">Fila de Flashes</string>
+    <string name="wipe_opts">Opções de Wipe</string>
+    <string name="add_queue">Adicionar um Zip à fila</string>
+    <string name="backup_opts">Opções de Backup</string>
+    <string name="system">System</string>
+    <string name="data">Data</string>
+    <string name="cache">Cache</string>
+    <string name="dalvik">Dalvik</string>
+    <string name="boot">Boot</string>
+    <string name="recovery_script_mind">Por favor, tenha em mente que isso só vai funcionar com o Recovery TWRP compatível</string>
+    <string name="run">Rodar</string>
+    <string name="recovery_script_review">Previsualizar Script</string>
+    <string name="failed_unpack_files">Falha ao descompactar arquivos do App</string>
+    <string name="failed_setup_layout">Erro ao definir Layout</string>
+    <string name="refresh_list">Update iniciado!</string>
+    <string name="new_imgs_loaded">%s novas IMGs carregadas</string>
+    <string name="make_choice">Por favor faça sua escolha</string>
+    <string name="unified_info">This ROM ist using Unified CyanogenMod Sources.\n
+        Consequently it could be that Rashr isn\'t able to find Recovery or Kernel images.\n
+        In this case you can choose your real device. (do this if there aren\'t any images found)\n
+        BE CAREFUL WITH THIS OPTION!</string>
+    <string name="reloading">Recarregando</string>
+    <string name="keep_current_name">Deixar o nome atual (%s)</string>
+    <string name="rename_failed">Renomeamento bugou</string>
+    <string name="flash">Flashear</string>
+    <string name="recovery_description">Com essa função você poderá to flashear recoveries em seus dispositivos com um click!</string>
+    <string name="kernel_description">Com essa função você poderá flashear kernels/boot em seus dispositivos com um click!</string>
+    <string name="options">Opçôes</string>
+    <string name="clear_cache_description">Apagar todas as imagens de Recovery/Kernel baixadas</string>
+    <string name="reboot_description">Deixe seu dispositivo reiniciar instataneamente</string>
+    <string name="reboot_recovery_description">Deixe seu dispositivo reiniciar no recovery instataneamente</string>
+    <string name="reboot_bootloader_description">Deixe seu dispositivo reiniciar no bootloader/Modo Download instataneamente</string>
+    <string name="shutdown_description">Deixe seu dispositivo desligar instataneamente</string>
+    <string name="cwm_description">ClockworkMod Recovery é o mais conhecido Custom Recovery para Android</string>
+    <string name="twrp_description">Team Winn Recovery Project (TWRP) é um Custom Recovery completamente controlável via toque</string>
+    <string name="philz_description">PhilZ Touch Recovery é uma versão Touch avançada do ClockworkMod</string>
+    <string name="stock_recovery_description">Stock recoveries são os recoveries de fábrica, aqui você pode retornar para ele.</string>
+    <string name="stock_kernel_description">Stock kernel são os kerneis de fábrica, aqui você pode retornar para seu stock kernel.</string>
+    <string name="delete_confirmation">Você quer realmente apagar todas as imagens baixadas?</string>
+    <string name="other_storage_description">Essa opção permite a você flashear as imagens já baixadas no seu dispositivo.</string>
+    <string name="reboot_confirmation">Reiniciar agora?</string>
+    <string name="shutdown_confirmation">Desligar agora?</string>
+    <string name="history_description">Aqui você pode encontras as últimas 5 imagens flasheadas</string>
+    <string name="reset_app">Reiniciar  o aplicativo</string>
+    <string name="reset_app_description">Reiniciar as configurações para os padrões</string>
+    <string name="files_deleted">Arquivos Apagados</string>
+    <string name="onlyLanguage">Por favor só escreva em Espanhol, Alemão ou Inglês</string>
+    <string name="flasher">Flashear</string>
+    <string name="history">Histórico</string>
+    <string name="exit_app">Sair do App?</string>
+    <string name="skip_md5">Pular MD5</string>
+    <string name="UseDarkUI">Usar UI escura</string>
+    <string name="check_app_updates">Procurar atualizações no início</string>
+    <string name="failed_update">Procura falhou</string>
+    <string name="update_available">Atualização disponível</string>
+    <string name="download_update">Por favor, baixe a atualização para continuar seguro e obter todas as novas funções</string>
+    <string name="open_playstore">Abrir a Play Store</string>
+    <string name="uptodate">Atualizado :D</string>
+    <string name="update">Beleza</string>
+    <string name="lists_outdated">A lista com os recoveries e kernels disponíveis estão desatualizadas. Para instalar no seu dispositivo as mais recentes imagens.\nNão são suportados todos os dispositivos!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stock_recovery">Stock Recovery</string>
+    <string name="stock_kernel">Stock Kernel</string>
+
+</resources>
