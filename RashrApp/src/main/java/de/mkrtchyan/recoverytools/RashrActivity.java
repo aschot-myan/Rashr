@@ -1,6 +1,5 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,16 +11,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 import org.sufficientlysecure.donations.DonationsFragment;
 import org.sufficientlysecure.rootcommands.Shell;
@@ -39,7 +38,7 @@ import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Notifyer;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2015 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -58,7 +57,7 @@ import de.mkrtchyan.utils.Notifyer;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-public class RashrActivity extends ActionBarActivity implements
+public class RashrActivity extends AppCompatActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     static boolean FirstSession = true;
@@ -81,7 +80,7 @@ public class RashrActivity extends ActionBarActivity implements
     private Device mDevice;
     private Toolbar mToolbar;
 
-    public static boolean IsDark;
+    public static boolean isDark;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
@@ -89,8 +88,8 @@ public class RashrActivity extends ActionBarActivity implements
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IsDark = Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_DARK_UI);
-        setTheme(!IsDark ? R.style.Rashr : R.style.Rashr_Dark);
+        isDark = Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_DARK_UI);
+        setTheme(!isDark ? R.style.Rashr : R.style.Rashr_Dark);
         setContentView(R.layout.loading_layout);
 
         final TextView tvLoading = (TextView) findViewById(R.id.tvLoading);
@@ -98,16 +97,15 @@ public class RashrActivity extends ActionBarActivity implements
         final Thread StartThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                /** Try to get root access */
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         tvLoading.setText(R.string.getting_root);
                     }
                 });
-
-	            try {
-		            mShell = Shell.startRootShell(mContext);
+                /** Try to get root access */
+                try {
+                    startShell();
                 } catch (IOException e) {
                     mActivity.addError(Constants.RASHR_TAG, e, false);
                     mActivity.runOnUiThread(new Runnable() {
@@ -118,22 +116,35 @@ public class RashrActivity extends ActionBarActivity implements
                             tvLoading.setText(R.string.no_root);
                         }
                     });
-                    return;
                 }
-                mToolbox = new Toolbox(mShell);
 
+                /** Creating needed folder and unpacking files */
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvLoading.setText(R.string.loading_data);
+                    }
+                });
+                for (File i : Folder) {
+                    if (!i.exists()) {
+                        if (!i.mkdir()) {
+                            mActivity.addError(Constants.RASHR_TAG,
+                                    new IOException(i + " can't be created!"), false);
+                        }
+                    }
+                }
                 try {
-                    unpackFiles();
+                    extractFiles();
                 } catch (IOException e) {
                     mActivity.addError(Constants.RASHR_TAG, e, true);
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            tvLoading.setText(R.string.failed_unpack_files);
-                            tvLoading.setTextColor(Color.RED);
+                            Toast
+                                    .makeText(mContext, R.string.failed_unpack_files, Toast.LENGTH_LONG)
+                                    .show();
                         }
                     });
-                    return;
                 }
 
                 try {
@@ -152,21 +163,6 @@ public class RashrActivity extends ActionBarActivity implements
                 });
 	            if (mDevice == null)
 		            mDevice = new Device(mActivity);
-                /** Creating needed folder and unpacking files */
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tvLoading.setText(R.string.loading_data);
-                    }
-                });
-                for (File i : Folder) {
-                    if (!i.exists()) {
-                        if (!i.mkdir()) {
-                            mActivity.addError(Constants.RASHR_TAG,
-                                    new IOException(i.getAbsolutePath() + " can't be created!"), true);
-                        }
-                    }
-                }
 
                 /** If device is not supported, you can report it now or close the App */
                 if (!mDevice.isRecoverySupported() && !mDevice.isKernelSupported()) {
@@ -222,9 +218,12 @@ public class RashrActivity extends ActionBarActivity implements
                             mVersionChanged = true;
                         }
                         if (mVersionChanged) {
+                            /** Re-enable Ads */
                             Common.setBooleanPref(mContext, Constants.PREF_NAME,
                                     Constants.PREF_KEY_ADS, true);
+                            /** Reset Shell Logs */
                             Common.deleteLogs(mContext);
+                            /** Show Play Store rater dialog */
                             mActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -252,17 +251,12 @@ public class RashrActivity extends ActionBarActivity implements
                             mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
                                     (DrawerLayout) findViewById(R.id.RashrLayout));
 
-                            RelativeLayout containerLayout =
-                                    (RelativeLayout) findViewById(R.id.containerLayout);
-                            AdView ads = (AdView) containerLayout.findViewById(R.id.ads);
+                            AdView ads = (AdView) findViewById(R.id.ads);
                             if (ads != null) {
                                 if (Common.getBooleanPref(mContext, Constants.PREF_NAME,
                                         Constants.PREF_KEY_ADS)) {
-                                    ads.loadAd(new AdRequest.Builder()
-                                            .addTestDevice("7C7C4F8B3603E7BA327F75CDC8C6A896")
-                                            .build());
-                                } else {
-                                    containerLayout.removeView(ads);
+                                    ads.loadAd(new AdRequest()
+                                            .addTestDevice("0559BC4D133A29D00A36F3FE8FECD883"));
                                 }
                             }
                             onNavigationDrawerItemSelected(0);
@@ -350,7 +344,7 @@ public class RashrActivity extends ActionBarActivity implements
         DeviceNotSupported.show();
     }
 
-    private void unpackFiles() throws IOException {
+    private void extractFiles() throws IOException {
         File RecoveryCollectionFile = new File(mContext.getFilesDir(), "recovery_sums");
         File KernelCollectionFile = new File(mContext.getFilesDir(), "kernel_sums");
         File flash_image = new File(getFilesDir(), "flash_image");
@@ -525,5 +519,19 @@ public class RashrActivity extends ActionBarActivity implements
 
     public ArrayList<String> getErrors() {
         return mERRORS;
+    }
+
+    private void startShell() throws IOException{
+        try {
+            mShell = Shell.startRootShell(mContext);
+        } catch (IOException e) {
+            if (BuildConfig.DEBUG) {
+                /** ignore root access error on Debug Rashr, use normal shell*/
+                mShell = Shell.startShell();
+            } else {
+                throw e;
+            }
+        }
+        mToolbox = new Toolbox(mShell);
     }
 }
