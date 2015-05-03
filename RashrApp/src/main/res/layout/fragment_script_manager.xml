@@ -1,158 +1,168 @@
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context=".ScriptManagerFragment">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    android:layout_height="match_parent" tools:context=".ScriptManagerFragment"
+    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@string/flash_queue"
-            android:textSize="20sp" />
-
-        <ListView
-            android:id="@+id/lvQueue"
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/addZip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/add_queue"/>
-
-
-        <TextView
-            android:id="@+id/tvBackup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@string/backup_opts"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cbBackupSystem"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="@string/system" />
+                android:text="@string/flash_queue"
+                android:textSize="20sp" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <ListView
+                    android:id="@+id/lvQueue"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/addZip"
+                    android:layout_alignParentTop="true" />
 
-            <CheckBox
-                android:id="@+id/cbBackupData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/data" />
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/addZip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/add_queue"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true" />
+            </RelativeLayout>
 
-            <CheckBox
-                android:id="@+id/cbBackupCache"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/cache" />
-        </LinearLayout>
 
-        <LinearLayout
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
-            <CheckBox
-                android:id="@+id/cbBackupRecovery"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbBackupSystem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/system" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbBackupData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/data" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbBackupCache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/cache" />
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbBackupRecovery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/recovery" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbBackupBoot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/boot" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/skip_md5"
+                    android:id="@+id/cbSkipMD5"
+                    android:layout_weight="1"/>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etBackupName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="@string/recovery" />
+                android:hint="@string/bak_name" />
 
-            <CheckBox
-                android:id="@+id/cbBackupBoot"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvWipe"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="@string/boot" />
+                android:text="@string/wipe_opts"
+                android:textSize="20sp" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/skip_md5"
-                android:id="@+id/cbSkipMD5"
-                android:layout_weight="1"/>
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbWipeCache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/cache" />
 
-        <EditText
-            android:id="@+id/etBackupName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:hint="@string/bak_name" />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbWipeDalvik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dalvik" />
 
-        <TextView
-            android:id="@+id/tvWipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@string/wipe_opts"
-            android:textSize="20sp" />
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/cbWipeData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/data" />
+            </android.support.v7.widget.LinearLayoutCompat>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cbWipeCache"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/bFlashZip"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/cache" />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/go" />
+        </android.support.v7.widget.LinearLayoutCompat>
 
-            <CheckBox
-                android:id="@+id/cbWipeDalvik"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/dalvik" />
-
-            <CheckBox
-                android:id="@+id/cbWipeData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/data" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/bFlashZip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/go" />
-
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvZipFlashInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -161,7 +171,5 @@
             android:text="@string/recovery_script_mind"
             android:textColor="@color/red" />
 
-    </LinearLayout>
-
-</ScrollView>
+</android.support.v7.widget.LinearLayoutCompat>
 

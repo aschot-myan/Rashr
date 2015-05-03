@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:choiceMode="singleChoice"
-    android:clickable="true" android:listSelector="@color/custom_green"
-    android:background="@color/darker_green" tools:context=".NavigationDrawerFragment" />
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content" android:layout_width="@dimen/navigation_drawer_width"
+    android:background="?attr/colorPrimaryDark" android:orientation="vertical"
+    tools:context=".NavigationDrawerFragment">
+
+    <ListView android:id="@+id/lvNavigation" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:choiceMode="singleChoice"
+        android:clickable="true" android:listSelector="?attr/colorPrimary" />
+
+</android.support.v7.widget.LinearLayoutCompat>

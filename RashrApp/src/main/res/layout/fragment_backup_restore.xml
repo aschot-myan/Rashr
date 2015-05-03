@@ -1,15 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:divider="@android:color/transparent"
     android:orientation="vertical" tools:context=".BackupRestoreFragment">
 
-    <LinearLayout
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/bCreateRecoveryBackup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,15 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/stroke" />
-    </LinearLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
 
-    <LinearLayout
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/bCreateKernelBackup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,5 +41,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/stroke" />
-    </LinearLayout>
-</LinearLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
+</android.support.v7.widget.LinearLayoutCompat>

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".FlashAsFragment">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tvFlashAs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -10,10 +10,9 @@
         android:layout_centerHorizontal="true"
         android:focusableInTouchMode="false"
         android:gravity="center"
-        android:textColor="@color/golden"
         android:layout_marginTop="10dp" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/bFlashAs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +22,7 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/bCancel" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/bCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,14 +31,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/tvFlashAs" />
 
-    <LinearLayout
+    <android.support.v7.widget.LinearLayoutCompat
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true">
 
-        <RadioButton
+        <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/optAsKernel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +48,7 @@
             android:textSize="24sp"
             android:layout_margin="10dp" />
 
-        <RadioButton
+        <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/optAsRecovery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,5 +57,5 @@
             android:text="@string/recovery"
             android:textSize="24sp"
             android:layout_margin="10dp" />
-    </LinearLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
 </RelativeLayout>

@@ -1,23 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical"
     tools:context=".SettingsFragment">
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/bReport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/report"
         android:layout_weight="1" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/bShowLogs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/showlog"
         android:layout_weight="1" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/bClearCache"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,17 +56,17 @@
         android:gravity="center"
         android:layout_weight="1" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/changelog"
         android:id="@+id/bShowChangelog"
         android:layout_weight="1" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/bReset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/reset_app"
         android:layout_weight="1" />
-</LinearLayout>
+</android.support.v7.widget.LinearLayoutCompat>
