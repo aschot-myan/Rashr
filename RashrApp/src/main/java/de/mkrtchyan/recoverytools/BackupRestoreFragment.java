@@ -1,10 +1,15 @@
 package de.mkrtchyan.recoverytools;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDialog;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,11 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -140,16 +141,17 @@ public class BackupRestoreFragment extends Fragment {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+
+                final CharSequence text = ((AppCompatTextView) v).getText();
                 try {
-                    CharSequence text = ((TextView) v).getText();
                     if (text != null) {
                         final String FileName = text.toString();
 
-                        final Dialog dialog = new Dialog(mContext);
+                        final AppCompatDialog dialog = new AppCompatDialog(mContext);
                         dialog.setTitle(R.string.setname);
                         dialog.setContentView(R.layout.dialog_input);
-                        final Button bGo = (Button) dialog.findViewById(R.id.bGoBackup);
-                        final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
+                        final AppCompatButton bGo = (AppCompatButton) dialog.findViewById(R.id.bGoBackup);
+                        final AppCompatEditText etFileName = (AppCompatEditText) dialog.findViewById(R.id.etFileName);
                         final File path = isRecovery ?
                                 Constants.PathToRecoveryBackups : Constants.PathToKernelBackups;
                         switch (menuItem.getItemId()) {
@@ -211,7 +213,13 @@ public class BackupRestoreFragment extends Fragment {
                         }
                     }
                 } catch (Exception e) {
-                    mActivity.addError(Constants.RASHR_TAG, e, true);
+                    if (e.getMessage().contains("EINVAL") && text.toString().contains(":")) {
+                        AlertDialog.Builder adialog = new AlertDialog.Builder(mContext);
+                        adialog.setMessage(R.string.check_name);
+                        adialog.setMessage(R.string.ok);
+                        adialog.show();
+                    }
+                    mActivity.addError(Constants.RASHR_TAG, e, false);
                     return false;
                 }
                 return false;
@@ -233,12 +241,12 @@ public class BackupRestoreFragment extends Fragment {
             EXT = mDevice.getKernelExt();
             CurrentName = mDevice.getKernelVersion();
         }
-        final Dialog dialog = new Dialog(mContext);
+        final AppCompatDialog dialog = new AppCompatDialog(mContext);
         dialog.setTitle(R.string.setname);
         dialog.setContentView(R.layout.dialog_input);
-        final Button bGoBackup = (Button) dialog.findViewById(R.id.bGoBackup);
-        final EditText etFileName = (EditText) dialog.findViewById(R.id.etFileName);
-        final CheckBox optName = (CheckBox) dialog.findViewById(R.id.cbOptInput);
+        final AppCompatButton bGoBackup = (AppCompatButton) dialog.findViewById(R.id.bGoBackup);
+        final AppCompatEditText etFileName = (AppCompatEditText) dialog.findViewById(R.id.etFileName);
+        final AppCompatCheckBox optName = (AppCompatCheckBox) dialog.findViewById(R.id.cbOptInput);
         final String NameHint = prefix + "-from-" + Calendar.getInstance().get(Calendar.DATE)
                 + "-" + Calendar.getInstance().get(Calendar.MONTH)
                 + "-" + Calendar.getInstance().get(Calendar.YEAR)
