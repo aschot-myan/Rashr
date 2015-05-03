@@ -106,6 +106,7 @@ public class RashrActivity extends AppCompatActivity implements
                 /** Try to get root access */
                 try {
                     startShell();
+                    mToolbox = new Toolbox(mShell);
                 } catch (IOException e) {
                     mActivity.addError(Constants.RASHR_TAG, e, false);
                     mActivity.runOnUiThread(new Runnable() {
@@ -116,6 +117,7 @@ public class RashrActivity extends AppCompatActivity implements
                             tvLoading.setText(R.string.no_root);
                         }
                     });
+                    return;
                 }
 
                 /** Creating needed folder and unpacking files */
@@ -340,7 +342,6 @@ public class RashrActivity extends AppCompatActivity implements
                 }
             });
         }
-        DeviceNotSupported.setCancelable(BuildConfig.DEBUG);
         DeviceNotSupported.show();
     }
 
@@ -532,6 +533,5 @@ public class RashrActivity extends AppCompatActivity implements
                 throw e;
             }
         }
-        mToolbox = new Toolbox(mShell);
     }
 }

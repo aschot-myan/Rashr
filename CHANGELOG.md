@@ -1,8 +1,9 @@
 CHANGELOG
 ====================
 
-Update [2.2.9]
+Update [2.3]
 
+-Fixed crash on un-rooted devices
 -Working back to 2.2 again!
 -Errors on setting new file permissions with toolbox (old devices doesn't include chmod in toolbox)
 -New icon (with lennoardrai@****.com)

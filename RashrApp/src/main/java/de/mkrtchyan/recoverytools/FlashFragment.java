@@ -479,7 +479,7 @@ public class FlashFragment extends Fragment {
 
     public void optimizeLayout(View root) throws NullPointerException {
 
-        if (mDevice.isRecoverySupported() || mDevice.isKernelSupported() || BuildConfig.DEBUG) {
+        if (mDevice.isRecoverySupported() || mDevice.isKernelSupported()) {
             /** If device is supported start setting up layout */
             setupSwipeUpdater(root);
 
