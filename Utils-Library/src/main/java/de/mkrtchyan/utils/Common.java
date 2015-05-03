@@ -31,7 +31,6 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -87,7 +86,7 @@ public class Common {
     public static void setBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY, Boolean value) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).edit();
         editor.putBoolean(PREF_KEY, value);
-        editor.apply();
+        editor.commit();
     }
 
     public static void toggleBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY) {
@@ -101,7 +100,7 @@ public class Common {
     public static void setStringPref(Context mContext, String PrefName, String key, String value) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
         editor.putString(key, value);
-        editor.apply();
+        editor.commit();
     }
 
     public static Integer getIntegerPref(Context mContext, String PrefName, String key) {
@@ -111,11 +110,11 @@ public class Common {
     public static void setIntegerPref(Context mContext, String PrefName, String key, int value) {
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
         editor.putInt(key, value);
-        editor.apply();
+        editor.commit();
     }
 
-    public static void showLogs(final Context mContext) {
-        final Dialog LogDialog = new Dialog(mContext);
+    public static void showLogs(final Context context) {
+        final Dialog LogDialog = new Dialog(context);
         LogDialog.setTitle(R.string.logs_title);
         LogDialog.setContentView(R.layout.dialog_command_logs);
         final TextView tvLog = (TextView) LogDialog.findViewById(R.id.tvSuLogs);
@@ -124,7 +123,7 @@ public class Common {
 
             @Override
             public void onClick(View view) {
-                if (new File(mContext.getFilesDir(), "commands.txt").delete()) {
+                if (Common.deleteLogs(context)) {
                     tvLog.setText("");
                 } else {
                     tvLog.setText(R.string.delete_failed);
@@ -135,7 +134,8 @@ public class Common {
 
         try {
             String line;
-            BufferedReader br = new BufferedReader(new InputStreamReader(mContext.openFileInput("commands.txt")));
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(context.openFileInput("commands.txt")));
             while ((line = br.readLine()) != null) {
                 sLog = sLog + line + "\n";
             }
@@ -145,6 +145,10 @@ public class Common {
             LogDialog.dismiss();
         }
         LogDialog.show();
+    }
+
+    public static boolean deleteLogs(final Context context) {
+        return new File(context.getFilesDir(), "commands.txt").delete();
     }
 
     public static void copyFile(File src, File dst) throws IOException {

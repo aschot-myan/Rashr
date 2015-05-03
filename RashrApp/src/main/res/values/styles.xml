@@ -1,33 +1,31 @@
 <resources>
 
     <style name="Rashr" parent="Theme.AppCompat.Light">
-        <item name="android:buttonStyle">@style/Rashr.Button</item>
         <item name="android:textColorPrimary">@color/golden</item>
         <item name="colorPrimary">@color/custom_green</item>
         <item name="colorPrimaryDark">@color/darker_green</item>
-        <item name="colorAccent">@color/darker_green</item>
-        <item name="android:windowBackground">@color/custom_green</item>
+        <item name="colorAccent">@color/golden</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
         <item name="windowActionBar">false</item>
-        <item name="android:navigationBarColor">@color/darker_green</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="colorButtonNormal">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Rashr.Dark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/primary_material_dark</item>
+        <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:windowBackground">@color/background_material_dark</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="Rashr.Dark" parent="Rashr">
-        <item name="android:windowBackground">@color/darker_green</item>
-        <item name="colorPrimary">@color/darker_green</item>
-    </style>
-
-    <style name="Rashr.Button" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/abc_item_background_holo_dark</item>
-        <item name="android:minHeight">62dp</item>
-        <item name="android:textSize">20sp</item>
+    <style name="Rashr.Button" parent="Widget.AppCompat.Button">
         <item name="android:textStyle">italic</item>
-        <item name="android:textColor">@color/golden</item>
-    </style>
-
-    <style name="Rashr.Button.Small" parent="Rashr.Button">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
     <style name="Rashr.Text">

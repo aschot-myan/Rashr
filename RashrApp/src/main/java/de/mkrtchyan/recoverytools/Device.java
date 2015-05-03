@@ -1,9 +1,9 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
@@ -496,7 +496,6 @@ public class Device {
     }
 
     private void readDeviceInfos() {
-
         for (File i : KernelList) {
             if (mKernelPath.equals("")) {
                 try {
@@ -954,5 +953,8 @@ public class Device {
             }
         }
     }
-
+    public boolean isUnified() {
+        return mName.startsWith("d2lte") || mName.startsWith("hlte")
+                || mName.startsWith("jflte") || mName.equals("moto_msm8960");
+    }
 }

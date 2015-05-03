@@ -1,18 +1,18 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -101,7 +101,7 @@ public class ScriptManagerFragment extends Fragment {
             }
         }
 
-        Button AddZip = (Button) mRootView.findViewById(R.id.addZip);
+        AppCompatButton AddZip = (AppCompatButton) mRootView.findViewById(R.id.addZip);
         AddZip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,20 +126,20 @@ public class ScriptManagerFragment extends Fragment {
                 mFileChooser.show();
             }
         });
-        Button FlashZip = (Button) mRootView.findViewById(R.id.bFlashZip);
+        AppCompatButton FlashZip = (AppCompatButton) mRootView.findViewById(R.id.bFlashZip);
         FlashZip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CheckBox cbBakSystem = (CheckBox) mRootView.findViewById(R.id.cbBackupSystem);
-                CheckBox cbBakData = (CheckBox) mRootView.findViewById(R.id.cbBackupData);
-                CheckBox cbBakCache = (CheckBox) mRootView.findViewById(R.id.cbBackupCache);
-                CheckBox cbBakRecovery = (CheckBox) mRootView.findViewById(R.id.cbBackupRecovery);
-                CheckBox cbBakBoot = (CheckBox) mRootView.findViewById(R.id.cbBackupBoot);
-				CheckBox cbSkipMD5 = (CheckBox) mRootView.findViewById(R.id.cbSkipMD5);
-                EditText etBakName = (EditText) mRootView.findViewById(R.id.etBackupName);
-                CheckBox cbWipeCache = (CheckBox) mRootView.findViewById(R.id.cbWipeCache);
-                CheckBox cbWipeDalvik = (CheckBox) mRootView.findViewById(R.id.cbWipeDalvik);
-                CheckBox cbWipeData = (CheckBox) mRootView.findViewById(R.id.cbWipeData);
+                AppCompatCheckBox cbBakSystem = (AppCompatCheckBox) mRootView.findViewById(R.id.cbBackupSystem);
+                AppCompatCheckBox cbBakData = (AppCompatCheckBox) mRootView.findViewById(R.id.cbBackupData);
+                AppCompatCheckBox cbBakCache = (AppCompatCheckBox) mRootView.findViewById(R.id.cbBackupCache);
+                AppCompatCheckBox cbBakRecovery = (AppCompatCheckBox) mRootView.findViewById(R.id.cbBackupRecovery);
+                AppCompatCheckBox cbBakBoot = (AppCompatCheckBox) mRootView.findViewById(R.id.cbBackupBoot);
+                AppCompatCheckBox cbSkipMD5 = (AppCompatCheckBox) mRootView.findViewById(R.id.cbSkipMD5);
+                AppCompatEditText etBakName = (AppCompatEditText) mRootView.findViewById(R.id.etBackupName);
+                AppCompatCheckBox cbWipeCache = (AppCompatCheckBox) mRootView.findViewById(R.id.cbWipeCache);
+                AppCompatCheckBox cbWipeDalvik = (AppCompatCheckBox) mRootView.findViewById(R.id.cbWipeDalvik);
+                AppCompatCheckBox cbWipeData = (AppCompatCheckBox) mRootView.findViewById(R.id.cbWipeData);
                 final StringBuilder command = new StringBuilder();
                 command.append("echo #####Script created by Rashr#####;");
                 if (cbBakBoot.isChecked() || cbBakCache.isChecked() || cbBakData.isChecked()

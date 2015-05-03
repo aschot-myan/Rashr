@@ -1,16 +1,16 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import java.io.File;
 
@@ -41,7 +41,7 @@ public class FlashAsFragment extends Fragment {
     private File mImg;
     private RashrActivity mActivity;
     private RadioButton mOptAsKernel, mOptAsRecovery;
-    private Button mButFlashAs;
+    private AppCompatButton mButFlashAs;
     private boolean mCloseApp;
 
     public static FlashAsFragment newInstance(RashrActivity activity, File img, boolean CloseApp) {
@@ -61,12 +61,12 @@ public class FlashAsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View fragment = inflater.inflate(R.layout.fragment_flash_as, container, false);
-        TextView tvFlashAs = (TextView) fragment.findViewById(R.id.tvFlashAs);
+        AppCompatTextView tvFlashAs = (AppCompatTextView) fragment.findViewById(R.id.tvFlashAs);
         tvFlashAs.setText(String.format(getString(R.string.flash_as), mImg.getName()));
         mOptAsRecovery = (RadioButton) fragment.findViewById(R.id.optAsRecovery);
         mOptAsKernel = (RadioButton) fragment.findViewById(R.id.optAsKernel);
-        mButFlashAs = (Button) fragment.findViewById(R.id.bFlashAs);
-        final Button ButCancel = (Button) fragment.findViewById(R.id.bCancel);
+        mButFlashAs = (AppCompatButton) fragment.findViewById(R.id.bFlashAs);
+        final AppCompatButton ButCancel = (AppCompatButton) fragment.findViewById(R.id.bCancel);
         ButCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

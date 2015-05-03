@@ -1,12 +1,13 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -44,12 +44,6 @@ import de.mkrtchyan.utils.Common;
  */
 public class SettingsFragment extends Fragment {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SettingsFragment.
-     */
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
@@ -59,17 +53,17 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
         final SwitchCompat swShowAds = (SwitchCompat) root.findViewById(R.id.cbShowAds);
         final SwitchCompat swLog = (SwitchCompat) root.findViewById(R.id.cbLog);
         final SwitchCompat swDarkUI = (SwitchCompat) root.findViewById(R.id.cbDarkUI);
         final SwitchCompat swCheckUpdates = (SwitchCompat) root.findViewById(R.id.cbCheckUpdates);
-        final Button bShowLogs = (Button) root.findViewById(R.id.bShowLogs);
-        final Button bReport = (Button) root.findViewById(R.id.bReport);
-        final Button bShowChangelog = (Button) root.findViewById(R.id.bShowChangelog);
-        final Button bReset = (Button) root.findViewById(R.id.bReset);
-        final Button bClearCache = (Button) root.findViewById(R.id.bClearCache);
+        final AppCompatButton bShowLogs = (AppCompatButton) root.findViewById(R.id.bShowLogs);
+        final AppCompatButton bReport = (AppCompatButton) root.findViewById(R.id.bReport);
+        final AppCompatButton bShowChangelog = (AppCompatButton) root.findViewById(R.id.bShowChangelog);
+        final AppCompatButton bReset = (AppCompatButton) root.findViewById(R.id.bReset);
+        final AppCompatButton bClearCache = (AppCompatButton) root.findViewById(R.id.bClearCache);
 
         swDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
                 Constants.PREF_KEY_DARK_UI));
@@ -86,6 +80,7 @@ public class SettingsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 Common.setBooleanPref(view.getContext(), Constants.PREF_NAME,
                         Constants.PREF_KEY_DARK_UI, isChecked);
+                RashrActivity.isDark = isChecked;
             }
         });
         swLog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -135,16 +130,16 @@ public class SettingsFragment extends Fragment {
         bReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity activity = getActivity();
+                AppCompatActivity activity = (AppCompatActivity)getActivity();
                 SharedPreferences.Editor editor = activity.getSharedPreferences(Constants.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
-                editor.clear().apply();
+                editor.clear().commit();
                 editor = activity.getSharedPreferences(FlashUtil.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
-                editor.clear().apply();
+                editor.clear().commit();
                 editor = activity.getSharedPreferences(Shell.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
-                editor.clear().apply();
+                editor.clear().commit();
             }
         });
 

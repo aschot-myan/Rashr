@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion '21.1.2'
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
     defaultConfig {
-        minSdkVersion 9
-        versionCode 95
-        versionName '2.2.8'
+        minSdkVersion 8
+        versionCode 96
+        versionName '2.2.9'
     }
     lintOptions {
         abortOnError false
@@ -18,7 +18,7 @@ dependencies {
     compile project(':root-commands')
     compile project(':Utils-Library')
     compile project(':CardsUILib')
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.google.android.gms:play-services:6.5.87'
+    compile project(':Donations')
+    compile 'com.android.support:support-v4:22.1.0'
+    compile 'com.android.support:appcompat-v7:22.1.0'
 }

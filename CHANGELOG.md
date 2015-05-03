@@ -1,6 +1,16 @@
 CHANGELOG
 ====================
 
+Update [2.2.9]
+
+-Working back to 2.2 again!
+-Errors on setting new file permissions with toolbox (old devices doesn't include chmod in toolbox)
+-New icon (with lennoardrai@****.com)
+-Some UI changes
+-New colors
+-Startup update crash fixed
+-Fixed backup and restore bug on ICS and lower (Please rename backups without using ':')
+
 Update [2.2.8]
 
 -Cannot send report if comment is to big fixed (thanks for reporting XDA-Member Stilez)

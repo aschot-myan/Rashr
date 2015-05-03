@@ -218,4 +218,6 @@
     <string name="lists_outdated">Die Listen an verfügbare Recoveires und Kernel ist veraltet. Updaten Sie diese um die neuesten Recoveries und Kernels zu flashen.\nNicht alle Geräte sind von diesen Recoveries unterstützt</string>
     <string name="stock_recovery">Stock Recovery</string>
     <string name="stock_kernel">Stock Kernel</string>
+    <string name="check_connection">Überprüfen Sie ihre Internetverbindung</string>
+    <string name="check_name">Bitte überprüfen Sie den Namen des Wiederherstellungspunktes. Auf manche Geräte kann es zu Fehler führen wenn es \':\' (Doppelpunkt) enthällt. Bitte ändern Sie dies um fortfahren zu können.</string>
 </resources>
