@@ -6,7 +6,7 @@
         <android.support.v7.widget.LinearLayoutCompat
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
             <android.support.v7.widget.AppCompatTextView
@@ -19,7 +19,7 @@
                 android:textSize="20sp" />
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="wrap_content">
                 <ListView
                     android:id="@+id/lvQueue"
                     android:layout_width="fill_parent"
@@ -44,8 +44,7 @@
         <android.support.v7.widget.LinearLayoutCompat
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -103,7 +102,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/skip_md5"
                     android:id="@+id/cbSkipMD5"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:checked="true"/>
 
             </android.support.v7.widget.LinearLayoutCompat>
 
