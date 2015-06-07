@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'com.novoda:bintray-release:0.2.5'
     }
 }
@@ -12,7 +12,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
 
 dependencies {
-    compile 'com.android.support:support-v4:22.1.0'
+    compile 'com.android.support:support-v4:22.2.0'
 }
 
 android {
