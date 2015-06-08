@@ -23,8 +23,8 @@
     <string name="xda">XDA-Thread</string>
     <string name="set_name">Name der Sicherrung</string>
     <string name="bak_warning">
-        Bevor Sie Rashr verwenden ist es empfehlenswert Sicherungen zu erstellen,
-        \ndiese werden unter \n%s\n erstellt.
+        Bevor Sie Rashr verwenden ist es empfehlenswert Sicherungen zu erstellen.
+        \nDiese werden unter \n%s\n erstellt.
         \nDer Entwikler ist nicht an Schäden ihres Gerätes verantwortlich.
     </string>
     <string name="flash_options">Flash optionen</string>
@@ -34,7 +34,7 @@
     <string name="sRebootRecovery">In den Recovery neustarten</string>
     <string name="sRebootBootloader">In den Bootloader neustarten</string>
     <string name="sRebootShutdown">Ausschalten</string>
-    <string name="info">Informazion</string>
+    <string name="info">Information</string>
     <string name="flashed">Partition geflasht.</string>
     <string name="warning">Warnung!</string>
     <string name="fota">
