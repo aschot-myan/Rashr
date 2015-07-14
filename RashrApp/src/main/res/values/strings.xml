@@ -182,5 +182,13 @@
     <string name="check_connection">Check your internet connection</string>
     <string name="check_name">Please check the backup name. Some devices can\'t handle it if contains \':\' so change it with a File Explorer</string>
     <string name="ok">OK</string>
+    <string name="logs_title">Logged Shell-Commands</string>
+    <string name="clear_logs">Clear Logs</string>
+    <string name="no_logs">No Logs</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="copy">Copy</string>
+    <string name="logs">Logs</string>
+    <string name="app_uptodate">App is up to date!</string>
+    <string name="hide_uptodate_hint">Hide up to date hints</string>
 
 </resources>

@@ -9,8 +9,8 @@
         <item name="android:windowBackground">?attr/colorPrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:fontFamily">sans-serif</item>
         <item name="colorButtonNormal">?attr/colorPrimaryDark</item>
+        <item name="android:dialogTheme">@style/Rashr.Dialog</item>
     </style>
 
     <style name="Rashr.Dark" parent="Theme.AppCompat">
@@ -20,7 +20,6 @@
         <item name="android:windowBackground">@color/background_material_dark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="Rashr.Button" parent="Widget.AppCompat.Button">
@@ -30,5 +29,8 @@
 
     <style name="Rashr.Text">
         <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="Rashr.Dialog" parent="Theme.AppCompat.Dialog">
     </style>
 </resources>

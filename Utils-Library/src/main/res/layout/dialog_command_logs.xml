@@ -4,22 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bClearLog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/clear_logs" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tvSuLogs"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true" />
 
     </ScrollView>
-
 
 </LinearLayout>

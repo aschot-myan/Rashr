@@ -122,12 +122,10 @@ public class Device {
     private File dump_image = new File("/system/bin", "dump_image");
 
     private RashrActivity mActivity;
-    private Context mContext;
     private Shell mShell;
 
     public Device(RashrActivity activity) {
         mActivity = activity;
-        mContext = activity;
         mShell = activity.getShell();
         setPredefinedOptions();
         loadRecoveryList();
@@ -369,7 +367,7 @@ public class Device {
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(
-                    new File(mContext.getFilesDir(), "recovery_sums"))));
+                    new File(Const.FilesDir, "recovery_sums"))));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
@@ -417,7 +415,7 @@ public class Device {
             }
 
         } catch (Exception e) {
-            mActivity.addError(Constants.DEVICE_TAG, e, false);
+            mActivity.addError(Const.DEVICE_TAG, e, false);
         }
     }
 
@@ -427,7 +425,7 @@ public class Device {
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(new File(mContext.getFilesDir(), "kernel_sums"))));
+                    new FileInputStream(new File(Const.FilesDir, "kernel_sums"))));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
@@ -453,13 +451,13 @@ public class Device {
             }
 
         } catch (Exception e) {
-            mActivity.addError(Constants.DEVICE_TAG, e, false);
+            mActivity.addError(Const.DEVICE_TAG, e, false);
         }
     }
 
     public boolean downloadUtils(final Context mContext) {
 
-        final File archive = new File(Constants.PathToUtils, mName + EXT_ZIP);
+        final File archive = new File(Const.PathToUtils, mName + EXT_ZIP);
 
         final AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
         mAlertDialog
@@ -471,12 +469,12 @@ public class Device {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            URL url = new URL(Constants.UTILS_URL + "/" + archive.getName());
+                            URL url = new URL(Const.UTILS_URL + "/" + archive.getName());
                             Downloader downloader = new Downloader(mContext, url, archive);
                             downloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
                                 @Override
                                 public void success(File file) {
-                                    Unzipper.unzip(archive, new File(Constants.PathToUtils, mName));
+                                    Unzipper.unzip(archive, new File(Const.PathToUtils, mName));
                                 }
 
                                 @Override
@@ -490,7 +488,7 @@ public class Device {
                 mAlertDialog.show();
                 return true;
             } else {
-                Unzipper.unzip(archive, new File(Constants.PathToUtils, mName));
+                Unzipper.unzip(archive, new File(Const.PathToUtils, mName));
                 return false;
             }
         }
@@ -700,14 +698,14 @@ public class Device {
 
     public File getFlash_image() {
         if (!flash_image.exists()) {
-            flash_image = new File(mContext.getFilesDir(), flash_image.getName());
+            flash_image = new File(Const.FilesDir, flash_image.getName());
         }
         return flash_image;
     }
 
     public File getDump_image() {
         if (!dump_image.exists()) {
-            dump_image = new File(mContext.getFilesDir(), dump_image.getName());
+            dump_image = new File(Const.FilesDir, dump_image.getName());
         }
         return dump_image;
     }
@@ -835,7 +833,7 @@ public class Device {
     private void readLastLog() {
         try {
             String line;
-            File LogCopy = new File(mContext.getFilesDir(), Constants.LastLog.getName() + ".txt");
+            File LogCopy = new File(Const.FilesDir, Const.LastLog.getName() + ".txt");
             mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
             while ((line = br.readLine()) != null) {
@@ -910,26 +908,26 @@ public class Device {
             }
             br.close();
         } catch (Exception e) {
-            mActivity.addError(Constants.DEVICE_TAG, e, false);
+            mActivity.addError(Const.DEVICE_TAG, e, false);
         }
     }
 
     private void readPartLayouts() {
-        File PartLayout = new File(mContext.getFilesDir(), Build.DEVICE);
+        File PartLayout = new File(Const.FilesDir, Build.DEVICE);
         if (!PartLayout.exists()) {
             try {
-                ZipFile PartLayoutsZip = new ZipFile(new File(mContext.getFilesDir(), "partlayouts.zip"));
+                ZipFile PartLayoutsZip = new ZipFile(new File(Const.FilesDir, "partlayouts.zip"));
                 for (Enumeration e = PartLayoutsZip.entries(); e.hasMoreElements(); ) {
                     ZipEntry entry = (ZipEntry) e.nextElement();
                     if (entry.getName().equals(Build.DEVICE)) {
-                        Unzipper.unzipEntry(PartLayoutsZip, entry, mContext.getFilesDir());
-                        if (new File(mContext.getFilesDir(), entry.getName()).renameTo(PartLayout)) {
+                        Unzipper.unzipEntry(PartLayoutsZip, entry, Const.FilesDir);
+                        if (new File(Const.FilesDir, entry.getName()).renameTo(PartLayout)) {
                             throw new IOException("Failed rename File into " + PartLayout);
                         }
                     }
                 }
             } catch (IOException e) {
-                mActivity.addError(Constants.DEVICE_TAG, e, false);
+                mActivity.addError(Const.DEVICE_TAG, e, false);
             }
         }
         if (PartLayout.exists()) {
@@ -951,12 +949,16 @@ public class Device {
                     }
                 }
             } catch (IOException e) {
-                mActivity.addError(Constants.DEVICE_TAG, e, false);
+                mActivity.addError(Const.DEVICE_TAG, e, false);
             }
         }
     }
     public boolean isUnified() {
         return mName.startsWith("d2lte") || mName.startsWith("hlte")
                 || mName.startsWith("jflte") || mName.equals("moto_msm8960");
+    }
+
+    public boolean isLoki() {
+        return mName.startsWith("g2") && Build.MANUFACTURER.equals("lge");
     }
 }

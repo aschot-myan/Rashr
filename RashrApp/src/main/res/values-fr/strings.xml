@@ -62,8 +62,8 @@
     <string name="reboot_recovery_now">Redémarrer en mode Recovery maintenant ?</string>
     <string name="reboot_now">Redémarrer maintenant ?</string>
     <string name="flashing">Flash en cours…</string>
-    <string name="restoring">Restauration en cours...</string>
-    <string name="creating_bak">Création de la sauvegarde...</string>
+    <string name="restoring">Restauration en cours…</string>
+    <string name="creating_bak">Création de la sauvegarde…</string>
     <string name="download_utils">        Pour utiliser cette App, vous devez télécharger quelques outils (environ 512Ko). Cela nécessite une connexion Internet.
         \nTélécharger maintenant ?</string>
     <string name="over_recovery">L\'appareil sera flashé sur la Recovery</string>

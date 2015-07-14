@@ -1,6 +1,15 @@
 CHANGELOG
 ====================
 
+Update [2.3.1]
+
+-Recovery Script Manager fixed
+-New setting to hide update hints
+-Logs can be copied to clipboard
+-Partitions for Galaxy S6 added
+-Partition layouts updated
+-German translations improved
+
 Update [2.3]
 
 -Fixed crash on un-rooted devices

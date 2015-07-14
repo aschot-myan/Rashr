@@ -220,4 +220,11 @@
     <string name="stock_kernel">Stock Kernel</string>
     <string name="check_connection">Überprüfen Sie ihre Internetverbindung</string>
     <string name="check_name">Bitte überprüfen Sie den Namen des Wiederherstellungspunktes. Auf manche Geräte kann es zu Fehler führen wenn es \':\' (Doppelpunkt) enthällt. Bitte ändern Sie dies um fortfahren zu können.</string>
+    <string name="logs_title">Mitgeschriebene Shell-Befehle</string>
+    <string name="clear_logs">Logs säubern</string>
+    <string name="no_logs">Keine Logs</string>
+    <string name="copied_to_clipboard">In den Zwischenspeicher kopiert!</string>
+    <string name="copy">Kopieren</string>
+    <string name="app_uptodate">App ist auf dem letzten Stand!</string>
+    <string name="hide_uptodate_hint">Hinweise zur Aktialität der App verstecken</string>
 </resources>

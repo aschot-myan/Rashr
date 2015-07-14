@@ -62,8 +62,8 @@ public class ReportDialog extends Dialog {
                     @Override
                     public void onClick(View v) {
 
-                        if (!Common.getBooleanPref(activity, Constants.PREF_NAME,
-                                Constants.PREF_KEY_ADS))
+                        if (!Common.getBooleanPref(activity, Const.PREF_NAME,
+                                Const.PREF_KEY_ADS))
                             Toast
                                     .makeText(activity, R.string.please_ads, Toast.LENGTH_SHORT)
                                     .show();
@@ -79,7 +79,7 @@ public class ReportDialog extends Dialog {
                                         FileOutputStream fos = activity.openFileOutput(
                                                 TestResults.getName(), Context.MODE_PRIVATE);
                                         fos.write(("Rashr:\n\n" + shell
-                                                .execCommand("ls -lR " + Constants.PathToRashr.getAbsolutePath()) +
+                                                .execCommand("ls -lR " + Const.PathToRashr.getAbsolutePath()) +
                                                 "\nCache Tree:\n" + shell
                                                 .execCommand("ls -lR /cache") + "\n" +
                                                 "\nMTD result:\n" + shell
@@ -90,7 +90,7 @@ public class ReportDialog extends Dialog {
                                     files.add(TestResults);
                                 }
                             } catch (Exception e) {
-                                activity.addError(Constants.RASHR_TAG, e, false);
+                                activity.addError(Const.RASHR_TAG, e, false);
                             }
                             if (activity.getPackageManager() != null) {
                                 PackageInfo pInfo = activity.getPackageManager()
@@ -154,7 +154,7 @@ public class ReportDialog extends Dialog {
                                         toolbox.setFilePermissions(tmp, "777");
                                         uris.add(Uri.fromFile(tmp));
                                     } catch (Exception e) {
-                                        activity.addError(Constants.RASHR_TAG, e, false);
+                                        activity.addError(Const.RASHR_TAG, e, false);
                                     }
                                 }
                                 if (errors.size() > 0) {
@@ -171,7 +171,7 @@ public class ReportDialog extends Dialog {
                             }
                         } catch (Exception e) {
                             dismiss();
-                            activity.addError(Constants.RASHR_TAG, e, false);
+                            activity.addError(Const.RASHR_TAG, e, false);
                         }
                     }
                 });

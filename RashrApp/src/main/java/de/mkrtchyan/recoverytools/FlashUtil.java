@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.os.Build;
 
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
@@ -44,9 +43,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public static final int JOB_FLASH_KERNEL = 4;
     public static final int JOB_BACKUP_KERNEL = 5;
     public static final int JOB_RESTORE_KERNEL = 6;
-    public static final String PREF_NAME = "FlashUtil";
-    public static final String PREF_KEY_HIDE_REBOOT = "hide_reboot";
-    public static final String PREF_KEY_FLASH_COUNTER = "last_counter";
     private final RashrActivity mActivity;
     private final Context mContext;
     private final Device mDevice;
@@ -93,7 +89,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             pDialog.setCancelable(false);
             pDialog.show();
         } catch (FailedExecuteCommand e) {
-            mActivity.addError(Constants.FLASH_UTIL_TAG, e, true);
+            mActivity.addError(Const.FLASH_UTIL_TAG, e, true);
         }
 
 
@@ -134,12 +130,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         pDialog.dismiss();
         if (!success) {
             if (mException != null) {
-                mActivity.addError(Constants.FLASH_UTIL_TAG, mException, true);
+                mActivity.addError(Const.FLASH_UTIL_TAG, mException, true);
             }
         } else if (tmpFile.delete()) {
             if (RunAtEnd != null) RunAtEnd.run();
             if (isJobFlash() || isJobRestore()) {
-                if (!Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY_HIDE_REBOOT)) {
+                if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT)) {
                     showRebootDialog();
                 } else {
                     if (!keepAppOpen) {
@@ -153,17 +149,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public void DD() throws FailedExecuteCommand, IOException {
         String Command = "";
         if (isJobFlash() || isJobRestore()) {
-            if (mDevice.getName().startsWith("g2") && Build.MANUFACTURER.equals("lge")
-                    && isJobFlash()) {
-                File aboot = new File("/dev/block/platform/msm_sdcc.1/by-name/aboot");
-                File extracted_aboot = new File(mContext.getFilesDir(), "aboot.img");
-                File patched_CustomIMG = new File(mContext.getFilesDir(), mCustomIMG.getName() + ".lok");
-                File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
-                File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
-                mShell.execCommand("dd if=" + aboot.getAbsolutePath() + " of=" + extracted_aboot.getAbsolutePath(), true);
-                mShell.execCommand(loki_patch.getAbsolutePath() + " recovery "
-                        + mCustomIMG.getAbsolutePath() + " " + patched_CustomIMG.getAbsolutePath() + "  || exit 1", true);
-                Command = loki_flash.getAbsolutePath() + " recovery " + patched_CustomIMG.getAbsolutePath() + " || exit 1";
+            if (mDevice.isLoki() && isJobFlash()) {
+                Command = lokiPatch();
             } else {
                 Common.copyFile(mCustomIMG, tmpFile);
                 Command = mBusybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
@@ -203,9 +190,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 || mDevice.getName().equals("c6602")
                 || mDevice.getName().equals("montblanc")) {
             if (isJobFlash() || isJobRestore()) {
-                File charger = new File(Constants.PathToUtils, "charger");
-                File chargermon = new File(Constants.PathToUtils, "chargermon");
-                File ric = new File(Constants.PathToUtils, "ric");
+                File charger = new File(Const.PathToUtils, "charger");
+                File chargermon = new File(Const.PathToUtils, "chargermon");
+                File ric = new File(Const.PathToUtils, "ric");
                 mToolbox.remount(CurrentPartition, "RW");
                 try {
                     mToolbox.copyFile(charger, CurrentPartition.getParentFile(), true, false);
@@ -216,7 +203,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                         mToolbox.setFilePermissions(ric, "755");
                     }
                 } catch (Exception e) {
-                    mActivity.addError(Constants.FLASH_UTIL_TAG, e, true);
+                    mActivity.addError(Const.FLASH_UTIL_TAG, e, true);
                 }
                 mToolbox.setFilePermissions(charger, "755");
                 mToolbox.setFilePermissions(chargermon, "755");
@@ -270,7 +257,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 		                try {
 			                mToolbox.reboot(REBOOT_JOB);
 		                } catch (Exception e) {
-                            mActivity.addError(Constants.FLASH_UTIL_TAG, e, false);
+                            mActivity.addError(Const.FLASH_UTIL_TAG, e, false);
 		                }
 	                }
                 })
@@ -285,7 +272,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 .setNegativeButton(R.string.never_again, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Common.setBooleanPref(mContext, PREF_NAME, PREF_KEY_HIDE_REBOOT, true);
+                        Common.setBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT,
+                                true);
                         if (!keepAppOpen) {
                             System.exit(0);
                         }
@@ -310,25 +298,25 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     public void saveHistory() {
         if (isJobFlash()) {
-            switch (Common.getIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER)) {
+            switch (Common.getIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER)) {
                 case 0:
-                    Common.setStringPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_HISTORY +
-                                    String.valueOf(Common.getIntegerPref(mContext, Constants.PREF_NAME,
-                                            PREF_KEY_FLASH_COUNTER)),
+                    Common.setStringPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HISTORY +
+                                    String.valueOf(Common.getIntegerPref(mContext, Const.PREF_NAME,
+                                            Const.PREF_KEY_FLASH_COUNTER)),
                             mCustomIMG.getAbsolutePath()
                     );
-                    Common.setIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER, 1);
+                    Common.setIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER, 1);
                     return;
                 default:
-                    Common.setStringPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_HISTORY +
-                                    String.valueOf(Common.getIntegerPref(mContext, Constants.PREF_NAME,
-                                            PREF_KEY_FLASH_COUNTER)),
+                    Common.setStringPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HISTORY +
+                                    String.valueOf(Common.getIntegerPref(mContext, Const.PREF_NAME,
+                                            Const.PREF_KEY_FLASH_COUNTER)),
                             mCustomIMG.getAbsolutePath()
                     );
-                    Common.setIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER,
-                            Common.getIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER) + 1);
-                    if (Common.getIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER) == 5) {
-                        Common.setIntegerPref(mContext, Constants.PREF_NAME, PREF_KEY_FLASH_COUNTER, 0);
+                    Common.setIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER,
+                            Common.getIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER) + 1);
+                    if (Common.getIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER) == 5) {
+                        Common.setIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER, 0);
                     }
             }
         }
@@ -360,5 +348,17 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     public void setRunAtEnd(Runnable RunAtEnd) {
         this.RunAtEnd = RunAtEnd;
+    }
+
+    public String lokiPatch() throws FailedExecuteCommand {
+        File aboot = new File("/dev/block/platform/msm_sdcc.1/by-name/aboot");
+        File extracted_aboot = new File(mContext.getFilesDir(), "aboot.img");
+        File patched_CustomIMG = new File(mContext.getFilesDir(), mCustomIMG.getName() + ".lok");
+        File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
+        File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
+        mShell.execCommand("dd if=" + aboot.getAbsolutePath() + " of=" + extracted_aboot.getAbsolutePath(), true);
+        mShell.execCommand(loki_patch.getAbsolutePath() + " recovery "
+                + mCustomIMG.getAbsolutePath() + " " + patched_CustomIMG.getAbsolutePath() + "  || exit 1", true);
+        return loki_flash.getAbsolutePath() + " recovery " + patched_CustomIMG.getAbsolutePath() + " || exit 1";
     }
 }

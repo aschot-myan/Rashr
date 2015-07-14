@@ -1,10 +1,12 @@
 package de.mkrtchyan.recoverytools;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Gravity;
@@ -47,7 +49,6 @@ public class NavigationDrawerFragment extends Fragment {
      */
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private LinearLayoutCompat mContainer;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
@@ -64,16 +65,16 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mContainer = (LinearLayoutCompat) inflater.inflate(
+        LinearLayoutCompat root = (LinearLayoutCompat) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
-        mDrawerListView = (ListView) mContainer.findViewById(R.id.lvNavigation);
+        mDrawerListView = (ListView) root.findViewById(R.id.lvNavigation);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
-        return mContainer;
+        return root;
     }
 
     public boolean isDrawerOpen() {
@@ -100,56 +101,58 @@ public class NavigationDrawerFragment extends Fragment {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
 
         mDrawerLayout = drawerLayout;
+        ActionBar ab = getSupportActivity().getSupportActionBar();
+        if (ab != null) {
+            mDrawerListView.setAdapter(new ArrayAdapter<>(
+                    ab.getThemedContext(),
+                    R.layout.drawer_list_item,
+                    android.R.id.text1,
+                    new String[]{
+                            getString(R.string.flasher),
+                            getString(R.string.recovery_script_manager),
+                            getString(R.string.donate),
+                            getString(R.string.settings),
+                            getString(R.string.xda)
+                    }));
 
-        mDrawerListView.setAdapter(new ArrayAdapter<>(
-                getSupportActivity().getSupportActionBar().getThemedContext(),
-                R.layout.drawer_list_item,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.flasher),
-                        getString(R.string.recovery_script_manager),
-                        getString(R.string.donate),
-                        getString(R.string.settings),
-                        getString(R.string.xda)
-                }));
-
-        // between the navigation drawer and the action bar app icon.
-        mDrawerToggle = new ActionBarDrawerToggle(
-                getActivity(),                    /* host Activity */
-                mDrawerLayout,                    /* DrawerLayout object */
-                getSupportActivity().getToolbar(),
-                R.string.app_name,                /* "open drawer" description for accessibility */
-                R.string.app_name                 /* "close drawer" description for accessibility */
-        ) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                if (!isAdded()) {
-                    return;
+            // between the navigation drawer and the action bar app icon.
+            mDrawerToggle = new ActionBarDrawerToggle(
+                    getActivity(),                    /* host Activity */
+                    mDrawerLayout,                    /* DrawerLayout object */
+                    getSupportActivity().getToolbar(),
+                    R.string.app_name,                /* "open drawer" description for accessibility */
+                    R.string.app_name                 /* "close drawer" description for accessibility */
+            ) {
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    super.onDrawerClosed(drawerView);
+                    if (!isAdded()) {
+                        return;
+                    }
+                    getSupportActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
                 }
-                getSupportActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-            }
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                if (!isAdded()) {
-                    return;
+                @Override
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
+                    if (!isAdded()) {
+                        return;
+                    }
+                    getSupportActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
                 }
-                getSupportActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-            }
-        };
+            };
 
-        // Defer code dependent on restoration of previous instance state.
-        mDrawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mDrawerToggle.syncState();
-            }
-        });
+            // Defer code dependent on restoration of previous instance state.
+            mDrawerLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    mDrawerToggle.syncState();
+                }
+            });
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        selectItem(0);
+            mDrawerLayout.setDrawerListener(mDrawerToggle);
+            selectItem(0);
+        }
     }
 
     private void selectItem(int position) {

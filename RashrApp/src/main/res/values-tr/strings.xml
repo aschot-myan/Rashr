@@ -42,26 +42,6 @@
     <string name="delete_failed">Silme başarısız</string>
     <string name="donate">Bağış yap</string>
     <string name="donate_to_support">Çalışmamı desteklemek için menüden bağış yapın! :)</string>
-    <string name="donations__alert_dialog_no_browser">
-        Web sitesini açmak için tarayıcı bulunamadı!
-    </string>
-    <string name="donations__alert_dialog_title">Bir hata oluştu</string>
-    <string name="donations__button_close">Kapat</string>
-    <string name="donations__description">
-        Bu uygulamayı yararlı buluyor musunuz? Geliştiriciye bağış göndererek gelişimini destekleyin!
-    </string>
-    <string name="donations__flattr">Flattr</string>
-    <string name="donations__flattr_description">Flattr her ay %10 ücret alır!</string>
-    <string name="donations__google_android_market">Google Play Store</string>
-    <string name="donations__google_android_market_description">Google her bağıştan %30 pay alır!</string>
-    <string name="donations__google_android_market_donate_button">Bağış yap!</string>
-    <string name="donations__google_android_market_not_supported">Uygulama içi bağış desteklenmiyor. Google Play Store düzgün yüklendi mi?</string>
-    <string name="donations__google_android_market_not_supported_title">Uygulama içi bağış desteklenmiyor.</string>
-    <string name="donations__google_android_market_text">Ne kadar?</string>
-    <string name="donations__paypal">PayPal</string>
-    <string name="donations__paypal_description">Düğmeye tıkladıktan sonra ne kadar bağış yapmak istediğinizi seçebilirsiniz!</string>
-    <string name="donations__thanks_dialog">Bağış için teşekkürler! Gerçekten minnettarım!</string>
-    <string name="donations__thanks_dialog_title">Teşekkürler!</string>
     <string name="download_now">%s şimdi indirilsin mi?</string>
     <string name="download_utils">
         Bu uygulamayı kullanmak için küçük araçları (512KB civarında) yüklemeniz gerekiyor. Bu bir

@@ -17,8 +17,6 @@
     </string>
     <string name="error">Error</string>
     <string name="warning">Warning!</string>
-    <string name="logs_title">Logged Shell-Commands</string>
-    <string name="clear_logs">Clear Logs</string>
 
     <string name="positive">Yes</string>
     <string name="neutral">No</string>

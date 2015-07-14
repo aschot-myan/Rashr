@@ -1,7 +1,7 @@
 package de.mkrtchyan.utils;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2015 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights 
@@ -21,13 +21,8 @@ package de.mkrtchyan.utils;
  * SOFTWARE.
  */
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +30,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
@@ -113,40 +107,6 @@ public class Common {
         editor.commit();
     }
 
-    public static void showLogs(final Context context) {
-        final Dialog LogDialog = new Dialog(context);
-        LogDialog.setTitle(R.string.logs_title);
-        LogDialog.setContentView(R.layout.dialog_command_logs);
-        final TextView tvLog = (TextView) LogDialog.findViewById(R.id.tvSuLogs);
-        final Button bClearLog = (Button) LogDialog.findViewById(R.id.bClearLog);
-        bClearLog.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                if (Common.deleteLogs(context)) {
-                    tvLog.setText("");
-                } else {
-                    tvLog.setText(R.string.delete_failed);
-                }
-            }
-        });
-        String sLog = "";
-
-        try {
-            String line;
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(context.openFileInput("commands.txt")));
-            while ((line = br.readLine()) != null) {
-                sLog = sLog + line + "\n";
-            }
-            br.close();
-            tvLog.setText(sLog);
-        } catch (Exception e) {
-            LogDialog.dismiss();
-        }
-        LogDialog.show();
-    }
-
     public static boolean deleteLogs(final Context context) {
         return new File(context.getFilesDir(), "commands.txt").delete();
     }
@@ -175,16 +135,12 @@ public class Common {
 		return endsWith;
 
 	}
-    public static String fileContent(File file) {
+    public static String fileContent(File file) throws IOException {
         String content = "";
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content += line;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            content += line;
         }
         return content;
     }

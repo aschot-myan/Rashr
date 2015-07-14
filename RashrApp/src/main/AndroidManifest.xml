@@ -33,12 +33,12 @@
                 <data android:mimeType="*/*" />
                 <data android:mimeType="application/octet-stream" />
                 <data android:host="*" />
-                <data android:pathPattern=".*\\.img" />
-                <data android:pathPattern=".*\\..*\\.img" />
-                <data android:pathPattern=".*\\..*\\..*\\.img" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.img" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.img" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.img" />
+                <data android:pathPattern="/.*\\.img" />
+                <data android:pathPattern="/.*\\..*\\.img" />
+                <data android:pathPattern="/.*\\..*\\..*\\.img" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\.img" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.img" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.img" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

@@ -153,7 +153,7 @@ public class BackupRestoreFragment extends Fragment {
                         final AppCompatButton bGo = (AppCompatButton) dialog.findViewById(R.id.bGoBackup);
                         final AppCompatEditText etFileName = (AppCompatEditText) dialog.findViewById(R.id.etFileName);
                         final File path = isRecovery ?
-                                Constants.PathToRecoveryBackups : Constants.PathToKernelBackups;
+                                Const.PathToRecoveryBackups : Const.PathToKernelBackups;
                         switch (menuItem.getItemId()) {
                             case R.id.iRestore:
                                 FlashUtil RestoreUtil = new FlashUtil(mActivity, new File(path, FileName),
@@ -219,7 +219,7 @@ public class BackupRestoreFragment extends Fragment {
                         adialog.setMessage(R.string.ok);
                         adialog.show();
                     }
-                    mActivity.addError(Constants.RASHR_TAG, e, false);
+                    mActivity.addError(Const.RASHR_TAG, e, false);
                     return false;
                 }
                 return false;
@@ -270,11 +270,11 @@ public class BackupRestoreFragment extends Fragment {
                 final int JOB;
                 if (RecoveryBackup) {
                     EXT = mDevice.getRecoveryExt();
-                    Path = Constants.PathToRecoveryBackups;
+                    Path = Const.PathToRecoveryBackups;
                     JOB = FlashUtil.JOB_BACKUP_RECOVERY;
                 } else {
                     EXT = mDevice.getKernelExt();
-                    Path = Constants.PathToKernelBackups;
+                    Path = Const.PathToKernelBackups;
                     JOB = FlashUtil.JOB_BACKUP_KERNEL;
                 }
 
@@ -320,9 +320,9 @@ public class BackupRestoreFragment extends Fragment {
 
         if (RecoveryBakAdapter != null) {
             if (mDevice.isRecoveryDD() || mDevice.isRecoveryMTD()) {
-                if (Constants.PathToRecoveryBackups.listFiles() != null) {
+                if (Const.PathToRecoveryBackups.listFiles() != null) {
                     ArrayList<File> RecoveryBakFiles = new ArrayList<>();
-                    File FileList[] = Constants.PathToRecoveryBackups.listFiles();
+                    File FileList[] = Const.PathToRecoveryBackups.listFiles();
                     if (FileList != null) {
                         RecoveryBakFiles.addAll(Arrays.asList(FileList));
                     }
@@ -336,9 +336,9 @@ public class BackupRestoreFragment extends Fragment {
 
         if (KernelBakAdapter != null) {
             if (mDevice.isKernelDD() || mDevice.isKernelMTD()) {
-                if (Constants.PathToKernelBackups.listFiles() != null) {
+                if (Const.PathToKernelBackups.listFiles() != null) {
                     ArrayList<File> KernelBakList = new ArrayList<>();
-                    File FileList[] = Constants.PathToKernelBackups.listFiles();
+                    File FileList[] = Const.PathToKernelBackups.listFiles();
                     if (FileList != null) {
                         KernelBakList.addAll(Arrays.asList(FileList));
                     }

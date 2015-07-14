@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,8 +65,6 @@ import de.mkrtchyan.utils.FileChooserDialog;
 public class FlashFragment extends Fragment {
 
     private SwipeRefreshLayout mSwipeUpdater = null;
-    private File RecoveryCollectionFile, KernelCollectionFile;
-
     private Device mDevice;
     private Toolbox mToolbox;
     private Context mContext;
@@ -88,8 +85,6 @@ public class FlashFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RecoveryCollectionFile = new File(mContext.getFilesDir(), "recovery_sums");
-        KernelCollectionFile = new File(mContext.getFilesDir(), "kernel_sums");
         setHasOptionsMenu(true);
     }
 
@@ -109,7 +104,7 @@ public class FlashFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_rashr, container, false);
         /** Check if device uses unified builds */
-        if (Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED)
+        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SHOW_UNIFIED)
                 && mDevice.isUnified()
                 && (!mDevice.isStockRecoverySupported() || !mDevice.isCwmRecoverySupported()
                 || !mDevice.isTwrpRecoverySupported() || !mDevice.isPhilzRecoverySupported())) {
@@ -119,7 +114,7 @@ public class FlashFragment extends Fragment {
         root.setBackgroundColor(
                 RashrActivity.isDark ? getResources().getColor(R.color.background_material_dark) :
                 getResources().getColor(R.color.background_material_light));
-        if (Common.getBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_CHECK_UPDATES)
+        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_CHECK_UPDATES)
                 && RashrActivity.FirstSession) {
             catchUpdates(true);
             RashrActivity.FirstSession = false;
@@ -155,103 +150,36 @@ public class FlashFragment extends Fragment {
             switch (SYSTEM) {
                 case "stock":
                     Versions = mDevice.getStockRecoveryVersions();
-                    path = Constants.PathToStockRecovery;
-                    for (String i : Versions) {
-                        try {
-                            String version = i.split("-")[3].replace(mDevice.getRecoveryExt(), "");
-                            String deviceName = i.split("-")[2];
-                            VersionsAdapter.add("Stock Recovery " + version + " (" + deviceName + ")");
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            VersionsAdapter.add(i);
-                        }
-                    }
+                    path = Const.PathToStockRecovery;
                     break;
                 case "clockwork":
                     Versions = mDevice.getCwmRecoveryVersions();
-                    path = Constants.PathToCWM;
-                    for (String i : Versions) {
-                        try {
-                            int startIndex;
-                            String version = "";
-                            if (i.contains("-touch-")) {
-                                startIndex = 4;
-                                version = "Touch ";
-                            } else {
-                                startIndex = 3;
-                            }
-                            version += i.split("-")[startIndex-1];
-                            String device = "(";
-                            for (int splitNr = startIndex; splitNr < i.split("-").length; splitNr++) {
-                                if (!device.equals("(")) device += "-";
-                                device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
-                            }
-                            device += ")";
-                            VersionsAdapter.add("ClockworkMod " + version + " " + device);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            VersionsAdapter.add(i);
-                        }
-                    }
+                    path = Const.PathToCWM;
                     break;
                 case "twrp":
                     Versions = mDevice.getTwrpRecoveryVersions();
-                    path = Constants.PathToTWRP;
-                    for (String i : Versions) {
-                        try {
-                            if (i.contains("openrecovery")) {
-                                String device = "(";
-                                for (int splitNr = 3; splitNr < i.split("-").length; splitNr++) {
-                                    if (!device.equals("(")) device += "-";
-                                    device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
-                                }
-                                device += ")";
-                                VersionsAdapter.add("TWRP " + i.split("-")[2] + " " + device);
-                            } else {
-                                VersionsAdapter.add("TWRP " + i.split("-")[1].replace(mDevice.getRecoveryExt(), "") + ")");
-                            }
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            VersionsAdapter.add(i);
-                        }
-                    }
+                    path = Const.PathToTWRP;
                     break;
                 case "philz":
                     Versions = mDevice.getPhilzRecoveryVersions();
-                    path = Constants.PathToPhilz;
-                    for (String i : Versions) {
-                        try {
-                            String device = "(";
-                            for (int splitNr = 1; splitNr < i.split("-").length; splitNr++) {
-                                if (!device.equals("(")) device += "-";
-                                device += i.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
-                            }
-                            device += ")";
-                            VersionsAdapter.add("PhilZ Touch " + i.split("_")[2].split("-")[0] + " " + device);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            VersionsAdapter.add(i);
-                        }
-                    }
+                    path = Const.PathToPhilz;
                     break;
                 default:
                     return;
             }
-            final AppCompatDialog RecoveriesDialog = new AppCompatDialog(mContext);
+            for (String i : Versions) {
+                VersionsAdapter.add(formatName(i, SYSTEM));
+            }
+            final AlertDialog.Builder RecoveriesDialog = new AlertDialog.Builder(mContext);
             RecoveriesDialog.setTitle(SYSTEM.toUpperCase());
-            ListView VersionList = new ListView(mContext);
-            RecoveriesDialog.setContentView(VersionList);
-
-            VersionList.setAdapter(VersionsAdapter);
-            RecoveriesDialog.show();
-            VersionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+            RecoveriesDialog.setAdapter(VersionsAdapter, new DialogInterface.OnClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    RecoveriesDialog.dismiss();
-
-                    final String fileName = Versions.get(i);
+                public void onClick(DialogInterface dialog, int which) {
+                    final String fileName = Versions.get(which);
                     final File recovery = new File(path, fileName);
                     if (!recovery.exists()) {
                         try {
-                            URL url = new URL(Constants.RECOVERY_URL + "/" + fileName);
+                            URL url = new URL(Const.RECOVERY_URL + "/" + fileName);
                             Downloader RecoveryDownloader = new Downloader(mContext, url, recovery);
                             RecoveryDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
                                 @Override
@@ -266,7 +194,7 @@ public class FlashFragment extends Fragment {
                             });
                             RecoveryDownloader.setRetry(true);
                             RecoveryDownloader.setAskBeforeDownload(true);
-                            RecoveryDownloader.setChecksumFile(RecoveryCollectionFile);
+                            RecoveryDownloader.setChecksumFile(Const.RecoveryCollectionFile);
                             RecoveryDownloader.ask();
                         } catch (MalformedURLException ignored) {}
                     } else {
@@ -274,6 +202,7 @@ public class FlashFragment extends Fragment {
                     }
                 }
             });
+            RecoveriesDialog.show();
         }
     }
 
@@ -291,14 +220,14 @@ public class FlashFragment extends Fragment {
                     flashRecovery(file);
                 }
             });
-        chooser.setStartFolder(Constants.PathToSd);
+        chooser.setStartFolder(Const.PathToSd);
         chooser.setWarn(true);
         chooser.show();
     }
 
     public void FlashSupportedKernel(Card card) {
         final File path;
-        ArrayList<String> Versions;
+        final ArrayList<String> Versions;
         ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext, R.layout.custom_list_item);
         if (!mDevice.downloadUtils(mContext)) {
             /**
@@ -308,7 +237,7 @@ public class FlashFragment extends Fragment {
             String SYSTEM = card.getData().toString();
             if (SYSTEM.equals("stock")) {
                 Versions = mDevice.getStockKernelVersions();
-                path = Constants.PathToStockKernel;
+                path = Const.PathToStockKernel;
                 for (String i : Versions) {
                     try {
                         String version = i.split("-")[3].replace(mDevice.getRecoveryExt(), "");
@@ -322,48 +251,39 @@ public class FlashFragment extends Fragment {
                 return;
             }
 
-            final AppCompatDialog KernelDialog = new AppCompatDialog(mContext);
+            final AlertDialog.Builder KernelDialog = new AlertDialog.Builder(mContext);
             KernelDialog.setTitle(SYSTEM);
-            ListView VersionList = new ListView(mContext);
-            KernelDialog.setContentView(VersionList);
-            VersionList.setAdapter(VersionsAdapter);
-            KernelDialog.show();
-            VersionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+            KernelDialog.setAdapter(VersionsAdapter, new DialogInterface.OnClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                public void onClick(DialogInterface dialog, int which) {
+                    final File kernel = new File(path, Versions.get(which));
 
-                    KernelDialog.dismiss();
-                    final String fileName;
-                    if ((fileName = ((AppCompatTextView) view).getText().toString()) != null) {
-                        final File kernel = new File(path, fileName);
+                    if (!kernel.exists()) {
+                        try {
+                            URL url = new URL(Const.KERNEL_URL + "/" + kernel.getName());
+                            Downloader KernelDownloader = new Downloader(mContext, url, kernel);
+                            KernelDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                @Override
+                                public void success(File file) {
+                                    flashKernel(file);
+                                }
 
-                        if (!kernel.exists()) {
-                            try {
-                                URL url = new URL(Constants.KERNEL_URL + "/" + fileName);
-                                Downloader KernelDownloader = new Downloader(mContext, url, kernel);
-                                KernelDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                                    @Override
-                                    public void success(File file) {
-                                        flashKernel(file);
-                                    }
+                                @Override
+                                public void failed(Exception e) {
 
-                                    @Override
-                                    public void failed(Exception e) {
-
-                                    }
-                                });
-                                KernelDownloader.setRetry(true);
-                                KernelDownloader.setAskBeforeDownload(true);
-                                KernelDownloader.setChecksumFile(KernelCollectionFile);
-                                KernelDownloader.ask();
-                            } catch (MalformedURLException ignored) {}
-                        } else {
-                            flashKernel(kernel);
-                        }
+                                }
+                            });
+                            KernelDownloader.setRetry(true);
+                            KernelDownloader.setAskBeforeDownload(true);
+                            KernelDownloader.setChecksumFile(Const.KernelCollectionFile);
+                            KernelDownloader.ask();
+                        } catch (MalformedURLException ignored) {}
+                    } else {
+                        flashKernel(kernel);
                     }
                 }
             });
+            KernelDialog.show();
         }
     }
 
@@ -379,7 +299,7 @@ public class FlashFragment extends Fragment {
                 flashKernel(file);
             }
         });
-        chooser.setStartFolder(Constants.PathToSd);
+        chooser.setStartFolder(Const.PathToSd);
         chooser.setAllowedEXT(AllowedEXT);
         chooser.setBrowseUpAllowed(true);
         chooser.setWarn(true);
@@ -387,38 +307,25 @@ public class FlashFragment extends Fragment {
     }
 
     public void showFlashHistory() {
-        final ArrayList<File> HistoryFiles = new ArrayList<>();
+        final ArrayList<File> HistoryFiles = getHistoryFiles();
         final ArrayList<String> HistoryFileNames = new ArrayList<>();
-        final AppCompatDialog HistoryDialog = new AppCompatDialog(mContext);
+        final AlertDialog.Builder HistoryDialog = new AlertDialog.Builder(mContext);
         HistoryDialog.setTitle(R.string.history);
-        ListView HistoryList = new ListView(mContext);
-        File tmp;
-        for (int i = 0; i < 5; i++) {
-            tmp = new File(Common.getStringPref(mContext, Constants.PREF_NAME,
-                    Constants.PREF_KEY_HISTORY + String.valueOf(i)));
-            if (tmp.exists() && !tmp.isDirectory()) {
-                HistoryFiles.add(tmp);
-                HistoryFileNames.add(tmp.getName());
-            } else {
-                Common.setStringPref(mContext, Constants.PREF_NAME,
-                        Constants.PREF_KEY_HISTORY + String.valueOf(i), "");
-            }
-        }
-        HistoryList.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1,
-                HistoryFileNames));
-        HistoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
 
-                if (HistoryFiles.get(arg2).exists()) {
+        for (File i : HistoryFiles) {
+            HistoryFileNames.add(i.getName());
+        }
+
+        HistoryDialog.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1,
+                HistoryFileNames), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (HistoryFiles.get(which).exists()) {
                     mActivity.switchTo(FlashAsFragment.newInstance(mActivity,
-                            HistoryFiles.get(arg2), true));
-                    HistoryDialog.dismiss();
+                            HistoryFiles.get(which), true));
                 }
             }
         });
-        HistoryDialog.setContentView(HistoryList);
         if (HistoryFileNames.toArray().length > 0) {
             HistoryDialog.show();
         } else {
@@ -517,16 +424,18 @@ public class FlashFragment extends Fragment {
                 addKernelCards(RashrCards, scheme);
             }
 
-            final IconCard HistoryCard = new IconCard(getString(R.string.history),
-                    R.drawable.ic_history, getString(R.string.history_description), scheme);
-            HistoryCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showFlashHistory();
-                }
-            });
+            if (getHistoryFiles().size() > 0) {
+                final IconCard HistoryCard = new IconCard(getString(R.string.history),
+                        R.drawable.ic_history, getString(R.string.history_description), scheme);
+                HistoryCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFlashHistory();
+                    }
+                });
 
-            RashrCards.addCard(HistoryCard, true);
+                RashrCards.addCard(HistoryCard, true);
+            }
 
             addRebooterCards(RashrCards, scheme);
         }
@@ -605,8 +514,8 @@ public class FlashFragment extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Common.setBooleanPref(mContext, Constants.PREF_NAME,
-                                Constants.PREF_KEY_SHOW_UNIFIED, false);
+                        Common.setBooleanPref(mContext, Const.PREF_NAME,
+                                Const.PREF_KEY_SHOW_UNIFIED, false);
                         mDevice.setName(DevName.get(position));
                         mDevice.loadRecoveryList();
                         mActivity.runOnUiThread(new Runnable() {
@@ -626,7 +535,7 @@ public class FlashFragment extends Fragment {
         KeepCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Common.setBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED, false);
+                Common.setBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SHOW_UNIFIED, false);
                 UnifiedBuildsDialog.dismiss();
             }
         });
@@ -636,7 +545,7 @@ public class FlashFragment extends Fragment {
             UnifiedBuildsDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    Common.setBooleanPref(mContext, Constants.PREF_NAME, Constants.PREF_KEY_SHOW_UNIFIED,
+                    Common.setBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SHOW_UNIFIED,
                             false);
                 }
             });
@@ -875,17 +784,17 @@ public class FlashFragment extends Fragment {
             public void run() {
                 try {
                     /** Check changes on server */
-                    final URL recoveryUrl = new URL(Constants.RECOVERY_SUMS_URL);
+                    final URL recoveryUrl = new URL(Const.RECOVERY_SUMS_URL);
                     URLConnection recoveryCon = recoveryUrl.openConnection();
                     long recoveryListSize = recoveryCon.getContentLength();         //returns size of file on server
-                    long recoveryListLocalSize = RecoveryCollectionFile.length();   //returns size of local file
+                    long recoveryListLocalSize = Const.RecoveryCollectionFile.length();   //returns size of local file
                     if (recoveryListSize > 0) {
                         isRecoveryListUpToDate = recoveryListLocalSize == recoveryListSize;
                     }
-                    final URL kernelUrl = new URL(Constants.KERNEL_SUMS_URL);
+                    final URL kernelUrl = new URL(Const.KERNEL_SUMS_URL);
                     URLConnection kernelCon = kernelUrl.openConnection();
                     long kernelListSize = kernelCon.getContentLength();
-                    long kernelListLocalSize = KernelCollectionFile.length();
+                    long kernelListLocalSize = Const.KernelCollectionFile.length();
                     if (kernelListSize > 0) {
                         isKernelListUpToDate = kernelListLocalSize == kernelListSize;
                     }
@@ -898,7 +807,7 @@ public class FlashFragment extends Fragment {
                                     .show();
                         }
                     });
-                    mActivity.addError(Constants.RASHR_TAG, e, false);
+                    mActivity.addError(Const.RASHR_TAG, e, false);
                 }
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
@@ -913,13 +822,13 @@ public class FlashFragment extends Fragment {
                             final URL recoveryURL;
                             final URL kernelURL;
                             try {
-                                recoveryURL = new URL(Constants.RECOVERY_SUMS_URL);
-                                kernelURL = new URL(Constants.KERNEL_SUMS_URL);
+                                recoveryURL = new URL(Const.RECOVERY_SUMS_URL);
+                                kernelURL = new URL(Const.KERNEL_SUMS_URL);
                             } catch (MalformedURLException e) {
                                 return;
                             }
                             final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
-                                    RecoveryCollectionFile);
+                                    Const.RecoveryCollectionFile);
                             RecoveryUpdater.setOverrideFile(true);
                             RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
                                 @Override
@@ -927,7 +836,7 @@ public class FlashFragment extends Fragment {
                                     mDevice.loadRecoveryList();
                                     isRecoveryListUpToDate = true;
                                     final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
-                                            KernelCollectionFile);
+                                            Const.KernelCollectionFile);
                                     KernelUpdater.setOverrideFile(true);
                                     KernelUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
                                         @Override
@@ -1006,21 +915,90 @@ public class FlashFragment extends Fragment {
                                 }
                             });
                         } else {
-                            mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast
-                                            .makeText(mContext, R.string.uptodate, Toast.LENGTH_SHORT)
-                                            .show();
-                                    mSwipeUpdater.setRefreshing(false);
-                                }
-                            });
+                            if (Common.getBooleanPref(mContext, Const.PREF_NAME,
+                                    Const.PREF_KEY_HIDE_UPDATE_HINTS)) {
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast
+                                                .makeText(mContext, R.string.uptodate, Toast.LENGTH_SHORT)
+                                                .show();
+                                        mSwipeUpdater.setRefreshing(false);
+                                    }
+                                });
+                            }
                         }
                     }
                 });
             }
         });
         updateThread.start();
+    }
+
+    private String formatName(final String fileName, final String system) {
+        try {
+            switch (system) {
+                case "twrp":
+                    if (fileName.contains("openrecovery")) {
+                        String tdevice = "(";
+                        for (int splitNr = 3; splitNr < fileName.split("-").length; splitNr++) {
+                            if (!tdevice.equals("(")) tdevice += "-";
+                            tdevice += fileName.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                        }
+                        tdevice += ")";
+                        return "TWRP " + fileName.split("-")[2] + " " + tdevice;
+                    } else {
+                        return "TWRP " + fileName.split("-")[1].replace(mDevice.getRecoveryExt(), "") + " (" + mDevice.getName() + ")";
+                    }
+                case "clockwork":
+                    int startIndex;
+                    String cversion = "";
+                    if (fileName.contains("-touch-")) {
+                        startIndex = 4;
+                        cversion = "Touch ";
+                    } else {
+                        startIndex = 3;
+                    }
+                    cversion += fileName.split("-")[startIndex - 1];
+                    String device = "(";
+                    for (int splitNr = startIndex; splitNr < fileName.split("-").length; splitNr++) {
+                        if (!device.equals("(")) device += "-";
+                        device += fileName.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                    }
+                    device += ")";
+                    return "ClockworkMod " + cversion + " " + device;
+                case "philz":
+                        String pdevice = "(";
+                        for (int splitNr = 1; splitNr < fileName.split("-").length; splitNr++) {
+                            if (!pdevice.equals("(")) pdevice += "-";
+                            pdevice += fileName.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                        }
+                        pdevice += ")";
+                        return "PhilZ Touch " + fileName.split("_")[2].split("-")[0] + " " + pdevice;
+                case "stock":
+                    String sversion = fileName.split("-")[3].replace(mDevice.getRecoveryExt(), "");
+                    String deviceName = fileName.split("-")[2];
+                    return "Stock Recovery " + sversion + " (" + deviceName + ")";
+            }
+        } catch (ArrayIndexOutOfBoundsException ignore) {
+        }
+        return fileName;
+    }
+
+    private ArrayList<File> getHistoryFiles() {
+        ArrayList<File> history = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            File tmp = new File(Common.getStringPref(mContext, Const.PREF_NAME,
+                    Const.PREF_KEY_HISTORY + String.valueOf(i)));
+            if (tmp.exists() && !tmp.isDirectory()) {
+                history.add(tmp);
+            } else {
+                Common.setStringPref(mContext, Const.PREF_NAME,
+                        Const.PREF_KEY_HISTORY + String.valueOf(i), "");
+            }
+        }
+
+        return history;
     }
 }
 

@@ -15,8 +15,6 @@
     </string>
     <string name="error">Fehler</string>
     <string name="warning">Warnung!</string>
-    <string name="logs_title">Mitgeschriebene Shell-Befehle</string>
-    <string name="clear_logs">Logs säubern</string>
 
     <string name="positive">Ja</string>
     <string name="neutral">Nein</string>
