@@ -1,5 +1,8 @@
 package de.mkrtchyan.recoverytools;
 
+import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -20,10 +23,12 @@ import android.widget.Toast;
 
 import org.sufficientlysecure.rootcommands.Shell;
 
+import java.io.File;
+
 import de.mkrtchyan.utils.Common;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2015 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -59,27 +64,30 @@ public class SettingsFragment extends Fragment {
         final SwitchCompat swLog = (SwitchCompat) root.findViewById(R.id.cbLog);
         final SwitchCompat swDarkUI = (SwitchCompat) root.findViewById(R.id.cbDarkUI);
         final SwitchCompat swCheckUpdates = (SwitchCompat) root.findViewById(R.id.cbCheckUpdates);
+        final SwitchCompat swHideUpToDateHint = (SwitchCompat) root.findViewById(R.id.cbShowUpToDateHints);
         final AppCompatButton bShowLogs = (AppCompatButton) root.findViewById(R.id.bShowLogs);
         final AppCompatButton bReport = (AppCompatButton) root.findViewById(R.id.bReport);
         final AppCompatButton bShowChangelog = (AppCompatButton) root.findViewById(R.id.bShowChangelog);
         final AppCompatButton bReset = (AppCompatButton) root.findViewById(R.id.bReset);
         final AppCompatButton bClearCache = (AppCompatButton) root.findViewById(R.id.bClearCache);
 
-        swDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
-                Constants.PREF_KEY_DARK_UI));
-        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
-                Constants.PREF_KEY_ADS));
+        swDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+                Const.PREF_KEY_DARK_UI));
+        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+                Const.PREF_KEY_ADS));
         swLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
-        swCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
-                Constants.PREF_KEY_CHECK_UPDATES));
-        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Constants.PREF_NAME,
-                Constants.PREF_KEY_ADS));
+        swCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+                Const.PREF_KEY_CHECK_UPDATES));
+        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+                Const.PREF_KEY_ADS));
+        swHideUpToDateHint.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+                Const.PREF_KEY_HIDE_UPDATE_HINTS));
 
         swDarkUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME,
-                        Constants.PREF_KEY_DARK_UI, isChecked);
+                Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
+                        Const.PREF_KEY_DARK_UI, isChecked);
                 RashrActivity.isDark = isChecked;
             }
         });
@@ -94,17 +102,22 @@ public class SettingsFragment extends Fragment {
         swCheckUpdates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME,
-                        Constants.PREF_KEY_CHECK_UPDATES, isChecked);
-                swCheckUpdates.setChecked(isChecked);
+                Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
+                        Const.PREF_KEY_CHECK_UPDATES, isChecked);
             }
         });
         swShowAds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                Common.setBooleanPref(view.getContext(), Constants.PREF_NAME, Constants.PREF_KEY_ADS,
+                Common.setBooleanPref(view.getContext(), Const.PREF_NAME, Const.PREF_KEY_ADS,
                         isChecked);
-                swShowAds.setChecked(isChecked);
+            }
+        });
+        swHideUpToDateHint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
+                        Const.PREF_KEY_HIDE_UPDATE_HINTS, isChecked);
             }
         });
 
@@ -121,7 +134,7 @@ public class SettingsFragment extends Fragment {
         bShowLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Common.showLogs(view.getContext());
+                showLogs();
             }
         });
 
@@ -131,10 +144,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity)getActivity();
-                SharedPreferences.Editor editor = activity.getSharedPreferences(Constants.PREF_NAME,
-                        Context.MODE_PRIVATE).edit();
-                editor.clear().commit();
-                editor = activity.getSharedPreferences(FlashUtil.PREF_NAME,
+                SharedPreferences.Editor editor = activity.getSharedPreferences(Const.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
                 editor.clear().commit();
                 editor = activity.getSharedPreferences(Shell.PREF_NAME,
@@ -152,11 +162,11 @@ public class SettingsFragment extends Fragment {
                 ConfirmationDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (!Common.deleteFolder(Constants.PathToCWM, false)
-                                || !Common.deleteFolder(Constants.PathToTWRP, false)
-                                || !Common.deleteFolder(Constants.PathToPhilz, false)
-                                || !Common.deleteFolder(Constants.PathToStockRecovery, false)
-                                || !Common.deleteFolder(Constants.PathToStockKernel, false)) {
+                        if (!Common.deleteFolder(Const.PathToCWM, false)
+                                || !Common.deleteFolder(Const.PathToTWRP, false)
+                                || !Common.deleteFolder(Const.PathToPhilz, false)
+                                || !Common.deleteFolder(Const.PathToStockRecovery, false)
+                                || !Common.deleteFolder(Const.PathToStockKernel, false)) {
                             Toast
                                     .makeText(getActivity(), R.string.delete_failed, Toast.LENGTH_SHORT)
                                     .show();
@@ -191,10 +201,55 @@ public class SettingsFragment extends Fragment {
         WebView changes = new WebView(AppContext);
         changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         changes.setWebViewClient(new WebViewClient());
-        changes.loadUrl(Constants.CHANGELOG_URL);
+        changes.loadUrl(Const.CHANGELOG_URL);
         changes.clearCache(true);
         dialog.setView(changes);
         dialog.show();
+    }
+
+    private void showLogs() {
+        final Context context = getActivity();
+        final AlertDialog.Builder LogDialog = new AlertDialog.Builder(context);
+        LogDialog.setTitle(R.string.logs);
+        try {
+            final String message = Common.fileContent(new File(context.getFilesDir(), Shell.Logs));
+            LogDialog.setMessage(message);
+            LogDialog.setNeutralButton(R.string.copy, new DialogInterface.OnClickListener() {
+                @Override
+                @SuppressLint("NewApi")
+                @SuppressWarnings("deprecation")
+                public void onClick(DialogInterface dialog, int which) {
+                    int currentApi = android.os.Build.VERSION.SDK_INT;
+                    if (currentApi >= android.os.Build.VERSION_CODES.HONEYCOMB){
+                        ClipboardManager clipboard =  (ClipboardManager)
+                                context.getSystemService(Context.CLIPBOARD_SERVICE);
+                        ClipData clip = ClipData.newPlainText("", message);
+                        clipboard.setPrimaryClip(clip);
+                    } else{
+                        ClipboardManager clipboard = (ClipboardManager)
+                                context.getSystemService(Context.CLIPBOARD_SERVICE);
+                        clipboard.setText(message);
+                    }
+                    Toast.makeText(context, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception ignore) {
+            Toast.makeText(context, R.string.no_logs, Toast.LENGTH_SHORT).show();
+        }
+        LogDialog.setNegativeButton(R.string.clear_logs, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Common.deleteLogs(context);
+            }
+        });
+        LogDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        LogDialog.show();
     }
 
 }
