@@ -1,6 +1,10 @@
 CHANGELOG
 ====================
 
+Update [2.3.2]
+
+-Device recognition and partitions added for Samsung GT-I9192I Galaxy S4 Mini Plus (serranove3gxx, value edition) thanks to XDA-Member alexax66
+
 Update [2.3.1]
 
 -Recovery Script Manager fixed
