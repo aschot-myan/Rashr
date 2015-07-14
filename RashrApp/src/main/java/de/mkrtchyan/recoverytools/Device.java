@@ -84,6 +84,7 @@ public class Device {
             new File("/dev/block/platform/sdhci.1/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
+            new File("/dev/block/bootdevice/by-name/recovery"),
             new File("/system/bin/recovery.tar"),
             new File("/dev/block/recovery"),
             new File("/dev/block/nandg"),
@@ -100,6 +101,7 @@ public class Device {
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
             new File("/dev/block/platform/sdhci.1/by-name/KERNEL"),
             new File("/dev/block/platform/sdhci.1/by-name/boot"),
+            new File("/dev/block/bootdevice/by-name/boot"),
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
