@@ -56,6 +56,14 @@
         android:gravity="center"
         android:layout_weight="1" />
 
+    <android.support.v7.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hide_uptodate_hint"
+        android:id="@+id/cbShowUpToDateHints"
+        android:gravity="center"
+        android:layout_weight="1"/>
+
     <android.support.v7.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
