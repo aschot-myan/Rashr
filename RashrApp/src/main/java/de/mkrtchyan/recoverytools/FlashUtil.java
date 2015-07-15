@@ -49,9 +49,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     final private Shell mShell;
     final private Toolbox mToolbox;
     private final int mJOB;
-    private final File mCustomIMG, mBusybox, flash_image, dump_image;
+    private final File mCustomIMG, flash_image, dump_image;
     private ProgressDialog pDialog;
-    private File tmpFile, CurrentPartition;
+    private File tmpFile, mPartition;
     private boolean keepAppOpen = true;
     private Runnable RunAtEnd;
 
@@ -65,7 +65,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         mJOB = job;
         mCustomIMG = CustomIMG;
         mToolbox = activity.getToolbox();
-        mBusybox = new File(mContext.getFilesDir(), "busybox");
         flash_image = mDevice.getFlash_image();
         dump_image = mDevice.getDump_image();
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
@@ -92,7 +91,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             mActivity.addError(Const.FLASH_UTIL_TAG, e, true);
         }
 
-
     }
 
     @Override
@@ -101,10 +99,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             int PartitionType = 0;
             if (isJobRecovery()) {
                 PartitionType = mDevice.getRecoveryType();
-                CurrentPartition = new File(mDevice.getRecoveryPath());
+                mPartition = new File(mDevice.getRecoveryPath());
             } else if (isJobKernel()) {
                 PartitionType = mDevice.getKernelType();
-                CurrentPartition = new File(mDevice.getKernelPath());
+                mPartition = new File(mDevice.getKernelPath());
             }
 
             switch (PartitionType) {
@@ -117,6 +115,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 case Device.PARTITION_TYPE_SONY:
                     SONY();
                     break;
+                default:
+                    return false;
             }
             saveHistory();
             return true;
@@ -153,13 +153,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Command = lokiPatch();
             } else {
                 Common.copyFile(mCustomIMG, tmpFile);
-                Command = mBusybox.getAbsolutePath() + " dd if=\"" + tmpFile.getAbsolutePath() + "\" " +
-                        "of=\"" + CurrentPartition.getAbsolutePath() + "\"";
+                Command = Const.Busybox + " dd if=\"" + tmpFile + "\" of=\"" + mPartition + "\" bs="
+                        + (isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize());
             }
         } else if (isJobBackup()) {
-
-            Command = mBusybox.getAbsolutePath() + " dd if=\"" + CurrentPartition.getAbsolutePath() + "\" " +
-                    "of=\"" + tmpFile.getAbsolutePath() + "\"";
+            Command = Const.Busybox + " dd if=\"" + mPartition + "\" of=\"" + tmpFile + "\"";
         }
         mShell.execCommand(Command, true);
         if (isJobBackup()) placeImgBack();
@@ -193,13 +191,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 File charger = new File(Const.PathToUtils, "charger");
                 File chargermon = new File(Const.PathToUtils, "chargermon");
                 File ric = new File(Const.PathToUtils, "ric");
-                mToolbox.remount(CurrentPartition, "RW");
+                mToolbox.remount(mPartition, "RW");
                 try {
-                    mToolbox.copyFile(charger, CurrentPartition.getParentFile(), true, false);
-                    mToolbox.copyFile(chargermon, CurrentPartition.getParentFile(), true, false);
+                    mToolbox.copyFile(charger, mPartition.getParentFile(), true, false);
+                    mToolbox.copyFile(chargermon, mPartition.getParentFile(), true, false);
                     if (mDevice.getName().equals("yuga")
                             || mDevice.getName().equals("c6602")) {
-                        mToolbox.copyFile(ric, CurrentPartition.getParentFile(), true, false);
+                        mToolbox.copyFile(ric, mPartition.getParentFile(), true, false);
                         mToolbox.setFilePermissions(ric, "755");
                     }
                 } catch (Exception e) {
@@ -208,10 +206,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 mToolbox.setFilePermissions(charger, "755");
                 mToolbox.setFilePermissions(chargermon, "755");
                 mToolbox.setFilePermissions(mCustomIMG, "644");
-                mToolbox.remount(CurrentPartition, "RO");
-                Command = "cat " + mCustomIMG.getAbsolutePath() + " >> " + CurrentPartition.getAbsolutePath();
+                mToolbox.remount(mPartition, "RO");
+                Command = "cat " + mCustomIMG.getAbsolutePath() + " >> " + mPartition.getAbsolutePath();
             } else if (isJobBackup()) {
-                Command = "cat " + CurrentPartition.getAbsolutePath() + " >> " + mCustomIMG.getAbsolutePath();
+                Command = "cat " + mPartition.getAbsolutePath() + " >> " + mCustomIMG.getAbsolutePath();
             }
         }
         mShell.execCommand(Command, true);
@@ -219,7 +217,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     private void setBinaryPermissions() throws FailedExecuteCommand {
-        mToolbox.setFilePermissions(mBusybox, "755");
+        mToolbox.setFilePermissions(Const.Busybox, "755");
 		try {
 			mToolbox.setFilePermissions(flash_image, "755");
 		} catch (FailedExecuteCommand e) {
@@ -356,9 +354,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         File patched_CustomIMG = new File(mContext.getFilesDir(), mCustomIMG.getName() + ".lok");
         File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
         File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
-        mShell.execCommand("dd if=" + aboot.getAbsolutePath() + " of=" + extracted_aboot.getAbsolutePath(), true);
-        mShell.execCommand(loki_patch.getAbsolutePath() + " recovery "
-                + mCustomIMG.getAbsolutePath() + " " + patched_CustomIMG.getAbsolutePath() + "  || exit 1", true);
-        return loki_flash.getAbsolutePath() + " recovery " + patched_CustomIMG.getAbsolutePath() + " || exit 1";
+        mShell.execCommand("dd if=" + aboot + " of=" + extracted_aboot, true);
+        mShell.execCommand(loki_patch + " recovery " + mCustomIMG + " " + patched_CustomIMG +
+                "  || exit 1", true);
+        return loki_flash + " recovery " + patched_CustomIMG + " || exit 1";
     }
 }

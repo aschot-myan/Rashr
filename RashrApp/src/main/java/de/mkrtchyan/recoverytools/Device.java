@@ -46,6 +46,13 @@ import de.mkrtchyan.utils.Unzipper;
  */
 public class Device {
 
+    public static final String EXT_IMG = ".img";
+    public static final String EXT_TAR = ".tar";
+    public static final String EXT_ZIP = ".zip";
+    public static final int PARTITION_TYPE_DD = 1;
+    public static final int PARTITION_TYPE_MTD = 2;
+    public static final int PARTITION_TYPE_RECOVERY = 3;
+    public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
     /**
      * This class contains all device specified information to provide
@@ -54,14 +61,9 @@ public class Device {
      * FileSystem an how to flash
      */
     private int mRECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
+    private int mRECOVERY_BLOCKSIZE = 0;
     private int mKERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
-    public static String EXT_IMG = ".img";
-    public static String EXT_TAR = ".tar";
-    public static String EXT_ZIP = ".zip";
-    public static final int PARTITION_TYPE_DD = 1;
-    public static final int PARTITION_TYPE_MTD = 2;
-    public static final int PARTITION_TYPE_RECOVERY = 3;
-    public static final int PARTITION_TYPE_SONY = 4;
+    private int mKERNEL_BLOCKSIZE = 0;
     /** Collection of known Recovery Partitions on some devices */
     private final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
@@ -132,6 +134,19 @@ public class Device {
         setPredefinedOptions();
         loadRecoveryList();
         loadKernelList();
+        if (isRecoveryDD()) {
+            try {
+                mRECOVERY_BLOCKSIZE = Integer.valueOf(
+                        mShell.execCommand(Const.Busybox + " blocksize --getbsz " + mRecoveryPath));
+            } catch (FailedExecuteCommand ignore) {}
+        }
+        if (isKernelDD()) {
+            try {
+                mKERNEL_BLOCKSIZE = Integer.valueOf(
+                        mShell.execCommand(Const.Busybox + " blocksize --getbsz " + mKernelPath));
+            } catch (FailedExecuteCommand ignore) {}
+        }
+
     }
 
     private void setPredefinedOptions() {
@@ -962,5 +977,13 @@ public class Device {
 
     public boolean isLoki() {
         return mName.startsWith("g2") && Build.MANUFACTURER.equals("lge");
+    }
+
+    public int getRecoveryBlocksize() {
+        return mRECOVERY_BLOCKSIZE;
+    }
+
+    public int getKernelBlocksize() {
+        return mKERNEL_BLOCKSIZE;
     }
 }
