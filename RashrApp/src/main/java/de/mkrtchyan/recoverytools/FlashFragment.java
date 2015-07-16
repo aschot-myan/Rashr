@@ -915,18 +915,18 @@ public class FlashFragment extends Fragment {
                                 }
                             });
                         } else {
-                            if (Common.getBooleanPref(mContext, Const.PREF_NAME,
-                                    Const.PREF_KEY_HIDE_UPDATE_HINTS)) {
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+                            mActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!Common.getBooleanPref(mContext, Const.PREF_NAME,
+                                            Const.PREF_KEY_HIDE_UPDATE_HINTS)) {
                                         Toast
                                                 .makeText(mContext, R.string.uptodate, Toast.LENGTH_SHORT)
                                                 .show();
-                                        mSwipeUpdater.setRefreshing(false);
                                     }
-                                });
-                            }
+                                    mSwipeUpdater.setRefreshing(false);
+                                }
+                            });
                         }
                     }
                 });
