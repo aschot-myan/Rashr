@@ -16,7 +16,7 @@ import java.io.IOException;
 import de.mkrtchyan.utils.Common;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2015 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -68,6 +68,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         flash_image = mDevice.getFlash_image();
         dump_image = mDevice.getDump_image();
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
+
+        if (isJobRecovery()) {
+            mPartition = new File(mDevice.getRecoveryPath());
+        } else if (isJobKernel()) {
+            mPartition = new File(mDevice.getKernelPath());
+        }
     }
 
     protected void onPreExecute() {
@@ -82,8 +88,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             } else if (isJobRestore()) {
                 pDialog.setTitle(R.string.restoring);
             }
-
-            pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            if (isJobBackup() && (isJobRecovery() ? mDevice.isRecoveryDD() : mDevice.isKernelDD())) {
+                pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                pDialog.setMax(getSizeOfFile(mPartition));
+            } else {
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            }
             pDialog.setMessage(mCustomIMG.getName());
             pDialog.setCancelable(false);
             pDialog.show();
@@ -99,12 +109,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             int PartitionType = 0;
             if (isJobRecovery()) {
                 PartitionType = mDevice.getRecoveryType();
-                mPartition = new File(mDevice.getRecoveryPath());
             } else if (isJobKernel()) {
                 PartitionType = mDevice.getKernelType();
-                mPartition = new File(mDevice.getKernelPath());
             }
-
             switch (PartitionType) {
                 case Device.PARTITION_TYPE_MTD:
                     MTD();
@@ -147,14 +154,54 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     public void DD() throws FailedExecuteCommand, IOException {
+        Thread observer;
+
+        if (isJobBackup() && (isJobRecovery() ? mDevice.isRecoveryDD() : mDevice.isKernelDD())) {
+            observer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                    while (true) {
+                        try {
+                            final int progress = Common.safeLongToInt(tmpFile.length());
+                            mActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pDialog.setProgress(progress);
+                                }
+                            });
+                            if (progress >= pDialog.getMax()) break;
+                        } catch (IllegalArgumentException e) {
+                            mActivity.addError(Const.FLASH_UTIL_TAG, e, false);
+                            pDialog.setProgress(pDialog.getMax());
+                            break;
+                        }
+                    }
+                }
+            });
+            observer.start();
+        }
+        if (isJobFlash()) {
+            int customSize = getSizeOfFile(mCustomIMG);
+            int partitionSize = getSizeOfFile(mPartition);
+            if (customSize > partitionSize || customSize == -1 || partitionSize == -1) {
+                throw new IOException("IMG is to big for your device! IMG Size: " +
+                        customSize / (1024 * 1024) + "MB Partition Size: " +
+                        partitionSize / (1024 * 1024) + "MB");
+            }
+        }
+
         String Command = "";
         if (isJobFlash() || isJobRestore()) {
             if (mDevice.isLoki() && isJobFlash()) {
                 Command = lokiPatch();
             } else {
                 Common.copyFile(mCustomIMG, tmpFile);
-                Command = Const.Busybox + " dd if=\"" + tmpFile + "\" of=\"" + mPartition + "\" bs="
-                        + (isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize());
+                Command = Const.Busybox + " dd if=\"" + tmpFile + "\" of=\"" + mPartition + "\"";
+                if ((isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize()) > 0) {
+                    String bs = "bs="
+                            + (isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize());
+                    Command += bs;
+                }
             }
         } else if (isJobBackup()) {
             Command = Const.Busybox + " dd if=\"" + mPartition + "\" of=\"" + tmpFile + "\"";
@@ -217,7 +264,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     private void setBinaryPermissions() throws FailedExecuteCommand {
-        mToolbox.setFilePermissions(Const.Busybox, "755");
+        try {
+            mToolbox.setFilePermissions(Const.Busybox, "755");
+        } catch (FailedExecuteCommand e) {
+            mToolbox.remount(Const.Busybox, "rw");
+            mToolbox.setFilePermissions(Const.Busybox, "755");
+            mToolbox.remount(Const.Busybox, "ro");
+        }
 		try {
 			mToolbox.setFilePermissions(flash_image, "755");
 		} catch (FailedExecuteCommand e) {
@@ -358,5 +411,15 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         mShell.execCommand(loki_patch + " recovery " + mCustomIMG + " " + patched_CustomIMG +
                 "  || exit 1", true);
         return loki_flash + " recovery " + patched_CustomIMG + " || exit 1";
+    }
+
+    public int getSizeOfFile(File path) {
+        try {
+            String output;
+            output = mShell.execCommand("wc -c " + path);
+            return Integer.valueOf(output.split(" ")[0]);
+        } catch (FailedExecuteCommand failedExecuteCommand) {
+            return -1;
+        }
     }
 }
