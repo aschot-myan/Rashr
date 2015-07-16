@@ -20,7 +20,6 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
 import org.sufficientlysecure.donations.DonationsFragment;
-import org.sufficientlysecure.rootcommands.RootCommands;
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
@@ -140,6 +139,47 @@ public class RashrActivity extends AppCompatActivity implements
                     LastLogExists = false;
                     mActivity.addError(Const.RASHR_TAG, e, false);
                 }
+                /** Checking if version has changed */
+                final int previous_version = Common.getIntegerPref(mContext,
+                        Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
+                final int current_version = BuildConfig.VERSION_CODE;
+                mVersionChanged = current_version > previous_version;
+                Common.setIntegerPref(mContext, Const.PREF_NAME,
+                        Const.PREF_KEY_CUR_VER, current_version);
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkUpdates(current_version);
+                    }
+                });
+                if (mVersionChanged) {
+                    /** Re-enable Ads */
+                    Common.setBooleanPref(mContext, Const.PREF_NAME,
+                            Const.PREF_KEY_ADS, true);
+                    /** Show Play Store rater dialog */
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!Common.getBooleanPref(mContext, Const.PREF_NAME,
+                                    Const.PREF_KEY_HIDE_RATER)) {
+                                Notifyer.showAppRateDialog(mContext, Const.PREF_NAME,
+                                        Const.PREF_KEY_HIDE_RATER);
+                            }
+                        }
+                    });
+                }
+                try {
+                    extractFiles();
+                } catch (IOException e) {
+                    mActivity.addError(Const.RASHR_TAG, e, true);
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mContext, R.string.failed_unpack_files,
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -176,51 +216,6 @@ public class RashrActivity extends AppCompatActivity implements
                                 showUsageWarning();
                             }
                         });
-                    } else {
-                        /** Checking if version has changed */
-                        final int previous_version = Common.getIntegerPref(mContext,
-                                Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
-                        final int current_version = BuildConfig.VERSION_CODE;
-                        mVersionChanged = current_version > previous_version;
-                        Common.setIntegerPref(mContext, Const.PREF_NAME,
-                                Const.PREF_KEY_CUR_VER, current_version);
-                        mActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                checkUpdates(current_version);
-                            }
-                        });
-                        if (mVersionChanged) {
-                            /** Re-enable Ads */
-                            Common.setBooleanPref(mContext, Const.PREF_NAME,
-                                    Const.PREF_KEY_ADS, true);
-                            /** Reset Shell Logs */
-                            Common.deleteLogs(mContext);
-                            /** Show Play Store rater dialog */
-                            mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (!Common.getBooleanPref(mContext, Const.PREF_NAME,
-                                            Const.PREF_KEY_HIDE_RATER)) {
-                                        Notifyer.showAppRateDialog(mContext, Const.PREF_NAME,
-                                                Const.PREF_KEY_HIDE_RATER);
-                                    }
-                                }
-                            });
-                        }
-
-                        try {
-                            extractFiles();
-                        } catch (IOException e) {
-                            mActivity.addError(Const.RASHR_TAG, e, true);
-                            mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(mContext, R.string.failed_unpack_files,
-                                            Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
                     }
                 }
                 mActivity.runOnUiThread(new Runnable() {
