@@ -136,14 +136,16 @@ public class Device {
         loadKernelList();
         if (isRecoveryDD()) {
             try {
-                mRECOVERY_BLOCKSIZE = Integer.valueOf(
-                        mShell.execCommand(Const.Busybox + " blocksize --getbsz " + mRecoveryPath));
+                String tmp = mShell.execCommand(Const.Busybox + " blockdev --getbsz " + mRecoveryPath);
+                tmp = tmp.replace("\n", "");
+                mRECOVERY_BLOCKSIZE = Integer.valueOf(tmp);
             } catch (FailedExecuteCommand ignore) {}
         }
         if (isKernelDD()) {
             try {
-                mKERNEL_BLOCKSIZE = Integer.valueOf(
-                        mShell.execCommand(Const.Busybox + " blocksize --getbsz " + mKernelPath));
+                String tmp = mShell.execCommand(Const.Busybox + " blockdev --getbsz " + mKernelPath);
+                tmp = tmp.replace("\n", "");
+                mKERNEL_BLOCKSIZE = Integer.valueOf(tmp);
             } catch (FailedExecuteCommand ignore) {}
         }
 
