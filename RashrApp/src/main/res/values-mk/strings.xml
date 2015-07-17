@@ -33,7 +33,7 @@
     <string name="comment">Коментар</string>
     <string name="comment_hint">Оставете коментар во врска со проблемот што го имате
     </string>
-    <string name="positive">Да, молам</string>
+    <string name="positive">Да</string>
     <string name="neutral">Не, благодарам</string>
     <string name="negative">Откажи</string>
 

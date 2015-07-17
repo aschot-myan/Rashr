@@ -58,8 +58,8 @@
     <string name="comment_hint">
         Bitte komentieren Sie hier welches Problem Sie haben (Download, Installation, Allgemein)
     </string>
-    <string name="positive">Ja, bitte</string>
-    <string name="neutral">Nein, danke</string>
+    <string name="positive">Ja</string>
+    <string name="neutral">Nein</string>
     <string name="negative">Abbrechen</string>
     <string name="log">Shell-Eingaben loggen</string>
     <string name="showlog">Shell-Eingaben zeigen</string>

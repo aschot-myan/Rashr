@@ -53,8 +53,8 @@
     <string name="Downloading">Downloading…</string>
     <string name="comment">Comentario</string>
     <string name="comment_hint">Comenten aquí lo que no funciona (download, flash)</string>
-    <string name="positive">Si, porfavor</string>
-    <string name="neutral">No, gracias</string>
+    <string name="positive">Si</string>
+    <string name="neutral">No</string>
     <string name="negative">Cancelar</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Ver Logs</string>

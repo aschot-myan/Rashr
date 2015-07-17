@@ -63,8 +63,8 @@
     <string name="comment_hint">
         Commenta qui cosa non funziona correttamente (download, flash, supporto o altro)
     </string>
-    <string name="positive">Si, grazie</string>
-    <string name="neutral">No, grazie</string>
+    <string name="positive">Si</string>
+    <string name="neutral">No</string>
     <string name="negative">Annulla</string>
     <string name="log">Registro comandi shell</string>
     <string name="showlog">Visualizza registri</string>

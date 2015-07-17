@@ -51,8 +51,8 @@
     <string name="Downloading">Downloading…</string>
     <string name="comment">Comment</string>
     <string name="comment_hint">Comment here, what is not working correctly (download, flash, common support or other)</string>
-    <string name="positive">Yes, please</string>
-    <string name="neutral">No, thanks</string>
+    <string name="positive">Yes</string>
+    <string name="neutral">No</string>
     <string name="negative">Cancel</string>
     <string name="log">Log Shell-Commands</string>
     <string name="showlog">Show Logs</string>

@@ -51,7 +51,7 @@
     <string name="Downloading">Baixando…</string>
     <string name="comment">Comentar</string>
     <string name="comment_hint">Comente aqui, o que estiver bugado (download, flash, suporte ou outro)</string>
-    <string name="positive">Sim, Por favor</string>
+    <string name="positive">Sim</string>
     <string name="neutral">Não, valeu</string>
     <string name="negative">Cancelar</string>
     <string name="log">Log Shell-Commands</string>
