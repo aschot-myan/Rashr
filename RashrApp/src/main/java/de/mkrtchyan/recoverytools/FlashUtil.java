@@ -119,9 +119,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 case Device.PARTITION_TYPE_DD:
                     DD();
                     break;
-                case Device.PARTITION_TYPE_SONY:
-                    SONY();
-                    break;
+                //case Device.PARTITION_TYPE_SONY:
+                //    SONY();
+                //    break;
                 default:
                     return false;
             }
@@ -228,7 +228,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (isJobBackup()) placeImgBack();
     }
 
-    public void SONY() throws FailedExecuteCommand, IOException {
+    /*public void SONY() throws FailedExecuteCommand, IOException {
 
         String Command = "";
         if (mDevice.getName().equals("yuga")
@@ -261,7 +261,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         }
         mShell.execCommand(Command, true);
         if (isJobBackup()) placeImgBack();
-    }
+    }*/
 
     private void setBinaryPermissions() throws FailedExecuteCommand {
         try {

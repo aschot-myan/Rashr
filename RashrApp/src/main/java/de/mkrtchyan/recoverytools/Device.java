@@ -1,9 +1,6 @@
 package de.mkrtchyan.recoverytools;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
 
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
@@ -13,15 +10,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Unzipper;
 
 /**
@@ -52,7 +46,7 @@ public class Device {
     public static final int PARTITION_TYPE_DD = 1;
     public static final int PARTITION_TYPE_MTD = 2;
     public static final int PARTITION_TYPE_RECOVERY = 3;
-    public static final int PARTITION_TYPE_SONY = 4;
+    //public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
     /**
      * This class contains all device specified information to provide
@@ -351,7 +345,7 @@ public class Device {
             mRECOVERY_TYPE = PARTITION_TYPE_DD;
 
 //		Devices who kernel will be flashed to
-        if (mName.equals("c6602") || mName.equals("yuga")) mRECOVERY_TYPE = PARTITION_TYPE_SONY;
+        //if (mName.equals("c6602") || mName.equals("yuga")) mRECOVERY_TYPE = PARTITION_TYPE_SONY;
 
         if (new File("/dev/mtd/").exists()) {
             if (!isRecoveryDD()) {
@@ -474,7 +468,7 @@ public class Device {
         }
     }
 
-    public boolean downloadUtils(final Context mContext) {
+/*    public boolean downloadUtils(final Context mContext) {
 
         final File archive = new File(Const.PathToUtils, mName + EXT_ZIP);
 
@@ -512,7 +506,7 @@ public class Device {
             }
         }
         return false;
-    }
+    }*/
 
     private void readDeviceInfos() {
         for (File i : KernelList) {
@@ -537,7 +531,7 @@ public class Device {
                     mRecoveryPath = i.getAbsolutePath();
                     if (mRecoveryPath.endsWith(EXT_TAR)) {
                         mRECOVERY_EXT = EXT_TAR;
-                        mRECOVERY_TYPE = PARTITION_TYPE_SONY;
+                        //mRECOVERY_TYPE = PARTITION_TYPE_SONY;
                     }
                     break;
                 } catch (FailedExecuteCommand ignore) {

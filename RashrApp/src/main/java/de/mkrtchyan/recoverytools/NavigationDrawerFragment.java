@@ -1,7 +1,6 @@
 package de.mkrtchyan.recoverytools;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

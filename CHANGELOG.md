@@ -1,6 +1,16 @@
 CHANGELOG
 ====================
 
+Update [2.3.3]
+
+-App startup optimized
+-First run errors fixed
+-Image Size checking added (before flash)
+-Blocksize argument added on flash
+-Progress on creating backups
+-Blocksize checking added
+-Startup notification fixed
+
 Update [2.3.2]
 
 -Device recognition and partitions added for Samsung GT-I9192I Galaxy S4 Mini Plus (serranove3gxx, value edition) thanks to XDA-Member alexax66

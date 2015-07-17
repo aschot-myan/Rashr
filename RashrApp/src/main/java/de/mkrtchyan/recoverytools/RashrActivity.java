@@ -226,7 +226,7 @@ public class RashrActivity extends AppCompatActivity implements
                             setContentView(R.layout.activity_rashr);
                             mToolbar = (Toolbar) findViewById(R.id.toolbar);
                             setSupportActionBar(mToolbar);
-                            mDevice.downloadUtils(mContext);
+                            //mDevice.downloadUtils(mContext);
                             mNavigationDrawerFragment = (NavigationDrawerFragment)
                                     getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
                             mNavigationDrawerFragment.setUp(R.id.navigation_drawer,

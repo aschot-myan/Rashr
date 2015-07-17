@@ -138,7 +138,7 @@ public class FlashFragment extends Fragment {
     public void FlashSupportedRecovery(Card card) {
         final File path;
         final ArrayList<String> Versions;
-        if (!mDevice.downloadUtils(mContext)) {
+        //if (!mDevice.downloadUtils(mContext)) {
             /**
              * If there files be needed to flash download it and listing device specified
              * recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
@@ -203,7 +203,7 @@ public class FlashFragment extends Fragment {
                 }
             });
             RecoveriesDialog.show();
-        }
+        //}
     }
 
     /**
@@ -229,7 +229,7 @@ public class FlashFragment extends Fragment {
         final File path;
         final ArrayList<String> Versions;
         ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext, R.layout.custom_list_item);
-        if (!mDevice.downloadUtils(mContext)) {
+        //if (!mDevice.downloadUtils(mContext)) {
             /**
              * If there files be needed to flash download it and listing device specified recovery
              * file for example stock-boot-grouper-4.4.img (read out from kernel_sums)
@@ -284,7 +284,7 @@ public class FlashFragment extends Fragment {
                 }
             });
             KernelDialog.show();
-        }
+        //}
     }
 
     /**
