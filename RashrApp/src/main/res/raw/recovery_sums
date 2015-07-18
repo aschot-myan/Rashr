@@ -4158,6 +4158,7 @@ bdb1732bc4dd6ff74990805f78cab69e2c53be0e recoveries/stock-recovery-manta-4.4.4.i
 87d8be4a8c797dcef0935ddce0412444239db844 recoveries/stock-recovery-manta-4.4.img
 4a94de05788ff37f5f4916dd912556861e8ed191 recoveries/stock-recovery-manta-5.0.1.img
 816a3c5cee9773a0e6062d4f216e12047a6f043c recoveries/stock-recovery-shamu-5.0.1.img
+5e5207d90c7890955b6ca18296442d6a8436858a recoveries/stock-recovery-shamu-5.1.0.img
 fe3f24c9aaa8e9a4160353198831e0a7de117404 recoveries/stock-recovery-tilapia-4.4.3.img
 e7f554c792c290ddda05bf82966c75c4a930d849 recoveries/stock-recovery-tilapia-4.4.4.img
 81977901e5243d2ae47f7d32807145e8d4e74985 recoveries/stock-recovery-toro-4.0.4.img
@@ -4169,6 +4170,7 @@ d203011a1fd5d334f0787fe9c597be9d65039144 recoveries/twrp-2.8.6.0-zeroflte.img
 8dfc508aa1bfed30f75ded948620c5721dc76b13 recoveries/twrp-2.8.6.0-zerofltespr.img
 3cc1a22063a1f79a2d4a58e030f4651f77347164 recoveries/twrp-2.8.6.1-zeroflte.img
 55fb1b55e491039935495c53f2ae3d59cc04168a recoveries/twrp-2.8.6.2-zeroflte.img
+b6f493dfeca70229ce113be2a8021089ca2c61a0 recoveries/twrp-2.8.7.1-zeroflte.img
 0e2231636071de9f2d3169b30844d82f77323c69 recoveries/twrp-blaze-2.0.0RC0.img
 3b74da4c6ea524a6acb804ea5944e1c952fc027f recoveries/twrp-crespo-2.0.0RC0.img
 77bf95b9614c0c7293bd2c1202a600fdd942f322 recoveries/twrp-crespo-2.1.0.img
