@@ -191,5 +191,5 @@ Team Win Recovery Project (TWRP) 是完全以觸控控制的自製 Recovery
     <string name="copy">複製</string>
     <string name="logs">日誌</string>
     <string name="app_uptodate">應用程式已是最新版本！</string>
-    <string name="hide_uptodate_hint">隱藏'最新版本'提示</string>
+    <string name="hide_uptodate_hint">隱藏\'最新版本\'提示</string>
 </resources>
