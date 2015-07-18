@@ -149,10 +149,11 @@ public class ReportDialog extends Dialog {
                                 for (File i : files) {
                                     try {
                                         File tmp = new File(tmpFolder, i.getName());
-                                        toolbox.setFilePermissions(tmp, "777");
+
+                                        shell.execCommand(Const.Busybox + " chmod 777 " + i);
                                         toolbox.copyFile(i, tmp, true, false);
                                         toolbox.setFilePermissions(tmp, "777");
-                                        uris.add(Uri.fromFile(tmp));
+                                        shell.execCommand(Const.Busybox + " chmod 777 " + tmp);
                                     } catch (Exception e) {
                                         activity.addError(Const.RASHR_TAG, e, false);
                                     }

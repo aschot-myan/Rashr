@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import de.mkrtchyan.utils.Common;
-import de.mkrtchyan.utils.Downloader;
+import de.mkrtchyan.utils.DownloadDialog;
 import de.mkrtchyan.utils.Notifyer;
 
 /**
@@ -133,7 +133,7 @@ public class RashrActivity extends AppCompatActivity implements
 
                 try {
                     File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName() + ".txt");
-                    mToolbox.setFilePermissions(Const.LastLog, "666");
+                    mShell.execCommand(Const.Busybox + " chmod 766 " + Const.LastLog);
                     mToolbox.copyFile(Const.LastLog, LogCopy, false, false);
                 } catch (Exception e) {
                     LastLogExists = false;
@@ -458,10 +458,10 @@ public class RashrActivity extends AppCompatActivity implements
     public void checkUpdates(final int currentVersion) {
         try {
             File versionsFile = new File(mContext.getFilesDir(), "version");
-            Downloader version = new Downloader(mContext, new URL(Const.RASHR_VERSION_URL), versionsFile);
+            DownloadDialog version = new DownloadDialog(mContext, new URL(Const.RASHR_VERSION_URL), versionsFile);
             version.setOverrideFile(true);
             version.setHidden(true);
-            version.setOnDownloadListener(new Downloader.OnDownloadListener() {
+            version.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                 @Override
                 public void success(File file) {
                     try {
@@ -513,14 +513,12 @@ public class RashrActivity extends AppCompatActivity implements
     }
 
     private void startShell() throws IOException{
-        ArrayList<String> env = new ArrayList<>();
-        env.add(getFilesDir().toString());
         try {
-            mShell = Shell.startRootShell(mContext, env, "/");
+            mShell = Shell.startRootShell(mContext);
         } catch (IOException e) {
             if (BuildConfig.DEBUG) {
                 /** ignore root access error on Debug Rashr, use normal shell*/
-                mShell = Shell.startShell(env, "/");
+                mShell = Shell.startShell();
             } else {
                 throw e;
             }
