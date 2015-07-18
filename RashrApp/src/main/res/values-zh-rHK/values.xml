@@ -1,0 +1,195 @@
+<resources>
+    <string name="app_name">Rashr</string>
+    <string name="settings">設定</string>
+    <string name="sCWM">CWM recovery</string>
+    <string name="sFlashRecovery">寫入 Recovery</string>
+    <string name="sFlashKernel">寫入內核</string>
+    <string name="recovery_history">Recovery 紀錄</string>
+    <string name="kernel_history">內核紀錄</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="other_recovery">由儲存空間寫入 Recovery</string>
+    <string name="other_kernel">由儲存空間寫入內核</string>
+    <string name="sRecoveryBackup">備份 Recovery</string>
+    <string name="sKernelBackup">備份內核</string>
+    <string name="backups">備份</string>
+    <string name="backup">備份</string>
+    <string name="go">開始</string>
+    <string name="sRebooter">Rebooter</string>
+    <string name="restore">還原</string>
+    <string name="rename">重新命名</string>
+    <string name="sClearCache">清除下載</string>
+    <string name="report">回報問題</string>
+    <string name="sExit">離開</string>
+    <string name="xda">XDA-論壇帖</string>
+    <string name="set_name">備份名字</string>
+<string name="bak_warning">
+在您做任何事情之前，請先備份並存至電腦上以防萬一。 \n備份將被存至\n%s. \n若您損壞您的裝置，我們將一概不負責。
+</string>
+    <string name="flash_options">刷機選項</string>
+    <string name="risk">我了解可能的風險</string>
+    <string name="sReboot">重啟</string>
+    <string name="sRebootHot">熱重啟</string>
+    <string name="sRebootRecovery">重啟至 Recovery</string>
+    <string name="sReboot啟動程式">重啟至 啟動程式</string>
+    <string name="sRebootShutdown">關機</string>
+    <string name="info">資訊</string>
+    <string name="flashed">已寫入磁區。</string>
+    <string name="warning">警告！</string>
+<string name="fota">
+刷入 Recovery 於此系統上將會變更 FOTAKernel (替代磁區) 您的內核必須支援此功能才可以使用 （大部分的 ROM 及自製內核都支援）。
+</string>
+    <string name="flash_over_recovery">現在就寫入新的 Recovery 嗎? (需先重啟至 Recovery)</string>
+    <string name="bak_done">已完成備份</string>
+    <string name="backupalready">相同備份已存在。</string>
+    <string name="error">錯誤</string>
+<string name="not_supportded">
+您的裝置尚未被支援。 掃描系統並回報您的裝置或者 試著找尋磁區（進入 Recovery 後重啟）？
+</string>
+<string name="no_root">
+裝置無法取得 Root 權限。請先 Root。更多資訊請洽 \n\nxda-developers.com
+</string>
+    <string name="Downloading">下載中…</string>
+    <string name="comment">評論</string>
+    <string name="comment_hint">請在此評論，說說哪些東西無法正常使用（下載、刷機、或其他）</string>
+    <string name="positive">OK</string>
+    <string name="neutral">不了，謝謝</string>
+    <string name="negative">取消</string>
+    <string name="log">紀錄 Shell 指令</string>
+    <string name="showlog">顯示日誌</string>
+    <string name="delete">刪除</string>
+    <string name="sBackupMgr">備份管理員</string>
+    <string name="setname">設定備份名字</string>
+    <string name="reboot_recovery_now">現在就重啟至Recovery？</string>
+    <string name="reboot_now">現在重啟？</string>
+    <string name="flashing">寫入中…</string>
+    <string name="restoring">還原中…</string>
+    <string name="creating_bak">創建備份中…</string>
+<string name="download_utils">
+若要使用此應用程式您必須先下載一些小工具 （大約 512KB）。您將需要網際網路連線 \n立刻下載？
+</string>
+    <string name="over_recovery">裝置將透過 Recovery 寫入</string>
+    <string name="ShowAds">顯示廣告以支持開發者</string>
+    <string name="please_restart">請重新啟動此應用程式以套用變更</string>
+    <string name="please_ads">可以的話拜託開啟廣告顯示以支持我的作品！:(</string>
+    <string name="donate_to_support">透過選單捐贈以支持我的作品！ :)</string>
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 歐元</item>
+        <item>1 歐元</item>
+        <item>2 歐元</item>
+        <item>3 歐元</item>
+        <item>5 歐元</item>
+    </string-array>
+    <string name="donate">捐贈</string>
+    <string name="never_again">永不顯示</string>
+    <string name="try_again">再試一次！</string>
+    <string name="later">稍後</string>
+    <string name="update_done">更新完畢</string>
+    <string name="pick_file">選擇檔案</string>
+    <string name="flash_error">寫入失敗</string>
+    <string name="res_error">還原失敗</string>
+    <string name="bak_error">備份失敗</string>
+    <string name="stock">Stock</string>
+    <string name="changelog">變更日誌</string>
+<string name="use_supersu">
+SuperSU 未在您的裝置上被檢測到。 請使用它以避免錯誤。 從 Play 商店上下載 SuperSU ？
+</string>
+    <string name="bak_deleted">已刪除備份</string>
+    <string name="extract_failed">自應用程式中提取檔案失敗。請重新啟動本應用程式。</string>
+    <string name="no_history">無紀錄</string>
+    <string name="styles">風格</string>
+    <string-array name="styles">
+        <item>風格</item>
+        <item>清新 Holo Dark Bar 風</item>
+        <item>清新 Holo 風</item>
+        <item>暗黑 Holo 風</item>
+    </string-array>
+    <string name="flash_as">將 %s 寫入至</string>
+    <string name="recovery">Recovery</string>
+    <string name="kernel">內核</string>
+    <string name="getting_root">取得 Root 權限中</string>
+    <string name="reading_device">讀取裝置訊息中</string>
+    <string name="loading_ui">啟動 UI 中</string>
+    <string name="loading_data">提取檔案並創建所需資料夾中</string>
+    <string name="recovery_script_manager">Recovery-腳本管理員</string>
+    <string name="bak_name">自訂備份名稱</string>
+    <string name="flash_queue">寫入所有檔案</string>
+    <string name="wipe_opts">磁區清除選項</string>
+    <string name="add_queue">新增 ZIP 至檔案列中</string>
+    <string name="backup_opts">備份選項</string>
+    <string name="system">System</string>
+    <string name="data">Data</string>
+    <string name="cache">Cache</string>
+    <string name="dalvik">Dalvik</string>
+    <string name="boot">Boot</string>
+    <string name="recovery_script_mind">請記住，這僅能搭配 TWRP 相容之 Recovery 使用</string>
+    <string name="run">開始</string>
+    <string name="recovery_script_review">預覽腳本</string>
+    <string name="failed_unpack_files">從應用程式中提取檔案失敗</string>
+    <string name="failed_setup_layout">設置布局時出錯了</string>
+    <string name="refresh_list">更新中！</string>
+    <string name="new_imgs_loaded">已準備好 %s 個新 IMG 檔</string>
+    <string name="make_choice">請選擇</string>
+<string name="unified_info">
+This ROM ist using Unified CyanogenMod Sources.\n Consequently it could be that Rashr isn\'t able to find Recovery or Kernel images.\n In this case you can choose your real device. (do this if there aren\'t any images found)\n BE CAREFUL WITH THIS OPTION!
+</string>
+    <string name="reloading">刷新中</string>
+    <string name="keep_current_name">保留目前名字 (%s)</string>
+    <string name="rename_failed">重新命名失敗</string>
+    <string name="flash">寫入</string>
+    <string name="recovery_description">透過此功能您只要按個鍵就能透過內建之 Recovery 刷機！</string>
+    <string name="kernel_description">透過此功能您只要按個鍵就能透過內建之內核或啟動磁區刷機！</string>
+    <string name="options">選項</string>
+    <string name="clear_cache_description">刪除所有已下載的 Recovery / 內核鏡像檔</string>
+    <string name="reboot_description">使您的裝置立即重啟</string>
+    <string name="reboot_recovery_description">使您的裝置立即重啟至 Recovery</string>
+    <string name="reboot_啟動程式_description">使您的裝置立即重啟至啟動程式/下載模式</string>
+    <string name="shutdown_description">使您的裝置立即關機</string>
+    <string name="cwm_description">ClockworkMod Recovery 是 Android 上最有名的自製 Recovery</string>
+<string name="twrp_description">
+Team Win Recovery Project (TWRP) 是完全以觸控控制的自製 Recovery
+</string>
+    <string name="philz_description">PhilZ Touch Recovery 是 ClockworkMod Recovery 的優化版</string>
+<string name="stock_recovery_description">
+原廠 Recovery 是裝置上預設的 Recovery，在這裡您可以選擇回復至您原廠的 Recovery。
+</string>
+    <string name="stock_kernel_description">原廠內核是裝置上預設的內核檔案，在這裡您可以選擇回復至您的原廠內核。</string>
+    <string name="delete_confirmation">您真的想刪除所有已下載的鏡像檔嗎？</string>
+    <string name="other_storage_description">此選項將讓您可以刷入已下載至您裝置的鏡像檔。</string>
+    <string name="reboot_confirmation">現在重啟？</string>
+    <string name="shutdown_confirmation">現在關機？</string>
+    <string name="history_description">在這裡您可以看到前五個您刷的檔案</string>
+    <string name="reset_app">重置程式</string>
+    <string name="reset_app_description">清除本應用程式資料</string>
+    <string name="files_deleted">已刪除檔案</string>
+    <string name="onlyLanguage">請以西班牙語、德語或英語回覆</string>
+    <string name="flasher">刷機模式</string>
+    <string name="history">紀錄</string>
+    <string name="exit_app">離開程式？</string>
+    <string name="skip_md5">跳過 MD5</string>
+    <string name="UseDarkUI">使用黑暗版 UI</string>
+    <string name="check_app_updates">啟動時檢查更新</string>
+    <string name="failed_update">檢查更新時失敗</string>
+    <string name="update_available">有新的更新</string>
+    <string name="download_update">請下載更新以保障裝置安全並取得最新的功能</string>
+    <string name="open_playstore">開啟 Play 商店</string>
+    <string name="uptodate">已至最新版本 :D</string>
+    <string name="update">更新</string>
+<string name="lists_outdated">
+內核及 Recovery 資料庫已過期。若要刷入您裝置的最新 Recovery 或內核，請更新。\n並非所有裝置都支援！
+</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stock_recovery">原廠 Recovery</string>
+    <string name="stock_kernel">原廠內核</string>
+    <string name="check_connection">請檢查您的網路</string>
+    <string name="check_name">請檢查備份名稱。 某些裝置無法使用擁有 \':\' 在內的檔案，請以任一檔案管理員程式更改名字。</string>
+    <string name="ok">OK</string>
+    <string name="logs_title">已紀錄之 Shell-指令</string>
+    <string name="clear_logs">清除日誌</string>
+    <string name="no_logs">無日誌</string>
+    <string name="copied_to_clipboard">已複製至剪貼版</string>
+    <string name="copy">複製</string>
+    <string name="logs">日誌</string>
+    <string name="app_uptodate">應用程式已是最新版本！</string>
+    <string name="hide_uptodate_hint">隱藏'最新版本'提示</string>
+</resources>
