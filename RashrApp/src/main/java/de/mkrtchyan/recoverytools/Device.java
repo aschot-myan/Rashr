@@ -483,8 +483,8 @@ public class Device {
                     public void onClick(DialogInterface dialog, int which) {
                         try {
                             URL url = new URL(Const.UTILS_URL + "/" + archive.getName());
-                            Downloader downloader = new Downloader(mContext, url, archive);
-                            downloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                            DownloadDialog downloader = new DownloadDialog(mContext, url, archive);
+                            downloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
                                 public void success(File file) {
                                     Unzipper.unzip(archive, new File(Const.PathToUtils, mName));

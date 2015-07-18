@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.mkrtchyan.utils.Common;
-import de.mkrtchyan.utils.Downloader;
+import de.mkrtchyan.utils.DownloadDialog;
 import de.mkrtchyan.utils.FileChooserDialog;
 
 /**
@@ -113,7 +113,7 @@ public class FlashFragment extends Fragment {
         optimizeLayout(root);
         root.setBackgroundColor(
                 RashrActivity.isDark ? getResources().getColor(R.color.background_material_dark) :
-                getResources().getColor(R.color.background_material_light));
+                        getResources().getColor(R.color.background_material_light));
         if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_CHECK_UPDATES)
                 && RashrActivity.FirstSession) {
             catchUpdates(true);
@@ -180,8 +180,8 @@ public class FlashFragment extends Fragment {
                     if (!recovery.exists()) {
                         try {
                             URL url = new URL(Const.RECOVERY_URL + "/" + fileName);
-                            Downloader RecoveryDownloader = new Downloader(mContext, url, recovery);
-                            RecoveryDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                            DownloadDialog RecoveryDownloader = new DownloadDialog(mContext, url, recovery);
+                            RecoveryDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
                                 public void success(File file) {
                                     flashRecovery(file);
@@ -261,8 +261,8 @@ public class FlashFragment extends Fragment {
                     if (!kernel.exists()) {
                         try {
                             URL url = new URL(Const.KERNEL_URL + "/" + kernel.getName());
-                            Downloader KernelDownloader = new Downloader(mContext, url, kernel);
-                            KernelDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                            DownloadDialog KernelDownloader = new DownloadDialog(mContext, url, kernel);
+                            KernelDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
                                 public void success(File file) {
                                     flashKernel(file);
@@ -277,7 +277,8 @@ public class FlashFragment extends Fragment {
                             KernelDownloader.setAskBeforeDownload(true);
                             KernelDownloader.setChecksumFile(Const.KernelCollectionFile);
                             KernelDownloader.ask();
-                        } catch (MalformedURLException ignored) {}
+                        } catch (MalformedURLException ignored) {
+                        }
                     } else {
                         flashKernel(kernel);
                     }
@@ -827,18 +828,18 @@ public class FlashFragment extends Fragment {
                             } catch (MalformedURLException e) {
                                 return;
                             }
-                            final Downloader RecoveryUpdater = new Downloader(mContext, recoveryURL,
+                            final DownloadDialog RecoveryUpdater = new DownloadDialog(mContext, recoveryURL,
                                     Const.RecoveryCollectionFile);
                             RecoveryUpdater.setOverrideFile(true);
-                            RecoveryUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                            RecoveryUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
                                 public void success(File file) {
                                     mDevice.loadRecoveryList();
                                     isRecoveryListUpToDate = true;
-                                    final Downloader KernelUpdater = new Downloader(mContext, kernelURL,
+                                    final DownloadDialog KernelUpdater = new DownloadDialog(mContext, kernelURL,
                                             Const.KernelCollectionFile);
                                     KernelUpdater.setOverrideFile(true);
-                                    KernelUpdater.setOnDownloadListener(new Downloader.OnDownloadListener() {
+                                    KernelUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                         @Override
                                         public void success(File file) {
                                             mDevice.loadKernelList();
