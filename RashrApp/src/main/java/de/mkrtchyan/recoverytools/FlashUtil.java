@@ -183,10 +183,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (isJobFlash()) {
             int customSize = getSizeOfFile(mCustomIMG);
             int partitionSize = getSizeOfFile(mPartition);
-            if (customSize > partitionSize || customSize == -1 || partitionSize == -1) {
-                throw new IOException("IMG is to big for your device! IMG Size: " +
-                        customSize / (1024 * 1024) + "MB Partition Size: " +
-                        partitionSize / (1024 * 1024) + "MB");
+            /** ERROR on some chinese devices. Partition size always 0 */
+            if (partitionSize != 0) {
+                if (customSize > partitionSize) {
+                    throw new IOException("IMG is to big for your device! IMG Size: " +
+                            customSize / (1024 * 1024) + "MB Partition Size: " +
+                            partitionSize / (1024 * 1024) + "MB");
+                }
             }
         }
 
