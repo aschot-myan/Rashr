@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import de.mkrtchyan.utils.Common;
-import de.mkrtchyan.utils.DownloadDialog;
+import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Notifyer;
 
 /**
@@ -99,6 +99,13 @@ public class RashrActivity extends AppCompatActivity implements
         final Thread StartThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                /** Checking if version has changed */
+                final int previous_version = Common.getIntegerPref(mContext,
+                        Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
+                final int current_version = BuildConfig.VERSION_CODE;
+                mVersionChanged = current_version > previous_version;
+                Common.setIntegerPref(mContext, Const.PREF_NAME,
+                        Const.PREF_KEY_CUR_VER, current_version);
                 /** Try to get root access */
                 try {
                     startShell();
@@ -132,20 +139,25 @@ public class RashrActivity extends AppCompatActivity implements
                 }
 
                 try {
-                    File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName() + ".txt");
-                    mShell.execCommand(Const.Busybox + " chmod 766 " + Const.LastLog);
+                    extractFiles();
+                } catch (IOException e) {
+                    mActivity.addError(Const.RASHR_TAG, e, true);
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mContext, R.string.failed_unpack_files,
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName());
+                try {
+                    mShell.execCommand(Const.Busybox + " chmod 777 " + Const.LastLog);
                     mToolbox.copyFile(Const.LastLog, LogCopy, false, false);
                 } catch (Exception e) {
-                    LastLogExists = false;
+                    LastLogExists = LogCopy.exists();
                     mActivity.addError(Const.RASHR_TAG, e, false);
                 }
-                /** Checking if version has changed */
-                final int previous_version = Common.getIntegerPref(mContext,
-                        Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
-                final int current_version = BuildConfig.VERSION_CODE;
-                mVersionChanged = current_version > previous_version;
-                Common.setIntegerPref(mContext, Const.PREF_NAME,
-                        Const.PREF_KEY_CUR_VER, current_version);
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -165,18 +177,6 @@ public class RashrActivity extends AppCompatActivity implements
                                 Notifyer.showAppRateDialog(mContext, Const.PREF_NAME,
                                         Const.PREF_KEY_HIDE_RATER);
                             }
-                        }
-                    });
-                }
-                try {
-                    extractFiles();
-                } catch (IOException e) {
-                    mActivity.addError(Const.RASHR_TAG, e, true);
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(mContext, R.string.failed_unpack_files,
-                                    Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -350,7 +350,7 @@ public class RashrActivity extends AppCompatActivity implements
         Const.Busybox = new File(mContext.getFilesDir(), "busybox");
         Common.pushFileFromRAW(mContext, Const.Busybox, R.raw.busybox, mVersionChanged);
         try {
-            mToolbox.setFilePermissions(Const.Busybox, "700");
+            mShell.execCommand("chmod 777 " + Const.Busybox);
         } catch (FailedExecuteCommand failedExecuteCommand) {
             failedExecuteCommand.printStackTrace();
         }
@@ -458,12 +458,11 @@ public class RashrActivity extends AppCompatActivity implements
     public void checkUpdates(final int currentVersion) {
         try {
             File versionsFile = new File(mContext.getFilesDir(), "version");
-            DownloadDialog version = new DownloadDialog(mContext, new URL(Const.RASHR_VERSION_URL), versionsFile);
-            version.setOverrideFile(true);
-            version.setHidden(true);
-            version.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
+            Downloader downloader = new Downloader(new URL(Const.RASHR_VERSION_URL), versionsFile);
+            downloader.setOverrideFile(true);
+            downloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
                 @Override
-                public void success(File file) {
+                public void onSuccess(File file) {
                     try {
                         if (currentVersion < Integer.valueOf(Common.fileContent(file))) {
                             new AlertDialog.Builder(mContext)
@@ -488,11 +487,11 @@ public class RashrActivity extends AppCompatActivity implements
                 }
 
                 @Override
-                public void failed(Exception e) {
+                public void onFail(Exception e) {
                     Toast.makeText(mContext, R.string.failed_update, Toast.LENGTH_SHORT).show();
                 }
             });
-            version.execute();
+            downloader.download();
         } catch (MalformedURLException ignore) {}
 
     }

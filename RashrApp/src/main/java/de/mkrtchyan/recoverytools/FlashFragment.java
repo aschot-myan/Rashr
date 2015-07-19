@@ -40,6 +40,7 @@ import java.util.Arrays;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.DownloadDialog;
+import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.FileChooserDialog;
 
 /**
@@ -180,21 +181,21 @@ public class FlashFragment extends Fragment {
                     if (!recovery.exists()) {
                         try {
                             URL url = new URL(Const.RECOVERY_URL + "/" + fileName);
-                            DownloadDialog RecoveryDownloader = new DownloadDialog(mContext, url, recovery);
+                            final Downloader downloader = new Downloader(url, recovery);
+                            final DownloadDialog RecoveryDownloader = new DownloadDialog(mContext, downloader);
                             RecoveryDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
-                                public void success(File file) {
+                                public void onSuccess(File file) {
                                     flashRecovery(file);
                                 }
 
                                 @Override
-                                public void failed(Exception e) {
-
+                                public void onFail(Exception e) {
+                                    RecoveryDownloader.retry();
                                 }
                             });
-                            RecoveryDownloader.setRetry(true);
                             RecoveryDownloader.setAskBeforeDownload(true);
-                            RecoveryDownloader.setChecksumFile(Const.RecoveryCollectionFile);
+                            downloader.setChecksumFile(Const.RecoveryCollectionFile);
                             RecoveryDownloader.ask();
                         } catch (MalformedURLException ignored) {}
                     } else {
@@ -261,21 +262,21 @@ public class FlashFragment extends Fragment {
                     if (!kernel.exists()) {
                         try {
                             URL url = new URL(Const.KERNEL_URL + "/" + kernel.getName());
-                            DownloadDialog KernelDownloader = new DownloadDialog(mContext, url, kernel);
+                            Downloader downloader = new Downloader(url, kernel);
+                            final DownloadDialog KernelDownloader = new DownloadDialog(mContext, downloader);
                             KernelDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
-                                public void success(File file) {
+                                public void onSuccess(File file) {
                                     flashKernel(file);
                                 }
 
                                 @Override
-                                public void failed(Exception e) {
-
+                                public void onFail(Exception e) {
+                                    KernelDownloader.retry();
                                 }
                             });
-                            KernelDownloader.setRetry(true);
                             KernelDownloader.setAskBeforeDownload(true);
-                            KernelDownloader.setChecksumFile(Const.KernelCollectionFile);
+                            downloader.setChecksumFile(Const.KernelCollectionFile);
                             KernelDownloader.ask();
                         } catch (MalformedURLException ignored) {
                         }
@@ -828,20 +829,21 @@ public class FlashFragment extends Fragment {
                             } catch (MalformedURLException e) {
                                 return;
                             }
-                            final DownloadDialog RecoveryUpdater = new DownloadDialog(mContext, recoveryURL,
-                                    Const.RecoveryCollectionFile);
-                            RecoveryUpdater.setOverrideFile(true);
+                            Downloader downloader = new Downloader(recoveryURL, Const.RecoveryCollectionFile);
+                            final DownloadDialog RecoveryUpdater = new DownloadDialog(mContext, downloader);
+                            downloader.setOverrideFile(true);
                             RecoveryUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
-                                public void success(File file) {
+                                public void onSuccess(File file) {
                                     mDevice.loadRecoveryList();
                                     isRecoveryListUpToDate = true;
-                                    final DownloadDialog KernelUpdater = new DownloadDialog(mContext, kernelURL,
-                                            Const.KernelCollectionFile);
-                                    KernelUpdater.setOverrideFile(true);
+                                    Downloader downloader = new Downloader(kernelURL, Const.KernelCollectionFile);
+                                    final DownloadDialog KernelUpdater = new DownloadDialog(mContext,
+                                            downloader);
+                                    downloader.setOverrideFile(true);
                                     KernelUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                         @Override
-                                        public void success(File file) {
+                                        public void onSuccess(File file) {
                                             mDevice.loadKernelList();
                                             isKernelListUpToDate = true;
                                             /** Counting added images (after update) */
@@ -865,18 +867,18 @@ public class FlashFragment extends Fragment {
                                         }
 
                                         @Override
-                                        public void failed(final Exception e) {
+                                        public void onFail(final Exception e) {
                                             Toast
                                                     .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
                                                     .show();
                                             mSwipeUpdater.setRefreshing(false);
                                         }
                                     });
-                                    KernelUpdater.execute();
+                                    KernelUpdater.download();
                                 }
 
                                 @Override
-                                public void failed(final Exception e) {
+                                public void onFail(final Exception e) {
                                     Toast
                                             .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
                                             .show();
@@ -897,7 +899,7 @@ public class FlashFragment extends Fragment {
                                                         Toast
                                                                 .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
                                                                 .show();
-                                                        RecoveryUpdater.execute();
+                                                        RecoveryUpdater.download();
                                                     }
                                                 })
                                                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -911,7 +913,7 @@ public class FlashFragment extends Fragment {
                                         Toast
                                                 .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
                                                 .show();
-                                        RecoveryUpdater.execute();
+                                        RecoveryUpdater.download();
                                     }
                                 }
                             });

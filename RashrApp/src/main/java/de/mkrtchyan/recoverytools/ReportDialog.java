@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.sufficientlysecure.rootcommands.Shell;
-import org.sufficientlysecure.rootcommands.Toolbox;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,7 +45,6 @@ public class ReportDialog extends Dialog {
         super(activity);
         final Shell shell = activity.getShell();
         final Device device = activity.getDevice();
-        final Toolbox toolbox = activity.getToolbox();
         final ArrayList<String> errors = activity.getErrors();
         setTitle(R.string.comment);
         setContentView(R.layout.dialog_comment);
@@ -142,18 +140,11 @@ public class ReportDialog extends Dialog {
                                                 + activity.getAllPrefs() +
                                                 "\n=========PREFS END========\n";
                                 files.add(new File(activity.getFilesDir(), Shell.Logs));
-                                files.add(new File(activity.getFilesDir(), "last_log.txt"));
+                                files.add(new File(activity.getFilesDir(), Const.LastLog.getName()));
                                 ArrayList<Uri> uris = new ArrayList<>();
-                                File tmpFolder = new File(activity.getFilesDir(), "tmp");
-                                if (tmpFolder.mkdir()) tmpFolder.deleteOnExit();
                                 for (File i : files) {
                                     try {
-                                        File tmp = new File(tmpFolder, i.getName());
-
                                         shell.execCommand(Const.Busybox + " chmod 777 " + i);
-                                        toolbox.copyFile(i, tmp, true, false);
-                                        toolbox.setFilePermissions(tmp, "777");
-                                        shell.execCommand(Const.Busybox + " chmod 777 " + tmp);
                                     } catch (Exception e) {
                                         activity.addError(Const.RASHR_TAG, e, false);
                                     }

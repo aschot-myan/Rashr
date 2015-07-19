@@ -209,7 +209,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         } else if (isJobBackup()) {
             Command = Const.Busybox + " dd if=\"" + mPartition + "\" of=\"" + tmpFile + "\"";
         }
-        mShell.execCommand(Command, true);
+        mShell.execCommand(Command);
         if (isJobBackup()) placeImgBack();
     }
 
@@ -227,7 +227,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         } else if (isJobBackup()) {
             Command = dump_image.getAbsolutePath() + Command + "\"" + tmpFile.getAbsolutePath() + "\"";
         }
-        mShell.execCommand(Command, true);
+        mShell.execCommand(Command);
         if (isJobBackup()) placeImgBack();
     }
 
@@ -345,8 +345,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 .show();
     }
 
-    private void placeImgBack() throws IOException, FailedExecuteCommand {
-        mToolbox.setFilePermissions(tmpFile, "666");
+    private void placeImgBack ()throws IOException, FailedExecuteCommand {
+        mShell.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
         Common.copyFile(tmpFile, mCustomIMG);
     }
 
