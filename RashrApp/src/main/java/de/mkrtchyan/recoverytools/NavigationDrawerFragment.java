@@ -1,12 +1,15 @@
 package de.mkrtchyan.recoverytools;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 /**
  * Copyright (c) 2015 Aschot Mkrtchyan
@@ -64,8 +69,24 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LinearLayoutCompat root = (LinearLayoutCompat) inflater.inflate(
+        RelativeLayout root = (RelativeLayout) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+        ImageButton xda = (ImageButton) root.findViewById(R.id.xda);
+        xda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://forum.xda-developers.com/showthread.php?t=2334554")));
+            }
+        });
+        ImageButton github = (ImageButton) root.findViewById(R.id.github);
+        github.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://github.com/dslnexus/rashr")));
+            }
+        });
         mDrawerListView = (ListView) root.findViewById(R.id.lvNavigation);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -110,8 +131,7 @@ public class NavigationDrawerFragment extends Fragment {
                             getString(R.string.flasher),
                             getString(R.string.recovery_script_manager),
                             getString(R.string.donate),
-                            getString(R.string.settings),
-                            getString(R.string.xda)
+                            getString(R.string.settings)
                     }));
 
             // between the navigation drawer and the action bar app icon.

@@ -9,14 +9,6 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="@string/flash_queue"
-                android:textSize="20sp" />
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
@@ -25,7 +17,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/addZip"
-                    android:layout_alignParentTop="true" />
+                    android:layout_below="@+id/textView" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/addZip"
@@ -34,6 +26,17 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/add_queue"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/flash_queue"
+                    android:textSize="20sp"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true" />
             </RelativeLayout>
 

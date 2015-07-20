@@ -1,80 +1,67 @@
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical"
     tools:context=".SettingsFragment">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/bReport"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/report"
-        android:layout_weight="1" />
+        android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/bShowLogs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/showlog"
-        android:layout_weight="1" />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/bClearCache"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sClearCache"
-        android:layout_weight="1" />
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/cbShowAds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/ShowAds"
-        android:gravity="center"
-        android:layout_weight="1" />
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/cbLog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/log"
-        android:gravity="center"
-        android:layout_weight="1" />
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/cbDarkUI"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/UseDarkUI"
-        android:gravity="center"
-        android:layout_weight="1" />
-
-    <android.support.v7.widget.SwitchCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/check_app_updates"
-        android:id="@+id/cbCheckUpdates"
-        android:gravity="center"
-        android:layout_weight="1" />
-
-    <android.support.v7.widget.SwitchCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hide_uptodate_hint"
-        android:id="@+id/cbShowUpToDateHints"
-        android:gravity="center"
-        android:layout_weight="1"/>
-
-    <android.support.v7.widget.AppCompatButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/changelog"
-        android:id="@+id/bShowChangelog"
-        android:layout_weight="1" />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/bReset"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/reset_app"
-        android:layout_weight="1" />
-</android.support.v7.widget.LinearLayoutCompat>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/bReport"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/report" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/bShowLogs"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/showlog" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/bClearCache"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/sClearCache" />
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/cbShowAds"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/ShowAds"
+            android:gravity="center" />
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/cbLog"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/log"
+            android:gravity="center" />
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/cbDarkUI"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/UseDarkUI"
+            android:gravity="center" />
+        <android.support.v7.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/check_app_updates"
+            android:id="@+id/cbCheckUpdates"
+            android:gravity="center" />
+        <android.support.v7.widget.SwitchCompat
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/hide_uptodate_hint"
+            android:id="@+id/cbShowUpToDateHints"
+            android:gravity="center"/>
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/changelog"
+            android:id="@+id/bShowChangelog" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/bReset"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/reset_app" />
+    </LinearLayout>
+</ScrollView>

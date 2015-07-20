@@ -162,27 +162,6 @@ public class RashrActivity extends AppCompatActivity implements
                     @Override
                     public void run() {
                         checkUpdates(current_version);
-                    }
-                });
-                if (mVersionChanged) {
-                    /** Re-enable Ads */
-                    Common.setBooleanPref(mContext, Const.PREF_NAME,
-                            Const.PREF_KEY_ADS, true);
-                    /** Show Play Store rater dialog */
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!Common.getBooleanPref(mContext, Const.PREF_NAME,
-                                    Const.PREF_KEY_HIDE_RATER)) {
-                                Notifyer.showAppRateDialog(mContext, Const.PREF_NAME,
-                                        Const.PREF_KEY_HIDE_RATER);
-                            }
-                        }
-                    });
-                }
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
                         tvLoading.setText(R.string.reading_device);
                     }
                 });
@@ -416,10 +395,6 @@ public class RashrActivity extends AppCompatActivity implements
                 break;
             case 4:
                 switchTo(SettingsFragment.newInstance());
-                break;
-            case 5:
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://forum.xda-developers.com/showthread.php?t=2334554")));
                 break;
         }
     }
