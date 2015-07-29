@@ -5,8 +5,8 @@ android {
     buildToolsVersion '22.0.1'
     defaultConfig {
         minSdkVersion 8
-        versionCode 101
-        versionName '2.3.4'
+        versionCode 102
+        versionName '2.3.5'
     }
     lintOptions {
         abortOnError false
@@ -19,6 +19,7 @@ dependencies {
     compile project(':Utils-Library')
     compile project(':CardsUILib')
     compile project(':Donations')
-    compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:design:22.2.1'
 }

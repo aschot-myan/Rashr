@@ -1,10 +1,18 @@
 CHANGELOG
 ====================
 
+Update [2.3.5]
+
+-Italian translations improved
+-German translations improved
+-TW translations fixed
+-Small bugfixes
+-Some errors on MTD devices fixed
+
 Update [2.3.4]
 
 -ERROR on some chinese devices. Partition size always 0
--Erros on not installed busybox devices fixed
+-Errors on not installed busybox devices fixed
 -Chinese translation improved by XDA-Member 341464
 
 Update [2.3.3]
