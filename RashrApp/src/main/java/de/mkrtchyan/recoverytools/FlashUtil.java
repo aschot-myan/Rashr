@@ -223,9 +223,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             return;
         }
         if (isJobFlash() || isJobRestore()) {
-            Command = flash_image.getAbsolutePath() + Command + "\"" + tmpFile.getAbsolutePath() + "\"";
+            Command = flash_image.getAbsolutePath() + Command + "\"" + tmpFile + "\"";
         } else if (isJobBackup()) {
-            Command = dump_image.getAbsolutePath() + Command + "\"" + tmpFile.getAbsolutePath() + "\"";
+            Command = dump_image.getAbsolutePath() + Command + "\"" + tmpFile + "\"";
         }
         mShell.execCommand(Command);
         if (isJobBackup()) placeImgBack();
@@ -346,7 +346,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     private void placeImgBack ()throws IOException, FailedExecuteCommand {
-        mShell.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
+        mShell.execCommand(Const.Busybox + " chmod 777 \"" + tmpFile + "\"");
         Common.copyFile(tmpFile, mCustomIMG);
     }
 
