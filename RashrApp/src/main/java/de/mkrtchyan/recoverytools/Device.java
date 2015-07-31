@@ -19,7 +19,7 @@ import java.util.zip.ZipFile;
 import de.mkrtchyan.utils.Unzipper;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2015 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -847,7 +847,6 @@ public class Device {
         try {
             String line;
             File LogCopy = new File(Const.FilesDir, Const.LastLog.getName() + ".txt");
-            mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
             while ((line = br.readLine()) != null) {
                 line = line.replace("\"", "");
@@ -858,6 +857,9 @@ public class Device {
                     } else if (line.contains("TWRP")) {
                         line = line.replace("Starting ", "");
                         line = line.split(" on")[0];
+                        mRecoveryVersion = line;
+                    } else if (line.contains("ro.twrp.version")) {
+                        line = line.replace("ro.twrp.version=", "");
                         mRecoveryVersion = line;
                     } else if (line.contains("PhilZ")) {
                         mRecoveryVersion = line;

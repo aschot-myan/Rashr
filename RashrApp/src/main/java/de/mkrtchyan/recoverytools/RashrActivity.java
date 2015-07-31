@@ -23,6 +23,7 @@ import org.sufficientlysecure.donations.DonationsFragment;
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
+import org.sufficientlysecure.rootcommands.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -150,12 +151,14 @@ public class RashrActivity extends AppCompatActivity implements
                         }
                     });
                 }
-                File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName());
                 try {
+                    File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName() + ".txt");
                     mShell.execCommand(Const.Busybox + " chmod 777 " + Const.LastLog);
+                    LogCopy.delete();
                     mToolbox.copyFile(Const.LastLog, LogCopy, false, false);
-                } catch (Exception e) {
+                    mShell.execCommand(Const.Busybox + " chmod 777 " + LogCopy);
                     LastLogExists = LogCopy.exists();
+                } catch (Exception e) {
                     mActivity.addError(Const.RASHR_TAG, e, false);
                 }
                 mActivity.runOnUiThread(new Runnable() {
