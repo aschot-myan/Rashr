@@ -86,6 +86,7 @@ public class Const {
     public static final File PathToRecoveryBackups =      new File(PathToRashr, "recovery-backups");
     public static final File PathToKernelBackups   =      new File(PathToRashr, "kernel-backups");
     public static final File PathToUtils           =      new File(PathToRashr, "utils");
+    public static final File PathToTmp             =      new File(PathToRashr, "tmp");
     public static final File LastLog               =      new File("/cache/recovery/last_log");
 
     /**

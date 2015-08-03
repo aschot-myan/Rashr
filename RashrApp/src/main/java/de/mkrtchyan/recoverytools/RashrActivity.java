@@ -66,7 +66,7 @@ public class RashrActivity extends AppCompatActivity implements
             Const.PathToRashr, Const.PathToRecoveries, Const.PathToKernel,
             Const.PathToStockRecovery, Const.PathToCWM, Const.PathToTWRP,
             Const.PathToPhilz, Const.PathToStockKernel, Const.PathToRecoveryBackups,
-            Const.PathToKernelBackups, Const.PathToUtils
+            Const.PathToKernelBackups, Const.PathToUtils, Const.PathToTmp
     };
     private final RashrActivity mActivity = this;
     private final Context mContext = this;
@@ -130,6 +130,9 @@ public class RashrActivity extends AppCompatActivity implements
                         tvLoading.setText(R.string.loading_data);
                     }
                 });
+                if (Const.PathToTmp.exists()) {
+                    Common.deleteFolder(Const.PathToTmp, true);
+                }
                 for (File i : Folder) {
                     if (!i.exists()) {
                         if (!i.mkdir()) {

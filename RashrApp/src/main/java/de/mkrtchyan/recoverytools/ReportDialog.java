@@ -1,11 +1,10 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import de.mkrtchyan.utils.Common;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2015 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -39,7 +38,7 @@ import de.mkrtchyan.utils.Common;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-public class ReportDialog extends Dialog {
+public class ReportDialog extends AppCompatDialog {
 
     public ReportDialog(final RashrActivity activity, String message) {
         super(activity);
@@ -61,13 +60,15 @@ public class ReportDialog extends Dialog {
                     public void onClick(View v) {
 
                         if (!Common.getBooleanPref(activity, Const.PREF_NAME,
-                                Const.PREF_KEY_ADS))
+                                Const.PREF_KEY_ADS)) {
                             Toast
                                     .makeText(activity, R.string.please_ads, Toast.LENGTH_SHORT)
                                     .show();
-                        Toast
-                                .makeText(activity, R.string.donate_to_support, Toast.LENGTH_SHORT)
-                                .show();
+                        } else {
+                            Toast
+                                    .makeText(activity, R.string.donate_to_support, Toast.LENGTH_SHORT)
+                                    .show();
+                        }
                         try {
                             ArrayList<File> files = new ArrayList<>();
                             File TestResults = new File(activity.getFilesDir(), "results.txt");
@@ -90,77 +91,77 @@ public class ReportDialog extends Dialog {
                             } catch (Exception e) {
                                 activity.addError(Const.RASHR_TAG, e, false);
                             }
-                            if (activity.getPackageManager() != null) {
-                                PackageInfo pInfo = activity.getPackageManager()
-                                        .getPackageInfo(activity.getPackageName(), 0);
+                            String comment = "";
+                            if (text.getText() != null) comment = text.getText().toString();
+                            Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                            intent.setType("text/plain");
+                            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + BuildConfig.VERSION_CODE + " report");
+                            String message = "Package Infos:" +
+                                    "\n\nName: " + BuildConfig.APPLICATION_ID +
+                                    "\nVersion Name: " + BuildConfig.VERSION_NAME;
+                            message +=
+                                    "\n\n\nProduct Info: " +
+                                            "\n\nManufacture: " + Build.MANUFACTURER + " (" + device.getManufacture() + ") " +
+                                            "\nDevice: " + Build.DEVICE + " (" + device.getName() + ")" +
+                                            "\nBoard: " + Build.BOARD +
+                                            "\nBrand: " + Build.BRAND +
+                                            "\nModel: " + Build.MODEL +
+                                            "\nFingerprint: " + Build.FINGERPRINT +
+                                            "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
 
-                                String comment = "";
-                                if (text.getText() != null) comment = text.getText().toString();
-                                Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                                intent.setType("text/plain");
-                                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + pInfo.versionCode + " report");
-                                String message = "Package Infos:" +
-                                        "\n\nName: " + pInfo.packageName +
-                                        "\nVersion Name: " + pInfo.versionName;
-                                message +=
-                                        "\n\n\nProduct Info: " +
-                                                "\n\nManufacture: " + Build.MANUFACTURER + " (" + device.getManufacture() + ") " +
-                                                "\nDevice: " + Build.DEVICE + " (" + device.getName() + ")" +
-                                                "\nBoard: " + Build.BOARD +
-                                                "\nBrand: " + Build.BRAND +
-                                                "\nModel: " + Build.MODEL +
-                                                "\nFingerprint: " + Build.FINGERPRINT +
-                                                "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
-
-                                if (device.isRecoverySupported()) {
-                                    message += "\n\nRecovery Path: " + device.getRecoveryPath() +
-                                            "\nRecovery Version: " + device.getRecoveryVersion() +
-                                            "\nRecovery MTD: " + device.isRecoveryMTD() +
-                                            "\nRecovery DD: " + device.isRecoveryDD() +
-                                            "\nStock: " + device.isStockRecoverySupported() +
-                                            "\nCWM: " + device.isCwmRecoverySupported() +
-                                            "\nTWRP: " + device.isTwrpRecoverySupported() +
-                                            "\nPHILZ: " + device.isPhilzRecoverySupported();
-                                }
-                                if (device.isKernelSupported()) {
-                                    message += "\n\nKernel Path: " + device.getKernelPath() +
-                                            "\nKernel Version: " + device.getKernelVersion() +
-                                            "\nKernel MTD: " + device.isKernelMTD() +
-                                            "\nKernel DD: " + device.isKernelDD();
-                                }
-                                if (!comment.equals("")) {
-                                    message +=
-                                            "\n\n\n===========COMMENT==========\n"
-                                                    + comment +
-                                                    "\n=========COMMENT END========\n";
-                                }
-                                message +=
-                                        "\n===========PREFS==========\n"
-                                                + activity.getAllPrefs() +
-                                                "\n=========PREFS END========\n";
-                                files.add(new File(activity.getFilesDir(), Shell.Logs));
-                                files.add(new File(activity.getFilesDir(), Const.LastLog.getName()));
-                                ArrayList<Uri> uris = new ArrayList<>();
-                                for (File i : files) {
-                                    try {
-                                        shell.execCommand(Const.Busybox + " chmod 777 " + i);
-                                    } catch (Exception e) {
-                                        activity.addError(Const.RASHR_TAG, e, false);
-                                    }
-                                }
-                                if (errors.size() > 0) {
-                                    message += "ERRORS:\n";
-                                    for (String error : errors) {
-                                        message += error + "\n";
-                                    }
-                                }
-
-                                intent.putExtra(Intent.EXTRA_TEXT, message);
-                                intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-                                activity.startActivity(Intent.createChooser(intent, "Send over Gmail"));
-                                dismiss();
+                            if (device.isRecoverySupported()) {
+                                message += "\n\nRecovery Path: " + device.getRecoveryPath() +
+                                        "\nRecovery Version: " + device.getRecoveryVersion() +
+                                        "\nRecovery MTD: " + device.isRecoveryMTD() +
+                                        "\nRecovery DD: " + device.isRecoveryDD() +
+                                        "\nStock: " + device.isStockRecoverySupported() +
+                                        "\nCWM: " + device.isCwmRecoverySupported() +
+                                        "\nTWRP: " + device.isTwrpRecoverySupported() +
+                                        "\nPHILZ: " + device.isPhilzRecoverySupported();
                             }
+                            if (device.isKernelSupported()) {
+                                message += "\n\nKernel Path: " + device.getKernelPath() +
+                                        "\nKernel Version: " + device.getKernelVersion() +
+                                        "\nKernel MTD: " + device.isKernelMTD() +
+                                        "\nKernel DD: " + device.isKernelDD();
+                            }
+                            if (!comment.equals("")) {
+                                message +=
+                                        "\n\n\n===========COMMENT==========\n"
+                                                + comment +
+                                                "\n=========COMMENT END========\n";
+                            }
+                            message +=
+                                    "\n===========PREFS==========\n"
+                                            + activity.getAllPrefs() +
+                                            "\n=========PREFS END========\n";
+                            files.add(new File(activity.getFilesDir(), Shell.Logs));
+                            files.add(new File(activity.getFilesDir(), Const.LastLog.getName()));
+                            ArrayList<Uri> uris = new ArrayList<>();
+                            for (File i : files) {
+                                try {
+                                    shell.execCommand(Const.Busybox + " chmod 777 " + i);
+                                    File tmpFile = new File(Const.PathToTmp, i.getName());
+                                    Common.copyFile(i, tmpFile);
+                                    shell.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
+                                    uris.add(Uri.fromFile(tmpFile));
+                                } catch (Exception e) {
+                                    activity.addError(Const.RASHR_TAG, e, false);
+                                }
+                            }
+                            if (errors.size() > 0) {
+                                message += "ERRORS:\n";
+                                for (String error : errors) {
+                                    message += error + "\n";
+                                }
+                            }
+
+                            intent.putExtra(Intent.EXTRA_TEXT, message);
+                            intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+                            activity.startActivity(Intent.createChooser(intent, "Send over Gmail"));
+                            dismiss();
+
                         } catch (Exception e) {
                             dismiss();
                             activity.addError(Const.RASHR_TAG, e, false);
