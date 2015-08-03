@@ -32,43 +32,25 @@ import android.widget.TextView;
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
  * the user's scroll progress.
- * <p>
+ * <p/>
  * To use the component, simply add it to your view hierarchy. Then in your
  * {@link android.app.Activity} or {@link android.support.v4.app.Fragment} call
  * {@link #setViewPager(ViewPager)} providing it the ViewPager this layout is being used for.
- * <p>
+ * <p/>
  * The colors can be customized in two ways. The first and simplest is to provide an array of colors
  * via {@link #setSelectedIndicatorColors(int...)} and {@link #setDividerColors(int...)}. The
  * alternative is via the {@link TabColorizer} interface which provides you complete control over
  * which color is used for any individual position.
- * <p>
+ * <p/>
  * The views used as tabs can be customized by calling {@link #setCustomTabView(int, int)},
  * providing the layout ID of your custom layout.
  */
 public class SlidingTabLayout extends HorizontalScrollView {
 
-    /**
-     * Allows complete control over the colors drawn in the tab layout. Set with
-     * {@link #setCustomTabColorizer(TabColorizer)}.
-     */
-    public interface TabColorizer {
-
-        /**
-         * @return return the color of the indicator used when {@code position} is selected.
-         */
-        int getIndicatorColor(int position);
-
-        /**
-         * @return return the color of the divider drawn to the right of {@code position}.
-         */
-        int getDividerColor(int position);
-
-    }
-
     private static final int TITLE_OFFSET_DIPS = 24;
     private static final int TAB_VIEW_PADDING_DIPS = 16;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
-
+    private final SlidingTabStrip mTabStrip;
     private int mTitleOffset;
 
     private int mTabViewLayoutId;
@@ -76,8 +58,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     private ViewPager mViewPager;
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
-
-    private final SlidingTabStrip mTabStrip;
 
     public SlidingTabLayout(Context context) {
         this(context, null);
@@ -103,7 +83,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     /**
      * Set the custom {@link TabColorizer} to be used.
-     *
+     * <p/>
      * If you only require simple custmisation then you can use
      * {@link #setSelectedIndicatorColors(int...)} and {@link #setDividerColors(int...)} to achieve
      * similar effects.
@@ -143,7 +123,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
      * Set the custom layout to be inflated for the tab views.
      *
      * @param layoutResId Layout id to be inflated
-     * @param textViewId id of the {@link TextView} in the inflated view
+     * @param textViewId  id of the {@link TextView} in the inflated view
      */
     public void setCustomTabView(int layoutResId, int textViewId) {
         mTabViewLayoutId = layoutResId;
@@ -250,6 +230,24 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             scrollTo(targetScrollX, 0);
         }
+    }
+
+    /**
+     * Allows complete control over the colors drawn in the tab layout. Set with
+     * {@link #setCustomTabColorizer(TabColorizer)}.
+     */
+    public interface TabColorizer {
+
+        /**
+         * @return return the color of the indicator used when {@code position} is selected.
+         */
+        int getIndicatorColor(int position);
+
+        /**
+         * @return return the color of the divider drawn to the right of {@code position}.
+         */
+        int getDividerColor(int position);
+
     }
 
     private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {

@@ -35,10 +35,10 @@ import de.mkrtchyan.utils.Common;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -49,11 +49,24 @@ import de.mkrtchyan.utils.Common;
  */
 public class SettingsFragment extends Fragment {
 
+    public SettingsFragment() {
+    }
+
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
 
-    public SettingsFragment() { }
+    public static void showChangelog(Context AppContext) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(AppContext);
+        dialog.setTitle(R.string.changelog);
+        WebView changes = new WebView(AppContext);
+        changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        changes.setWebViewClient(new WebViewClient());
+        changes.loadUrl(Const.CHANGELOG_URL);
+        changes.clearCache(true);
+        dialog.setView(changes);
+        dialog.show();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,7 +156,7 @@ public class SettingsFragment extends Fragment {
         bReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity)getActivity();
+                AppCompatActivity activity = (AppCompatActivity) getActivity();
                 SharedPreferences.Editor editor = activity.getSharedPreferences(Const.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
                 editor.clear().commit();
@@ -195,18 +208,6 @@ public class SettingsFragment extends Fragment {
         return root;
     }
 
-    public static void showChangelog(Context AppContext) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(AppContext);
-        dialog.setTitle(R.string.changelog);
-        WebView changes = new WebView(AppContext);
-        changes.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        changes.setWebViewClient(new WebViewClient());
-        changes.loadUrl(Const.CHANGELOG_URL);
-        changes.clearCache(true);
-        dialog.setView(changes);
-        dialog.show();
-    }
-
     private void showLogs() {
         final Context context = getActivity();
         final AlertDialog.Builder LogDialog = new AlertDialog.Builder(context);
@@ -220,12 +221,12 @@ public class SettingsFragment extends Fragment {
                 @SuppressWarnings("deprecation")
                 public void onClick(DialogInterface dialog, int which) {
                     int currentApi = android.os.Build.VERSION.SDK_INT;
-                    if (currentApi >= android.os.Build.VERSION_CODES.HONEYCOMB){
-                        ClipboardManager clipboard =  (ClipboardManager)
+                    if (currentApi >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+                        ClipboardManager clipboard = (ClipboardManager)
                                 context.getSystemService(Context.CLIPBOARD_SERVICE);
                         ClipData clip = ClipData.newPlainText("", message);
                         clipboard.setPrimaryClip(clip);
-                    } else{
+                    } else {
                         ClipboardManager clipboard = (ClipboardManager)
                                 context.getSystemService(Context.CLIPBOARD_SERVICE);
                         clipboard.setText(message);

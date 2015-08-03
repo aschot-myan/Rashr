@@ -33,10 +33,10 @@ import de.mkrtchyan.utils.FileChooserDialog;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -47,18 +47,20 @@ import de.mkrtchyan.utils.FileChooserDialog;
  */
 public class ScriptManagerFragment extends Fragment {
 
-    private Shell mShell;
-    private Context mContext;
-    private View mRootView;
-
     private final String CMD_END = ";";
-
     File mStartFile;
     ArrayList<File> mFileList;
     ArrayAdapter<String> mFileNameAdapter;
     ListView mQueue;
     FileChooserDialog mFileChooser;
     String[] mAllowedEXT = {".zip"};
+    private Shell mShell;
+    private Context mContext;
+    private View mRootView;
+
+    public ScriptManagerFragment() {
+        // Required empty public constructor
+    }
 
     public static ScriptManagerFragment newInstance(RashrActivity activity, File ZIP) {
         ScriptManagerFragment fragment = new ScriptManagerFragment();
@@ -66,10 +68,6 @@ public class ScriptManagerFragment extends Fragment {
         fragment.setShell(activity.getShell());
         fragment.setStartFile(ZIP);
         return fragment;
-    }
-
-    public ScriptManagerFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -108,7 +106,7 @@ public class ScriptManagerFragment extends Fragment {
                 mFileChooser = new FileChooserDialog(mContext);
                 File startFolder = new File("/");
                 if (mFileList.size() > 0) {
-                    startFolder = mFileList.get(mFileList.size()-1);
+                    startFolder = mFileList.get(mFileList.size() - 1);
                     if (startFolder.isFile()) {
                         startFolder = startFolder.getParentFile();
                     }
@@ -150,7 +148,7 @@ public class ScriptManagerFragment extends Fragment {
                     if (cbBakData.isChecked()) command.append("D");
                     if (cbBakRecovery.isChecked()) command.append("R");
                     if (cbBakSystem.isChecked()) command.append("S");
-					if (cbSkipMD5.isChecked()) command.append("M");
+                    if (cbSkipMD5.isChecked()) command.append("M");
 
                     CharSequence BackupName = etBakName.getText();
                     if (BackupName != null && !BackupName.equals("")) {
@@ -219,9 +217,11 @@ public class ScriptManagerFragment extends Fragment {
     public void setShell(Shell shell) {
         mShell = shell;
     }
+
     public void setContext(Context context) {
         mContext = context;
     }
+
     public void setStartFile(File file) {
         mStartFile = file;
     }

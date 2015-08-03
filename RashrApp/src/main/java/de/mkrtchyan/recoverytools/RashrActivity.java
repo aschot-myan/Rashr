@@ -23,7 +23,6 @@ import org.sufficientlysecure.donations.DonationsFragment;
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
-import org.sufficientlysecure.rootcommands.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,10 +43,10 @@ import de.mkrtchyan.utils.Notifyer;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -59,9 +58,9 @@ import de.mkrtchyan.utils.Notifyer;
 public class RashrActivity extends AppCompatActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    public static boolean isDark;
     static boolean FirstSession = true;
     static boolean LastLogExists = true;
-
     private final File Folder[] = {
             Const.PathToRashr, Const.PathToRecoveries, Const.PathToKernel,
             Const.PathToStockRecovery, Const.PathToCWM, Const.PathToTWRP,
@@ -78,9 +77,6 @@ public class RashrActivity extends AppCompatActivity implements
     private Toolbox mToolbox;
     private Device mDevice;
     private Toolbar mToolbar;
-
-    public static boolean isDark;
-
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private boolean mVersionChanged = false;
@@ -171,8 +167,8 @@ public class RashrActivity extends AppCompatActivity implements
                         tvLoading.setText(R.string.reading_device);
                     }
                 });
-	            if (mDevice == null)
-		            mDevice = new Device(mActivity);
+                if (mDevice == null)
+                    mDevice = new Device(mActivity);
 
                 /** If device is not supported, you can report it now or close the App */
                 if (!mDevice.isRecoverySupported() && !mDevice.isKernelSupported()) {
@@ -415,6 +411,7 @@ public class RashrActivity extends AppCompatActivity implements
     public Shell getShell() {
         return mShell;
     }
+
     public Toolbox getToolbox() {
         return mToolbox;
     }
@@ -464,7 +461,8 @@ public class RashrActivity extends AppCompatActivity implements
                                 Toast.makeText(mContext, R.string.app_uptodate, Toast.LENGTH_SHORT).show();
                             }
                         }
-                    } catch (IOException ignore) {}
+                    } catch (IOException ignore) {
+                    }
                 }
 
                 @Override
@@ -473,9 +471,11 @@ public class RashrActivity extends AppCompatActivity implements
                 }
             });
             downloader.download();
-        } catch (MalformedURLException ignore) {}
+        } catch (MalformedURLException ignore) {
+        }
 
     }
+
     public Toolbar getToolbar() {
         return mToolbar;
     }
@@ -492,7 +492,7 @@ public class RashrActivity extends AppCompatActivity implements
         return mERRORS;
     }
 
-    private void startShell() throws IOException{
+    private void startShell() throws IOException {
         try {
             mShell = Shell.startRootShell(mContext);
         } catch (IOException e) {

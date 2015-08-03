@@ -49,13 +49,127 @@ public class BackupRestoreFragment extends Fragment {
     private ViewPager mPager;
     private BackupRestorePagerAdapter mAdapter;
 
+    public BackupRestoreFragment() {
+    }
+
     public static BackupRestoreFragment newInstance(RashrActivity activity) {
         BackupRestoreFragment fragment = new BackupRestoreFragment();
         fragment.mActivity = activity;
         return fragment;
     }
 
-    public BackupRestoreFragment() { }
+    public static void showPopup(final RashrActivity activity, final View v, final boolean isRecovery, final ArrayAdapter<String> adapter, final BackupRestorePagerAdapter pagerAdapter) {
+        PopupMenu popup = new PopupMenu(activity, v);
+        popup.getMenuInflater().inflate(R.menu.bakmgr_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                final CharSequence text = ((AppCompatTextView) v).getText();
+                try {
+
+                    final String FileName = text.toString();
+
+                    final AppCompatDialog dialog = new AppCompatDialog(activity);
+                    dialog.setTitle(R.string.setname);
+                    dialog.setContentView(R.layout.dialog_input);
+                    final AppCompatButton bGo = (AppCompatButton) dialog.findViewById(R.id.bGoBackup);
+                    final AppCompatEditText etFileName = (AppCompatEditText) dialog.findViewById(R.id.etFileName);
+                    final File path = isRecovery ?
+                            Const.PathToRecoveryBackups : Const.PathToKernelBackups;
+                    switch (menuItem.getItemId()) {
+                        case R.id.iRestore:
+                            FlashUtil RestoreUtil = new FlashUtil(activity, new File(path, FileName),
+                                    isRecovery ? FlashUtil.JOB_RESTORE_RECOVERY : FlashUtil.JOB_RESTORE_KERNEL);
+                            RestoreUtil.execute();
+                            return true;
+                        case R.id.iRename:
+                            etFileName.setHint(FileName);
+                            bGo.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+
+                                    String Name;
+                                    if (etFileName.getText() != null && etFileName.isEnabled()
+                                            && !etFileName.getText().toString().equals("")) {
+                                        Name = etFileName.getText().toString();
+                                    } else {
+                                        Name = String.valueOf(etFileName.getHint());
+                                    }
+
+                                    if (!Name.endsWith(activity.getDevice().getRecoveryExt())) {
+                                        Name = Name + activity.getDevice().getRecoveryExt();
+                                    }
+
+                                    File renamedBackup = new File(path, Name);
+
+                                    if (renamedBackup.exists()) {
+                                        Toast
+                                                .makeText(activity, R.string.backupalready, Toast.LENGTH_SHORT)
+                                                .show();
+                                    } else {
+                                        File Backup = new File(path, FileName);
+                                        if (Backup.renameTo(renamedBackup)) {
+                                            loadBackups(activity.getDevice(), adapter, isRecovery);
+                                        } else {
+                                            Toast
+                                                    .makeText(activity, R.string.rename_failed, Toast.LENGTH_SHORT)
+                                                    .show();
+                                        }
+
+                                    }
+                                    dialog.dismiss();
+                                }
+                            });
+                            dialog.show();
+                            return true;
+                        case R.id.iDeleteBackup:
+                            if (new File(path, text.toString()).delete()) {
+                                Toast.makeText(activity, activity.getString(R.string.bak_deleted),
+                                        Toast.LENGTH_SHORT).show();
+                                ArrayAdapter<String> adapter;
+                                if (isRecovery) {
+                                    adapter = pagerAdapter.getRecoveryBackupFragment().getAdapter();
+                                } else {
+                                    adapter = pagerAdapter.getKernelBackupFragment().getAdapter();
+                                }
+                                loadBackups(activity.getDevice(), adapter, isRecovery);
+                            }
+                            return true;
+                        default:
+                            return false;
+                    }
+                } catch (Exception e) {
+                    if (e.getMessage().contains("EINVAL") && text.toString().contains(":")) {
+                        AlertDialog.Builder adialog = new AlertDialog.Builder(activity);
+                        adialog.setMessage(R.string.check_name);
+                        adialog.setMessage(R.string.ok);
+                        adialog.show();
+                    }
+                    activity.addError(Const.RASHR_TAG, e, false);
+                    return false;
+                }
+            }
+        });
+        popup.show();
+    }
+
+    public static void loadBackups(Device device, ArrayAdapter<String> adapter, boolean isRecovery) {
+        if ((isRecovery && !(device.isRecoveryDD() || device.isRecoveryMTD()))
+                || !isRecovery && !(device.isKernelDD() || device.isKernelMTD())) {
+            adapter.add("Operation not supported");
+        } else {
+            File path = isRecovery ? Const.PathToRecoveryBackups : Const.PathToKernelBackups;
+            if (path.listFiles() != null) {
+                File FileList[] = path.listFiles();
+                adapter.clear();
+                for (File backup : FileList) {
+                    if (!backup.isDirectory()) adapter.add(backup.getName());
+                }
+            }
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -262,101 +376,41 @@ public class BackupRestoreFragment extends Fragment {
         return false;
     }
 
-    public static void showPopup(final RashrActivity activity, final View v, final boolean isRecovery, final ArrayAdapter<String> adapter, final BackupRestorePagerAdapter pagerAdapter) {
-        PopupMenu popup = new PopupMenu(activity, v);
-        popup.getMenuInflater().inflate(R.menu.bakmgr_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
+    public static class ListFragment extends Fragment {
 
-                final CharSequence text = ((AppCompatTextView) v).getText();
-                try {
+        private ArrayAdapter<String> mAdapter;
+        private RashrActivity mActivity;
+        private ListView mListView;
+        private boolean isRecovery;
 
-                    final String FileName = text.toString();
+        public ListFragment() {
+        }
 
-                    final AppCompatDialog dialog = new AppCompatDialog(activity);
-                    dialog.setTitle(R.string.setname);
-                    dialog.setContentView(R.layout.dialog_input);
-                    final AppCompatButton bGo = (AppCompatButton) dialog.findViewById(R.id.bGoBackup);
-                    final AppCompatEditText etFileName = (AppCompatEditText) dialog.findViewById(R.id.etFileName);
-                    final File path = isRecovery ?
-                            Const.PathToRecoveryBackups : Const.PathToKernelBackups;
-                    switch (menuItem.getItemId()) {
-                        case R.id.iRestore:
-                            FlashUtil RestoreUtil = new FlashUtil(activity, new File(path, FileName),
-                                    isRecovery ? FlashUtil.JOB_RESTORE_RECOVERY : FlashUtil.JOB_RESTORE_KERNEL);
-                            RestoreUtil.execute();
-                            return true;
-                        case R.id.iRename:
-                            etFileName.setHint(FileName);
-                            bGo.setOnClickListener(new View.OnClickListener() {
+        public static ListFragment newInstance(RashrActivity activity, boolean isRecovery) {
+            ListFragment fragment = new ListFragment();
+            fragment.mActivity = activity;
+            fragment.mListView = new ListView(activity);
+            fragment.mAdapter = new ArrayAdapter<>(activity, R.layout.custom_list_item);
+            fragment.mListView.setAdapter(fragment.getAdapter());
+            fragment.isRecovery = isRecovery;
+            return fragment;
+        }
 
-                                @Override
-                                public void onClick(View v) {
+        @Override
+        public View onCreateView(LayoutInflater inflater,
+                                 ViewGroup container, Bundle savedInstanceState) {
+            loadBackups(mActivity.getDevice(), mAdapter, isRecovery);
+            return mListView;
+        }
 
-                                    String Name;
-                                    if (etFileName.getText() != null && etFileName.isEnabled()
-                                            && !etFileName.getText().toString().equals("")) {
-                                        Name = etFileName.getText().toString();
-                                    } else {
-                                        Name = String.valueOf(etFileName.getHint());
-                                    }
+        public ArrayAdapter<String> getAdapter() {
+            return mAdapter;
+        }
 
-                                    if (!Name.endsWith(activity.getDevice().getRecoveryExt())) {
-                                        Name = Name + activity.getDevice().getRecoveryExt();
-                                    }
+        public ListView getListView() {
+            return mListView;
+        }
 
-                                    File renamedBackup = new File(path, Name);
-
-                                    if (renamedBackup.exists()) {
-                                        Toast
-                                                .makeText(activity, R.string.backupalready, Toast.LENGTH_SHORT)
-                                                .show();
-                                    } else {
-                                        File Backup = new File(path, FileName);
-                                        if (Backup.renameTo(renamedBackup)) {
-                                            loadBackups(activity.getDevice(), adapter, isRecovery);
-                                        } else {
-                                            Toast
-                                                    .makeText(activity, R.string.rename_failed, Toast.LENGTH_SHORT)
-                                                    .show();
-                                        }
-
-                                    }
-                                    dialog.dismiss();
-                                }
-                            });
-                            dialog.show();
-                            return true;
-                        case R.id.iDeleteBackup:
-                            if (new File(path, text.toString()).delete()) {
-                                Toast.makeText(activity, activity.getString(R.string.bak_deleted),
-                                        Toast.LENGTH_SHORT).show();
-                                ArrayAdapter<String> adapter;
-                                if (isRecovery) {
-                                    adapter = pagerAdapter.getRecoveryBackupFragment().getAdapter();
-                                } else {
-                                    adapter = pagerAdapter.getKernelBackupFragment().getAdapter();
-                                }
-                                loadBackups(activity.getDevice(), adapter, isRecovery);
-                            }
-                            return true;
-                        default:
-                            return false;
-                    }
-                } catch (Exception e) {
-                    if (e.getMessage().contains("EINVAL") && text.toString().contains(":")) {
-                        AlertDialog.Builder adialog = new AlertDialog.Builder(activity);
-                        adialog.setMessage(R.string.check_name);
-                        adialog.setMessage(R.string.ok);
-                        adialog.show();
-                    }
-                    activity.addError(Const.RASHR_TAG, e, false);
-                    return false;
-                }
-            }
-        });
-        popup.show();
     }
 
     public class BackupRestorePagerAdapter extends FragmentPagerAdapter {
@@ -408,58 +462,6 @@ public class BackupRestoreFragment extends Fragment {
             }
             mKernelBackupFragment = ListFragment.newInstance(mActivity, false);
             return mKernelBackupFragment;
-        }
-    }
-
-    public static class ListFragment extends Fragment {
-
-        private ArrayAdapter<String> mAdapter;
-        private RashrActivity mActivity;
-        private ListView mListView;
-        private boolean isRecovery;
-
-        public static ListFragment newInstance(RashrActivity activity, boolean isRecovery) {
-            ListFragment fragment = new ListFragment();
-            fragment.mActivity = activity;
-            fragment.mListView = new ListView(activity);
-            fragment.mAdapter = new ArrayAdapter<>(activity, R.layout.custom_list_item);
-            fragment.mListView.setAdapter(fragment.getAdapter());
-            fragment.isRecovery = isRecovery;
-            return fragment;
-        }
-
-        public ListFragment() {}
-
-        @Override
-        public View onCreateView(LayoutInflater inflater,
-                                 ViewGroup container, Bundle savedInstanceState) {
-            loadBackups(mActivity.getDevice(), mAdapter, isRecovery);
-            return mListView;
-        }
-
-        public ArrayAdapter<String> getAdapter() {
-            return mAdapter;
-        }
-
-        public ListView getListView() {
-            return mListView;
-        }
-
-    }
-
-    public static void loadBackups(Device device, ArrayAdapter<String> adapter, boolean isRecovery) {
-        if ((isRecovery && !(device.isRecoveryDD() || device.isRecoveryMTD()))
-                || !isRecovery && !(device.isKernelDD() || device.isKernelMTD())) {
-            adapter.add("Operation not supported");
-        } else {
-            File path = isRecovery ? Const.PathToRecoveryBackups : Const.PathToKernelBackups;
-            if (path.listFiles() != null) {
-                File FileList[] = path.listFiles();
-                adapter.clear();
-                for (File backup : FileList) {
-                    if (!backup.isDirectory()) adapter.add(backup.getName());
-                }
-            }
         }
     }
 }
