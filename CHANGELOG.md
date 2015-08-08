@@ -1,6 +1,12 @@
 CHANGELOG
 ====================
 
+Update [2.3.6]
+
+-Partitions for Lenovo Vibe X2 (MTK6595) added thanks to eryenakgun@****.com
+-Fixed recovery version recognition
+-Downloader errors fixed
+
 Update [2.3.5]
 
 -Italian translations improved

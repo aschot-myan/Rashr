@@ -5,7 +5,7 @@ android {
     buildToolsVersion '22.0.1'
     defaultConfig {
         minSdkVersion 8
-        versionCode 102
+        versionCode 103
         versionName '2.3.5'
     }
     lintOptions {
