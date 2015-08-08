@@ -32,7 +32,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class Downloader {
-    private static final String TAG = "DownloadDialog";
+    private static final String TAG = "Downloader";
 
     private URL mURL;
     private File mOutputFile;
@@ -74,6 +74,7 @@ public class Downloader {
                         URLConnection connection = mURL.openConnection();
 
                         connection.setDoOutput(true);
+                        connection.setDoInput(true);
                         connection.connect();
 
                         FileOutputStream fileOutput = new FileOutputStream(mOutputFile);
@@ -106,32 +107,33 @@ public class Downloader {
 
                         Log.i(TAG, "Download finished!");
 
-                        if (!mCheckSHA1 || !isDownloadCorrupt()) {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (onDownloadListener != null) {
-                                        mHandler.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                onDownloadListener.onSuccess(mOutputFile);
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-                        } else {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (onDownloadListener != null) onDownloadListener.onFail(mError);
-                                }
-                            });
-                            mOutputFile.delete();
-                        }
+
                     } catch (IOException e) {
                         mError = e;
                         e.printStackTrace();
+                    }
+                    if ((!mCheckSHA1 || !isDownloadCorrupt()) && mError == null) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (onDownloadListener != null) {
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            onDownloadListener.onSuccess(mOutputFile);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (onDownloadListener != null) onDownloadListener.onFail(mError);
+                            }
+                        });
+                        mOutputFile.delete();
                     }
                 }
             });

@@ -26,6 +26,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -72,21 +73,27 @@ public class DownloadDialog extends ProgressDialog {
     }
 
     public void download() {
-        if (onDownloadListener != null) {
-            mDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
-                @Override
-                public void onSuccess(File file) {
-                    mDownloadDialog.dismiss();
+        mDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
+            @Override
+            public void onSuccess(File file) {
+                mDownloadDialog.dismiss();
+                if (onDownloadListener != null) {
                     onDownloadListener.onSuccess(file);
                 }
+            }
 
-                @Override
-                public void onFail(Exception e) {
-                    mDownloadDialog.dismiss();
+            @Override
+            public void onFail(Exception e) {
+                ConnectingDialog.dismiss();
+                mDownloadDialog.dismiss();
+                if (e != null) {
+                    Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
+                }
+                if (onDownloadListener != null) {
                     onDownloadListener.onFail(e);
                 }
-            });
-        }
+            }
+        });
         ConnectingDialog.setTitle(mContext.getResources().getString(R.string.connecting));
         ConnectingDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         ConnectingDialog.setMessage(mDownloader.getURL().toString());
