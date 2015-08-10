@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -220,18 +221,7 @@ public class SettingsFragment extends Fragment {
                 @SuppressLint("NewApi")
                 @SuppressWarnings("deprecation")
                 public void onClick(DialogInterface dialog, int which) {
-                    int currentApi = android.os.Build.VERSION.SDK_INT;
-                    if (currentApi >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-                        ClipboardManager clipboard = (ClipboardManager)
-                                context.getSystemService(Context.CLIPBOARD_SERVICE);
-                        ClipData clip = ClipData.newPlainText("", message);
-                        clipboard.setPrimaryClip(clip);
-                    } else {
-                        ClipboardManager clipboard = (ClipboardManager)
-                                context.getSystemService(Context.CLIPBOARD_SERVICE);
-                        clipboard.setText(message);
-                    }
-                    Toast.makeText(context, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
+                    Common.copyToClipboard(context, message);
                 }
             });
         } catch (Exception ignore) {
