@@ -131,7 +131,6 @@ public class NavigationDrawerFragment extends Fragment {
                             getString(R.string.donate),
                             getString(R.string.settings)
                     }));
-
             // between the navigation drawer and the action bar app icon.
             mDrawerToggle = new ActionBarDrawerToggle(
                     getActivity(),                    /* host Activity */
@@ -168,20 +167,14 @@ public class NavigationDrawerFragment extends Fragment {
             });
 
             mDrawerLayout.setDrawerListener(mDrawerToggle);
-            selectItem(0);
         }
     }
 
     private void selectItem(int position) {
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
-        }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
-        if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(position);
-        }
+        mCallbacks.onNavigationDrawerItemSelected(position);
     }
 
     @Override
