@@ -205,7 +205,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             });
             observer.start();
         }
-        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.SKIP_SIZE_CHECK)) {
+        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_SIZE_CHECK)) {
             if (isJobFlash()) {
                 int customSize = getSizeOfFile(mCustomIMG);
                 int partitionSize = getSizeOfFile(mPartition);
@@ -228,7 +228,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Common.copyFile(mCustomIMG, tmpFile);
                 Command = Const.Busybox + " dd if=\"" + tmpFile + "\" of=\"" + mPartition + "\"";
                 if ((isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize()) > 0) {
-                    String bs = "bs="
+                    String bs = " bs="
                             + (isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize());
                     Command += bs;
                 }

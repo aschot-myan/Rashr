@@ -345,9 +345,9 @@ public class BackupRestoreFragment extends Fragment {
                             .show();
                 } else {
                     final FlashUtil BackupCreator = new FlashUtil(mActivity, fBACKUP, JOB);
-                    BackupCreator.setRunAtEnd(new Runnable() {
+                    BackupCreator.setOnTaskDoneListener(new FlashUtil.OnTaskDoneListener() {
                         @Override
-                        public void run() {
+                        public void onSuccess() {
                             ArrayAdapter<String> adapter;
                             if (RecoveryBackup) {
                                 adapter = mAdapter.getRecoveryBackupFragment().getAdapter();
@@ -356,6 +356,11 @@ public class BackupRestoreFragment extends Fragment {
                             }
 
                             loadBackups(mActivity.getDevice(), adapter, RecoveryBackup);
+                        }
+
+                        @Override
+                        public void onFail(Exception e) {
+
                         }
                     });
                     BackupCreator.execute();
