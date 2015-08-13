@@ -195,5 +195,6 @@
     <string name="xzdual_uninstall_alert">Do you want to uninstall XZDualRecovery?</string>
     <string name="installing_xzdual">Installing XZDualRecovery</string>
     <string name="uninstalling_xzdual">Uninstalling XZDualRecovery</string>
+    <string name="skip_size_check">Skip size cheking on Images (can cause damage)</string>
 
 </resources>

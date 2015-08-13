@@ -205,16 +205,17 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             });
             observer.start();
         }
-        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.SKIP_SIZE_CHECK))
-        if (isJobFlash()) {
-            int customSize = getSizeOfFile(mCustomIMG);
-            int partitionSize = getSizeOfFile(mPartition);
-            /** ERROR on some chinese devices. Partition size always 0 */
-            if (partitionSize != 0) {
-                if (customSize > partitionSize) {
-                    throw new IOException("IMG is to big for your device! IMG Size: " +
-                            customSize / (1024 * 1024) + "MB Partition Size: " +
-                            partitionSize / (1024 * 1024) + "MB");
+        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.SKIP_SIZE_CHECK)) {
+            if (isJobFlash()) {
+                int customSize = getSizeOfFile(mCustomIMG);
+                int partitionSize = getSizeOfFile(mPartition);
+                /** ERROR on some chinese devices. Partition size always 0 */
+                if (partitionSize != 0) {
+                    if (customSize > partitionSize) {
+                        throw new IOException("IMG is to big for your device! IMG Size: " +
+                                customSize / (1024 * 1024) + "MB Partition Size: " +
+                                partitionSize / (1024 * 1024) + "MB");
+                    }
                 }
             }
         }

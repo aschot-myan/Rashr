@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,30 +75,33 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
-        final SwitchCompat swShowAds = (SwitchCompat) root.findViewById(R.id.cbShowAds);
-        final SwitchCompat swLog = (SwitchCompat) root.findViewById(R.id.cbLog);
-        final SwitchCompat swDarkUI = (SwitchCompat) root.findViewById(R.id.cbDarkUI);
-        final SwitchCompat swCheckUpdates = (SwitchCompat) root.findViewById(R.id.cbCheckUpdates);
-        final SwitchCompat swHideUpToDateHint = (SwitchCompat) root.findViewById(R.id.cbShowUpToDateHints);
+        final AppCompatCheckBox cbShowAds = (AppCompatCheckBox) root.findViewById(R.id.cbShowAds);
+        final AppCompatCheckBox cbLog = (AppCompatCheckBox) root.findViewById(R.id.cbLog);
+        final AppCompatCheckBox cbDarkUI = (AppCompatCheckBox) root.findViewById(R.id.cbDarkUI);
+        final AppCompatCheckBox cbCheckUpdates = (AppCompatCheckBox) root.findViewById(R.id.cbCheckUpdates);
+        final AppCompatCheckBox cbHideUpToDateHint = (AppCompatCheckBox) root.findViewById(R.id.cbShowUpToDateHints);
+        final AppCompatCheckBox cbSkipSizeCheck = (AppCompatCheckBox) root.findViewById(R.id.cbSkipSizeChecking);
         final AppCompatButton bShowLogs = (AppCompatButton) root.findViewById(R.id.bShowLogs);
         final AppCompatButton bReport = (AppCompatButton) root.findViewById(R.id.bReport);
         final AppCompatButton bShowChangelog = (AppCompatButton) root.findViewById(R.id.bShowChangelog);
         final AppCompatButton bReset = (AppCompatButton) root.findViewById(R.id.bReset);
         final AppCompatButton bClearCache = (AppCompatButton) root.findViewById(R.id.bClearCache);
 
-        swDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+        cbDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_DARK_UI));
-        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_ADS));
-        swLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
-        swCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+        cbLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
+        cbCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_CHECK_UPDATES));
-        swShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+        cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_ADS));
-        swHideUpToDateHint.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+        cbHideUpToDateHint.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_HIDE_UPDATE_HINTS));
+        cbSkipSizeCheck.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+                Const.PREF_KEY_SKIP_SIZE_CHECK));
 
-        swDarkUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cbDarkUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
@@ -105,7 +109,7 @@ public class SettingsFragment extends Fragment {
                 RashrActivity.isDark = isChecked;
             }
         });
-        swLog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cbLog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 Common.setBooleanPref(view.getContext(), Shell.PREF_NAME, Shell.PREF_LOG, isChecked);
@@ -113,25 +117,32 @@ public class SettingsFragment extends Fragment {
                         .setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
             }
         });
-        swCheckUpdates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cbCheckUpdates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
                         Const.PREF_KEY_CHECK_UPDATES, isChecked);
             }
         });
-        swShowAds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cbShowAds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 Common.setBooleanPref(view.getContext(), Const.PREF_NAME, Const.PREF_KEY_ADS,
                         isChecked);
             }
         });
-        swHideUpToDateHint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cbHideUpToDateHint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
                         Const.PREF_KEY_HIDE_UPDATE_HINTS, isChecked);
+            }
+        });
+        cbSkipSizeCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Common.setBooleanPref(buttonView.getContext(), Const.PREF_NAME,
+                        Const.PREF_KEY_SKIP_SIZE_CHECK, isChecked);
             }
         });
 
@@ -152,7 +163,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        bShowLogs.setVisibility(swLog.isChecked() ? View.VISIBLE : View.INVISIBLE);
+        bShowLogs.setVisibility(cbLog.isChecked() ? View.VISIBLE : View.INVISIBLE);
 
         bReset.setOnClickListener(new View.OnClickListener() {
             @Override
