@@ -227,4 +227,5 @@
     <string name="copy">Kopieren</string>
     <string name="app_uptodate">App ist auf dem neuesten Stand!</string>
     <string name="hide_uptodate_hint">Hinweise zur Aktualität der App verstecken</string>
+    <string name="xzdual_describtion">ZXDualRecovery wurde von dem XDA-Mitglied [NUT] ins Leben gerufen, diese erlaubt Ihnen die kombinierte Nutzung von TWRP, CWM und PhilZ</string>
 </resources>

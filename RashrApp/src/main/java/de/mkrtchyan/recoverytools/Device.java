@@ -73,7 +73,7 @@ public class Device {
             new File("/dev/block/platform/dw_mmc/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
             new File("/dev/block/bootdevice/by-name/recovery"),
-            new File("/system/bin/recovery.tar"),
+            //new File("/system/bin/recovery.tar"),
             new File("/dev/block/recovery"),
             new File("/dev/block/nandg"),
             new File("/dev/block/acta"),
@@ -107,6 +107,7 @@ public class Device {
     private int mKERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private int mKERNEL_BLOCKSIZE = 0;
     private String mName = Build.DEVICE.toLowerCase();
+    private String mXZName;
     private String mManufacture = Build.MANUFACTURER.toLowerCase();
     private String mBoard = Build.BOARD.toLowerCase();
     private String mRecoveryPath = "";
@@ -120,6 +121,7 @@ public class Device {
     private ArrayList<String> mCwmRecoveries = new ArrayList<>();
     private ArrayList<String> mPhilzRecoveries = new ArrayList<>();
     private ArrayList<String> mStockKernel = new ArrayList<>();
+    private ArrayList<String> mXZDualRecoveries = new ArrayList<>();
 
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
@@ -302,9 +304,9 @@ public class Device {
         if (mBoard.equals("gee") && mManufacture.equals("lge")) mName = "geeb";
 
 //		Sony Xperia Z (C6603)
-        if (mName.equals("c6603")) mName = "yuga";
-
-        if (mName.equals("c6603") || mName.equals("c6602")) mRECOVERY_EXT = EXT_TAR;
+        //if (mName.equals("c6603")) mName = "yuga";
+//
+        //if (mName.equals("c6603") || mName.equals("c6602")) mRECOVERY_EXT = EXT_TAR;
 
 //      HTC Desire HD
         if (mBoard.equals("ace")) mName = "ace";
@@ -347,6 +349,85 @@ public class Device {
             mRECOVERY_TYPE = PARTITION_TYPE_RECOVERY;
             mRECOVERY_EXT = EXT_ZIP;
         }
+
+//      XZDualRecovery
+        if (mManufacture.equals("sony")) {
+            //Xperia Z
+            if (mName.equals("so-02e") || mName.equals("c6602") || mName.equals("c6603")
+                    || mName.equals("c6606") || mName.equals("c6616")) {
+                mXZName = "xz";
+            }
+            //Xperia ZL
+            if (mName.equals("c6502") || mName.equals("c6503") || mName.equals("c6506")) {
+                mXZName = "zl";
+            }
+            //Xperia Tablet Z
+            if (mName.equals("so-03e") || mName.equals("sgp311") || mName.equals("sgp312")
+                    || mName.equals("sgp321") || mName.equals("sgp351")) {
+                mXZName = "tabz";
+            }
+            //Xperia Z Ultra
+            if (mName.equals("c6802") || mName.equals("c6806") || mName.equals("c6833")
+                    || mName.equals("c6843")) {
+                mXZName = "zu";
+            }
+            //Xperia Z1
+            if (mName.equals("c6902") || mName.equals("c6903") || mName.equals("c6906")
+                    || mName.equals("c6943") || mName.equals("c6916")) {
+                mXZName = "z1";
+            }
+            //Xperia Z1 Compact
+            if (mName.equals("d5502") || mName.equals("d5503") || mName.equals("d5506")) {
+                mXZName = "z1c";
+            }
+            //Xperia Z2
+            if (mName.equals("d6502") || mName.equals("d6503") || mName.equals("d6506")
+                    || mName.equals("d6543") || mName.equals("d6563")) {
+                mXZName = "z2";
+            }
+            //Xperia Tablet Z2
+            if (mName.equals("sgp511") || mName.equals("sgp512") || mName.equals("sgp521")
+                    || mName.equals("sgp551") || mName.equals("sgp561")) {
+                mXZName = "tabz2";
+            }
+            //Xperia ZR
+            if (mName.equals("c5602") || mName.equals("c5603") || mName.equals("c5606")) {
+                mXZName = "zr";
+            }
+            //Xperia T, TX, TL, V
+            if (mName.equals("lt30p") || mName.equals("lt29p") || mName.equals("lt30at")
+                    || mName.equals("lt25i")) {
+                mXZName = "xt";
+            }
+            //Xperia S
+            if (mName.equals("lt26i")) {
+                mXZName = "xs";
+            }
+            //Xperia SP
+            if (mName.equals("c5302") || mName.equals("c5303")) {
+                mXZName = "xsp";
+            }
+            //Xperia T2 Ultra
+            if (mName.equals("d5303") || mName.equals("d5322")) {
+                mXZName = "t2u";
+            }
+            //Xperia Z3
+            if (mName.equals("d6603") || mName.equals("d6633") || mName.equals("d6643")
+                    || mName.equals("6653") || mName.equals("6616")) {
+                mXZName = "z3";
+            }
+            //Xperia Z3 Compat
+            if (mName.equals("d5803") || mName.equals("d5833")) {
+                mXZName = "z3c";
+            }
+            //Xperia Tablet Z3 Compat
+            if (mName.equals("sgp621") || mName.equals("sgp641") || mName.equals("sgp651")) {
+                mXZName = "tabz3c";
+            }
+        }
+
+        mXZName = "z3";
+
         readDeviceInfos();
         if (!mRecoveryPath.equals("") && !isRecoveryOverRecovery())
             mRECOVERY_TYPE = PARTITION_TYPE_DD;
@@ -382,17 +463,18 @@ public class Device {
     public void loadRecoveryList() {
 
         ArrayList<String> CWMList = new ArrayList<>(), TWRPList = new ArrayList<>(),
-                PHILZList = new ArrayList<>(), StockList = new ArrayList<>();
+                PHILZList = new ArrayList<>(), StockList = new ArrayList<>(), XZDualList = new ArrayList<>();
 
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(
-                    new File(Const.FilesDir, "recovery_sums"))));
+                    Const.RecoveryCollectionFile)));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
                 if (lowLine.endsWith(mRECOVERY_EXT)) {
-                    if (lowLine.contains(mName.toLowerCase()) || lowLine.contains(Build.DEVICE.toLowerCase())) {
+                    if (lowLine.contains(mName.toLowerCase())
+                            || lowLine.contains(Build.DEVICE.toLowerCase())) {
                         if (lowLine.contains("stock")) {
                             StockList.add(Line.substring(NameStartAt));
                         } else if (lowLine.contains("clockwork") || lowLine.contains("cwm")) {
@@ -404,6 +486,12 @@ public class Device {
                         }
                     }
                 }
+
+                if (!mXZName.equals("")) {
+                    if (lowLine.contains(mXZName + "-") && lowLine.contains("dualrecovery")) {
+                        XZDualList.add(Line.substring(NameStartAt));
+                    }
+                }
             }
             br.close();
 
@@ -411,6 +499,7 @@ public class Device {
             Collections.sort(CWMList);
             Collections.sort(TWRPList);
             Collections.sort(PHILZList);
+            Collections.sort(XZDualList);
 
             /**
              * First clear list before adding items (to avoid double entry on reload by update)
@@ -419,6 +508,7 @@ public class Device {
             mCwmRecoveries.clear();
             mTwrpRecoveries.clear();
             mPhilzRecoveries.clear();
+            mXZDualRecoveries.clear();
 
             /** Sort newest version to first place */
             for (Object i : StockList) {
@@ -432,6 +522,9 @@ public class Device {
             }
             for (Object i : PHILZList) {
                 mPhilzRecoveries.add(0, i.toString());
+            }
+            for (Object i : XZDualList) {
+                mXZDualRecoveries.add(0, i.toString());
             }
 
         } catch (Exception e) {
@@ -536,10 +629,10 @@ public class Device {
                 try {
                     mShell.execCommand("ls " + i.getAbsolutePath());
                     mRecoveryPath = i.getAbsolutePath();
-                    if (mRecoveryPath.endsWith(EXT_TAR)) {
-                        mRECOVERY_EXT = EXT_TAR;
-                        //mRECOVERY_TYPE = PARTITION_TYPE_SONY;
-                    }
+                    //if (mRecoveryPath.endsWith(EXT_TAR)) {
+                    //    mRECOVERY_EXT = EXT_TAR;
+                    //    //mRECOVERY_TYPE = PARTITION_TYPE_SONY;
+                    //}
                     break;
                 } catch (FailedExecuteCommand ignore) {
                     /**
@@ -749,11 +842,15 @@ public class Device {
     }
 
     public boolean isStockKernelSupported() {
-        return mStockKernel.size() > 0 && isRecoverySupported();
+        return mStockKernel.size() > 0 && isKernelSupported();
+    }
+
+    public boolean isXZDualRecoverySupported() {
+        return mXZDualRecoveries.size() > 0;
     }
 
     public boolean isRecoverySupported() {
-        return mRECOVERY_TYPE != PARTITION_TYPE_NOT_SUPPORTED;
+        return mRECOVERY_TYPE != PARTITION_TYPE_NOT_SUPPORTED || isXZDualRecoverySupported();
     }
 
     public int getRecoveryType() {
@@ -818,6 +915,10 @@ public class Device {
 
     public ArrayList<String> getStockKernelVersions() {
         return mStockKernel;
+    }
+
+    public ArrayList<String> getXZDualRecoveryVersions() {
+        return mXZDualRecoveries;
     }
 
     public String getRecoveryVersion() {
@@ -993,5 +1094,18 @@ public class Device {
 
     public int getKernelBlocksize() {
         return mKERNEL_BLOCKSIZE;
+    }
+
+    public String getXZDualName() {
+        return mXZName;
+    }
+
+    public boolean isXZDualInstalled() {
+        try {
+            mShell.execCommand("ls /system/bin/recovery.cwm.cpio.lzma");
+            return true;
+        } catch (FailedExecuteCommand ignore) {
+            return false;
+        }
     }
 }

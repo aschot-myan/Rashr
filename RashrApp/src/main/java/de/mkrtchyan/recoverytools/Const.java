@@ -81,6 +81,7 @@ public class Const {
     public static final File PathToCWM             =      new File(PathToRecoveries, "clockworkmod");
     public static final File PathToTWRP            =      new File(PathToRecoveries, "twrp");
     public static final File PathToPhilz           =      new File(PathToRecoveries, "philz");
+    public static final File PathToXZDual          =      new File(PathToRecoveries, "xzdual");
     public static final File PathToKernel          =      new File(PathToRashr, "kernel");
     public static final File PathToStockKernel     =      new File(PathToKernel, "stock");
     public static final File PathToRecoveryBackups =      new File(PathToRashr, "recovery-backups");

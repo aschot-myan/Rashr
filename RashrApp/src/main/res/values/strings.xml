@@ -190,5 +190,10 @@
     <string name="logs">Logs</string>
     <string name="app_uptodate">App is up to date!</string>
     <string name="hide_uptodate_hint">Hide up to date hints</string>
+    <string name="xzdualrecovery">XZDualRecovery</string>
+    <string name="xzdual_describtion">XZDualRecovery is created by XDA-Member [NUT] and contains TWRP CWM and PhilZ so you can choose wich one you want to use</string>
+    <string name="xzdual_uninstall_alert">Do you want to uninstall XZDualRecovery?</string>
+    <string name="installing_xzdual">Installing XZDualRecovery</string>
+    <string name="uninstalling_xzdual">Uninstalling XZDualRecovery</string>
 
 </resources>
