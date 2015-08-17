@@ -1,10 +1,24 @@
 CHANGELOG
 ====================
 
+Update [2.3.6]
+
+-Partitions for Lenovo Vibe X2 (MTK6595) added thanks to eryenakgun@****.com
+-Fixed recovery version recognition
+-Downloader errors fixed
+
+Update [2.3.5]
+
+-Italian translations improved
+-German translations improved
+-TW translations fixed
+-Small bugfixes
+-Some errors on MTD devices fixed
+
 Update [2.3.4]
 
 -ERROR on some chinese devices. Partition size always 0
--Erros on not installed busybox devices fixed
+-Errors on not installed busybox devices fixed
 -Chinese translation improved by XDA-Member 341464
 
 Update [2.3.3]

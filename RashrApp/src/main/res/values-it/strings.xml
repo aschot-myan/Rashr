@@ -168,10 +168,10 @@
     <string name="exit_app">Uscire dall\'app?</string>
     <string name="skip_md5">Ignora MD5</string>
     <string name="UseDarkUI">Usa UI scura</string>
-    <string name="check_app_updates">Controlla aggironamenti all'avvio</string>
+    <string name="check_app_updates">Controlla aggironamenti all\'avvio</string>
     <string name="failed_update">Controllo aggiornamenti fallito</string>
     <string name="update_available">Disponibile aggiornamento</string>
-    <string name="download_update">Scarica l'aggironamento per mantenere aggiornata la sicurezza e le funzionalità</string>
+    <string name="download_update">Scarica l\'aggironamento per mantenere aggiornata la sicurezza e le funzionalità</string>
     <string name="open_playstore">Apri Play Store</string>
     <string name="uptodate">Aggiornato il :D</string>
     <string name="update">Aggiorna</string>
@@ -188,7 +188,7 @@
     <string name="copied_to_clipboard">Copiato negli Appunti</string>
     <string name="copy">Copia</string>
     <string name="logs">Regsitri</string>
-    <string name="app_uptodate">L'app è aggiornata!</string>
+    <string name="app_uptodate">L\'app è aggiornata!</string>
     <string name="hide_uptodate_hint">Nascondi fino a  data suggerimenti</string>
 
 </resources>

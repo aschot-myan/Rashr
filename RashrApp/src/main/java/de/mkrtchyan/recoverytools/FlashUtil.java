@@ -23,10 +23,10 @@ import de.mkrtchyan.utils.Common;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -158,8 +158,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
         if (isJobBackup() && (isJobRecovery() ? mDevice.isRecoveryDD() : mDevice.isKernelDD())) {
             observer = new Thread(new Runnable() {
-            @Override
-            public void run() {
+                @Override
+                public void run() {
                     while (true) {
                         try {
                             final int progress = Common.safeLongToInt(tmpFile.length());
@@ -209,7 +209,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         } else if (isJobBackup()) {
             Command = Const.Busybox + " dd if=\"" + mPartition + "\" of=\"" + tmpFile + "\"";
         }
-        mShell.execCommand(Command, true);
+        mShell.execCommand(Command);
         if (isJobBackup()) placeImgBack();
     }
 
@@ -223,11 +223,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             return;
         }
         if (isJobFlash() || isJobRestore()) {
-            Command = flash_image.getAbsolutePath() + Command + "\"" + tmpFile.getAbsolutePath() + "\"";
+            Command = flash_image.getAbsolutePath() + Command + "\"" + tmpFile + "\"";
         } else if (isJobBackup()) {
-            Command = dump_image.getAbsolutePath() + Command + "\"" + tmpFile.getAbsolutePath() + "\"";
+            Command = dump_image.getAbsolutePath() + Command + "\"" + tmpFile + "\"";
         }
-        mShell.execCommand(Command, true);
+        mShell.execCommand(Command);
         if (isJobBackup()) placeImgBack();
     }
 
@@ -274,46 +274,46 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             mToolbox.setFilePermissions(Const.Busybox, "755");
             mToolbox.remount(Const.Busybox, "ro");
         }
-		try {
-			mToolbox.setFilePermissions(flash_image, "755");
-		} catch (FailedExecuteCommand e) {
-			mToolbox.remount(flash_image, "rw");
-			mToolbox.setFilePermissions(flash_image, "755");
-			mToolbox.remount(flash_image, "ro");
-		}
-		try {
-			mToolbox.setFilePermissions(dump_image, "755");
-		} catch (FailedExecuteCommand e) {
-			mToolbox.remount(dump_image, "rw");
-			mToolbox.setFilePermissions(dump_image, "755");
-			mToolbox.remount(dump_image, "ro");
-		}
+        try {
+            mToolbox.setFilePermissions(flash_image, "755");
+        } catch (FailedExecuteCommand e) {
+            mToolbox.remount(flash_image, "rw");
+            mToolbox.setFilePermissions(flash_image, "755");
+            mToolbox.remount(flash_image, "ro");
+        }
+        try {
+            mToolbox.setFilePermissions(dump_image, "755");
+        } catch (FailedExecuteCommand e) {
+            mToolbox.remount(dump_image, "rw");
+            mToolbox.setFilePermissions(dump_image, "755");
+            mToolbox.remount(dump_image, "ro");
+        }
     }
 
     public void showRebootDialog() {
-	    int Message;
-	    final int REBOOT_JOB;
-	    if (isJobKernel()) {
-		    Message = R.string.reboot_now;
-		    REBOOT_JOB = Toolbox.REBOOT_REBOOT;
-	    } else {
-		    Message = R.string.reboot_recovery_now;
-		    REBOOT_JOB = Toolbox.REBOOT_RECOVERY;
-	    }
+        int Message;
+        final int REBOOT_JOB;
+        if (isJobKernel()) {
+            Message = R.string.reboot_now;
+            REBOOT_JOB = Toolbox.REBOOT_REBOOT;
+        } else {
+            Message = R.string.reboot_recovery_now;
+            REBOOT_JOB = Toolbox.REBOOT_RECOVERY;
+        }
 
         new AlertDialog.Builder(mContext)
                 .setTitle(R.string.flashed)
                 .setMessage(Message)
                 .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-	                @Override
-	                public void onClick(DialogInterface dialogInterface, int i) {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-		                try {
-			                mToolbox.reboot(REBOOT_JOB);
-		                } catch (Exception e) {
+                        try {
+                            mToolbox.reboot(REBOOT_JOB);
+                        } catch (Exception e) {
                             mActivity.addError(Const.FLASH_UTIL_TAG, e, false);
-		                }
-	                }
+                        }
+                    }
                 })
                 .setNeutralButton(R.string.neutral, new DialogInterface.OnClickListener() {
                     @Override
@@ -346,7 +346,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     private void placeImgBack() throws IOException, FailedExecuteCommand {
-        mToolbox.setFilePermissions(tmpFile, "666");
+        mShell.execCommand(Const.Busybox + " chmod 777 \"" + tmpFile + "\"");
         Common.copyFile(tmpFile, mCustomIMG);
     }
 

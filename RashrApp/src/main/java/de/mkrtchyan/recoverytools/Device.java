@@ -19,17 +19,17 @@ import java.util.zip.ZipFile;
 import de.mkrtchyan.utils.Unzipper;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2015 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -49,26 +49,18 @@ public class Device {
     //public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
     /**
-     * This class contains all device specified information to provide
-     * all information for all other classes for example:
-     * What kind of partition and where is the recovery partition in the
-     * FileSystem an how to flash
+     * Collection of known Recovery Partitions on some devices
      */
-    private int mRECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
-    private int mRECOVERY_BLOCKSIZE = 0;
-    private int mKERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
-    private int mKERNEL_BLOCKSIZE = 0;
-    /** Collection of known Recovery Partitions on some devices */
     private final File[] RecoveryList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/recovery"),
             new File("/dev/block/platform/sdhci-pxav3.2/by-name/RECOVERY"),
-            new File("/dev/block/platform/comip-mmc.1/by-name/recovery"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/FOTAKernel"),
             new File("/dev/block/platform/15570000.ufs/by-name/RECOVERY"),
+            new File("/dev/block/platform/comip-mmc.1/by-name/recovery"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
-            new File("/dev/block/platform/sprd-sdhci.3/by-name/KERNEL"),
+            new File("/dev/block/platform/mtk-msdc.0/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/USP"),
             new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
@@ -87,13 +79,16 @@ public class Device {
             new File("/dev/block/acta"),
             new File("/dev/recovery")
     };
-    /** Collection of known Kernel Partitions on some devices */
+    /**
+     * Collection of known Kernel Partitions on some devices
+     */
     private final File[] KernelList = {
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/boot"),
             new File("/dev/block/platform/sprd-sdhci.3/by-name/KERNEL"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/LNX"),
             new File("/dev/block/platform/15570000.ufs/by-name/BOOT"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/Kernel"),
+            new File("/dev/block/platform/mtk-msdc.0/by-name/boot"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
             new File("/dev/block/platform/sdhci.1/by-name/KERNEL"),
             new File("/dev/block/platform/sdhci.1/by-name/boot"),
@@ -101,6 +96,16 @@ public class Device {
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
+    /**
+     * This class contains all device specified information to provide
+     * all information for all other classes for example:
+     * What kind of partition and where is the recovery partition in the
+     * FileSystem an how to flash
+     */
+    private int mRECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
+    private int mRECOVERY_BLOCKSIZE = 0;
+    private int mKERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
+    private int mKERNEL_BLOCKSIZE = 0;
     private String mName = Build.DEVICE.toLowerCase();
     private String mManufacture = Build.MANUFACTURER.toLowerCase();
     private String mBoard = Build.BOARD.toLowerCase();
@@ -133,14 +138,16 @@ public class Device {
                 String tmp = mShell.execCommand(Const.Busybox + " blockdev --getbsz " + mRecoveryPath);
                 tmp = tmp.replace("\n", "");
                 mRECOVERY_BLOCKSIZE = Integer.valueOf(tmp);
-            } catch (FailedExecuteCommand ignore) {}
+            } catch (FailedExecuteCommand ignore) {
+            }
         }
         if (isKernelDD()) {
             try {
                 String tmp = mShell.execCommand(Const.Busybox + " blockdev --getbsz " + mKernelPath);
                 tmp = tmp.replace("\n", "");
                 mKERNEL_BLOCKSIZE = Integer.valueOf(tmp);
-            } catch (FailedExecuteCommand ignore) {}
+            } catch (FailedExecuteCommand ignore) {
+            }
         }
 
     }
@@ -627,7 +634,8 @@ public class Device {
             if (mName.equals("ace") || mName.equals("primou"))
                 mRecoveryPath = "/dev/block/platform/msm_sdcc.2/mmcblk0p21";
 
-            if (mName.equals("pyramid")) mRecoveryPath = "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
+            if (mName.equals("pyramid"))
+                mRecoveryPath = "/dev/block/platform/msm_sdcc.1/mmcblk0p21";
 
             if (mName.equals("ville") || mName.equals("evita") || mName.equals("skyrocket")
                     || mName.equals("fireball") || mName.equals("jewel") || mName.equals("shooter"))
@@ -646,7 +654,8 @@ public class Device {
 
             if (mName.equals("dinara_td")) mRecoveryPath = "/dev/block/mmcblk1p14";
 
-            if (mName.equals("e975") || mName.equals("e988")) mRecoveryPath = "/dev/block/mmcblk0p28";
+            if (mName.equals("e975") || mName.equals("e988"))
+                mRecoveryPath = "/dev/block/mmcblk0p28";
 
             if (mName.equals("shadow") || mName.equals("edison") || mName.equals("venus2"))
                 mRecoveryPath = "/dev/block/mmcblk1p16";
@@ -847,7 +856,6 @@ public class Device {
         try {
             String line;
             File LogCopy = new File(Const.FilesDir, Const.LastLog.getName() + ".txt");
-            mShell.execCommand("chmod 644 " + LogCopy.getAbsolutePath());
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
             while ((line = br.readLine()) != null) {
                 line = line.replace("\"", "");
@@ -858,6 +866,9 @@ public class Device {
                     } else if (line.contains("TWRP")) {
                         line = line.replace("Starting ", "");
                         line = line.split(" on")[0];
+                        mRecoveryVersion = line;
+                    } else if (line.contains("ro.twrp.version")) {
+                        line = line.replace("ro.twrp.version=", "");
                         mRecoveryVersion = line;
                     } else if (line.contains("PhilZ")) {
                         mRecoveryVersion = line;
@@ -966,6 +977,7 @@ public class Device {
             }
         }
     }
+
     public boolean isUnified() {
         return mName.startsWith("d2lte") || mName.startsWith("hlte")
                 || mName.startsWith("jflte") || mName.equals("moto_msm8960");

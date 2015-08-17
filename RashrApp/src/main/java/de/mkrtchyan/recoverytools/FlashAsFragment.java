@@ -22,10 +22,10 @@ import java.io.File;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -44,6 +44,10 @@ public class FlashAsFragment extends Fragment {
     private AppCompatButton mButFlashAs;
     private boolean mCloseApp;
 
+    public FlashAsFragment() {
+        // Required empty public constructor
+    }
+
     public static FlashAsFragment newInstance(RashrActivity activity, File img, boolean CloseApp) {
         FlashAsFragment fragment = new FlashAsFragment();
         fragment.setActivity(activity);
@@ -51,10 +55,6 @@ public class FlashAsFragment extends Fragment {
         fragment.setImg(img);
         fragment.setCloseApp(CloseApp);
         return fragment;
-    }
-
-    public FlashAsFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -70,26 +70,26 @@ public class FlashAsFragment extends Fragment {
         ButCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-				if (!mCloseApp) {
+                if (!mCloseApp) {
                     new AlertDialog.Builder(mContext)
-							.setTitle(R.string.exit_app)
-							.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									mActivity.finish();
-								}
-							})
-							.setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									mActivity.switchTo(FlashFragment.newInstance(mActivity));
-								}
-							})
-							.setCancelable(false)
-							.show();
-				} else {
-					mActivity.finish();
-				}
+                            .setTitle(R.string.exit_app)
+                            .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mActivity.finish();
+                                }
+                            })
+                            .setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mActivity.switchTo(FlashFragment.newInstance(mActivity));
+                                }
+                            })
+                            .setCancelable(false)
+                            .show();
+                } else {
+                    mActivity.finish();
+                }
             }
         });
         View.OnClickListener listener = new View.OnClickListener() {
@@ -137,13 +137,16 @@ public class FlashAsFragment extends Fragment {
     public void setDevice(Device device) {
         mDevice = device;
     }
+
     public void setActivity(RashrActivity activity) {
         mActivity = activity;
         mContext = activity;
     }
+
     public void setImg(File img) {
         mImg = img;
     }
+
     public void setCloseApp(boolean closeApp) {
         mCloseApp = closeApp;
     }

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rashr</string>
+    <string name="settings">Cài Đặt</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sFlashRecovery">Nạp Recovery</string>
+    <string name="sFlashKernel">Nạp Kernel</string>
+    <string name="recovery_history">Lịch Sử Recovery</string>
+    <string name="kernel_history">Lịch Sử Kernel</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="other_recovery">Recovery Từ Bộ Nhớ</string>
+    <string name="other_kernel">Kernel Từ Bộ Nhớ</string>
+    <string name="sRecoveryBackup">Sao Lưu Recovery</string>
+    <string name="sKernelBackup">Sao Lưu Kernel</string>
+    <string name="backups">Các Sao Lưu</string>
+    <string name="backup">Sao Lưu</string>
+    <string name="go">Đến</string>
+    <string name="sRebooter">Khởi Động Lại</string>
+    <string name="restore">Khôi phục</string>
+    <string name="rename">Đổi tên</string>
+    <string name="sClearCache">Xóa các tải về</string>
+    <string name="report">Báo lỗi</string>
+    <string name="sExit">Thoát</string>
+    <string name="xda">Chủ đề XDA</string>
+    <string name="set_name">Tên Sao lưu</string>
+    <string name="bak_warning">Trước khi làm một vài hành động với Rashr xin hãy tạo một bản sao lưu và lưu nó ở PC của bạn.
+        \nCác sao lưu sẽ được tạo ở \n%s.
+        \nNhà phát triển không có trách nhiệm khi điện thoại của bạn xảy ra lỗi.</string>
+    <string name="flash_options">Tùy Chọn Nạp</string>
+    <string name="risk">Tôi bất chấp rủi ro</string>
+    <string name="sReboot">Khởi động lại</string>
+    <string name="sRebootHot">Khởi động lại nhanh</string>
+    <string name="sRebootRecovery">Vào Recovery</string>
+    <string name="sRebootBootloader">Vào Bootloader</string>
+    <string name="sRebootShutdown">Tắt nguồn</string>
+    <string name="info">Thông tin</string>
+    <string name="flashed">Đã nạp Phân vùng.</string>
+    <string name="warning">Cảnh báo!</string>
+    <string name="fota">Việc nạp Recovery trên thiết bị này sẽ thay đổi FOTAKernel (thay đổi phân vùng)
+        điều này sẽ chỉ hoạt động nếu kernel hỗ trợ (Phần lớn Custom Kernel và ROM đều hỗ trợ). </string>
+    <string name="flash_over_recovery">Nạp Recovery ngay bây giờ? (cần Khởi động vào Recovery)</string>
+    <string name="bak_done">Sao lưu hoàn thành</string>
+    <string name="backupalready">Bản sao lưu đã tồn tại.</string>
+    <string name="error">Lỗi</string>
+    <string name="not_supportded">Điện thoại của bạn chưa được hỗ trợ. Quét Hệ thống và Báo cáo Thiết bị chưa được hỗ trợ hoặc
+        cố gắng tìm phân vùng (khởi động ngay vào Recovery)?</string>
+    <string name="no_root">Điện thoại chưa được Root. Vui lòng Root. Thông tin thêm tại
+        \n\nxda-developers.com</string>
+    <string name="Downloading">Đang tải về…</string>
+    <string name="comment">Bình luận</string>
+    <string name="comment_hint">Bình luận ở đây, cái gì đang không hoạt động đúng cách (tải về, nạp, hỗ trợ chung hay những cái khác)</string>
+    <string name="positive">Đồng ý</string>
+    <string name="neutral">Không</string>
+    <string name="negative">Hủy</string>
+    <string name="log">Bản ghi các dòng lệnh</string>
+    <string name="showlog">Xem các bản ghi</string>
+    <string name="delete">Xóa</string>
+    <string name="sBackupMgr">Quản lý sao lưu</string>
+    <string name="setname">Đặt tên cho sao lưu</string>
+    <string name="reboot_recovery_now">Vào Recovery ngay?</string>
+    <string name="reboot_now">Khởi động lại ngay?</string>
+    <string name="flashing">Đang nạp…</string>
+    <string name="restoring">Đang khôi phục…</string>
+    <string name="creating_bak">Đang tạo Sao lưu…</string>
+    <string name="download_utils">Để sử dụng Ứng dụng này bạn cần tải về những công cụ nhỏ (khoảng 512KB). Điều này yêu cầu kết nối mạng.
+        \nTải ngay?</string>
+    <string name="over_recovery">Điện thoại sẽ được nạp qua recovery</string>
+    <string name="ShowAds">Hiện quảng cáo để ủng hộ</string>
+    <string name="please_restart">Hãy khởi động lại phần mềm để áp dụng (các) thay đổi</string>
+    <string name="please_ads">Hãy bật quảng cáo lên để ủng hộ công việc của tôi! :(</string>
+    <string name="donate_to_support">Ủng hộ công việc của tôi thông qua menu! :)</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0,50 Euro</item>
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+        <item>3 Euros</item>
+        <item>5 Euros</item>
+    </string-array>
+
+    <string name="donate">Ủng hộ</string>
+    <string name="never_again">Không nhắc lại</string>
+    <string name="try_again">Thử lại!</string>
+    <string name="later">Để sau</string>
+    <string name="update_done">Cập nhật xong</string>
+    <string name="pick_file">Chọn Tập tin</string>
+    <string name="flash_error">Nạp thất bại</string>
+    <string name="res_error">Khôi phục thất bại</string>
+    <string name="bak_error">Sao lưu thất bại</string>
+    <string name="stock">Stock</string>
+    <string name="changelog">Changelog</string>
+    <string name="use_supersu">SuperSu của Chainfire không nhận ra được điện thoại của bạn. Vui lòng sử dụng nó để tránh các lỗi.
+        Tải SuperSu (từ Play Store) ngay?</string>
+    <string name="bak_deleted">Đã xóa sao lưu</string>
+    <string name="extract_failed">Giải nén các tệp cần thiết thất bại. Hãy khởi động lại ứng dụng.</string>
+    <string name="no_history">Không có lịch sử nào</string>
+    <string name="styles">Giao diện</string>
+
+    <string-array name="styles">
+        <item>Giao diện</item>
+        <item>Giao Diện Nền Thanh Sáng Tối</item>
+        <item>Giao Diện Nền Sáng</item>
+        <item>Giao Diện Nền Tối</item>
+    </string-array>
+
+    <string name="flash_as">Nạp %s như</string>
+    <string name="recovery">Recovery</string>
+    <string name="kernel">Kernel</string>
+    <string name="getting_root">Đang lấy quyền truy cập Root</string>
+    <string name="reading_device">Đang đọc thông tin điện thoại</string>
+    <string name="loading_ui">Đang tải giao diện người dùng</string>
+    <string name="loading_data">Đang giải nén dữ liệu và tạo thư mục cần thiết</string>
+    <string name="recovery_script_manager">Quản lý Recovery-Script</string>
+    <string name="bak_name">Cá nhân hóa tên bản sao lưu</string>
+    <string name="flash_queue">Nạp lần lượt</string>
+    <string name="wipe_opts">Tùy chọn xóa</string>
+    <string name="add_queue">Thêm Zip vào hàng chờ nạp</string>
+    <string name="backup_opts">Tùy chọn sao lưu</string>
+    <string name="system">Hệ thống</string>
+    <string name="data">Dữ liệu</string>
+    <string name="cache">Cache</string>
+    <string name="dalvik">Dalvik</string>
+    <string name="boot">Boot</string>
+    <string name="recovery_script_mind">Hãy nhớ rằng, điều này sẽ chỉ hoạt động với TWRP Recovery tương thích</string>
+    <string name="run">Chạy</string>
+    <string name="recovery_script_review">Xem trước Script</string>
+    <string name="failed_unpack_files">Thất bại khi giải nén các tệp từ Ứng dụng</string>
+    <string name="failed_setup_layout">Lỗi khi thiết lập Bố cục</string>
+    <string name="refresh_list">Bắt đầu cập nhật!</string>
+    <string name="new_imgs_loaded">Đã tải %s IMG mới</string>
+    <string name="make_choice">Hãy lựa chọn</string>
+    <string name="unified_info">Bản ROM này đang sử dụng Mã Nguồn CyanogenMod Thống Nhất.\n
+        Điều này dẫn tới việc Rashr không thể tìm được tệp nạp Recovery hoặc Kernel.\n
+        Trong trường hợp bạn có thể chọn thiết bị thật của bạn. (làm điều này nếu không có tệp nạp nào được tìm thấy).\n
+        HÃY CẨN THẬN VỚI TÙY CHỌN NÀY!</string>
+    <string name="reloading">Đang tải lại</string>
+    <string name="keep_current_name">Giữ lại tên hiện tại (%s)</string>
+    <string name="rename_failed">Đổi tên thất bại</string>
+    <string name="flash">Nạp</string>
+    <string name="recovery_description">Với chức năng này bạn có thể nạp recovery phân vùng sẵn có chỉ với một
+        click!</string>
+  <string name="kernel_description">Với chức năng này bạn có thể nạp kernel/boot phân vùng sẵn có chỉ với
+        một click!</string>
+    <string name="options">Tùy chọn</string>
+    <string name="clear_cache_description">Xóa tất cả các tệp nạp recovery/kernel đã tải</string>
+    <string name="reboot_description">Để điện thoại khởi động lại ngay lập tức</string>
+    <string name="reboot_recovery_description">Để điện thoại khởi động vào recovery ngay lập tức</string>
+    <string name="reboot_bootloader_description">Để điện thoại khởi động vào  bootloader/download mode ngay lập tức</string>
+    <string name="shutdown_description">Để điện thoại tắt nguồn ngay lập tức</string>
+    <string name="cwm_description">ClockworkMod Recovery là Custom Recovery cho Android được biết đến nhiều nhất</string>
+    <string name="twrp_description">Team Winn Recovery Project (TWRP) là Custom Recovery điều khiển hoàn toàn bằng cảm ứng</string>
+    <string name="philz_description">PhilZ Touch Recovery là một bản nâng cấp của ClockworkMod</string>
+    <string name="stock_recovery_description">Stock recoveries là recovery mặc định của máy,tại đây bạn có thể quay về stock recovery.</string>
+    <string name="stock_kernel_description">Stock kernel là kernel mặc định của máy,tại đây bạn có thể quay về stock kernel.</string>
+    <string name="delete_confirmation">Bạn có thực sự muốn xóa tất cả các tệp nạp đã tải?</string>
+    <string name="other_storage_description">Tùy chọn này cho phép bạn nạp các tệp nạp có sẵn được lưu trên điện thoại.</string>
+    <string name="reboot_confirmation">Khởi động lại ngay?</string>
+    <string name="shutdown_confirmation">Tắt nguồn ngay?</string>
+    <string name="history_description">Tại đây bạn có thể thấy 5 tệp nạp gần đây nhất</string>
+    <string name="reset_app">Khởi động lại ứng dụng</string>
+    <string name="reset_app_description">Thiết lập lại các cài đặt ứng dụng về mặc định</string>
+    <string name="files_deleted">Đã xóa các tệp</string>
+    <string name="onlyLanguage">Vui lòng chỉ viết bằng tiếng Tây Ban Nha, Đức hoặc Tiếng Anh</string>
+    <string name="flasher">Công cụ nạp</string>
+    <string name="history">Lịch sử</string>
+    <string name="exit_app">Thoát khỏi ứng dụng?</string>
+    <string name="skip_md5">Bỏ qua MD5</string>
+    <string name="UseDarkUI">Dùng giao diện người dùng tối</string>
+    <string name="check_app_updates">Kiểm tra cập nhật khi mở</string>
+    <string name="failed_update">Kiểm tra cập nhật thất bại</string>
+    <string name="update_available">Đã có bản cập nhật</string>
+    <string name="download_update">Hãy tải bản bản cập nhật để giữ an toàn và có được các chức năng mới nhất</string>
+    <string name="open_playstore">Mở CH Play</string>
+    <string name="uptodate">Mới nhất :D</string>
+    <string name="update">Cập nhật</string>
+    <string name="lists_outdated">Danh sách các recovery và kernel sẵn có đã lỗi thời. Hãy nạp recovery và kernel mới nhất cho điện thoại.\nKhông phải tất cả các thiết bị đều được hỗ trợ!</string>
+    <string name="hello_blank_fragment">Xin chào blank fragment</string>
+    <string name="stock_recovery">Stock Recovery</string>
+    <string name="stock_kernel">Stock Kernel</string>
+    <string name="check_connection">Kiểm tra kết nối mạng</string>
+    <string name="check_name">Vui lòng kiểm tra tên tệp sao lưu. Một số điện thoại không thể sử dụng nó nếu chứa ký tự \':\' vì vậy hãy đổi tên nó</string>
+    <string name="ok">OK</string>
+    <string name="logs_title">Đã ghi Các dòng lệnh</string>
+    <string name="clear_logs">Xóa bản ghi</string>
+    <string name="no_logs">Không có bản ghi</string>
+    <string name="copied_to_clipboard">Đã chép vào clipboard</string>
+    <string name="copy">Sao chép</string>
+    <string name="logs">Bản ghi</string>
+    <string name="app_uptodate">Ứng dụng là mới nhất!</string>
+    <string name="hide_uptodate_hint">Ẩn nhắc nhở cập nhật</string>
+    
+</resources>

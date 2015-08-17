@@ -40,6 +40,7 @@ import java.util.Arrays;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.DownloadDialog;
+import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.FileChooserDialog;
 
 /**
@@ -50,10 +51,10 @@ import de.mkrtchyan.utils.FileChooserDialog;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -72,6 +73,9 @@ public class FlashFragment extends Fragment {
     private boolean isRecoveryListUpToDate = true;
     private boolean isKernelListUpToDate = true;
 
+    public FlashFragment() {
+    }
+
     public static FlashFragment newInstance(RashrActivity activity) {
         FlashFragment fragment = new FlashFragment();
         fragment.setActivity(activity);
@@ -79,8 +83,6 @@ public class FlashFragment extends Fragment {
         fragment.setToolbox(activity.getToolbox());
         return fragment;
     }
-
-    public FlashFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,70 +141,71 @@ public class FlashFragment extends Fragment {
         final File path;
         final ArrayList<String> Versions;
         //if (!mDevice.downloadUtils(mContext)) {
-            /**
-             * If there files be needed to flash download it and listing device specified
-             * recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
-             * (read out from RECOVERY_SUMS)
-             */
-            String SYSTEM = card.getData().toString();
-            ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext,
-                    R.layout.custom_list_item);
-            switch (SYSTEM) {
-                case "stock":
-                    Versions = mDevice.getStockRecoveryVersions();
-                    path = Const.PathToStockRecovery;
-                    break;
-                case "clockwork":
-                    Versions = mDevice.getCwmRecoveryVersions();
-                    path = Const.PathToCWM;
-                    break;
-                case "twrp":
-                    Versions = mDevice.getTwrpRecoveryVersions();
-                    path = Const.PathToTWRP;
-                    break;
-                case "philz":
-                    Versions = mDevice.getPhilzRecoveryVersions();
-                    path = Const.PathToPhilz;
-                    break;
-                default:
-                    return;
-            }
-            for (String i : Versions) {
-                VersionsAdapter.add(formatName(i, SYSTEM));
-            }
-            final AlertDialog.Builder RecoveriesDialog = new AlertDialog.Builder(mContext);
-            RecoveriesDialog.setTitle(SYSTEM.toUpperCase());
-            RecoveriesDialog.setAdapter(VersionsAdapter, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    final String fileName = Versions.get(which);
-                    final File recovery = new File(path, fileName);
-                    if (!recovery.exists()) {
-                        try {
-                            URL url = new URL(Const.RECOVERY_URL + "/" + fileName);
-                            DownloadDialog RecoveryDownloader = new DownloadDialog(mContext, url, recovery);
-                            RecoveryDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
-                                @Override
-                                public void success(File file) {
-                                    flashRecovery(file);
-                                }
+        /**
+         * If there files be needed to flash download it and listing device specified
+         * recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
+         * (read out from RECOVERY_SUMS)
+         */
+        String SYSTEM = card.getData().toString();
+        ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext,
+                R.layout.custom_list_item);
+        switch (SYSTEM) {
+            case "stock":
+                Versions = mDevice.getStockRecoveryVersions();
+                path = Const.PathToStockRecovery;
+                break;
+            case "clockwork":
+                Versions = mDevice.getCwmRecoveryVersions();
+                path = Const.PathToCWM;
+                break;
+            case "twrp":
+                Versions = mDevice.getTwrpRecoveryVersions();
+                path = Const.PathToTWRP;
+                break;
+            case "philz":
+                Versions = mDevice.getPhilzRecoveryVersions();
+                path = Const.PathToPhilz;
+                break;
+            default:
+                return;
+        }
+        for (String i : Versions) {
+            VersionsAdapter.add(formatName(i, SYSTEM));
+        }
+        final AlertDialog.Builder RecoveriesDialog = new AlertDialog.Builder(mContext);
+        RecoveriesDialog.setTitle(SYSTEM.toUpperCase());
+        RecoveriesDialog.setAdapter(VersionsAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String fileName = Versions.get(which);
+                final File recovery = new File(path, fileName);
+                if (!recovery.exists()) {
+                    try {
+                        URL url = new URL(Const.RECOVERY_URL + "/" + fileName);
+                        final Downloader downloader = new Downloader(url, recovery);
+                        final DownloadDialog RecoveryDownloader = new DownloadDialog(mContext, downloader);
+                        RecoveryDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
+                            @Override
+                            public void onSuccess(File file) {
+                                flashRecovery(file);
+                            }
 
-                                @Override
-                                public void failed(Exception e) {
-
-                                }
-                            });
-                            RecoveryDownloader.setRetry(true);
-                            RecoveryDownloader.setAskBeforeDownload(true);
-                            RecoveryDownloader.setChecksumFile(Const.RecoveryCollectionFile);
-                            RecoveryDownloader.ask();
-                        } catch (MalformedURLException ignored) {}
-                    } else {
-                        flashRecovery(recovery);
+                            @Override
+                            public void onFail(Exception e) {
+                                RecoveryDownloader.retry();
+                            }
+                        });
+                        RecoveryDownloader.setAskBeforeDownload(true);
+                        downloader.setChecksumFile(Const.RecoveryCollectionFile);
+                        RecoveryDownloader.ask();
+                    } catch (MalformedURLException ignored) {
                     }
+                } else {
+                    flashRecovery(recovery);
                 }
-            });
-            RecoveriesDialog.show();
+            }
+        });
+        RecoveriesDialog.show();
         //}
     }
 
@@ -215,11 +218,11 @@ public class FlashFragment extends Fragment {
         chooser.setAllowedEXT(AllowedEXT);
         chooser.setBrowseUpAllowed(true);
         chooser.setOnFileChooseListener(new FileChooserDialog.OnFileChooseListener() {
-                @Override
-                public void OnFileChoose(File file) {
-                    flashRecovery(file);
-                }
-            });
+            @Override
+            public void OnFileChoose(File file) {
+                flashRecovery(file);
+            }
+        });
         chooser.setStartFolder(Const.PathToSd);
         chooser.setWarn(true);
         chooser.show();
@@ -230,61 +233,61 @@ public class FlashFragment extends Fragment {
         final ArrayList<String> Versions;
         ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext, R.layout.custom_list_item);
         //if (!mDevice.downloadUtils(mContext)) {
-            /**
-             * If there files be needed to flash download it and listing device specified recovery
-             * file for example stock-boot-grouper-4.4.img (read out from kernel_sums)
-             */
-            String SYSTEM = card.getData().toString();
-            if (SYSTEM.equals("stock")) {
-                Versions = mDevice.getStockKernelVersions();
-                path = Const.PathToStockKernel;
-                for (String i : Versions) {
-                    try {
-                        String version = i.split("-")[3].replace(mDevice.getRecoveryExt(), "");
-                        String deviceName = i.split("-")[2];
-                        VersionsAdapter.add("Stock Kernel " + version + " (" + deviceName + ")");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        VersionsAdapter.add(i);
-                    }
+        /**
+         * If there files be needed to flash download it and listing device specified recovery
+         * file for example stock-boot-grouper-4.4.img (read out from kernel_sums)
+         */
+        String SYSTEM = card.getData().toString();
+        if (SYSTEM.equals("stock")) {
+            Versions = mDevice.getStockKernelVersions();
+            path = Const.PathToStockKernel;
+            for (String i : Versions) {
+                try {
+                    String version = i.split("-")[3].replace(mDevice.getRecoveryExt(), "");
+                    String deviceName = i.split("-")[2];
+                    VersionsAdapter.add("Stock Kernel " + version + " (" + deviceName + ")");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    VersionsAdapter.add(i);
                 }
-            } else {
-                return;
             }
+        } else {
+            return;
+        }
 
-            final AlertDialog.Builder KernelDialog = new AlertDialog.Builder(mContext);
-            KernelDialog.setTitle(SYSTEM);
-            KernelDialog.setAdapter(VersionsAdapter, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    final File kernel = new File(path, Versions.get(which));
+        final AlertDialog.Builder KernelDialog = new AlertDialog.Builder(mContext);
+        KernelDialog.setTitle(SYSTEM);
+        KernelDialog.setAdapter(VersionsAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final File kernel = new File(path, Versions.get(which));
 
-                    if (!kernel.exists()) {
-                        try {
-                            URL url = new URL(Const.KERNEL_URL + "/" + kernel.getName());
-                            DownloadDialog KernelDownloader = new DownloadDialog(mContext, url, kernel);
-                            KernelDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
-                                @Override
-                                public void success(File file) {
-                                    flashKernel(file);
-                                }
+                if (!kernel.exists()) {
+                    try {
+                        URL url = new URL(Const.KERNEL_URL + "/" + kernel.getName());
+                        Downloader downloader = new Downloader(url, kernel);
+                        final DownloadDialog KernelDownloader = new DownloadDialog(mContext, downloader);
+                        KernelDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
+                            @Override
+                            public void onSuccess(File file) {
+                                flashKernel(file);
+                            }
 
-                                @Override
-                                public void failed(Exception e) {
-
-                                }
-                            });
-                            KernelDownloader.setRetry(true);
-                            KernelDownloader.setAskBeforeDownload(true);
-                            KernelDownloader.setChecksumFile(Const.KernelCollectionFile);
-                            KernelDownloader.ask();
-                        } catch (MalformedURLException ignored) {
-                        }
-                    } else {
-                        flashKernel(kernel);
+                            @Override
+                            public void onFail(Exception e) {
+                                KernelDownloader.retry();
+                            }
+                        });
+                        KernelDownloader.setAskBeforeDownload(true);
+                        downloader.setChecksumFile(Const.KernelCollectionFile);
+                        KernelDownloader.ask();
+                    } catch (MalformedURLException ignored) {
                     }
+                } else {
+                    flashKernel(kernel);
                 }
-            });
-            KernelDialog.show();
+            }
+        });
+        KernelDialog.show();
         //}
     }
 
@@ -552,6 +555,7 @@ public class FlashFragment extends Fragment {
             });
         }
     }
+
     public void setupSwipeUpdater(View root) {
         mSwipeUpdater = (SwipeRefreshLayout) root.findViewById(R.id.swipe_updater);
         mSwipeUpdater.setColorSchemeResources(R.color.custom_green,
@@ -627,6 +631,7 @@ public class FlashFragment extends Fragment {
         });
         cardUI.addCard(OtherCard, true);
     }
+
     public void addKernelCards(CardUI cardUI, CardColorScheme scheme) {
         if (mDevice.isStockKernelSupported()) {
             final IconCard StockCard = new IconCard(getString(R.string.stock_kernel), R.drawable.ic_stock,
@@ -652,6 +657,7 @@ public class FlashFragment extends Fragment {
 
         cardUI.addCard(OtherCard, true);
     }
+
     public void addRebooterCards(CardUI cardUI, CardColorScheme scheme) {
         SimpleCard Reboot = new SimpleCard(getString(R.string.sReboot),
                 getString(R.string.reboot_description), scheme);
@@ -770,9 +776,11 @@ public class FlashFragment extends Fragment {
     public void setDevice(Device device) {
         mDevice = device;
     }
+
     public void setToolbox(Toolbox toolbox) {
         mToolbox = toolbox;
     }
+
     public void setActivity(RashrActivity activity) {
         mActivity = activity;
         mContext = activity;
@@ -828,20 +836,21 @@ public class FlashFragment extends Fragment {
                             } catch (MalformedURLException e) {
                                 return;
                             }
-                            final DownloadDialog RecoveryUpdater = new DownloadDialog(mContext, recoveryURL,
-                                    Const.RecoveryCollectionFile);
-                            RecoveryUpdater.setOverrideFile(true);
+                            Downloader downloader = new Downloader(recoveryURL, Const.RecoveryCollectionFile);
+                            final DownloadDialog RecoveryUpdater = new DownloadDialog(mContext, downloader);
+                            downloader.setOverrideFile(true);
                             RecoveryUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                 @Override
-                                public void success(File file) {
+                                public void onSuccess(File file) {
                                     mDevice.loadRecoveryList();
                                     isRecoveryListUpToDate = true;
-                                    final DownloadDialog KernelUpdater = new DownloadDialog(mContext, kernelURL,
-                                            Const.KernelCollectionFile);
-                                    KernelUpdater.setOverrideFile(true);
+                                    Downloader downloader = new Downloader(kernelURL, Const.KernelCollectionFile);
+                                    final DownloadDialog KernelUpdater = new DownloadDialog(mContext,
+                                            downloader);
+                                    downloader.setOverrideFile(true);
                                     KernelUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                                         @Override
-                                        public void success(File file) {
+                                        public void onSuccess(File file) {
                                             mDevice.loadKernelList();
                                             isKernelListUpToDate = true;
                                             /** Counting added images (after update) */
@@ -865,18 +874,18 @@ public class FlashFragment extends Fragment {
                                         }
 
                                         @Override
-                                        public void failed(final Exception e) {
+                                        public void onFail(final Exception e) {
                                             Toast
                                                     .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
                                                     .show();
                                             mSwipeUpdater.setRefreshing(false);
                                         }
                                     });
-                                    KernelUpdater.execute();
+                                    KernelUpdater.download();
                                 }
 
                                 @Override
-                                public void failed(final Exception e) {
+                                public void onFail(final Exception e) {
                                     Toast
                                             .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
                                             .show();
@@ -897,7 +906,7 @@ public class FlashFragment extends Fragment {
                                                         Toast
                                                                 .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
                                                                 .show();
-                                                        RecoveryUpdater.execute();
+                                                        RecoveryUpdater.download();
                                                     }
                                                 })
                                                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -911,7 +920,7 @@ public class FlashFragment extends Fragment {
                                         Toast
                                                 .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
                                                 .show();
-                                        RecoveryUpdater.execute();
+                                        RecoveryUpdater.download();
                                     }
                                 }
                             });
@@ -969,13 +978,13 @@ public class FlashFragment extends Fragment {
                     device += ")";
                     return "ClockworkMod " + cversion + " " + device;
                 case "philz":
-                        String pdevice = "(";
-                        for (int splitNr = 1; splitNr < fileName.split("-").length; splitNr++) {
-                            if (!pdevice.equals("(")) pdevice += "-";
-                            pdevice += fileName.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
-                        }
-                        pdevice += ")";
-                        return "PhilZ Touch " + fileName.split("_")[2].split("-")[0] + " " + pdevice;
+                    String pdevice = "(";
+                    for (int splitNr = 1; splitNr < fileName.split("-").length; splitNr++) {
+                        if (!pdevice.equals("(")) pdevice += "-";
+                        pdevice += fileName.split("-")[splitNr].replace(mDevice.getRecoveryExt(), "");
+                    }
+                    pdevice += ")";
+                    return "PhilZ Touch " + fileName.split("_")[2].split("-")[0] + " " + pdevice;
                 case "stock":
                     String sversion = fileName.split("-")[3].replace(mDevice.getRecoveryExt(), "");
                     String deviceName = fileName.split("-")[2];

@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import de.mkrtchyan.utils.Common;
-import de.mkrtchyan.utils.DownloadDialog;
+import de.mkrtchyan.utils.Downloader;
 import de.mkrtchyan.utils.Notifyer;
 
 /**
@@ -43,10 +43,10 @@ import de.mkrtchyan.utils.Notifyer;
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
@@ -58,14 +58,14 @@ import de.mkrtchyan.utils.Notifyer;
 public class RashrActivity extends AppCompatActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    public static boolean isDark;
     static boolean FirstSession = true;
     static boolean LastLogExists = true;
-
     private final File Folder[] = {
             Const.PathToRashr, Const.PathToRecoveries, Const.PathToKernel,
             Const.PathToStockRecovery, Const.PathToCWM, Const.PathToTWRP,
             Const.PathToPhilz, Const.PathToStockKernel, Const.PathToRecoveryBackups,
-            Const.PathToKernelBackups, Const.PathToUtils
+            Const.PathToKernelBackups, Const.PathToUtils, Const.PathToTmp
     };
     private final RashrActivity mActivity = this;
     private final Context mContext = this;
@@ -77,9 +77,6 @@ public class RashrActivity extends AppCompatActivity implements
     private Toolbox mToolbox;
     private Device mDevice;
     private Toolbar mToolbar;
-
-    public static boolean isDark;
-
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private boolean mVersionChanged = false;
@@ -99,6 +96,13 @@ public class RashrActivity extends AppCompatActivity implements
         final Thread StartThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                /** Checking if version has changed */
+                final int previous_version = Common.getIntegerPref(mContext,
+                        Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
+                final int current_version = BuildConfig.VERSION_CODE;
+                mVersionChanged = current_version > previous_version;
+                Common.setIntegerPref(mContext, Const.PREF_NAME,
+                        Const.PREF_KEY_CUR_VER, current_version);
                 /** Try to get root access */
                 try {
                     startShell();
@@ -122,6 +126,9 @@ public class RashrActivity extends AppCompatActivity implements
                         tvLoading.setText(R.string.loading_data);
                     }
                 });
+                if (Const.PathToTmp.exists()) {
+                    Common.deleteFolder(Const.PathToTmp, true);
+                }
                 for (File i : Folder) {
                     if (!i.exists()) {
                         if (!i.mkdir()) {
@@ -131,43 +138,6 @@ public class RashrActivity extends AppCompatActivity implements
                     }
                 }
 
-                try {
-                    File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName() + ".txt");
-                    mShell.execCommand(Const.Busybox + " chmod 766 " + Const.LastLog);
-                    mToolbox.copyFile(Const.LastLog, LogCopy, false, false);
-                } catch (Exception e) {
-                    LastLogExists = false;
-                    mActivity.addError(Const.RASHR_TAG, e, false);
-                }
-                /** Checking if version has changed */
-                final int previous_version = Common.getIntegerPref(mContext,
-                        Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
-                final int current_version = BuildConfig.VERSION_CODE;
-                mVersionChanged = current_version > previous_version;
-                Common.setIntegerPref(mContext, Const.PREF_NAME,
-                        Const.PREF_KEY_CUR_VER, current_version);
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        checkUpdates(current_version);
-                    }
-                });
-                if (mVersionChanged) {
-                    /** Re-enable Ads */
-                    Common.setBooleanPref(mContext, Const.PREF_NAME,
-                            Const.PREF_KEY_ADS, true);
-                    /** Show Play Store rater dialog */
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!Common.getBooleanPref(mContext, Const.PREF_NAME,
-                                    Const.PREF_KEY_HIDE_RATER)) {
-                                Notifyer.showAppRateDialog(mContext, Const.PREF_NAME,
-                                        Const.PREF_KEY_HIDE_RATER);
-                            }
-                        }
-                    });
-                }
                 try {
                     extractFiles();
                 } catch (IOException e) {
@@ -180,14 +150,25 @@ public class RashrActivity extends AppCompatActivity implements
                         }
                     });
                 }
+                try {
+                    File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName() + ".txt");
+                    mShell.execCommand(Const.Busybox + " chmod 777 " + Const.LastLog);
+                    LogCopy.delete();
+                    mToolbox.copyFile(Const.LastLog, LogCopy, false, false);
+                    mShell.execCommand(Const.Busybox + " chmod 777 " + LogCopy);
+                    LastLogExists = LogCopy.exists();
+                } catch (Exception e) {
+                    mActivity.addError(Const.RASHR_TAG, e, false);
+                }
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        checkUpdates(current_version);
                         tvLoading.setText(R.string.reading_device);
                     }
                 });
-	            if (mDevice == null)
-		            mDevice = new Device(mActivity);
+                if (mDevice == null)
+                    mDevice = new Device(mActivity);
 
                 /** If device is not supported, you can report it now or close the App */
                 if (!mDevice.isRecoverySupported() && !mDevice.isKernelSupported()) {
@@ -350,7 +331,7 @@ public class RashrActivity extends AppCompatActivity implements
         Const.Busybox = new File(mContext.getFilesDir(), "busybox");
         Common.pushFileFromRAW(mContext, Const.Busybox, R.raw.busybox, mVersionChanged);
         try {
-            mToolbox.setFilePermissions(Const.Busybox, "700");
+            mShell.execCommand("chmod 777 " + Const.Busybox);
         } catch (FailedExecuteCommand failedExecuteCommand) {
             failedExecuteCommand.printStackTrace();
         }
@@ -417,10 +398,6 @@ public class RashrActivity extends AppCompatActivity implements
             case 4:
                 switchTo(SettingsFragment.newInstance());
                 break;
-            case 5:
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://forum.xda-developers.com/showthread.php?t=2334554")));
-                break;
         }
     }
 
@@ -434,6 +411,7 @@ public class RashrActivity extends AppCompatActivity implements
     public Shell getShell() {
         return mShell;
     }
+
     public Toolbox getToolbox() {
         return mToolbox;
     }
@@ -458,12 +436,11 @@ public class RashrActivity extends AppCompatActivity implements
     public void checkUpdates(final int currentVersion) {
         try {
             File versionsFile = new File(mContext.getFilesDir(), "version");
-            DownloadDialog version = new DownloadDialog(mContext, new URL(Const.RASHR_VERSION_URL), versionsFile);
-            version.setOverrideFile(true);
-            version.setHidden(true);
-            version.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
+            Downloader downloader = new Downloader(new URL(Const.RASHR_VERSION_URL), versionsFile);
+            downloader.setOverrideFile(true);
+            downloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
                 @Override
-                public void success(File file) {
+                public void onSuccess(File file) {
                     try {
                         if (currentVersion < Integer.valueOf(Common.fileContent(file))) {
                             new AlertDialog.Builder(mContext)
@@ -484,18 +461,21 @@ public class RashrActivity extends AppCompatActivity implements
                                 Toast.makeText(mContext, R.string.app_uptodate, Toast.LENGTH_SHORT).show();
                             }
                         }
-                    } catch (IOException ignore) {}
+                    } catch (IOException ignore) {
+                    }
                 }
 
                 @Override
-                public void failed(Exception e) {
+                public void onFail(Exception e) {
                     Toast.makeText(mContext, R.string.failed_update, Toast.LENGTH_SHORT).show();
                 }
             });
-            version.execute();
-        } catch (MalformedURLException ignore) {}
+            downloader.download();
+        } catch (MalformedURLException ignore) {
+        }
 
     }
+
     public Toolbar getToolbar() {
         return mToolbar;
     }
@@ -512,7 +492,7 @@ public class RashrActivity extends AppCompatActivity implements
         return mERRORS;
     }
 
-    private void startShell() throws IOException{
+    private void startShell() throws IOException {
         try {
             mShell = Shell.startRootShell(mContext);
         } catch (IOException e) {

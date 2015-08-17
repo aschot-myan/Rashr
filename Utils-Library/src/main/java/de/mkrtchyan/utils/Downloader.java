@@ -21,6 +21,7 @@ package de.mkrtchyan.utils;
  * SOFTWARE.
  */
 
+import android.os.Handler;
 import android.util.Log;
 
 import java.io.File;
@@ -31,7 +32,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class Downloader {
-    private static final String TAG = "DownloadDialog";
+    private static final String TAG = "Downloader";
 
     private URL mURL;
     private File mOutputFile;
@@ -41,10 +42,11 @@ public class Downloader {
     private File ChecksumFile = null;
     private OnDownloadListener onDownloadListener = null;
     private OnUpdateListener onUpdateListener = null;
-    private boolean mErrorOccurred = false;
+    private OnCancelListener onCancelListener = null;
     private Thread mDownloadThread;
+    private Handler mHandler = new Handler();
 
-    private IOException ioException;
+    private Exception mError;
 
     public Downloader(URL url, File outputFile) {
         mURL = url;
@@ -53,12 +55,17 @@ public class Downloader {
 
     public void download() {
         if (!mOutputFile.getParentFile().exists()) {
-            mErrorOccurred = mErrorOccurred || !mOutputFile.getParentFile().mkdir();
-            if (mOverrideFile && mOutputFile.exists())
-                mErrorOccurred = mErrorOccurred || !mOutputFile.delete();
+            if (!mOutputFile.getParentFile().mkdir()) {
+                mError = new Exception("Cannot create parent folder");
+            }
+        }
+        if (mOverrideFile && mOutputFile.exists()) {
+            if (!mOutputFile.delete()) {
+                mError = new Exception("Cannot override file");
+            }
         }
 
-        if (!mOutputFile.exists()) {
+        if (mError == null) {
             mDownloadThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -67,6 +74,7 @@ public class Downloader {
                         URLConnection connection = mURL.openConnection();
 
                         connection.setDoOutput(true);
+                        connection.setDoInput(true);
                         connection.connect();
 
                         FileOutputStream fileOutput = new FileOutputStream(mOutputFile);
@@ -74,37 +82,70 @@ public class Downloader {
                         InputStream inputStream = connection.getInputStream();
 
                         byte[] buffer = new byte[1024];
-                        int FullLength = connection.getContentLength();
+                        final int FullLength = connection.getContentLength();
 
                         int bufferLength;
-                        int Downloaded = 0;
+                        int downloaded = 0;
 
                         Log.i(TAG, "Downloading " + mOutputFile.getName());
 
                         while (((bufferLength = inputStream.read(buffer)) > 0) && !mCancel) {
                             fileOutput.write(buffer, 0, bufferLength);
-                            Downloaded += bufferLength;
-                            if (onUpdateListener != null)
-                                onUpdateListener.update(FullLength, Downloaded);
+                            downloaded += bufferLength;
+                            final int Downloaded = downloaded;
+                            if (onUpdateListener != null) {
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        onUpdateListener.onUpdate(FullLength, Downloaded);
+                                    }
+                                });
+                            }
                         }
 
                         fileOutput.close();
 
                         Log.i(TAG, "Download finished!");
-                        if (mErrorOccurred && (!mCheckSHA1 || !isDownloadCorrupt())) {
-                            if (onDownloadListener != null) onDownloadListener.success(mOutputFile);
-                        } else {
-                            if (onDownloadListener != null) onDownloadListener.failed(ioException);
-                            mOutputFile.delete();
-                        }
+
+
                     } catch (IOException e) {
-                        ioException = e;
+                        mError = e;
                         e.printStackTrace();
+                    }
+                    if ((!mCheckSHA1 || !isDownloadCorrupt()) && mError == null) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (onDownloadListener != null) {
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            onDownloadListener.onSuccess(mOutputFile);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (onDownloadListener != null) onDownloadListener.onFail(mError);
+                            }
+                        });
+                        mOutputFile.delete();
                     }
                 }
             });
             mDownloadThread.start();
 
+        } else {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (onDownloadListener != null) onDownloadListener.onFail(null);
+                }
+            });
         }
 
     }
@@ -112,10 +153,17 @@ public class Downloader {
     public void cancel() {
         mCancel = true;
         if (mOutputFile.exists()) {
-            mErrorOccurred = mErrorOccurred || !mOutputFile.delete();
+            if (!mOutputFile.delete()) {
+                mError = new Exception("Cannot delete output file on cancel");
+            }
         }
-        if (onDownloadListener != null) {
-            onDownloadListener.canceled();
+        if (onCancelListener != null) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    onCancelListener.onCancel();
+                }
+            });
         }
     }
 
@@ -146,6 +194,22 @@ public class Downloader {
         this.onUpdateListener = onUpdateListener;
     }
 
+    public void setOnCancelListener(OnCancelListener onCancelListener) {
+        this.onCancelListener = onCancelListener;
+    }
+
+    public OnDownloadListener getOnDownloadListener() {
+        return onDownloadListener;
+    }
+
+    public OnUpdateListener getOnUpdateListener() {
+        return onUpdateListener;
+    }
+
+    public OnCancelListener getOnCancelListener() {
+        return onCancelListener;
+    }
+
     public URL getURL() {
         return mURL;
     }
@@ -155,12 +219,15 @@ public class Downloader {
     }
 
     public interface OnDownloadListener {
-        void success(File file);
-        void failed(Exception e);
-        void canceled();
+        void onSuccess(File file);
+        void onFail(Exception e);
+    }
+
+    public interface OnCancelListener {
+        void onCancel();
     }
 
     public interface OnUpdateListener {
-        void update(int MAX, int Downloaded);
+        void onUpdate(int MAX, int Downloaded);
     }
 }
