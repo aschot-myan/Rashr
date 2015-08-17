@@ -29,6 +29,7 @@ import com.fima.cardsui.views.IconCard;
 import com.fima.cardsui.views.SimpleCard;
 
 import org.sufficientlysecure.rootcommands.Toolbox;
+import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.File;
 import java.io.IOException;
@@ -146,7 +147,7 @@ public class FlashFragment extends Fragment {
          * recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
          * (read out from RECOVERY_SUMS)
          */
-        String SYSTEM = card.getData().toString();
+        final String SYSTEM = card.getData().toString();
         ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext,
                 R.layout.custom_list_item);
         switch (SYSTEM) {
@@ -165,6 +166,33 @@ public class FlashFragment extends Fragment {
             case "philz":
                 Versions = mDevice.getPhilzRecoveryVersions();
                 path = Const.PathToPhilz;
+                break;
+            case "xzdual":
+                Versions = mDevice.getXZDualRecoveryVersions();
+                path = Const.PathToXZDual;
+                if (mDevice.isXZDualInstalled()) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                    alert.setTitle(R.string.warning);
+                    alert.setMessage(R.string.xzdual_uninstall_alert);
+                    alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                FlashUtil.uninstallXZDual(mActivity.getShell());
+                            } catch (FailedExecuteCommand failedExecuteCommand) {
+                                //TODO: Inform the user about result
+                                failedExecuteCommand.printStackTrace();
+                            }
+                        }
+                    });
+                    alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    return;
+                }
                 break;
             default:
                 return;
@@ -187,7 +215,12 @@ public class FlashFragment extends Fragment {
                         RecoveryDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                             @Override
                             public void onSuccess(File file) {
-                                flashRecovery(file);
+                                if (SYSTEM.equals("xzdual")) {
+                                    FlashUtil flasher = new FlashUtil(mActivity, file, FlashUtil.JOB_INSTALL_XZDUAL);
+                                    flasher.execute();
+                                } else {
+                                    flashRecovery(file);
+                                }
                             }
 
                             @Override
@@ -572,6 +605,18 @@ public class FlashFragment extends Fragment {
     }
 
     public void addRecoveryCards(CardUI cardUI, CardColorScheme scheme) {
+        if (mDevice.isXZDualRecoverySupported()) {
+            final IconCard XZCard = new IconCard(getString(R.string.xzdualrecovery), R.drawable.ic_xzdual,
+                    getString(R.string.xzdual_describtion));
+            XZCard.setData("xzdual");
+            XZCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FlashSupportedRecovery(XZCard);
+                }
+            });
+            cardUI.addCard(XZCard, true);
+        }
         if (mDevice.isCwmRecoverySupported()) {
             final IconCard CWMCard = new IconCard(getString(R.string.sCWM), R.drawable.ic_cwm,
                     getString(R.string.cwm_description), scheme);
@@ -948,6 +993,9 @@ public class FlashFragment extends Fragment {
     private String formatName(final String fileName, final String system) {
         try {
             switch (system) {
+                case "xzdual":
+                    String split[] = fileName.split("lockeddualrecovery");
+                    return mDevice.getXZDualName().toUpperCase()  + " XZDualRecovery " + split[split.length - 1].replace(".zip", "");
                 case "twrp":
                     if (fileName.contains("openrecovery")) {
                         String tdevice = "(";

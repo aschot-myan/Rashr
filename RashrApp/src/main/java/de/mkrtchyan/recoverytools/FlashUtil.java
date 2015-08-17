@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 
 import de.mkrtchyan.utils.Common;
+import de.mkrtchyan.utils.Unzipper;
 
 /**
  * Copyright (c) 2015 Aschot Mkrtchyan
@@ -43,6 +45,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public static final int JOB_FLASH_KERNEL = 4;
     public static final int JOB_BACKUP_KERNEL = 5;
     public static final int JOB_RESTORE_KERNEL = 6;
+    public static final int JOB_INSTALL_XZDUAL = 7;
     private final RashrActivity mActivity;
     private final Context mContext;
     private final Device mDevice;
@@ -53,9 +56,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     private ProgressDialog pDialog;
     private File tmpFile, mPartition;
     private boolean keepAppOpen = true;
-    private Runnable RunAtEnd;
-
-    private Exception mException = null;
+    private OnTaskDoneListener mOnTaskDoneListener;
+    private Handler mHandler = new Handler();
 
     public FlashUtil(RashrActivity activity, File CustomIMG, int job) {
         mActivity = activity;
@@ -68,7 +70,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         flash_image = mDevice.getFlash_image();
         dump_image = mDevice.getDump_image();
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
-
         if (isJobRecovery()) {
             mPartition = new File(mDevice.getRecoveryPath());
         } else if (isJobKernel()) {
@@ -80,13 +81,21 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         pDialog = new ProgressDialog(mContext);
 
         try {
-            setBinaryPermissions();
+            if (!isJobXZDual()) {
+                if ((isJobRecovery() && mDevice.isRecoveryMTD())
+                        || isJobKernel() && mDevice.isKernelMTD()) {
+                    mShell.execCommand(Const.Busybox + " chmod 755 " + flash_image);
+                    mShell.execCommand(Const.Busybox + " chmod 755 " + dump_image);
+                }
+            }
             if (isJobFlash()) {
                 pDialog.setTitle(R.string.flashing);
             } else if (isJobBackup()) {
                 pDialog.setTitle(R.string.creating_bak);
             } else if (isJobRestore()) {
                 pDialog.setTitle(R.string.restoring);
+            } else if (isJobXZDual()) {
+                pDialog.setTitle(R.string.installing_xzdual);
             }
             if (isJobBackup() && (isJobRecovery() ? mDevice.isRecoveryDD() : mDevice.isKernelDD())) {
                 pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -106,6 +115,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
+            if (isJobXZDual()) {
+                installXZDual();
+                return true;
+            }
             int PartitionType = 0;
             if (isJobRecovery()) {
                 PartitionType = mDevice.getRecoveryType();
@@ -126,27 +139,39 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     return false;
             }
             saveHistory();
+            if (mOnTaskDoneListener != null) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mOnTaskDoneListener.onSuccess();
+                    }
+                });
+            }
             return true;
-        } catch (Exception e) {
-            mException = e;
+        } catch (final Exception e) {
+            if (mOnTaskDoneListener != null) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mOnTaskDoneListener.onFail(e);
+                    }
+                });
+            }
             return false;
         }
     }
 
     protected void onPostExecute(Boolean success) {
         pDialog.dismiss();
-        if (!success) {
-            if (mException != null) {
-                mActivity.addError(Const.FLASH_UTIL_TAG, mException, true);
-            }
-        } else if (tmpFile.delete()) {
-            if (RunAtEnd != null) RunAtEnd.run();
-            if (isJobFlash() || isJobRestore()) {
-                if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT)) {
-                    showRebootDialog();
-                } else {
-                    if (!keepAppOpen) {
-                        System.exit(0);
+        if (success) {
+            if (tmpFile.delete()) {
+                if (isJobFlash() || isJobRestore()) {
+                    if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT)) {
+                        showRebootDialog();
+                    } else {
+                        if (!keepAppOpen) {
+                            System.exit(0);
+                        }
                     }
                 }
             }
@@ -163,7 +188,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     while (true) {
                         try {
                             final int progress = Common.safeLongToInt(tmpFile.length());
-                            mActivity.runOnUiThread(new Runnable() {
+                            mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
                                     pDialog.setProgress(progress);
@@ -180,15 +205,17 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             });
             observer.start();
         }
-        if (isJobFlash()) {
-            int customSize = getSizeOfFile(mCustomIMG);
-            int partitionSize = getSizeOfFile(mPartition);
-            /** ERROR on some chinese devices. Partition size always 0 */
-            if (partitionSize != 0) {
-                if (customSize > partitionSize) {
-                    throw new IOException("IMG is to big for your device! IMG Size: " +
-                            customSize / (1024 * 1024) + "MB Partition Size: " +
-                            partitionSize / (1024 * 1024) + "MB");
+        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_SIZE_CHECK)) {
+            if (isJobFlash()) {
+                int customSize = getSizeOfFile(mCustomIMG);
+                int partitionSize = getSizeOfFile(mPartition);
+                /** ERROR on some chinese devices. Partition size always 0 */
+                if (partitionSize != 0) {
+                    if (customSize > partitionSize) {
+                        throw new IOException("IMG is to big for your device! IMG Size: " +
+                                customSize / (1024 * 1024) + "MB Partition Size: " +
+                                partitionSize / (1024 * 1024) + "MB");
+                    }
                 }
             }
         }
@@ -201,7 +228,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 Common.copyFile(mCustomIMG, tmpFile);
                 Command = Const.Busybox + " dd if=\"" + tmpFile + "\" of=\"" + mPartition + "\"";
                 if ((isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize()) > 0) {
-                    String bs = "bs="
+                    String bs = " bs="
                             + (isJobRecovery() ? mDevice.getRecoveryBlocksize() : mDevice.getKernelBlocksize());
                     Command += bs;
                 }
@@ -265,30 +292,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         mShell.execCommand(Command, true);
         if (isJobBackup()) placeImgBack();
     }*/
-
-    private void setBinaryPermissions() throws FailedExecuteCommand {
-        try {
-            mToolbox.setFilePermissions(Const.Busybox, "755");
-        } catch (FailedExecuteCommand e) {
-            mToolbox.remount(Const.Busybox, "rw");
-            mToolbox.setFilePermissions(Const.Busybox, "755");
-            mToolbox.remount(Const.Busybox, "ro");
-        }
-        try {
-            mToolbox.setFilePermissions(flash_image, "755");
-        } catch (FailedExecuteCommand e) {
-            mToolbox.remount(flash_image, "rw");
-            mToolbox.setFilePermissions(flash_image, "755");
-            mToolbox.remount(flash_image, "ro");
-        }
-        try {
-            mToolbox.setFilePermissions(dump_image, "755");
-        } catch (FailedExecuteCommand e) {
-            mToolbox.remount(dump_image, "rw");
-            mToolbox.setFilePermissions(dump_image, "755");
-            mToolbox.remount(dump_image, "ro");
-        }
-    }
 
     public void showRebootDialog() {
         int Message;
@@ -400,8 +403,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         return mJOB == JOB_BACKUP_RECOVERY || mJOB == JOB_RESTORE_RECOVERY || mJOB == JOB_FLASH_RECOVERY;
     }
 
-    public void setRunAtEnd(Runnable RunAtEnd) {
-        this.RunAtEnd = RunAtEnd;
+    public boolean isJobXZDual() {
+        return mJOB == JOB_INSTALL_XZDUAL;
     }
 
     public String lokiPatch() throws FailedExecuteCommand {
@@ -425,4 +428,57 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             return -1;
         }
     }
+
+    private void installXZDual() throws FailedExecuteCommand {
+        Unzipper.unzip(mCustomIMG, new File("/tmp"));
+        mShell.execCommand("chmod 755 /tmp/backupstockbinaries.sh");
+        try {
+            mShell.execCommand("./tmp/backupstockbinaries.sh");
+        } catch (FailedExecuteCommand ignore) {
+
+        }
+        mShell.execCommand("cp " + Const.Busybox + " /system/.XZDualRecovery/busybox");
+        mShell.execCommand("chmod 755 /tmp/tmp/installstock.sh");
+        mShell.execCommand("./tmp/tmp/installstock.sh");
+        mShell.execCommand("chmod 755 /tmp/tmp/installdisableric.sh");
+        mShell.execCommand("./tmp/tmp/installdisableric.sh");
+        mShell.execCommand("chmod 755 /tmp/tmp/installndrutils.sh");
+        mShell.execCommand("./tmp/tmp/installndrutils.sh");
+        mShell.execCommand("chmod 755 /tmp/tmp/setversion.sh");
+        mShell.execCommand("./tmp/tmp/setversion.sh");
+        mShell.execCommand("chmod 644 /system/bin/recovery.cwm.cpio.lzma");
+        mShell.execCommand("chmod 644 /system/bin/recovery.philz.cpio.lzma");
+        mShell.execCommand("chmod 644 /system/bin/recovery.twrp.cpio.lzma");
+        mShell.execCommand("chmod 755 /system/bin/mr");
+        mShell.execCommand("chmod 755 /system/bin/chargemon");
+        mShell.execCommand("chmod 755 /system/bin/dualrecovery.sh");
+        mShell.execCommand("chmod 755 /system/bin/rickiller.sh");
+        mShell.execCommand("chmod 755 /system/xbin/busybox");
+    }
+
+    public static void uninstallXZDual(Shell shell) throws FailedExecuteCommand {
+        shell.execCommand("rm /system/bin/recovery.twrp.cpio*");
+        shell.execCommand("rm /system/bin/recovery.cwm.cpio*");
+        shell.execCommand("rm /system/bin/recovery.philz.cpio*");
+        shell.execCommand("rm /system/bin/charger");
+        shell.execCommand("rm /system/bin/ric");
+        shell.execCommand("rm /system/bin/chargermon");
+        shell.execCommand("rm /system/bin/dualrecovery.sh");
+        shell.execCommand("mv /system/bin/charger.stock /system/bin/charger");
+        shell.execCommand("mv /system/bin/ric.stock /system/bin/ric");
+        shell.execCommand("mv /system/bin/chargermon.stock /system/bin/chargermon");
+        shell.execCommand("chmod 755 /system/bin/charger");
+        shell.execCommand("chmod 755 /system/bin/ric");
+        shell.execCommand("chmod 755 /system/bin/chargermon");
+    }
+
+    public void setOnTaskDoneListener(OnTaskDoneListener onTaskDoneListener) {
+        mOnTaskDoneListener = onTaskDoneListener;
+    }
+
+    interface OnTaskDoneListener {
+        void onSuccess();
+        void onFail(Exception e);
+    }
+
 }

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rashr</string>
+    <string name="settings">설정</string>
+    <string name="sCWM">CWM 리커버리</string>
+    <string name="sFlashRecovery">리커버리 설치</string>
+    <string name="sFlashKernel">커널 설치</string>
+    <string name="recovery_history">리커버리 설치 내역</string>
+    <string name="kernel_history">커널 설치 내역</string>
+    <string name="sTWRP">TWRP 리커버리</string>
+    <string name="sPhilz">Philz 리커버리</string>
+    <string name="other_recovery">Recovery from Storage</string>
+    <string name="other_kernel">저장소에서 커널 불러오기</string>
+    <string name="sRecoveryBackup">리커버리 백업</string>
+    <string name="sKernelBackup">커널 백업</string>
+    <string name="backups">백업 내역</string>
+    <string name="backup">백업</string>
+    <string name="go">시작</string>
+    <string name="sRebooter">리부터</string>
+    <string name="restore">복원</string>
+    <string name="rename">이름 바꾸기</string>
+    <string name="sClearCache">다운로드 삭제</string>
+    <string name="report">버그 리포트</string>
+    <string name="sExit">나가기</string>
+    <string name="xda">XDA 쓰레드</string>
+    <string name="set_name">백업 이름</string>
+    <string name="bak_warning">Rashr로 작업하시기 전에는 백업을 하신 후 파일을 PC로 옮겨주세요.
+        \n백업 파일은 여기에 형성됩니다.\n%s.
+        \n개발자는 여러분의 기기의 손상에 대해 책임지지 않습니다.
+        \n번역 : 김종민/WhatThe (jongmeankim@naver.com)</string>
+    <string name="flash_options">설치 옵션</string>
+    <string name="risk">알겠습니다</string>
+    <string name="sReboot">재부팅</string>
+    <string name="sRebootHot">빠른 재부팅</string>
+    <string name="sRebootRecovery">리커버리로 재부팅</string>
+    <string name="sRebootBootloader">부트로더로 재부팅</string>
+    <string name="sRebootShutdown">전원 종료</string>
+    <string name="info">정보</string>
+    <string name="flashed">파티션이 설치되었습니다.</string>
+    <string name="warning">경고!</string>
+    <string name="fota">이 기기에서 리커버리를 플래싱할 경우 FOTA커널을 바꾸게 됩니다.
+        이는 여러분의 커널이 이 기능을 지원할 때만 작동합니다. (대부분의 커스텀 커널과 ROM이 지원합니다.)</string>
+    <string name="flash_over_recovery">리커버리를 설치할까요? (리커버리로 재부팅하셔야 합니다.)</string>
+    <string name="bak_done">백업 완료</string>
+    <string name="backupalready">백업 파일이 이미 존재합니다.</string>
+    <string name="error">오류</string>
+    <string name="not_supportded">당신의 기기는 아직 지원되지 않습니다. 시스템을 스캔하셔서 미지원 기기를 리포트 하시거나
+        파티션을 찾아보시길 바랍니다. (리커버리로 한 번 재부팅 해볼까요)?</string>
+    <string name="no_root">이 기기는 루팅되지 않았습니다. 루팅을 해주시길 바랍니다. 더 많은 정보는 여기서 확인해주세요.
+        \n\nxda-developers.com</string>
+    <string name="Downloading">다운로드 중...</string>
+    <string name="comment">제보</string>
+    <string name="comment_hint">무엇이 정확히 안 되는지 여기에 제보해주시길 바랍니다. (다운로드, 설치, 일반 지원 혹은 기타)</string>
+    <string name="positive">예</string>
+    <string name="neutral">아니오</string>
+    <string name="negative">취소</string>
+    <string name="log">로그 쉘 커맨드</string>
+    <string name="showlog">로그 보기</string>
+    <string name="delete">삭제</string>
+    <string name="sBackupMgr">백업 관리자</string>
+    <string name="setname">백업 이름 설정</string>
+    <string name="reboot_recovery_now">지금 리커버리로 재부팅할까요?</string>
+    <string name="reboot_now">지금 재부팅할까요?</string>
+    <string name="flashing">설치 중...</string>
+    <string name="restoring">복원 중...</string>
+    <string name="creating_bak">백업 생성 중...</string>
+    <string name="download_utils">이 앱을 이용하기 위해 당신은 작은 도구를 (약 512KB) 다운로드 해야 합니다. 이는 인터넷 연결이 필요합니다.
+        \n지금 다운로드 할까요?</string>
+    <string name="over_recovery">리커버리를 통해 설치될 것입니다.</string>
+    <string name="ShowAds">개발자를 위해 광고 보여주기</string>
+    <string name="please_restart">변경 내용을 적용하기 위해 앱을 다시 시작해주세요.</string>
+    <string name="please_ads">제발 저의 지원을 위해 광고를 켜주세요! :(</string>
+    <string name="donate_to_support">메뉴 위의 기부를 하여 저를 지원해주세요! :)</string>
+
+    <string-array name="donation_google_catalog_values">
+        <item>0.50 유로</item>
+        <item>1 유로</item>
+        <item>2 유로</item>
+        <item>3 유로</item>
+        <item>5 유로</item>
+    </string-array>
+
+    <string name="donate">기부</string>
+    <string name="never_again">다시 보지 않습니다.</string>
+    <string name="try_again">재시도 해보세요!</string>
+    <string name="later">나중에</string>
+    <string name="update_done">업데이트 완료</string>
+    <string name="pick_file">파일 선택</string>
+    <string name="flash_error">설치 실패</string>
+    <string name="res_error">복구 실패</string>
+    <string name="bak_error">백업 실패</string>
+    <string name="stock">순정</string>
+    <string name="changelog">체인지로그</string>
+    <string name="use_supersu">Chainfire의 SuperSU가 감지되지 않습이다. 오류를 피하기 위해 그 앱을 사용해 주시길 바랍니다.
+        지금 SuperSU를 설치할까요? (</string>
+    <string name="bak_deleted">백업 파일이 삭제되었습니다.</string>
+    <string name="extract_failed">앱에서 필요한 파일을 추출하지 못했습니다. 앱을 다시 시작해주세요.</string>
+    <string name="no_history">기록이 없습니다</string>
+    <string name="styles">스타일</string>
+
+    <string-array name="styles">
+        <item>스타일</item>
+        <item>Holo Light Dark Bar Style</item>
+        <item>Holo Light Style</item>
+        <item>Holo Dark Style</item>
+    </string-array>
+
+    <string name="flash_as">어떤 것으로 설치하시겠습니까?</string>
+    <string name="recovery">리커버리</string>
+    <string name="kernel">커널</string>
+    <string name="getting_root">루트 권한을 얻는 중</string>
+    <string name="reading_device">기기 정보를 읽는 중</string>
+    <string name="loading_ui">UI 로드 중</string>
+    <string name="loading_data">데이터 추출 및 필요한 폴더 생성 중</string>
+    <string name="recovery_script_manager">리커버리 스크립트 관리자</string>
+    <string name="bak_name">커스텀 백업 이름</string>
+    <string name="flash_queue">설치 대기열</string>
+    <string name="wipe_opts">초기화 옵션</string>
+    <string name="add_queue">대기열에 zip 추가</string>
+    <string name="backup_opts">백업 옵션</string>
+    <string name="system">시스템</string>
+    <string name="data">데이터</string>
+    <string name="cache">캐시</string>
+    <string name="dalvik">달빅</string>
+    <string name="boot">커널</string>
+    <string name="recovery_script_mind">이 기능은 오직 호환되는 TWRP 리커버리로만 작동하는 것을 명심해주세요.</string>
+    <string name="run">시작</string>
+    <string name="recovery_script_review">스크립트 미리보기</string>
+    <string name="failed_unpack_files">앱에서 파일 압축해제 실패</string>
+    <string name="failed_setup_layout">레이아웃 설정 실패</string>
+    <string name="refresh_list">업데이트 시작!</string>
+    <string name="new_imgs_loaded">%s 새로운 이미지가 로드되었습니다.</string>
+    <string name="make_choice">선택해 주시길 바랍니다.</string>
+    <string name="unified_info">이 ROM은 CyanogenMod의 통합 소스를 사용하지 않습니다.\n
+        따라서 이는 Rashr가 리커버리와 커널 이미지를 찾을 수 없게 합니다.\n
+        이 경우에는 직접 당신의 진짜 기기를 고를 수 있습니다. (아무런 이미지도 찾을 수 없을 때 사용하십시오.)\n
+        이 옵션은 주의하고 사용하세요!</string>
+    <string name="reloading">다시 로드 중</string>
+    <string name="keep_current_name">현재 이름으로 유지 : (%s)</string>
+    <string name="rename_failed">이름 바꾸기 실패</string>
+    <string name="flash">설치</string>
+    <string name="recovery_description">이 기능으로 당신은 당신의 기기에 원클릭으로 리커버리 파티션에 설치할 수 있습니다!</string>
+    <string name="kernel_description">이 기능으로 당신은 당신의 기기에 원클릭으로 커널/부트 파티션에 설치할 수 있습니다!</string>
+    <string name="options">옵션</string>
+    <string name="clear_cache_description">모든 다운로드된 리커버리/커널 이미지 삭제</string>
+    <string name="reboot_description">기기가 즉시 재부팅 하도록 합니다.</string>
+    <string name="reboot_recovery_description">기기가 즉시 리커버리 모드로 재부팅 하도록 합니다.</string>
+    <string name="reboot_bootloader_description">기기가 즉시 부트로더/다운로드 모드로 재부팅 하도록 합니다.</string>
+    <string name="shutdown_description">기기가 즉시 꺼지도록 합니다.</string>
+    <string name="cwm_description">ClockWorkMod 리커버리는 가장 널리 알려진 커스텀 안드로이드 리커버리입니다.</string>
+    <string name="twrp_description">Team Winn Recovery Project (TWRP)는 풀터치로 사용 가능한 커스텀 리커버리입니다.</string>
+    <string name="philz_description">PhilZ Touch 리커버리는 ClockWorkMod의 진화된 버전으로 터치를 지원합니다.</string>
+    <string name="stock_recovery_description">순정 리커버리는 표준 리커버리로, 여기서 순정 리커버리로 돌릴 수 있습니다.</string>
+    <string name="stock_kernel_description">순정 커널은 표준 커널로, 여기서 순정 커널로 돌릴 수 있습니다.</string>
+    <string name="delete_confirmation">정말 모든 다운로드된 이미지를 지우겠습니까?</string>
+    <string name="other_storage_description">이 옵션은 이미 저장소에 다운로드된 이미지를 설치합니다.</string>
+    <string name="reboot_confirmation">지금 재부팅할까요?</string>
+    <string name="shutdown_confirmation">지금 전원을 종료할까요?</string>
+    <string name="history_description">여기서 가장 최근에 설치했던 5개의 이미지를 찾을 수 있습니다.</string>
+    <string name="reset_app">앱 초기화</string>
+    <string name="reset_app_description">앱 설정을 초기 설정으로 초기화</string>
+    <string name="files_deleted">파일이 삭제되었습니다.</string>
+    <string name="onlyLanguage">스페인어, 독일어 혹은 영어로만 써주세요.</string>
+    <string name="flasher">설치 도구</string>
+    <string name="history">기록</string>
+    <string name="exit_app">앱을 종료할까요?</string>
+    <string name="skip_md5">MD5 스킴</string>
+    <string name="UseDarkUI">어두운 UI 사용</string>
+    <string name="check_app_updates">앱 실행할 때 업데이트 체크</string>
+    <string name="failed_update">업데이트 실패 확인</string>
+    <string name="update_available">업데이트 가능</string>
+    <string name="download_update">업데이트를 다운로드하여 보안을 유지하고 최신 기능을 사용하세요.</string>
+    <string name="open_playstore">Play스토어</string>
+    <string name="uptodate">최신 버전입니다. :D</string>
+    <string name="update">Update</string>
+    <string name="lists_outdated">사용 가능한 리커버리와 커널들의 목록이 구버전입니다. 최신 버전의 리커버리와 커널을 설치하기 위해서 업데이트 하시길 바랍니다. \n모든 기기들이 지원되는 것은 아닙니다!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stock_recovery">순정 리커버리</string>
+    <string name="stock_kernel">순정 커널</string>
+    <string name="check_connection">인터넷000 연결을 확인해주세요.</string>
+    <string name="check_name">백업 파일의 이름을 확인해주세요. 일부 기기들은 이름에 \':\' 을 포함한 파일을 다룰 수 없습니다. 파일 관리자로 이름을 바꾸어주세요.</string>
+    <string name="ok">OK</string>
+
+</resources>

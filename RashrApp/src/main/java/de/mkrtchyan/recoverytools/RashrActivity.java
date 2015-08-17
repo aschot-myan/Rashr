@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,8 +66,9 @@ public class RashrActivity extends AppCompatActivity implements
     private final File Folder[] = {
             Const.PathToRashr, Const.PathToRecoveries, Const.PathToKernel,
             Const.PathToStockRecovery, Const.PathToCWM, Const.PathToTWRP,
-            Const.PathToPhilz, Const.PathToStockKernel, Const.PathToRecoveryBackups,
-            Const.PathToKernelBackups, Const.PathToUtils, Const.PathToTmp
+            Const.PathToPhilz, Const.PathToXZDual, Const.PathToStockKernel,
+            Const.PathToRecoveryBackups, Const.PathToKernelBackups, Const.PathToUtils,
+            Const.PathToTmp
     };
     private final RashrActivity mActivity = this;
     private final Context mContext = this;
@@ -153,7 +156,7 @@ public class RashrActivity extends AppCompatActivity implements
                 try {
                     File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName() + ".txt");
                     mShell.execCommand(Const.Busybox + " chmod 777 " + Const.LastLog);
-                    LogCopy.delete();
+                    if (LogCopy.exists()) LogCopy.delete();
                     mToolbox.copyFile(Const.LastLog, LogCopy, false, false);
                     mShell.execCommand(Const.Busybox + " chmod 777 " + LogCopy);
                     LastLogExists = LogCopy.exists();
@@ -191,6 +194,8 @@ public class RashrActivity extends AppCompatActivity implements
                         Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
                         Common.setBooleanPref(mContext, Const.PREF_NAME,
                                 Const.PREF_KEY_CHECK_UPDATES, true);
+                        Common.setBooleanPref(mContext, Const.PREF_NAME,
+                                Const.PREF_KEY_SKIP_SIZE_CHECK, false);
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -204,7 +209,10 @@ public class RashrActivity extends AppCompatActivity implements
                     public void run() {
 
                         try {
-                            setContentView(R.layout.activity_rashr);
+                            View root = View.inflate(mContext, R.layout.activity_rashr, null);
+                            root.startAnimation(AnimationUtils.loadAnimation(mContext,
+                                    R.anim.abc_grow_fade_in_from_bottom));
+                            setContentView(root);
                             mToolbar = (Toolbar) findViewById(R.id.toolbar);
                             setSupportActionBar(mToolbar);
                             //mDevice.downloadUtils(mContext);
@@ -223,16 +231,15 @@ public class RashrActivity extends AppCompatActivity implements
                             }
                             if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
                                 /** Rashr is opened by other app to flash supported files (.zip) or (.img) */
-                                if (getIntent().getData().toString().endsWith(".zip")) {
-                                    /** If it is a zip file open the ScriptManager */
-                                    File zip = new File(getIntent().getData().getPath());
-                                    if (zip.exists())
-                                        switchTo(ScriptManagerFragment.newInstance(mActivity, zip));
-                                } else {
-                                    /** If it is a img file open FlashAs to choose mode (recovery or kernel) */
-                                    File img = new File(getIntent().getData().getPath());
-                                    if (img.exists())
-                                        switchTo(FlashAsFragment.newInstance(mActivity, img, true));
+                                File file = new File(getIntent().getData().getPath());
+                                if (file.exists()) {
+                                    if (file.toString().endsWith(".zip")) {
+                                        /** If it is a zip file open the ScriptManager */
+                                        switchTo(ScriptManagerFragment.newInstance(mActivity, file));
+                                    } else {
+                                        /** If it is a img file open FlashAs to choose mode (recovery or kernel) */
+                                        switchTo(FlashAsFragment.newInstance(mActivity, file, true));
+                                    }
                                 }
                             } else {
                                 onNavigationDrawerItemSelected(0);
@@ -483,7 +490,8 @@ public class RashrActivity extends AppCompatActivity implements
     public void switchTo(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                .setCustomAnimations(R.anim.abc_grow_fade_in_from_bottom,
+                        R.anim.abc_shrink_fade_out_from_bottom)
                 .replace(R.id.container, fragment)
                 .commitAllowingStateLoss();
     }

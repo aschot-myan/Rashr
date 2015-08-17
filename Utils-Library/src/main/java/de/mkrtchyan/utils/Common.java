@@ -21,8 +21,14 @@ package de.mkrtchyan.utils;
  * SOFTWARE.
  */
 
+import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -151,5 +157,17 @@ public class Common {
                     (l + " cannot be cast to int without changing its value.");
         }
         return (int) l;
+    }
+
+    @SuppressLint("NewApi")
+    public static void copyToClipboard(Context context, String message) {
+        ClipboardManager clipboard = (ClipboardManager)
+                context.getSystemService(Context.CLIPBOARD_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ClipData clip = ClipData.newPlainText("", message);
+            clipboard.setPrimaryClip(clip);
+        } else {
+            clipboard.setText(message);
+        }
     }
 }

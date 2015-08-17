@@ -46,6 +46,7 @@ public class Const {
     public static final String PREF_KEY_HIDE_UPDATE_HINTS   =   "hide_uptodate_hint";
     public static final String PREF_KEY_HIDE_REBOOT         =   "hide_reboot";
     public static final String PREF_KEY_FLASH_COUNTER       =   "last_counter";
+    public static final String PREF_KEY_SKIP_SIZE_CHECK     =   "skip_size_check";
 
     /**
      * Google
@@ -81,6 +82,7 @@ public class Const {
     public static final File PathToCWM             =      new File(PathToRecoveries, "clockworkmod");
     public static final File PathToTWRP            =      new File(PathToRecoveries, "twrp");
     public static final File PathToPhilz           =      new File(PathToRecoveries, "philz");
+    public static final File PathToXZDual          =      new File(PathToRecoveries, "xzdual");
     public static final File PathToKernel          =      new File(PathToRashr, "kernel");
     public static final File PathToStockKernel     =      new File(PathToKernel, "stock");
     public static final File PathToRecoveryBackups =      new File(PathToRashr, "recovery-backups");

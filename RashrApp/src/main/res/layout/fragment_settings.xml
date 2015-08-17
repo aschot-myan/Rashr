@@ -23,35 +23,41 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/sClearCache" />
-        <android.support.v7.widget.SwitchCompat
+        <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/cbShowAds"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/ShowAds"
             android:gravity="center" />
-        <android.support.v7.widget.SwitchCompat
+        <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/cbLog"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/log"
             android:gravity="center" />
-        <android.support.v7.widget.SwitchCompat
+        <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/cbDarkUI"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/UseDarkUI"
             android:gravity="center" />
-        <android.support.v7.widget.SwitchCompat
+        <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/check_app_updates"
             android:id="@+id/cbCheckUpdates"
             android:gravity="center" />
-        <android.support.v7.widget.SwitchCompat
+        <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/hide_uptodate_hint"
             android:id="@+id/cbShowUpToDateHints"
+            android:gravity="center"/>
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/skip_size_check"
+            android:id="@+id/cbSkipSizeChecking"
             android:gravity="center"/>
         <android.support.v7.widget.AppCompatButton
             android:layout_width="match_parent"
