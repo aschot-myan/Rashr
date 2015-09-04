@@ -8,6 +8,7 @@ import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class Device {
             new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc.0/by-name/RECOVERY"),
             new File("/dev/block/platform/hi_mci.1/by-name/recovery"),
+            new File("/dev/block/platform/hi_mci.0/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/UP"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/SS"),
             new File("/dev/block/platform/sdhci.1/by-name/RECOVERY"),
@@ -91,6 +93,7 @@ public class Device {
             new File("/dev/block/platform/mtk-msdc.0/by-name/boot"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
             new File("/dev/block/platform/sdhci.1/by-name/KERNEL"),
+            new File("/dev/block/platform/hi_mci.0/by-name/boot"),
             new File("/dev/block/platform/sdhci.1/by-name/boot"),
             new File("/dev/block/bootdevice/by-name/boot"),
             new File("/dev/block/nandc"),
@@ -107,7 +110,7 @@ public class Device {
     private int mKERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
     private int mKERNEL_BLOCKSIZE = 0;
     private String mName = Build.DEVICE.toLowerCase();
-    private String mXZName;
+    private String mXZName = "";
     private String mManufacture = Build.MANUFACTURER.toLowerCase();
     private String mBoard = Build.BOARD.toLowerCase();
     private String mRecoveryPath = "";
@@ -328,6 +331,10 @@ public class Device {
         if (mName.equals("hwu9200") || mBoard.equals("u9200") || MODEL.equals("u9200"))
             mName = "u9200";
 
+//      Huawei Ascend Mate 7
+        if (mName.equals("hwmt7") || mBoard.equals("mt7-l09") || MODEL.equals("mt7-l09"))
+            mName = "hwmt7";
+
 //      Motorola RAZR
         if (mName.equals("cdma_yangtze") || mBoard.equals("yangtze")) mName = "yangtze";
 
@@ -425,8 +432,6 @@ public class Device {
                 mXZName = "tabz3c";
             }
         }
-
-        mXZName = "z3";
 
         readDeviceInfos();
         if (!mRecoveryPath.equals("") && !isRecoveryOverRecovery())
@@ -527,7 +532,7 @@ public class Device {
                 mXZDualRecoveries.add(0, i.toString());
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             mActivity.addError(Const.DEVICE_TAG, e, false);
         }
     }
