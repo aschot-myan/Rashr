@@ -177,12 +177,23 @@ public class FlashFragment extends Fragment {
                     alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
+                            abuilder.setTitle(R.string.info);
+                            abuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
                             try {
                                 FlashUtil.uninstallXZDual(mActivity.getShell());
+                                abuilder.setMessage(R.string.xzdual_uninstall_successfull);
                             } catch (FailedExecuteCommand failedExecuteCommand) {
-                                //TODO: Inform the user about result
+                                abuilder.setMessage(getString(R.string.xzdual_uninstall_failed) + "\n" +
+                                failedExecuteCommand.toString());
                                 failedExecuteCommand.printStackTrace();
                             }
+                            abuilder.show();
                         }
                     });
                     alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -378,7 +389,8 @@ public class FlashFragment extends Fragment {
                     && !recovery.isDirectory()) {
                 if (!mDevice.isFOTAFlashed() && !mDevice.isRecoveryOverRecovery()) {
                     /** Flash not need to be handled specially */
-                    executeFlash(recovery, FlashUtil.JOB_FLASH_RECOVERY);
+                    final FlashUtil flashUtil = new FlashUtil(mActivity, recovery, FlashUtil.JOB_FLASH_RECOVERY);
+                    flashUtil.execute();
                 } else {
                     /** Flashing needs to be handled specially (not standard flash method)*/
                     if (mDevice.isFOTAFlashed()) {
@@ -389,7 +401,8 @@ public class FlashFragment extends Fragment {
                                 .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        executeFlash(recovery, FlashUtil.JOB_FLASH_RECOVERY);
+                                        final FlashUtil flashUtil = new FlashUtil(mActivity, recovery, FlashUtil.JOB_FLASH_RECOVERY);
+                                        flashUtil.execute();
                                     }
                                 })
                                 .setNegativeButton(R.string.negative, new DialogInterface.OnClickListener() {
@@ -411,14 +424,10 @@ public class FlashFragment extends Fragment {
         if (kernel != null) {
             if (kernel.exists() && kernel.getName().endsWith(mDevice.getKernelExt())
                     && !kernel.isDirectory()) {
-                executeFlash(kernel, FlashUtil.JOB_FLASH_KERNEL);
+                final FlashUtil flashUtil = new FlashUtil(mActivity, kernel, FlashUtil.JOB_FLASH_KERNEL);
+                flashUtil.execute();
             }
         }
-    }
-
-    private void executeFlash(final File image, final int FlashUtilJOB) {
-        final FlashUtil flashUtil = new FlashUtil(mActivity, image, FlashUtilJOB);
-        flashUtil.execute();
     }
 
     public void optimizeLayout(View root) throws NullPointerException {

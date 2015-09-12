@@ -1,6 +1,15 @@
 CHANGELOG
 ====================
 
+Update [2.3.7]
+
+-Korean translation added by xda-Member Genie's
+-Added optional security option (on earlier version forced)
+-Some startup bugs fixed
+-XZDualRecovery implementation (beta)
+-Huawei Ascend Mate 7 added (by https://github.com/asyan4ik)
+-Portuguese  translation improved by Lennoard Rai
+
 Update [2.3.6]
 
 -Partitions for Lenovo Vibe X2 (MTK6595) added thanks to eryenakgun@****.com

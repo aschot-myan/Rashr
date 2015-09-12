@@ -196,5 +196,7 @@
     <string name="installing_xzdual">Installing XZDualRecovery</string>
     <string name="uninstalling_xzdual">Uninstalling XZDualRecovery</string>
     <string name="skip_size_check">Skip size cheking on Images (can cause damage)</string>
+    <string name="xzdual_uninstall_successfull">XZDualRecovery uninstalled successfully from your device</string>
+    <string name="xzdual_uninstall_failed">XZDualRecovery couldn\'t be uninstalled. Error:</string>
 
 </resources>
