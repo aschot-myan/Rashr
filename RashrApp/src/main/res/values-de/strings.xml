@@ -126,7 +126,7 @@
     <string name="cache">Cache</string>
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
-    <string name="recovery_script_mind">Bitte merken Sie sich, dass dies nur mit TWRP kompatibelen Recoveries funktionieren wird</string>
+    <string name="recovery_script_mind">Bitte beachten Sie, dass dies nur mit TWRP kompatibelen Recoveries funktioniert</string>
     <string name="run">Ausführen</string>
     <string name="recovery_script_review">Script Vorschau</string>
     <string name="failed_unpack_files">Fehler beim Entpacken der Daten von der App</string>
@@ -158,7 +158,7 @@
     </string>
     <string name="reboot_description">Gerät neustarten</string>
     <string name="reboot_recovery_description">
-        Gerät in den Recovery neustarten
+        Gerät im Recovery-Modus neustarten
     </string>
     <string name="reboot_bootloader_description">
         Gerät in den Bootloader/Download-Mode neustarten
@@ -194,7 +194,7 @@
     <string name="history_description">Hier finden Sie die letzten 5 geflashten Images</string>
     <string name="reset_app">App zurücksetzen</string>
     <string name="reset_app_description">
-        App zu Standardeinstellungen zurücksetzen (alle von Ihnen vorgenommenen Einstellungen werden
+        App auf Standardeinstellungen zurücksetzen (alle von Ihnen vorgenommenen Einstellungen werden
         gelöscht)
     </string>
 
@@ -206,8 +206,8 @@
     <string name="kernel_history">Kernel-Verlauf</string>
     <string name="history">Verlauf</string>
     <string name="exit_app">App verlassen?</string>
-    <string name="skip_md5">MD5 Überspringen</string>
-    <string name="UseDarkUI">Dunkele UI benutzen</string>
+    <string name="skip_md5">MD5-Check überspringen</string>
+    <string name="UseDarkUI">Dunkle UI benutzen</string>
     <string name="check_app_updates">Beim Start auf Updates prüfen</string>
     <string name="failed_update">Fehler beim Überprüfen von Updates</string>
     <string name="update_available">Update verfügbar</string>
@@ -215,17 +215,23 @@
     <string name="open_playstore">Play Store öffnen</string>
     <string name="uptodate">Listen sind aktuell</string>
     <string name="update">Update</string>
-    <string name="lists_outdated">Die Listen an verfügbaren Recoveires und Kernel sind veraltet. Updaten Sie diese, um die neuesten Recoveries und Kernels zu flashen.\nNicht alle Geräte werden von diesen Recoveries und Kernels unterstützt</string>
+    <string name="lists_outdated">Die Listen an verfügbaren Recoveries und Kernel sind veraltet. Updaten Sie diese, um die neuesten Recoveries und Kernels zu flashen.\nNicht alle Geräte werden von diesen Recoveries und Kernels unterstützt</string>
     <string name="stock_recovery">Stock Recovery</string>
     <string name="stock_kernel">Stock Kernel</string>
     <string name="check_connection">Überprüfen Sie Ihre Internetverbindung</string>
-    <string name="check_name">Bitte überprüfen Sie den Namen des Wiederherstellungspunktes. Auf manchen Geräte kann es zu Fehlern führen, wenn es \':\' (Doppelpunkt) enthällt. Bitte ändern Sie dies, um fortfahren zu können.</string>
-    <string name="logs_title">Mitgeschriebene Shell-Befehle</string>
-    <string name="clear_logs">Logs säubern</string>
+    <string name="check_name">Bitte überprüfen Sie den Namen des Wiederherstellungspunktes. Auf manchen Geräte kann es zu Fehlern führen, wenn es \':\' (Doppelpunkt) enthält. Bitte ändern Sie dies, um fortfahren zu können.</string>
+    <string name="logs_title">Geloggte Shell-Befehle</string>
+    <string name="clear_logs">Logs löschen</string>
     <string name="no_logs">Keine Logs</string>
     <string name="copied_to_clipboard">In den Zwischenspeicher kopiert!</string>
     <string name="copy">Kopieren</string>
     <string name="app_uptodate">App ist auf dem neuesten Stand!</string>
     <string name="hide_uptodate_hint">Hinweise zur Aktualität der App verstecken</string>
     <string name="xzdual_describtion">ZXDualRecovery wurde von dem XDA-Mitglied [NUT] ins Leben gerufen, diese erlaubt Ihnen die kombinierte Nutzung von TWRP, CWM und PhilZ</string>
+    <string name="xzdual_uninstall_alert">Möchten Sie XZDualRecovery deinstallieren?</string>
+    <string name="installing_xzdual">Installiere XZDualRecovery</string>
+    <string name="uninstalling_xzdual">Deinstalliere XZDualRecovery</string>
+    <string name="skip_size_check">Dateigrössenprüfung überspringen (könnte schädlich sein)</string>
+    <string name="xzdual_uninstall_successfull">XZDualRecovery wurde erfolgreich von Ihrem Gerät deinstallier</string>
+    <string name="xzdual_uninstall_failed">XZDualRecovery konnte nicht deinstalliert werden. Folgender Fehler ist aufgetreten:</string>
 </resources>
