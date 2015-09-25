@@ -21,9 +21,9 @@
     <string name="report">Bug melden</string>
     <string name="sExit">Schließen</string>
     <string name="xda">XDA-Thread</string>
-    <string name="set_name">Name der Sicherung</string>
+    <string name="set_name">Name des Backups</string>
     <string name="bak_warning">
-        Bevor Sie Rashr verwenden, ist es empfehlenswert Sicherungen zu erstellen.
+        Bevor Sie Rashr verwenden, ist es empfehlenswert ein Backup zu erstellen.
         \nDiese werden unter \n%s\n erstellt.
         \nDer Entwickler ist nicht für Schäden an Ihrem Gerät verantwortlich.
     </string>
@@ -47,16 +47,16 @@
     <string name="error">Fehler</string>
     <string name="not_supportded">
         Ihr Gerät wird zurzeit nicht unterstützt. System scannen und Gerät dem Entwickler melden?
-        Oder versuchen die Partition zu finden, indem neugestartet wird?
+        Oder versuchen die Partition im Recovery-Modus zu finden (Das Gerät wird dabei neuegstarte)?
     </string>
     <string name="no_root">
-        Gerät nicht gerootet. Bitte tun Sie dies um die App verwenden zu können. Mehr Informationen unter
+        Gerät nicht gerootet. Bitte rooten Sie ihr Gerät um diese App verwenden zu können. Mehr Informationen unter
         \n\nxda-developers.com
     </string>
     <string name="Downloading">Wird heruntergeladen…</string>
     <string name="comment">Kommentar</string>
     <string name="comment_hint">
-        Bitte kommentieren Sie hier, welches Problem Sie haben (Download, Installation, Allgemein)
+        Bitte beschreiben Sie hier, welches Problem Sie mit der App haben (Download, Installation, Allgemein)
     </string>
     <string name="positive">Ja</string>
     <string name="neutral">Nein</string>
