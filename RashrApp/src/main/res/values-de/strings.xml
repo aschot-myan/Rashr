@@ -17,7 +17,7 @@
     <string name="sRebooter">Rebooter</string>
     <string name="restore">Wiederherstellen</string>
     <string name="rename">Umbenennen</string>
-    <string name="sClearCache">Heruntergeladene Daten löschen</string>
+    <string name="sClearCache">Downloads löschen</string>
     <string name="report">Bug melden</string>
     <string name="sExit">Schließen</string>
     <string name="xda">XDA-Thread</string>
@@ -31,7 +31,7 @@
     <string name="risk">Ich kenne das Risiko</string>
     <string name="sReboot">Neustarten</string>
     <string name="sRebootHot">Hot Reboot</string>
-    <string name="sRebootRecovery">In den Recovery neustarten</string>
+    <string name="sRebootRecovery">Im Recovery-Modus neustarten</string>
     <string name="sRebootBootloader">In den Bootloader neustarten</string>
     <string name="sRebootShutdown">Ausschalten</string>
     <string name="info">Information</string>
@@ -41,7 +41,7 @@
         Zum Flashen dieses Gerätes wird die FOTAKernel Partition benötigt und wird nur funktionieren,
         wenn sie eine modifizierte Version des Systemes oder Kernels installiert haben.
     </string>
-    <string name="flash_over_recovery">Jetzt flashen? (Neustart in den Recovery erforderlich)</string>
+    <string name="flash_over_recovery">Jetzt flashen? (Neustart in den Recovery-Modus erforderlich)</string>
     <string name="bak_done">Backup vollständig</string>
     <string name="backupalready">Backup existiert bereits.</string>
     <string name="error">Fehler</string>
@@ -66,7 +66,7 @@
     <string name="delete">Löschen</string>
     <string name="sBackupMgr">Backup Manager</string>
     <string name="setname">Name des Backups</string>
-    <string name="reboot_recovery_now">Jetzt in die Recovery neustarten?</string>
+    <string name="reboot_recovery_now">Jetzt neustarten und in den Recovery-Modus wechseln?</string>
     <string name="reboot_now">Jetzt neustarten?</string>
     <string name="flashing">Flashing…</string>
     <string name="restoring">Wiederherstellung…</string>
@@ -75,7 +75,7 @@
         Um diese App verwenden zu können, werden kleine Tools gebraucht (ungefär 512kb).
         \nJetzt downloaden?
     </string>
-    <string name="over_recovery">Gerät wird über die Recovery geflasht</string>
+    <string name="over_recovery">Gerät wird über den Recovery-Modus geflasht</string>
     <string name="ShowAds">Werbung aktivieren, um den Entwickler zu unterstützen</string>
     <string name="please_restart">Bitte App neustarten, um Änderungen zu übernehmen</string>
     <string name="please_ads">Bitte schalten Sie die Werbung ein, um meine Arbeit zu unterstützen! :(</string>
