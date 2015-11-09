@@ -196,7 +196,6 @@
     <string name="xda">XDA-Konusu</string>
 
     <string-array name="donation_google_catalog_values">
-        <item>0,50 Avro</item>
         <item>1 Avro</item>
         <item>2 Avro</item>
         <item>3 Avro</item>

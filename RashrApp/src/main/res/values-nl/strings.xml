@@ -53,7 +53,6 @@
     <string name="please_ads">Schakel de advertenties aan om mijn werk te ondersteunen!</string>
 
     <string-array name="donation_google_catalog_values">
-        <item>0,50 Eurocent</item>
         <item>1 Euros</item>
         <item>2 Euros</item>
         <item>3 Euros</item>

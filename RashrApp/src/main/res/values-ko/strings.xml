@@ -74,7 +74,6 @@
     <string name="donate_to_support">메뉴 위의 기부를 하여 저를 지원해주세요! :)</string>
 
     <string-array name="donation_google_catalog_values">
-        <item>0.50 유로</item>
         <item>1 유로</item>
         <item>2 유로</item>
         <item>3 유로</item>

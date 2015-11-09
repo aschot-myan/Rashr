@@ -65,7 +65,6 @@
     <string name="please_ads">请打开广告功能以支持我开发:(</string>
     <string name="donate_to_support">通过菜单捐助以支持我开发:)</string>
     <string-array name="donation_google_catalog_values">
-        <item>0,50 Euro</item>
         <item>1 Euro</item>
         <item>2 Euros</item>
         <item>3 Euros</item>

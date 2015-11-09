@@ -75,7 +75,6 @@
     <string name="donate_to_support">Done para apoyar mi trabajo! :)</string>
 
     <string-array name="donation_google_catalog_values">
-        <item>0,50 Euro</item>
         <item>1 Euro</item>
         <item>2 Euros</item>
         <item>3 Euros</item>
