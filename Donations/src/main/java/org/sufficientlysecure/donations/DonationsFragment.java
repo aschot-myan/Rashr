@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2013 Dominik Schürmann <dominik@dominikschuermann.de>
+ * Copyright (C) 2011-2015 Dominik Schürmann <dominik@dominikschuermann.de>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,26 @@
 
 package org.sufficientlysecure.donations;
 
-
-import org.sufficientlysecure.donations.google.util.IabHelper;
-import org.sufficientlysecure.donations.google.util.IabResult;
-
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-
-import android.content.DialogInterface;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import org.sufficientlysecure.donations.google.util.IabHelper;
+import org.sufficientlysecure.donations.google.util.IabResult;
 import org.sufficientlysecure.donations.google.util.Purchase;
 
 public class DonationsFragment extends Fragment {
@@ -45,6 +46,12 @@ public class DonationsFragment extends Fragment {
     public static final String ARG_GOOGLE_PUBKEY = "googlePubkey";
     public static final String ARG_GOOGLE_CATALOG = "googleCatalog";
     public static final String ARG_GOOGLE_CATALOG_VALUES = "googleCatalogValues";
+
+    public static final String ARG_PAYPAL_ENABLED = "paypalEnabled";
+    public static final String ARG_PAYPAL_USER = "paypalUser";
+    public static final String ARG_PAYPAL_CURRENCY_CODE = "paypalCurrencyCode";
+    public static final String ARG_PAYPAL_ITEM_NAME = "mPaypalItemName";
+
     private static final String TAG = "Donations Library";
 
     // http://developer.android.com/google/play/billing/billing_testing.html
@@ -58,29 +65,48 @@ public class DonationsFragment extends Fragment {
 
     protected boolean mDebug = false;
 
+    protected boolean mGoogleEnabled = false;
     protected String mGooglePubkey = "";
-    protected String[] mGoogleCatalog = new String[]{};
+    protected String[] mGgoogleCatalog = new String[]{};
     protected String[] mGoogleCatalogValues = new String[]{};
+
+    protected boolean mPaypalEnabled = false;
+    protected String mPaypalUser = "";
+    protected String mPaypalCurrencyCode = "";
+    protected String mPaypalItemName = "";
 
     /**
      * Instantiate DonationsFragment.
      *
      * @param debug               You can use BuildConfig.DEBUG to propagate the debug flag from your app to the Donations library
+     * @param googleEnabled       Enabled Google Play donations
      * @param googlePubkey        Your Google Play public key
      * @param googleCatalog       Possible item names that can be purchased from Google Play
      * @param googleCatalogValues Values for the names
+     * @param paypalEnabled       Enable PayPal donations
+     * @param paypalUser          Your PayPal email address
+     * @param paypalCurrencyCode  Currency code like EUR. See here for other codes:
+     *                            https://developer.paypal.com/webapps/developer/docs/classic/api/currency_codes/#id09A6G0U0GYK
+     * @param paypalItemName      Display item name on PayPal, like "Donation for NTPSync"
      * @return DonationsFragment
      */
-    public static DonationsFragment newInstance(boolean debug, String googlePubkey,
-                                                String[] googleCatalog, String[] googleCatalogValues) {
+    public static DonationsFragment newInstance(boolean debug, boolean googleEnabled, String googlePubkey, String[] googleCatalog,
+                                                String[] googleCatalogValues, boolean paypalEnabled, String paypalUser,
+                                                String paypalCurrencyCode, String paypalItemName) {
         DonationsFragment donationsFragment = new DonationsFragment();
         Bundle args = new Bundle();
 
         args.putBoolean(ARG_DEBUG, debug);
 
+        args.putBoolean(ARG_GOOGLE_ENABLED, googleEnabled);
         args.putString(ARG_GOOGLE_PUBKEY, googlePubkey);
         args.putStringArray(ARG_GOOGLE_CATALOG, googleCatalog);
         args.putStringArray(ARG_GOOGLE_CATALOG_VALUES, googleCatalogValues);
+
+        args.putBoolean(ARG_PAYPAL_ENABLED, paypalEnabled);
+        args.putString(ARG_PAYPAL_USER, paypalUser);
+        args.putString(ARG_PAYPAL_CURRENCY_CODE, paypalCurrencyCode);
+        args.putString(ARG_PAYPAL_ITEM_NAME, paypalItemName);
 
         donationsFragment.setArguments(args);
         return donationsFragment;
@@ -92,10 +118,15 @@ public class DonationsFragment extends Fragment {
 
         mDebug = getArguments().getBoolean(ARG_DEBUG);
 
+        mGoogleEnabled = getArguments().getBoolean(ARG_GOOGLE_ENABLED);
         mGooglePubkey = getArguments().getString(ARG_GOOGLE_PUBKEY);
-        mGoogleCatalog = getArguments().getStringArray(ARG_GOOGLE_CATALOG);
+        mGgoogleCatalog = getArguments().getStringArray(ARG_GOOGLE_CATALOG);
         mGoogleCatalogValues = getArguments().getStringArray(ARG_GOOGLE_CATALOG_VALUES);
 
+        mPaypalEnabled = getArguments().getBoolean(ARG_PAYPAL_ENABLED);
+        mPaypalUser = getArguments().getString(ARG_PAYPAL_USER);
+        mPaypalCurrencyCode = getArguments().getString(ARG_PAYPAL_CURRENCY_CODE);
+        mPaypalItemName = getArguments().getString(ARG_PAYPAL_ITEM_NAME);
     }
 
     @Override
@@ -103,71 +134,95 @@ public class DonationsFragment extends Fragment {
         return inflater.inflate(R.layout.donations__fragment, container, false);
     }
 
+    @TargetApi(11)
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         /* Google */
-        // choose donation amount
-        mGoogleSpinner = (Spinner) getActivity().findViewById(
-                R.id.donations__google_android_market_spinner);
-        ArrayAdapter<CharSequence> adapter;
-        if (mDebug) {
-            adapter = new ArrayAdapter<CharSequence>(getActivity(),
-                    android.R.layout.simple_spinner_item, CATALOG_DEBUG);
-        } else {
-            adapter = new ArrayAdapter<CharSequence>(getActivity(),
-                    android.R.layout.simple_spinner_item, mGoogleCatalogValues);
-        }
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mGoogleSpinner.setAdapter(adapter);
+        if (mGoogleEnabled) {
+            // inflate google view into stub
+            ViewStub googleViewStub = (ViewStub) getActivity().findViewById(
+                    R.id.donations__google_stub);
+            googleViewStub.inflate();
 
-        Button btGoogle = (Button) getActivity().findViewById(
-                R.id.donations__google_android_market_donate_button);
-        btGoogle.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                donateGoogleOnClick(v);
+            // choose donation amount
+            mGoogleSpinner = (Spinner) getActivity().findViewById(
+                    R.id.donations__google_android_market_spinner);
+            ArrayAdapter<CharSequence> adapter;
+            if (mDebug) {
+                adapter = new ArrayAdapter<CharSequence>(getActivity(),
+                        android.R.layout.simple_spinner_item, CATALOG_DEBUG);
+            } else {
+                adapter = new ArrayAdapter<CharSequence>(getActivity(),
+                        android.R.layout.simple_spinner_item, mGoogleCatalogValues);
             }
-        });
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mGoogleSpinner.setAdapter(adapter);
 
-        // Create the helper, passing it our context and the public key to verify signatures with
-        if (mDebug)
-            Log.d(TAG, "Creating IAB helper.");
-        mHelper = new IabHelper(getActivity(), mGooglePubkey);
+            Button btGoogle = (Button) getActivity().findViewById(
+                    R.id.donations__google_android_market_donate_button);
+            btGoogle.setOnClickListener(new OnClickListener() {
 
-        // enable debug logging (for a production application, you should set this to false).
-        mHelper.enableDebugLogging(mDebug);
-
-        // Start setup. This is asynchronous and the specified listener
-        // will be called once setup completes.
-        if (mDebug)
-            Log.d(TAG, "Starting setup.");
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                if (mDebug)
-                    Log.d(TAG, "Setup finished.");
-
-                if (!result.isSuccess()) {
-                    // Oh noes, there was a problem.
-                    openDialog(android.R.drawable.ic_dialog_alert, R.string.donations__google_android_market_not_supported_title,
-                            getString(R.string.donations__google_android_market_not_supported));
-                    return;
+                @Override
+                public void onClick(View v) {
+                    donateGoogleOnClick(v);
                 }
+            });
 
-                // Have we been disposed of in the meantime? If so, quit.
-                if (mHelper == null) return;
-            }
-        });
+            // Create the helper, passing it our context and the public key to verify signatures with
+            if (mDebug)
+                Log.d(TAG, "Creating IAB helper.");
+            mHelper = new IabHelper(getActivity(), mGooglePubkey);
+
+            // enable debug logging (for a production application, you should set this to false).
+            mHelper.enableDebugLogging(mDebug);
+
+            // Start setup. This is asynchronous and the specified listener
+            // will be called once setup completes.
+            if (mDebug)
+                Log.d(TAG, "Starting setup.");
+            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                public void onIabSetupFinished(IabResult result) {
+                    if (mDebug)
+                        Log.d(TAG, "Setup finished.");
+
+                    if (!result.isSuccess()) {
+                        // Oh noes, there was a problem.
+                        openDialog(android.R.drawable.ic_dialog_alert, R.string.donations__google_android_market_not_supported_title,
+                                getString(R.string.donations__google_android_market_not_supported));
+                        return;
+                    }
+
+                    // Have we been disposed of in the meantime? If so, quit.
+                    if (mHelper == null) return;
+                }
+            });
+        }
+
+        /* PayPal */
+        if (mPaypalEnabled) {
+            // inflate paypal view into stub
+            ViewStub paypalViewStub = (ViewStub) getActivity().findViewById(
+                    R.id.donations__paypal_stub);
+            paypalViewStub.inflate();
+
+            Button btPayPal = (Button) getActivity().findViewById(
+                    R.id.donations__paypal_donate_button);
+            btPayPal.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    donatePayPalOnClick(v);
+                }
+            });
+        }
+
+
     }
 
     /**
      * Open dialog
-     *
-     * @param icon
-     * @param title
-     * @param message
      */
     void openDialog(int icon, int title, String message) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
@@ -188,8 +243,6 @@ public class DonationsFragment extends Fragment {
 
     /**
      * Donate button executes donations based on selection in spinner
-     *
-     * @param view
      */
     public void donateGoogleOnClick(View view) {
         final int index;
@@ -204,7 +257,7 @@ public class DonationsFragment extends Fragment {
                     0, mPurchaseFinishedListener, null);
         } else {
             mHelper.launchPurchaseFlow(getActivity(),
-                    mGoogleCatalog[index], IabHelper.ITEM_TYPE_INAPP,
+                    mGgoogleCatalog[index], IabHelper.ITEM_TYPE_INAPP,
                     0, mPurchaseFinishedListener, null);
         }
     }
@@ -268,4 +321,36 @@ public class DonationsFragment extends Fragment {
         }
     }
 
+
+    /**
+     * Donate button with PayPal by opening browser with defined URL For possible parameters see:
+     * https://developer.paypal.com/webapps/developer/docs/classic/paypal-payments-standard/integration-guide/Appx_websitestandard_htmlvariables/
+     */
+    public void donatePayPalOnClick(View view) {
+        Uri.Builder uriBuilder = new Uri.Builder();
+        uriBuilder.scheme("https").authority("www.paypal.com").path("cgi-bin/webscr");
+        uriBuilder.appendQueryParameter("cmd", "_donations");
+
+        uriBuilder.appendQueryParameter("business", mPaypalUser);
+        uriBuilder.appendQueryParameter("lc", "DE");
+        uriBuilder.appendQueryParameter("item_name", mPaypalItemName);
+        uriBuilder.appendQueryParameter("no_note", "1");
+        // uriBuilder.appendQueryParameter("no_note", "0");
+        // uriBuilder.appendQueryParameter("cn", "Note to the developer");
+        uriBuilder.appendQueryParameter("no_shipping", "1");
+        uriBuilder.appendQueryParameter("currency_code", mPaypalCurrencyCode);
+        Uri payPalUri = uriBuilder.build();
+
+        if (mDebug)
+            Log.d(TAG, "Opening the browser with the url: " + payPalUri.toString());
+
+        // Start your favorite browser
+        try {
+            Intent viewIntent = new Intent(Intent.ACTION_VIEW, payPalUri);
+            startActivity(viewIntent);
+        } catch (ActivityNotFoundException e) {
+            openDialog(android.R.drawable.ic_dialog_alert, R.string.donations__alert_dialog_title,
+                    getString(R.string.donations__alert_dialog_no_browser));
+        }
+    }
 }

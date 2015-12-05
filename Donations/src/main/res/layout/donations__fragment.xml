@@ -18,42 +18,19 @@
             android:text="@string/donations__description"
             android:textAppearance="@android:style/TextAppearance.Small" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:text="@string/donations__google_android_market"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/donations__google_android_market_description"
-            android:textAppearance="@android:style/TextAppearance.Small" />
-
-        <LinearLayout
+        <ViewStub
+            android:id="@+id/donations__google_stub"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingTop="5dp" >
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/donations__google"
+            android:layout="@layout/donations__fragment_google" />
 
-            <Spinner
-                android:id="@+id/donations__google_android_market_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:prompt="@string/donations__google_android_market_text" />
-
-            <Button
-                android:id="@+id/donations__google_android_market_donate_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/donations__google_android_market_donate_button" />
-        </LinearLayout>
-
+        <ViewStub
+            android:id="@+id/donations__paypal_stub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/donations__paypal"
+            android:layout="@layout/donations__fragment_paypal" />
     </LinearLayout>
 
 </ScrollView>
