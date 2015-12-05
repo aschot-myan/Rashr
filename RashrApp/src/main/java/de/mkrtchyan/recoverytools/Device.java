@@ -8,7 +8,6 @@ import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -42,13 +41,14 @@ import de.mkrtchyan.utils.Unzipper;
 public class Device {
 
     public static final String EXT_IMG = ".img";
-    public static final String EXT_TAR = ".tar";
+    //public static final String EXT_TAR = ".tar";
     public static final String EXT_ZIP = ".zip";
     public static final int PARTITION_TYPE_DD = 1;
     public static final int PARTITION_TYPE_MTD = 2;
     public static final int PARTITION_TYPE_RECOVERY = 3;
     //public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
+    private static final String RECOVERY_VERSION_NOT_RECONGNIZED = "Not recognized Recovery-Version";
     /**
      * Collection of known Recovery Partitions on some devices
      */
@@ -114,7 +114,7 @@ public class Device {
     private String mManufacture = Build.MANUFACTURER.toLowerCase();
     private String mBoard = Build.BOARD.toLowerCase();
     private String mRecoveryPath = "";
-    private String mRecoveryVersion = "Not recognized Recovery-Version";
+    private String mRecoveryVersion = RECOVERY_VERSION_NOT_RECONGNIZED;
     private String mKernelVersion = "Linux " + System.getProperty("os.version");
     private String mKernelPath = "";
     private String mRECOVERY_EXT = EXT_IMG;
@@ -533,7 +533,7 @@ public class Device {
             }
 
         } catch (IOException e) {
-            mActivity.addError(Const.DEVICE_TAG, e, false);
+            mActivity.addError(Const.DEVICE_TAG, "Could not read Recovery List: " + e, false);
         }
     }
 
@@ -569,7 +569,7 @@ public class Device {
             }
 
         } catch (Exception e) {
-            mActivity.addError(Const.DEVICE_TAG, e, false);
+            mActivity.addError(Const.DEVICE_TAG, "Could not read Kernel List: " + e, false);
         }
     }
 
@@ -959,6 +959,11 @@ public class Device {
     }
 
     private void readLastLog() {
+        /**
+         * The lastLogs file in Android contains the logs of the last booted RecoverySystem.
+         * Using the lastLogs we can find out which recovery system and version the user has
+         * installed and the used boot (kernel partition) and recovery (recovery partition) paths.
+         */
         try {
             String line;
             File LogCopy = new File(Const.FilesDir, Const.LastLog.getName() + ".txt");
@@ -966,26 +971,36 @@ public class Device {
             while ((line = br.readLine()) != null) {
                 line = line.replace("\"", "");
                 line = line.replace("\'", "");
-                if (mRecoveryVersion.equals("Not recognized Recovery-Version")) {
+                /**
+                 * If the Recovery System and Version could not definded so try it with the next line
+                 */
+                if (mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
                     if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
                         mRecoveryVersion = line;
-                    } else if (line.contains("TWRP")) {
+                    } else if (line.contains("TWRP") && line.contains("Loading settings")) {
                         line = line.replace("Starting ", "");
                         line = line.split(" on")[0];
                         mRecoveryVersion = line;
                     } else if (line.contains("ro.twrp.version")) {
                         line = line.replace("ro.twrp.version=", "");
-                        mRecoveryVersion = line;
+                        mRecoveryVersion = "TWRP " + line;
                     } else if (line.contains("PhilZ")) {
                         mRecoveryVersion = line;
                     } else if (line.contains("4EXT")) {
                         line = line.split("4EXT")[1];
                         mRecoveryVersion = line;
                     }
-                } else if (!mKernelPath.equals("") && !mRecoveryPath.equals("")) {
+                } else if ((!mKernelPath.equals("") || isKernelMTD())
+                        && (!mRecoveryPath.equals("") || isRecoveryMTD())) {
+                    /**
+                     * Break if the recovery system and version could be definded and partitions for
+                     * recovery and kernel found.
+                     */
                     break;
                 }
-
+                /**
+                 * KernelPath not found so try it with this line
+                 */
                 if (mKernelPath.equals("")) {
                     if (line.contains("/boot") && !line.contains("/bootloader")) {
                         if (line.contains("mtd")) {
@@ -1011,7 +1026,9 @@ public class Device {
                         }
                     }
                 }
-
+                /**
+                 * RecoveryPath not found so try it with this line
+                 */
                 if (mRecoveryPath.equals("")) {
                     if (line.contains("/recovery")) {
                         if (line.contains("mtd")) {
@@ -1038,8 +1055,26 @@ public class Device {
             }
             br.close();
         } catch (Exception e) {
-            mActivity.addError(Const.DEVICE_TAG, e, false);
+            mActivity.addError(Const.DEVICE_TAG, "Could not read LastLog.txt: " + e, false);
         }
+        /*
+        if (mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
+            try {
+                File tmpVersionFile = new File(Const.FilesDir, ".version");
+                mShell.execCommand("ls /cache/recovery/.version");
+                mShell.execCommand("cp /cache/recovery/.version " + tmpVersionFile);
+                mShell.execCommand("chmod 777 " + tmpVersionFile);
+                BufferedReader br = new BufferedReader(new FileReader(tmpVersionFile));
+                String line = "";
+                while ((line = br.readLine()) != null) {
+
+                }
+            } catch (Exception ignore) {
+                /**
+                 * TWRP is not runned so .version cannot found or listed.
+                 */
+        //    }
+        //}
     }
 
     private void readPartLayouts() {
@@ -1057,7 +1092,7 @@ public class Device {
                     }
                 }
             } catch (IOException e) {
-                mActivity.addError(Const.DEVICE_TAG, e, false);
+                mActivity.addError(Const.DEVICE_TAG, "PartLayouts could not be unzipped: " + e, false);
             }
         }
         if (PartLayout.exists()) {
@@ -1079,7 +1114,7 @@ public class Device {
                     }
                 }
             } catch (IOException e) {
-                mActivity.addError(Const.DEVICE_TAG, e, false);
+                mActivity.addError(Const.DEVICE_TAG, "Error while reading PartLayouts" + e, false);
             }
         }
     }

@@ -81,6 +81,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         pDialog = new ProgressDialog(mContext);
 
         try {
+
+            mToolbox.remount("/system", "rw");
             if (!isJobXZDual()) {
                 if ((isJobRecovery() && mDevice.isRecoveryMTD())
                         || isJobKernel() && mDevice.isKernelMTD()) {
@@ -88,6 +90,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     mShell.execCommand(Const.Busybox + " chmod 755 " + dump_image);
                 }
             }
+
+        } catch (FailedExecuteCommand e) {
+            mActivity.addError(Const.FLASH_UTIL_TAG,
+                    "Failed to set permissions to flash_image and dump_image before flashing: " + e, true);
+        }
             if (isJobFlash()) {
                 pDialog.setTitle(R.string.flashing);
             } else if (isJobBackup()) {
@@ -106,9 +113,6 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             pDialog.setMessage(mCustomIMG.getName());
             pDialog.setCancelable(false);
             pDialog.show();
-        } catch (FailedExecuteCommand e) {
-            mActivity.addError(Const.FLASH_UTIL_TAG, e, true);
-        }
 
     }
 
@@ -163,6 +167,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     protected void onPostExecute(Boolean success) {
         pDialog.dismiss();
+        mToolbox.remount("/system", "ro");
         if (success) {
             if (tmpFile.delete()) {
                 if (isJobFlash() || isJobRestore()) {
@@ -196,7 +201,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                             });
                             if (progress >= pDialog.getMax()) break;
                         } catch (IllegalArgumentException e) {
-                            mActivity.addError(Const.FLASH_UTIL_TAG, e, false);
+                            mActivity.addError(Const.FLASH_UTIL_TAG,
+                                    "Error in ObserverThread for progress display" +
+                                            " while flashing or creating backup", false);
                             pDialog.setProgress(pDialog.getMax());
                             break;
                         }
@@ -313,8 +320,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
                         try {
                             mToolbox.reboot(REBOOT_JOB);
-                        } catch (Exception e) {
-                            mActivity.addError(Const.FLASH_UTIL_TAG, e, false);
+                        } catch (FailedExecuteCommand e) {
+                            mActivity.addError(Const.FLASH_UTIL_TAG, "Device could not be rebooted: " + e, false);
                         }
                     }
                 })

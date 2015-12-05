@@ -35,7 +35,6 @@ import java.util.Map;
 
 import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Downloader;
-import de.mkrtchyan.utils.Notifyer;
 
 /**
  * Copyright (c) 2015 Aschot Mkrtchyan
@@ -88,6 +87,7 @@ public class RashrActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         Const.FilesDir = mContext.getFilesDir();
+        Const.RashrLog = new File(Const.FilesDir, Const.LOG_NAME);
         Const.RecoveryCollectionFile = new File(Const.FilesDir, "recovery_sums");
         Const.KernelCollectionFile = new File(Const.FilesDir, "kernel_sums");
         isDark = Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_DARK_UI);
@@ -102,15 +102,20 @@ public class RashrActivity extends AppCompatActivity implements
                 /** Checking if version has changed */
                 final int previous_version = Common.getIntegerPref(mContext,
                         Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
-                final int current_version = BuildConfig.VERSION_CODE;
-                mVersionChanged = current_version > previous_version;
+                mVersionChanged = BuildConfig.VERSION_CODE > previous_version;
                 Common.setIntegerPref(mContext, Const.PREF_NAME,
-                        Const.PREF_KEY_CUR_VER, current_version);
+                        Const.PREF_KEY_CUR_VER, BuildConfig.VERSION_CODE);
                 /** Try to get root access */
                 try {
                     startShell();
                 } catch (IOException e) {
-                    mActivity.addError(Const.RASHR_TAG, e, false);
+                    String message;
+                    if (mShell != null) {
+                        message = e.toString();
+                    } else {
+                        message = "Shell could not be started.  Error: " + e.toString();
+                    }
+                    mActivity.addError(Const.RASHR_TAG, message, false);
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -135,8 +140,7 @@ public class RashrActivity extends AppCompatActivity implements
                 for (File i : Folder) {
                     if (!i.exists()) {
                         if (!i.mkdir()) {
-                            mActivity.addError(Const.RASHR_TAG,
-                                    new IOException(i + " can't be created!"), false);
+                            mActivity.addError(Const.RASHR_TAG, i + " can't be created!", false);
                         }
                     }
                 }
@@ -144,7 +148,7 @@ public class RashrActivity extends AppCompatActivity implements
                 try {
                     extractFiles();
                 } catch (IOException e) {
-                    mActivity.addError(Const.RASHR_TAG, e, true);
+                    mActivity.addError(Const.RASHR_TAG, "Failed to extract files. Error: " + e, true);
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -161,12 +165,13 @@ public class RashrActivity extends AppCompatActivity implements
                     mShell.execCommand(Const.Busybox + " chmod 777 " + LogCopy);
                     LastLogExists = LogCopy.exists();
                 } catch (Exception e) {
-                    mActivity.addError(Const.RASHR_TAG, e, false);
+                    mActivity.addError(Const.RASHR_TAG,
+                            "Error while setting permission to LastLog: " + e , false);
                 }
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        checkUpdates(current_version);
+                        checkUpdates();
                         tvLoading.setText(R.string.reading_device);
                     }
                 });
@@ -186,16 +191,7 @@ public class RashrActivity extends AppCompatActivity implements
                             Const.PREF_KEY_SHOW_UNIFIED, true);
                     if (!Common.getBooleanPref(mContext, Const.PREF_NAME,
                             Const.PREF_KEY_FIRST_RUN)) {
-                        /** Setting first start configuration */
-                        Common.setBooleanPref(mContext, Const.PREF_NAME,
-                                Const.PREF_KEY_HIDE_UPDATE_HINTS, false);
-                        Common.setBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_ADS,
-                                true);
-                        Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
-                        Common.setBooleanPref(mContext, Const.PREF_NAME,
-                                Const.PREF_KEY_CHECK_UPDATES, true);
-                        Common.setBooleanPref(mContext, Const.PREF_NAME,
-                                Const.PREF_KEY_SKIP_SIZE_CHECK, false);
+                        firstSetup();
                         mActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -246,12 +242,13 @@ public class RashrActivity extends AppCompatActivity implements
                             }
                         } catch (NullPointerException e) {
                             setContentView(R.layout.err_layout);
-                            mActivity.addError(Const.RASHR_TAG, e, false);
+                            mActivity.addError(Const.RASHR_TAG,
+                                    "Error while inflating layout:" + e, false);
                             AppCompatTextView tv = (AppCompatTextView) findViewById(R.id.tvErr);
                             try {
                                 tv.setText(R.string.failed_setup_layout);
                             } catch (RuntimeException ex) {
-                                mActivity.addError(Const.RASHR_TAG, e, true);
+                                mActivity.addError(Const.RASHR_TAG, e.toString(), true);
                                 ex.printStackTrace();
 
                             }
@@ -320,7 +317,7 @@ public class RashrActivity extends AppCompatActivity implements
                     try {
                         mToolbox.reboot(Toolbox.REBOOT_RECOVERY);
                     } catch (Exception e) {
-                        mActivity.addError(Const.RASHR_TAG, e, false);
+                        mActivity.addError(Const.RASHR_TAG, "Device could not be rebooted", false);
                     }
                 }
             });
@@ -366,23 +363,23 @@ public class RashrActivity extends AppCompatActivity implements
         SharedPreferences prefs = getSharedPreferences(Const.PREF_NAME, MODE_PRIVATE);
         String Prefs = "";
         Map<String, ?> prefsMap = prefs.getAll();
-        try {
+        //try {
             for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
                 /**
                  * Skip following Prefs (PREF_KEY_HISTORY, ...)
                  */
-                try {
+                //try {
                     if (!entry.getKey().contains(Const.PREF_KEY_HISTORY)
                             && !entry.getKey().contains(Const.PREF_KEY_FLASH_COUNTER)) {
                         Prefs += entry.getKey() + ": " + entry.getValue().toString() + "\n";
                     }
-                } catch (NullPointerException e) {
-                    mActivity.addError(Const.RASHR_TAG, e, false);
-                }
+                //} catch (NullPointerException e) {
+                //    mActivity.addError(Const.RASHR_TAG, e, false);
+                //}
             }
-        } catch (NullPointerException e) {
-            mActivity.addError(Const.RASHR_TAG, e, false);
-        }
+        //} catch (NullPointerException e) {
+        //    mActivity.addError(Const.RASHR_TAG, e, false);
+        //}
 
         return Prefs;
     }
@@ -398,9 +395,10 @@ public class RashrActivity extends AppCompatActivity implements
                 switchTo(ScriptManagerFragment.newInstance(this, null));
                 break;
             case 3:
-                switchTo(DonationsFragment.newInstance(BuildConfig.DEBUG,
+                switchTo(DonationsFragment.newInstance(BuildConfig.DEBUG, true,
                         Const.GOOGLE_PUBKEY, Const.GOOGLE_CATALOG,
-                        getResources().getStringArray(R.array.donation_google_catalog_values)));
+                        getResources().getStringArray(R.array.donation_google_catalog_values),
+                        true, "ashotmkrtchyan1995@gmail.com", "EUR", "Donation - Rashr Developer - Aschot Mkrtchyan"));
                 break;
             case 4:
                 switchTo(SettingsFragment.newInstance());
@@ -423,24 +421,21 @@ public class RashrActivity extends AppCompatActivity implements
         return mToolbox;
     }
 
-    public void addError(String TAG, final Exception e, final boolean serious) {
-        mERRORS.add(TAG + ": " + (e != null ? e.toString() : ""));
-        if (e != null) {
-            if (serious) {
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ReportDialog dialog = new ReportDialog(mActivity, e.toString());
-                        dialog.setCancelable(true);
-                        dialog.show();
-                        Notifyer.showExceptionToast(mContext, e);
-                    }
-                });
-            }
+    public void addError(String TAG, final String message, final boolean serious) {
+        mERRORS.add(TAG + ": " + message);
+        if (serious) {
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ReportDialog dialog = new ReportDialog(mActivity, message);
+                    dialog.setCancelable(true);
+                    dialog.show();
+                }
+            });
         }
     }
 
-    public void checkUpdates(final int currentVersion) {
+    public void checkUpdates() {
         try {
             File versionsFile = new File(mContext.getFilesDir(), "version");
             Downloader downloader = new Downloader(new URL(Const.RASHR_VERSION_URL), versionsFile);
@@ -449,7 +444,7 @@ public class RashrActivity extends AppCompatActivity implements
                 @Override
                 public void onSuccess(File file) {
                     try {
-                        if (currentVersion < Integer.valueOf(Common.fileContent(file))) {
+                        if (BuildConfig.VERSION_CODE < Integer.valueOf(Common.fileContent(file))) {
                             new AlertDialog.Builder(mContext)
                                     .setTitle(R.string.update_available)
                                     .setMessage(R.string.download_update)
@@ -512,5 +507,18 @@ public class RashrActivity extends AppCompatActivity implements
             }
         }
         mToolbox = new Toolbox(mShell);
+    }
+
+    private void firstSetup() {
+        /** Setting first start configuration */
+        Common.setBooleanPref(mContext, Const.PREF_NAME,
+                Const.PREF_KEY_HIDE_UPDATE_HINTS, false);
+        Common.setBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_ADS,
+                true);
+        Common.setBooleanPref(mContext, Shell.PREF_NAME, Shell.PREF_LOG, true);
+        Common.setBooleanPref(mContext, Const.PREF_NAME,
+                Const.PREF_KEY_CHECK_UPDATES, true);
+        Common.setBooleanPref(mContext, Const.PREF_NAME,
+                Const.PREF_KEY_SKIP_SIZE_CHECK, false);
     }
 }

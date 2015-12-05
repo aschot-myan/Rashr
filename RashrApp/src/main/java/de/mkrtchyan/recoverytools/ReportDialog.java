@@ -89,7 +89,7 @@ public class ReportDialog extends AppCompatDialog {
                                     files.add(TestResults);
                                 }
                             } catch (Exception e) {
-                                activity.addError(Const.RASHR_TAG, e, false);
+                                activity.addError(Const.RASHR_TAG, "Failed to list files: " +e, false);
                             }
                             String comment = "";
                             if (text.getText() != null) comment = text.getText().toString();
@@ -147,7 +147,8 @@ public class ReportDialog extends AppCompatDialog {
                                     shell.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
                                     uris.add(Uri.fromFile(tmpFile));
                                 } catch (Exception e) {
-                                    activity.addError(Const.RASHR_TAG, e, false);
+                                    activity.addError(Const.RASHR_TAG,
+                                            "Failed to create attachment: " + e, false);
                                 }
                             }
                             if (errors.size() > 0) {
@@ -164,7 +165,7 @@ public class ReportDialog extends AppCompatDialog {
 
                         } catch (Exception e) {
                             dismiss();
-                            activity.addError(Const.RASHR_TAG, e, false);
+                            activity.addError(Const.RASHR_TAG, "Failed to create attachment: " + e, false);
                         }
                     }
                 });

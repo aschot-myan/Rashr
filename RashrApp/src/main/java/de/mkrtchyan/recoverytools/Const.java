@@ -95,8 +95,14 @@ public class Const {
      * Files in App-Files directory
      */
     public static File Busybox;
+    public static File RashrLog;
     public static File RecoveryCollectionFile;
     public static File KernelCollectionFile;
     public static File LokiFlash;
     public static File LokiPatch;
+
+    /**
+     * Other constants
+     */
+    public static String LOG_NAME = "logs.txt";
 }

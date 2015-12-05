@@ -3,9 +3,9 @@ package de.mkrtchyan.recoverytools;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialog;
@@ -115,8 +115,9 @@ public class FlashFragment extends Fragment {
         }
         optimizeLayout(root);
         root.setBackgroundColor(
-                RashrActivity.isDark ? getResources().getColor(R.color.background_material_dark) :
-                        getResources().getColor(R.color.background_material_light));
+                RashrActivity.isDark ?
+                        ContextCompat.getColor(mContext, R.color.background_material_dark) :
+                        ContextCompat.getColor(mContext, R.color.background_material_light));
         if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_CHECK_UPDATES)
                 && RashrActivity.FirstSession) {
             catchUpdates(true);
@@ -438,13 +439,12 @@ public class FlashFragment extends Fragment {
 
             CardUI RashrCards = (CardUI) root.findViewById(R.id.RashrCards);
             final CardColorScheme scheme;
-            Resources res = getResources();
             if (!RashrActivity.isDark) {
                 scheme = null;
             } else {
                 scheme = new CardColorScheme(
-                        res.getColor(R.color.background_floating_material_dark),
-                        res.getColor(R.color.abc_secondary_text_material_dark)
+                        ContextCompat.getColor(mContext,R.color.background_floating_material_dark),
+                        ContextCompat.getColor(mContext,R.color.abc_secondary_text_material_dark)
                 );
             }
             /** Avoid overlapping scroll on CardUI and SwipeRefreshLayout */
@@ -870,7 +870,7 @@ public class FlashFragment extends Fragment {
                                     .show();
                         }
                     });
-                    mActivity.addError(Const.RASHR_TAG, e, false);
+                    mActivity.addError(Const.RASHR_TAG, "Error while checking for updates: " + e, false);
                 }
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
