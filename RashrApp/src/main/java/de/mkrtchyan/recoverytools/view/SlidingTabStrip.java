@@ -16,7 +16,6 @@
 
 package de.mkrtchyan.recoverytools.view;
 
-import android.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,7 +30,7 @@ class SlidingTabStrip extends LinearLayout {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 2;
     private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x26;
-    private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 8;
+    private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 3;
     private static final int DEFAULT_SELECTED_INDICATOR_COLOR = 0xFF33B5E5;
 
     private static final int DEFAULT_DIVIDER_THICKNESS_DIPS = 1;
@@ -64,7 +63,7 @@ class SlidingTabStrip extends LinearLayout {
         final float density = getResources().getDisplayMetrics().density;
 
         TypedValue outValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorForeground, outValue, true);
+        context.getTheme().resolveAttribute(android.R.attr.colorForeground, outValue, true);
         final int themeForegroundColor = outValue.data;
 
         mDefaultBottomBorderColor = setColorAlpha(themeForegroundColor,
