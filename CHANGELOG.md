@@ -1,6 +1,15 @@
 CHANGELOG
 ====================
 
+Update [2.3.8]
+
+-Portuguese translation improved by Lennoard Rai
+-Better error detection
+-Code cleanup
+-Better "documentation"
+-Better error logging
+-Read-only Filesystem error fixed
+
 Update [2.3.7]
 
 -Korean translation added by xda-Member Genie's
