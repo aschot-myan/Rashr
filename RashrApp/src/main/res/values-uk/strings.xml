@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rashr</string>
+    <string name="settings">Налаштування</string>
+    <string name="sCWM">CWM Recovery</string>
+    <string name="sFlashRecovery">Прошивка Recovery</string>
+    <string name="sFlashKernel">Прошивка ядра</string>
+    <string name="recovery_history">Історія Recovery</string>
+    <string name="kernel_history">Історія ядер</string>
+    <string name="sTWRP">TWRP Recovery</string>
+    <string name="sPhilz">Philz Recovery</string>
+    <string name="other_recovery">Recovery з пам\'яті</string>
+    <string name="other_kernel">Ядро пам\'яті</string>
+    <string name="sRecoveryBackup">Бекап Recovery</string>
+    <string name="sKernelBackup">Бекап ядра</string>
+    <string name="backups">Бекапи</string>
+    <string name="backup">Бекап</string>
+    <string name="go">Вперед</string>
+    <string name="sRebooter">Перезавантаження</string>
+    <string name="restore">Відновити</string>
+    <string name="rename">Перейменувати</string>
+    <string name="sClearCache">Очистити завантаження</string>
+    <string name="report">Повідомити про помилку</string>
+    <string name="sExit">Вихід</string>
+    <string name="xda">Тема на XDA</string>
+    <string name="set_name">Назва бекапа</string>
+  <string name="bak_warning">\"Перш ніж виконувати які-небудь дії з Rashr, будь ласка, створіть резервну копію і збережіть її на свій комп\'ютер.
+Резервні копії будуть створюватися:
+%s. 
+Розробник не несе відповідальності за пошкодження Вашого пристрою.\"</string>
+    <string name="flash_options">Параметри прошивки</string>
+    <string name="risk">Я знаю, що ризикую</string>
+    <string name="sReboot">Перезавантаження</string>
+    <string name="sRebootHot">Швидке перезавантаження</string>
+    <string name="sRebootRecovery">Режим відновлення</string>
+    <string name="sRebootBootloader">Завантажувач</string>
+    <string name="sRebootShutdown">Вимкнути</string>
+    <string name="info">Інформація</string>
+    <string name="flashed">Успішно прошито!</string>
+    <string name="warning">Увага!</string>
+    <string name="fota">Прошивка Recovery System на цьому пристроїв змінить FOTAKernel (замінить розділ), це работакт, лише якщо ядро підтримує його (На більшості кастомних ядер і ROM це працює).</string>
+    <string name="flash_over_recovery">Прошити через Recovery? (потрібне перезавантаження в Recovery)</string>
+    <string name="bak_done">Резервне копіювання завершено</string>
+    <string name="backupalready">Бекап вже існує.</string>
+    <string name="error">Помилка</string>
+    <string name="not_supportded">Ваш пристрій не підтримується. Сканування системи і звітів не підтримується пристроєм. Спробувати знайти розділ (перезавантажитися в recovery)?</string>
+  <string name="no_root">\"Пристрій не рутовано. Будь ласка, отримайте Root. Більш детальна інформація на 
+
+xda-developers.com\"</string>
+    <string name="Downloading">Завантаження...</string>
+    <string name="comment">Коментар</string>
+    <string name="comment_hint">Залиште тут коментар, що працює не коректно (завантаження, прошивка, загальна підтримка або інше)</string>
+    <string name="positive">Так</string>
+    <string name="neutral">Ні</string>
+    <string name="negative">Скасувати</string>
+    <string name="log">Журнал команд</string>
+    <string name="showlog">Показати журнали</string>
+    <string name="delete">Видалити</string>
+    <string name="sBackupMgr">Менеджер Бекапів</string>
+    <string name="setname">Введіть назву бекапа</string>
+    <string name="reboot_recovery_now">Перезавантажити в recovery?</string>
+    <string name="reboot_now">Хочете перезавантажити?</string>
+    <string name="flashing">Прошивка...</string>
+    <string name="restoring">Відновлення...</string>
+    <string name="creating_bak">Створення бекапу...</string>
+  <string name="download_utils">\"Щоб використовувати це додаток необхідно завантажити невеликі інструменти (близько 512 КБ). Це вимагає підключення до інтернету.
+Завантажити зараз?\"</string>
+    <string name="over_recovery">Пристрій буде прошито через recovery</string>
+    <string name="ShowAds">Показувати рекламу для підтримки</string>
+    <string name="please_restart">Будь ласка, перезапустіть додаток, щоб застосувати зміни</string>
+    <string name="please_ads">Будь ласка, включіть рекламу, щоб підтримати мою роботу! :(</string>
+    <string name="donate_to_support">Пожертвуйте через меню, щоб підтримати мою роботу! :)</string>
+    <string-array name="donation_google_catalog_values">
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+        <item>3 Euros</item>
+        <item>5 Euros</item>
+    </string-array>
+    <string name="donate">Допомогти проекту</string>
+    <string name="never_again">Більше не показувати</string>
+    <string name="try_again">Спробуйте ще раз!</string>
+    <string name="later">Пізніше</string>
+    <string name="update_done">Оновлено</string>
+    <string name="pick_file">Виберіть файл</string>
+    <string name="flash_error">Не вдалося прошити</string>
+    <string name="res_error">Не вдалося відновити</string>
+    <string name="bak_error">Не вдалося створити резервну копію</string>
+    <string name="stock">Сток</string>
+    <string name="changelog">Журнал змін</string>
+    <string name="use_supersu">SuperSu від Chainfire не знайдений на пристрої. Будь ласка, використовуйте його, щоб уникнути помилок. Хочете скачати SuperSu (з Play Store) зараз?</string>
+    <string name="bak_deleted">Бекап видалений</string>
+    <string name="extract_failed">Не вдалося витягти необхідні файли з програми. Будь ласка, перезавантажте його.</string>
+    <string name="no_history">Немає історії</string>
+    <string name="styles">Стилі</string>
+    <string-array name="styles">
+        <item>Стилі</item>
+        <item>Світлий Holo - Темна панель</item>
+        <item>Світлий Holo</item>
+        <item>Темний Holo</item>
+    </string-array>
+    <string name="flash_as">Прошити %s як</string>
+    <string name="recovery">Recovery</string>
+    <string name="kernel">Ядро</string>
+    <string name="getting_root">Запит Root...</string>
+    <string name="reading_device">Обробка...</string>
+    <string name="loading_ui">Завантаження інтерфейсу</string>
+    <string name="loading_data">Витяг даних і створення необхідної папки</string>
+    <string name="recovery_script_manager">Менеджер скриптів Recovery</string>
+    <string name="bak_name">Назва бекапа</string>
+    <string name="flash_queue">Черга прошивок</string>
+    <string name="wipe_opts">Опції Wipe</string>
+    <string name="add_queue">Додати Zip в чергу</string>
+    <string name="backup_opts">Опції бекапа</string>
+    <string name="system">Система</string>
+    <string name="data">Дані</string>
+    <string name="cache">Кеш</string>
+    <string name="dalvik">Dalvik</string>
+    <string name="boot">Завантаження</string>
+    <string name="recovery_script_mind">УВАГА! Працює тільки з TWRP recovery</string>
+    <string name="run">Запуск</string>
+    <string name="recovery_script_review">Попередній перегляд скрипта</string>
+    <string name="failed_unpack_files">Не вдалося видобути файли з програми</string>
+    <string name="failed_setup_layout">Помилка налаштування компонування</string>
+    <string name="refresh_list">Оновлення...</string>
+    <string name="new_imgs_loaded">Завантажено %s нових IMG</string>
+    <string name="make_choice">Зробіть вибір</string>
+  <string name="unified_info">\"Ваша прошивка використовує єдині ресурси CyanogenMod.
+Отже, можливо, що Rashr не зможе знайти Recovery або образи ядер.
+У цьому випадку Ви можете вибрати реальний пристрій. (зробіть це, якщо образи не знайдені)
+БУДЬТЕ ОБЕРЕЖНІ З ЦІЄЮ ОПЦІЄЮ!\"</string>
+    <string name="reloading">Перезавантаження</string>
+    <string name="keep_current_name">Поточне ім\'я (%s)</string>
+    <string name="rename_failed">Не вдалося перейменувати</string>
+    <string name="flash">Прошивка</string>
+    <string name="recovery_description">З допомогою цієї функції Ви зможете прошити пристрій вбудованим розділом відновлення, в один клік!</string>
+    <string name="kernel_description">З допомогою цієї функції Ви зможете прошити пристрій, вбудований в ядро/завантажувач розділом, в один клік!</string>
+    <string name="options">Опції</string>
+    <string name="clear_cache_description">Видалити всі завантажені образи recovery/ядра</string>
+    <string name="reboot_description">Пристрій буде перезавантажено</string>
+    <string name="reboot_recovery_description">Пристрій буде перезагружено у recovery</string>
+    <string name="reboot_bootloader_description">Пристрій буде перезагружено в завантажувач/режим прошивки</string>
+    <string name="shutdown_description">Пристрій буде вимкнено</string>
+    <string name="cwm_description">ClockworkMod Recovery (CWM) - це найбільш відомий кастомне Recovery для Android</string>
+    <string name="twrp_description">Team Winn Recovery Project (TWRP) - це кастомное Recovery з повним сенсорним управлінням</string>
+    <string name="philz_description">PhilZ Touch Recovery - це вдосконалена версія ClockworkMod</string>
+    <string name="stock_recovery_description">Стокове Recovery - це стандартне recovery, тут можна повернути стічне recovery.</string>
+    <string name="stock_kernel_description">Стокове ядро - це стандартне ядро, тут можна повернутися на стічне ядро.</string>
+    <string name="delete_confirmation">Ви дійсно хочете видалити всі завантажені образи?</string>
+    <string name="other_storage_description">Ця опція дозволяє прошити вже завантажені образи, збережені на пристрої.</string>
+    <string name="reboot_confirmation">Хочете перезавантажити?</string>
+    <string name="shutdown_confirmation">Хочете вимкнути?</string>
+    <string name="history_description">Тут Ви знайдете 5 останніх прошитих образів</string>
+    <string name="reset_app">Скидання налаштувань</string>
+    <string name="reset_app_description">Скидання налаштувань програми до стандартних</string>
+    <string name="files_deleted">Файли видалені</string>
+    <string name="onlyLanguage">Будь ласка, пишіть тільки на іспанською, німецькою або англійською мовою</string>
+    <string name="flasher">Флешер</string>
+    <string name="history">Історія</string>
+    <string name="exit_app">Вийти з програми?</string>
+    <string name="skip_md5">Пропустити MD5</string>
+    <string name="UseDarkUI">Використовувати чорний інтерфейс</string>
+    <string name="check_app_updates">Перевірка оновлень при запуску</string>
+    <string name="failed_update">Не вдалося перевірити наявність оновлень</string>
+    <string name="update_available">Доступно оновлення</string>
+    <string name="download_update">Будь ласка, завантажте оновлення, щоб забезпечити і отримати новіші функції</string>
+    <string name="open_playstore">Відкрити Play Store</string>
+    <string name="uptodate">В актуальному стані</string>
+    <string name="update">Оновити</string>
+  <string name="lists_outdated">\"Список доступних recovery ядер застарів. Щоб прошивати пристрій останніми recovery ядрами необхідно оновлення.
+Не всі пристрої підтримуються!\"</string>
+    <string name="hello_blank_fragment">Порожній фрагмент</string>
+    <string name="stock_recovery">Стокове Recovery</string>
+    <string name="stock_kernel">Стокове ядро</string>
+    <string name="check_connection">Перевірте підключення до Інтернету</string>
+    <string name="check_name">Будь ласка, перевірте назву резервної копії. Деякі пристрої не можуть впоратися, якщо назва містить \':\'. У разі виявлення, змінити його з допомогою File Explorer</string>
+    <string name="ok">ОК</string>
+    <string name="logs_title">Команди оболонки</string>
+    <string name="clear_logs">Очистити</string>
+    <string name="no_logs">Немає журналів</string>
+    <string name="copied_to_clipboard">Скопійовано в буфер обміну</string>
+    <string name="copy">Копіювати</string>
+    <string name="logs">Журнали</string>
+    <string name="app_uptodate">Програма в актуальній версії!</string>
+    <string name="hide_uptodate_hint">Приховати підказки</string>
+    <string name="xzdualrecovery">XZDualRecovery</string>
+    <string name="xzdual_describtion">XZDualRecovery створено на XDA-Member [NUT], і містить TWRP і PhilZ CWM. Ви можете вибрати будь-яке, яке хочете використовувати</string>
+    <string name="xzdual_uninstall_alert">Ви дійсно хочете видалити XZDualRecovery?</string>
+    <string name="installing_xzdual">Установка XZDualRecovery</string>
+    <string name="uninstalling_xzdual">Видалення XZDualRecovery</string>
+    <string name="skip_size_check">Пропускати перевірку розміру образів (може призвести до пошкодження)</string>
+    <string name="xzdual_uninstall_successfull">XZDualRecovery успішно видалено з Вашого пристрою</string>
+    <string name="xzdual_uninstall_failed">Не вдалося видалити XZDualRecovery. Помилка:</string>
+</resources>
