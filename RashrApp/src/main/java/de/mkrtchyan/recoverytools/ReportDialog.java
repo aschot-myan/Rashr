@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import de.mkrtchyan.utils.Common;
 
 /**
- * Copyright (c) 2015 Aschot Mkrtchyan
+ * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -42,9 +42,6 @@ public class ReportDialog extends AppCompatDialog {
 
     public ReportDialog(final RashrActivity activity, String message) {
         super(activity);
-        final Shell shell = activity.getShell();
-        final Device device = activity.getDevice();
-        final ArrayList<String> errors = activity.getErrors();
         setTitle(R.string.comment);
         setContentView(R.layout.dialog_comment);
         final EditText text = (EditText) findViewById(R.id.etComment);
@@ -77,19 +74,19 @@ public class ReportDialog extends AppCompatDialog {
                                     if (TestResults.delete()) {
                                         FileOutputStream fos = activity.openFileOutput(
                                                 TestResults.getName(), Context.MODE_PRIVATE);
-                                        fos.write(("Rashr:\n\n" + shell
+                                        fos.write(("Rashr:\n\n" + RashrApp.SHELL
                                                 .execCommand("ls -lR " + Const.PathToRashr.getAbsolutePath()) +
-                                                "\nCache Tree:\n" + shell
+                                                "\nCache Tree:\n" + RashrApp.SHELL
                                                 .execCommand("ls -lR /cache") + "\n" +
-                                                "\nMTD result:\n" + shell
+                                                "\nMTD result:\n" + RashrApp.SHELL
                                                 .execCommand("cat /proc/mtd") + "\n" +
-                                                "\nDevice Tree:\n\n" + shell
+                                                "\nDevice Tree:\n\n" + RashrApp.SHELL
                                                 .execCommand("ls -lR /dev")).getBytes());
                                     }
                                     files.add(TestResults);
                                 }
                             } catch (Exception e) {
-                                activity.addError(Const.RASHR_TAG, "Failed to list files: " +e, false);
+                                RashrApp.ERRORS.add(Const.RASHR_TAG + " Failed to list files: " + e);
                             }
                             String comment = "";
                             if (text.getText() != null) comment = text.getText().toString();
@@ -102,29 +99,29 @@ public class ReportDialog extends AppCompatDialog {
                                     "\nVersion Name: " + BuildConfig.VERSION_NAME;
                             message +=
                                     "\n\n\nProduct Info: " +
-                                            "\n\nManufacture: " + Build.MANUFACTURER + " (" + device.getManufacture() + ") " +
-                                            "\nDevice: " + Build.DEVICE + " (" + device.getName() + ")" +
+                                            "\n\nManufacture: " + Build.MANUFACTURER + " (" + RashrApp.DEVICE.getManufacture() + ") " +
+                                            "\nDevice: " + Build.DEVICE + " (" + RashrApp.DEVICE.getName() + ")" +
                                             "\nBoard: " + Build.BOARD +
                                             "\nBrand: " + Build.BRAND +
                                             "\nModel: " + Build.MODEL +
                                             "\nFingerprint: " + Build.FINGERPRINT +
                                             "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
 
-                            if (device.isRecoverySupported()) {
-                                message += "\n\nRecovery Path: " + device.getRecoveryPath() +
-                                        "\nRecovery Version: " + device.getRecoveryVersion() +
-                                        "\nRecovery MTD: " + device.isRecoveryMTD() +
-                                        "\nRecovery DD: " + device.isRecoveryDD() +
-                                        "\nStock: " + device.isStockRecoverySupported() +
-                                        "\nCWM: " + device.isCwmRecoverySupported() +
-                                        "\nTWRP: " + device.isTwrpRecoverySupported() +
-                                        "\nPHILZ: " + device.isPhilzRecoverySupported();
+                            if (RashrApp.DEVICE.isRecoverySupported()) {
+                                message += "\n\nRecovery Path: " + RashrApp.DEVICE.getRecoveryPath() +
+                                        "\nRecovery Version: " + RashrApp.DEVICE.getRecoveryVersion() +
+                                        "\nRecovery MTD: " + RashrApp.DEVICE.isRecoveryMTD() +
+                                        "\nRecovery DD: " + RashrApp.DEVICE.isRecoveryDD() +
+                                        "\nStock: " + RashrApp.DEVICE.isStockRecoverySupported() +
+                                        "\nCWM: " + RashrApp.DEVICE.isCwmRecoverySupported() +
+                                        "\nTWRP: " + RashrApp.DEVICE.isTwrpRecoverySupported() +
+                                        "\nPHILZ: " + RashrApp.DEVICE.isPhilzRecoverySupported();
                             }
-                            if (device.isKernelSupported()) {
-                                message += "\n\nKernel Path: " + device.getKernelPath() +
-                                        "\nKernel Version: " + device.getKernelVersion() +
-                                        "\nKernel MTD: " + device.isKernelMTD() +
-                                        "\nKernel DD: " + device.isKernelDD();
+                            if (RashrApp.DEVICE.isKernelSupported()) {
+                                message += "\n\nKernel Path: " + RashrApp.DEVICE.getKernelPath() +
+                                        "\nKernel Version: " + RashrApp.DEVICE.getKernelVersion() +
+                                        "\nKernel MTD: " + RashrApp.DEVICE.isKernelMTD() +
+                                        "\nKernel DD: " + RashrApp.DEVICE.isKernelDD();
                             }
                             if (!comment.equals("")) {
                                 message +=
@@ -141,19 +138,19 @@ public class ReportDialog extends AppCompatDialog {
                             ArrayList<Uri> uris = new ArrayList<>();
                             for (File i : files) {
                                 try {
-                                    shell.execCommand(Const.Busybox + " chmod 777 " + i);
+                                    RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + i);
                                     File tmpFile = new File(Const.PathToTmp, i.getName());
                                     Common.copyFile(i, tmpFile);
-                                    shell.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
+                                    RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
                                     uris.add(Uri.fromFile(tmpFile));
                                 } catch (Exception e) {
-                                    activity.addError(Const.RASHR_TAG,
-                                            "Failed to create attachment: " + e, false);
+                                    RashrApp.ERRORS.add(Const.RASHR_TAG +
+                                            " Failed to create attachment: " + e);
                                 }
                             }
-                            if (errors.size() > 0) {
+                            if (RashrApp.ERRORS.size() > 0) {
                                 message += "ERRORS:\n";
-                                for (String error : errors) {
+                                for (String error : RashrApp.ERRORS) {
                                     message += error + "\n";
                                 }
                             }
@@ -165,7 +162,7 @@ public class ReportDialog extends AppCompatDialog {
 
                         } catch (Exception e) {
                             dismiss();
-                            activity.addError(Const.RASHR_TAG, "Failed to create attachment: " + e, false);
+                            RashrApp.ERRORS.add(Const.RASHR_TAG + " Failed to create attachment: " + e);
                         }
                     }
                 });
