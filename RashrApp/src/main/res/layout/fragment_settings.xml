@@ -59,6 +59,12 @@
             android:text="@string/skip_size_check"
             android:id="@+id/cbSkipSizeChecking"
             android:gravity="center"/>
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/cbSkipValidateImages"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/skip_validate_image"
+            android:gravity="center" />
         <android.support.v7.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="60dp"

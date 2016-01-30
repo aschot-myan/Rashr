@@ -1,19 +1,15 @@
 package de.mkrtchyan.recoverytools;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +77,7 @@ public class SettingsFragment extends Fragment {
         final AppCompatCheckBox cbCheckUpdates = (AppCompatCheckBox) root.findViewById(R.id.cbCheckUpdates);
         final AppCompatCheckBox cbHideUpToDateHint = (AppCompatCheckBox) root.findViewById(R.id.cbShowUpToDateHints);
         final AppCompatCheckBox cbSkipSizeCheck = (AppCompatCheckBox) root.findViewById(R.id.cbSkipSizeChecking);
+        final AppCompatCheckBox cbSkipValidate = (AppCompatCheckBox) root.findViewById(R.id.cbSkipValidateImages);
         final AppCompatButton bShowLogs = (AppCompatButton) root.findViewById(R.id.bShowLogs);
         final AppCompatButton bReport = (AppCompatButton) root.findViewById(R.id.bReport);
         final AppCompatButton bShowChangelog = (AppCompatButton) root.findViewById(R.id.bShowChangelog);
@@ -100,6 +97,7 @@ public class SettingsFragment extends Fragment {
                 Const.PREF_KEY_HIDE_UPDATE_HINTS));
         cbSkipSizeCheck.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_SKIP_SIZE_CHECK));
+        cbSkipValidate.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME, Const.PREF_KEY_SKIP_IMAGE_CHECK));
 
         cbDarkUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -145,6 +143,13 @@ public class SettingsFragment extends Fragment {
                         Const.PREF_KEY_SKIP_SIZE_CHECK, isChecked);
             }
         });
+        cbSkipValidate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Common.setBooleanPref(buttonView.getContext(), Const.PREF_NAME,
+                        Const.PREF_KEY_SKIP_IMAGE_CHECK, isChecked);
+            }
+        });
 
         final RashrActivity activity = (RashrActivity) getActivity();
 
@@ -175,6 +180,7 @@ public class SettingsFragment extends Fragment {
                 editor = activity.getSharedPreferences(Shell.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
                 editor.clear().commit();
+                RashrActivity.firstSetup(v.getContext());
             }
         });
 
