@@ -5,7 +5,7 @@
     <string name="settings">Ajustes</string>
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashKernel">Flash Kernel</string>
-    <string name="recovery_history">History</string>
+    <string name="recovery_history">Historial</string>
     <string name="sTWRP">TWRP Recovery</string>
     <string name="sPhilz">Philz Recovery</string>
     <string name="other_recovery">Recovery de la memoria interna</string>
@@ -22,9 +22,9 @@
     <string name="sExit">Salida</string>
     <string name="xda">Thread de XDA</string>
     <string name="set_name">Nombre del Backup</string>
-    <string name="bak_warning">Anted de que utilize Rashr haga backups y cuiden lo en su ordenador.
+    <string name="bak_warning">Antes de que utilice Rashr haga backups y guardelos en su ordenador.
         \nLos backups se crean en \n%s.
-        \nEl programador no es responsible si se daña su dispositivo.</string>
+        \nEl programador no es responsable si se daña su dispositivo.</string>
     <string name="flash_options">Opciones de Flash</string>
     <string name="risk">Conozco el riesgo</string>
     <string name="sReboot">Reiniciar</string>
@@ -33,27 +33,27 @@
     <string name="sRebootBootloader">Reiniciar Bootloader</string>
     <string name="sRebootShutdown">Apagar</string>
     <string name="info">Información</string>
-    <string name="flashed">Partition flasheado.</string>
-    <string name="warning">Alarma!</string>
+    <string name="flashed">Partición flasheada.</string>
+    <string name="warning">¡Alarma!</string>
     <string name="fota">
         Si usted instala un Recovery en su sistema se utilizara la particion FOTAKernel.
-        Solo prodrá utilizarla si usan un Custom Kernel o Custom ROM. Quieren avanzar?
+        Solo prodrá utilizarla si usan un Custom Kernel o Custom ROM. ¿Quiere avanzar?
     </string>
-    <string name="flash_over_recovery">Instalar Recovery ahora? (necesitan reiniciar)</string>
+    <string name="flash_over_recovery">¿Instalar Recovery ahora? (necesitan reiniciar)</string>
     <string name="bak_done">Backup completada</string>
     <string name="backupalready">Backup ya existe.</string>
     <string name="error">Error</string>
     <string name="not_supportded">
-        Su dispositivo no es suportado. Escanear sistema y enviar un reporte al programador o
-        reiniciar en el recovery (puede ayudar para encontrar la partición)?
+        Su dispositivo no está suportado. ¿Escanear sistema y enviar un reporte al programador o
+        reiniciar en el recovery? (puede ayudar para encontrar la partición)
     </string>
     <string name="no_root">
-        Dispositivo sin Root. Porfavor rooten lo. Mas informaciones en
+        Dispositivo sin Root. Por favor rootealo. Más información en
         \n\nxda-developers.com</string>
-    <string name="Downloading">Downloading…</string>
+    <string name="Downloading">Descargando…</string>
     <string name="comment">Comentario</string>
     <string name="comment_hint">Comenten aquí lo que no funciona (download, flash)</string>
-    <string name="positive">Si</string>
+    <string name="positive">Sí</string>
     <string name="neutral">No</string>
     <string name="negative">Cancelar</string>
     <string name="log">Log Shell-Commands</string>
@@ -61,18 +61,18 @@
     <string name="delete">Eliminar</string>
     <string name="sBackupMgr">Backup Manager</string>
     <string name="setname">Nombrar el Backup</string>
-    <string name="reboot_recovery_now">Reiniciar en el recovery ahora?</string>
-    <string name="reboot_now">Reiniciar ahora?</string>
-    <string name="flashing">Flashing…</string>
+    <string name="reboot_recovery_now">¿Reiniciar en el recovery ahora?</string>
+    <string name="reboot_now">¿Reiniciar ahora?</string>
+    <string name="flashing">Flasheando…</string>
     <string name="restoring">Restaurando…</string>
     <string name="creating_bak">Creando punto de restauración…</string>
     <string name="download_utils">Para utilizar esta aplicación es necesario descargar datos (alrededor de 512KB).
-        \nDescargar ahora?</string>
+        \n ¿Descargar ahora?</string>
     <string name="over_recovery">Device will be flashed over recovery</string>
     <string name="ShowAds">Enseñar anuncios para apoyar mi trabajo</string>
-    <string name="please_restart">Porfavor reinicie la aplicación</string>
-    <string name="please_ads">Porfavor encienda los anuncios para apoyar mi trabajo! :(</string>
-    <string name="donate_to_support">Done para apoyar mi trabajo! :)</string>
+    <string name="please_restart">Por favor reinicie la aplicación</string>
+    <string name="please_ads">¡Por favor habilita los anuncios para apoyar mi trabajo! :(</string>
+    <string name="donate_to_support">¡Done para apoyar mi trabajo! :)</string>
 
     <string-array name="donation_google_catalog_values">
         <item>1 Euro</item>
@@ -83,7 +83,7 @@
 
     <string name="donate">Donar</string>
     <string name="never_again">No enseñar mas</string>
-    <string name="try_again">Reintentar!</string>
+    <string name="try_again">¡Reintentar!</string>
     <string name="later">Después</string>
     <string name="update_done">Actualizado</string>
     <string name="pick_file">Elija un dato</string>
@@ -105,7 +105,7 @@
     <string name="kernel">Kernel</string>
     <string name="getting_root">Obteniendo Root</string>
     <string name="reading_device">Leyendo informaciones del sistema</string>
-    <string name="loading_ui">Loading UI</string>
+    <string name="loading_ui">Cargando Interfaz de Usuario</string>
     <string name="loading_data">Extrayendo datos y creando carpetas necesarias</string>
     <string name="recovery_script_manager">Recovery-Script Manager</string>
     <string name="bak_name">Nombre del Backup</string>
@@ -118,14 +118,14 @@
     <string name="cache">Cache</string>
     <string name="dalvik">Dalvik</string>
     <string name="boot">Boot</string>
-    <string name="recovery_script_mind">Esta funcción solamente va ha funcionar si utilizan TWRP</string>
-    <string name="run">Executar</string>
+    <string name="recovery_script_mind">Esta funcción solamente va a funcionar si utilizan TWRP</string>
+    <string name="run">Ejecutar</string>
     <string name="recovery_script_review">Script Preview</string>
-    <string name="failed_unpack_files">Decompresión de datos fallesido.</string>
+    <string name="failed_unpack_files">Descompresión de datos fallido.</string>
     <string name="failed_setup_layout">Error al crear la UI</string>
-    <string name="refresh_list">Update started!</string>
-    <string name="new_imgs_loaded">%s new IMGs loaded</string>
-    <string name="make_choice">Please make your choice</string>
+    <string name="refresh_list">¡Actualización iniciada!</string>
+    <string name="new_imgs_loaded">%s nuevas IMGs cargadas</string>
+    <string name="make_choice">Por favor elige una opción</string>
     <string name="unified_info">
         This ROM ist using Unified CyanogenMod Sources.\n
         Consequently it could be that Rashr isn\'t able to find Recovery or Kernel images.\n
@@ -135,14 +135,14 @@
     <string name="reloading">Reloading</string>
     <string name="keep_current_name">Keep current name (%s)</string>
 
-    <string name="rename_failed">Renombrar fallecido</string>
+    <string name="rename_failed">Renombrar fallido</string>
 
     <string name="flash">Flash</string>
     <string name="recovery_description">
-        Con esta función pueden instalar Custom Recoveries a su dispositivo.
+        Con esta función pueden instalar Custom Recoveries en su dispositivo.
     </string>
     <string name="kernel_description">
-        Con esta función pueden instalar Kernels a su dispositivo.
+        Con esta función pueden instalar Kernels en su dispositivo.
     </string>
     <string name="options">Opciones</string>
     <string name="clear_cache_description">
@@ -157,14 +157,14 @@
     </string>
     <string name="shutdown_description">Apagar dispositivo</string>
     <string name="cwm_description">
-        ClockworkMod Recovery es la custom recovery mas untilizada para Android
+        ClockworkMod Recovery es la custom recovery mas utilizada para Android
     </string>
     <string name="twrp_description">
         Team Winn Recovery Project (TWRP) es un Recovery-MOD muy desarollado y con una interfaz de usuario
-        controlable por touch
+        controlable de manera táctil
     </string>
     <string name="philz_description">
-        PhilZ Touch Recovery basea en ClockworkMod y tiene funciones mas avanzadas
+        PhilZ Touch Recovery basada en ClockworkMod y tiene funciones más avanzadas
     </string>
     <string name="stock_recovery_description">
         Las Stock Recoveries son las recoveries que estaban instaladas al comprar el dispositivo.
@@ -175,32 +175,32 @@
         Esta función se puede utilizar para restaurar su dispositivo.
     </string>
     <string name="delete_confirmation">
-        Seguro que quieren borrar todas las imagénes descargadas?
+        ¿Seguro que quiere borrar todas las imagénes descargadas?
     </string>
     <string name="other_storage_description">
         Con esta función pueden instalar imagénes deste la memoria interna del dispositivo.
     </string>
-    <string name="reboot_confirmation">Reiniciar ahora?</string>
-    <string name="shutdown_confirmation">Apagar ahora?</string>
+    <string name="reboot_confirmation">¿Reiniciar ahora?</string>
+    <string name="shutdown_confirmation">¿Apagar ahora?</string>
 
     <string name="reset_app">Reconfigurar App</string>
     <string name="reset_app_description">
-        Reconfigurar App? Todos los ajustes que ha echo se van ha borrar
+        ¿Reconfigurar App? Todos los ajustes que ha echo se van a borrar
     </string>
 
     <string name="files_deleted">Archivos borrados</string>
 
-    <string name="onlyLanguage">Porfavor solamente escriban en Alemàn, Inglès o en Castellano</string>
+    <string name="onlyLanguage">Por favor solamente escriban en alemàn, inglès o en castellano</string>
     <string name="other_kernel">Kernel de la memoria interna</string>
     <string name="exit_app">Salir de la App?</string>
     <string name="skip_md5">Sobresaltar MD5</string>
     <string name="UseDarkUI">Utilizar interfaz oscuro</string>
     <string name="check_app_updates">Buscar updates al inicio</string>
     <string name="failed_update">Error al buscar updates</string>
-    <string name="update_available">Update disponible</string>
-    <string name="download_update">Actualizen la app para utilizar nuevas funciones y evitar problemas</string>
+    <string name="update_available">Actualización disponible</string>
+    <string name="download_update">Actualicen la app para utilizar nuevas funciones y evitar problemas</string>
     <string name="open_playstore">Abrir Play Store</string>
-    <string name="uptodate">Actuàl</string>
-    <string name="update">Update</string>
+    <string name="uptodate">Actualizado</string>
+    <string name="update">Actualizar</string>
 
 </resources>
