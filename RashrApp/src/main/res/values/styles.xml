@@ -2,8 +2,8 @@
 
     <style name="Rashr" parent="Theme.AppCompat.Light">
         <item name="android:textColorPrimary">@color/golden</item>
-        <item name="colorPrimary">@color/custom_green</item>
-        <item name="colorPrimaryDark">@color/darker_green</item>
+        <item name="colorPrimary">@color/custom_blue</item>
+        <item name="colorPrimaryDark">@color/darker_blue</item>
         <item name="colorAccent">@color/golden</item>
         <item name="android:textStyle">italic</item>
         <item name="android:windowBackground">?attr/colorPrimary</item>

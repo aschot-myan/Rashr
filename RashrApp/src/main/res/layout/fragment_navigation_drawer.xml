@@ -6,11 +6,20 @@
     android:background="?attr/colorPrimaryDark" android:orientation="vertical"
     tools:context=".NavigationDrawerFragment">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/rashr_banner"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true" />
+
     <ListView android:id="@+id/lvNavigation" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:choiceMode="singleChoice"
         android:clickable="true" android:listSelector="?attr/colorPrimary"
         android:layout_above="@+id/linearLayout"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/imageView" />
 
     <LinearLayout
         android:layout_width="match_parent"

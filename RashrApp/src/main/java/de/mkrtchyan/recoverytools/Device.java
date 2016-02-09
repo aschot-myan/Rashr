@@ -2,7 +2,6 @@ package de.mkrtchyan.recoverytools;
 
 import android.os.Build;
 
-import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.BufferedReader;
@@ -19,7 +18,7 @@ import java.util.zip.ZipFile;
 import de.mkrtchyan.utils.Unzipper;
 
 /**
- * Copyright (c) 2015 Aschot Mkrtchyan
+ * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -49,6 +48,7 @@ public class Device {
     //public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
     private static final String RECOVERY_VERSION_NOT_RECONGNIZED = "Not recognized Recovery-Version";
+    private boolean isSetup = false;
     /**
      * Collection of known Recovery Partitions on some devices
      */
@@ -129,18 +129,14 @@ public class Device {
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
 
-    private RashrActivity mActivity;
-    private Shell mShell;
 
-    public Device(RashrActivity activity) {
-        mActivity = activity;
-        mShell = activity.getShell();
+    public void setup() {
         setPredefinedOptions();
         loadRecoveryList();
         loadKernelList();
         if (isRecoveryDD()) {
             try {
-                String tmp = mShell.execCommand(Const.Busybox + " blockdev --getbsz " + mRecoveryPath);
+                String tmp = RashrApp.SHELL.execCommand(Const.Busybox + " blockdev --getbsz " + mRecoveryPath);
                 tmp = tmp.replace("\n", "");
                 mRECOVERY_BLOCKSIZE = Integer.valueOf(tmp);
             } catch (FailedExecuteCommand ignore) {
@@ -148,13 +144,13 @@ public class Device {
         }
         if (isKernelDD()) {
             try {
-                String tmp = mShell.execCommand(Const.Busybox + " blockdev --getbsz " + mKernelPath);
+                String tmp = RashrApp.SHELL.execCommand(Const.Busybox + " blockdev --getbsz " + mKernelPath);
                 tmp = tmp.replace("\n", "");
                 mKERNEL_BLOCKSIZE = Integer.valueOf(tmp);
             } catch (FailedExecuteCommand ignore) {
             }
         }
-
+        isSetup = true;
     }
 
     private void setPredefinedOptions() {
@@ -533,7 +529,7 @@ public class Device {
             }
 
         } catch (IOException e) {
-            mActivity.addError(Const.DEVICE_TAG, "Could not read Recovery List: " + e, false);
+            RashrApp.ERRORS.add(Const.DEVICE_TAG + " Could not read Recovery List: " + e);
         }
     }
 
@@ -543,7 +539,7 @@ public class Device {
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(new File(Const.FilesDir, "kernel_sums"))));
+                    new FileInputStream(new File(Const.FilesDir, Const.KERNEL_SUMS))));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
@@ -569,7 +565,7 @@ public class Device {
             }
 
         } catch (Exception e) {
-            mActivity.addError(Const.DEVICE_TAG, "Could not read Kernel List: " + e, false);
+            RashrApp.ERRORS.add(Const.DEVICE_TAG + " Could not read Kernel List: " + e);
         }
     }
 
@@ -617,7 +613,7 @@ public class Device {
         for (File i : KernelList) {
             if (mKernelPath.equals("")) {
                 try {
-                    mShell.execCommand("ls " + i.getAbsolutePath());
+                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath());
                     mKernelPath = i.getAbsolutePath();
                     break;
                 } catch (FailedExecuteCommand ignore) {
@@ -632,7 +628,7 @@ public class Device {
         for (File i : RecoveryList) {
             if (mRecoveryPath.equals("")) {
                 try {
-                    mShell.execCommand("ls " + i.getAbsolutePath());
+                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath());
                     mRecoveryPath = i.getAbsolutePath();
                     //if (mRecoveryPath.endsWith(EXT_TAR)) {
                     //    mRECOVERY_EXT = EXT_TAR;
@@ -1009,7 +1005,7 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev")) {
                                     try {
-                                        mShell.execCommand("ls " + split);
+                                        RashrApp.SHELL.execCommand("ls " + split);
                                         mKernelPath = split;
                                         break;
                                     } catch (FailedExecuteCommand e) {
@@ -1037,7 +1033,7 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev") || split.startsWith("/system")) {
                                     try {
-                                        mShell.execCommand("ls " + split);
+                                        RashrApp.SHELL.execCommand("ls " + split);
                                         mRecoveryPath = split;
                                         break;
                                     } catch (FailedExecuteCommand ignore) {
@@ -1055,7 +1051,7 @@ public class Device {
             }
             br.close();
         } catch (Exception e) {
-            mActivity.addError(Const.DEVICE_TAG, "Could not read LastLog.txt: " + e, false);
+            RashrApp.ERRORS.add(Const.DEVICE_TAG + " Could not read LastLog.txt: " + e);
         }
         /*
         if (mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
@@ -1092,7 +1088,7 @@ public class Device {
                     }
                 }
             } catch (IOException e) {
-                mActivity.addError(Const.DEVICE_TAG, "PartLayouts could not be unzipped: " + e, false);
+                RashrApp.ERRORS.add(Const.DEVICE_TAG + " PartLayouts could not be unzipped: " + e);
             }
         }
         if (PartLayout.exists()) {
@@ -1114,7 +1110,7 @@ public class Device {
                     }
                 }
             } catch (IOException e) {
-                mActivity.addError(Const.DEVICE_TAG, "Error while reading PartLayouts" + e, false);
+                RashrApp.ERRORS.add(Const.DEVICE_TAG + " Error while reading PartLayouts " + e);
             }
         }
     }
@@ -1142,10 +1138,14 @@ public class Device {
 
     public boolean isXZDualInstalled() {
         try {
-            mShell.execCommand("ls /system/bin/recovery.cwm.cpio.lzma");
+            RashrApp.SHELL.execCommand("ls /system/bin/recovery.cwm.cpio.lzma");
             return true;
         } catch (FailedExecuteCommand ignore) {
             return false;
         }
+    }
+
+    public boolean isSetup() {
+        return isSetup;
     }
 }

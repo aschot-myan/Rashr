@@ -190,12 +190,13 @@
     <string name="app_uptodate">App is up to date!</string>
     <string name="hide_uptodate_hint">Hide up to date hints</string>
     <string name="xzdualrecovery">XZDualRecovery</string>
-    <string name="xzdual_describtion">XZDualRecovery is created by XDA-Member [NUT] and contains TWRP CWM and PhilZ so you can choose wich one you want to use</string>
+    <string name="xzdual_describtion">XZDualRecovery is created by XDA-Member [NUT] and contains TWRP CWM and PhilZ so you can choose which one you want to use</string>
     <string name="xzdual_uninstall_alert">Do you want to uninstall XZDualRecovery?</string>
     <string name="installing_xzdual">Installing XZDualRecovery</string>
     <string name="uninstalling_xzdual">Uninstalling XZDualRecovery</string>
     <string name="skip_size_check">Skip size cheking on Images (can cause damage)</string>
     <string name="xzdual_uninstall_successfull">XZDualRecovery uninstalled successfully from your device</string>
     <string name="xzdual_uninstall_failed">XZDualRecovery couldn\'t be uninstalled. Error:</string>
-
+    <string name="skip_validate_image">Skip Image header checking (can cause damage)</string>
+    <string name="information">Information</string>
 </resources>

@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.sufficientlysecure.rootcommands.Shell;
 import org.sufficientlysecure.rootcommands.Toolbox;
 
 import java.io.File;
@@ -26,7 +25,7 @@ import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.FileChooserDialog;
 
 /**
- * Copyright (c) 2014 Aschot Mkrtchyan
+ * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -54,7 +53,6 @@ public class ScriptManagerFragment extends Fragment {
     ListView mQueue;
     FileChooserDialog mFileChooser;
     String[] mAllowedEXT = {".zip"};
-    private Shell mShell;
     private Context mContext;
     private View mRootView;
 
@@ -65,7 +63,6 @@ public class ScriptManagerFragment extends Fragment {
     public static ScriptManagerFragment newInstance(RashrActivity activity, File ZIP) {
         ScriptManagerFragment fragment = new ScriptManagerFragment();
         fragment.setContext(activity);
-        fragment.setShell(activity.getShell());
         fragment.setStartFile(ZIP);
         return fragment;
     }
@@ -189,10 +186,10 @@ public class ScriptManagerFragment extends Fragment {
                             try {
                                 for (String split : command.toString().split(";")) {
                                     if (!split.equals("")) {
-                                        mShell.execCommand("echo " + split + " >> /cache/recovery/openrecoveryscript");
+                                        RashrApp.SHELL.execCommand("echo " + split + " >> /cache/recovery/openrecoveryscript");
                                     }
                                 }
-                                new Toolbox(mShell).reboot(Toolbox.REBOOT_RECOVERY);
+                                RashrApp.TOOLBOX.reboot(Toolbox.REBOOT_RECOVERY);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -212,10 +209,6 @@ public class ScriptManagerFragment extends Fragment {
             }
         });
         return mRootView;
-    }
-
-    public void setShell(Shell shell) {
-        mShell = shell;
     }
 
     public void setContext(Context context) {

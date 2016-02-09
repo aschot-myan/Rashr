@@ -5,20 +5,31 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="fce519f1-7114-46f0-a80b-5cfc560d80f6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/RashrApp-release.apk" afterPath="$PROJECT_DIR$/RashrApp/RashrApp-release.apk" />
+    <list default="true" id="fce519f1-7114-46f0-a80b-5cfc560d80f6" name="Default" comment="-Now you can get more information about your device (count of available images, Flash information, Partition information....)">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/BackupRestoreFragment.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/BackupRestoreFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="$PROJECT_DIR$/CHANGELOG.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/CardsUILib.iml" afterPath="$PROJECT_DIR$/CardsUILib/CardsUILib.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/RashrApp.iml" afterPath="$PROJECT_DIR$/RashrApp/RashrApp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" afterPath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" afterPath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashAsFragment.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashAsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button_pressed.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button_pressed.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/build.gradle" afterPath="$PROJECT_DIR$/RashrApp/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/build.gradle" afterPath="$PROJECT_DIR$/Utils-Library/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/custom_item_list_background.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/custom_item_list_background.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/drawer_list_item.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/drawer_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_navigation_drawer.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_navigation_drawer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root-commands/root-commands.iml" afterPath="$PROJECT_DIR$/root-commands/root-commands.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values-ru/strings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values-ru/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Rashr.iws" />
@@ -49,12 +60,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ScriptManagerFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java">
+      <file leaf-file-name="FlashAsFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashAsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+              <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlashUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="183" column="56" selection-start-line="183" selection-start-column="24" selection-end-line="183" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NavigationDrawerFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5224242">
+              <caret line="131" column="57" selection-start-line="131" selection-start-column="57" selection-end-line="131" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3242#3493#0" expanded="true" />
+                <element signature="e#3492#3493#0" expanded="true" />
+                <element signature="e#7880#7881#0" expanded="true" />
+                <element signature="e#7932#7933#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,50 +100,7 @@
         <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CHANGELOG.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13664596">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="10" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9411764">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-tr/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.0588236">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DonationsFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Donations/src/main/java/org/sufficientlysecure/donations/DonationsFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="205" column="68" selection-start-line="205" selection-start-column="68" selection-end-line="205" selection-end-column="68" />
+              <caret line="334" column="52" selection-start-line="334" selection-start-column="52" selection-end-line="334" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -114,13 +108,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Donations/build.gradle">
+      <file leaf-file-name="fragment_navigation_drawer.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_navigation_drawer.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+              <caret line="18" column="78" selection-start-line="18" selection-start-column="78" selection-end-line="18" selection-end-column="78" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -130,7 +127,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile" />
+        <option value="valueResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
       </list>
     </option>
   </component>
@@ -3763,7 +3762,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="D:\workspace\Rashr" value="10120922170261" />
+        <entry key="D:\workspace\Rashr" value="10134899272857" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -4197,8 +4196,8 @@
                             <option value="D:/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.1.1/support-v4-23.1.1.aar" />
                             <option value="D:/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.1.1/appcompat-v7-23.1.1.aar" />
                             <option value="D:/Android/sdk/extras/android/m2repository/com/android/support/design/23.1.1/design-23.1.1.aar" />
-                            <option value="D:/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar" />
                             <option value="D:/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.1.1/recyclerview-v7-23.1.1.aar" />
+                            <option value="D:/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar" />
                             <option value="$MODULE_DIR$/libs/GoogleAdMobAdsSdk-6.4.1.jar" />
                             <option value="$PROJECT_DIR$/CardsUILib/libs/nineoldandroids-2.4.0.jar" />
                           </list>
@@ -4555,49 +4554,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CardsUILib/build.gradle" />
-        <option value="$PROJECT_DIR$/root-commands/build.gradle" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-bs/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-de/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-es/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-fa/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-fr/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-hr/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-it/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-ko/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-mk/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-nl/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-pl/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-ro/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-sk/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-sr/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-tr/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-vi/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-zh/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-zh-rTW/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-zh-rHK/values.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/info_card.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/view/FlashItemCard.java" />
         <option value="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/StylableCard.java" />
         <option value="$PROJECT_DIR$/RashrApp/build.gradle" />
         <option value="$PROJECT_DIR$/Utils-Library/build.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Const.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ReportDialog.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/view/SlidingTabLayout.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-pt/strings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/BackupRestoreFragment.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/view/SlidingTabStrip.java" />
         <option value="$PROJECT_DIR$/Donations/build.gradle" />
         <option value="$PROJECT_DIR$/Donations/src/main/res/layout/donations__fragment.xml" />
         <option value="$PROJECT_DIR$/Donations/src/main/java/org/sufficientlysecure/donations/DonationsFragment.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-uk/strings.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/view/RashrApp.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ReportDialog.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/C.java" />
+        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrApp.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button_pressed.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/drawable/custom_item_list_background.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/activity_rashr.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_unified_build.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_information.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/dummy/DummyContent.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/dummy/InformationContent.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/InformationContent.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/drawer_list_item.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_information_list.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-ru/strings.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Const.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_settings.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/SettingsFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/information_item.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/InformationRecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/InformationFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_backup_restore.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/BackupRestoreFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values-pt/strings.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashAsFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_navigation_drawer.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java" />
       </list>
     </option>
   </component>
@@ -4612,9 +4619,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1113" />
-    <option name="height" value="1038" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -4627,7 +4635,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -4639,6 +4647,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -4715,6 +4724,332 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-zh-rTW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-zh-rHK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-zh" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-vi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-uk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-tr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-sr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-sk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-ru" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -4723,9 +5058,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rashr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RashrApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recoverytools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -4734,132 +5104,8 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="strings.xml" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recoverytools" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recoverytools" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4876,6 +5122,16 @@
     <property name="ExportApk.ApkPath" value="D:\workspace\Rashr\RashrApp" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.BuildType" value="release" />
+    <property name="android.project.structure.last.selected" value="Notifications" />
+    <property name="android.project.structure.proportion" value="0.15" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.packageName">
+      <recent name="de.mkrtchyan.recoverytools" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="de.mkrtchyan.recoverytools" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.RashrApp">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -5012,7 +5268,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
       <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -5053,42 +5309,99 @@
       <option name="project" value="LOCAL" />
       <updated>1449276439072</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="-Ukranian translation added by Pavlo Motrunych :)">
+      <created>1453924447431</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1453924447431</updated>
+    </task>
+    <task id="LOCAL-00003" summary="-Constants renamed, reorganized">
+      <created>1454169783167</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1454169783167</updated>
+    </task>
+    <task id="LOCAL-00004" summary="-Shared instances of Shell, Toolbox and Device now in own class accessible from everywhere">
+      <created>1454169862561</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1454169862561</updated>
+    </task>
+    <task id="LOCAL-00005" summary="-Constants reorganized">
+      <created>1454170181862</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1454170181862</updated>
+    </task>
+    <task id="LOCAL-00006" summary="-In-App colors adapter to Icon colors">
+      <created>1454170305786</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1454170305786</updated>
+    </task>
+    <task id="LOCAL-00007" summary="-Rashr flashing is getting more secure :). Image header added. (Can be disabled in settings)">
+      <created>1454170807450</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1454170807450</updated>
+    </task>
+    <task id="LOCAL-00008" summary="-Settings for Header-Checking added">
+      <created>1454170885528</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1454170885528</updated>
+    </task>
+    <task id="LOCAL-00009" summary="-Now you can get more information about your device (count of available images, Flash information, Partition information....)">
+      <created>1454171395621</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1454171395621</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1113" height="1038" extended-state="0" />
-    <editor active="false" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32680538" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983682" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3181818" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997669" sideWeight="0.50428724" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4207459" sideWeight="0.5107181" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983682" sideWeight="0.49785638" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32932165" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3775216" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18274383" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3977968" sideWeight="0.49571276" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4207459" sideWeight="0.4892819" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3285102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983682" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -5105,7 +5418,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="-Portuguese translation improved by Lennoard Rai" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Portuguese translation improved by Lennoard Rai" />
+    <MESSAGE value="-Ukranian translation added by Pavlo Motrunych :)" />
+    <MESSAGE value="-Constants renamed, reorganized" />
+    <MESSAGE value="-Shared instances of Shell, Toolbox and Device now in own class accessible from everywhere" />
+    <MESSAGE value="-Constants reorganized" />
+    <MESSAGE value="-In-App colors adapter to Icon colors" />
+    <MESSAGE value="-Rashr flashing is getting more secure :). Image header added. (Can be disabled in settings)" />
+    <MESSAGE value="-Settings for Header-Checking added" />
+    <MESSAGE value="-Now you can get more information about your device (count of available images, Flash information, Partition information....)" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Now you can get more information about your device (count of available images, Flash information, Partition information....)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -5122,392 +5443,466 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="13" />
+      <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="android-dummy://D:\workspace\Rashr/RashrApp/Translations Editor">
-      <provider selected="true" editor-type-id="string-resource-editor">
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-bs/strings.xml">
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-uk/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-de/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="83" column="56" selection-start-line="83" selection-start-column="56" selection-end-line="83" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-es/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="76" column="56" selection-start-line="76" selection-start-column="56" selection-end-line="76" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-fa/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-fr/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-hr/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="73" column="56" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-it/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-ko/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="75" column="56" selection-start-line="75" selection-start-column="56" selection-end-line="75" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-mk/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="60" column="56" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-nl/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.5">
-          <caret line="54" column="56" selection-start-line="54" selection-start-column="56" selection-end-line="54" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-pl/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="58" column="56" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-ro/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="69" column="56" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-sk/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="87" column="56" selection-start-line="87" selection-start-column="56" selection-end-line="87" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-sr/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-vi/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-zh/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-zh-rTW/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5857143">
-          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_ex.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.528445">
-          <caret line="19" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="15" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.117647">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/SimpleCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/RecyclableCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/IconCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/root-commands/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.053333335">
-          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="54" selection-start-line="12" selection-start-column="54" selection-end-line="12" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/res/layout/item_play_card_empty_first.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61333334">
-          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30666667">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Const.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.093333334">
-          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10666667">
-          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.28">
-          <caret line="48" column="54" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4133334">
-          <caret line="417" column="78" selection-start-line="417" selection-start-column="78" selection-end-line="417" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-pt/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28538284">
-          <caret line="181" column="22" selection-start-line="181" selection-start-column="22" selection-end-line="181" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/BackupRestoreFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.026666667">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_backup_restore.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25031605">
-          <caret line="9" column="57" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="57" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10666667">
-          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/view/SlidingTabLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18124208">
-          <caret line="95" column="14" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/view/SlidingTabStrip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5969582">
-          <caret line="145" column="63" selection-start-line="145" selection-start-column="63" selection-end-line="145" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashAsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5466667">
-          <caret line="205" column="0" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ReportDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29333332">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Donations/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Donations/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Donations/src/main/res/layout/donations__fragment.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Donations/src/main/java/org/sufficientlysecure/donations/DonationsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="205" column="68" selection-start-line="205" selection-start-column="68" selection-end-line="205" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9411764">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.30594185">
+          <caret line="11" column="62" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-tr/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0588236">
+        <state vertical-scroll-proportion="0.0">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13664596">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="10" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/drawable/background_button_pressed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/drawable/custom_item_list_background.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_input.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_comment.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3888889">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/dialog_unified_build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05562579">
+          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/err_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.529412">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/activity_rashr.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/CardColorScheme.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5466667">
+          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/custom_list_item.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/InformationItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_settings.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="53" selection-start-line="65" selection-start-column="39" selection-end-line="65" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6764706">
+          <caret line="4" column="59" selection-start-line="4" selection-start-column="59" selection-end-line="4" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Const.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/information_item.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_information_list.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar!/android/support/v7/widget/RecyclerView.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35813954">
+          <caret line="4673" column="15" selection-start-line="4673" selection-start-column="15" selection-end-line="4673" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25031605">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.17391305">
+            <caret line="6" column="92" selection-start-line="6" selection-start-column="92" selection-end-line="6" selection-end-column="92" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ReportDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6088561">
+          <caret line="136" column="97" selection-start-line="136" selection-start-column="97" selection-end-line="136" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/SettingsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.7343173">
+          <caret line="249" column="42" selection-start-line="249" selection-start-column="42" selection-end-line="249" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10666667">
+          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/InformationRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="57" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/InformationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="200" column="42" selection-start-line="200" selection-start-column="42" selection-end-line="200" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/drawer_list_item.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_backup_restore.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/BackupRestoreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="415" column="0" selection-start-line="415" selection-start-column="0" selection-end-line="415" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="117" column="48" selection-start-line="117" selection-start-column="48" selection-end-line="117" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="183" column="56" selection-start-line="183" selection-start-column="24" selection-end-line="183" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-pt/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="47.264706">
+          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-fa/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-hr/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-ru/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.1764708">
+          <caret line="74" column="56" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-zh-rTW/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8065739">
+          <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-zh/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-sk/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_navigation_drawer.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="78" selection-start-line="18" selection-start-column="78" selection-end-line="18" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashAsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.5309091">
+          <caret line="124" column="67" selection-start-line="124" selection-start-column="67" selection-end-line="124" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="334" column="52" selection-start-line="334" selection-start-column="52" selection-end-line="334" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5224242">
+          <caret line="131" column="57" selection-start-line="131" selection-start-column="57" selection-end-line="131" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3242#3493#0" expanded="true" />
+            <element signature="e#3492#3493#0" expanded="true" />
+            <element signature="e#7880#7881#0" expanded="true" />
+            <element signature="e#7932#7933#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

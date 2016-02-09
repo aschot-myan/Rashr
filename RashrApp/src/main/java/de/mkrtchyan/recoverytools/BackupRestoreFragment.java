@@ -37,15 +37,29 @@ import de.mkrtchyan.recoverytools.view.SlidingTabLayout;
 //TODO: Improve and clean up...
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link BackupRestoreFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Copyright (c) 2016 Aschot Mkrtchyan
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * <p/>
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * <p/>
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 public class BackupRestoreFragment extends Fragment {
 
     private RashrActivity mActivity;
     private Context mContext;
-    private Device mDevice;
     private ViewPager mPager;
     private BackupRestorePagerAdapter mAdapter;
 
@@ -102,9 +116,9 @@ public class BackupRestoreFragment extends Fragment {
                                         Name = String.valueOf(etFileName.getHint());
                                     }
 
-                                    if (!Name.endsWith(mDevice.getRecoveryExt())) {
+                                        if (!Name.endsWith(RashrApp.DEVICE.getRecoveryExt())) {
                                         //Append extension
-                                        Name += mDevice.getRecoveryExt();
+                                        Name += RashrApp.DEVICE.getRecoveryExt();
                                     }
 
                                     File renamedBackup = new File(path, Name);
@@ -149,7 +163,7 @@ public class BackupRestoreFragment extends Fragment {
                         adialog.setMessage(R.string.ok);
                         adialog.show();
                     }
-                    mActivity.addError(Const.RASHR_TAG, e.toString(), false);
+                    RashrApp.ERRORS.add(Const.RASHR_TAG + " " + e);
                     return false;
                 }
             }
@@ -169,7 +183,6 @@ public class BackupRestoreFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_backup_restore, container, false);
         mActivity = (RashrActivity) getActivity();
         mContext = root.getContext();
-        mDevice = mActivity.getDevice();
         mPager = (ViewPager) root.findViewById(R.id.vpBackupRestore);
         mAdapter = new BackupRestorePagerAdapter(getChildFragmentManager());
         mPager.setAdapter(mAdapter);
@@ -208,14 +221,14 @@ public class BackupRestoreFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
-                    if (mDevice.isRecoveryDD() || mDevice.isRecoveryMTD()) {
+                    if (RashrApp.DEVICE.isRecoveryDD() || RashrApp.DEVICE.isRecoveryMTD()) {
                         fab.setVisibility(View.VISIBLE);
                     } else {
                         fab.setVisibility(View.INVISIBLE);
                     }
                 } else {
 
-                    if (mDevice.isKernelDD() || mDevice.isKernelMTD()) {
+                    if (RashrApp.DEVICE.isKernelDD() || RashrApp.DEVICE.isKernelMTD()) {
                         fab.setVisibility(View.VISIBLE);
                     } else {
                         fab.setVisibility(View.INVISIBLE);
@@ -231,7 +244,7 @@ public class BackupRestoreFragment extends Fragment {
         mAdapter.getRecoveryBackupFragment().getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!(mDevice.isRecoveryDD() || mDevice.isRecoveryMTD())) {
+                if (!(RashrApp.DEVICE.isRecoveryDD() || RashrApp.DEVICE.isRecoveryMTD())) {
                     Toast.makeText(mContext, "Operation not supported", Toast.LENGTH_SHORT).show();
                 } else {
                     showPopup(view);
@@ -241,7 +254,7 @@ public class BackupRestoreFragment extends Fragment {
         mAdapter.getKernelBackupFragment().getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!(mDevice.isKernelDD() || mDevice.isKernelMTD())) {
+                if (!(RashrApp.DEVICE.isKernelDD() || RashrApp.DEVICE.isKernelMTD())) {
                     Toast.makeText(mContext, "Operation not supported", Toast.LENGTH_SHORT).show();
                 } else {
                     showPopup(view);
@@ -263,12 +276,12 @@ public class BackupRestoreFragment extends Fragment {
         String EXT;
         if (RecoveryBackup) {
             prefix = "recovery";
-            EXT = mDevice.getRecoveryExt();
-            CurrentName = mDevice.getRecoveryVersion();
+            EXT = RashrApp.DEVICE.getRecoveryExt();
+            CurrentName = RashrApp.DEVICE.getRecoveryVersion();
         } else {
             prefix = "kernel";
-            EXT = mDevice.getKernelExt();
-            CurrentName = mDevice.getKernelVersion();
+            EXT = RashrApp.DEVICE.getKernelExt();
+            CurrentName = RashrApp.DEVICE.getKernelVersion();
         }
         final AppCompatDialog dialog = new AppCompatDialog(mContext);
         dialog.setTitle(R.string.setname);
@@ -298,11 +311,11 @@ public class BackupRestoreFragment extends Fragment {
                 File Path;
                 final int JOB;
                 if (RecoveryBackup) {
-                    EXT = mDevice.getRecoveryExt();
+                    EXT = RashrApp.DEVICE.getRecoveryExt();
                     Path = Const.PathToRecoveryBackups;
                     JOB = FlashUtil.JOB_BACKUP_RECOVERY;
                 } else {
-                    EXT = mDevice.getKernelExt();
+                    EXT = RashrApp.DEVICE.getKernelExt();
                     Path = Const.PathToKernelBackups;
                     JOB = FlashUtil.JOB_BACKUP_KERNEL;
                 }
@@ -371,7 +384,7 @@ public class BackupRestoreFragment extends Fragment {
         public static ListFragment newInstance(RashrActivity activity) {
             ListFragment fragment = new ListFragment();
             fragment.mListView = new ListView(activity);
-            fragment.mAdapter = new ArrayAdapter<>(activity, R.layout.custom_list_item);
+            fragment.mAdapter = new ArrayAdapter<>(activity, R.layout.drawer_list_item);
             fragment.mListView.setAdapter(fragment.getAdapter());
             return fragment;
         }
@@ -452,7 +465,7 @@ public class BackupRestoreFragment extends Fragment {
         private void loadBackups() {
             if (mRecoveryBackupFragment != null) {
                 mRecoveryBackupFragment.getAdapter().clear();
-                if (!(mDevice.isRecoveryDD() || mDevice.isRecoveryMTD())) {
+                if (!(RashrApp.DEVICE.isRecoveryDD() || RashrApp.DEVICE.isRecoveryMTD())) {
                     mRecoveryBackupFragment.getAdapter().add("Operation not supported");
                 } else {
                     File path = Const.PathToRecoveryBackups;
@@ -468,7 +481,7 @@ public class BackupRestoreFragment extends Fragment {
             }
             if (mKernelBackupFragment != null) {
                 mKernelBackupFragment.getAdapter().clear();
-                if (!(mDevice.isKernelDD() || mDevice.isKernelMTD())) {
+                if (!(RashrApp.DEVICE.isKernelDD() || RashrApp.DEVICE.isKernelMTD())) {
                     mKernelBackupFragment.getAdapter().add("Operation not supported");
                 } else {
                     File path = Const.PathToKernelBackups;

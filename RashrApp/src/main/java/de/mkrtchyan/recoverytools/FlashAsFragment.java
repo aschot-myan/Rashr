@@ -15,7 +15,7 @@ import android.widget.RadioButton;
 import java.io.File;
 
 /**
- * Copyright (c) 2015 Aschot Mkrtchyan
+ * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -36,7 +36,6 @@ import java.io.File;
  */
 public class FlashAsFragment extends Fragment {
 
-    private Device mDevice;
     private Context mContext;
     private File mImg;
     private RashrActivity mActivity;
@@ -51,7 +50,6 @@ public class FlashAsFragment extends Fragment {
     public static FlashAsFragment newInstance(RashrActivity activity, File img, boolean CloseApp) {
         FlashAsFragment fragment = new FlashAsFragment();
         fragment.setActivity(activity);
-        fragment.setDevice(activity.getDevice());
         fragment.setImg(img);
         fragment.setCloseApp(CloseApp);
         return fragment;
@@ -109,8 +107,18 @@ public class FlashAsFragment extends Fragment {
                 if (mImg.exists()) {
                     int job = mOptAsRecovery.isChecked() ?
                             FlashUtil.JOB_FLASH_RECOVERY : FlashUtil.JOB_FLASH_KERNEL;
-                    FlashUtil flashUtil = new FlashUtil(mActivity, mImg, job);
-                    flashUtil.setKeepAppOpen(false);
+                    final FlashUtil flashUtil = new FlashUtil(mActivity, mImg, job);
+                    flashUtil.setOnTaskDoneListener(new FlashUtil.OnTaskDoneListener() {
+                        @Override
+                        public void onSuccess() {
+                            flashUtil.showRebootDialog();
+                        }
+
+                        @Override
+                        public void onFail(Exception e) {
+
+                        }
+                    });
                     flashUtil.execute();
                 } else {
                     mActivity.finish();
@@ -120,22 +128,18 @@ public class FlashAsFragment extends Fragment {
         mOptAsRecovery.setOnClickListener(listener);
         mOptAsKernel.setOnClickListener(listener);
         ViewGroup parent;
-        if (!mDevice.isRecoverySupported()) {
+        if (!RashrApp.DEVICE.isRecoverySupported()) {
             if ((parent = (ViewGroup) mOptAsRecovery.getParent()) != null) {
                 parent.removeView(mOptAsRecovery);
                 mOptAsKernel.setChecked(true);
             }
         }
-        if (!mDevice.isKernelSupported()) {
+        if (!RashrApp.DEVICE.isKernelSupported()) {
             if ((parent = (ViewGroup) mOptAsKernel.getParent()) != null) {
-                parent.removeView((mOptAsKernel));
+                parent.removeView(mOptAsKernel);
             }
         }
         return fragment;
-    }
-
-    public void setDevice(Device device) {
-        mDevice = device;
     }
 
     public void setActivity(RashrActivity activity) {

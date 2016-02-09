@@ -1,7 +1,7 @@
 package de.mkrtchyan.utils;
 
 /**
- * Copyright (c) 2014 Ashot Mkrtchyan
+ * Copyright (c) 2016 Ashot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights 
@@ -183,7 +183,7 @@ public class Downloader {
     }
 
     public void setOverrideFile(boolean overrideFile) {
-        this.mOverrideFile = overrideFile;
+        mOverrideFile = overrideFile;
     }
 
     public void setOnDownloadListener(OnDownloadListener onDownloadListener) {

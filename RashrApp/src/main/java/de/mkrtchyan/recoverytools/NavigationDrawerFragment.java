@@ -1,6 +1,5 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -130,7 +129,8 @@ public class NavigationDrawerFragment extends Fragment {
                             getString(R.string.flasher),
                             getString(R.string.recovery_script_manager),
                             getString(R.string.donate),
-                            getString(R.string.settings)
+                            getString(R.string.settings),
+                            getString(R.string.information)
                     }));
             // between the navigation drawer and the action bar app icon.
             mDrawerToggle = new ActionBarDrawerToggle(
