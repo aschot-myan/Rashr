@@ -1,6 +1,15 @@
 CHANGELOG
 ====================
 
+Update [2.3.9]
+
+-Settings for Header-Checking added (Rashr is getting more secure)
+-Rashr flashing is getting more secure :). Image header added. (Can be disabled in settings)
+-In-App colors adapter to Icon colors
+-Ukranian translation added by Pavlo Motrunych :)
+-Spanish translation improved by GitHub-User Pablohn26, Thanks
+-Partial Greek translation by GitHub-User leskal, Thanks
+
 Update [2.3.8]
 
 -Portuguese translation improved by Lennoard Rai
