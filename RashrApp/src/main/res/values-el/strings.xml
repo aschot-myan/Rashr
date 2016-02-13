@@ -125,7 +125,7 @@
     <string name="recovery_script_mind">Προσοχή, αυτό λειτουργεί μόνο με συμβατό TWRP recovery</string>
     <string name="run">Εκτέλεση</string>
     <string name="recovery_script_review">Προβολή του Script</string>
-    <string name="failed_unpack_files">Failed to unpack files from App</string>
+    <string name="failed_unpack_files">Αποτυχία εξαγωγής αρχείων</string>
     <string name="failed_setup_layout">Error setting up Layout</string>
     <string name="refresh_list">Η ενημέρωση ξεκίνησε!</string>
     <string name="new_imgs_loaded">%s νέα IMG φορτώθηκαν</string>
@@ -135,7 +135,7 @@
         In this case you can choose your real device. (do this if there aren\'t any images found)\n
         BE CAREFUL WITH THIS OPTION!</string>
     <string name="reloading">Επαναφόρτωση</string>
-    <string name="keep_current_name">Keep current name (%s)</string>
+    <string name="keep_current_name">Κρατήστε το τωρινό όνομα (%s)</string>
     <string name="rename_failed">Η μεταονομασία απέτυχε</string>
     <string name="flash">Flash</string>
     <string name="recovery_description">With this function you are able to flash your devices build-in recovery partition with one
@@ -143,7 +143,7 @@
     <string name="kernel_description">With this function you are able to flash your devices build-in kernel/boot partition with
         one click!</string>
     <string name="options">Ρυθμίσεις</string>
-    <string name="clear_cache_description">Delete all downloaded recovery/kernel images</string>
+    <string name="clear_cache_description">Διαγραφή όλων των ληφθέντων recovery/kernel εικόνων</string>
     <string name="reboot_description">Αφήστε την συσκεύη να επανεκκινηθεί άμεσα</string>
     <string name="reboot_recovery_description">Αφήστε την συσκεύη να επανεκκινηθεί στη recovery άμεσα</string>
     <string name="reboot_bootloader_description">Αφήστε την συσκεύη να επανεκκινηθεί στο bootloader/download mode άμεσα</string>
@@ -170,12 +170,12 @@
     <string name="check_app_updates">Έλεγχος ενημερώσεων στην αρχή</string>
     <string name="failed_update">Ο έλεγχος για ενημερώσεις απέτυχε</string>
     <string name="update_available">Ενημέρωση διαθέσιμη</string>
-    <string name="download_update">Please download the update to keep secure and get the latest features</string>
+    <string name="download_update">Παρακαλώ κατεβάστε την ενημερωμένη έκδοση για να κρατήσετε ασφάλεια και να πάρετε τις τελευταίες λειτουργίες</string>
     <string name="open_playstore">Άνοιγμα του Play Store</string>
     <string name="uptodate">Ενημερωμένο :D</string>
     <string name="update">Ενημέρωση</string>
     <string name="lists_outdated">The list with available recoveries and kernels are outdated. To flash your device with the latest recoveries and kernels update.\nNot all devices are supported!</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Γεια κενό κομμάτι</string>
     <string name="stock_recovery">Stock Recovery</string>
     <string name="stock_kernel">Stock Kernel</string>
     <string name="check_connection">Ελέξτε την σύνδεση στο διαδίκτυο</string>
