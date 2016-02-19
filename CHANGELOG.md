@@ -1,6 +1,10 @@
 CHANGELOG
 ====================
 
+Update [2.3.10]
+
+-Errors while creating backups fixed :)
+
 Update [2.3.9]
 
 -Settings for Header-Checking added (Rashr is getting more secure)
