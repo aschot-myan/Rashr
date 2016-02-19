@@ -4997,6 +4997,10 @@ e7f554c792c290ddda05bf82966c75c4a930d849 recoveries/stock-recovery-tilapia-4.4.4
 c104f99fd1cbce74c079641b8eb79bf437cae7cc recoveries/stock-recovery-toro-4.2.2.img
 6ea3f597d658d85f85ce4ab1ba087b87b9381bb2 recoveries/stock-recovery-toroplus-4.1.1.img
 11b9b7b05d141d54b261f9d86b89edd7e97d33b2 recoveries/stock-recovery-toroplus-4.2.1.img
+26c40e066b2deb227bf57beed18c513c1afb45aa recoveries/T2U-lockeddualrecovery2.8.21.zip
+b318c02d8ac4ea667721805421b9bc68820a3b46 recoveries/TabZ2-lockeddualrecovery2.8.21.zip
+c7134410b002158c99ab4d2ded5c5e5fc8d27e35 recoveries/TabZ3C-lockeddualrecovery2.8.21.zip
+0d2b0f7a285dcf96c8f9d5b638e136a2ea5c3b16 recoveries/TabZ-lockeddualrecovery2.8.21.zip
 d203011a1fd5d334f0787fe9c597be9d65039144 recoveries/twrp-2.8.6.0-zeroflte.img
 8dfc508aa1bfed30f75ded948620c5721dc76b13 recoveries/twrp-2.8.6.0-zerofltespr.img
 3cc1a22063a1f79a2d4a58e030f4651f77347164 recoveries/twrp-2.8.6.1-zeroflte.img
@@ -5054,3 +5058,15 @@ b8f4f020b9661629b267567f18380483278adb12 recoveries/twrp-thunderg-2.0.0alpha1.im
 932f5616dfb3ee450e9490d4007cdb36a1ee6048 recoveries/twrp-toro-2.1.2.img
 e11d92be881cde53f609ffa3a14c628b41bc248f recoveries/twrp-toroplus-2.1.2.img
 bf32907efca6571f2671adb9241f5e631ec7ed12 recoveries/twrp-vivow-2.0.0RC0.img
+5815b440b0d17b3dca36b3a9491967edd5bca40f recoveries/XS-lockeddualrecovery2.8.21.zip
+e9a37ba655d819afb6debcadf28bb92dfa21a38a recoveries/XSP-lockeddualrecovery2.8.21.zip
+6c0778c5919651f69ebe667dc5cb865d574ab2d0 recoveries/XT-lockeddualrecovery2.8.21.zip
+9a0f309ead4278098b24a91ab3c92b59f4582b6c recoveries/XZ-lockeddualrecovery2.8.21.zip
+1b65c175b6d17777661bce953058173b0a33ff91 recoveries/Z1C-lockeddualrecovery2.8.21.zip
+b2a97d9f5164d5f802e74fc1868c306aad9dac01 recoveries/Z1-lockeddualrecovery2.8.21.zip
+4d26c42c795b287533f88e407e4bba8da5deea10 recoveries/Z2-lockeddualrecovery2.8.21.zip
+a7b81801371b89104cfd208b4ce9d7aca944aa7e recoveries/Z3C-lockeddualrecovery2.8.21.zip
+60990b1c39b238566aa911790783b2922309d30f recoveries/Z3-lockeddualrecovery2.8.21.zip
+9b81d6feb87adb73f361ac672a78f95d50c64aa7 recoveries/ZL-lockeddualrecovery2.8.21.zip
+d3416031b41d73855e3bd7149bf5f6c87b46393c recoveries/ZR-lockeddualrecovery2.8.21.zip
+bc8edd74c73765d2926353df3c079a06d8817110 recoveries/ZU-lockeddualrecovery2.8.21.zip

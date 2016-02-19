@@ -129,9 +129,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     protected Boolean doInBackground(Void... params) {
         try {
             if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_IMAGE_CHECK)) {
-                if (mCustomIMG.toString().endsWith(Device.EXT_IMG)) {
-                    if (!isImageValid(mCustomIMG)) {
-                        throw new ImageNotValidException(mCustomIMG);
+                if (!isJobBackup()) {
+                    if (mCustomIMG.toString().endsWith(Device.EXT_IMG)) {
+                        if (!isImageValid(mCustomIMG)) {
+                            throw new ImageNotValidException(mCustomIMG);
+                        }
                     }
                 }
             }

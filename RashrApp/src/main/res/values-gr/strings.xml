@@ -179,7 +179,6 @@
     <string name="stock_recovery">Stock Recovery</string>
     <string name="stock_kernel">Stock Kernel</string>
     <string name="check_connection">Ελέξτε την σύνδεση στο διαδίκτυο</string>
-    <string name="check_name">Παρακαλώ ελέξτε το όνομα του backup. Μερικές συσκευές δεν μπορούν να το διαχειριστούν εάν περιέχει \':\' γι' αυτό αλλάξτε το με το File Explorer</string>
     <string name="ok">OK</string>
     <string name="logs_title">Logged Shell-Commands</string>
     <string name="clear_logs">Εκκαθάριση των Logs</string>

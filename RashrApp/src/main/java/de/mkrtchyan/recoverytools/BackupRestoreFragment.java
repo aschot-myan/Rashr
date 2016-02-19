@@ -352,7 +352,7 @@ public class BackupRestoreFragment extends Fragment {
 
                         @Override
                         public void onFail(Exception e) {
-
+                            Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
                     BackupCreator.execute();
