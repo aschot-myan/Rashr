@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import org.sufficientlysecure.rootcommands.Shell;
 import java.io.File;
 
 import de.mkrtchyan.utils.Common;
+import de.psdev.licensesdialog.LicensesDialog;
 
 /**
  * Copyright (c) 2015 Aschot Mkrtchyan
@@ -83,6 +85,7 @@ public class SettingsFragment extends Fragment {
         final AppCompatButton bShowChangelog = (AppCompatButton) root.findViewById(R.id.bShowChangelog);
         final AppCompatButton bReset = (AppCompatButton) root.findViewById(R.id.bReset);
         final AppCompatButton bClearCache = (AppCompatButton) root.findViewById(R.id.bClearCache);
+        final AppCompatButton bShowLicences = (AppCompatButton)root.findViewById(R.id.bShowLicenses);
 
         cbDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_DARK_UI));
@@ -221,6 +224,16 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SettingsFragment.showChangelog(v.getContext());
+            }
+        });
+        bShowLicences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LicensesDialog.Builder(v.getContext())
+                        .setNotices(R.raw.licenses_notice)
+                        .setIncludeOwnLicense(true)
+                        .build()
+                        .show();
             }
         });
         return root;

@@ -71,6 +71,11 @@
             android:text="@string/changelog"
             android:id="@+id/bShowChangelog" />
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/bShowLicenses"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/licenses" />
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/bReset"
             android:layout_width="match_parent"
             android:layout_height="60dp"
