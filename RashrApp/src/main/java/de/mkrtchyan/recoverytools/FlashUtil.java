@@ -170,13 +170,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     protected void onPostExecute(Boolean success) {
         pDialog.dismiss();
+        tmpFile.delete();
         RashrApp.TOOLBOX.remount("/system", "ro");
         if (success) {
-            if (tmpFile.delete()) {
-                if (isJobFlash() || isJobRestore()) {
-                    if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT)) {
-                        showRebootDialog();
-                    }
+            if (isJobFlash() || isJobRestore()) {
+                if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT)) {
+                    showRebootDialog();
                 }
             }
             if (mOnTaskDoneListener != null) {
@@ -363,7 +362,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private void placeImgBack() throws IOException, FailedExecuteCommand {
         RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 \"" + tmpFile + "\"");
-        Common.copyFile(tmpFile, mCustomIMG);
+        RashrApp.SHELL.execCommand(Const.Busybox + " mv \"" + tmpFile + "\" \"" + mCustomIMG + "\"");
     }
 
     public void saveHistory() {
