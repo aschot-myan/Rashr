@@ -40,6 +40,7 @@ public class Const {
     public static final String PREF_KEY_CUR_VER = "current_version";
     public static final String PREF_KEY_FIRST_RUN = "first_run";
     public static final String PREF_KEY_HIDE_RATER = "show_rater";
+    public static final String PREF_KEY_LOG = "log_commands";
     public static final String PREF_KEY_SHOW_UNIFIED = "show_unified";
     public static final String PREF_KEY_DARK_UI = "use_dark_ui";
     public static final String PREF_KEY_CHECK_UPDATES = "check_updates";
@@ -88,6 +89,7 @@ public class Const {
     public static final File PathToCWM = new File(PathToRecoveries, "clockworkmod");
     public static final File PathToTWRP = new File(PathToRecoveries, "twrp");
     public static final File PathToPhilz = new File(PathToRecoveries, "philz");
+    public static final File PathToCM = new File(PathToRecoveries, "cm");
     public static final File PathToXZDual = new File(PathToRecoveries, "xzdual");
     public static final File PathToKernel = new File(PathToRashr, "kernel");
     public static final File PathToStockKernel = new File(PathToKernel, "stock");
@@ -96,6 +98,7 @@ public class Const {
     public static final File PathToUtils = new File(PathToRashr, "utils");
     public static final File PathToTmp = new File(PathToRashr, "tmp");
     public static final File LastLog = new File("/cache/recovery/last_log");
+    public static final String Logs = "logs.txt";
     /**
      * Used folder and files
      */
