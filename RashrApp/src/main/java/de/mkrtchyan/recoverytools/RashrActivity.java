@@ -84,7 +84,7 @@ public class RashrActivity extends AppCompatActivity implements
     public static void firstSetup(Context context) {
         Common.setBooleanPref(context, Const.PREF_NAME, Const.PREF_KEY_HIDE_UPDATE_HINTS, false);
         Common.setBooleanPref(context, Const.PREF_NAME, Const.PREF_KEY_ADS, true);
-        Common.setBooleanPref(context, Shell.PREF_NAME, Shell.PREF_LOG, true);
+        Common.setBooleanPref(context, Const.PREF_NAME, Const.PREF_KEY_LOG, true);
         Common.setBooleanPref(context, Const.PREF_NAME, Const.PREF_KEY_CHECK_UPDATES, true);
         Common.setBooleanPref(context, Const.PREF_NAME, Const.PREF_KEY_SKIP_SIZE_CHECK, false);
     }
@@ -94,8 +94,6 @@ public class RashrActivity extends AppCompatActivity implements
 
         Const.FilesDir = mContext.getFilesDir();
         Const.RashrLog = new File(Const.FilesDir, Const.LOG_NAME);
-        //Const.RecoveryCollectionFile = new File(Const.FilesDir, Const.RECOVERY_SUMS);
-        //Const.KernelCollectionFile = new File(Const.FilesDir, Const.KERNEL_SUMS);
         isDark = Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_DARK_UI);
         setTheme(!isDark ? R.style.Rashr : R.style.Rashr_Dark);
         setContentView(R.layout.loading_layout);
@@ -114,6 +112,8 @@ public class RashrActivity extends AppCompatActivity implements
                 /** Try to get root access */
                 try {
                     RashrApp.SHELL = startShell();
+                    File logs = new File(mContext.getFilesDir(), Const.Logs);
+                    RashrApp.SHELL.setLogFile(logs);
                     RashrApp.TOOLBOX = new Toolbox(RashrApp.SHELL);
                 } catch (IOException e) {
                     String message;
@@ -132,13 +132,12 @@ public class RashrActivity extends AppCompatActivity implements
                     return;
                 }
 
-                /** Delete logs for new session */
-                Common.deleteLogs(mContext);
                 /** Creating needed folder and unpacking files */
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        tvLoading.setText(R.string.loading_data);
+                        if (tvLoading != null)
+                            tvLoading.setText(R.string.loading_data);
                     }
                 });
                 if (Const.PathToTmp.exists()) {
@@ -178,7 +177,8 @@ public class RashrActivity extends AppCompatActivity implements
                     @Override
                     public void run() {
                         checkAppUpdates();
-                        tvLoading.setText(R.string.reading_device);
+                        if (tvLoading != null)
+                            tvLoading.setText(R.string.reading_device);
                     }
                 });
                 if (!RashrApp.DEVICE.isSetup())
@@ -251,7 +251,9 @@ public class RashrActivity extends AppCompatActivity implements
                             RashrApp.ERRORS.add(Const.RASHR_TAG + " Error while inflating layout:" + e);
                             AppCompatTextView tv = (AppCompatTextView) findViewById(R.id.tvErr);
                             try {
-                                tv.setText(R.string.failed_setup_layout);
+                                if (tv != null) {
+                                    tv.setText(R.string.failed_setup_layout);
+                                }
                             } catch (RuntimeException ex) {
                                 RashrApp.ERRORS.add(Const.RASHR_TAG + e);
                                 ReportDialog dialog = new ReportDialog(mActivity, e.toString());
@@ -281,6 +283,9 @@ public class RashrActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Let the user know that what he is doing is dangerous
+     */
     private void showUsageWarning() {
         if (RashrApp.DEVICE.isRecoverySupported() || RashrApp.DEVICE.isKernelSupported()) {
             final AlertDialog.Builder WarningDialog = new AlertDialog.Builder(mContext);
@@ -307,6 +312,10 @@ public class RashrActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * If the device is not supported the user can send a report to the Developers-Email and help
+     * to Implement the device.
+     */
     private void showDeviceNotSupportedDialog() {
         AlertDialog.Builder DeviceNotSupported = new AlertDialog.Builder(mContext);
         DeviceNotSupported.setTitle(R.string.warning);
@@ -318,6 +327,11 @@ public class RashrActivity extends AppCompatActivity implements
             }
         });
         if (!Const.LastLog.exists()) {
+            /**
+             * Device has never been booted to recovery or cache has been cleaned.
+             * The LastLog-File normaly contains a partition table so Rashr can read it out from
+             * there if the user restarts into recovery. (probably)
+             */
             DeviceNotSupported.setNeutralButton(R.string.sReboot, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -332,6 +346,10 @@ public class RashrActivity extends AppCompatActivity implements
         DeviceNotSupported.show();
     }
 
+    /**
+     * Extract files from APK, the files are stored under RashrApp/src/res/raw
+     * @throws IOException Files can't be extracted
+     */
     private void extractFiles() throws IOException {
         Common.pushFileFromRAW(mContext, Const.RecoveryCollectionFile, R.raw.recovery_sums,
                 mVersionChanged);
@@ -356,6 +374,9 @@ public class RashrActivity extends AppCompatActivity implements
         Common.pushFileFromRAW(mContext, Const.LokiFlash, R.raw.loki_flash, mVersionChanged);
     }
 
+    /**
+     * Close App.
+     */
     public void exit() {
         finish();
         System.exit(0);
@@ -460,7 +481,7 @@ public class RashrActivity extends AppCompatActivity implements
     }
 
     /**
-     * @param fragment current fragment will be changed with param fragment
+     * @param fragment current fragment will be replaced by param fragment
      */
     public void switchTo(Fragment fragment) {
         getSupportFragmentManager()
@@ -477,7 +498,7 @@ public class RashrActivity extends AppCompatActivity implements
     private Shell startShell() throws IOException {
         Shell shell;
         try {
-            shell = Shell.startRootShell(mContext);
+            shell = Shell.startRootShell();
         } catch (IOException e) {
             if (BuildConfig.DEBUG) {
                 /** ignore root access error on Debug Rashr, use normal shell*/
