@@ -17,8 +17,6 @@
 
 package org.sufficientlysecure.rootcommands;
 
-import android.content.Context;
-
 import org.sufficientlysecure.rootcommands.command.Command;
 import org.sufficientlysecure.rootcommands.command.SimpleCommand;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
@@ -29,17 +27,14 @@ import org.sufficientlysecure.rootcommands.util.Utils;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Shell implements Closeable {
-    public static final String PREF_NAME = "shell";
-    public static final String PREF_LOG = "log_commands";
-    public static final String Logs = "commands.txt";
     private static final String LD_LIBRARY_PATH = System.getenv("LD_LIBRARY_PATH");
     private static final String token = "F*D^W@#FGF";
     private static final String TAG = "Shell";
@@ -47,8 +42,8 @@ public class Shell implements Closeable {
     private final BufferedReader stdOutErr;
     private final DataOutputStream outputStream;
     private final List<Command> commands = new ArrayList<Command>();
+    private File mLogFile = null;
     private boolean close = false;
-    private Context mContext = null;
     private Runnable inputRunnable = new Runnable() {
         public void run() {
             try {
@@ -70,10 +65,8 @@ public class Shell implements Closeable {
         }
     };
 
-    private Shell(Context mContext, String shell, ArrayList<String> customEnv, String baseDirectory)
+    private Shell(String shell, ArrayList<String> customEnv, String baseDirectory)
             throws IOException {
-
-        this.mContext = mContext;
         Log.d(RootCommands.TAG, "Starting shell: " + shell);
 
         // start shell process!
@@ -109,10 +102,10 @@ public class Shell implements Closeable {
      *
      * @param customEnv
      * @param baseDirectory
-     * @return
+     * @return shell
      * @throws IOException
      */
-    public static Shell startRootShell(Context mContext, ArrayList<String> customEnv, String baseDirectory)
+    public static Shell startRootShell(ArrayList<String> customEnv, String baseDirectory)
             throws IOException {
         Log.d(RootCommands.TAG, "Starting Root Shell!");
 
@@ -123,7 +116,7 @@ public class Shell implements Closeable {
         }
         customEnv.add("LD_LIBRARY_PATH=" + LD_LIBRARY_PATH);
 
-        Shell shell = new Shell(mContext, Utils.getSuPath(), customEnv, baseDirectory);
+        Shell shell = new Shell(Utils.getSuPath(), customEnv, baseDirectory);
 
         return shell;
     }
@@ -135,11 +128,7 @@ public class Shell implements Closeable {
      * @throws IOException
      */
     public static Shell startRootShell() throws IOException {
-        return startRootShell(null, null, null);
-    }
-
-    public static Shell startRootShell(Context mContext) throws IOException {
-        return startRootShell(mContext, null, null);
+        return startRootShell(null, null);
     }
 
     /**
@@ -153,7 +142,7 @@ public class Shell implements Closeable {
     public static Shell startShell(ArrayList<String> customEnv, String baseDirectory)
             throws IOException {
         Log.d(RootCommands.TAG, "Starting Shell!");
-        Shell shell = new Shell(null, "sh", customEnv, baseDirectory);
+        Shell shell = new Shell("sh", customEnv, baseDirectory);
         return shell;
     }
 
@@ -179,7 +168,7 @@ public class Shell implements Closeable {
     public static Shell startCustomShell(String shellPath, ArrayList<String> customEnv,
                                          String baseDirectory) throws IOException {
         Log.d(RootCommands.TAG, "Starting Custom Shell!");
-        Shell shell = new Shell(null, shellPath, customEnv, baseDirectory);
+        Shell shell = new Shell(shellPath, customEnv, baseDirectory);
 
         return shell;
     }
@@ -369,18 +358,18 @@ public class Shell implements Closeable {
     public String execCommand(String Command) throws FailedExecuteCommand {
         final SimpleCommand command = new SimpleCommand(Command);
         try {
-            android.util.Log.i(TAG, Command);
+            Log.i(TAG, Command);
             this.add(command).waitForFinish();
             String output = command.getOutput();
             logCommand(command);
-            android.util.Log.i(TAG, output);
+            Log.i(TAG, output);
             if (command.getExitCode() != 0) {
                 throw new Exception("Exit-Code not 0");
             }
             return output;
         } catch (Exception e) {
             logCommand(command);
-            android.util.Log.i(TAG, "Failed: " + command.getOutput());
+            Log.i(TAG, "Failed: " + command.getOutput());
             throw new FailedExecuteCommand(command);
         }
     }
@@ -388,7 +377,7 @@ public class Shell implements Closeable {
     public String execCommand(String Command, boolean waitForFinish) throws FailedExecuteCommand {
         final SimpleCommand command = new SimpleCommand(Command);
         try {
-            android.util.Log.i(TAG, Command);
+            Log.i(TAG, Command);
             if (waitForFinish) {
                 this.add(command).waitForFinish();
             } else {
@@ -396,14 +385,14 @@ public class Shell implements Closeable {
             }
             String output = command.getOutput();
             logCommand(command);
-            android.util.Log.i(TAG, output);
+            Log.i(TAG, output);
             if (command.getExitCode() != 0) {
                 throw new Exception("Exit-Code not 0");
             }
             return output;
         } catch (Exception e) {
             logCommand(command);
-            android.util.Log.i(TAG, "Failed: " + command.getOutput());
+            Log.i(TAG, "Failed: " + command.getOutput());
             throw new FailedExecuteCommand(command);
         }
     }
@@ -411,18 +400,18 @@ public class Shell implements Closeable {
     public String execCommand(Command command) throws FailedExecuteCommand {
         final SimpleCommand simpleCommand = new SimpleCommand(command.getCommand());
         try {
-            android.util.Log.i(TAG, simpleCommand.getCommand());
+            Log.i(TAG, simpleCommand.getCommand());
             this.add(simpleCommand).waitForFinish();
             String output = simpleCommand.getOutput();
             logCommand(simpleCommand);
-            android.util.Log.i(TAG, output);
+            Log.i(TAG, output);
             if (simpleCommand.getExitCode() != 0) {
                 throw new Exception("Exit-Code not 0");
             }
             return output;
         } catch (Exception e) {
             logCommand(simpleCommand);
-            android.util.Log.i(TAG, "Failed: " + command.getCommand());
+            Log.i(TAG, "Failed: " + command.getCommand());
             throw new FailedExecuteCommand(command);
         }
     }
@@ -436,7 +425,7 @@ public class Shell implements Closeable {
                 this.add(simpleCommand);
             }
             String output = simpleCommand.getOutput();
-            android.util.Log.i(TAG, simpleCommand.getCommand());
+            Log.i(TAG, simpleCommand.getCommand());
             logCommand(simpleCommand);
             if (simpleCommand.getExitCode() != 0) {
                 throw new Exception("Exit-Code not 0");
@@ -450,24 +439,27 @@ public class Shell implements Closeable {
 
     private void logCommand(SimpleCommand command) {
         try {
-            if (mContext != null) {
-                if (mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getBoolean(PREF_LOG, false)) {
-                    String Log = "";
-                    if (command.getExitCode() == 0) {
-                        Log += "\nCommand:\n" + command.getCommand();
-                    } else {
-                        Log += "\nFailed execute:\n" + command.getCommand() + "\n";
-                    }
-                    if (!command.getOutput().equals("")) {
-                        Log += "\n\nOutput:\n" + command.getOutput();
-                    }
-                    FileOutputStream fo = mContext.openFileOutput(Logs, Context.MODE_APPEND);
-                    fo.write(Log.getBytes());
-                    fo.close();
+            if (mLogFile != null) {
+                String Log = "";
+                if (command.getExitCode() == 0) {
+                    Log += "\nCommand:\n" + command.getCommand();
+                } else {
+                    Log += "\nFailed execute:\n" + command.getCommand() + "\n";
                 }
+                if (!command.getOutput().equals("")) {
+                    Log += "\n\nOutput:\n" + command.getOutput();
+                }
+                RandomAccessFile f = new RandomAccessFile(mLogFile, "rw");
+                f.seek(0);
+                f.write(Log.getBytes());
+                f.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setLogFile(File file) {
+        mLogFile = file;
     }
 }
