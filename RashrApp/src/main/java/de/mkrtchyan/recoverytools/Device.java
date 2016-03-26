@@ -42,6 +42,13 @@ public class Device {
     public static final String EXT_IMG = ".img";
     //public static final String EXT_TAR = ".tar";
     public static final String EXT_ZIP = ".zip";
+    public static final String REC_SYS_CWM = "cwm";
+    public static final String REC_SYS_TWRP = "twrp";
+    public static final String REC_SYS_PHILZ = "philz";
+    public static final String REC_SYS_XZDUAL = "xzdual";
+    public static final String REC_SYS_CM = "cm";
+    public static final String REC_SYS_STOCK = "stock";
+    public static final String KER_SYS_STOCK = "stock";
     public static final int PARTITION_TYPE_DD = 1;
     public static final int PARTITION_TYPE_MTD = 2;
     public static final int PARTITION_TYPE_RECOVERY = 3;
@@ -123,6 +130,7 @@ public class Device {
     private ArrayList<String> mTwrpRecoveries = new ArrayList<>();
     private ArrayList<String> mCwmRecoveries = new ArrayList<>();
     private ArrayList<String> mPhilzRecoveries = new ArrayList<>();
+    private ArrayList<String> mCmRecoveries = new ArrayList<>();
     private ArrayList<String> mStockKernel = new ArrayList<>();
     private ArrayList<String> mXZDualRecoveries = new ArrayList<>();
 
@@ -464,7 +472,9 @@ public class Device {
     public void loadRecoveryList() {
 
         ArrayList<String> CWMList = new ArrayList<>(), TWRPList = new ArrayList<>(),
-                PHILZList = new ArrayList<>(), StockList = new ArrayList<>(), XZDualList = new ArrayList<>();
+                PHILZList = new ArrayList<>(), StockList = new ArrayList<>(),
+                XZDualList = new ArrayList<>(), CMList = new ArrayList<>();
+
 
         try {
             String Line;
@@ -476,14 +486,17 @@ public class Device {
                 if (lowLine.endsWith(mRECOVERY_EXT)) {
                     if (lowLine.contains(mName.toLowerCase())
                             || lowLine.contains(Build.DEVICE.toLowerCase())) {
-                        if (lowLine.contains("stock")) {
+                        if (lowLine.contains(REC_SYS_STOCK)) {
                             StockList.add(Line.substring(NameStartAt));
-                        } else if (lowLine.contains("clockwork") || lowLine.contains("cwm")) {
+                        } else if (lowLine.contains("clockwork") || lowLine.contains(REC_SYS_CWM)) {
                             CWMList.add(Line.substring(NameStartAt));
-                        } else if (lowLine.contains("twrp")) {
-                            TWRPList.add(Line.substring(NameStartAt));
-                        } else if (lowLine.contains("philz")) {
+                        } else if (lowLine.contains(REC_SYS_TWRP)) {
+                            if (Line.endsWith(mName + mRECOVERY_EXT))
+                                TWRPList.add(Line.split("/")[1]);
+                        } else if (lowLine.contains(REC_SYS_PHILZ)) {
                             PHILZList.add(Line.substring(NameStartAt));
+                        } else if (lowLine.contains("cm-")) {
+                            CMList.add(Line.split(" ")[1]);
                         }
                     }
                 }
@@ -501,6 +514,7 @@ public class Device {
             Collections.sort(TWRPList);
             Collections.sort(PHILZList);
             Collections.sort(XZDualList);
+            Collections.sort(CMList);
 
             /**
              * First clear list before adding items (to avoid double entry on reload by update)
@@ -510,6 +524,7 @@ public class Device {
             mTwrpRecoveries.clear();
             mPhilzRecoveries.clear();
             mXZDualRecoveries.clear();
+            mCmRecoveries.clear();
 
             /** Sort newest version to first place */
             for (Object i : StockList) {
@@ -526,6 +541,9 @@ public class Device {
             }
             for (Object i : XZDualList) {
                 mXZDualRecoveries.add(0, i.toString());
+            }
+            for (Object i : CMList) {
+                mCmRecoveries.add(0, i.toString());
             }
 
         } catch (IOException e) {
@@ -842,6 +860,10 @@ public class Device {
         return mPhilzRecoveries.size() > 0 && isRecoverySupported();
     }
 
+    public boolean isCmRecoverySupported() {
+        return mCmRecoveries.size() > 0 && isRecoverySupported();
+    }
+
     public boolean isStockKernelSupported() {
         return mStockKernel.size() > 0 && isKernelSupported();
     }
@@ -920,6 +942,10 @@ public class Device {
 
     public ArrayList<String> getXZDualRecoveryVersions() {
         return mXZDualRecoveries;
+    }
+
+    public ArrayList<String> getCmRecoveriyVersions() {
+        return mCmRecoveries;
     }
 
     public String getRecoveryVersion() {
