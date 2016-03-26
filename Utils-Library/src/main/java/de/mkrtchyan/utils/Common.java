@@ -113,10 +113,6 @@ public class Common {
         editor.commit();
     }
 
-    public static boolean deleteLogs(final Context context) {
-        return new File(context.getFilesDir(), "commands.txt").delete();
-    }
-
     public static void copyFile(File src, File dst) throws IOException {
         FileChannel inChannel = new FileInputStream(src).getChannel();
         FileChannel outChannel = new FileOutputStream(dst).getChannel();
