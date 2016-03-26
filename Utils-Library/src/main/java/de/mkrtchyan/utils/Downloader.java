@@ -1,7 +1,7 @@
 package de.mkrtchyan.utils;
 
 /**
- * Copyright (c) 2016 Ashot Mkrtchyan
+ * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights 
@@ -28,8 +28,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 public class Downloader {
     private static final String TAG = "Downloader";
@@ -71,12 +71,25 @@ public class Downloader {
                 public void run() {
                     try {
                         Log.i(TAG, "Connecting to " + mURL.getHost());
-                        URLConnection connection = mURL.openConnection();
-
-                        connection.setDoOutput(true);
-                        connection.setDoInput(true);
+                        HttpURLConnection connection = (HttpURLConnection) mURL.openConnection();
                         connection.connect();
+                        while (connection.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM
+                                || connection.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP) {
+                            // get redirect url from "location" header field
+                            String newUrl = connection.getHeaderField("Location");
 
+                            // get the cookie if need, for login
+                            String cookies = connection.getHeaderField("Set-Cookie");
+
+                            // open the new connnection again
+                            connection = (HttpURLConnection) new URL(newUrl).openConnection();
+                            connection.setRequestProperty("Cookie", cookies);
+                            connection.setRequestMethod("GET");
+                            connection.setDoOutput(true);
+                            connection.setDoInput(true);
+                            connection.setInstanceFollowRedirects(true);
+                            connection.connect();
+                        }
                         FileOutputStream fileOutput = new FileOutputStream(mOutputFile);
 
                         InputStream inputStream = connection.getInputStream();
@@ -172,6 +185,7 @@ public class Downloader {
             return !SHA1.verifyChecksum(mOutputFile, ChecksumFile);
         } catch (IOException | SHA1.SHA1SumNotFound e) {
             Log.d(TAG, e.getMessage());
+            mError = e;
             e.printStackTrace();
         }
         return true;
