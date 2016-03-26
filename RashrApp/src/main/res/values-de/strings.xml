@@ -233,4 +233,6 @@
     <string name="skip_size_check">Dateigrössenprüfung überspringen (könnte schädlich sein)</string>
     <string name="xzdual_uninstall_successfull">XZDualRecovery wurde erfolgreich von Ihrem Gerät deinstallier</string>
     <string name="xzdual_uninstall_failed">XZDualRecovery konnte nicht deinstalliert werden. Folgender Fehler ist aufgetreten:</string>
+    <string name="total_images">Insgesammt verfügbare Images</string>
+    <string name="recovery_type">Typ der Recovery-Partition</string>
 </resources>

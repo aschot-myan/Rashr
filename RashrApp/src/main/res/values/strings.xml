@@ -199,4 +199,11 @@
     <string name="xzdual_uninstall_failed">XZDualRecovery couldn\'t be uninstalled. Error:</string>
     <string name="skip_validate_image">Skip Image header checking (can cause damage)</string>
     <string name="information">Information</string>
+    <string name="total_images">Total images available</string>
+    <string name="recovery_type">Recovery Type</string>
+    <string name="licenses">Licenses</string>
+    <string name="install_xzdual_alert">Do you want to install XZDual on this device?</string>
+    <string name="yes">Yes</string>
+    <string name="cm_recovery">CyanogenMod Recovery</string>
+    <string name="cm_recovery_description">CyanogenMod Recovery is used by CyanogenMod in their ROMs and are keept realy near to stock recovery.</string>
 </resources>
