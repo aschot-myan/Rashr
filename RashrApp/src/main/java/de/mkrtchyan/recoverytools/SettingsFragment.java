@@ -1,6 +1,5 @@
 package de.mkrtchyan.recoverytools;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
@@ -19,8 +17,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-
-import org.sufficientlysecure.rootcommands.Shell;
 
 import java.io.File;
 
@@ -91,7 +87,7 @@ public class SettingsFragment extends Fragment {
                 Const.PREF_KEY_DARK_UI));
         cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_ADS));
-        cbLog.setChecked(Common.getBooleanPref(root.getContext(), Shell.PREF_NAME, Shell.PREF_LOG));
+        cbLog.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME, Const.PREF_KEY_LOG));
         cbCheckUpdates.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_CHECK_UPDATES));
         cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
@@ -113,7 +109,7 @@ public class SettingsFragment extends Fragment {
         cbLog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                Common.setBooleanPref(view.getContext(), Shell.PREF_NAME, Shell.PREF_LOG, isChecked);
+                Common.setBooleanPref(view.getContext(), Const.PREF_NAME, Const.PREF_KEY_LOG, isChecked);
                 root.findViewById(R.id.bShowLogs)
                         .setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
             }
@@ -180,7 +176,7 @@ public class SettingsFragment extends Fragment {
                 SharedPreferences.Editor editor = activity.getSharedPreferences(Const.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
                 editor.clear().commit();
-                editor = activity.getSharedPreferences(Shell.PREF_NAME,
+                editor = activity.getSharedPreferences(Const.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
                 editor.clear().commit();
                 RashrActivity.firstSetup(v.getContext());
@@ -243,13 +239,12 @@ public class SettingsFragment extends Fragment {
         final Context context = getActivity();
         final AlertDialog.Builder LogDialog = new AlertDialog.Builder(context);
         LogDialog.setTitle(R.string.logs);
+        final File logs = new File(context.getFilesDir(), Const.Logs);
         try {
-            final String message = Common.fileContent(new File(context.getFilesDir(), Shell.Logs));
+            final String message = Common.fileContent(logs);
             LogDialog.setMessage(message);
             LogDialog.setNeutralButton(R.string.copy, new DialogInterface.OnClickListener() {
                 @Override
-                @SuppressLint("NewApi")
-                @SuppressWarnings("deprecation")
                 public void onClick(DialogInterface dialog, int which) {
                     Common.copyToClipboard(context, message);
                 }
@@ -260,7 +255,7 @@ public class SettingsFragment extends Fragment {
         LogDialog.setNegativeButton(R.string.clear_logs, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Common.deleteLogs(context);
+                logs.delete();
             }
         });
         LogDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
