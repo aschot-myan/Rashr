@@ -34,7 +34,6 @@ import java.util.Calendar;
 
 import de.mkrtchyan.recoverytools.view.SlidingTabLayout;
 
-//TODO: Improve and clean up...
 
 /**
  * Copyright (c) 2016 Aschot Mkrtchyan
@@ -88,6 +87,7 @@ public class BackupRestoreFragment extends Fragment {
                 dialog.setContentView(R.layout.dialog_input);
                 final AppCompatButton bGo = (AppCompatButton) dialog.findViewById(R.id.bGoBackup);
                 final AppCompatEditText etFileName = (AppCompatEditText) dialog.findViewById(R.id.etFileName);
+                if (bGo == null || etFileName == null) return false;
                 //If current item is 0 (first item) a recovery backup will be edited or created
                 final File path = mPager.getCurrentItem() == 0 ?
                         Const.PathToRecoveryBackups : Const.PathToKernelBackups;
@@ -97,7 +97,7 @@ public class BackupRestoreFragment extends Fragment {
                         case R.id.iRestore:
                             File backup = new File(path, FileName);
                             FlashUtil RestoreUtil = new FlashUtil(mActivity, backup,
-                                    mPager.getCurrentItem() == 1 ?
+                                    mPager.getCurrentItem() == 0 ?
                                             FlashUtil.JOB_RESTORE_RECOVERY : FlashUtil.JOB_RESTORE_KERNEL);
                             RestoreUtil.execute();
                             return true;
@@ -227,7 +227,6 @@ public class BackupRestoreFragment extends Fragment {
                         fab.setVisibility(View.INVISIBLE);
                     }
                 } else {
-
                     if (RashrApp.DEVICE.isKernelDD() || RashrApp.DEVICE.isKernelMTD()) {
                         fab.setVisibility(View.VISIBLE);
                     } else {
@@ -289,6 +288,7 @@ public class BackupRestoreFragment extends Fragment {
         final AppCompatButton bGoBackup = (AppCompatButton) dialog.findViewById(R.id.bGoBackup);
         final AppCompatEditText etFileName = (AppCompatEditText) dialog.findViewById(R.id.etFileName);
         final AppCompatCheckBox optName = (AppCompatCheckBox) dialog.findViewById(R.id.cbOptInput);
+        if (bGoBackup == null || etFileName == null || optName == null) return;
         final String NameHint = prefix + "-from-" + Calendar.getInstance().get(Calendar.DATE)
                 + "-" + Calendar.getInstance().get(Calendar.MONTH)
                 + "-" + Calendar.getInstance().get(Calendar.YEAR)
@@ -466,7 +466,7 @@ public class BackupRestoreFragment extends Fragment {
             if (mRecoveryBackupFragment != null) {
                 mRecoveryBackupFragment.getAdapter().clear();
                 if (!(RashrApp.DEVICE.isRecoveryDD() || RashrApp.DEVICE.isRecoveryMTD())) {
-                    mRecoveryBackupFragment.getAdapter().add("Operation not supported");
+                    mRecoveryBackupFragment.getAdapter().add(getString(R.string.op_not_supported));
                 } else {
                     File path = Const.PathToRecoveryBackups;
                     if (path.listFiles() != null) {
@@ -482,7 +482,7 @@ public class BackupRestoreFragment extends Fragment {
             if (mKernelBackupFragment != null) {
                 mKernelBackupFragment.getAdapter().clear();
                 if (!(RashrApp.DEVICE.isKernelDD() || RashrApp.DEVICE.isKernelMTD())) {
-                    mKernelBackupFragment.getAdapter().add("Operation not supported");
+                    mKernelBackupFragment.getAdapter().add(getString(R.string.op_not_supported));
                 } else {
                     File path = Const.PathToKernelBackups;
                     if (path.listFiles() != null) {
