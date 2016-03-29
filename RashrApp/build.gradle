@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '23.0.2'
     defaultConfig {
         minSdkVersion 8
-        versionCode 107
-        versionName '2.3.10'
+        versionCode 108
+        versionName '2.3.11'
     }
     lintOptions {
         abortOnError false
@@ -19,8 +19,9 @@ dependencies {
     compile project(':Utils-Library')
     compile project(':CardsUILib')
     compile project(':Donations')
-    compile 'com.android.support:support-v4:23.1.1'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'de.psdev.licensesdialog:licensesdialog:1.8.0'
 }

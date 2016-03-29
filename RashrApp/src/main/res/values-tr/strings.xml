@@ -2,7 +2,6 @@
 <resources>
 
     <string name="add_queue">Kuyruğa Zip ekle</string>
-    <string name="app_name">Rashr</string>
     <string name="backup">Yedekle</string>
     <string name="backup_opts">Yedekleme Seçenekleri</string>
     <string name="backupalready">Yedek zaten mevcut.</string>

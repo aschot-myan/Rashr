@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class InformationFragment extends Fragment {
 
-    //private OnListFragmentInteractionListener mListener;
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -79,7 +77,7 @@ public class InformationFragment extends Fragment {
                     kernelType = "Not supported";
             }
 
-            items.add(new InformationItem("Recovery Partition Type", recoveryType));
+            items.add(new InformationItem(getString(R.string.recovery_type), recoveryType));
             if (recoveryWithPath)
                 items.add(new InformationItem("Recovery Path", RashrApp.DEVICE.getRecoveryPath()));
             if (recoveryWithBS)
@@ -94,7 +92,7 @@ public class InformationFragment extends Fragment {
             int total = 0;
             if (RashrApp.DEVICE.isCwmRecoverySupported()) {
                 int tmp = RashrApp.DEVICE.getCwmRecoveryVersions().size();
-                items.add(new InformationItem("CWM Images", String.valueOf(tmp)));
+                items.add(new InformationItem(getString(R.string.sCWM), String.valueOf(tmp)));
                 total += tmp;
             }
             if (RashrApp.DEVICE.isTwrpRecoverySupported()) {
@@ -114,55 +112,23 @@ public class InformationFragment extends Fragment {
             }
             if (RashrApp.DEVICE.isStockRecoverySupported()){
                 int tmp = RashrApp.DEVICE.getStockRecoveryVersions().size();
-                items.add(new InformationItem("Stock Recovery Images", String.valueOf(tmp)));
+                items.add(new InformationItem(getString(R.string.stock_recovery), String.valueOf(tmp)));
                 total += tmp;
             }
             if (RashrApp.DEVICE.isStockKernelSupported()){
                 int tmp = RashrApp.DEVICE.getStockKernelVersions().size();
-                items.add(new InformationItem("Stock Kernel Images", String.valueOf(tmp)));
+                items.add(new InformationItem(getString(R.string.stock_kernel), String.valueOf(tmp)));
                 total += tmp;
             }
 
-            items.add(new InformationItem("Total images avaiable", String.valueOf(total)));
+            items.add(new InformationItem(getString(R.string.total_images), String.valueOf(total)));
 
             for (String err : RashrApp.ERRORS) {
-                items.add(new InformationItem("Err", err));
+                items.add(new InformationItem("Error:", err));
             }
 
             recyclerView.setAdapter(new InformationRecyclerViewAdapter(items));
         }
         return view;
     }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        //mListener = new OnListFragmentInteractionListener() {
-        //    @Override
-        //    public void onListFragmentInteraction(InformationItem item) {
-//
-        //    }
-        //};
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        //mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    //public interface OnListFragmentInteractionListener {
-    //    void onListFragmentInteraction(InformationItem item);
-    //}
 }

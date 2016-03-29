@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Rashr</string>
+    <string name="app_name" translatable="false">Rashr</string>
     <string name="settings">Settings</string>
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flash Recovery</string>
@@ -205,5 +205,9 @@
     <string name="install_xzdual_alert">Do you want to install XZDual on this device?</string>
     <string name="yes">Yes</string>
     <string name="cm_recovery">CyanogenMod Recovery</string>
-    <string name="cm_recovery_description">CyanogenMod Recovery is used by CyanogenMod in their ROMs and are keept realy near to stock recovery.</string>
+    <string name="cm_recovery_description">CyanogenMod Recovery is used by CyanogenMod in their ROMs and are kept really near to stock recovery.</string>
+    <string name="op_not_supported">Operation not supported</string>
+    <string name="image_not_valid_message" formatted="false">This image hasn\'t been recognised as a valid Android-Image. If you are really sure that this Image (%s) is not corrupt you are able to disable the Validation in the settings and try it again. I\'ve warned you!</string>
+    <string name="image_to_big_message" formatted="false">The chosen image (%d MB) is to big for your device (partition %d MB). If you are sure that this image is the correct one you are able to skip size check before flashing. Checkout the Settings. I\'ve warned you!</string>
+    <string name="reboot_failed">Reboot failed</string>
 </resources>

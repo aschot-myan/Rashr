@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Rashr</string>
     <string name="settings">設定</string>
     <string name="sCWM">CWM recovery</string>
     <string name="sFlashRecovery">刷寫 Recovery</string>
@@ -33,7 +32,6 @@
     <string name="sReboot">重啟</string>
     <string name="sRebootHot">熱重啟</string>
     <string name="sRebootRecovery">重啟至 Recovery</string>
-    <string name="sReboot啟動程式">重啟至 啟動程式</string>
     <string name="sRebootShutdown">關機</string>
     <string name="info">資訊</string>
     <string name="flashed">已寫入磁區。</string>
@@ -144,7 +142,6 @@
     <string name="clear_cache_description">刪除所有已下載的 Recovery / 內核鏡像檔</string>
     <string name="reboot_description">立即重啟您的裝置</string>
     <string name="reboot_recovery_description">立即重啟您的裝置至 Recovery</string>
-    <string name="reboot_啟動程式_description">立即重啟您的裝置至載入程式</string>
     <string name="shutdown_description">立即關閉您的裝置</string>
     <string name="cwm_description">ClockworkMod Recovery 是 Android 上最有名的自訂 Recovery</string>
     <string name="twrp_description">Team Win Recovery Project (TWRP) 是個完全以觸控操作的自訂 Recovery</string>

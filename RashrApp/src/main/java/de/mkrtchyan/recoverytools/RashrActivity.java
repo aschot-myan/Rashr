@@ -154,7 +154,7 @@ public class RashrActivity extends AppCompatActivity implements
                 try {
                     extractFiles();
                 } catch (IOException e) {
-                    RashrApp.ERRORS.add(Const.RASHR_TAG + " Failed to extract files. Error: " + e);
+                    RashrApp.ERRORS.add("Failed to extract files. Error: " + e);
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -248,7 +248,7 @@ public class RashrActivity extends AppCompatActivity implements
                             }
                         } catch (NullPointerException e) {
                             setContentView(R.layout.err_layout);
-                            RashrApp.ERRORS.add(Const.RASHR_TAG + " Error while inflating layout:" + e);
+                            RashrApp.ERRORS.add("Error while inflating layout:" + e);
                             AppCompatTextView tv = (AppCompatTextView) findViewById(R.id.tvErr);
                             try {
                                 if (tv != null) {
@@ -338,6 +338,7 @@ public class RashrActivity extends AppCompatActivity implements
                     try {
                         RashrApp.TOOLBOX.reboot(Toolbox.REBOOT_RECOVERY);
                     } catch (Exception e) {
+                        Toast.makeText(mContext, R.string.reboot_failed, Toast.LENGTH_SHORT).show();
                         RashrApp.ERRORS.add(Const.RASHR_TAG + " Device could not be rebooted");
                     }
                 }
@@ -500,6 +501,7 @@ public class RashrActivity extends AppCompatActivity implements
         try {
             shell = Shell.startRootShell();
         } catch (IOException e) {
+            RashrApp.ERRORS.add("Root-Shell could not be started " + e);
             if (BuildConfig.DEBUG) {
                 /** ignore root access error on Debug Rashr, use normal shell*/
                 shell = Shell.startShell();

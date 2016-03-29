@@ -1,5 +1,14 @@
 CHANGELOG
-====================
+=========
+
+Update [2.3.11]
+
+-Error while creating backups fixed on more devices
+-Restore on wrong partition fixed (sorry)
+-CyanogenMod Recoveries added to Rashr :)
+-TWRP images updated!!
+-Licences added
+-Some other bugs fixed
 
 Update [2.3.10]
 

@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Rashr</string>
     <string name="settings">設定</string>
     <string name="sCWM">CWM recovery</string>
     <string name="sFlashRecovery">寫入 Recovery</string>
@@ -31,7 +30,6 @@
     <string name="sReboot">重啟</string>
     <string name="sRebootHot">熱重啟</string>
     <string name="sRebootRecovery">重啟至 Recovery</string>
-    <string name="sReboot啟動程式">重啟至 啟動程式</string>
     <string name="sRebootShutdown">關機</string>
     <string name="info">資訊</string>
     <string name="flashed">已寫入磁區。</string>
@@ -142,7 +140,6 @@ This ROM ist using Unified CyanogenMod Sources.\n Consequently it could be that 
     <string name="clear_cache_description">刪除所有已下載的 Recovery / 內核鏡像檔</string>
     <string name="reboot_description">使您的裝置立即重啟</string>
     <string name="reboot_recovery_description">使您的裝置立即重啟至 Recovery</string>
-    <string name="reboot_啟動程式_description">使您的裝置立即重啟至啟動程式/下載模式</string>
     <string name="shutdown_description">使您的裝置立即關機</string>
     <string name="cwm_description">ClockworkMod Recovery 是 Android 上最有名的自製 Recovery</string>
 <string name="twrp_description">

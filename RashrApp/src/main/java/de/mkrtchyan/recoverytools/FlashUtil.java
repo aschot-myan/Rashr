@@ -127,26 +127,33 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        try {
-            if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_IMAGE_CHECK)) {
-                if (!isJobBackup()) {
-                    if (mCustomIMG.toString().endsWith(Device.EXT_IMG)) {
-                        if (!isImageValid(mCustomIMG)) {
-                            throw new ImageNotValidException(mCustomIMG);
-                        }
+        if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_IMAGE_CHECK)) {
+            if (!isJobBackup()) {
+                if (mCustomIMG.toString().endsWith(Device.EXT_IMG)) {
+                    if (!isImageValid(mCustomIMG)) {
+                        mException = new ImageNotValidException(mCustomIMG);
+                        return false;
                     }
                 }
             }
-            if (isJobXZDual()) {
+        }
+        if (isJobXZDual()) {
+            try {
                 installXZDual();
-                return true;
+            } catch (FailedExecuteCommand failedExecuteCommand) {
+                failedExecuteCommand.printStackTrace();
+                mException = failedExecuteCommand;
+                return false;
             }
-            int PartitionType = 0;
-            if (isJobRecovery()) {
-                PartitionType = RashrApp.DEVICE.getRecoveryType();
-            } else if (isJobKernel()) {
-                PartitionType = RashrApp.DEVICE.getKernelType();
-            }
+            return true;
+        }
+        int PartitionType = 0;
+        if (isJobRecovery()) {
+            PartitionType = RashrApp.DEVICE.getRecoveryType();
+        } else if (isJobKernel()) {
+            PartitionType = RashrApp.DEVICE.getKernelType();
+        }
+        try {
             switch (PartitionType) {
                 case Device.PARTITION_TYPE_MTD:
                     MTD();
@@ -160,12 +167,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 default:
                     return false;
             }
-            saveHistory();
-            return true;
-        } catch (final Exception e) {
+        } catch (FailedExecuteCommand | IOException | ImageToBigException e) {
             mException = e;
-            return false;
         }
+        saveHistory();
+        /** If there is not any exception everything was ok */
+        return mException == null;
     }
 
     protected void onPostExecute(Boolean success) {
@@ -198,7 +205,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         }
     }
 
-    public void DD() throws FailedExecuteCommand, IOException {
+    public void DD() throws FailedExecuteCommand, IOException, ImageToBigException {
         Thread observer;
 
         if (isJobBackup() && (isJobRecovery() ? RashrApp.DEVICE.isRecoveryDD() : RashrApp.DEVICE.isKernelDD())) {
@@ -227,16 +234,14 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             });
             observer.start();
         }
-        if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_SIZE_CHECK)) {
+        if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_SIZE_CHECK)) {
             if (isJobFlash()) {
                 int customSize = getSizeOfFile(mCustomIMG);
                 int partitionSize = getSizeOfFile(mPartition);
                 /** ERROR on some chinese devices. Partition size always 0 */
                 if (partitionSize != 0) {
                     if (customSize > partitionSize) {
-                        throw new IOException("IMG is to big for your device! IMG Size: " +
-                                customSize / (1024 * 1024) + "MB Partition Size: " +
-                                partitionSize / (1024 * 1024) + "MB");
+                        throw new ImageToBigException(customSize, partitionSize);
                     }
                 }
             }
@@ -360,7 +365,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 .show();
     }
 
-    private void placeImgBack() throws IOException, FailedExecuteCommand {
+    private void placeImgBack() throws FailedExecuteCommand {
         RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 \"" + tmpFile + "\"");
         RashrApp.SHELL.execCommand(Const.Busybox + " mv \"" + tmpFile + "\" \"" + mCustomIMG + "\"");
     }
@@ -491,6 +496,26 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         }
         public String getPath() {
             return path;
+        }
+    }
+
+    public class ImageToBigException extends Exception {
+        private int mCustomSize;
+        private int mPartitionSize;
+        public ImageToBigException(int customSize, int partitionSize) {
+            super("IMG is to big for your device! IMG Size: " +
+                    customSize / (1024 * 1024) + "MB Partition Size: " +
+                    partitionSize / (1024 * 1024) + "MB");
+            mCustomSize = customSize;
+            mPartitionSize = partitionSize;
+        }
+
+        public int getCustomSize() {
+            return mCustomSize;
+        }
+
+        public int getPartitionSize() {
+            return mPartitionSize;
         }
     }
 

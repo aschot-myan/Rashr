@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Rashr</string>
     <string name="settings">Paramètres</string>
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flash Recovery</string>
