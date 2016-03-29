@@ -193,6 +193,7 @@ public class FlashFragment extends Fragment {
                                 abuilder.setMessage(getString(R.string.xzdual_uninstall_failed) + "\n" +
                                         failedExecuteCommand.toString());
                                 failedExecuteCommand.printStackTrace();
+                                RashrApp.ERRORS.add(failedExecuteCommand.toString() + " Error uninstalling XZDual");
                             }
                             abuilder.show();
                         }
@@ -427,15 +428,35 @@ public class FlashFragment extends Fragment {
 
                         @Override
                         public void onFail(Exception e) {
+                            RashrApp.ERRORS.add(e.toString());
                             AlertDialog.Builder d = new AlertDialog.Builder(mContext);
                             d.setTitle(R.string.flash_error);
-                            d.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                            d.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
                             });
-                            d.setMessage(e.getMessage());
+                            if (e instanceof FlashUtil.ImageNotValidException) {
+                                d.setMessage(String.format(getString(R.string.image_not_valid_message),
+                                        ((FlashUtil.ImageNotValidException) e).getPath()));
+                                d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mActivity.switchTo(SettingsFragment.newInstance());
+                                    }
+                                });
+                            } else if (e instanceof FlashUtil.ImageToBigException) {
+                                d.setMessage(String.format(getString(R.string.image_to_big_message), ((FlashUtil.ImageToBigException) e).getCustomSize() / (1024 * 1024), ((FlashUtil.ImageToBigException) e).getPartitionSize() / (1024 * 1024)));
+                                d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mActivity.switchTo(SettingsFragment.newInstance());
+                                    }
+                                });
+                            } else {
+                                d.setMessage(e.getMessage());
+                            }
                             d.show();
                         }
                     });
@@ -825,7 +846,8 @@ public class FlashFragment extends Fragment {
                         try {
                             RashrApp.TOOLBOX.reboot(Toolbox.REBOOT_REBOOT);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.reboot_failed, Toast.LENGTH_SHORT).show();
+                            RashrApp.ERRORS.add(e.toString());
                         }
                     }
                 });
@@ -852,7 +874,8 @@ public class FlashFragment extends Fragment {
                         try {
                             RashrApp.TOOLBOX.reboot(Toolbox.REBOOT_RECOVERY);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.reboot_failed, Toast.LENGTH_SHORT).show();
+                            RashrApp.ERRORS.add(e.toString());
                         }
                     }
                 });
@@ -879,7 +902,8 @@ public class FlashFragment extends Fragment {
                         try {
                             RashrApp.TOOLBOX.reboot(Toolbox.REBOOT_BOOTLOADER);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.reboot_failed, Toast.LENGTH_SHORT).show();
+                            RashrApp.ERRORS.add(e.toString());
                         }
                     }
                 });
@@ -906,7 +930,8 @@ public class FlashFragment extends Fragment {
                         try {
                             RashrApp.TOOLBOX.reboot(Toolbox.REBOOT_SHUTDOWN);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.reboot_failed, Toast.LENGTH_SHORT).show();
+                            RashrApp.ERRORS.add(e.toString());
                         }
                     }
                 });
