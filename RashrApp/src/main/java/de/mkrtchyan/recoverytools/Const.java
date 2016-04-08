@@ -99,6 +99,8 @@ public class Const {
     public static final File PathToTmp = new File(PathToRashr, "tmp");
     public static final File LastLog = new File("/cache/recovery/last_log");
     public static final String Logs = "logs.txt";
+    public static final File RecoveryCollectionFile = new File(PathToRashr, RECOVERY_SUMS);
+    public static final File KernelCollectionFile = new File(PathToRashr, KERNEL_SUMS);
     /**
      * Used folder and files
      */
@@ -108,8 +110,6 @@ public class Const {
      */
     public static File Busybox;
     public static File RashrLog;
-    public static final File RecoveryCollectionFile = new File(PathToRashr, RECOVERY_SUMS);
-    public static final File KernelCollectionFile = new File(PathToRashr, KERNEL_SUMS);
     public static File LokiFlash;
     public static File LokiPatch;
 }

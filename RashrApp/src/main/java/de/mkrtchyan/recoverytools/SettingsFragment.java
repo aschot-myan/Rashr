@@ -24,7 +24,7 @@ import de.mkrtchyan.utils.Common;
 import de.psdev.licensesdialog.LicensesDialog;
 
 /**
- * Copyright (c) 2015 Aschot Mkrtchyan
+ * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -81,7 +81,7 @@ public class SettingsFragment extends Fragment {
         final AppCompatButton bShowChangelog = (AppCompatButton) root.findViewById(R.id.bShowChangelog);
         final AppCompatButton bReset = (AppCompatButton) root.findViewById(R.id.bReset);
         final AppCompatButton bClearCache = (AppCompatButton) root.findViewById(R.id.bClearCache);
-        final AppCompatButton bShowLicences = (AppCompatButton)root.findViewById(R.id.bShowLicenses);
+        final AppCompatButton bShowLicences = (AppCompatButton) root.findViewById(R.id.bShowLicenses);
 
         cbDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_DARK_UI));

@@ -349,6 +349,7 @@ public class RashrActivity extends AppCompatActivity implements
 
     /**
      * Extract files from APK, the files are stored under RashrApp/src/res/raw
+     *
      * @throws IOException Files can't be extracted
      */
     private void extractFiles() throws IOException {

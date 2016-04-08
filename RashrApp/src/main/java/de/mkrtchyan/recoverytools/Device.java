@@ -55,7 +55,6 @@ public class Device {
     //public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
     private static final String RECOVERY_VERSION_NOT_RECONGNIZED = "Not recognized Recovery-Version";
-    private boolean isSetup = false;
     /**
      * Collection of known Recovery Partitions on some devices
      */
@@ -106,6 +105,7 @@ public class Device {
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
+    private boolean isSetup = false;
     /**
      * This class contains all device specified information to provide
      * all information for all other classes for example:

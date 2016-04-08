@@ -100,7 +100,7 @@ public class InformationFragment extends Fragment {
                 items.add(new InformationItem("TWRP Images", String.valueOf(tmp)));
                 total += tmp;
             }
-            if (RashrApp.DEVICE.isPhilzRecoverySupported()){
+            if (RashrApp.DEVICE.isPhilzRecoverySupported()) {
                 int tmp = RashrApp.DEVICE.getPhilzRecoveryVersions().size();
                 items.add(new InformationItem("Philz Images", String.valueOf(tmp)));
                 total += tmp;
@@ -110,12 +110,12 @@ public class InformationFragment extends Fragment {
                 items.add(new InformationItem("XZDual Images", String.valueOf(tmp)));
                 total += tmp;
             }
-            if (RashrApp.DEVICE.isStockRecoverySupported()){
+            if (RashrApp.DEVICE.isStockRecoverySupported()) {
                 int tmp = RashrApp.DEVICE.getStockRecoveryVersions().size();
                 items.add(new InformationItem(getString(R.string.stock_recovery), String.valueOf(tmp)));
                 total += tmp;
             }
-            if (RashrApp.DEVICE.isStockKernelSupported()){
+            if (RashrApp.DEVICE.isStockKernelSupported()) {
                 int tmp = RashrApp.DEVICE.getStockKernelVersions().size();
                 items.add(new InformationItem(getString(R.string.stock_kernel), String.valueOf(tmp)));
                 total += tmp;

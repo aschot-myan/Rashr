@@ -137,6 +137,7 @@ public class FlashFragment extends Fragment {
 
     /**
      * Flash a Recovery provided by Rashr, like ClockworkMod, TWRP, PhilZ, CM, Stock
+     *
      * @param card CardView containing the Recovery-System type for example:
      *             clockwork, cm, twrp, philz, stock....
      */
@@ -288,8 +289,9 @@ public class FlashFragment extends Fragment {
 
     /**
      * Flash Kernels provided by Rashr like stock kernels for Nexus Devices
+     *
      * @param card CardView that contains the Kernel type should be flashed for example: stock,
-     *                                                                                   bricked...
+     *             bricked...
      */
     public void FlashSupportedKernel(Card card) {
         final File path;
@@ -411,6 +413,7 @@ public class FlashFragment extends Fragment {
 
     /**
      * Flash recovery using FlashUtil
+     *
      * @param recovery recovery image (appropriated for this device)
      */
     private void flashRecovery(final File recovery) {
@@ -482,7 +485,7 @@ public class FlashFragment extends Fragment {
                                     }
                                 })
                                 .show();
-                    } else if (RashrApp.DEVICE.isRecoveryOverRecovery()){
+                    } else if (RashrApp.DEVICE.isRecoveryOverRecovery()) {
                         mActivity.switchTo(ScriptManagerFragment.newInstance(mActivity, recovery));
                     }
                 }
@@ -492,6 +495,7 @@ public class FlashFragment extends Fragment {
 
     /**
      * Flashing kernel using FlashUtil
+     *
      * @param kernel kernel image (appropriated for this device)
      */
     private void flashKernel(final File kernel) {
@@ -507,6 +511,7 @@ public class FlashFragment extends Fragment {
     /**
      * optimizeLayout checks wich cards need to be added to UI. So if you device doesn't support
      * kernel flashing optimizeLayout will not add it to UI.
+     *
      * @param root RootView from Fragment
      * @throws NullPointerException layout can't be inflated
      */
@@ -707,6 +712,7 @@ public class FlashFragment extends Fragment {
      * addRecoveryCards checks wich recovery systems are supported by your device for example:
      * Galaxy S6 (SM-G920F) supports TWRP but isn't supported by CWM so addRecoveryCards will add
      * TWRP Card and Recovery From Storage card.
+     *
      * @param cardUI Where should be the cards added
      * @param scheme Style for the cards (background color and font color for dark theme)
      */
@@ -761,7 +767,7 @@ public class FlashFragment extends Fragment {
         }
         if (RashrApp.DEVICE.isCmRecoverySupported()) {
             final IconCard CMCard = new IconCard(getString(R.string.cm_recovery), R.drawable.ic_cm,
-                    getString(R.string.cm_recovery_description));
+                    getString(R.string.cm_recovery_description), scheme);
             CMCard.setData(Device.REC_SYS_CM);
             CMCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -797,6 +803,7 @@ public class FlashFragment extends Fragment {
 
     /**
      * addKernelCards checks wich kernels are supported by your device
+     *
      * @param cardUI Where should be the cards added
      * @param scheme Style for the cards (background color and font color for dark theme)
      */
@@ -828,6 +835,7 @@ public class FlashFragment extends Fragment {
 
     /**
      * Add cards for reboot device: Reboot to Bootloader, Reboot to Recovery, Reboot, Shutdown
+     *
      * @param cardUI Where should be the cards added
      * @param scheme Style for the cards (background color and font color for dark theme)
      */
@@ -959,7 +967,8 @@ public class FlashFragment extends Fragment {
      * Checking if there are new Kernel and Recovery images to download.
      * Download new list of recoveries and kernels if user want and reload interface.
      * The lists are placed in  dslnexus.de/Android/recovery_sums
-     *                          dslnexus.de/Android/kernel_sums
+     * dslnexus.de/Android/kernel_sums
+     *
      * @param ask let the user choose if he want to download the new ImageList.
      */
     public void catchUpdates(final boolean ask) {
@@ -1134,8 +1143,9 @@ public class FlashFragment extends Fragment {
     /**
      * formatName formats the fileName to a better one for the User (NO FILE WILL BE TOUCHED)
      * you need to work with the real name to flash like @param fileName
+     *
      * @param fileName for example recovery-clockwork-touch-rndversion-rnddevice.image
-     * @param system Supported recovery Systems twrp, cwm, philz, xzdual, cm, stock
+     * @param system   Supported recovery Systems twrp, cwm, philz, xzdual, cm, stock
      * @return Formatted Filename like ClockworkMod Touch 5.8.x.x (grouper) // Nexus 7 2012
      */
     private String formatName(final String fileName, final String system) {

@@ -225,7 +225,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                         } catch (IllegalArgumentException e) {
                             RashrApp.ERRORS.add(Const.FLASH_UTIL_TAG +
                                     " Error in ObserverThread for progress display" +
-                                            " while flashing or creating backup");
+                                    " while flashing or creating backup");
                             pDialog.setProgress(pDialog.getMax());
                             break;
                         }
@@ -473,27 +473,30 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         mOnTaskDoneListener = onTaskDoneListener;
     }
 
+    private boolean isImageValid(File img) {
+        boolean result = false;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(img));
+            result = br.readLine().contains("ANDROID!");
+        } catch (IOException ignore) {
+        }
+        return result;
+    }
+
     interface OnTaskDoneListener {
         void onSuccess();
 
         void onFail(Exception e);
     }
 
-    private boolean isImageValid(File img) {
-        boolean result = false;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(img));
-            result = br.readLine().contains("ANDROID!");
-        } catch (IOException ignore) {}
-        return result;
-    }
-
     public class ImageNotValidException extends Exception {
         private String path = "";
+
         public ImageNotValidException(File file) {
             super(file + " is not a valid Image to flash");
             path = file.toString();
         }
+
         public String getPath() {
             return path;
         }
@@ -502,6 +505,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public class ImageToBigException extends Exception {
         private int mCustomSize;
         private int mPartitionSize;
+
         public ImageToBigException(int customSize, int partitionSize) {
             super("IMG is to big for your device! IMG Size: " +
                     customSize / (1024 * 1024) + "MB Partition Size: " +

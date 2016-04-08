@@ -116,7 +116,7 @@ public class BackupRestoreFragment extends Fragment {
                                         Name = String.valueOf(etFileName.getHint());
                                     }
 
-                                        if (!Name.endsWith(RashrApp.DEVICE.getRecoveryExt())) {
+                                    if (!Name.endsWith(RashrApp.DEVICE.getRecoveryExt())) {
                                         //Append extension
                                         Name += RashrApp.DEVICE.getRecoveryExt();
                                     }
