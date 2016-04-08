@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="Downloading">Stahuje se…</string>
+
+    <string name="ShowAds">Zobrazte reklamy na mojí podporu</string>
+
+    <string name="backupalready">Záloha už existuje.</string>
+
+    <string name="backups">Zálohy</string>
+
+    <string name="bak_deleted">Záloha vymazaná</string>
+
+    <string name="bak_done">Záloha dokončená</string>
+
+    <string name="bak_error">Zálohování selhalo</string>
+
+    <string name="bak_warning">"Předtím, než provedete jakoukoliv akci v Rashr, prosím, udělejte si zálohu vašich dat a uložte ji do vašeho počítače. Vytvořené zálohy budou v %s. Vývojář není zodpovědný za žádné škody způsobené na vašem zařízení."</string>
+
+    <string name="changelog">Seznam změn</string>
+
+    <string name="comment">Komentovat</string>
+
+    <string name="comment_hint">Zde komentujte co nefunguje správně (stahování, instalace, bežná podpora nebo jiné)</string>
+
+    <string name="creating_bak">Vytvářím zálohu</string>
+
+    <string name="delete">Vymazat</string>
+
+    <string name="donate">Darovat</string>
+
+    <string name="donate_to_support">Darovat můžete přes menu aby jste podpořili mojí práci! :)</string>
+
+    <string name="download_utils">"Pro používání této aplikace je potřeba stáhnout malé nástroje (okolo 512KB). Toto vyžaduje internetové připojení. Stáhnout nyní?"</string>
+
+    <string name="error">Chyba</string>
+
+    <string name="extract_failed">Extrahování potřebných souborů z aplikace selhalo. Prosím, restartujte aplikaci.</string>
+
+    <string name="flash_error">Instalace selhala</string>
+
+    <string name="flash_options">Možnosti instalace</string>
+
+    <string name="flash_over_recovery">Nainstalovat Recovery nyní? (je nutné restartování do Recovery)</string>
+
+    <string name="flashed">Nainstalováno.</string>
+
+    <string name="flashing">Instaluji…</string>
+
+    <string name="go">Start</string>
+
+    <string name="info">Informace</string>
+
+    <string name="later">Později</string>
+
+    <string name="log">Log Shell-Příkazy</string>
+
+    <string name="negative">Zrušit</string>
+
+    <string name="neutral">Ne, děkuji</string>
+
+    <string name="never_again">Již nezobrazovat</string>
+
+    <string name="no_history">Nebyla nalezena žádná historie</string>
+
+    <string name="no_root">"Zařízení nemá root. Prosím, nejpve si zařízení root-něte. Více informací na xda-developers.com"</string>
+
+    <string name="not_supportded">Vaše zařízení ještě není podporované. Proskenovat Systém a nahlásit nepodporované zařízení, nebo se pokusit najít oddíl (restartovat do Recovery)?</string>
+
+    <string name="other_recovery">Recovery ze zařízení</string>
+
+    <string name="over_recovery">Na zařízení proběhne instalace po zvolení recovery</string>
+
+    <string name="pick_file">Vyberte soubor</string>
+
+    <string name="please_ads">Prosím, zapněte zobrazování reklam aby jste mě podpořili! :(</string>
+
+    <string name="please_restart">Prosím, restartujte aplikaci aby se vykonali dané změny</string>
+
+    <string name="positive">Ano, prosím</string>
+
+    <string name="reboot_recovery_now">Restartovat do Recovery nyní?</string>
+
+    <string name="recovery_history">Historie Recovery</string>
+
+    <string name="rename">Přejmenovat</string>
+
+    <string name="report">Oznámit chybu</string>
+
+    <string name="res_error">Obnova selhala</string>
+
+    <string name="restore">Obnovit</string>
+
+    <string name="restoring">Obnovuji…</string>
+
+    <string name="risk">Vím o risku který podstupuji</string>
+
+    <string name="sBackupMgr">Manažer záloh</string>
+
+    <string name="sCWM">CWM Recovery</string>
+
+    <string name="sClearCache">Vyčistit stáhnuté</string>
+
+    <string name="sExit">Konec</string>
+
+    <string name="sFlashKernel">Nainstalovat Kernel</string>
+
+    <string name="sKernelBackup">Zálohovat Kernel</string>
+
+    <string name="sPhilz">Philz Recovery</string>
+
+    <string name="sReboot">Restartovat</string>
+
+    <string name="sRebootBootloader">Restartovat Bootloader</string>
+
+    <string name="sRebootRecovery">Restartovat do Recovery</string>
+
+    <string name="sRebooter">Restartovač</string>
+
+    <string name="sRecoveryBackup">Zálohovat Recovery</string>
+
+    <string name="sTWRP">TWRP Recovery</string>
+
+    <string name="set_name">Název zálohy</string>
+
+    <string name="setname">Nastavte název zálohy</string>
+
+    <string name="settings">Nastavení</string>
+
+    <string name="showlog">Zobrazit Logy</string>
+
+    <string name="stock">Stock (původní)</string>
+
+    <string name="styles">Styly</string>
+
+    <string name="try_again">Zkusit znovu!</string>
+
+    <string name="use_supersu">SuperSu od Chainfire není rozpoznáno na vašem zařízení. Prosím, použíjte tuto aplikaci aby jste se vyhnuli různým chybám. Stáhnout SuperSu (z Obchodu Play) nyní?</string>
+
+    <string name="warning">Upozornění!</string>
+
+    <string name="xda">Článek na XDA</string>
+
+    <string name="UseDarkUI">Použít tmavé UI</string>
+
+    <string name="add_queue">Přidat zip do fronty</string>
+
+    <string name="backup">Záloha</string>
+
+    <string name="backup_opts">Možnosti zálohy</string>
+
+    <string name="bak_name">Název vlastní zálohy</string>
+
+    <string name="boot">Boot</string>
+
+    <string name="cache">Cache</string>
+
+    <string name="check_app_updates">Zkontrolovat aktualizace při spuštění</string>
+
+    <string name="clear_cache_description">Vymazat všechny stáhnuté recovery/kernely</string>
+
+    <string name="cwm_description">ClockworkMod Recovery je nejznámější Custom Recovery pro Android</string>
+
+    <string name="dalvik">Dalvik</string>
+
+    <string name="data">Data</string>
+
+    <string name="delete_confirmation">Opravdu chcete vymazat všechny stáhnuté soubory?</string>
+
+    <string name="download_update">Prosím, stáhněte si aktualizaci aby jste mohli bezpečne používat aplikaci spolu s nejnověšími funkcemi</string>
+
+    <string name="exit_app">Ukončit aplikaci?</string>
+
+    <string name="failed_setup_layout">Chyba nastavování Rozložení</string>
+
+    <string name="failed_unpack_files">Rozbalování souborů z aplikace selhalo</string>
+
+    <string name="failed_update">Kontrola aktualizací selhala</string>
+
+    <string name="files_deleted">Soubory smazané</string>
+
+    <string name="flash">Instalovat</string>
+
+    <string name="flash_as">Instalovat %s jako</string>
+
+    <string name="flash_queue">Instalovat frontu</string>
+
+    <string name="flasher">Instalátor</string>
+
+    <string name="fota">Instalace Recovery na tomto zařízení změní FOTAKernel (oddíl výměny), toto bude fungovat pouze tehdy, jestliže to váš kernel podporuje (většina Custom Kernelů a ROM to podporují).</string>
+
+    <string name="getting_root">Pokouším se získat Root přístup</string>
+
+    <string name="history">Historie</string>
+
+    <string name="history_description">Zde můžete nájít posledních 5 instalovaných obrazů.</string>
+
+    <string name="keep_current_name">Ponechat aktuální název (%s)</string>
+
+    <string name="kernel">Kernel</string>
+
+    <string name="kernel_description">S touto funkcí budete schopní instalovat přednastavený kernel/boot pouze jediným kliknutím!</string>
+
+    <string name="kernel_history">Historie Kernelů</string>
+
+    <string name="lists_outdated">"Seznam dostupných recovery a kernelů je starý. Aktualizujte ho aby jste získali pro vaše zařízenie nejnovší recovery a kernely. Né všechny zařízení jsou podporované!"</string>
+
+    <string name="loading_data">Extrahuji data a vytvářím potřebnou složku</string>
+
+    <string name="loading_ui">Načítám UI</string>
+
+    <string name="make_choice">Prosím, rozhodněte se</string>
+
+    <string name="new_imgs_loaded">%s nové IMG soubory přidané!</string>
+
+    <string name="onlyLanguage">Prosím, pište pouze Španělsky, Německy nebo Anglicky.</string>
+
+    <string name="open_playstore">Otevřít Obchod Play</string>
+
+    <string name="options">Možnosti</string>
+
+    <string name="other_kernel">Kernel ze zařízení</string>
+
+    <string name="other_storage_description">Tato možnost vám umožní instalovat již stáhnuté img ve vašem zařízení.</string>
+
+    <string name="philz_description">PhilZ Touch Recovery je vylepšená a pokročilejší verze ClockworkMod Recovery</string>
+
+    <string name="reading_device">Načítám informace o zařízení</string>
+
+    <string name="reboot_bootloader_description">Nechte vaše zařízení automaticky restartovat do bootloaderu/download módu</string>
+
+    <string name="reboot_confirmation">Restartovat nyní?</string>
+
+    <string name="reboot_description">Nechte vaše zařízení automaticky restartovat</string>
+
+    <string name="reboot_now">Restartovat nyní?</string>
+
+    <string name="reboot_recovery_description">Nechte vaše zařízení automaticky restartovat do recovery</string>
+
+    <string name="recovery">Recovery</string>
+
+    <string name="recovery_description">S touto funkcí budete schopní instalovat přednastavené recovery pouze jediným kliknutím!</string>
+
+    <string name="recovery_script_manager">Manažer Recovery-Scriptu</string>
+
+    <string name="recovery_script_mind">Prosím, pamatujte si, že toto bude fungovat pouze na TWRP kompatibilních zařízeních</string>
+
+    <string name="recovery_script_review">Náhled scriptu</string>
+
+    <string name="refresh_list">Aktualizace začala!</string>
+
+    <string name="reloading">Znovu se načítá</string>
+
+    <string name="rename_failed">Přejmenování selhalo</string>
+
+    <string name="reset_app">Resetovat aplikaci</string>
+
+    <string name="reset_app_description">Resetovat nastavení aplikace a použít původní nastavení?</string>
+
+    <string name="run">Spustit</string>
+
+    <string name="sRebootHot">Rychlý restart</string>
+
+    <string name="sRebootShutdown">Vypnout</string>
+
+    <string name="shutdown_confirmation">Vypnout nyní?</string>
+
+    <string name="shutdown_description">Nechte vaše zařízení vypnout automaticky</string>
+
+    <string name="skip_md5">Přeskočit MD5</string>
+
+    <string name="stock_kernel_description">Stock (původní) kernel je standardní kernel, zde se můžete vrátit k vašemu stock kernelu.</string>
+
+    <string name="stock_recovery_description">Stock (původní) recovery je standardní recovery, zde se můžete vrátit k vašemu stock recovery.</string>
+
+    <string name="system">Systém</string>
+
+    <string name="twrp_description">Team Win Recovery Project (TWRP) je Custom Recovery které je plně ovladatelné dotykem</string>
+
+    <string name="unified_info">"Tato ROM nepoužívá společné zdroje CyanogenModu Výsledkem může být, že Rashr nebude schopný najít obrazy Recovery ani Kernelu. V tomto případě si můžete vybrat vaše opravdové zařízení. (udělejte to, pokud se nenajdou žádné obrazy) BUĎTE OPATRNÝ S TOUTO MOŽNOSTÍ!"</string>
+
+    <string name="update">Aktualizovat</string>
+
+    <string name="update_available">Aktualizace je k dispozici</string>
+
+    <string name="update_done">Aktualizace dokončená</string>
+
+    <string name="uptodate">Aktualizováno :D</string>
+
+    <string name="wipe_opts">Smazat možnosti</string>
+
+    <string name="sFlashRecovery">Instalovat Recovery</string>
+
+</resources>
