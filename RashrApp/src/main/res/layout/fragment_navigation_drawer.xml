@@ -1,51 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content" android:layout_width="@dimen/navigation_drawer_width"
-    android:background="?attr/colorPrimaryDark" android:orientation="vertical"
+    android:layout_width="@dimen/navigation_drawer_width"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimaryDark"
+    android:orientation="vertical"
     tools:context=".NavigationDrawerFragment">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/rashr_banner"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:src="@drawable/rashr_banner" />
 
-    <ListView android:id="@+id/lvNavigation" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:choiceMode="singleChoice"
-        android:clickable="true" android:listSelector="?attr/colorPrimary"
-        android:layout_above="@+id/linearLayout"
-        android:layout_below="@+id/imageView" />
-
-    <LinearLayout
+    <ListView
+        android:id="@+id/lvNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_above="@+id/linearLayout"
+        android:layout_below="@+id/imageView"
+        android:choiceMode="singleChoice"
+        android:clickable="true"
+        android:listSelector="?attr/colorPrimary" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:id="@+id/linearLayout">
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/xda"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:src="@drawable/ic_xda"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/ic_xda" />
 
         <ImageButton
             android:id="@+id/github"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_github"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:src="@drawable/ic_github" />
     </LinearLayout>
 
 

@@ -7,10 +7,10 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimaryDark"/>
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize" />
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/RashrLayout"
@@ -25,22 +25,28 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <FrameLayout android:id="@+id/container" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_weight="1"/>
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
-            <com.google.ads.AdView xmlns:ads= "http://schemas.android.com/apk/lib/com.google.ads"
+            <com.google.ads.AdView xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
                 android:id="@+id/ads"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 ads:adSize="SMART_BANNER"
-                ads:adUnitId="ca-app-pub-3591384811135190/6436276193"/>
+                ads:adUnitId="ca-app-pub-3591384811135190/6436276193" />
 
         </android.support.v7.widget.LinearLayoutCompat>
 
-        <fragment android:id="@+id/navigation_drawer"
-            android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
-            android:layout_gravity="start" android:name="de.mkrtchyan.recoverytools.NavigationDrawerFragment"
+        <fragment
+            android:id="@+id/navigation_drawer"
+            android:name="de.mkrtchyan.recoverytools.NavigationDrawerFragment"
+            android:layout_width="@dimen/navigation_drawer_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
             tools:layout="@layout/fragment_navigation_drawer" />
     </android.support.v4.widget.DrawerLayout>
 

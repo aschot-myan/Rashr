@@ -5,29 +5,29 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.LinearLayoutCompat
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:orientation="horizontal">
 
         <ProgressBar
             android:id="@+id/pbLoading"
             style="?attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="false"
             android:layout_gravity="center"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:indeterminate="false" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textColor="@color/golden"
             android:layout_gravity="center_vertical"
-            android:text="@string/getting_root" />
+            android:gravity="center"
+            android:text="@string/getting_root"
+            android:textColor="@color/golden"
+            android:textSize="20sp" />
     </android.support.v7.widget.LinearLayoutCompat>
 </RelativeLayout>
