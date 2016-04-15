@@ -92,6 +92,14 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+        ImageButton google_plus = (ImageButton) root.findViewById(R.id.google_plus);
+        google_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://plus.google.com/communities/108943765577787027090")));
+            }
+        });
         return root;
     }
 
@@ -167,7 +175,7 @@ public class NavigationDrawerFragment extends Fragment {
                 }
             });
 
-            mDrawerLayout.setDrawerListener(mDrawerToggle);
+            mDrawerLayout.addDrawerListener(mDrawerToggle);
         }
     }
 
