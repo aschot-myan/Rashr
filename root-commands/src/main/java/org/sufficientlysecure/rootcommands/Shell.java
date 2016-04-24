@@ -1,4 +1,5 @@
-/*
+/**
+ * Copyright (C) 2016 Aschot Mkrtchyan
  * Copyright (C) 2012 Dominik Schürmann <dominik@dominikschuermann.de>
  * Copyright (c) 2012 Stephen Erickson, Chris Ravenscroft, Adam Shanks, Jeremy Lakeman (RootTools)
  *
@@ -28,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
@@ -449,10 +451,9 @@ public class Shell implements Closeable {
                 if (!command.getOutput().equals("")) {
                     Log += "\n\nOutput:\n" + command.getOutput();
                 }
-                RandomAccessFile f = new RandomAccessFile(mLogFile, "rw");
-                f.seek(0);
-                f.write(Log.getBytes());
-                f.close();
+                FileWriter writer = new FileWriter(mLogFile, true);
+                writer.write(Log + "\n");
+                writer.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
