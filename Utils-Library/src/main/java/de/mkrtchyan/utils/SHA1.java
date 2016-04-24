@@ -40,7 +40,7 @@ public class SHA1 {
      *
      * @param file         and name of a file that is to be verified
      * @param ChecksumFile the file with generated checksum
-     * @return true if the expeceted SHA1 checksum matches the file's SHA1 checksum; false otherwise.
+     * @return true if the excepted SHA1 checksum matches the file's SHA1 checksum; false otherwise.
      */
     public static boolean verifyChecksum(final File file, final File ChecksumFile) throws IOException, SHA1SumNotFound {
         String line;

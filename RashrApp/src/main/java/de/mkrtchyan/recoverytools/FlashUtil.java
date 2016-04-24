@@ -437,9 +437,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             String output;
             output = RashrApp.SHELL.execCommand("wc -c " + path);
             return Integer.valueOf(output.split(" ")[0]);
-        } catch (FailedExecuteCommand failedExecuteCommand) {
-            return -1;
+        } catch (Exception e) {
+            RashrApp.ERRORS.add(e.toString());
+            e.printStackTrace();
         }
+        return -1;
     }
 
     private void installXZDual() throws FailedExecuteCommand {
