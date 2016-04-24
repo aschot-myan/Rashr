@@ -477,7 +477,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         boolean result = false;
         try {
             BufferedReader br = new BufferedReader(new FileReader(img));
-            result = br.readLine().contains("ANDROID!");
+            String line = br.readLine();
+            result = line.contains("ANDROID!") || line.contains("init/=init");
         } catch (IOException ignore) {
         }
         return result;
@@ -508,8 +509,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
         public ImageToBigException(int customSize, int partitionSize) {
             super("IMG is to big for your device! IMG Size: " +
-                    customSize / (1024 * 1024) + "MB Partition Size: " +
-                    partitionSize / (1024 * 1024) + "MB");
+                    customSize / (1024 * 1024) + "MB (" + customSize + ") Partition Size: " +
+                    partitionSize / (1024 * 1024) + "MB (" + partitionSize + ")");
             mCustomSize = customSize;
             mPartitionSize = partitionSize;
         }
