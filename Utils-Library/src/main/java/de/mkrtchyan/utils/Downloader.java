@@ -36,15 +36,17 @@ public class Downloader {
 
     private URL mURL;
     private File mOutputFile;
-    private boolean mCheckSHA1 = false;
+    private boolean mCheckSum = false;
     private boolean mOverrideFile = false;
     private boolean mCancel = false;
-    private File ChecksumFile = null;
+    private File mChecksumFile = null;
     private OnDownloadListener onDownloadListener = null;
     private OnUpdateListener onUpdateListener = null;
     private OnCancelListener onCancelListener = null;
     private Thread mDownloadThread;
     private Handler mHandler = new Handler();
+    private String mReferrer;
+    private boolean isDone = false;
 
     private Exception mError;
 
@@ -72,7 +74,12 @@ public class Downloader {
                     try {
                         Log.i(TAG, "Connecting to " + mURL.getHost());
                         HttpURLConnection connection = (HttpURLConnection) mURL.openConnection();
+                        //Workaround for twrp downloading
+                        if (mReferrer != null) {
+                            connection.addRequestProperty("Referer", mReferrer);
+                        }
                         connection.connect();
+                        //Workaround for cm downloading
                         while (connection.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM
                                 || connection.getResponseCode() == HttpURLConnection.HTTP_MOVED_TEMP) {
                             // get redirect url from "location" header field
@@ -81,7 +88,7 @@ public class Downloader {
                             // get the cookie if need, for login
                             String cookies = connection.getHeaderField("Set-Cookie");
 
-                            // open the new connnection again
+                            // open the new connection again
                             connection = (HttpURLConnection) new URL(newUrl).openConnection();
                             connection.setRequestProperty("Cookie", cookies);
                             connection.setRequestMethod("GET");
@@ -125,7 +132,7 @@ public class Downloader {
                         mError = e;
                         e.printStackTrace();
                     }
-                    if ((!mCheckSHA1 || !isDownloadCorrupt()) && mError == null) {
+                    if ((!mCheckSum || !isDownloadCorrupt()) && mError == null) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -160,7 +167,7 @@ public class Downloader {
                 }
             });
         }
-
+        isDone = true;
     }
 
     public void cancel() {
@@ -180,9 +187,13 @@ public class Downloader {
         }
     }
 
+    public void setReferrer(String referrer) {
+        mReferrer = referrer;
+    }
+
     public boolean isDownloadCorrupt() {
         try {
-            return !SHA1.verifyChecksum(mOutputFile, ChecksumFile);
+            return !MD5.verifyCheckSum(mOutputFile, mChecksumFile) && !SHA1.verifyChecksum(mOutputFile, mChecksumFile);
         } catch (IOException | SHA1.SHA1SumNotFound e) {
             Log.d(TAG, e.getMessage());
             mError = e;
@@ -192,8 +203,8 @@ public class Downloader {
     }
 
     public void setChecksumFile(File checksumFile) {
-        ChecksumFile = checksumFile;
-        mCheckSHA1 = ChecksumFile != null;
+        mChecksumFile = checksumFile;
+        mCheckSum = mChecksumFile != null;
     }
 
     public void setOverrideFile(boolean overrideFile) {
@@ -243,5 +254,9 @@ public class Downloader {
 
     public interface OnUpdateListener {
         void onUpdate(int MAX, int Downloaded);
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 }
