@@ -66,7 +66,7 @@ public class Const {
      * Other constants
      */
     public static final String LOG_NAME = "logs.txt";
-    public static final String RECOVERY_SUMS = "recovery_sums";
+    public static final String RECOVERY_SUMS = "recovery_links";
     public static final String KERNEL_SUMS = "kernel_sums";
     public static final String VERSION = "version";
 

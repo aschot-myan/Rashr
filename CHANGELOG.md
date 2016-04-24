@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+Update [2.3.12]
+
+-Logging fixed
+-Intel partition header check added (on old versions it will be recognized as invalid image)
+
 Update [2.3.11]
 
 -Error while creating backups fixed on more devices

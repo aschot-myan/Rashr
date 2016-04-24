@@ -329,7 +329,7 @@ public class RashrActivity extends AppCompatActivity implements
         if (!Const.LastLog.exists()) {
             /**
              * Device has never been booted to recovery or cache has been cleaned.
-             * The LastLog-File normaly contains a partition table so Rashr can read it out from
+             * The LastLog-File normally contains a partition table so Rashr can read it out from
              * there if the user restarts into recovery. (probably)
              */
             DeviceNotSupported.setNeutralButton(R.string.sReboot, new DialogInterface.OnClickListener() {
@@ -431,7 +431,7 @@ public class RashrActivity extends AppCompatActivity implements
 
     /**
      * Checks if new version of Rashr is online and links to Play Store
-     * The current version number is storen on dslnexus.de/Android/rashr/version
+     * The current version number is stored on dslnexus.de/Android/rashr/version
      * as plain text
      */
     public void checkAppUpdates() {
@@ -443,7 +443,7 @@ public class RashrActivity extends AppCompatActivity implements
                 @Override
                 public void onSuccess(File file) {
                     try {
-                        if (BuildConfig.VERSION_CODE < Integer.valueOf(Common.fileContent(file))) {
+                        if (BuildConfig.VERSION_CODE < Integer.valueOf(Common.fileContent(file).replace("\n", ""))) {
                             new AlertDialog.Builder(mContext)
                                     .setTitle(R.string.update_available)
                                     .setMessage(R.string.download_update)

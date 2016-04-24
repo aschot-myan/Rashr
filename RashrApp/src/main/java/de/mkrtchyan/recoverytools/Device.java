@@ -469,13 +469,20 @@ public class Device {
         }
     }
 
+    /**
+     * Reads the file raw/recovery_sums. This file contains Recovery-Image names (Placed on my own
+     * server) and links to Recovery-Images (used for CyanogenMod-Recovery and TWRP. ClockworkMod
+     * can't be downloaded by direct link because they don't provide any checksum.
+     *
+     * Each found image for the Device will be added into the corresponding ArrayList.
+     */
     public void loadRecoveryList() {
-
+        //TempArrayLists
         ArrayList<String> CWMList = new ArrayList<>(), TWRPList = new ArrayList<>(),
                 PHILZList = new ArrayList<>(), StockList = new ArrayList<>(),
                 XZDualList = new ArrayList<>(), CMList = new ArrayList<>();
 
-
+        //Start reading file
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(
@@ -492,7 +499,7 @@ public class Device {
                             CWMList.add(Line.substring(NameStartAt));
                         } else if (lowLine.contains(REC_SYS_TWRP)) {
                             if (Line.endsWith(mName + mRECOVERY_EXT))
-                                TWRPList.add(Line.split("/")[1]);
+                                TWRPList.add(Line.split(" ")[1]);
                         } else if (lowLine.contains(REC_SYS_PHILZ)) {
                             PHILZList.add(Line.substring(NameStartAt));
                         } else if (lowLine.contains("cm-")) {
@@ -551,9 +558,16 @@ public class Device {
         }
     }
 
+    /**
+     * Reads the file raw/kernel_sums. This file contains Kernel-Image names (Placed on my own
+     * server and mostly Nexus-Device kernels)
+     *
+     * Each found image for the Device will be added into the corresponding ArrayList.
+     */
     public void loadKernelList() {
+        //TempArrayLists
         ArrayList<String> StockKernel = new ArrayList<>();
-
+        //Start reading file
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -563,7 +577,7 @@ public class Device {
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
                 if ((lowLine.contains(mName) || lowLine.contains(Build.DEVICE.toLowerCase()))
                         && lowLine.endsWith(mKERNEL_EXT)) {
-                    if (lowLine.contains("stock")) {
+                    if (lowLine.contains(Device.KER_SYS_STOCK)) {
                         StockKernel.add(Line.substring(NameStartAt));
                     }
                 }
@@ -630,22 +644,27 @@ public class Device {
     private void readDeviceInfos() {
         for (File i : KernelList) {
             if (mKernelPath.equals("")) {
+                /**
+                 * Partition doesn't exist LOLLIPOP (File.exists() returns always
+                 * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
+                 * Check over RootShell (if throws exception partition not found check next
+                 */
                 try {
                     RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath());
                     mKernelPath = i.getAbsolutePath();
                     break;
                 } catch (FailedExecuteCommand ignore) {
-                    /**
-                     * Partition doesn't exist LOLLIPOP Workaround File.exists() returns always
-                     * false if file is in hidden FS. Lollipop marks /dev/.... as hidden
-                     * Check over RootShell (if throws exception partition not found check next
-                     */
                 }
             }
         }
         for (File i : RecoveryList) {
             if (mRecoveryPath.equals("")) {
                 try {
+                    /**
+                     * Partition doesn't exist LOLLIPOP (File.exists() returns always
+                     * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
+                     * Check over RootShell (if throws exception partition not found check next
+                     */
                     RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath());
                     mRecoveryPath = i.getAbsolutePath();
                     //if (mRecoveryPath.endsWith(EXT_TAR)) {
@@ -654,11 +673,6 @@ public class Device {
                     //}
                     break;
                 } catch (FailedExecuteCommand ignore) {
-                    /**
-                     * Partition doesn't exist LOLLIPOP Workaround File.exists() returns always
-                     * false if file is in hidden FS. Lollipop marks /dev/.... as hidden
-                     * Check over RootShell (if throws exception partition not found check next
-                     */
                 }
             }
         }
@@ -756,6 +770,9 @@ public class Device {
             if (mName.equals("dlxub1") || mName.equals("dlx") || mName.equals("dlxj")
                     || mName.equals("im-a840sp") || mName.equals("im-a840s") || mName.equals("taurus"))
                 mRecoveryPath = "/dev/block/mmcblk0p20";
+
+            if (mName.equals("arubaslim"))
+                mKernelPath = "/dev/block/mmcblk0p8";
 
 //	    Motorola DEVICEs + Same
             if (mName.equals("qinara") || mName.equals("f02e") || mName.equals("vanquish_u")
@@ -1015,7 +1032,7 @@ public class Device {
                 } else if ((!mKernelPath.equals("") || isKernelMTD())
                         && (!mRecoveryPath.equals("") || isRecoveryMTD())) {
                     /**
-                     * Break if the recovery system and version could be definded and partitions for
+                     * Break if the recovery system and version could be defined and partitions for
                      * recovery and kernel found.
                      */
                     break;

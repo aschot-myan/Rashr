@@ -111,8 +111,12 @@ public class BackupRestoreFragment extends Fragment {
                                     String Name;
                                     if (etFileName.getText() != null && etFileName.isEnabled()
                                             && !etFileName.getText().toString().equals("")) {
+                                        //User has defined a name for the backup. Use it.
                                         Name = etFileName.getText().toString();
                                     } else {
+                                        //Use hint as backup name. Normally the correct version
+                                        //and Recovery System (if Rashr could read it out of
+                                        //"/cache/recovery/last_log"
                                         Name = String.valueOf(etFileName.getHint());
                                     }
 
@@ -244,7 +248,7 @@ public class BackupRestoreFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (!(RashrApp.DEVICE.isRecoveryDD() || RashrApp.DEVICE.isRecoveryMTD())) {
-                    Toast.makeText(mContext, "Operation not supported", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.op_not_supported, Toast.LENGTH_SHORT).show();
                 } else {
                     showPopup(view);
                 }
@@ -254,7 +258,7 @@ public class BackupRestoreFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (!(RashrApp.DEVICE.isKernelDD() || RashrApp.DEVICE.isKernelMTD())) {
-                    Toast.makeText(mContext, "Operation not supported", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.op_not_supported, Toast.LENGTH_SHORT).show();
                 } else {
                     showPopup(view);
                 }
