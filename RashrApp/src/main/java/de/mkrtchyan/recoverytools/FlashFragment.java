@@ -225,7 +225,7 @@ public class FlashFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 String fileName = Versions.get(which);
                 String surl = Const.RECOVERY_URL + "/" + fileName;
-                if (SYSTEM.equals(Device.REC_SYS_CM)) {
+                if (SYSTEM.equals(Device.REC_SYS_CM) || SYSTEM.equals(Device.REC_SYS_TWRP)) {
                     surl = fileName;
                     fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
                 }
@@ -235,6 +235,9 @@ public class FlashFragment extends Fragment {
                         URL url = new URL(surl);
                         final Downloader downloader = new Downloader(url, recovery);
                         final DownloadDialog RecoveryDownloader = new DownloadDialog(mContext, downloader);
+                        if (SYSTEM.equals(Device.REC_SYS_TWRP)) {
+                            downloader.setReferrer(surl);
+                        }
                         RecoveryDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
                             @Override
                             public void onSuccess(File file) {
