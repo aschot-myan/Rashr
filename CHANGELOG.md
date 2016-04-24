@@ -3,6 +3,9 @@ CHANGELOG
 
 Update [2.3.12]
 
+-Czech translation added by XDA Member VMach3
+-Google+ Button added
+-TWRP Images now directly from twrp server
 -Logging fixed
 -Intel partition header check added (on old versions it will be recognized as invalid image)
 
