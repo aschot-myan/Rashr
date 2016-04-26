@@ -480,7 +480,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         try {
             BufferedReader br = new BufferedReader(new FileReader(img));
             String line = br.readLine();
-            result = line.contains("ANDROID!") || line.contains("init/=init");
+            result = line.contains("ANDROID!") || line.contains("init=/init");
         } catch (IOException ignore) {
         }
         return result;
