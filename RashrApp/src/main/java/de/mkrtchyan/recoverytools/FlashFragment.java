@@ -512,7 +512,7 @@ public class FlashFragment extends Fragment {
     }
 
     /**
-     * optimizeLayout checks wich cards need to be added to UI. So if you device doesn't support
+     * optimizeLayout checks which cards need to be added to UI. So if you device doesn't support
      * kernel flashing optimizeLayout will not add it to UI.
      *
      * @param root RootView from Fragment
@@ -629,12 +629,16 @@ public class FlashFragment extends Fragment {
             String[] unifiedGalaxyNote3 = {"hlte", "hltespr", "hltetmo", "hltevzw", "htlexx"};
             String[] unifiedGalaxyS4 = {"jflte", "jflteatt", "jfltecan", "jfltecri", "jfltecsp",
                     "jfltespr", "jfltetmo", "jflteusc", "jfltevzw", "jfltexx", "jgedlte"};
+            String[] unifiedGalaxyNote4 = {"trlte", "trltecan", "trltedt", "trltexx", "trltespr",
+                    "trltetmo", "trltevzw", "trlteusc"};
             if (Common.stringEndsWithArray(RashrApp.DEVICE.getName(), unifiedGalaxyS3)) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS3));
             } else if (Common.stringEndsWithArray(RashrApp.DEVICE.getName(), unifiedGalaxyS3)) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyNote3));
             } else if (Common.stringEndsWithArray(RashrApp.DEVICE.getName(), unifiedGalaxyS4)) {
                 DevName.addAll(Arrays.asList(unifiedGalaxyS4));
+            } else if (Common.stringEndsWithArray(RashrApp.DEVICE.getName(), unifiedGalaxyNote4)) {
+                DevName.addAll(Arrays.asList(unifiedGalaxyNote4));
             }
         }
 
@@ -668,6 +672,8 @@ public class FlashFragment extends Fragment {
                 DevNamesCarriers.add(i + " (International)");
             } else if (i.contains("ged")) {
                 DevNamesCarriers.add(i + " (Google Play Edition)");
+            } else if (i.contains("dt")) {
+                DevNamesCarriers.add(i + " (India)");
             } else {
                 DevNamesCarriers.add(i + " (Unified)");
             }
@@ -712,7 +718,7 @@ public class FlashFragment extends Fragment {
     }
 
     /**
-     * addRecoveryCards checks wich recovery systems are supported by your device for example:
+     * addRecoveryCards checks which recovery systems are supported by your device for example:
      * Galaxy S6 (SM-G920F) supports TWRP but isn't supported by CWM so addRecoveryCards will add
      * TWRP Card and Recovery From Storage card.
      *
@@ -720,7 +726,7 @@ public class FlashFragment extends Fragment {
      * @param scheme Style for the cards (background color and font color for dark theme)
      */
     public void addRecoveryCards(CardUI cardUI, CardColorScheme scheme) {
-        if (RashrApp.DEVICE.isXZDualRecoverySupported()) {
+        if (RashrApp.DEVICE.isXZDualRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard XZCard = new IconCard(getString(R.string.xzdualrecovery), R.drawable.ic_xzdual,
                     getString(R.string.xzdual_describtion));
             XZCard.setData(Device.REC_SYS_XZDUAL);
@@ -732,7 +738,7 @@ public class FlashFragment extends Fragment {
             });
             cardUI.addCard(XZCard, true);
         }
-        if (RashrApp.DEVICE.isCwmRecoverySupported()) {
+        if (RashrApp.DEVICE.isCwmRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard CWMCard = new IconCard(getString(R.string.sCWM), R.drawable.ic_cwm,
                     getString(R.string.cwm_description), scheme);
             CWMCard.setData(Device.REC_SYS_CWM);
@@ -744,7 +750,7 @@ public class FlashFragment extends Fragment {
             });
             cardUI.addCard(CWMCard, true);
         }
-        if (RashrApp.DEVICE.isTwrpRecoverySupported()) {
+        if (RashrApp.DEVICE.isTwrpRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard TWRPCard = new IconCard(getString(R.string.sTWRP), R.drawable.ic_twrp,
                     getString(R.string.twrp_description), scheme);
             TWRPCard.setData(Device.REC_SYS_TWRP);
@@ -756,7 +762,7 @@ public class FlashFragment extends Fragment {
             });
             cardUI.addCard(TWRPCard, true);
         }
-        if (RashrApp.DEVICE.isPhilzRecoverySupported()) {
+        if (RashrApp.DEVICE.isPhilzRecoverySupported() || BuildConfig.DEBUG) {
             final SimpleCard PHILZCard = new SimpleCard(getString(R.string.sPhilz),
                     getString(R.string.philz_description), scheme);
             PHILZCard.setData(Device.REC_SYS_PHILZ);
@@ -768,7 +774,7 @@ public class FlashFragment extends Fragment {
             });
             cardUI.addCard(PHILZCard, true);
         }
-        if (RashrApp.DEVICE.isCmRecoverySupported()) {
+        if (RashrApp.DEVICE.isCmRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard CMCard = new IconCard(getString(R.string.cm_recovery), R.drawable.ic_cm,
                     getString(R.string.cm_recovery_description), scheme);
             CMCard.setData(Device.REC_SYS_CM);
@@ -780,7 +786,7 @@ public class FlashFragment extends Fragment {
             });
             cardUI.addCard(CMCard, true);
         }
-        if (RashrApp.DEVICE.isStockRecoverySupported()) {
+        if (RashrApp.DEVICE.isStockRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard StockCard = new IconCard(getString(R.string.stock_recovery),
                     R.drawable.ic_update, getString(R.string.stock_recovery_description), scheme);
             StockCard.setData(Device.REC_SYS_STOCK);
@@ -811,7 +817,7 @@ public class FlashFragment extends Fragment {
      * @param scheme Style for the cards (background color and font color for dark theme)
      */
     public void addKernelCards(CardUI cardUI, CardColorScheme scheme) {
-        if (RashrApp.DEVICE.isStockKernelSupported()) {
+        if (RashrApp.DEVICE.isStockKernelSupported() || BuildConfig.DEBUG) {
             final IconCard StockCard = new IconCard(getString(R.string.stock_kernel), R.drawable.ic_stock,
                     getString(R.string.stock_kernel_description), scheme);
             StockCard.setData("stock");

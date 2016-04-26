@@ -1160,7 +1160,8 @@ public class Device {
 
     public boolean isUnified() {
         return mName.startsWith("d2lte") || mName.startsWith("hlte")
-                || mName.startsWith("jflte") || mName.equals("moto_msm8960");
+                || mName.startsWith("jflte") || mName.equals("moto_msm8960")
+                || mName.startsWith("trlte");
     }
 
     public boolean isLoki() {
