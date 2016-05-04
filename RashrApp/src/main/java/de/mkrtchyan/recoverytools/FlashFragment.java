@@ -577,7 +577,7 @@ public class FlashFragment extends Fragment {
 
     /**
      * Check if Device uses a Unified base like some Galaxy S4: htle, htltespr htltexx uses the same
-     * sources so they can use the unified kernels and recoveries. Let the User choice wich one is
+     * sources so they can use the unified kernels and recoveries. Let the User choice which one is
      * the correct for him. PLEASE BE CAREFUL!
      */
     public void showUnifiedBuildsDialog() {
@@ -981,7 +981,8 @@ public class FlashFragment extends Fragment {
      * @param ask let the user choose if he want to download the new ImageList.
      */
     public void catchUpdates(final boolean ask) {
-        mSwipeUpdater.setRefreshing(true);
+        if (mSwipeUpdater != null)
+            mSwipeUpdater.setRefreshing(true);
         final Thread updateThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1070,15 +1071,22 @@ public class FlashFragment extends Fragment {
                                                                         new_img_count), Toast.LENGTH_SHORT)
                                                                 .show();
                                                     }
-                                                    mSwipeUpdater.setRefreshing(false);
+                                                    if (mSwipeUpdater != null)
+                                                        mSwipeUpdater.setRefreshing(false);
                                                 }
                                             });
                                         }
 
                                         @Override
                                         public void onFail(final Exception e) {
+                                            String msg;
+                                            if (e != null) {
+                                                msg = e.getMessage();
+                                            } else {
+                                                msg = "Error occurred while loading new Recovery Lists";
+                                            }
                                             Toast
-                                                    .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                                    .makeText(mActivity, msg, Toast.LENGTH_SHORT)
                                                     .show();
                                             mSwipeUpdater.setRefreshing(false);
                                         }

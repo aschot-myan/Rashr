@@ -14,7 +14,6 @@ import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import de.mkrtchyan.utils.Common;
@@ -141,19 +140,23 @@ public class ReportDialog extends AppCompatDialog {
                                                 + activity.getAllPrefs() +
                                                 "\n=========PREFS END========\n";
                                 files.add(new File(activity.getFilesDir(), Const.Logs));
-                                files.add(new File(activity.getFilesDir(), Const.LastLog.getName()));
+                                files.add(new File(activity.getFilesDir(), Const.LastLog.getName() + ".txt"));
                                 ArrayList<Uri> uris = new ArrayList<>();
                                 for (File i : files) {
-                                    try {
-                                        RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + i);
-                                        File tmpFile = new File(Const.PathToTmp, i.getName());
-                                        Common.copyFile(i, tmpFile);
-                                        RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
-                                        uris.add(Uri.fromFile(tmpFile));
-                                    } catch (FailedExecuteCommand e) {
-                                        RashrApp.ERRORS.add("Failed setting permissions to Attachment: " + e);
-                                    } catch (IOException e) {
-                                        RashrApp.ERRORS.add("Failed to copy Attachment to destination: " + e);
+                                    if (i.exists()) {
+                                        try {
+                                            RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + i);
+                                            File tmpFile = new File(Const.PathToTmp, i.getName());
+                                            RashrApp.SHELL.execCommand(Const.Busybox + " cp " + i + " " + tmpFile);
+                                            RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
+                                            RashrApp.SHELL.execCommand(Const.Busybox + " chown root:root " + tmpFile);
+                                            uris.add(Uri.fromFile(tmpFile));
+                                        } catch (FailedExecuteCommand e) {
+                                            RashrApp.ERRORS.add("Failed setting permissions to Attachment: " + e);
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        RashrApp.ERRORS.add("Attachment dosn't exists");
                                     }
                                 }
                                 if (RashrApp.ERRORS.size() > 0) {

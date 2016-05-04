@@ -19,7 +19,7 @@ import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Unzipper;
 
 /**
- * Copyright (c) 2015 Aschot Mkrtchyan
+ * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -481,7 +481,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             BufferedReader br = new BufferedReader(new FileReader(img));
             String line = br.readLine();
             result = line.contains("ANDROID!") || line.contains("init=/init");
-        } catch (IOException ignore) {
+        } catch (IOException e) {
+            RashrApp.ERRORS.add(e.toString());
+            e.printStackTrace();
         }
         return result;
     }

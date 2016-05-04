@@ -5,8 +5,8 @@ android {
     buildToolsVersion '23.0.3'
     defaultConfig {
         minSdkVersion 8
-        versionCode 109
-        versionName '2.3.12'
+        versionCode 110
+        versionName '2.3.13'
     }
     lintOptions {
         abortOnError false

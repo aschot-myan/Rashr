@@ -356,7 +356,13 @@ public class BackupRestoreFragment extends Fragment {
 
                         @Override
                         public void onFail(Exception e) {
-                            Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
+                            String msg;
+                            if (e != null) {
+                                msg = e.toString();
+                            } else {
+                                msg = getString(R.string.bak_error);
+                            }
+                            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
                         }
                     });
                     BackupCreator.execute();

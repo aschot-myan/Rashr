@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -167,10 +168,14 @@ public class RashrActivity extends AppCompatActivity implements
                     File LogCopy = new File(mContext.getFilesDir(), Const.LastLog.getName() + ".txt");
                     RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + Const.LastLog);
                     if (LogCopy.exists()) LogCopy.delete();
-                    RashrApp.TOOLBOX.copyFile(Const.LastLog, LogCopy, false, false);
+                    RashrApp.SHELL.execCommand(Const.Busybox + " cp " + Const.LastLog + " " + LogCopy);
+                    RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + LogCopy);
+                    ApplicationInfo info = getApplicationInfo();
+                    RashrApp.SHELL.execCommand(
+                            Const.Busybox + " chown " + info.uid + ":" + info.uid + " " + LogCopy);
                     RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + LogCopy);
                     LastLogExists = LogCopy.exists();
-                } catch (FailedExecuteCommand | IOException e) {
+                } catch (FailedExecuteCommand e) {
                     RashrApp.ERRORS.add(Const.RASHR_TAG + " LastLog not found: " + e);
                 }
                 mActivity.runOnUiThread(new Runnable() {
@@ -341,6 +346,25 @@ public class RashrActivity extends AppCompatActivity implements
                         Toast.makeText(mContext, R.string.reboot_failed, Toast.LENGTH_SHORT).show();
                         RashrApp.ERRORS.add(Const.RASHR_TAG + " Device could not be rebooted");
                     }
+                }
+            });
+        } else {
+            DeviceNotSupported.setPositiveButton(R.string.report, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final ReportDialog reportDialog = new ReportDialog(mActivity, "Device not supported");
+                    reportDialog.setCancelable(false);
+                    reportDialog.show();
+                    Thread t = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (reportDialog.isShowing()) {
+                                //Wait till dialog is closed then exit the app
+                            }
+                            System.exit(0);
+                        }
+                    });
+                    t.start();
                 }
             });
         }

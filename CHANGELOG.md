@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+Update 2.3.13
+
+-Unified builds for Galaxy Note 4 (trlte) added
+-Intel partition header checking fixed
+
 Update [2.3.12]
 
 -Czech translation added by XDA Member VMach3

@@ -79,7 +79,11 @@ public class Common {
     }
 
     public static boolean getBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY) {
-        return mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getBoolean(PREF_KEY, false);
+        try {
+            return mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getBoolean(PREF_KEY, false);
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
     public static void setBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY, Boolean value) {
@@ -89,7 +93,7 @@ public class Common {
     }
 
     public static void toggleBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY) {
-        setBooleanPref(mContext, PREF_NAME, PREF_KEY, !Common.getBooleanPref(mContext, PREF_NAME, PREF_KEY));
+        setBooleanPref(mContext, PREF_NAME, PREF_KEY, !getBooleanPref(mContext, PREF_NAME, PREF_KEY));
     }
 
     public static String getStringPref(Context mContext, String PrefName, String key) {
