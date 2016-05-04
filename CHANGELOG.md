@@ -3,6 +3,7 @@ CHANGELOG
 
 Update 2.3.13
 
+-Force closes at start fixed on some devices
 -Unified builds for Galaxy Note 4 (trlte) added
 -Intel partition header checking fixed
 
