@@ -546,7 +546,7 @@ public class FlashFragment extends Fragment {
                 public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                     int topRowVerticalPosition = (view == null || view.getChildCount() == 0) ?
                             0 : view.getChildAt(0).getTop();
-                    mSwipeUpdater.setEnabled((topRowVerticalPosition >= 0));
+                    if (mSwipeUpdater != null) mSwipeUpdater.setEnabled((topRowVerticalPosition >= 0));
                 }
             });
 
@@ -981,8 +981,7 @@ public class FlashFragment extends Fragment {
      * @param ask let the user choose if he want to download the new ImageList.
      */
     public void catchUpdates(final boolean ask) {
-        if (mSwipeUpdater != null)
-            mSwipeUpdater.setRefreshing(true);
+        if (mSwipeUpdater != null) mSwipeUpdater.setRefreshing(true);
         final Thread updateThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1071,8 +1070,9 @@ public class FlashFragment extends Fragment {
                                                                         new_img_count), Toast.LENGTH_SHORT)
                                                                 .show();
                                                     }
-                                                    if (mSwipeUpdater != null)
+                                                    if (mSwipeUpdater != null) {
                                                         mSwipeUpdater.setRefreshing(false);
+                                                    }
                                                 }
                                             });
                                         }
@@ -1083,12 +1083,14 @@ public class FlashFragment extends Fragment {
                                             if (e != null) {
                                                 msg = e.getMessage();
                                             } else {
-                                                msg = "Error occurred while loading new Recovery Lists";
+                                                msg = "Error occurred while loading new Kernel Lists";
                                             }
                                             Toast
                                                     .makeText(mActivity, msg, Toast.LENGTH_SHORT)
                                                     .show();
-                                            mSwipeUpdater.setRefreshing(false);
+                                            if (mSwipeUpdater != null) {
+                                                mSwipeUpdater.setRefreshing(false);
+                                            }
                                         }
                                     });
                                     KernelUpdater.download();
@@ -1096,10 +1098,18 @@ public class FlashFragment extends Fragment {
 
                                 @Override
                                 public void onFail(final Exception e) {
+                                    String msg;
+                                    if (e != null) {
+                                        msg = e.getMessage();
+                                    } else {
+                                        msg = "Error occurred while loading new Recovery Lists";
+                                    }
                                     Toast
-                                            .makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT)
+                                            .makeText(mActivity, msg, Toast.LENGTH_SHORT)
                                             .show();
-                                    mSwipeUpdater.setRefreshing(false);
+                                    if (mSwipeUpdater != null) {
+                                        mSwipeUpdater.setRefreshing(false);
+                                    }
                                 }
                             });
                             mActivity.runOnUiThread(new Runnable() {
@@ -1146,7 +1156,9 @@ public class FlashFragment extends Fragment {
                                                 .makeText(mContext, R.string.uptodate, Toast.LENGTH_SHORT)
                                                 .show();
                                     }
-                                    mSwipeUpdater.setRefreshing(false);
+                                    if (mSwipeUpdater != null) {
+                                        mSwipeUpdater.setRefreshing(false);
+                                    }
                                 }
                             });
                         }
@@ -1169,18 +1181,17 @@ public class FlashFragment extends Fragment {
         try {
             switch (system) {
                 case Device.REC_SYS_XZDUAL:
-                    /**
+                    /*
                      * Finding better name for example:
                      *      Z3-lockeddualrecovery2.8.21.zip -> Z3 XZDualRecovery 2.8.21
                      */
                     String split[] = fileName.split("lockeddualrecovery");
                     return RashrApp.DEVICE.getXZDualName().toUpperCase() + " XZDualRecovery " + split[split.length - 1].replace(".zip", "");
                 case Device.REC_SYS_TWRP:
-                    /**
+                    /*
                      * Finding better name for example:
                      *      twrp-3.0.0-1-zeroflte.img -> TWRP 3.0.0-1 (zeroflte)
                      */
-                    // Example twrp-3.0.0.0-zeroflte.img
                     String tokens[] = fileName.split("-");
                     if (tokens.length == 3) {
                         return "TWRP " + tokens[1] + " (" + tokens[tokens.length - 1].substring(0, tokens[tokens.length - 1].length()) + ")";
@@ -1189,7 +1200,7 @@ public class FlashFragment extends Fragment {
                     // Example twrp-3.0.0-1-zeroflte.img
                     return "TWRP " + tokens[1] + "-" + tokens[2] + " (" + tokens[tokens.length - 1].replace(RashrApp.DEVICE.getRecoveryExt(), "") + ")";
                 case Device.REC_SYS_CWM:
-                    /**
+                    /*
                      * Finding better name for example:
                      *      recovery-clockwork-touch-6.0.4.7-mako.img -> ClockworkMod Touch 6.0.4.7 (mako)
                      */
@@ -1210,7 +1221,7 @@ public class FlashFragment extends Fragment {
                     device += ")";
                     return "ClockworkMod " + cversion + " " + device;
                 case Device.REC_SYS_PHILZ:
-                    /**
+                    /*
                      * Finding better name for example:
                      *      philz_touch_6.57.9-mako.img -> PhilZ Touch 6.57.9 (mako)
                      */
@@ -1223,7 +1234,7 @@ public class FlashFragment extends Fragment {
                     String philzVersion = fileName.split("_")[2].split("-")[0];
                     return "PhilZ Touch " + philzVersion + " " + pdevice;
                 case Device.REC_SYS_STOCK:
-                    /**
+                    /*
                      * Finding better name for example:
                      *      stock-recovery-hammerhead-6.0.1.img -> Stock Recovery 6.0.1 (hammerhead)
                      */
@@ -1231,7 +1242,7 @@ public class FlashFragment extends Fragment {
                     String deviceName = fileName.split("-")[2];
                     return "Stock Recovery " + sversion + " (" + deviceName + ")";
                 case Device.REC_SYS_CM:
-                    /**
+                    /*
                      * Finding better name for example:
                      *      cm-13-20160224-NIGHTLY-hammerhead ->
                      *              CyanogenMod Recovery 13 nightly 20160224 (hammerhead)
@@ -1256,10 +1267,10 @@ public class FlashFragment extends Fragment {
             File tmp = new File(Common.getStringPref(mContext, Const.PREF_NAME,
                     Const.PREF_KEY_HISTORY + String.valueOf(i)));
             if (tmp.exists() && !tmp.isDirectory()) {
-                /** Add file to list */
+                /* Add file to list */
                 history.add(tmp);
             } else {
-                /** File has been deleted, clear information */
+                /* File has been deleted, clear information */
                 Common.setStringPref(mContext, Const.PREF_NAME,
                         Const.PREF_KEY_HISTORY + String.valueOf(i), "");
             }
