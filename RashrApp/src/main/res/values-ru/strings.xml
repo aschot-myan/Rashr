@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name" translatable="false">Rashr</string>
     <string name="settings">Настройки</string>
-    <string name="sCWM">CWM Recovery</string>
-    <string name="sFlashRecovery">Прошить Recovery</string>
+    <string name="sCWM">Рекавери от CWM</string>
+    <string name="sFlashRecovery">Прошить рекавери</string>
     <string name="sFlashKernel">Прошить ядро</string>
-    <string name="recovery_history">История Recovery</string>
+    <string name="recovery_history">История рекавери</string>
     <string name="kernel_history">История ядер</string>
-    <string name="sTWRP">TWRP Recovery</string>
-    <string name="sPhilz">Philz Recovery</string>
-    <string name="other_recovery">Recovery из каталога</string>
+    <string name="sTWRP">Рекавери от TWRP</string>
+    <string name="sPhilz">Рекавери от Philz</string>
+    <string name="other_recovery">Рекавери из каталога</string>
     <string name="other_kernel">Ядро из каталога</string>
-    <string name="sRecoveryBackup">Резервировать Recovery</string>
-    <string name="sKernelBackup">Резервировать ядро</string>
+    <string name="sRecoveryBackup">Резервная копия рекавери</string>
+    <string name="sKernelBackup">Резервная копия ядра</string>
     <string name="backups">Резервные копии</string>
     <string name="backup">Резервная копия</string>
     <string name="go">Пуск</string>
     <string name="sRebooter">Перезагрузчик</string>
     <string name="restore">Восстановить</string>
-    <string name="rename">Пенреименовать</string>
+    <string name="rename">Переименовать</string>
     <string name="sClearCache">Очистить загрузки</string>
     <string name="report">Сообщить об ошибке</string>
     <string name="sExit">Выход</string>
@@ -31,21 +32,21 @@
     <string name="risk">Я знаю о риске</string>
     <string name="sReboot">Перезагрузка</string>
     <string name="sRebootHot">Горячая перезагрузка</string>
-    <string name="sRebootRecovery">Перезагрузить Recovery</string>
+    <string name="sRebootRecovery">Перезагрузить рекавери</string>
     <string name="sRebootBootloader">Перезагрузить загрузчик</string>
     <string name="sRebootShutdown">Выключение</string>
     <string name="info">Информация</string>
     <string name="flashed">Раздел прошит.</string>
     <string name="warning">Внимание!</string>
-    <string name="fota">Прошивка системы Recovery на данных устройствах изменит FOTAKernel (замена раздела)
+    <string name="fota">Прошивка раздела рекавери на данных устройствах изменит FOTAKernel (замена раздела)
        и будет работать только в том случае, если ядро его поддерживает (Большинство пользовательских ядер и прошивок).</string>
-    <string name="flash_over_recovery">Flash Recovery now? (needs to Reboot into Recovery)</string>
+    <string name="flash_over_recovery">Прошить рекавери сейчас? (потребуется перезагрузка в рекавери)</string>
     <string name="bak_done">Резервное копирование завершено</string>
-    <string name="backupalready">Рещервная копия уже существует.</string>
+    <string name="backupalready">Резервная копия уже существует.</string>
     <string name="error">Ошибка</string>
-    <string name="not_supportded">Ваше устройство еще не поддерживается. Посканировать устройство и сообщить о неподдекрживаемом устройстве или
+    <string name="not_supportded">Ваше устройство еще не поддерживается. Просканировать устройство и сообщить о неподдерживаемом устройстве или
         попробовать найти раздел (перезагрузиться в рекавери)?</string>
-    <string name="no_root">Устройство не имеет Root-прав. Пожалуйста "рутуйте" его. Подробнее
+    <string name="no_root">Устройство не имеет Root-прав. Пожалуйста установите рут. Подробнее
         \n\nxda-developers.com</string>
     <string name="Downloading">Скачивание…</string>
     <string name="comment">Комментарий</string>
@@ -53,21 +54,21 @@
     <string name="positive">Да</string>
     <string name="neutral">Нет</string>
     <string name="negative">Отмена</string>
-    <string name="log">Log Shell-Commands</string>
+    <string name="log">Логирование</string>
     <string name="showlog">Показать логи</string>
     <string name="delete">Удалить</string>
     <string name="sBackupMgr">Менеджер резервных копий</string>
     <string name="setname">Задайте имя копии</string>
-    <string name="reboot_recovery_now">Перезагрузить в recovery?</string>
+    <string name="reboot_recovery_now">Перезагрузить в рекавери?</string>
     <string name="reboot_now">Перезагрузить сейчас?</string>
     <string name="flashing">Прошивка…</string>
     <string name="restoring">Восстановление…</string>
     <string name="creating_bak">Создание бекапа…</string>
     <string name="download_utils">Для использования этого приложения нужно скачать небольшие инструменты (около 512KB). Для этого требуется интернет-соединение.
         \nСкачать сейчас?</string>
-    <string name="over_recovery">Устройство будет прошито через recovery</string>
-    <string name="ShowAds">Показать рекламу для поддержки устройства</string>
-    <string name="please_restart">Пожалуйста перезагрузите приложения для принятия изменений</string>
+    <string name="over_recovery">Устройство будет прошито через рекавери</string>
+    <string name="ShowAds">Показать рекламу для поддержки</string>
+    <string name="please_restart">Пожалуйста перезагрузите приложение для принятия изменений</string>
     <string name="please_ads">Пожалуйста, включите рекламу для поддержки моей работы! :(</string>
     <string name="donate_to_support">Поддержите финаново для продолжения работы! :)</string>
 
@@ -87,7 +88,7 @@
     <string name="flash_error">Невозможно прошить</string>
     <string name="res_error">Невозможно восстановить</string>
     <string name="bak_error">Невозможно сделать копию</string>
-    <string name="stock">Stock</string>
+    <string name="stock">Сток</string>
     <string name="changelog">Изменения</string>
     <string name="use_supersu">SuperSu от Chainfire не распознано на Вашем устройстве. Пожалуйста используйте его во избежание ошибок.
         Скачать SuperSu (из Play Store) сейчас?</string>
@@ -104,59 +105,59 @@
     </string-array>
 
     <string name="flash_as">Прошить %s как</string>
-    <string name="recovery">Recovery</string>
+    <string name="recovery">Рекавери</string>
     <string name="kernel">Ядро</string>
-    <string name="getting_root">Trying to get Root-Access</string>
-    <string name="reading_device">Reading Device Infos</string>
-    <string name="loading_ui">Loading UI</string>
-    <string name="loading_data">Extracting data and creating needed Folder</string>
-    <string name="recovery_script_manager">Recovery-Script Manager</string>
-    <string name="bak_name">Custom Backup Name</string>
-    <string name="flash_queue">Flash Queue</string>
+    <string name="getting_root">Попытка получить рут доступ</string>
+    <string name="reading_device">Считывание информации об устройстве</string>
+    <string name="loading_ui">Загрузка интерфейса</string>
+    <string name="loading_data">Извлечение данных и создание необходимой директории</string>
+    <string name="recovery_script_manager">Менеджер прошивок</string>
+    <string name="bak_name">Пользовательское имя резервной копии</string>
+    <string name="flash_queue">Очередь прошивки</string>
     <string name="wipe_opts">Сбросить настройки</string>
-    <string name="add_queue">Add Zip to queue</string>
-    <string name="backup_opts">Backup Options</string>
+    <string name="add_queue">Добавить zip - архив в очередь</string>
+    <string name="backup_opts">Опции резервирования</string>
     <string name="system">Система</string>
     <string name="data">Данные</string>
     <string name="cache">Кэш</string>
-    <string name="dalvik">Dalvik</string>
-    <string name="boot">Boot</string>
-    <string name="recovery_script_mind">Please keep in mind, this will only work with TWRP compatible recovery</string>
-    <string name="run">Run</string>
-    <string name="recovery_script_review">Script Preview</string>
-    <string name="failed_unpack_files">Failed to unpack files from App</string>
+    <string name="dalvik">Далвик</string>
+    <string name="boot">Ядро</string>
+    <string name="recovery_script_mind">Пожалуйста, помните это совместимо только с TWRP</string>
+    <string name="run">Выполнить</string>
+    <string name="recovery_script_review">Предпросмотр скрипта</string>
+    <string name="failed_unpack_files">Ошибка распаковки файлов</string>
     <string name="failed_setup_layout">Error setting up Layout</string>
     <string name="refresh_list">Обновление запущено!</string>
-    <string name="new_imgs_loaded">%s new IMGs loaded</string>
+    <string name="new_imgs_loaded">%s новых образов загружено</string>
     <string name="make_choice">Пожалуйста, сделайте выбор</string>
-    <string name="unified_info">Этот ROM испльзует Unified CyanogenMod Sources.\n
+    <string name="unified_info">Эта прошивка использует единые исходники CyanogenMod.\n
         Следовательно поэтому Rashr не может найти образы Recovery или ядра.\n
         По этой причине вы можете выбрать реальное устройство. (поступайте так если образов не найдено)\n
         ОСТОРОЖНЕЕ С ЭТОЙ ОПЦИЕЙ!</string>
     <string name="reloading">Перезагрузка</string>
     <string name="keep_current_name">Сохранить текущее имя (%s)</string>
-    <string name="rename_failed">Rename failed</string>
+    <string name="rename_failed">Переименование неудалось</string>
     <string name="flash">Прошить</string>
-    <string name="recovery_description">With this function you are able to flash your devices build-in recovery partition with one
-        click!</string>
-    <string name="kernel_description">С помощью этой функции, вы можете прошить встроенный kernel/boot раздел 
-		одним щелчком!</string>
+    <string name="recovery_description">С помощью этой функции, вы можете прошить раздел рекавери на свое устройство 
+        в одно нажатие!</string>
+    <string name="kernel_description">С помощью этой функции, вы можете прошить ядро 
+	в одно нажатие!</string>
     <string name="options">Опции</string>
-    <string name="clear_cache_description">Удалить все загруженные образы recovery/kernel</string>
+    <string name="clear_cache_description">Удалить все загруженные образы рекавери или ядер</string>
     <string name="reboot_description">Разрешить устройству перезагружаться мнгновенно</string>
-    <string name="reboot_recovery_description">Let your device reboot into recovery instantly</string>
-    <string name="reboot_bootloader_description">Let your device reboot into bootloader/download mode instantly</string>
+    <string name="reboot_recovery_description">Позволить устройству перезагружаться в рекавери немедленно</string>
+    <string name="reboot_bootloader_description">Позволить устройству перезагружаться в режим загрузчика немедленно</string>
     <string name="shutdown_description">Разрешить устройству выключаться мнгновенно</string>
-    <string name="cwm_description">ClockworkMod Recovery самая известная Custom Recovery для Android</string>
-    <string name="twrp_description">Team Winn Recovery Project (TWRP) полностью сенсорная Custom Recovery</string>
+    <string name="cwm_description">ClockworkMod Recovery самая известная версия стороннего для Android</string>
+    <string name="twrp_description">Team Win Recovery Project (TWRP) полностью сенсорная версия стороннего рекавери</string>
     <string name="philz_description">PhilZ Touch Recovery это расширенная версия ClockworkMod</string>
-    <string name="stock_recovery_description">Stock recoveries это стандартная recovery, здесь Вы можете вернуться к stock recovery.</string>
-    <string name="stock_kernel_description">Stock kernel are the standard kernel, here you can return to your stock kernel.</string>
+    <string name="stock_recovery_description">Stock recoveries это стандартный рекавери, здесь Вы можете вернуться к заводскому рекавери.</string>
+    <string name="stock_kernel_description">Сток ядро это ядро по умолчанию, здесь Вы можете вернутся к заводской версии ядра.</string>
     <string name="delete_confirmation">Вы действительно хотите удалить все загруженные образы?</string>
     <string name="other_storage_description">Эти опции позволят Вам прошить уже загруженные образы, хранящиеся на вашем устройстве.</string>
     <string name="reboot_confirmation">Перезагрузить сейчас?</string>
     <string name="shutdown_confirmation">Выключить сейчас?</string>
-    <string name="history_description">Здесь Вы можете найти 5 последних прошитых образа</string>
+    <string name="history_description">Здесь Вы можете найти 5 последних прошитых образов</string>
     <string name="reset_app">Сброс приложения</string>
     <string name="reset_app_description">Сбросить настройки приложения к стандартным</string>
     <string name="files_deleted">Файлы удалены</string>
@@ -165,7 +166,7 @@
     <string name="history">История</string>
     <string name="exit_app">Выйти?</string>
     <string name="skip_md5">Пропустить MD5</string>
-    <string name="UseDarkUI">Испольщовать тёмный UI</string>
+    <string name="UseDarkUI">Испольщовать тёмный интерфейс</string>
     <string name="check_app_updates">Проверять обновления при запуске</string>
     <string name="failed_update">Проверка на обновления не удалась</string>
     <string name="update_available">Доступно обновление</string>
@@ -173,20 +174,40 @@
     <string name="open_playstore">Открыть Play Store</string>
     <string name="uptodate">Обновлено :D</string>
     <string name="update">Обновить</string>
-    <string name="lists_outdated">The list with available recoveries and kernels are outdated. To flash your device with the latest recoveries and kernels update.\nNot all devices are supported!</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="stock_recovery">Stock Recovery</string>
-    <string name="stock_kernel">Stock Kernel</string>
+    <string name="lists_outdated">Список доступных ядер и рекавери устарел. Для прошивки устройства новыми версиями обновите список.\nНе все устройства поддерживаются!</string>
+    <string name="hello_blank_fragment">Пустой фрагмент</string>
+    <string name="stock_recovery">Стоковое рекавери</string>
+    <string name="stock_kernel">Стоковое ядро</string>
     <string name="check_connection">Проверьте Ваше интернет-соединение</string>
-    <string name="check_name">Please check the backup name. Some devices can\'t handle it if contains \':\' so change it with a File Explorer</string>
+    <string name="check_name">Проверте имя резервной копии.</string>
     <string name="ok">OK</string>
-    <string name="logs_title">Logged Shell-Commands</string>
+    <string name="logs_title">Команды логирования</string>
     <string name="clear_logs">Очистить логи</string>
     <string name="no_logs">Нет логов</string>
     <string name="copied_to_clipboard">Скопировано в буфер</string>
-    <string name="copy">Копировать</string>
+    <string name="copy">Копия</string>
     <string name="logs">Логи</string>
     <string name="app_uptodate">Приложение обновлено!</string>
     <string name="hide_uptodate_hint">Скрыть уведомление об обновлении</string>
-
+    <string name="xzdualrecovery">Рекавери от XZDual</string>
+    <string name="xzdual_describtion">XZDual Recovery создано пользователем с форума XDA и содержит рекавери от TWRP, CWM и PhilZ и вы можете выбирать каким пользоваться</string>
+    <string name="xzdual_uninstall_alert">Вы хотите удалить XZDualRecovery?</string>
+    <string name="installing_xzdual">Установка XZDualRecovery</string>
+    <string name="uninstalling_xzdual">Удаление XZDualRecovery</string>
+    <string name="skip_size_check">Пропустить проверку размера образов (может привести к повреждению)</string>
+    <string name="xzdual_uninstall_successfull">XZDualRecovery удалено с вашего устройства</string>
+    <string name="xzdual_uninstall_failed">XZDualRecovery не может быть удалено. Ошибка:</string>
+    <string name="skip_validate_image">Пропустить проверку соответсвия образа (может привести к повреждению)</string>
+    <string name="information">Информация</string>
+    <string name="total_images">Доступные образы</string>
+    <string name="recovery_type">Тип рекавери</string>
+    <string name="licenses">Лицензии</string>
+    <string name="install_xzdual_alert">Хотите установить рекавери XZDual на устройство?</string>
+    <string name="yes">Да</string>
+    <string name="cm_recovery">Рекавери CyanogenMod</string>
+    <string name="cm_recovery_description">CyanogenMod рекавери используется на устройствах с прошивкой CyanogenMod и очень похоже на стоковый рекавери.</string>
+    <string name="op_not_supported">Операция не поддерживается</string>
+    <string name="image_not_valid_message" formatted="false">Этот образ не может быть распознан как совместимый с операционной системой. Если Вы уверены что этот образ не поврежден вы можете отключить проверку в настройках и попробовать ещё раз</string>
+    <string name="image_to_big_message" formatted="false">Выбранный образ (%d MB) очень большой для вашего устройства (раздел %d MB). Если Вы уверены что этот образ имеет правильный размер, Вы можете пропустить проверку размеров перед прошивкой в настройках.</string>
+    <string name="reboot_failed">Ошибка перезагрузки</string>
 </resources>
