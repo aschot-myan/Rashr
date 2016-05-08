@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Rashr</string
+    <string name="app_name" translatable="false">Rashr</string>
     <string name="settings">Настройки</string>
-    <string name="sCWM">Реквери от CWM</string>
+    <string name="sCWM">Рекавери от CWM</string>
     <string name="sFlashRecovery">Прошить рекавери</string>
     <string name="sFlashKernel">Прошить ядро</string>
     <string name="recovery_history">История рекавери</string>
@@ -210,5 +210,4 @@
     <string name="image_not_valid_message" formatted="false">Этот образ не может быть распознан как совместимый с операционной системой. Если Вы уверены что этот образ не поврежден вы можете отключить проверку в настройках и попробовать ещё раз</string>
     <string name="image_to_big_message" formatted="false">Выбранный образ (%d MB) очень большой для вашего устройства (раздел %d MB). Если Вы уверены что этот образ имеет правильный размер, Вы можете пропустить проверку размеров перед прошивкой в настройках.</string>
     <string name="reboot_failed">Ошибка перезагрузки</string>
-
 </resources>
