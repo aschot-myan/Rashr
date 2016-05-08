@@ -104,13 +104,13 @@ public class RashrActivity extends AppCompatActivity implements
         final Thread StartThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                /** Checking if version has changed */
+                /* Checking if version has changed */
                 final int previous_version = Common.getIntegerPref(mContext,
                         Const.PREF_NAME, Const.PREF_KEY_CUR_VER);
                 mVersionChanged = BuildConfig.VERSION_CODE > previous_version;
                 Common.setIntegerPref(mContext, Const.PREF_NAME,
                         Const.PREF_KEY_CUR_VER, BuildConfig.VERSION_CODE);
-                /** Try to get root access */
+                /* Try to get root access */
                 try {
                     RashrApp.SHELL = startShell();
                     File logs = new File(mContext.getFilesDir(), Const.Logs);
@@ -133,7 +133,7 @@ public class RashrActivity extends AppCompatActivity implements
                     return;
                 }
 
-                /** Creating needed folder and unpacking files */
+                /* Creating needed folder and unpacking files */
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -189,7 +189,7 @@ public class RashrActivity extends AppCompatActivity implements
                 if (!RashrApp.DEVICE.isSetup())
                     RashrApp.DEVICE.setup();
 
-                /** If device is not supported, you can report it now or close the App */
+                /* If device is not supported, you can report it now or close the App */
                 if (!RashrApp.DEVICE.isRecoverySupported() && !RashrApp.DEVICE.isKernelSupported()) {
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
@@ -237,14 +237,14 @@ public class RashrActivity extends AppCompatActivity implements
                                 }
                             }
                             if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
-                                /** Rashr is opened by other app to flash supported files (.zip) or (.img) */
+                                /* Rashr is opened by other app to flash supported files (.zip) or (.img) */
                                 File file = new File(getIntent().getData().getPath());
                                 if (file.exists()) {
                                     if (file.toString().endsWith(".zip")) {
-                                        /** If it is a zip file open the ScriptManager */
+                                        /* If it is a zip file open the ScriptManager */
                                         switchTo(ScriptManagerFragment.newInstance(mActivity, file));
                                     } else {
-                                        /** If it is a img file open FlashAs to choose mode (recovery or kernel) */
+                                        /* If it is a img file open FlashAs to choose mode (recovery or kernel) */
                                         switchTo(FlashAsFragment.newInstance(mActivity, file, true));
                                     }
                                 }
@@ -332,7 +332,7 @@ public class RashrActivity extends AppCompatActivity implements
             }
         });
         if (!Const.LastLog.exists()) {
-            /**
+            /*
              * Device has never been booted to recovery or cache has been cleaned.
              * The LastLog-File normally contains a partition table so Rashr can read it out from
              * there if the user restarts into recovery. (probably)
@@ -382,7 +382,7 @@ public class RashrActivity extends AppCompatActivity implements
         Common.pushFileFromRAW(mContext, Const.KernelCollectionFile, R.raw.kernel_sums,
                 mVersionChanged);
         Const.Busybox = new File(mContext.getFilesDir(), "busybox");
-        Common.pushFileFromRAW(mContext, Const.Busybox, R.raw.busybox, mVersionChanged);
+        Common.pushFileFromRAW(mContext, Const.Busybox, R.raw.busybox_arm, mVersionChanged);
         try {
             RashrApp.SHELL.execCommand("chmod 777 " + Const.Busybox);
         } catch (FailedExecuteCommand failedExecuteCommand) {
@@ -416,7 +416,7 @@ public class RashrActivity extends AppCompatActivity implements
         String Prefs = "";
         Map<String, ?> prefsMap = prefs.getAll();
         for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
-            /**
+            /*
              * Skip following Prefs (PREF_KEY_HISTORY, ...)
              */
             if (!entry.getKey().contains(Const.PREF_KEY_HISTORY)
@@ -467,7 +467,8 @@ public class RashrActivity extends AppCompatActivity implements
                 @Override
                 public void onSuccess(File file) {
                     try {
-                        if (BuildConfig.VERSION_CODE < Integer.valueOf(Common.fileContent(file).replace("\n", ""))) {
+                        final int ServerVersion =  Integer.valueOf(Common.fileContent(file).replace("\n", ""));
+                        if (BuildConfig.VERSION_CODE < ServerVersion) {
                             new AlertDialog.Builder(mContext)
                                     .setTitle(R.string.update_available)
                                     .setMessage(R.string.download_update)
@@ -487,7 +488,12 @@ public class RashrActivity extends AppCompatActivity implements
                                 Toast.makeText(mContext, R.string.app_uptodate, Toast.LENGTH_SHORT).show();
                             }
                         }
-                    } catch (IOException ignore) {
+                    } catch (IOException | NumberFormatException ignore) {
+                        // NOTE for NumberFormatException
+                        // It seams so that some devices that gets a error-page instead of breaking connection
+                        // For example: Your device is not connected to the internet actualize your dataplan
+                        // to get connection or something else so the downloader gets the "error" HTML page
+                        // and its not parsable to a Integer
                     }
                 }
 
