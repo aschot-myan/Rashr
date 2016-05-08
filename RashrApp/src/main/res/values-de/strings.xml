@@ -161,7 +161,7 @@
     <string name="reboot_bootloader_description">
         Gerät in den Bootloader/Download-Mode neustarten
     </string>
-    <string name="shutdown_description">Gerät neustarten</string>
+    <string name="shutdown_description">Gerät ausschalten</string>
     <string name="cwm_description">
         ClockworkMod Recovery ist die am meist verbreitete Custom Recovery für Android
     </string>
