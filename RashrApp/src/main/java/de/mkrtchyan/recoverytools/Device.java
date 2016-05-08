@@ -437,6 +437,12 @@ public class Device {
             }
         }
 
+        //Lenovo A7010
+        if (mName.equals("a7010a48")) {
+            mRecoveryPath = "/dev/block/mmcblk0p8";
+            mKernelPath = "/dev/block/mmcblk0p7";
+        }
+
         readDeviceInfos();
         if (!mRecoveryPath.equals("") && !isRecoveryOverRecovery())
             mRECOVERY_TYPE = PARTITION_TYPE_DD;
