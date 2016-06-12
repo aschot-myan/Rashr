@@ -119,10 +119,10 @@ public class Device {
      * What kind of partition and where is the recovery partition in the
      * FileSystem an how to flash
      */
-    private int mRECOVERY_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
-    private int mRECOVERY_BLOCKSIZE = 0;
-    private int mKERNEL_TYPE = PARTITION_TYPE_NOT_SUPPORTED;
-    private int mKERNEL_BLOCKSIZE = 0;
+    private int mRecoveryType = PARTITION_TYPE_NOT_SUPPORTED;
+    private int mRecoveryBlocksize = 0;
+    private int mKernelType = PARTITION_TYPE_NOT_SUPPORTED;
+    private int mKernelBlocksize = 0;
     private String mName = Build.DEVICE.toLowerCase();
     private String mXZName = "";
     private String mManufacture = Build.MANUFACTURER.toLowerCase();
@@ -131,8 +131,8 @@ public class Device {
     private String mRecoveryVersion = RECOVERY_VERSION_NOT_RECONGNIZED;
     private String mKernelVersion = "Linux " + System.getProperty("os.version");
     private String mKernelPath = "";
-    private String mRECOVERY_EXT = EXT_IMG;
-    private String mKERNEL_EXT = EXT_IMG;
+    private String mRecoveryExt = EXT_IMG;
+    private String mKernelExt = EXT_IMG;
     private ArrayList<String> mStockRecoveries = new ArrayList<>();
     private ArrayList<String> mTwrpRecoveries = new ArrayList<>();
     private ArrayList<String> mCwmRecoveries = new ArrayList<>();
@@ -150,10 +150,10 @@ public class Device {
         loadRecoveryList();
         loadKernelList();
         if (isRecoveryDD()) {
-            mRECOVERY_BLOCKSIZE = getBlockSizeOf(mRecoveryPath);
+            mRecoveryBlocksize = getBlockSizeOf(mRecoveryPath);
         }
         if (isKernelDD()) {
-            mKERNEL_BLOCKSIZE = getBlockSizeOf(mKernelPath);
+            mKernelBlocksize = getBlockSizeOf(mKernelPath);
         }
         isSetup = true;
     }
@@ -310,7 +310,7 @@ public class Device {
 //		Sony Xperia Z (C6603)
         //if (mName.equals("c6603")) mName = "yuga";
 //
-        //if (mName.equals("c6603") || mName.equals("c6602")) mRECOVERY_EXT = EXT_TAR;
+        //if (mName.equals("c6603") || mName.equals("c6602")) mRecoveryExt = EXT_TAR;
 
 //      HTC Desire HD
         if (mBoard.equals("ace")) mName = "ace";
@@ -354,14 +354,14 @@ public class Device {
 
         if (mName.equals("droid2") || mName.equals("daytona") || mName.equals("captivate")
                 || mName.equals("galaxys") || mName.equals("droid2we")) {
-            mRECOVERY_TYPE = PARTITION_TYPE_RECOVERY;
-            mRECOVERY_EXT = EXT_ZIP;
+            mRecoveryType = PARTITION_TYPE_RECOVERY;
+            mRecoveryExt = EXT_ZIP;
         }
 
         if (mManufacture.equals("xiaomi") && mName.equals("libra")) {
             mKernelPath = "/dev/block/mmcblk0p37";
             mRecoveryPath = "/dev/block/mmcblk0p38";
-            mKERNEL_TYPE = mRECOVERY_TYPE = PARTITION_TYPE_DD;
+            mKernelType = mRecoveryType = PARTITION_TYPE_DD;
         }
 
 //      XZDualRecovery
@@ -448,33 +448,33 @@ public class Device {
 
         readDeviceInfos();
         if (!mRecoveryPath.equals("") && !isRecoveryOverRecovery()) {
-            mRECOVERY_TYPE = PARTITION_TYPE_DD;
+            mRecoveryType = PARTITION_TYPE_DD;
         }
 
 //		Devices who kernel will be flashed to
-        //if (mName.equals("c6602") || mName.equals("yuga")) mRECOVERY_TYPE = PARTITION_TYPE_SONY;
+        //if (mName.equals("c6602") || mName.equals("yuga")) mRecoveryType = PARTITION_TYPE_SONY;
 
         if (new File("/dev/mtd/").exists()) {
             if (!isRecoveryDD()) {
-                mRECOVERY_TYPE = PARTITION_TYPE_MTD;
+                mRecoveryType = PARTITION_TYPE_MTD;
             }
             if (!isKernelDD()) {
-                mKERNEL_TYPE = PARTITION_TYPE_MTD;
+                mKernelType = PARTITION_TYPE_MTD;
             }
         }
         if (!mRecoveryPath.equals("")) {
             if (mRecoveryPath.contains("mtd")) {
-                mRECOVERY_TYPE = PARTITION_TYPE_MTD;
+                mRecoveryType = PARTITION_TYPE_MTD;
             } else {
-                mRECOVERY_TYPE = PARTITION_TYPE_DD;
+                mRecoveryType = PARTITION_TYPE_DD;
             }
         }
 
         if (!mKernelPath.equals("")) {
             if (mKernelPath.contains("mtd")) {
-                mKERNEL_TYPE = PARTITION_TYPE_MTD;
+                mKernelType = PARTITION_TYPE_MTD;
             } else {
-                mKERNEL_TYPE = PARTITION_TYPE_DD;
+                mKernelType = PARTITION_TYPE_DD;
             }
         }
     }
@@ -500,7 +500,7 @@ public class Device {
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
-                if (lowLine.endsWith(mRECOVERY_EXT)) {
+                if (lowLine.endsWith(mRecoveryExt)) {
                     if (lowLine.contains(mName.toLowerCase())
                             || lowLine.contains(Build.DEVICE.toLowerCase())) {
                         if (lowLine.contains(REC_SYS_STOCK)) {
@@ -508,7 +508,7 @@ public class Device {
                         } else if (lowLine.contains("clockwork") || lowLine.contains(REC_SYS_CWM)) {
                             CWMList.add(Line.substring(NameStartAt));
                         } else if (lowLine.contains(REC_SYS_TWRP)) {
-                            if (Line.endsWith(mName + mRECOVERY_EXT))
+                            if (Line.endsWith(mName + mRecoveryExt))
                                 TWRPList.add(Line.split(" ")[1]);
                         } else if (lowLine.contains(REC_SYS_PHILZ)) {
                             PHILZList.add(Line.substring(NameStartAt));
@@ -586,7 +586,7 @@ public class Device {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
                 if ((lowLine.contains(mName) || lowLine.contains(Build.DEVICE.toLowerCase()))
-                        && lowLine.endsWith(mKERNEL_EXT)) {
+                        && lowLine.endsWith(mKernelExt)) {
                     if (lowLine.contains(Device.KER_SYS_STOCK)) {
                         StockKernel.add(Line.substring(NameStartAt));
                     }
@@ -678,8 +678,8 @@ public class Device {
                     RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath(), true, false);
                     mRecoveryPath = i.getAbsolutePath();
                     //if (mRecoveryPath.endsWith(EXT_TAR)) {
-                    //    mRECOVERY_EXT = EXT_TAR;
-                    //    //mRECOVERY_TYPE = PARTITION_TYPE_SONY;
+                    //    mRecoveryExt = EXT_TAR;
+                    //    //mRecoveryType = PARTITION_TYPE_SONY;
                     //}
                     break;
                 } catch (FailedExecuteCommand ignore) {
@@ -842,13 +842,13 @@ public class Device {
 
         if (!isRecoverySupported()) {
             if (mRecoveryPath.contains("/dev/block")) {
-                mRECOVERY_TYPE = PARTITION_TYPE_DD;
+                mRecoveryType = PARTITION_TYPE_DD;
             }
         }
 
         if (!isKernelSupported()) {
             if (mKernelPath.contains("/dev/block")) {
-                mKERNEL_TYPE = PARTITION_TYPE_DD;
+                mKernelType = PARTITION_TYPE_DD;
             }
         }
 
@@ -900,23 +900,23 @@ public class Device {
     }
 
     public boolean isRecoverySupported() {
-        return mRECOVERY_TYPE != PARTITION_TYPE_NOT_SUPPORTED || isXZDualRecoverySupported();
+        return mRecoveryType != PARTITION_TYPE_NOT_SUPPORTED || isXZDualRecoverySupported();
     }
 
     public int getRecoveryType() {
-        return mRECOVERY_TYPE;
+        return mRecoveryType;
     }
 
     public boolean isRecoveryMTD() {
-        return mRECOVERY_TYPE == PARTITION_TYPE_MTD;
+        return mRecoveryType == PARTITION_TYPE_MTD;
     }
 
     public boolean isRecoveryDD() {
-        return mRECOVERY_TYPE == PARTITION_TYPE_DD;
+        return mRecoveryType == PARTITION_TYPE_DD;
     }
 
     public boolean isRecoveryOverRecovery() {
-        return mRECOVERY_TYPE == PARTITION_TYPE_RECOVERY;
+        return mRecoveryType == PARTITION_TYPE_RECOVERY;
     }
 
     public boolean isFOTAFlashed() {
@@ -924,27 +924,27 @@ public class Device {
     }
 
     public boolean isKernelSupported() {
-        return mKERNEL_TYPE != PARTITION_TYPE_NOT_SUPPORTED;
+        return mKernelType != PARTITION_TYPE_NOT_SUPPORTED;
     }
 
     public boolean isKernelDD() {
-        return mKERNEL_TYPE == PARTITION_TYPE_DD;
+        return mKernelType == PARTITION_TYPE_DD;
     }
 
     public boolean isKernelMTD() {
-        return mKERNEL_TYPE == PARTITION_TYPE_MTD;
+        return mKernelType == PARTITION_TYPE_MTD;
     }
 
     public int getKernelType() {
-        return mKERNEL_TYPE;
+        return mKernelType;
     }
 
     public String getRecoveryExt() {
-        return mRECOVERY_EXT;
+        return mRecoveryExt;
     }
 
     public String getKernelExt() {
-        return mKERNEL_EXT;
+        return mKernelExt;
     }
 
     public ArrayList<String> getStockRecoveryVersions() {
@@ -1054,7 +1054,7 @@ public class Device {
                 if (mKernelPath.equals("")) {
                     if (line.contains("/boot") && !line.contains("/bootloader")) {
                         if (line.contains("mtd")) {
-                            mKERNEL_TYPE = PARTITION_TYPE_MTD;
+                            mKernelType = PARTITION_TYPE_MTD;
                         } else if (line.contains("/dev/")) {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev")) {
@@ -1082,7 +1082,7 @@ public class Device {
                 if (mRecoveryPath.equals("")) {
                     if (line.contains("/recovery")) {
                         if (line.contains("mtd")) {
-                            mRECOVERY_TYPE = PARTITION_TYPE_MTD;
+                            mRecoveryType = PARTITION_TYPE_MTD;
                         } else if (line.contains("/dev/")) {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev") || split.startsWith("/system")) {
@@ -1159,11 +1159,11 @@ public class Device {
                     if (partition.exists()) {
                         if (!isRecoverySupported() && Line.contains("recovery")) {
                             mRecoveryPath = partition.getAbsolutePath();
-                            mRECOVERY_TYPE = PARTITION_TYPE_DD;
+                            mRecoveryType = PARTITION_TYPE_DD;
                         } else if (!isKernelSupported() && Line.contains("boot")
                                 && !Line.contains("bootloader")) {
                             mKernelPath = partition.getAbsolutePath();
-                            mKERNEL_TYPE = PARTITION_TYPE_DD;
+                            mKernelType = PARTITION_TYPE_DD;
                         }
                     }
                 }
@@ -1187,11 +1187,11 @@ public class Device {
     }
 
     public int getRecoveryBlocksize() {
-        return mRECOVERY_BLOCKSIZE;
+        return mRecoveryBlocksize;
     }
 
     public int getKernelBlocksize() {
-        return mKERNEL_BLOCKSIZE;
+        return mKernelBlocksize;
     }
 
     public String getXZDualName() {
