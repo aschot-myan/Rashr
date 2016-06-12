@@ -426,7 +426,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         File patched_CustomIMG = new File(mContext.getFilesDir(), mCustomIMG.getName() + ".lok");
         File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
         File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
-        RashrApp.SHELL.execCommand("dd if=" + aboot + " of=" + extracted_aboot, true);
+        RashrApp.SHELL.execCommand("dd if=\"" + aboot + "\" of=\"" + extracted_aboot + "\"", true);
         RashrApp.SHELL.execCommand(loki_patch + " recovery " + mCustomIMG + " " + patched_CustomIMG +
                 "  || exit 1", true);
         return loki_flash + " recovery " + patched_CustomIMG + " || exit 1";
@@ -435,7 +435,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public int getSizeOfFile(File path) {
         try {
             String output;
-            output = RashrApp.SHELL.execCommand("wc -c " + path);
+            output = RashrApp.SHELL.execCommand("wc -c \"" + path + "\"");
             return Integer.valueOf(output.split(" ")[0]);
         } catch (Exception e) {
             RashrApp.ERRORS.add(e.toString());
