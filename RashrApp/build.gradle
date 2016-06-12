@@ -5,8 +5,8 @@ android {
     buildToolsVersion '23.0.3'
     defaultConfig {
         minSdkVersion 8
-        versionCode 110
-        versionName '2.3.13'
+        versionCode 111
+        versionName '2.3.14'
     }
     lintOptions {
         abortOnError false
@@ -19,9 +19,9 @@ dependencies {
     compile project(':Utils-Library')
     compile project(':CardsUILib')
     compile project(':Donations')
-    compile 'com.android.support:support-v4:23.3.0'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
-    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'de.psdev.licensesdialog:licensesdialog:1.8.0'
 }

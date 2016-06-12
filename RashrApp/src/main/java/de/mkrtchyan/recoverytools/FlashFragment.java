@@ -546,7 +546,8 @@ public class FlashFragment extends Fragment {
                 public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                     int topRowVerticalPosition = (view == null || view.getChildCount() == 0) ?
                             0 : view.getChildAt(0).getTop();
-                    if (mSwipeUpdater != null) mSwipeUpdater.setEnabled((topRowVerticalPosition >= 0));
+                    if (mSwipeUpdater != null)
+                        mSwipeUpdater.setEnabled((topRowVerticalPosition >= 0));
                 }
             });
 

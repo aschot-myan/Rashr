@@ -48,7 +48,7 @@
         파티션을 찾아보시길 바랍니다. (리커버리로 한 번 재부팅 해볼까요)?</string>
     <string name="no_root">이 기기는 루팅되지 않았습니다. 루팅을 해주시길 바랍니다. 더 많은 정보는 여기서 확인해주세요.
         \n\nxda-developers.com</string>
-    <string name="Downloading">다운로드 중...</string>
+    <string name="Downloading">다운로드 중…</string>
     <string name="comment">제보</string>
     <string name="comment_hint">무엇이 정확히 안 되는지 여기에 제보해주시길 바랍니다. (다운로드, 설치, 일반 지원 혹은 기타)</string>
     <string name="positive">예</string>
@@ -61,9 +61,9 @@
     <string name="setname">백업 이름 설정</string>
     <string name="reboot_recovery_now">지금 리커버리로 재부팅할까요?</string>
     <string name="reboot_now">지금 재부팅할까요?</string>
-    <string name="flashing">설치 중...</string>
-    <string name="restoring">복원 중...</string>
-    <string name="creating_bak">백업 생성 중...</string>
+    <string name="flashing">설치 중…</string>
+    <string name="restoring">복원 중…</string>
+    <string name="creating_bak">백업 생성 중…</string>
     <string name="download_utils">이 앱을 이용하기 위해 당신은 작은 도구를 (약 512KB) 다운로드 해야 합니다. 이는 인터넷 연결이 필요합니다.
         \n지금 다운로드 할까요?</string>
     <string name="over_recovery">리커버리를 통해 설치될 것입니다.</string>

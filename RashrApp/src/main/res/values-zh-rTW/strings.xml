@@ -46,7 +46,7 @@
 		試著找尋磁區（進入 Recovery 後重啟）？</string>
     <string name="no_root">無法取得 Root 權限。請先 Root 您的裝置。更多資訊請洽
         \n\nxda-developers.com</string>
-    <string name="Downloading">下載中...</string>
+    <string name="Downloading">下載中…</string>
     <string name="comment">評論</string>
     <string name="comment_hint">請在此評論，說說哪些東西無法正常使用（下載、刷機、或其他）</string>
     <string name="positive">OK</string>
@@ -59,9 +59,9 @@
     <string name="setname">設定備份名字</string>
     <string name="reboot_recovery_now">現在就重啟至Recovery？</string>
     <string name="reboot_now">現在重啟？</string>
-    <string name="flashing">寫入中...</string>
-    <string name="restoring">還原中...</string>
-    <string name="creating_bak">創建備份中...</string>
+    <string name="flashing">寫入中…</string>
+    <string name="restoring">還原中…</string>
+    <string name="creating_bak">創建備份中…</string>
     <string name="download_utils">若要使用此應用程式您必須先下載一些小工具 （大約 512KB）。您將需要網際網路連線
         \n立刻下載？</string>
     <string name="over_recovery">裝置將透過 Recovery 寫入</string>

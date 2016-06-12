@@ -483,7 +483,7 @@ public class Device {
      * Reads the file raw/recovery_sums. This file contains Recovery-Image names (Placed on my own
      * server) and links to Recovery-Images (used for CyanogenMod-Recovery and TWRP. ClockworkMod
      * can't be downloaded by direct link because they don't provide any checksum.
-     *
+     * <p/>
      * Each found image for the Device will be added into the corresponding ArrayList.
      */
     public void loadRecoveryList() {
@@ -571,7 +571,7 @@ public class Device {
     /**
      * Reads the file raw/kernel_sums. This file contains Kernel-Image names (Placed on my own
      * server and mostly Nexus-Device kernels)
-     *
+     * <p/>
      * Each found image for the Device will be added into the corresponding ArrayList.
      */
     public void loadKernelList() {
@@ -1129,7 +1129,6 @@ public class Device {
 
     /**
      * If some partition (Kernel or Recovery) can't be found so check if the partition layouts of
-     *
      */
     private void readPartLayouts() {
         File PartLayout = new File(Const.FilesDir, Build.DEVICE);
@@ -1209,6 +1208,7 @@ public class Device {
 
     /**
      * Checks if Device instance has already scanned the device
+     *
      * @return is true if has already setup
      */
     public boolean isSetup() {

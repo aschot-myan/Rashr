@@ -46,7 +46,7 @@
   <string name="no_root">\"Пристрій не рутовано. Будь ласка, отримайте Root. Більш детальна інформація на 
 
 xda-developers.com\"</string>
-    <string name="Downloading">Завантаження...</string>
+    <string name="Downloading">Завантаження…</string>
     <string name="comment">Коментар</string>
     <string name="comment_hint">Залиште тут коментар, що працює не коректно (завантаження, прошивка, загальна підтримка або інше)</string>
     <string name="positive">Так</string>
@@ -59,9 +59,9 @@ xda-developers.com\"</string>
     <string name="setname">Введіть назву бекапа</string>
     <string name="reboot_recovery_now">Перезавантажити в recovery?</string>
     <string name="reboot_now">Хочете перезавантажити?</string>
-    <string name="flashing">Прошивка...</string>
-    <string name="restoring">Відновлення...</string>
-    <string name="creating_bak">Створення бекапу...</string>
+    <string name="flashing">Прошивка…</string>
+    <string name="restoring">Відновлення…</string>
+    <string name="creating_bak">Створення бекапу…</string>
   <string name="download_utils">\"Щоб використовувати це додаток необхідно завантажити невеликі інструменти (близько 512 КБ). Це вимагає підключення до інтернету.
 Завантажити зараз?\"</string>
     <string name="over_recovery">Пристрій буде прошито через recovery</string>
@@ -100,8 +100,8 @@ xda-developers.com\"</string>
     <string name="flash_as">Прошити %s як</string>
     <string name="recovery">Recovery</string>
     <string name="kernel">Ядро</string>
-    <string name="getting_root">Запит Root...</string>
-    <string name="reading_device">Обробка...</string>
+    <string name="getting_root">Запит Root…</string>
+    <string name="reading_device">Обробка…</string>
     <string name="loading_ui">Завантаження інтерфейсу</string>
     <string name="loading_data">Витяг даних і створення необхідної папки</string>
     <string name="recovery_script_manager">Менеджер скриптів Recovery</string>
@@ -120,7 +120,7 @@ xda-developers.com\"</string>
     <string name="recovery_script_review">Попередній перегляд скрипта</string>
     <string name="failed_unpack_files">Не вдалося видобути файли з програми</string>
     <string name="failed_setup_layout">Помилка налаштування компонування</string>
-    <string name="refresh_list">Оновлення...</string>
+    <string name="refresh_list">Оновлення…</string>
     <string name="new_imgs_loaded">Завантажено %s нових IMG</string>
     <string name="make_choice">Зробіть вибір</string>
   <string name="unified_info">\"Ваша прошивка використовує єдині ресурси CyanogenMod.

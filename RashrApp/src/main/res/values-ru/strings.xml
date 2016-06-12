@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Rashr</string>
     <string name="settings">Настройки</string>
     <string name="sCWM">Рекавери от CWM</string>
     <string name="sFlashRecovery">Прошить рекавери</string>

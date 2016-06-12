@@ -413,7 +413,6 @@ c29761e2a790c69326da0f3b7766bedb72e3580c recoveries/philz_touch_6.19.2-hera.img
 2f41559b3005d223da1cbd8665088685ea806d3d recoveries/philz_touch_6.19.2-metis.img
 049adee63293292bb5178c743eef1dbcbbea2568 recoveries/philz_touch_6.19.2-stormer.img
 ae56280656dcbae6d4485aa7c3f0ed412983889d recoveries/philz_touch_6.19.2-warplte.img
-ecc26163bd25507731b537991992e273add5f76a recoveries/Philz_touch_6.19.2-yuga.img
 be8097d93eee277446123082182b3d4841e9aa8e recoveries/philz_touch_6.19.3-apexqtmo.img
 30f17d2b31a2082848eac683a3cb3a4267365eac recoveries/philz_touch_6.19.3-ariesve.img
 e46eb0a1dde8e6c81b4447b99679270f7710ecef recoveries/philz_touch_6.19.3-celoxhd.img
@@ -540,7 +539,6 @@ b565c202c5c86f69228b52a5263ff7881bbb32c9 recoveries/philz_touch_6.19.7-d803.img
 c7e1987e35607d67c00028f64267938f2f957a55 recoveries/philz_touch_6.20.6-hammerhead.img
 09e85dc9e956c002a8d2a452347e1d271a0f9c8e recoveries/philz_touch_6.20.6-jflte.img
 e6e92bc636733a676b975be25282557b1234b876 recoveries/philz_touch_6.20.6-ls970.img
-91c4ef8258781b315c5f4474ec9fab87225d4349 recoveries/Philz_touch_6.20.6-yuga.img
 d5adc5ab4000d8e1e6e473be8f8cf2fab3cb9fb7 recoveries/philz_touch_6.20.7-jflte.img
 32f8e9a0a251d17385f7da7a203902431091b7a3 recoveries/philz_touch_6.21.1-jflte.img
 764b84d38553242adc6c9348c9878bec87ede875 recoveries/philz_touch_6.21.2-arubaslim.img
@@ -552,9 +550,9 @@ de61e6d9396b78db7c689a46be2fb78be5cf6e83 recoveries/philz_touch_6.21.5-jflte.img
 71939a999de71c3b2a7a9d83b8b248d95ce093f4 recoveries/philz_touch_6.22.1-ace.img
 800b52e04d698a770b85810031825a1bbece7133 recoveries/philz_touch_6.22.1-arubaslim.img
 1e8c2dface00cfb88fc0905e5102d021f12c4128 recoveries/philz_touch_6.22.1-delos3geur.img
-da39a3ee5e6b4b0d3255bfef95601890afd80709 recoveries/philz_touch_6.22.1-e970.img
-da39a3ee5e6b4b0d3255bfef95601890afd80709 recoveries/philz_touch_6.22.1-e973.img
-da39a3ee5e6b4b0d3255bfef95601890afd80709 recoveries/philz_touch_6.22.1-e975.img
+d50b432ac17fde5533f5773af5c3225a8d9a679c recoveries/philz_touch_6.22.1-e970.img
+0404e776f1412587de68fa38ac40ad08e7378e2e recoveries/philz_touch_6.22.1-e973.img
+26d104ff35d72f39148baf774f13505d84f05fab recoveries/philz_touch_6.22.1-e975.img
 047bb4bdb6d18b3e2e2e8dca434f60207330b44b recoveries/philz_touch_6.22.1-i9100.img
 3a4ca97f0524f2754c3408aa858a8e7839330e65 recoveries/philz_touch_6.22.1-jflte.img
 5951b759ac719d0611b7d82f240f3f739c550176 recoveries/philz_touch_6.22.1-ls970.img
@@ -563,9 +561,9 @@ da39a3ee5e6b4b0d3255bfef95601890afd80709 recoveries/philz_touch_6.22.1-e975.img
 f816b7238ada13c9cfba54117c8a688c29e31d4d recoveries/philz_touch_6.22.4-jflte.img
 7753cee3821464880ed62caa03b3c4fecf7205f8 recoveries/philz_touch_6.22.7-hammerhead.img
 212ca02b80a1c60a7670920b139453fdca1f3f29 recoveries/philz_touch_6.22.7-moto_msm8960.img
-da39a3ee5e6b4b0d3255bfef95601890afd80709 recoveries/philz_touch_6.23.3-e970.img
-da39a3ee5e6b4b0d3255bfef95601890afd80709 recoveries/philz_touch_6.23.3-e973.img
-da39a3ee5e6b4b0d3255bfef95601890afd80709 recoveries/philz_touch_6.23.3-e975.img
+3df37c0606d22bafbe478d21c46a9fdd77b00fb7 recoveries/philz_touch_6.23.3-e970.img
+90f21f801679daf39d040d5a675fc291367be511 recoveries/philz_touch_6.23.3-e973.img
+2b36ea5df012a253966667011d3fcdb84247f531 recoveries/philz_touch_6.23.3-e975.img
 088f86aa6556de7c1f5c3787f89899c249195bde recoveries/philz_touch_6.23.3-jflte.img
 e5c5f3bee29324fd2364ad06f50d4adff12fb450 recoveries/philz_touch_6.23.3-ls970.img
 f57bfd690df2a1c626f7366a70a81fe30211e463 recoveries/philz_touch_6.23.5-jflte.img

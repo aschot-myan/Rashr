@@ -302,7 +302,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         if (isJobBackup()) placeImgBack();
     }*/
 
-    public void MTD() throws FailedExecuteCommand, IOException {
+    public void MTD() throws FailedExecuteCommand {
         String Command;
         if (isJobRecovery()) {
             Command = " recovery ";

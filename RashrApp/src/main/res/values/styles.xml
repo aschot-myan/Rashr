@@ -31,5 +31,5 @@
         <item name="android:textStyle">italic</item>
     </style>
 
-    <style name="Rashr.Dialog" parent="Theme.AppCompat.Dialog"></style>
+    <style name="Rashr.Dialog" parent="Theme.AppCompat.Dialog"/>
 </resources>

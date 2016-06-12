@@ -382,7 +382,7 @@ public class RashrActivity extends AppCompatActivity implements
         Common.pushFileFromRAW(mContext, Const.KernelCollectionFile, R.raw.kernel_sums,
                 mVersionChanged);
         Const.Busybox = new File(mContext.getFilesDir(), "busybox");
-        Common.pushFileFromRAW(mContext, Const.Busybox, R.raw.busybox_arm, mVersionChanged);
+        Common.pushFileFromRAW(mContext, Const.Busybox, R.raw.busybox, mVersionChanged);
         try {
             RashrApp.SHELL.execCommand("chmod 777 " + Const.Busybox);
         } catch (FailedExecuteCommand failedExecuteCommand) {
@@ -467,7 +467,7 @@ public class RashrActivity extends AppCompatActivity implements
                 @Override
                 public void onSuccess(File file) {
                     try {
-                        final int ServerVersion =  Integer.valueOf(Common.fileContent(file).replace("\n", ""));
+                        final int ServerVersion = Integer.valueOf(Common.fileContent(file).replace("\n", ""));
                         if (BuildConfig.VERSION_CODE < ServerVersion) {
                             new AlertDialog.Builder(mContext)
                                     .setTitle(R.string.update_available)

@@ -358,25 +358,14 @@ public class Shell implements Closeable {
 
 
     public String execCommand(String Command) throws FailedExecuteCommand {
-        final SimpleCommand command = new SimpleCommand(Command);
-        try {
-            Log.i(TAG, Command);
-            this.add(command).waitForFinish();
-            String output = command.getOutput();
-            logCommand(command);
-            Log.i(TAG, output);
-            if (command.getExitCode() != 0) {
-                throw new Exception("Exit-Code not 0");
-            }
-            return output;
-        } catch (Exception e) {
-            logCommand(command);
-            Log.i(TAG, "Failed: " + command.getOutput());
-            throw new FailedExecuteCommand(command);
-        }
+        return execCommand(Command, true);
     }
 
     public String execCommand(String Command, boolean waitForFinish) throws FailedExecuteCommand {
+        return execCommand(Command, waitForFinish, true);
+    }
+
+    public String execCommand(String Command, boolean waitForFinish, boolean logCommand) throws FailedExecuteCommand {
         final SimpleCommand command = new SimpleCommand(Command);
         try {
             Log.i(TAG, Command);
@@ -386,57 +375,21 @@ public class Shell implements Closeable {
                 this.add(command);
             }
             String output = command.getOutput();
-            logCommand(command);
+            if (logCommand) logCommand(command);
             Log.i(TAG, output);
             if (command.getExitCode() != 0) {
                 throw new Exception("Exit-Code not 0");
             }
             return output;
         } catch (Exception e) {
-            logCommand(command);
+            if (logCommand) logCommand(command);
             Log.i(TAG, "Failed: " + command.getOutput());
             throw new FailedExecuteCommand(command);
         }
     }
 
     public String execCommand(Command command) throws FailedExecuteCommand {
-        final SimpleCommand simpleCommand = new SimpleCommand(command.getCommand());
-        try {
-            Log.i(TAG, simpleCommand.getCommand());
-            this.add(simpleCommand).waitForFinish();
-            String output = simpleCommand.getOutput();
-            logCommand(simpleCommand);
-            Log.i(TAG, output);
-            if (simpleCommand.getExitCode() != 0) {
-                throw new Exception("Exit-Code not 0");
-            }
-            return output;
-        } catch (Exception e) {
-            logCommand(simpleCommand);
-            Log.i(TAG, "Failed: " + command.getCommand());
-            throw new FailedExecuteCommand(command);
-        }
-    }
-
-    public String execCommand(Command command, boolean waitForFinish) throws FailedExecuteCommand {
-        final SimpleCommand simpleCommand = new SimpleCommand(command.getCommand());
-        try {
-            if (waitForFinish) {
-                this.add(simpleCommand).waitForFinish();
-            } else {
-                this.add(simpleCommand);
-            }
-            String output = simpleCommand.getOutput();
-            Log.i(TAG, simpleCommand.getCommand());
-            logCommand(simpleCommand);
-            if (simpleCommand.getExitCode() != 0) {
-                throw new Exception("Exit-Code not 0");
-            }
-            return output;
-        } catch (Exception e) {
-            logCommand(simpleCommand);
-            throw new FailedExecuteCommand(command);
-        }
+        return execCommand(command.getCommand(), true);
     }
 
     private void logCommand(SimpleCommand command) {

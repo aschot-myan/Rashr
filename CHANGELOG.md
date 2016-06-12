@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+Update 2.3.14
+
+-Support for Galaxy S7, Xiaomi Libra, Vernee Thor and ASUS ZenFone 2E added
+-Size checking errors fixed
+-Russian translation fixed by GitHub-User rasfyah
+-German translation for shutdown-card corrected
+-Startup crash fixed on devices that gets HTML-Errors from provider (out of data plan etc.)
+-Crash on getting new kernel and recovery lists fixed
+-Fixed crash on some devices while flashing (validating image)
+-Support for Lenovo A7010 added 
+
 Update 2.3.13
 
 -Force closes at start fixed on some devices

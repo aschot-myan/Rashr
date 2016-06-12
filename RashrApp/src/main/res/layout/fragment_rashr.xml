@@ -3,7 +3,7 @@
     android:id="@+id/swipe_updater"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".RashrFragment">
+    tools:context=".FlashFragment">
 
     <com.fima.cardsui.views.CardUI
         android:id="@+id/RashrCards"
