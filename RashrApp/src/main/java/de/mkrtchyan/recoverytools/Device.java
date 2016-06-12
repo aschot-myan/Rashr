@@ -52,6 +52,7 @@ public class Device {
     public static final int PARTITION_TYPE_DD = 1;
     public static final int PARTITION_TYPE_MTD = 2;
     public static final int PARTITION_TYPE_RECOVERY = 3;
+    //public static final int PARTITION_TYPE_RECOVERY2 = 4;
     //public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
     private static final String RECOVERY_VERSION_NOT_RECONGNIZED = "Not recognized Recovery-Version";
@@ -59,12 +60,14 @@ public class Device {
      * Collection of known Recovery Partitions on some devices
      */
     private final File[] RecoveryList = {
+            new File("/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
             new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/recovery"),
             new File("/dev/block/platform/sdhci-pxav3.2/by-name/RECOVERY"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/FOTAKernel"),
             new File("/dev/block/platform/15570000.ufs/by-name/RECOVERY"),
+            new File("/dev/block/platform/155a0000.ufs/by-name/RECOVERY"),
             new File("/dev/block/platform/comip-mmc.1/by-name/recovery"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
             new File("/dev/block/platform/mtk-msdc.0/by-name/recovery"),
@@ -81,6 +84,7 @@ public class Device {
             new File("/dev/block/platform/dw_mmc/by-name/recovery"),
             new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
             new File("/dev/block/bootdevice/by-name/recovery"),
+            new File("/dev/block/by-name/recovery"),
             //new File("/system/bin/recovery.tar"),
             new File("/dev/block/recovery"),
             new File("/dev/block/nandg"),
@@ -91,10 +95,12 @@ public class Device {
      * Collection of known Kernel Partitions on some devices
      */
     private final File[] KernelList = {
+            new File("/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/boot"),
             new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/boot"),
             new File("/dev/block/platform/sprd-sdhci.3/by-name/KERNEL"),
             new File("/dev/block/platform/sdhci-tegra.3/by-name/LNX"),
             new File("/dev/block/platform/15570000.ufs/by-name/BOOT"),
+            new File("/dev/block/platform/155a0000.ufs/by-name/BOOT"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/Kernel"),
             new File("/dev/block/platform/mtk-msdc.0/by-name/boot"),
             new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
@@ -102,6 +108,7 @@ public class Device {
             new File("/dev/block/platform/hi_mci.0/by-name/boot"),
             new File("/dev/block/platform/sdhci.1/by-name/boot"),
             new File("/dev/block/bootdevice/by-name/boot"),
+            new File("/dev/block/by-name/boot"),
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
@@ -143,20 +150,10 @@ public class Device {
         loadRecoveryList();
         loadKernelList();
         if (isRecoveryDD()) {
-            try {
-                String tmp = RashrApp.SHELL.execCommand(Const.Busybox + " blockdev --getbsz " + mRecoveryPath);
-                tmp = tmp.replace("\n", "");
-                mRECOVERY_BLOCKSIZE = Integer.valueOf(tmp);
-            } catch (FailedExecuteCommand ignore) {
-            }
+            mRECOVERY_BLOCKSIZE = getBlockSizeOf(mRecoveryPath);
         }
         if (isKernelDD()) {
-            try {
-                String tmp = RashrApp.SHELL.execCommand(Const.Busybox + " blockdev --getbsz " + mKernelPath);
-                tmp = tmp.replace("\n", "");
-                mKERNEL_BLOCKSIZE = Integer.valueOf(tmp);
-            } catch (FailedExecuteCommand ignore) {
-            }
+            mKERNEL_BLOCKSIZE = getBlockSizeOf(mKernelPath);
         }
         isSetup = true;
     }
@@ -361,6 +358,12 @@ public class Device {
             mRECOVERY_EXT = EXT_ZIP;
         }
 
+        if (mManufacture.equals("xiaomi") && mName.equals("libra")) {
+            mKernelPath = "/dev/block/mmcblk0p37";
+            mRecoveryPath = "/dev/block/mmcblk0p38";
+            mKERNEL_TYPE = mRECOVERY_TYPE = PARTITION_TYPE_DD;
+        }
+
 //      XZDualRecovery
         if (mManufacture.equals("sony")) {
             //Xperia Z
@@ -444,8 +447,9 @@ public class Device {
         }
 
         readDeviceInfos();
-        if (!mRecoveryPath.equals("") && !isRecoveryOverRecovery())
+        if (!mRecoveryPath.equals("") && !isRecoveryOverRecovery()) {
             mRECOVERY_TYPE = PARTITION_TYPE_DD;
+        }
 
 //		Devices who kernel will be flashed to
         //if (mName.equals("c6602") || mName.equals("yuga")) mRECOVERY_TYPE = PARTITION_TYPE_SONY;
@@ -529,7 +533,7 @@ public class Device {
             Collections.sort(XZDualList);
             Collections.sort(CMList);
 
-            /**
+            /*
              * First clear list before adding items (to avoid double entry on reload by update)
              */
             mStockRecoveries.clear();
@@ -539,7 +543,7 @@ public class Device {
             mXZDualRecoveries.clear();
             mCmRecoveries.clear();
 
-            /** Sort newest version to first place */
+            /* Sort newest version to first place */
             for (Object i : StockList) {
                 mStockRecoveries.add(0, i.toString());
             }
@@ -656,7 +660,7 @@ public class Device {
                  * Check over RootShell (if throws exception partition not found check next
                  */
                 try {
-                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath());
+                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath(), true, false);
                     mKernelPath = i.getAbsolutePath();
                     break;
                 } catch (FailedExecuteCommand ignore) {
@@ -671,7 +675,7 @@ public class Device {
                      * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
                      * Check over RootShell (if throws exception partition not found check next
                      */
-                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath());
+                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath(), true, false);
                     mRecoveryPath = i.getAbsolutePath();
                     //if (mRecoveryPath.endsWith(EXT_TAR)) {
                     //    mRECOVERY_EXT = EXT_TAR;
@@ -1003,12 +1007,13 @@ public class Device {
         return mBoard;
     }
 
+    /**
+     * The lastLogs file in Android contains the logs of the last booted RecoverySystem.
+     * Using the lastLogs we can find out which recovery system and version the user has
+     * installed and the used boot (kernel partition) and recovery (recovery partition) paths.
+     */
     private void readLastLog() {
-        /**
-         * The lastLogs file in Android contains the logs of the last booted RecoverySystem.
-         * Using the lastLogs we can find out which recovery system and version the user has
-         * installed and the used boot (kernel partition) and recovery (recovery partition) paths.
-         */
+
         try {
             String line;
             File LogCopy = new File(Const.FilesDir, Const.LastLog.getName() + ".txt");
@@ -1016,8 +1021,8 @@ public class Device {
             while ((line = br.readLine()) != null) {
                 line = line.replace("\"", "");
                 line = line.replace("\'", "");
-                /**
-                 * If the Recovery System and Version could not definded so try it with the next line
+                /*
+                 * If the Recovery System and Version could not defined so try it with the next line
                  */
                 if (mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
                     if (line.contains("ClockworkMod Recovery") || line.contains("CWM")) {
@@ -1037,13 +1042,13 @@ public class Device {
                     }
                 } else if ((!mKernelPath.equals("") || isKernelMTD())
                         && (!mRecoveryPath.equals("") || isRecoveryMTD())) {
-                    /**
+                    /*
                      * Break if the recovery system and version could be defined and partitions for
                      * recovery and kernel found.
                      */
                     break;
                 }
-                /**
+                /*
                  * KernelPath not found so try it with this line
                  */
                 if (mKernelPath.equals("")) {
@@ -1054,12 +1059,12 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev")) {
                                     try {
-                                        RashrApp.SHELL.execCommand("ls " + split);
+                                        RashrApp.SHELL.execCommand("ls " + split, true, false);
                                         mKernelPath = split;
                                         break;
                                     } catch (FailedExecuteCommand e) {
                                         e.printStackTrace();
-                                        /**
+                                        /*
                                          * Partition doesn't exist LOLLIPOP Workaround
                                          * File.exists() returns always false if file is in hidden FS
                                          * Lollipop marks /dev/.... as hidden
@@ -1082,7 +1087,7 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev") || split.startsWith("/system")) {
                                     try {
-                                        RashrApp.SHELL.execCommand("ls " + split);
+                                        RashrApp.SHELL.execCommand("ls " + split, true, false);
                                         mRecoveryPath = split;
                                         break;
                                     } catch (FailedExecuteCommand ignore) {
@@ -1122,6 +1127,10 @@ public class Device {
         //}
     }
 
+    /**
+     * If some partition (Kernel or Recovery) can't be found so check if the partition layouts of
+     *
+     */
     private void readPartLayouts() {
         File PartLayout = new File(Const.FilesDir, Build.DEVICE);
         if (!PartLayout.exists()) {
@@ -1170,6 +1179,9 @@ public class Device {
                 || mName.startsWith("trlte");
     }
 
+    /**
+     * Checks if device requires a loki patched image
+     */
     public boolean isLoki() {
         return mName.startsWith("g2") && Build.MANUFACTURER.equals("lge");
     }
@@ -1195,7 +1207,25 @@ public class Device {
         }
     }
 
+    /**
+     * Checks if Device instance has already scanned the device
+     * @return is true if has already setup
+     */
     public boolean isSetup() {
         return isSetup;
+    }
+
+    /**
+     * @param partitionPath path of the partition
+     * @return blocksize of partitionPath 0 if failed
+     */
+    private int getBlockSizeOf(String partitionPath) {
+        try {
+            String tmp = RashrApp.SHELL.execCommand(Const.Busybox + " blockdev --getbsz " + partitionPath);
+            tmp = tmp.replace("\n", "");
+            return Integer.valueOf(tmp);
+        } catch (FailedExecuteCommand ignore) {
+        }
+        return 0;
     }
 }
