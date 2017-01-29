@@ -125,11 +125,11 @@ public class Device {
     private int mKernelBlocksize = 0;
     private String mName = Build.DEVICE.toLowerCase();
     private String mXZName = "";
-    private String mManufacture = Build.MANUFACTURER.toLowerCase();
-    private String mBoard = Build.BOARD.toLowerCase();
+    private final String mManufacture = Build.MANUFACTURER.toLowerCase();
+    private final String mBoard = Build.BOARD.toLowerCase();
     private String mRecoveryPath = "";
     private String mRecoveryVersion = RECOVERY_VERSION_NOT_RECONGNIZED;
-    private String mKernelVersion = "Linux " + System.getProperty("os.version");
+    private final String mKernelVersion = "Linux " + System.getProperty("os.version");
     private String mKernelPath = "";
     private String mRecoveryExt = EXT_IMG;
     private String mKernelExt = EXT_IMG;
@@ -144,8 +144,10 @@ public class Device {
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
 
-
-    public void setup() {
+    public void setup(String deviceName) {
+        if (!deviceName.equals("")) {
+            mName = deviceName;
+        }
         setPredefinedOptions();
         loadRecoveryList();
         loadKernelList();
