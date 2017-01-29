@@ -3,12 +3,15 @@ package de.mkrtchyan.recoverytools;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,13 +68,14 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View root = inflater.inflate(R.layout.fragment_settings, container, false);
+        final AppCompatButton bSetDevName = (AppCompatButton) root.findViewById(R.id.bSetDevName);
         final AppCompatCheckBox cbShowAds = (AppCompatCheckBox) root.findViewById(R.id.cbShowAds);
         final AppCompatCheckBox cbLog = (AppCompatCheckBox) root.findViewById(R.id.cbLog);
-        final AppCompatCheckBox cbDarkUI = (AppCompatCheckBox) root.findViewById(R.id.cbDarkUI);
+//        final AppCompatCheckBox cbDarkUI = (AppCompatCheckBox) root.findViewById(R.id.cbDarkUI);
         final AppCompatCheckBox cbCheckUpdates = (AppCompatCheckBox) root.findViewById(R.id.cbCheckUpdates);
         final AppCompatCheckBox cbHideUpToDateHint = (AppCompatCheckBox) root.findViewById(R.id.cbShowUpToDateHints);
         final AppCompatCheckBox cbSkipSizeCheck = (AppCompatCheckBox) root.findViewById(R.id.cbSkipSizeChecking);
@@ -83,8 +87,8 @@ public class SettingsFragment extends Fragment {
         final AppCompatButton bClearCache = (AppCompatButton) root.findViewById(R.id.bClearCache);
         final AppCompatButton bShowLicences = (AppCompatButton) root.findViewById(R.id.bShowLicenses);
 
-        cbDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
-                Const.PREF_KEY_DARK_UI));
+//        cbDarkUI.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
+//                Const.PREF_KEY_DARK_UI));
         cbShowAds.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME,
                 Const.PREF_KEY_ADS));
         cbLog.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME, Const.PREF_KEY_LOG));
@@ -98,14 +102,14 @@ public class SettingsFragment extends Fragment {
                 Const.PREF_KEY_SKIP_SIZE_CHECK));
         cbSkipValidate.setChecked(Common.getBooleanPref(root.getContext(), Const.PREF_NAME, Const.PREF_KEY_SKIP_IMAGE_CHECK));
 
-        cbDarkUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
-                        Const.PREF_KEY_DARK_UI, isChecked);
-                RashrActivity.isDark = isChecked;
-            }
-        });
+//        cbDarkUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+//                Common.setBooleanPref(view.getContext(), Const.PREF_NAME,
+//                        Const.PREF_KEY_DARK_UI, isChecked);
+//                RashrActivity.isDark = isChecked;
+//            }
+//        });
         cbLog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
@@ -175,10 +179,10 @@ public class SettingsFragment extends Fragment {
                 AppCompatActivity activity = (AppCompatActivity) getActivity();
                 SharedPreferences.Editor editor = activity.getSharedPreferences(Const.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
-                editor.clear().commit();
+                editor.clear().apply();
                 editor = activity.getSharedPreferences(Const.PREF_NAME,
                         Context.MODE_PRIVATE).edit();
-                editor.clear().commit();
+                editor.clear().apply();
                 RashrActivity.firstSetup(v.getContext());
             }
         });
@@ -230,6 +234,42 @@ public class SettingsFragment extends Fragment {
                         .setIncludeOwnLicense(true)
                         .build()
                         .show();
+            }
+        });
+        bSetDevName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AppCompatEditText et = new AppCompatEditText(v.getContext());
+                AlertDialog.Builder inputDialog = new AlertDialog.Builder(v.getContext());
+                String dev_name = Common.getStringPref(v.getContext(), Const.PREF_NAME, Const.PREF_KEY_DEVICE_NAME);
+                if (dev_name.equals("")) dev_name = RashrApp.DEVICE.getName();
+                et.setText(dev_name);
+                inputDialog.setTitle(R.string.device_name);
+                inputDialog.setView(et);
+                inputDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String name = et.getText().toString();
+                        if (!name.equals("")) {
+                            Common.setStringPref(getContext(), Const.PREF_NAME, Const.PREF_KEY_DEVICE_NAME, et.getText().toString());
+                            Snackbar.make(bSetDevName, R.string.please_restart, Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                inputDialog.setNeutralButton(R.string.reset, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Common.setStringPref(getContext(), Const.PREF_NAME, Const.PREF_KEY_DEVICE_NAME, Build.DEVICE.toLowerCase());
+                    }
+                });
+                inputDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                inputDialog.show();
+
             }
         });
         return root;
