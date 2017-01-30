@@ -33,7 +33,7 @@ public class Utils {
 	public static float convertDpToPixel(Context context, float dp) {
 
 		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		float px = (float) (dp * (metrics.densityDpi / 160f));
+		float px = dp * (metrics.densityDpi / 160f);
 		return px;
 	}
 

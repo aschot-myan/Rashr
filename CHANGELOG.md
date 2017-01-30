@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+Update 2.4
+
+-Device name is now customizable
+-DarkUI temporally removed
+
 Update 2.3.14
 
 -Support for Galaxy S7, Xiaomi Libra, Vernee Thor and ASUS ZenFone 2E added

@@ -230,11 +230,11 @@ public class FileChooserDialog extends Dialog {
         return StartFolder.isDirectory();
     }
 
-    public abstract interface OnFileChooseListener {
+    public interface OnFileChooseListener {
         void OnFileChoose(File file);
     }
 
-    public abstract interface OnFolderChooseListener {
+    public interface OnFolderChooseListener {
         void OnFolderChoose(File folder);
     }
 }

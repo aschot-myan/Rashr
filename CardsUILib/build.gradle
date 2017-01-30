@@ -1,8 +1,7 @@
 apply plugin: 'com.android.library'
-
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.1'
 
     sourceSets {
         main {
@@ -30,4 +29,7 @@ android {
     dependencies {
         compile fileTree(dir: 'libs', include: '*.jar')
     }
+}
+
+dependencies {
 }

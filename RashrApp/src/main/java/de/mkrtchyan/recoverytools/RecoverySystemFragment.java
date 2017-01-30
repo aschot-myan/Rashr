@@ -36,13 +36,6 @@ import de.mkrtchyan.utils.Downloader;
 
 public class RecoverySystemFragment extends Fragment {
 
-    private String mTitle, mDesc, mDev, mScreenshotURL, mImagePath;
-    private int mLogo;
-    private ArrayList<String> mVersions;
-    private Context mContext;
-    private RashrActivity mActivity;
-    private RecoverySystemFragment mView = this;
-
     public final static String PARAM_TITLE = "title";
     public final static String PARAM_DESC = "desc";
     public final static String PARAM_DEV = "dev";
@@ -50,10 +43,28 @@ public class RecoverySystemFragment extends Fragment {
     public final static String PARAM_IMG_PATH = "img_path";
     public final static String PARAM_LOGO = "logo";
     public final static String PARAM_VERSIONS = "versions";
+    private String mTitle, mDesc, mDev, mScreenshotURL, mImagePath;
+    private int mLogo;
+    private ArrayList<String> mVersions;
+    private Context mContext;
+    private RashrActivity mActivity;
+    private RecoverySystemFragment mView = this;
 
 
     public RecoverySystemFragment() {
         // Required empty public constructor
+    }
+
+    public static RecoverySystemFragment newInstance(Bundle bundle) {
+        RecoverySystemFragment fragment = new RecoverySystemFragment();
+        fragment.setTitle(bundle.getString(PARAM_TITLE));
+        fragment.setDescription((bundle.getString(PARAM_DESC)));
+        fragment.setDeveloper(bundle.getString(PARAM_DEV));
+        fragment.setVersions(bundle.getStringArrayList(PARAM_VERSIONS));
+        fragment.setLogo(bundle.getInt(PARAM_LOGO));
+        fragment.setPath(bundle.getString(PARAM_IMG_PATH));
+        fragment.setScreenshotURL(bundle.getString(PARAM_SCREENSHOT_URL));
+        return fragment;
     }
 
     private void setTitle(String title) {
@@ -82,18 +93,6 @@ public class RecoverySystemFragment extends Fragment {
 
     private void setPath(String path) {
         mImagePath = path;
-    }
-
-    public static RecoverySystemFragment newInstance(Bundle bundle) {
-        RecoverySystemFragment fragment = new RecoverySystemFragment();
-        fragment.setTitle(bundle.getString(PARAM_TITLE));
-        fragment.setDescription((bundle.getString(PARAM_DESC)));
-        fragment.setDeveloper(bundle.getString(PARAM_DEV));
-        fragment.setVersions(bundle.getStringArrayList(PARAM_VERSIONS));
-        fragment.setLogo(bundle.getInt(PARAM_LOGO));
-        fragment.setPath(bundle.getString(PARAM_IMG_PATH));
-        fragment.setScreenshotURL(bundle.getString(PARAM_SCREENSHOT_URL));
-        return fragment;
     }
 
     @Override
@@ -134,7 +133,7 @@ public class RecoverySystemFragment extends Fragment {
         final LinearLayout ScreenshotLayout = (LinearLayout) root.findViewById(R.id.ScreenshotLayout);
         if (mScreenshotURL == null) {
             Log.d(Const.RASHR_TAG, "No screenshots");
-            ((ViewGroup)ScreenshotLayout.getParent()).removeView(ScreenshotLayout);
+            ((ViewGroup) ScreenshotLayout.getParent()).removeView(ScreenshotLayout);
         } else {
             try {
                 Downloader jsonDownloader = new Downloader(new URL(mScreenshotURL + "/getScreenshots.php"),
@@ -283,8 +282,8 @@ public class RecoverySystemFragment extends Fragment {
     /**
      * Flash a Recovery provided by Rashr, like ClockworkMod, TWRP, PhilZ, CM, Stock
      *
-     * @param system String containing the Recovery-System type for example:
-     *             clockwork, cm, twrp, philz, stock....
+     * @param system  String containing the Recovery-System type for example:
+     *                clockwork, cm, twrp, philz, stock....
      * @param fileUrl File that will be flashed
      */
     public void flashSupportedRecovery(final String system, String fileUrl) {

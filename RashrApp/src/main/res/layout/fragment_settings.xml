@@ -11,10 +11,10 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatButton
-            android:text="@string/set_dev_name"
+            android:id="@+id/bSetDevName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/bSetDevName" />
+            android:text="@string/set_dev_name" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/bReport"

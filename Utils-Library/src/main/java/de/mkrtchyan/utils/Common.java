@@ -41,12 +41,12 @@ import java.nio.channels.FileChannel;
 
 public class Common {
 
-    public static void pushFileFromRAW(Context mContext, File outputFile, int RAW, boolean Override) throws IOException {
+    public static void pushFileFromRAW(Context context, File outputFile, int RAW, boolean Override) throws IOException {
         if (!outputFile.exists() || Override) {
             if (Override && outputFile.exists()) if (!outputFile.delete()) {
                 throw new IOException(outputFile.getName() + " can't be deleted!");
             }
-            InputStream is = mContext.getResources().openRawResource(RAW);
+            InputStream is = context.getResources().openRawResource(RAW);
             OutputStream os = new FileOutputStream(outputFile);
             byte[] data = new byte[is.available()];
             is.read(data);
@@ -78,42 +78,42 @@ public class Common {
         return !failed;
     }
 
-    public static boolean getBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY) {
+    public static boolean getBooleanPref(Context context, String PREF_NAME, String PREF_KEY) {
         try {
-            return mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getBoolean(PREF_KEY, false);
+            return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getBoolean(PREF_KEY, false);
         } catch (NullPointerException e) {
             return false;
         }
     }
 
-    public static void setBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY, Boolean value) {
-        SharedPreferences.Editor editor = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).edit();
+    public static void setBooleanPref(Context context, String PREF_NAME, String PREF_KEY, Boolean value) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).edit();
         editor.putBoolean(PREF_KEY, value);
-        editor.commit();
+        editor.apply();
     }
 
-    public static void toggleBooleanPref(Context mContext, String PREF_NAME, String PREF_KEY) {
-        setBooleanPref(mContext, PREF_NAME, PREF_KEY, !getBooleanPref(mContext, PREF_NAME, PREF_KEY));
+    public static void toggleBooleanPref(Context context, String PREF_NAME, String PREF_KEY) {
+        setBooleanPref(context, PREF_NAME, PREF_KEY, !getBooleanPref(context, PREF_NAME, PREF_KEY));
     }
 
-    public static String getStringPref(Context mContext, String PrefName, String key) {
-        return mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).getString(key, "");
+    public static String getStringPref(Context context, String PrefName, String key) {
+        return context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).getString(key, "");
     }
 
-    public static void setStringPref(Context mContext, String PrefName, String key, String value) {
-        SharedPreferences.Editor editor = mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
+    public static void setStringPref(Context context, String PrefName, String key, String value) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
     }
 
-    public static Integer getIntegerPref(Context mContext, String PrefName, String key) {
-        return mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).getInt(key, 0);
+    public static Integer getIntegerPref(Context context, String PrefName, String key) {
+        return context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).getInt(key, 0);
     }
 
-    public static void setIntegerPref(Context mContext, String PrefName, String key, int value) {
-        SharedPreferences.Editor editor = mContext.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
+    public static void setIntegerPref(Context context, String PrefName, String key, int value) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     public static void copyFile(File src, File dst) throws IOException {

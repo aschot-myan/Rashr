@@ -56,6 +56,13 @@ public class Downloader {
     }
 
     public void download() {
+        if (mOutputFile.exists() && !mOverrideFile) {
+            Log.d(TAG, "File already downloaded");
+            if (onDownloadListener != null) {
+                onDownloadListener.onSuccess(mOutputFile);
+            }
+            return;
+        }
         if (!mOutputFile.getParentFile().exists()) {
             if (!mOutputFile.getParentFile().mkdir()) {
                 mError = new Exception("Cannot create parent folder");
@@ -163,7 +170,7 @@ public class Downloader {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (onDownloadListener != null) onDownloadListener.onFail(null);
+                    if (onDownloadListener != null) onDownloadListener.onFail(mError);
                 }
             });
         }

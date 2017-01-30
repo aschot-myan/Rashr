@@ -200,7 +200,7 @@ public abstract class Card extends AbstractCard {
     }
 
     public interface OnCardSwiped {
-        public void onCardSwiped(Card card, View layout);
+        void onCardSwiped(Card card, View layout);
     }
 
     /**

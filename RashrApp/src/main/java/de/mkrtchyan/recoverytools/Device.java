@@ -112,6 +112,9 @@ public class Device {
             new File("/dev/block/nandc"),
             new File("/dev/boot")
     };
+    private final String mManufacture = Build.MANUFACTURER.toLowerCase();
+    private final String mBoard = Build.BOARD.toLowerCase();
+    private final String mKernelVersion = "Linux " + System.getProperty("os.version");
     private boolean isSetup = false;
     /**
      * This class contains all device specified information to provide
@@ -125,11 +128,8 @@ public class Device {
     private int mKernelBlocksize = 0;
     private String mName = Build.DEVICE.toLowerCase();
     private String mXZName = "";
-    private final String mManufacture = Build.MANUFACTURER.toLowerCase();
-    private final String mBoard = Build.BOARD.toLowerCase();
     private String mRecoveryPath = "";
     private String mRecoveryVersion = RECOVERY_VERSION_NOT_RECONGNIZED;
-    private final String mKernelVersion = "Linux " + System.getProperty("os.version");
     private String mKernelPath = "";
     private String mRecoveryExt = EXT_IMG;
     private String mKernelExt = EXT_IMG;

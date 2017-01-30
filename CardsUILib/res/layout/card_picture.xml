@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selectable_background_cardbank"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp" >
+        android:paddingRight="8dp">
 
         <TextView
             android:id="@+id/title"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:padding="8dp" >
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/imageView1"
@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:ellipsize="end"
-            android:maxLines="7"/>
+            android:maxLines="7" />
     </LinearLayout>
 
 </LinearLayout>

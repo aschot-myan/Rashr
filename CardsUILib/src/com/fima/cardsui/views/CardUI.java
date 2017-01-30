@@ -331,7 +331,7 @@ public class CardUI extends FrameLayout {
                 TableRow tr = null;
                 for (int i = 0; i < mAdapter.getCount(); i += mColumnNumber) {
                     //add a new table row with the current context
-                    tr = (TableRow) new TableRow(mTableLayout.getContext());
+                    tr = new TableRow(mTableLayout.getContext());
                     tr.setOrientation(TableRow.HORIZONTAL);
                     tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                             TableRow.LayoutParams.WRAP_CONTENT));
@@ -398,7 +398,7 @@ public class CardUI extends FrameLayout {
     }
 
     public interface OnRenderedListener {
-        public void onRendered();
+        void onRendered();
     }
 
 }

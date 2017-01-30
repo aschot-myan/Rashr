@@ -1,16 +1,16 @@
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="?attr/colorPrimary">
 
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="wrap_content"
-        app:srcCompat="@drawable/rashr_banner"
-        android:scaleType="fitStart"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:adjustViewBounds="true" />
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        app:srcCompat="@drawable/rashr_banner" />
 </RelativeLayout>

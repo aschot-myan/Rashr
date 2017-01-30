@@ -2,27 +2,27 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/colorPrimary"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
 
     <ImageView
-        android:scaleType="fitStart"
-        android:foregroundGravity="top"
+        android:id="@+id/loading_banner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/rashr_banner"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/loading_banner" />
+        android:foregroundGravity="top"
+        android:scaleType="fitStart"
+        app:srcCompat="@drawable/rashr_banner" />
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/loading_banner"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/loading_banner">
+        android:orientation="horizontal">
 
         <ProgressBar
             android:id="@+id/pbLoading"

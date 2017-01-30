@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- "shadow" -->
     <!-- <item>
         <bitmap android:src="@drawable/card_shadow" >
         </bitmap>
     </item> -->
-    <item >
+    <item>
         <shape
             android:dither="true"
-            android:shape="rectangle" >
+            android:shape="rectangle">
             <corners android:radius="2dp" />
 
             <solid android:color="@android:color/white" />

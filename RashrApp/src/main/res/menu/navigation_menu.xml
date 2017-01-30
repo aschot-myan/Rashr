@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single" android:id="@+id/nav_menu_grp">
-        <item android:icon="@drawable/ic_flash" android:id="@+id/nav_flasher" android:title="@string/flasher" android:checked="true"/>
-        <item android:icon="@drawable/ic_done_all_black" android:id="@+id/nav_recovery_script" android:title="@string/recovery_script_manager"/>
-        <item android:icon="@drawable/ic_euro_symbol_black" android:id="@+id/nav_donate" android:title="@string/donate"/>
-        <item android:icon="@drawable/ic_settings_black" android:id="@+id/nav_settings" android:title="@string/settings"/>
-        <item android:icon="@drawable/ic_info_outline_black" android:id="@+id/nav_information" android:title="@string/information"/>
+    <group
+        android:id="@+id/nav_menu_grp"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_flasher"
+            android:checked="true"
+            android:icon="@drawable/ic_flash"
+            android:title="@string/flasher" />
+        <item
+            android:id="@+id/nav_recovery_script"
+            android:icon="@drawable/ic_done_all_black"
+            android:title="@string/recovery_script_manager" />
+        <item
+            android:id="@+id/nav_donate"
+            android:icon="@drawable/ic_euro_symbol_black"
+            android:title="@string/donate" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_information"
+            android:icon="@drawable/ic_info_outline_black"
+            android:title="@string/information" />
     </group>
 
-    <group android:checkableBehavior="none" android:id="@+id/links_menu_grp">
-        <item android:icon="@drawable/ic_xda" android:id="@+id/xda" android:title="@string/xda" />
-        <item android:icon="@drawable/ic_google_plus" android:id="@+id/google_plus" android:title="@string/google_plus" />
-        <item android:icon="@drawable/ic_github" android:id="@+id/github" android:title="@string/github" />
+    <group
+        android:id="@+id/links_menu_grp"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/xda"
+            android:icon="@drawable/ic_xda"
+            android:title="@string/xda" />
+        <item
+            android:id="@+id/google_plus"
+            android:icon="@drawable/ic_google_plus"
+            android:title="@string/google_plus" />
+        <item
+            android:id="@+id/github"
+            android:icon="@drawable/ic_github"
+            android:title="@string/github" />
     </group>
 </menu>

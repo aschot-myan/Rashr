@@ -28,7 +28,7 @@
         <item name="backgroundTint">?attr/colorAccent</item>
     </style>
 
-    <style name="Rashr.Dialog" parent="Theme.AppCompat.Dialog"/>
+    <style name="Rashr.Dialog" parent="Theme.AppCompat.Dialog" />
 
     <style name="Rashr.ActionBar" parent="Widget.AppCompat.ActionBar">
         <item name="android:textColorPrimary">?attr/colorAccent</item>
