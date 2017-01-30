@@ -6,7 +6,7 @@ android {
     defaultConfig {
         minSdkVersion 10
         versionCode 112
-        versionName '2.3.14'
+        versionName '2.4'
     }
     lintOptions {
         abortOnError false

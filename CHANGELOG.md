@@ -5,6 +5,7 @@ Update 2.4
 
 -Device name is now customizable
 -DarkUI temporally removed
+-UI optimized
 
 Update 2.3.14
 
