@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+Update 2.4.1
+
+-Downloading new Images fixed
+
 Update 2.4
 
 -Device name is now customizable

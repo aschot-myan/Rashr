@@ -587,6 +587,7 @@ public class FlashFragment extends Fragment {
                     bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.xzdual_describtion));
                     bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getXZDualRecoveryVersions());
                     bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_xzdual);
+                    bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, Const.PathToXZDual.toString());
                     mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
@@ -606,6 +607,7 @@ public class FlashFragment extends Fragment {
                     bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getCwmRecoveryVersions());
                     bundle.putString(RecoverySystemFragment.PARAM_SCREENSHOT_URL, Const.CWM_SCREENSHOT_URL);
                     bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_cwm);
+                    bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, Const.PathToCWM.toString());
                     mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
@@ -625,6 +627,7 @@ public class FlashFragment extends Fragment {
                     bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getTwrpRecoveryVersions());
                     bundle.putString(RecoverySystemFragment.PARAM_SCREENSHOT_URL, Const.TWRP_SCREENSHOT_URL);
                     bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_twrp);
+                    bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, Const.PathToTWRP.toString());
                     mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
@@ -642,6 +645,7 @@ public class FlashFragment extends Fragment {
                     bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_philz));
                     bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.philz_description));
                     bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getPhilzRecoveryVersions());
+                    bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, Const.PathToPhilz.toString());
                     mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
@@ -659,7 +663,8 @@ public class FlashFragment extends Fragment {
                     bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_cm));
                     bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.cm_recovery_description));
                     bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getCmRecoveriyVersions());
-                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_twrp);
+                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_cm);
+                    bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, Const.PathToCM.toString());
                     mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
@@ -678,6 +683,7 @@ public class FlashFragment extends Fragment {
                     bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.stock_recovery_description));
                     bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getStockRecoveryVersions());
                     bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_update);
+                    bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, Const.PathToStockRecovery.toString());
                     mActivity.switchTo(RecoverySystemFragment.newInstance(bundle));
                 }
             });

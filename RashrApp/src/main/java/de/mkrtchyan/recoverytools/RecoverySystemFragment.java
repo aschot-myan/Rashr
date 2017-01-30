@@ -348,6 +348,7 @@ public class RecoverySystemFragment extends Fragment {
                         if (system.equals(Device.REC_SYS_XZDUAL)) {
                             FlashUtil flasher = new FlashUtil(getActivity(), file, FlashUtil.JOB_INSTALL_XZDUAL);
                             flasher.execute();
+                            mActivity.onBackPressed();
                         } else {
                             flashRecovery(file);
                         }
