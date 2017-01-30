@@ -3,4 +3,6 @@
     <color name="custom_blue">#309090</color>
     <color name="darker_blue">#2e8a8a</color>
     <color name="black_light">#393939</color>
+    <color name="custom_white">#F9FCFB</color>
+
 </resources>

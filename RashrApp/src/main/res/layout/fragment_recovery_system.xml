@@ -1,0 +1,175 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="de.mkrtchyan.recoverytools.RecoverySystemFragment">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/ScreenshotCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:id="@+id/ScreenShotWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/ivRecLogo"
+                        android:padding="0dp"
+                        android:cropToPadding="false"
+                        android:layout_height="26dp"
+                        android:layout_width="26dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvSysName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorPrimary"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        tools:text="System Name"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="-"
+                        android:textSize="14sp"
+                        tools:ignore="HardcodedText" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvDevName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="Aschot Mkrtchyan" />
+                </LinearLayout>
+
+                <View
+                    android:background="#979797"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:minHeight="200dp"
+                        android:id="@+id/ScreenshotLayout"
+                        android:padding="10dp"
+                        android:paddingTop="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp" />
+                </HorizontalScrollView>
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/DescriptionCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:orientation="horizontal">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/description"
+                        android:textColor="?attr/colorPrimary"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        tools:text="Description" />
+                </LinearLayout>
+
+                <View
+                    android:background="#979797"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvRecSysDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    tools:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/VersionCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardElevation="4dp">
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spVersions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/FlashCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardElevation="4dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/bFlashRecovery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/flash_button"
+                    tools:text="FLASH!"
+                    android:drawableLeft="@drawable/ic_flash_white"
+                    android:drawableStart="@drawable/ic_flash_white"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</ScrollView>
+

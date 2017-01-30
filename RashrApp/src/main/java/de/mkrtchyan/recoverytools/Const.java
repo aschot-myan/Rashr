@@ -42,13 +42,16 @@ public class Const {
     public static final String PREF_KEY_HIDE_RATER = "show_rater";
     public static final String PREF_KEY_LOG = "log_commands";
     public static final String PREF_KEY_SHOW_UNIFIED = "show_unified";
-    public static final String PREF_KEY_DARK_UI = "use_dark_ui";
+    //public static final String PREF_KEY_DARK_UI = "use_dark_ui";
     public static final String PREF_KEY_CHECK_UPDATES = "check_updates";
     public static final String PREF_KEY_HIDE_UPDATE_HINTS = "hide_uptodate_hint";
     public static final String PREF_KEY_HIDE_REBOOT = "hide_reboot";
     public static final String PREF_KEY_FLASH_COUNTER = "last_counter";
     public static final String PREF_KEY_SKIP_SIZE_CHECK = "skip_size_check";
     public static final String PREF_KEY_SKIP_IMAGE_CHECK = "skip_image_check";
+    public static final String PREF_KEY_DEVICE_NAME = "device_name";
+    public static final String PREF_KEY_RECOVERY_PATH = "recovery_path";
+    public static final String PREF_KEY_KERNEL_PATH = "kernel_path";
 
     /**
      * Google
@@ -80,6 +83,11 @@ public class Const {
     public static final String KERNEL_SUMS_URL = BASE_URL + "/" + KERNEL_SUMS;
     public static final String RASHR_VERSION_URL = BASE_URL + "/rashr/" + VERSION;
     public static final String UTILS_URL = BASE_URL + "/utils";
+    public static final String XDA_THREAD_URL = "http://forum.xda-developers.com/showthread.php?t=2334554";
+    public static final String GOOGLE_PLUS_URL = "https://plus.google.com/communities/108943765577787027090";
+    public static final String GITHUB_REPOSITORY_URL = "https://github.com/dslnexus/rashr";
+    public static final String TWRP_SCREENSHOT_URL = BASE_URL + "/rashr/twrp_screenshots";
+    public static final String CWM_SCREENSHOT_URL = BASE_URL + "/rashr/cwm_screenshots";
 
     public static final String CHANGELOG_URL = "https://raw.githubusercontent.com/DsLNeXuS/Rashr/master/CHANGELOG.md";
     public static final File PathToSd = Environment.getExternalStorageDirectory();

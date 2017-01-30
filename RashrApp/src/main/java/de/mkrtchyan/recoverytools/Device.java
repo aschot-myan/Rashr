@@ -482,7 +482,7 @@ public class Device {
     }
 
     /**
-     * Reads the file raw/recovery_sums. This file contains Recovery-Image names (Placed on my own
+     * Reads the file raw/recovery_links. This file contains Recovery-Image names (Placed on my own
      * server) and links to Recovery-Images (used for CyanogenMod-Recovery and TWRP. ClockworkMod
      * can't be downloaded by direct link because they don't provide any checksum.
      * <p/>

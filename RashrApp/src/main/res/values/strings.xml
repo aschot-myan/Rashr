@@ -210,4 +210,17 @@
     <string name="image_not_valid_message" formatted="false">This image hasn\'t been recognised as a valid Android-Image. If you are really sure that this Image (%s) is not corrupt you are able to disable the Validation in the settings and try it again. I\'ve warned you!</string>
     <string name="image_to_big_message" formatted="false">The chosen image (%d MB) is to big for your device (partition %d MB). If you are sure that this image is the correct one you are able to skip size check before flashing. Checkout the Settings. I\'ve warned you!</string>
     <string name="reboot_failed">Reboot failed</string>
+    <string name="google_plus" translatable="false">Google+</string>
+    <string name="github" translatable="false">GitHub</string>
+    <string name="description">Description</string>
+    <string name="dev_name_twrp" translatable="false">TeamWin</string>
+    <string name="dev_name_xzdual" translatable="false">[NUT]</string>
+    <string name="dev_name_philz" translatable="false">Phil3759</string>
+    <string name="dev_name_cwm" translatable="false">Clockwork</string>
+    <string name="dev_name_cm" translatable="false">Cyanogen</string>
+    <string name="flash_button">FLASH!</string>
+    <string name="close">CLOSE</string>
+    <string name="set_dev_name">Set custom Device name</string>
+    <string name="device_name">Device name</string>
+    <string name="reset">Reset</string>
 </resources>

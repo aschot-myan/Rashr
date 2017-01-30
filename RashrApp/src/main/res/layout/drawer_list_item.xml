@@ -5,8 +5,10 @@
     android:layout_height="48dp"
     android:layout_gravity="center_horizontal"
     android:gravity="center_vertical"
-    android:paddingLeft="20dp"
-    android:text="Sample Text"
     android:textColor="?attr/colorAccent"
+    android:paddingLeft="20dp"
+    android:background="@color/custom_white"
+    android:paddingStart="20dp"
+    android:text="Sample Text"
     android:textIsSelectable="false"
-    android:textSize="14sp" />
+    android:textStyle="bold" />

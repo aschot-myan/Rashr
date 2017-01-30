@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialog;
@@ -24,13 +23,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.fima.cardsui.objects.Card;
-import com.fima.cardsui.objects.CardColorScheme;
 import com.fima.cardsui.views.CardUI;
 import com.fima.cardsui.views.IconCard;
 import com.fima.cardsui.views.SimpleCard;
 
 import org.sufficientlysecure.rootcommands.Toolbox;
-import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.File;
 import java.io.IOException;
@@ -113,13 +110,9 @@ public class FlashFragment extends Fragment {
             showUnifiedBuildsDialog();
         }
         optimizeLayout(root);
-        root.setBackgroundColor(
-                RashrActivity.isDark ?
-                        ContextCompat.getColor(mContext, R.color.background_material_dark) :
-                        ContextCompat.getColor(mContext, R.color.background_material_light));
         if (Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_CHECK_UPDATES)
                 && RashrActivity.FirstSession) {
-            catchUpdates(true);
+            catchUpdates();
             RashrActivity.FirstSession = false;
         }
         return root;
@@ -129,146 +122,10 @@ public class FlashFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.BackupItem:
-                mActivity.switchTo(BackupRestoreFragment.newInstance(mActivity));
+                mActivity.switchTo(BackupRestoreFragment.newInstance(mActivity), true);
                 break;
         }
         return false;
-    }
-
-    /**
-     * Flash a Recovery provided by Rashr, like ClockworkMod, TWRP, PhilZ, CM, Stock
-     *
-     * @param card CardView containing the Recovery-System type for example:
-     *             clockwork, cm, twrp, philz, stock....
-     */
-    public void FlashSupportedRecovery(Card card) {
-        final File path;
-        final ArrayList<String> Versions;
-        /**
-         * If there files be needed to flash download it and listing device specified
-         * recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
-         * (read out from RECOVERY_SUMS)
-         */
-        final String SYSTEM = card.getData().toString();
-        ArrayAdapter<String> VersionsAdapter = new ArrayAdapter<>(mContext,
-                R.layout.custom_list_item);
-        switch (SYSTEM) {
-            case Device.REC_SYS_STOCK:
-                Versions = RashrApp.DEVICE.getStockRecoveryVersions();
-                path = Const.PathToStockRecovery;
-                break;
-            case Device.REC_SYS_CWM:
-                Versions = RashrApp.DEVICE.getCwmRecoveryVersions();
-                path = Const.PathToCWM;
-                break;
-            case Device.REC_SYS_TWRP:
-                Versions = RashrApp.DEVICE.getTwrpRecoveryVersions();
-                path = Const.PathToTWRP;
-                break;
-            case Device.REC_SYS_PHILZ:
-                Versions = RashrApp.DEVICE.getPhilzRecoveryVersions();
-                path = Const.PathToPhilz;
-                break;
-            case Device.REC_SYS_XZDUAL:
-                Versions = RashrApp.DEVICE.getXZDualRecoveryVersions();
-                path = Const.PathToXZDual;
-                AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-                alert.setTitle(R.string.warning);
-                if (RashrApp.DEVICE.isXZDualInstalled()) {
-                    alert.setMessage(R.string.xzdual_uninstall_alert);
-                    alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            AlertDialog.Builder abuilder = new AlertDialog.Builder(mContext);
-                            abuilder.setTitle(R.string.info);
-                            abuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            });
-                            try {
-                                FlashUtil.uninstallXZDual();
-                                abuilder.setMessage(R.string.xzdual_uninstall_successfull);
-                            } catch (FailedExecuteCommand failedExecuteCommand) {
-                                abuilder.setMessage(getString(R.string.xzdual_uninstall_failed) + "\n" +
-                                        failedExecuteCommand.toString());
-                                failedExecuteCommand.printStackTrace();
-                                RashrApp.ERRORS.add(failedExecuteCommand.toString() + " Error uninstalling XZDual");
-                            }
-                            abuilder.show();
-                        }
-                    });
-                    alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    return;
-                }
-                break;
-            case Device.REC_SYS_CM:
-                Versions = RashrApp.DEVICE.getCmRecoveriyVersions();
-                path = Const.PathToCM;
-                break;
-            default:
-                return;
-        }
-        for (String i : Versions) {
-            VersionsAdapter.add(formatName(i, SYSTEM));
-        }
-        final AlertDialog.Builder RecoveriesDialog = new AlertDialog.Builder(mContext);
-        RecoveriesDialog.setTitle(SYSTEM.toUpperCase());
-        RecoveriesDialog.setAdapter(VersionsAdapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String fileName = Versions.get(which);
-                String surl = Const.RECOVERY_URL + "/" + fileName;
-                if (SYSTEM.equals(Device.REC_SYS_CM) || SYSTEM.equals(Device.REC_SYS_TWRP)) {
-                    surl = fileName;
-                    fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
-                }
-                final File recovery = new File(path, fileName);
-                if (!recovery.exists()) {
-                    try {
-                        URL url = new URL(surl);
-                        final Downloader downloader = new Downloader(url, recovery);
-                        final DownloadDialog RecoveryDownloader = new DownloadDialog(mContext, downloader);
-                        if (SYSTEM.equals(Device.REC_SYS_TWRP)) {
-                            downloader.setReferrer(surl);
-                        }
-                        RecoveryDownloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
-                            @Override
-                            public void onSuccess(File file) {
-                                if (SYSTEM.equals(Device.REC_SYS_XZDUAL)) {
-                                    FlashUtil flasher = new FlashUtil(mActivity, file, FlashUtil.JOB_INSTALL_XZDUAL);
-                                    flasher.execute();
-                                } else {
-                                    flashRecovery(file);
-                                }
-                            }
-
-                            @Override
-                            public void onFail(Exception e) {
-                                if (e != null) {
-                                    Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                                RecoveryDownloader.retry();
-                            }
-                        });
-                        RecoveryDownloader.setAskBeforeDownload(true);
-                        downloader.setChecksumFile(Const.RecoveryCollectionFile);
-                        RecoveryDownloader.ask();
-                    } catch (MalformedURLException ignored) {
-                    }
-                } else {
-                    flashRecovery(recovery);
-                }
-            }
-        });
-        RecoveriesDialog.show();
-        //}
     }
 
     /**
@@ -444,8 +301,7 @@ public class FlashFragment extends Fragment {
                                 }
                             });
                             if (e instanceof FlashUtil.ImageNotValidException) {
-                                d.setMessage(String.format(getString(R.string.image_not_valid_message),
-                                        ((FlashUtil.ImageNotValidException) e).getPath()));
+                                d.setMessage(getString(R.string.image_not_valid_message));
                                 d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -526,15 +382,6 @@ public class FlashFragment extends Fragment {
             setupSwipeUpdater(root);
 
             CardUI RashrCards = (CardUI) root.findViewById(R.id.RashrCards);
-            final CardColorScheme scheme;
-            if (!RashrActivity.isDark) {
-                scheme = null;
-            } else {
-                scheme = new CardColorScheme(
-                        ContextCompat.getColor(mContext, R.color.background_floating_material_dark),
-                        ContextCompat.getColor(mContext, R.color.abc_secondary_text_material_dark)
-                );
-            }
             /** Avoid overlapping scroll on CardUI and SwipeRefreshLayout */
             RashrCards.getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
@@ -552,16 +399,16 @@ public class FlashFragment extends Fragment {
             });
 
             if (RashrApp.DEVICE.isRecoverySupported()) {
-                addRecoveryCards(RashrCards, scheme);
+                addRecoveryCards(RashrCards);
             }
 
             if (RashrApp.DEVICE.isKernelSupported()) {
-                addKernelCards(RashrCards, scheme);
+                addKernelCards(RashrCards);
             }
             //Device has been flashed over Rashr so you can choose previously used images
             if (getHistoryFiles().size() > 0) {
                 final IconCard HistoryCard = new IconCard(getString(R.string.history),
-                        R.drawable.ic_history, getString(R.string.history_description), scheme);
+                        R.drawable.ic_history, getString(R.string.history_description));
                 HistoryCard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -572,7 +419,7 @@ public class FlashFragment extends Fragment {
                 RashrCards.addCard(HistoryCard, true);
             }
 
-            addRebooterCards(RashrCards, scheme);
+            addRebooterCards(RashrCards);
         }
     }
 
@@ -705,14 +552,15 @@ public class FlashFragment extends Fragment {
 
     public void setupSwipeUpdater(View root) {
         mSwipeUpdater = (SwipeRefreshLayout) root.findViewById(R.id.swipe_updater);
-        mSwipeUpdater.setColorSchemeResources(R.color.custom_blue,
+        mSwipeUpdater.setColorSchemeResources(
+                R.color.custom_blue,
                 R.color.golden,
                 R.color.custom_blue,
                 android.R.color.darker_gray);
         mSwipeUpdater.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                catchUpdates(false);
+                catchUpdates();
             }
         });
 
@@ -724,9 +572,8 @@ public class FlashFragment extends Fragment {
      * TWRP Card and Recovery From Storage card.
      *
      * @param cardUI Where should be the cards added
-     * @param scheme Style for the cards (background color and font color for dark theme)
      */
-    public void addRecoveryCards(CardUI cardUI, CardColorScheme scheme) {
+    public void addRecoveryCards(CardUI cardUI) {
         if (RashrApp.DEVICE.isXZDualRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard XZCard = new IconCard(getString(R.string.xzdualrecovery), R.drawable.ic_xzdual,
                     getString(R.string.xzdual_describtion));
@@ -734,74 +581,112 @@ public class FlashFragment extends Fragment {
             XZCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSupportedRecovery(XZCard);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(RecoverySystemFragment.PARAM_TITLE, XZCard.getData().toString());
+                    bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_xzdual));
+                    bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.xzdual_describtion));
+                    bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getXZDualRecoveryVersions());
+                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_xzdual);
+                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
             cardUI.addCard(XZCard, true);
         }
         if (RashrApp.DEVICE.isCwmRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard CWMCard = new IconCard(getString(R.string.sCWM), R.drawable.ic_cwm,
-                    getString(R.string.cwm_description), scheme);
+                    getString(R.string.cwm_description));
             CWMCard.setData(Device.REC_SYS_CWM);
             CWMCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSupportedRecovery(CWMCard);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(RecoverySystemFragment.PARAM_TITLE, CWMCard.getData().toString());
+                    bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_cwm));
+                    bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.cwm_description));
+                    bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getCwmRecoveryVersions());
+                    bundle.putString(RecoverySystemFragment.PARAM_SCREENSHOT_URL, Const.CWM_SCREENSHOT_URL);
+                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_cwm);
+                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
             cardUI.addCard(CWMCard, true);
         }
         if (RashrApp.DEVICE.isTwrpRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard TWRPCard = new IconCard(getString(R.string.sTWRP), R.drawable.ic_twrp,
-                    getString(R.string.twrp_description), scheme);
+                    getString(R.string.twrp_description));
             TWRPCard.setData(Device.REC_SYS_TWRP);
             TWRPCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSupportedRecovery(TWRPCard);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(RecoverySystemFragment.PARAM_TITLE, TWRPCard.getData().toString());
+                    bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_twrp));
+                    bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.twrp_description));
+                    bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getTwrpRecoveryVersions());
+                    bundle.putString(RecoverySystemFragment.PARAM_SCREENSHOT_URL, Const.TWRP_SCREENSHOT_URL);
+                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_twrp);
+                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
             cardUI.addCard(TWRPCard, true);
         }
         if (RashrApp.DEVICE.isPhilzRecoverySupported() || BuildConfig.DEBUG) {
             final SimpleCard PHILZCard = new SimpleCard(getString(R.string.sPhilz),
-                    getString(R.string.philz_description), scheme);
+                    getString(R.string.philz_description));
             PHILZCard.setData(Device.REC_SYS_PHILZ);
             PHILZCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSupportedRecovery(PHILZCard);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(RecoverySystemFragment.PARAM_TITLE, PHILZCard.getData().toString());
+                    bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_philz));
+                    bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.philz_description));
+                    bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getPhilzRecoveryVersions());
+                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
             cardUI.addCard(PHILZCard, true);
         }
         if (RashrApp.DEVICE.isCmRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard CMCard = new IconCard(getString(R.string.cm_recovery), R.drawable.ic_cm,
-                    getString(R.string.cm_recovery_description), scheme);
+                    getString(R.string.cm_recovery_description));
             CMCard.setData(Device.REC_SYS_CM);
             CMCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSupportedRecovery(CMCard);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(RecoverySystemFragment.PARAM_TITLE, CMCard.getData().toString());
+                    bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_cm));
+                    bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.cm_recovery_description));
+                    bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getCmRecoveriyVersions());
+                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_twrp);
+                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
             cardUI.addCard(CMCard, true);
         }
         if (RashrApp.DEVICE.isStockRecoverySupported() || BuildConfig.DEBUG) {
             final IconCard StockCard = new IconCard(getString(R.string.stock_recovery),
-                    R.drawable.ic_update, getString(R.string.stock_recovery_description), scheme);
+                    R.drawable.ic_update, getString(R.string.stock_recovery_description));
             StockCard.setData(Device.REC_SYS_STOCK);
             StockCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashSupportedRecovery(StockCard);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(RecoverySystemFragment.PARAM_TITLE, StockCard.getData().toString());
+                    bundle.putString(RecoverySystemFragment.PARAM_DEV, RashrApp.DEVICE.getManufacture());
+                    bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.stock_recovery_description));
+                    bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, RashrApp.DEVICE.getStockRecoveryVersions());
+                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_update);
+                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle));
                 }
             });
             cardUI.addCard(StockCard, true);
         }
 
-        final SimpleCard OtherCard = new SimpleCard(getString(R.string.other_recovery),
-                getString(R.string.other_storage_description), scheme);
+        final IconCard OtherCard = new IconCard(getString(R.string.other_recovery),
+                R.drawable.ic_folder,
+                getString(R.string.other_storage_description));
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -815,12 +700,11 @@ public class FlashFragment extends Fragment {
      * addKernelCards checks wich kernels are supported by your device
      *
      * @param cardUI Where should be the cards added
-     * @param scheme Style for the cards (background color and font color for dark theme)
      */
-    public void addKernelCards(CardUI cardUI, CardColorScheme scheme) {
+    public void addKernelCards(CardUI cardUI) {
         if (RashrApp.DEVICE.isStockKernelSupported() || BuildConfig.DEBUG) {
-            final IconCard StockCard = new IconCard(getString(R.string.stock_kernel), R.drawable.ic_stock,
-                    getString(R.string.stock_kernel_description), scheme);
+            final IconCard StockCard = new IconCard(getString(R.string.stock_kernel), R.drawable.ic_stock_kernel,
+                    getString(R.string.stock_kernel_description));
             StockCard.setData("stock");
             StockCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -831,8 +715,9 @@ public class FlashFragment extends Fragment {
             cardUI.addCard(StockCard, true);
         }
 
-        final SimpleCard OtherCard = new SimpleCard(getString(R.string.other_kernel),
-                getString(R.string.other_storage_description), scheme);
+        final IconCard OtherCard = new IconCard(getString(R.string.other_kernel),
+                R.drawable.ic_folder,
+                getString(R.string.other_storage_description));
         OtherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -847,11 +732,10 @@ public class FlashFragment extends Fragment {
      * Add cards for reboot device: Reboot to Bootloader, Reboot to Recovery, Reboot, Shutdown
      *
      * @param cardUI Where should be the cards added
-     * @param scheme Style for the cards (background color and font color for dark theme)
      */
-    public void addRebooterCards(CardUI cardUI, CardColorScheme scheme) {
+    public void addRebooterCards(CardUI cardUI) {
         SimpleCard Reboot = new SimpleCard(getString(R.string.sReboot),
-                getString(R.string.reboot_description), scheme);
+                getString(R.string.reboot_description));
         Reboot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -879,7 +763,7 @@ public class FlashFragment extends Fragment {
             }
         });
         SimpleCard RebootRecovery = new SimpleCard(getString(R.string.sRebootRecovery),
-                getString(R.string.reboot_recovery_description), scheme);
+                getString(R.string.reboot_recovery_description));
         RebootRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -907,7 +791,7 @@ public class FlashFragment extends Fragment {
             }
         });
         SimpleCard RebootBootloader = new SimpleCard(getString(R.string.sRebootBootloader),
-                getString(R.string.reboot_bootloader_description), scheme);
+                getString(R.string.reboot_bootloader_description));
         RebootBootloader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -935,7 +819,7 @@ public class FlashFragment extends Fragment {
             }
         });
         SimpleCard Shutdown = new SimpleCard(getString(R.string.sRebootShutdown),
-                getString(R.string.shutdown_description), scheme);
+                getString(R.string.shutdown_description));
         Shutdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -976,12 +860,10 @@ public class FlashFragment extends Fragment {
     /**
      * Checking if there are new Kernel and Recovery images to download.
      * Download new list of recoveries and kernels if user want and reload interface.
-     * The lists are placed in  dslnexus.de/Android/recovery_sums
+     * The lists are placed in  dslnexus.de/Android/recovery_links
      * dslnexus.de/Android/kernel_sums
-     *
-     * @param ask let the user choose if he want to download the new ImageList.
      */
-    public void catchUpdates(final boolean ask) {
+    public void catchUpdates() {
         if (mSwipeUpdater != null) mSwipeUpdater.setRefreshing(true);
         final Thread updateThread = new Thread(new Runnable() {
             @Override
@@ -1035,22 +917,20 @@ public class FlashFragment extends Fragment {
                                 recoveryURL = new URL(Const.RECOVERY_SUMS_URL);
                                 kernelURL = new URL(Const.KERNEL_SUMS_URL);
                             } catch (MalformedURLException e) {
+                                RashrApp.ERRORS.add(e.toString());
                                 return;
                             }
                             /** Download the new lists */
-                            Downloader downloader = new Downloader(recoveryURL, Const.RecoveryCollectionFile);
-                            final DownloadDialog RecoveryUpdater = new DownloadDialog(mContext, downloader);
-                            downloader.setOverrideFile(true);
-                            RecoveryUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
+                            final Downloader rDownloader = new Downloader(recoveryURL, Const.RecoveryCollectionFile);
+                            rDownloader.setOverrideFile(true);
+                            rDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
                                 @Override
                                 public void onSuccess(File file) {
                                     RashrApp.DEVICE.loadRecoveryList();
                                     isRecoveryListUpToDate = true;
-                                    Downloader downloader = new Downloader(kernelURL, Const.KernelCollectionFile);
-                                    final DownloadDialog KernelUpdater = new DownloadDialog(mContext,
-                                            downloader);
-                                    downloader.setOverrideFile(true);
-                                    KernelUpdater.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
+                                    final Downloader kDownloader = new Downloader(kernelURL, Const.KernelCollectionFile);
+                                    kDownloader.setOverrideFile(true);
+                                    kDownloader.setOnDownloadListener(new Downloader.OnDownloadListener() {
                                         @Override
                                         public void onSuccess(File file) {
                                             RashrApp.DEVICE.loadKernelList();
@@ -1068,7 +948,7 @@ public class FlashFragment extends Fragment {
                                                     if (isAdded()) {
                                                         Toast
                                                                 .makeText(mActivity, String.format(getString(R.string.new_imgs_loaded),
-                                                                        new_img_count), Toast.LENGTH_SHORT)
+                                                                        String.valueOf(new_img_count)), Toast.LENGTH_SHORT)
                                                                 .show();
                                                     }
                                                     if (mSwipeUpdater != null) {
@@ -1094,7 +974,7 @@ public class FlashFragment extends Fragment {
                                             }
                                         }
                                     });
-                                    KernelUpdater.download();
+                                    kDownloader.download();
                                 }
 
                                 @Override
@@ -1113,39 +993,7 @@ public class FlashFragment extends Fragment {
                                     }
                                 }
                             });
-                            mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    /** Ask the user if he wants to download the new lists */
-                                    if (ask) {
-                                        AlertDialog.Builder updateDialog = new AlertDialog.Builder(mContext);
-                                        updateDialog
-                                                .setTitle(R.string.update_available)
-                                                .setMessage(R.string.lists_outdated)
-                                                .setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        Toast
-                                                                .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
-                                                                .show();
-                                                        RecoveryUpdater.download();
-                                                    }
-                                                })
-                                                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-
-                                                    }
-                                                })
-                                                .show();
-                                    } else {
-                                        Toast
-                                                .makeText(mActivity, R.string.refresh_list, Toast.LENGTH_SHORT)
-                                                .show();
-                                        RecoveryUpdater.download();
-                                    }
-                                }
-                            });
+                            rDownloader.download();
                         } else {
                             /** Lists are up to date */
                             mActivity.runOnUiThread(new Runnable() {
@@ -1168,95 +1016,6 @@ public class FlashFragment extends Fragment {
             }
         });
         updateThread.start();
-    }
-
-    /**
-     * formatName formats the fileName to a better one for the User (NO FILE WILL BE TOUCHED)
-     * you need to work with the real name to flash like @param fileName
-     *
-     * @param fileName for example recovery-clockwork-touch-rndversion-rnddevice.image
-     * @param system   Supported recovery Systems twrp, cwm, philz, xzdual, cm, stock
-     * @return Formatted Filename like ClockworkMod Touch 5.8.x.x (grouper) // Nexus 7 2012
-     */
-    private String formatName(final String fileName, final String system) {
-        try {
-            switch (system) {
-                case Device.REC_SYS_XZDUAL:
-                    /*
-                     * Finding better name for example:
-                     *      Z3-lockeddualrecovery2.8.21.zip -> Z3 XZDualRecovery 2.8.21
-                     */
-                    String split[] = fileName.split("lockeddualrecovery");
-                    return RashrApp.DEVICE.getXZDualName().toUpperCase() + " XZDualRecovery " + split[split.length - 1].replace(".zip", "");
-                case Device.REC_SYS_TWRP:
-                    /*
-                     * Finding better name for example:
-                     *      twrp-3.0.0-1-zeroflte.img -> TWRP 3.0.0-1 (zeroflte)
-                     */
-                    String tokens[] = fileName.split("-");
-                    if (tokens.length == 3) {
-                        return "TWRP " + tokens[1] + " (" + tokens[tokens.length - 1].substring(0, tokens[tokens.length - 1].length()) + ")";
-                    }
-                    // Contains revision number like 3.0.0-1
-                    // Example twrp-3.0.0-1-zeroflte.img
-                    return "TWRP " + tokens[1] + "-" + tokens[2] + " (" + tokens[tokens.length - 1].replace(RashrApp.DEVICE.getRecoveryExt(), "") + ")";
-                case Device.REC_SYS_CWM:
-                    /*
-                     * Finding better name for example:
-                     *      recovery-clockwork-touch-6.0.4.7-mako.img -> ClockworkMod Touch 6.0.4.7 (mako)
-                     */
-                    int startIndex;
-                    String cversion = "";
-                    if (fileName.contains("-touch-")) {
-                        startIndex = 4;
-                        cversion = "Touch ";
-                    } else {
-                        startIndex = 3;
-                    }
-                    cversion += fileName.split("-")[startIndex - 1];
-                    String device = "(";
-                    for (int splitNr = startIndex; splitNr < fileName.split("-").length; splitNr++) {
-                        if (!device.equals("(")) device += "-";
-                        device += fileName.split("-")[splitNr].replace(RashrApp.DEVICE.getRecoveryExt(), "");
-                    }
-                    device += ")";
-                    return "ClockworkMod " + cversion + " " + device;
-                case Device.REC_SYS_PHILZ:
-                    /*
-                     * Finding better name for example:
-                     *      philz_touch_6.57.9-mako.img -> PhilZ Touch 6.57.9 (mako)
-                     */
-                    String pdevice = "(";
-                    for (int splitNr = 1; splitNr < fileName.split("-").length; splitNr++) {
-                        if (!pdevice.equals("(")) pdevice += "-";
-                        pdevice += fileName.split("-")[splitNr].replace(RashrApp.DEVICE.getRecoveryExt(), "");
-                    }
-                    pdevice += ")";
-                    String philzVersion = fileName.split("_")[2].split("-")[0];
-                    return "PhilZ Touch " + philzVersion + " " + pdevice;
-                case Device.REC_SYS_STOCK:
-                    /*
-                     * Finding better name for example:
-                     *      stock-recovery-hammerhead-6.0.1.img -> Stock Recovery 6.0.1 (hammerhead)
-                     */
-                    String sversion = fileName.split("-")[3].replace(RashrApp.DEVICE.getRecoveryExt(), "");
-                    String deviceName = fileName.split("-")[2];
-                    return "Stock Recovery " + sversion + " (" + deviceName + ")";
-                case Device.REC_SYS_CM:
-                    /*
-                     * Finding better name for example:
-                     *      cm-13-20160224-NIGHTLY-hammerhead ->
-                     *              CyanogenMod Recovery 13 nightly 20160224 (hammerhead)
-                     */
-                    String cmVersion = fileName.split("-")[1];
-                    String date = fileName.split("-")[2];
-                    String build = fileName.split("-")[3];
-                    deviceName = fileName.split("-")[4];
-                    return "CyanogenMod Recovery " + cmVersion + " " + build + " " + date + " (" + deviceName + ")";
-            }
-        } catch (ArrayIndexOutOfBoundsException ignore) {
-        }
-        return fileName;
     }
 
     /**

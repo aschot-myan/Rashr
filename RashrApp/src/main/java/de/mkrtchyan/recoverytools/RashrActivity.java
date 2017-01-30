@@ -1,26 +1,37 @@
 package de.mkrtchyan.recoverytools;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.sufficientlysecure.donations.DonationsFragment;
 import org.sufficientlysecure.rootcommands.Shell;
@@ -56,18 +67,18 @@ import de.mkrtchyan.utils.Downloader;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-public class RashrActivity extends AppCompatActivity implements
-        NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class RashrActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static boolean isDark;
+    //public static boolean isDark;
     static boolean FirstSession = true;
     static boolean LastLogExists = false;
     private final File Folder[] = {
             Const.PathToRashr, Const.PathToRecoveries, Const.PathToKernel,
             Const.PathToStockRecovery, Const.PathToCWM, Const.PathToTWRP,
-            Const.PathToPhilz, Const.PathToXZDual, Const.PathToStockKernel,
-            Const.PathToRecoveryBackups, Const.PathToKernelBackups, Const.PathToUtils,
-            Const.PathToTmp
+            Const.PathToPhilz, Const.PathToXZDual, Const.PathToCM,
+            Const.PathToStockKernel, Const.PathToRecoveryBackups, Const.PathToKernelBackups,
+            Const.PathToUtils, Const.PathToTmp
     };
     private final RashrActivity mActivity = this;
     private final Context mContext = this;
@@ -75,7 +86,10 @@ public class RashrActivity extends AppCompatActivity implements
      * Declaring needed objects
      */
     private Toolbar mToolbar;
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    //private NavigationDrawerFragment mNavigationDrawerFragment;
+    private NavigationView mNavigationView;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mRoot;
 
     private boolean mVersionChanged = false;
 
@@ -95,9 +109,11 @@ public class RashrActivity extends AppCompatActivity implements
 
         Const.FilesDir = mContext.getFilesDir();
         Const.RashrLog = new File(Const.FilesDir, Const.LOG_NAME);
-        isDark = Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_DARK_UI);
-        setTheme(!isDark ? R.style.Rashr : R.style.Rashr_Dark);
+        //isDark = Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_DARK_UI);
+        setTheme(R.style.Rashr);
         setContentView(R.layout.loading_layout);
+        ActivityCompat.requestPermissions(
+                this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
 
         final TextView tvLoading = (TextView) findViewById(R.id.tvLoading);
 
@@ -146,7 +162,7 @@ public class RashrActivity extends AppCompatActivity implements
                 }
                 for (File i : Folder) {
                     if (!i.exists()) {
-                        if (!i.mkdir()) {
+                        if (!i.mkdirs()) {
                             RashrApp.ERRORS.add(Const.RASHR_TAG + " " + i + " can't be created!");
                         }
                     }
@@ -186,8 +202,11 @@ public class RashrActivity extends AppCompatActivity implements
                             tvLoading.setText(R.string.reading_device);
                     }
                 });
-                if (!RashrApp.DEVICE.isSetup())
-                    RashrApp.DEVICE.setup();
+                if (!RashrApp.DEVICE.isSetup()) {
+                    String pref_dev_name = Common.getStringPref(mContext, Const.PREF_NAME,
+                            Const.PREF_KEY_DEVICE_NAME);
+                    RashrApp.DEVICE.setup(pref_dev_name);
+                }
 
                 /* If device is not supported, you can report it now or close the App */
                 if (!RashrApp.DEVICE.isRecoverySupported() && !RashrApp.DEVICE.isKernelSupported()) {
@@ -216,31 +235,39 @@ public class RashrActivity extends AppCompatActivity implements
                     public void run() {
 
                         try {
-                            View root = View.inflate(mContext, R.layout.activity_rashr, null);
-                            root.startAnimation(AnimationUtils.loadAnimation(mContext,
-                                    R.anim.abc_grow_fade_in_from_bottom));
-                            setContentView(root);
+                            mRoot = (DrawerLayout) View.inflate(mContext, R.layout.activity_rashr, null);
+                            mRoot.startAnimation(AnimationUtils.loadAnimation(mContext,
+                                    R.anim.abc_fade_in));
+                            setContentView(mRoot);
                             mToolbar = (Toolbar) findViewById(R.id.toolbar);
                             setSupportActionBar(mToolbar);
-                            //mDevice.downloadUtils(mContext);
-                            mNavigationDrawerFragment = (NavigationDrawerFragment)
-                                    getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-                            mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
-                                    (DrawerLayout) findViewById(R.id.RashrLayout));
+                            mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+                            mDrawerToggle = new ActionBarDrawerToggle(mActivity, mRoot, mToolbar,
+                                    R.string.app_name, R.string.app_name);
+                            DrawerArrowDrawable coloredArrow = new DrawerArrowDrawable(mContext);
+                            TypedValue typedValue = new TypedValue();
+                            Resources.Theme theme = getTheme();
+                            theme.resolveAttribute(R.attr.colorAccent, typedValue, true);
+                            coloredArrow.setColor(typedValue.data);
+                            mDrawerToggle.setDrawerArrowDrawable(coloredArrow);
+                            mRoot.addDrawerListener(mDrawerToggle);
+                            mDrawerToggle.syncState();
+                            mNavigationView.setNavigationItemSelectedListener(mActivity);
 
                             AdView ads = (AdView) findViewById(R.id.ads);
                             if (ads != null) {
                                 if (Common.getBooleanPref(mContext, Const.PREF_NAME,
                                         Const.PREF_KEY_ADS)) {
-                                    ads.loadAd(new AdRequest()
-                                            .addTestDevice("6400A1C06B921CB807E69EC539ADC588"));
+                                    ads.loadAd(new AdRequest.Builder()
+                                            .addTestDevice("7DE4544A9DF140825046328923A50A91")
+                                            .build());
                                 }
                             }
                             if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
                                 /* Rashr is opened by other app to flash supported files (.zip) or (.img) */
                                 File file = new File(getIntent().getData().getPath());
                                 if (file.exists()) {
-                                    if (file.toString().endsWith(".zip")) {
+                                    if (file.toString().endsWith(Device.EXT_ZIP)) {
                                         /* If it is a zip file open the ScriptManager */
                                         switchTo(ScriptManagerFragment.newInstance(mActivity, file));
                                     } else {
@@ -249,7 +276,7 @@ public class RashrActivity extends AppCompatActivity implements
                                     }
                                 }
                             } else {
-                                onNavigationDrawerItemSelected(0);
+                                onNavigationItemSelected(mNavigationView.getMenu().getItem(0));
                             }
                         } catch (NullPointerException e) {
                             setContentView(R.layout.err_layout);
@@ -264,28 +291,16 @@ public class RashrActivity extends AppCompatActivity implements
                                 ReportDialog dialog = new ReportDialog(mActivity, e.toString());
                                 dialog.show();
                                 ex.printStackTrace();
-
                             }
+                            ReportDialog dialog = new ReportDialog(mActivity, e.toString());
+                            dialog.show();
+                            e.printStackTrace();
                         }
                     }
                 });
             }
         });
         StartThread.start();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (mNavigationDrawerFragment.isDrawerOpen()) {
-                    mNavigationDrawerFragment.closeDrawer();
-                } else {
-                    mNavigationDrawerFragment.openDrawer();
-                }
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -359,6 +374,11 @@ public class RashrActivity extends AppCompatActivity implements
                         @Override
                         public void run() {
                             while (reportDialog.isShowing()) {
+                                try {
+                                    Thread.sleep(100);
+                                } catch (InterruptedException ignore) {
+
+                                }
                                 //Wait till dialog is closed then exit the app
                             }
                             System.exit(0);
@@ -377,7 +397,7 @@ public class RashrActivity extends AppCompatActivity implements
      * @throws IOException Files can't be extracted
      */
     private void extractFiles() throws IOException {
-        Common.pushFileFromRAW(mContext, Const.RecoveryCollectionFile, R.raw.recovery_sums,
+        Common.pushFileFromRAW(mContext, Const.RecoveryCollectionFile, R.raw.recovery_links,
                 mVersionChanged);
         Common.pushFileFromRAW(mContext, Const.KernelCollectionFile, R.raw.kernel_sums,
                 mVersionChanged);
@@ -426,31 +446,6 @@ public class RashrActivity extends AppCompatActivity implements
         }
 
         return Prefs;
-    }
-
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        position++;
-        switch (position) {
-            case 1:
-                switchTo(FlashFragment.newInstance(this));
-                break;
-            case 2:
-                switchTo(ScriptManagerFragment.newInstance(this, null));
-                break;
-            case 3:
-                switchTo(DonationsFragment.newInstance(BuildConfig.DEBUG, true,
-                        Const.GOOGLE_PUBKEY, Const.GOOGLE_CATALOG,
-                        getResources().getStringArray(R.array.donation_google_catalog_values),
-                        true, "ashotmkrtchyan1995@gmail.com", "EUR", "Donation - Rashr Developer - Aschot Mkrtchyan"));
-                break;
-            case 4:
-                switchTo(SettingsFragment.newInstance());
-                break;
-            case 5:
-                switchTo(InformationFragment.newInstance());
-                break;
-        }
     }
 
     /**
@@ -508,20 +503,28 @@ public class RashrActivity extends AppCompatActivity implements
 
     }
 
-    public Toolbar getToolbar() {
-        return mToolbar;
+    /**
+     * @param fragment current fragment will be replaced by param fragment
+     */
+    public void switchTo(Fragment fragment) {
+        switchTo(fragment, false);
     }
 
     /**
      * @param fragment current fragment will be replaced by param fragment
      */
-    public void switchTo(Fragment fragment) {
-        getSupportFragmentManager()
+    public void switchTo(Fragment fragment, boolean addToBackStack) {
+        FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.abc_grow_fade_in_from_bottom,
-                        R.anim.abc_shrink_fade_out_from_bottom)
-                .replace(R.id.container, fragment)
-                .commitAllowingStateLoss();
+                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                .replace(R.id.container, fragment);
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
+        } else {
+            getSupportFragmentManager().popBackStackImmediate();
+        }
+        transaction.commitAllowingStateLoss();
+
     }
 
     /**
@@ -541,5 +544,74 @@ public class RashrActivity extends AppCompatActivity implements
             }
         }
         return shell;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_flasher:
+                switchTo(FlashFragment.newInstance(mActivity));
+                item.setChecked(true);
+                break;
+            case R.id.nav_recovery_script:
+                switchTo(ScriptManagerFragment.newInstance(mActivity, null));
+                item.setChecked(true);
+                break;
+            case R.id.nav_donate:
+                switchTo(DonationsFragment.newInstance(BuildConfig.DEBUG, true,
+                        Const.GOOGLE_PUBKEY, Const.GOOGLE_CATALOG,
+                        getResources().getStringArray(R.array.donation_google_catalog_values),
+                        true, "ashotmkrtchyan1995@gmail.com", "EUR", "Donation - Rashr Developer - Aschot Mkrtchyan"));
+                item.setChecked(true);
+                break;
+            case R.id.nav_settings:
+                switchTo(SettingsFragment.newInstance());
+                item.setChecked(true);
+                break;
+            case R.id.nav_information:
+                switchTo(InformationFragment.newInstance());
+                item.setChecked(true);
+                break;
+            case R.id.xda:
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(Const.XDA_THREAD_URL)));
+                return true;
+            case R.id.google_plus:
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(Const.GOOGLE_PLUS_URL)));
+                return true;
+            case R.id.github:
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(Const.GITHUB_REPOSITORY_URL)));
+                return true;
+
+            default:
+                mRoot.closeDrawers();
+                return false;
+        }
+        mRoot.closeDrawers();
+        return false;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStackImmediate();
+            fm
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                    .commitAllowingStateLoss();
+        } else {
+            exit();
+        }
     }
 }

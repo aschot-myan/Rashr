@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.1'
     defaultConfig {
-        minSdkVersion 8
-        versionCode 111
+        minSdkVersion 10
+        versionCode 112
         versionName '2.3.14'
     }
     lintOptions {
@@ -19,9 +19,11 @@ dependencies {
     compile project(':Utils-Library')
     compile project(':CardsUILib')
     compile project(':Donations')
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
     compile 'de.psdev.licensesdialog:licensesdialog:1.8.0'
+    compile 'com.android.support:cardview-v7:25.1.1'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
 }

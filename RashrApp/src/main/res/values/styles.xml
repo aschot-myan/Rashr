@@ -1,35 +1,39 @@
 <resources>
 
     <style name="Rashr" parent="Theme.AppCompat.Light">
-        <item name="android:textColorPrimary">@color/golden</item>
+        <item name="android:textColorPrimary">@color/vio</item>
         <item name="colorPrimary">@color/custom_blue</item>
         <item name="colorPrimaryDark">@color/darker_blue</item>
         <item name="colorAccent">@color/golden</item>
-        <item name="android:textStyle">italic</item>
-        <item name="android:windowBackground">?attr/colorPrimary</item>
+        <item name="android:windowBackground">@color/custom_white</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorButtonNormal">?attr/colorPrimaryDark</item>
-        <item name="android:dialogTheme">@style/Rashr.Dialog</item>
-    </style>
-
-    <style name="Rashr.Dark" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/primary_material_dark</item>
-        <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
-        <item name="android:textStyle">italic</item>
-        <item name="android:windowBackground">@color/background_material_dark</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="colorButtonNormal">?attr/colorAccent</item>
+        <item name="dialogTheme">@style/Rashr.Dialog</item>
+        <item name="buttonStyle">@style/Rashr.Button</item>
+        <item name="actionBarStyle">@style/Rashr.ActionBar</item>
+        <item name="actionMenuTextColor">?attr/colorAccent</item>
+        <item name="buttonBarButtonStyle">@style/Rashr.Button.Primary</item>
     </style>
 
     <style name="Rashr.Button" parent="Widget.AppCompat.Button">
-        <item name="android:textStyle">italic</item>
-        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:colorBackground">?attr/colorAccent</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">@color/custom_white</item>
     </style>
 
-    <style name="Rashr.Text">
-        <item name="android:textStyle">italic</item>
+    <style name="Rashr.Button.Primary" parent="Rashr.Button">
+        <item name="android:colorBackground">?attr/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorAccent</item>
     </style>
 
     <style name="Rashr.Dialog" parent="Theme.AppCompat.Dialog"/>
+
+    <style name="Rashr.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">?attr/colorAccent</item>
+        <item name="android:colorBackground">?attr/colorPrimary</item>
+        <item name="titleTextStyle">@color/custom_white</item>
+    </style>
+
 </resources>
