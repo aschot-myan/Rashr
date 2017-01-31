@@ -3,7 +3,9 @@ package de.mkrtchyan.recoverytools;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.os.EnvironmentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -101,7 +103,7 @@ public class ScriptManagerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mFileChooser = new FileChooserDialog(mContext);
-                File startFolder = new File("/");
+                File startFolder = Environment.getExternalStorageDirectory();
                 if (mFileList.size() > 0) {
                     startFolder = mFileList.get(mFileList.size() - 1);
                     if (startFolder.isFile()) {
