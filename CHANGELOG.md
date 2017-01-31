@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+Update 2.4.2
+
+-Force close on app-start on some devices fixed
+-Error on loading Screenshots fixed on low memory devices
+-Add files to Flash Queue (in Recovery-Script-Manager) fixed for Android 7.1.1 devices (start directory changed to internal memory instead of root)
+
 Update 2.4.1
 
 -Downloading new Images fixed
