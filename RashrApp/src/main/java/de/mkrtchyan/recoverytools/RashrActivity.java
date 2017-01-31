@@ -209,7 +209,8 @@ public class RashrActivity extends AppCompatActivity
                 }
 
                 /* If device is not supported, you can report it now or close the App */
-                if (!RashrApp.DEVICE.isRecoverySupported() && !RashrApp.DEVICE.isKernelSupported()) {
+                if ((!RashrApp.DEVICE.isRecoverySupported() && !RashrApp.DEVICE.isKernelSupported())
+                        || BuildConfig.DEBUG) {
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -524,6 +525,7 @@ public class RashrActivity extends AppCompatActivity
             getSupportFragmentManager().popBackStackImmediate();
         }
         transaction.commitAllowingStateLoss();
+        getSupportFragmentManager().executePendingTransactions();
 
     }
 

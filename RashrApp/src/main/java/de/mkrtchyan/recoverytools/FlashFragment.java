@@ -377,11 +377,13 @@ public class FlashFragment extends Fragment {
     @SuppressLint("PrivateResource")
     public void optimizeLayout(View root) throws NullPointerException {
 
-        if (RashrApp.DEVICE.isRecoverySupported() || RashrApp.DEVICE.isKernelSupported()) {
+        CardUI RashrCards = (CardUI) root.findViewById(R.id.RashrCards);
+
+        if (RashrApp.DEVICE.isRecoverySupported() || RashrApp.DEVICE.isKernelSupported()
+                || BuildConfig.DEBUG) {
             /** If device is supported start setting up layout */
             setupSwipeUpdater(root);
 
-            CardUI RashrCards = (CardUI) root.findViewById(R.id.RashrCards);
             /** Avoid overlapping scroll on CardUI and SwipeRefreshLayout */
             RashrCards.getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
@@ -398,11 +400,11 @@ public class FlashFragment extends Fragment {
                 }
             });
 
-            if (RashrApp.DEVICE.isRecoverySupported()) {
+            if (RashrApp.DEVICE.isRecoverySupported() || BuildConfig.DEBUG) {
                 addRecoveryCards(RashrCards);
             }
 
-            if (RashrApp.DEVICE.isKernelSupported()) {
+            if (RashrApp.DEVICE.isKernelSupported() || BuildConfig.DEBUG) {
                 addKernelCards(RashrCards);
             }
             //Device has been flashed over Rashr so you can choose previously used images
@@ -419,8 +421,8 @@ public class FlashFragment extends Fragment {
                 RashrCards.addCard(HistoryCard, true);
             }
 
-            addRebooterCards(RashrCards);
         }
+        addRebooterCards(RashrCards);
     }
 
     /**

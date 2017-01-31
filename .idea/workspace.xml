@@ -19,76 +19,15 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71737960-68e2-4894-b0d3-702749c01d61" name="Default" comment="-Device name is now customizable">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="71737960-68e2-4894-b0d3-702749c01d61" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="$PROJECT_DIR$/CHANGELOG.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/AndroidManifest.xml" afterPath="$PROJECT_DIR$/CardsUILib/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/CardsUILib.iml" afterPath="$PROJECT_DIR$/CardsUILib/CardsUILib.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/build.gradle" afterPath="$PROJECT_DIR$/CardsUILib/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/drawable/card.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/drawable/card.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/drawable/selectable_background_cardbank.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/drawable/selectable_background_cardbank.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/card_ex.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/card_ex.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/card_picture.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/card_play.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/card_play.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/cards_view.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/cards_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/cards_view_multicolumn.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/cards_view_multicolumn.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/footer_fragment.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/footer_fragment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/header.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/header.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/item_card.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/item_card.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/item_card_empty_first.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/item_card_empty_first.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/item_card_empty_last.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/item_card_empty_last.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/item_play_card_empty_first.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/item_play_card_empty_first.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/layout/item_stack.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/layout/item_stack.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/values/colors.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/values/dimens.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/res/values/styles.xml" afterPath="$PROJECT_DIR$/CardsUILib/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/SwipeDismissTouchListener.java" afterPath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/SwipeDismissTouchListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/Utils.java" afterPath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/Card.java" afterPath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/objects/Card.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/CardUI.java" afterPath="$PROJECT_DIR$/CardsUILib/src/com/fima/cardsui/views/CardUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Donations/build.gradle" afterPath="$PROJECT_DIR$/Donations/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Donations/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/Donations/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Donations/src/main/java/org/sufficientlysecure/donations/google/util/IabHelper.java" afterPath="$PROJECT_DIR$/Donations/src/main/java/org/sufficientlysecure/donations/google/util/IabHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rashr.iml" afterPath="$PROJECT_DIR$/Rashr.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/RashrApp.iml" afterPath="$PROJECT_DIR$/RashrApp/RashrApp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoverySystemFragment.java" afterPath="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoverySystemFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_backup.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_backup.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_close_white.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_close_white.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_done_all_black.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_done_all_black.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_euro_symbol_black.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_euro_symbol_black.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_flash.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_flash.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_flash_white.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_flash_white.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_folder.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_folder.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_github.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_github.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_google_plus.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_google_plus.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_history.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_history.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_info_outline_black.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_info_outline_black.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_settings_black.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_settings_black.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_stock_kernel.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_stock_kernel.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_update.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_update.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_xda.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_xda.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/activity_rashr.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/activity_rashr.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/drawer_list_item.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/drawer_list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_recovery_system.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_recovery_system.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_settings.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/navigation_header.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/navigation_header.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/layout/recovery_screenshot.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/layout/recovery_screenshot.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/menu/navigation_menu.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/menu/navigation_menu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" afterPath="$PROJECT_DIR$/Utils-Library/Utils-Library.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/build.gradle" afterPath="$PROJECT_DIR$/Utils-Library/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Common.java" afterPath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Common.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" afterPath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/FileChooserDialog.java" afterPath="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/FileChooserDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root-commands/build.gradle" afterPath="$PROJECT_DIR$/root-commands/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/root-commands/root-commands.iml" afterPath="$PROJECT_DIR$/root-commands/root-commands.iml" />
     </list>
     <ignored path="Rashr.iws" />
@@ -124,26 +63,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="RashrActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10780">
-              <caret line="546" column="5" selection-start-line="546" selection-start-column="5" selection-end-line="546" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="528">
+              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Device.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
+      <file leaf-file-name="CHANGELOG.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9856">
-              <caret line="923" column="34" selection-start-line="923" selection-start-column="34" selection-end-line="923" selection-end-column="34" />
+            <state relative-caret-position="88">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RashrActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="528" column="0" selection-start-line="528" selection-start-column="0" selection-end-line="528" selection-end-column="0" />
               <folding>
-                <element signature="e#40130#40131#0" expanded="true" />
-                <element signature="e#40197#40198#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -152,57 +98,26 @@
       <file leaf-file-name="RecoverySystemFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoverySystemFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="138" column="43" selection-start-line="138" selection-start-column="43" selection-end-line="138" selection-end-column="43" />
+            <state relative-caret-position="132">
+              <caret line="361" column="21" selection-start-line="361" selection-start-column="21" selection-end-line="361" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3096#3097#0" expanded="false" />
-                <element signature="e#3129#3130#0" expanded="false" />
                 <element signature="docComment;method#formatName#0;class#RecoverySystemFragment#0" expanded="false" />
                 <element signature="method#formatName#0;class#RecoverySystemFragment#0" expanded="false" />
-                <element signature="class#14320:14535" expanded="false" />
-                <element signature="class#15313:15496" expanded="false" />
+                <element signature="class#14863:15078" expanded="false" />
+                <element signature="class#15856:16039" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Const.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Const.java">
+      <file leaf-file-name="Downloader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="87" column="91" selection-start-line="87" selection-start-column="91" selection-end-line="87" selection-end-column="91" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FlashFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3514">
-              <caret line="564" column="11" selection-start-line="564" selection-start-column="11" selection-end-line="564" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#25095#25255#0" expanded="true" />
-                <element signature="e#25254#25255#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_rashr.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/activity_rashr.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+            <state relative-caret-position="188">
+              <caret line="253" column="13" selection-start-line="253" selection-start-column="13" selection-end-line="253" selection-end-column="13" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
@@ -215,6 +130,11 @@
         <option value="layoutResourceFile_vertical" />
       </list>
     </option>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="D:\workspace\Keystone.key" />
+    <option name="KEY_ALIAS" value="dslnexus" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -4364,7 +4284,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$" value="10329125440321" />
-        <entry key="D:\workspace\Rashr" value="10339557920404" />
+        <entry key="D:\workspace\Rashr" value="10339561022364" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -4974,7 +4894,6 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/RashrApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/res/values/values.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/loading_layout.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/build/intermediates/res/merged/debug/values/values.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/NavigationDrawerFragment.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/color.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/drawable/navigation_divider.xml" />
@@ -4988,31 +4907,34 @@
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashAsFragment.java" />
         <option value="$PROJECT_DIR$/CardsUILib/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/root-commands/build.gradle" />
-        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Common.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_settings.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
         <option value="$PROJECT_DIR$/RashrApp/build/generated/source/r/debug/de/mkrtchyan/recoverytools/R.java" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/SettingsFragment.java" />
-        <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/navigation_header.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/menu/navigation_menu.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/menu/nav_links_menu.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/activity_rashr.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" />
-        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/recovery_screenshot.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/layout/fragment_recovery_system.xml" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/raw/recovery_sums" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/res/raw/recovery_links" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoverySystemFragment.java" />
-        <option value="$PROJECT_DIR$/RashrApp/build.gradle" />
         <option value="$PROJECT_DIR$/Donations/build.gradle" />
         <option value="$PROJECT_DIR$/Utils-Library/build.gradle" />
-        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" />
         <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Const.java" />
+        <option value="$PROJECT_DIR$/RashrApp/build.gradle" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/build/intermediates/res/merged/debug/values/values.xml" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Common.java" />
+        <option value="$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoverySystemFragment.java" />
+        <option value="$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java" />
       </list>
     </option>
   </component>
@@ -5030,18 +4952,102 @@
             <id />
           </State>
           <State>
+            <id>Abstraction issuesJava</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Accessibility</id>
+          </State>
+          <State>
             <id>Android &gt; Lint &gt; Correctness</id>
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Security</id>
+          </State>
+          <State>
+            <id>C/C++</id>
+          </State>
+          <State>
+            <id>Class structureJava</id>
+          </State>
+          <State>
+            <id>Cloning issuesJava</id>
+          </State>
+          <State>
+            <id>Code style issuesJava</id>
+          </State>
+          <State>
+            <id>Concurrency annotation issuesJava</id>
+          </State>
+          <State>
+            <id>Control FlowGroovy</id>
+          </State>
+          <State>
+            <id>Declaration redundancyJava</id>
+          </State>
+          <State>
+            <id>Encapsulation issuesJava</id>
+          </State>
+          <State>
+            <id>GPath inspectionsGroovy</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>Inheritance issuesJava</id>
+          </State>
+          <State>
+            <id>J2ME issuesJava</id>
           </State>
           <State>
             <id>Java</id>
           </State>
           <State>
+            <id>Java language level migration aidsJava</id>
+          </State>
+          <State>
+            <id>JavaBeans issuesJava</id>
+          </State>
+          <State>
+            <id>Performance issuesJava</id>
+          </State>
+          <State>
+            <id>Probable bugsGroovy</id>
+          </State>
+          <State>
             <id>Probable bugsJava</id>
+          </State>
+          <State>
+            <id>Security issuesJava</id>
+          </State>
+          <State>
+            <id>Serialization issuesJava</id>
+          </State>
+          <State>
+            <id>StyleGroovy</id>
+          </State>
+          <State>
+            <id>TestNGJava</id>
+          </State>
+          <State>
+            <id>Threading issuesGroovy</id>
+          </State>
+          <State>
+            <id>Threading issuesJava</id>
+          </State>
+          <State>
+            <id>Unused codeC/C++</id>
+          </State>
+          <State>
+            <id>Visibility issuesJava</id>
+          </State>
+          <State>
+            <id>toString() issuesJava</id>
           </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>IgnoreResultOfCall</id>
+            <id>WeakerAccess</id>
           </State>
         </selected-state>
       </profile-state>
@@ -5072,8 +5078,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -5102,34 +5106,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Utils-Library" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="root-commands" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="RashrApp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -5153,152 +5129,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RashrApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -5332,36 +5162,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Donations" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Rashr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CardsUILib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane />
@@ -5371,11 +5175,11 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="D:/Android/sdk" />
     <property name="settings.editor.selected.configurable" value="configurable.group.language" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HDCPDisabler" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Keystone.key" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="android.project.structure.last.selected" value="RashrApp" />
+    <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="device.picker.selection" value="ce0916094ba1331b04" />
+    <property name="device.picker.selection" value="Nexus_5_API_25" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="DEBUGGABLE_DEVICE" value="samsung-sm_g930f-ce0916094ba1331b04" />
     <property name="DEBUGGABLE_PROCESS" value="de.mkrtchyan.recoverytools" />
@@ -5399,6 +5203,9 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlEditorPanel.SHOW" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPropertiesWindowManager-NlEditorPanel.SHOW" value="true" />
+    <property name="ExportApk.ApkPath" value="D:\workspace\Rashr\RashrApp" />
+    <property name="ExportApk.Flavors" value="" />
+    <property name="ExportApk.BuildType" value="release" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -5738,7 +5545,35 @@
       <option name="project" value="LOCAL" />
       <updated>1485813785120</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="-Code reformatted and organized">
+      <created>1485813997351</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1485813997351</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update 2.4&#10;&#10;-Device name is now customizable&#10;-DarkUI temporally removed&#10;-UI optimized">
+      <created>1485814257070</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1485814257070</updated>
+    </task>
+    <task id="LOCAL-00007" summary="-Add files to Flash Queue (in Recovery-Script-Manager) fixed for Android 7.1.1 devices (start directory changed to internal memory instead of root)">
+      <created>1485824748229</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1485824748229</updated>
+    </task>
+    <task id="LOCAL-00008" summary="-Error on loading Screenshots fixed on low memory devices">
+      <created>1485902862264</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1485902862264</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -5756,26 +5591,25 @@
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39390388" sideWeight="0.50805587" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3931925" sideWeight="0.50805587" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58382183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39273155" sideWeight="0.49194413" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30011722" sideWeight="0.49194413" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298122" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32239157" sideWeight="0.49697885" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32121924" sideWeight="0.49697885" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3317702" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2207304" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27712137" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282532" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -5786,6 +5620,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39976552" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -5822,6 +5657,9 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
+  </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
@@ -5834,86 +5672,32 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="-Device name is now customizable&#10;-DarkUI temporally removed" />
     <MESSAGE value="-Device name is now customizable" />
     <MESSAGE value="-UI Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="-UI Changes" />
+    <MESSAGE value="-Code reformatted and organized" />
+    <MESSAGE value="Update 2.4&#10;&#10;-Device name is now customizable&#10;-DarkUI temporally removed&#10;-UI optimized" />
+    <MESSAGE value="-Add files to Flash Queue (in Recovery-Script-Manager) fixed for Android 7.1.1 devices (start directory changed to internal memory instead of root)" />
+    <MESSAGE value="-Error on loading Screenshots fixed on low memory devices" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Error on loading Screenshots fixed on low memory devices" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java</url>
-          <line>662</line>
-          <properties />
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java</url>
-          <line>919</line>
+          <line>927</line>
           <properties />
           <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="69" />
+      <option name="time" value="74" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values-de/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_flash_white.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_flash.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#7890#7891#0" expanded="false" />
-            <element signature="e#7969#7970#0" expanded="false" />
-            <element signature="e#8184#8185#0" expanded="false" />
-            <element signature="e#8270#8271#0" expanded="false" />
-            <element signature="e#8966#8967#0" expanded="false" />
-            <element signature="e#9067#9068#0" expanded="false" />
-            <element signature="e#17338#17339#0" expanded="false" />
-            <element signature="e#17415#17416#0" expanded="false" />
-            <element signature="e#17976#17977#0" expanded="false" />
-            <element signature="e#18025#18026#0" expanded="false" />
-            <element signature="e#21863#21864#0" expanded="false" />
-            <element signature="e#21898#21899#0" expanded="false" />
-            <element signature="e#22475#22476#0" expanded="false" />
-            <element signature="e#22517#22518#0" expanded="false" />
-            <element signature="e#22558#22559#0" expanded="false" />
-            <element signature="e#22603#22604#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/drawable/ic_close_white.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -5925,7 +5709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5933,7 +5716,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -5959,31 +5741,24 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CardsUILib/AndroidManifest.xml">
       <provider editor-type-id="android-manifest">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CardsUILib/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Common.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3388">
-          <caret line="169" column="9" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -6001,14 +5776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="224" column="30" selection-start-line="224" selection-start-column="30" selection-end-line="224" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Android/sdk/sources/android-25/android/os/Build.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -6020,13 +5787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5055">
           <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -6055,7 +5815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="13" column="65" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6063,7 +5822,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -6081,7 +5839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6089,7 +5846,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6097,7 +5853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6112,7 +5867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
           <caret line="1240" column="19" selection-start-line="1240" selection-start-column="19" selection-end-line="1240" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6131,33 +5885,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
           <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/raw/recovery_links">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
           <caret line="6216" column="2" selection-start-line="6216" selection-start-column="2" selection-end-line="6216" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="45" column="34" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="34" />
-          <folding>
-            <element signature="method#cancel#0;class#Downloader#0" expanded="false" />
-            <element signature="method#isDownloadCorrupt#0;class#Downloader#0" expanded="false" />
-            <element signature="method#setChecksumFile#0;class#Downloader#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -6165,7 +5906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="229" column="53" selection-start-line="229" selection-start-column="53" selection-end-line="229" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6173,7 +5913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
           <caret line="412" column="16" selection-start-line="412" selection-start-column="16" selection-end-line="412" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6181,7 +5920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -6192,7 +5930,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6200,7 +5937,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6208,7 +5944,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -6216,31 +5951,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoverySystemFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="138" column="43" selection-start-line="138" selection-start-column="43" selection-end-line="138" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3096#3097#0" expanded="false" />
-            <element signature="e#3129#3130#0" expanded="false" />
-            <element signature="docComment;method#formatName#0;class#RecoverySystemFragment#0" expanded="false" />
-            <element signature="method#formatName#0;class#RecoverySystemFragment#0" expanded="false" />
-            <element signature="class#14320:14535" expanded="false" />
-            <element signature="class#15313:15496" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -6249,28 +5959,7 @@
         <state relative-caret-position="493">
           <caret line="87" column="91" selection-start-line="87" selection-start-column="91" selection-end-line="87" selection-end-column="91" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10780">
-          <caret line="546" column="5" selection-start-line="546" selection-start-column="5" selection-end-line="546" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9856">
-          <caret line="923" column="34" selection-start-line="923" selection-start-column="34" selection-end-line="923" selection-end-column="34" />
-          <folding>
-            <element signature="e#40130#40131#0" expanded="true" />
-            <element signature="e#40197#40198#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -6279,7 +5968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -6288,23 +5976,132 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/layout/activity_rashr.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
+        <state relative-caret-position="726">
           <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java">
+    <entry file="file://$PROJECT_DIR$/RashrApp/build/intermediates/res/merged/debug/values/values.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3514">
-          <caret line="564" column="11" selection-start-line="564" selection-start-column="11" selection-end-line="564" selection-end-column="11" />
+        <state relative-caret-position="147">
+          <caret line="994" column="0" selection-start-line="994" selection-start-column="0" selection-end-line="994" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/ScriptManagerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="149" column="9" selection-start-line="149" selection-start-column="9" selection-end-line="149" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#25095#25255#0" expanded="true" />
-            <element signature="e#25254#25255#0" expanded="true" />
+            <element signature="e#40130#40131#0" expanded="true" />
+            <element signature="e#40197#40198#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="50" column="52" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Common.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="158" column="5" selection-start-line="158" selection-start-column="5" selection-end-line="158" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/DownloadDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Android/sdk/extras/android/m2repository/com/android/support/support-fragment/25.1.1/support-fragment-25.1.1-sources.jar!/android/support/v4/app/Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="1435" column="7" selection-start-line="1435" selection-start-column="7" selection-end-line="1435" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/FlashFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-353">
+          <caret line="577" column="16" selection-start-line="577" selection-start-column="16" selection-end-line="577" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils-Library/src/main/java/de/mkrtchyan/utils/Downloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="253" column="13" selection-start-line="253" selection-start-column="13" selection-end-line="253" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RecoverySystemFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="361" column="21" selection-start-line="361" selection-start-column="21" selection-end-line="361" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#formatName#0;class#RecoverySystemFragment#0" expanded="false" />
+            <element signature="method#formatName#0;class#RecoverySystemFragment#0" expanded="false" />
+            <element signature="class#14863:15078" expanded="false" />
+            <element signature="class#15856:16039" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RashrApp/src/main/java/de/mkrtchyan/recoverytools/RashrActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="528" column="0" selection-start-line="528" selection-start-column="0" selection-end-line="528" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

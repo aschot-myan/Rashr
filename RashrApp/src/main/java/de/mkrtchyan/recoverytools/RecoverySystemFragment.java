@@ -158,6 +158,8 @@ public class RecoverySystemFragment extends Fragment {
                                         AppCompatImageView iv = (AppCompatImageView)
                                                 inflater.inflate(R.layout.recovery_screenshot, null);
                                         try {
+                                            final BitmapFactory.Options options = new BitmapFactory.Options();
+                                            options.inSampleSize = 8;
                                             Bitmap screenshot = BitmapFactory.decodeFile(file.toString());
                                             iv.setImageBitmap(screenshot);
                                             ScreenshotLayout.addView(iv);
