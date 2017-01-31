@@ -157,9 +157,14 @@ public class RecoverySystemFragment extends Fragment {
                                     public void onSuccess(File file) {
                                         AppCompatImageView iv = (AppCompatImageView)
                                                 inflater.inflate(R.layout.recovery_screenshot, null);
-                                        Bitmap screenshot = BitmapFactory.decodeFile(file.toString());
-                                        iv.setImageBitmap(screenshot);
-                                        ScreenshotLayout.addView(iv);
+                                        try {
+                                            Bitmap screenshot = BitmapFactory.decodeFile(file.toString());
+                                            iv.setImageBitmap(screenshot);
+                                            ScreenshotLayout.addView(iv);
+                                        } catch (OutOfMemoryError e) {
+                                            RashrApp.ERRORS.add("Screenshot "+ file.toString()
+                                                    + " could not be decoded " + e.toString());
+                                        }
                                     }
 
                                     @Override
