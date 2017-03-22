@@ -132,7 +132,6 @@ public class RecoverySystemFragment extends Fragment {
         });
         final LinearLayout ScreenshotLayout = (LinearLayout) root.findViewById(R.id.ScreenshotLayout);
         if (mScreenshotURL == null) {
-            Log.d(Const.RASHR_TAG, "No screenshots");
             ((ViewGroup) ScreenshotLayout.getParent()).removeView(ScreenshotLayout);
         } else {
             try {
@@ -164,7 +163,7 @@ public class RecoverySystemFragment extends Fragment {
                                             iv.setImageBitmap(screenshot);
                                             ScreenshotLayout.addView(iv);
                                         } catch (OutOfMemoryError e) {
-                                            RashrApp.ERRORS.add("Screenshot "+ file.toString()
+                                            App.ERRORS.add("Screenshot " + file.toString()
                                                     + " could not be decoded " + e.toString());
                                         }
                                     }
@@ -214,7 +213,7 @@ public class RecoverySystemFragment extends Fragment {
                      *      Z3-lockeddualrecovery2.8.21.zip -> Z3 XZDualRecovery 2.8.21
                      */
                     String split[] = fileName.split("lockeddualrecovery");
-                    return RashrApp.DEVICE.getXZDualName().toUpperCase() + " XZDualRecovery " + split[split.length - 1].replace(".zip", "");
+                    return App.Device.getXZDualName().toUpperCase() + " XZDualRecovery " + split[split.length - 1].replace(".zip", "");
                 case Device.REC_SYS_TWRP:
                     /*
                      * Finding better name for example:
@@ -226,7 +225,7 @@ public class RecoverySystemFragment extends Fragment {
                     }
                     // Contains revision number like 3.0.0-1
                     // Example twrp-3.0.0-1-zeroflte.img
-                    return "TWRP " + tokens[1] + "-" + tokens[2] + " (" + tokens[tokens.length - 1].replace(RashrApp.DEVICE.getRecoveryExt(), "") + ")";
+                    return "TWRP " + tokens[1] + "-" + tokens[2] + " (" + tokens[tokens.length - 1].replace(App.Device.getRecoveryExt(), "") + ")";
                 case Device.REC_SYS_CWM:
                     /*
                      * Finding better name for example:
@@ -244,7 +243,7 @@ public class RecoverySystemFragment extends Fragment {
                     String device = "(";
                     for (int splitNr = startIndex; splitNr < fileName.split("-").length; splitNr++) {
                         if (!device.equals("(")) device += "-";
-                        device += fileName.split("-")[splitNr].replace(RashrApp.DEVICE.getRecoveryExt(), "");
+                        device += fileName.split("-")[splitNr].replace(App.Device.getRecoveryExt(), "");
                     }
                     device += ")";
                     return "ClockworkMod " + cversion + " " + device;
@@ -256,7 +255,7 @@ public class RecoverySystemFragment extends Fragment {
                     String pdevice = "(";
                     for (int splitNr = 1; splitNr < fileName.split("-").length; splitNr++) {
                         if (!pdevice.equals("(")) pdevice += "-";
-                        pdevice += fileName.split("-")[splitNr].replace(RashrApp.DEVICE.getRecoveryExt(), "");
+                        pdevice += fileName.split("-")[splitNr].replace(App.Device.getRecoveryExt(), "");
                     }
                     pdevice += ")";
                     String philzVersion = fileName.split("_")[2].split("-")[0];
@@ -266,7 +265,7 @@ public class RecoverySystemFragment extends Fragment {
                      * Finding better name for example:
                      *      stock-recovery-hammerhead-6.0.1.img -> Stock Recovery 6.0.1 (hammerhead)
                      */
-                    String sversion = fileName.split("-")[3].replace(RashrApp.DEVICE.getRecoveryExt(), "");
+                    String sversion = fileName.split("-")[3].replace(App.Device.getRecoveryExt(), "");
                     String deviceName = fileName.split("-")[2];
                     return "Stock Recovery " + sversion + " (" + deviceName + ")";
                 case Device.REC_SYS_CM:
@@ -294,7 +293,7 @@ public class RecoverySystemFragment extends Fragment {
      * @param fileUrl File that will be flashed
      */
     public void flashSupportedRecovery(final String system, String fileUrl) {
-        /**
+        /*
          * If there files be needed to flash download it and listing device specified
          * recovery file for example recovery-clockwork-touch-6.0.3.1-grouper.img
          * (read out from RECOVERY_SUMS)
@@ -302,7 +301,7 @@ public class RecoverySystemFragment extends Fragment {
         if (system.equals(Device.REC_SYS_XZDUAL)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
             alert.setTitle(R.string.warning);
-            if (RashrApp.DEVICE.isXZDualInstalled()) {
+            if (App.Device.isXZDualInstalled()) {
                 alert.setMessage(R.string.xzdual_uninstall_alert);
                 alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -322,7 +321,7 @@ public class RecoverySystemFragment extends Fragment {
                             abuilder.setMessage(getString(R.string.xzdual_uninstall_failed) + "\n" +
                                     failedExecuteCommand.toString());
                             failedExecuteCommand.printStackTrace();
-                            RashrApp.ERRORS.add(failedExecuteCommand.toString() + " Error uninstalling XZDual");
+                            App.ERRORS.add(failedExecuteCommand.toString() + " Error uninstalling XZDual");
                         }
                         abuilder.show();
                     }
@@ -364,14 +363,14 @@ public class RecoverySystemFragment extends Fragment {
                     @Override
                     public void onFail(Exception e) {
                         if (e != null) {
-                            RashrApp.ERRORS.add(e.toString());
+                            App.ERRORS.add(e.toString());
                             Snackbar.make(mView.getView(), e.getMessage(), Snackbar.LENGTH_SHORT).show();
                         }
                         RecoveryDownloader.retry();
                     }
                 });
                 RecoveryDownloader.setAskBeforeDownload(true);
-                downloader.setChecksumFile(Const.RecoveryCollectionFile);
+                downloader.setChecksumFile(App.RecoveryCollectionFile);
                 RecoveryDownloader.ask();
             } catch (MalformedURLException ignored) {
             }
@@ -387,10 +386,10 @@ public class RecoverySystemFragment extends Fragment {
      */
     private void flashRecovery(final File recovery) {
         if (recovery != null) {
-            if (recovery.exists() && recovery.getName().endsWith(RashrApp.DEVICE.getRecoveryExt())
+            if (recovery.exists() && recovery.getName().endsWith(App.Device.getRecoveryExt())
                     && !recovery.isDirectory()) {
-                if (!RashrApp.DEVICE.isFOTAFlashed() && !RashrApp.DEVICE.isRecoveryOverRecovery()) {
-                    /** Flash not need to be handled specially */
+                if (!App.Device.isFOTAFlashed() && !App.Device.isRecoveryOverRecovery()) {
+                    /* Flash not need to be handled specially */
                     final FlashUtil flashUtil = new FlashUtil(mActivity, recovery, FlashUtil.JOB_FLASH_RECOVERY);
                     flashUtil.setOnTaskDoneListener(new FlashUtil.OnTaskDoneListener() {
                         @Override
@@ -400,7 +399,7 @@ public class RecoverySystemFragment extends Fragment {
 
                         @Override
                         public void onFail(Exception e) {
-                            RashrApp.ERRORS.add(e.toString());
+                            App.ERRORS.add(e.toString());
                             AlertDialog.Builder d = new AlertDialog.Builder(mContext);
                             d.setTitle(R.string.flash_error);
                             d.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -414,7 +413,7 @@ public class RecoverySystemFragment extends Fragment {
                                 d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        mActivity.switchTo(SettingsFragment.newInstance());
+                                        mActivity.switchTo(new SettingsFragment());
                                     }
                                 });
                             } else if (e instanceof FlashUtil.ImageToBigException) {
@@ -422,7 +421,7 @@ public class RecoverySystemFragment extends Fragment {
                                 d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        mActivity.switchTo(SettingsFragment.newInstance());
+                                        mActivity.switchTo(new SettingsFragment());
                                     }
                                 });
                             } else {
@@ -433,9 +432,9 @@ public class RecoverySystemFragment extends Fragment {
                     });
                     flashUtil.execute();
                 } else {
-                    /** Flashing needs to be handled specially (not standard flash method)*/
-                    if (RashrApp.DEVICE.isFOTAFlashed()) {
-                        /** Show warning if FOTAKernel will be flashed */
+                    /* Flashing needs to be handled specially (not standard flash method)*/
+                    if (App.Device.isFOTAFlashed()) {
+                        /* Show warning if FOTAKernel will be flashed */
                         new AlertDialog.Builder(mContext)
                                 .setTitle(R.string.warning)
                                 .setMessage(R.string.fota)
@@ -453,7 +452,7 @@ public class RecoverySystemFragment extends Fragment {
                                     }
                                 })
                                 .show();
-                    } else if (RashrApp.DEVICE.isRecoveryOverRecovery()) {
+                    } else if (App.Device.isRecoveryOverRecovery()) {
                         mActivity.switchTo(ScriptManagerFragment.newInstance(mActivity, recovery));
                     }
                 }
