@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="settings">Configurações</string>
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Flashear Recovery</string>
@@ -26,7 +25,7 @@
     <string name="set_name">Nome do Backup</string>
     <string name="bak_warning">Antes de você realizar algumas ações com o Rashr, por favor, crie um backup e guarde-o no seu PC.
         \nBackups vão ser criados em\n%s.
-        \nO desenvolvelor não é responsável por danos no seu dispositivo.</string>
+        \nO desenvolvedor não é responsável por danos no seu dispositivo.</string>
     <string name="flash_options">Opções de flash</string>
     <string name="risk">Conheço o risco</string>
     <string name="sReboot">Reiniciar</string>
@@ -40,12 +39,12 @@
     <string name="fota">Flashear o sistema de Recovey neste dispositivo alterará o FOTAKernel (partição de substituição)
         Isso só funcionará se o seu kernel tiver suporte (A maioria dos Custom Kernels e ROMs suportam).</string>
     <string name="flash_over_recovery">Flashear Recovery agora? (necessário reiniciar no Recovery)</string>
-    <string name="bak_done">Backup completeto</string>
+    <string name="bak_done">Backup completo</string>
     <string name="backupalready">O Backup já existe.</string>
     <string name="error">Erro</string>
-    <string name="not_supportded">Seu dispositivo não é suportado ainda. Escanear o sistema e comunicar dispositivo não suportado
+    <string name="not_supportded">Seu dispositivo não é suportado ainda. Escanear o sistema e comunicar que o dispositivo não é suportado
         ou tentar encontrar a partição (reiniciar uma vez no recovery)?</string>
-    <string name="no_root">Dispositivo não rooteado. Por favor, faça root nele. mais informações em
+    <string name="no_root">Dispositivo não rooteado. Por favor, faça root nele. Mais informações em
         \n\nxda-developers.com</string>
     <string name="Downloading">Fazendo download…</string>
     <string name="comment">Comentar</string>
@@ -68,7 +67,7 @@
     <string name="over_recovery">O dispositivo será flasheado sobre o recovery</string>
     <string name="ShowAds">Mostrar Ads para apoio</string>
     <string name="please_restart">Por favor, reinicie o aplicativo para aplicar as mudanças</string>
-    <string name="please_ads">Por favor, ligue os anúncios para aopiar meu trabalho! :(</string>
+    <string name="please_ads">Por favor, ligue os anúncios para apoiar meu trabalho! :(</string>
     <string name="donate_to_support">Faça uma doação para ajudar meu trabalho! :)</string>
 
     <string-array name="donation_google_catalog_values">
@@ -137,9 +136,9 @@
     <string name="keep_current_name">Manter nome atual (%s)</string>
     <string name="rename_failed">Falha ao renomear</string>
     <string name="flash">Flashear</string>
-    <string name="recovery_description">Com esta função você será capaz de flashear a partição de recuperação que veio com seu dispositivo com um
+    <string name="recovery_description">Com esta opção, você será capaz de flashear a partição de recuperação que veio com seu dispositivo com um
         clique!</string>
-    <string name="kernel_description">Com esta função você será capaz de flashear a partição de kernel que veio com seu dispositivo com um
+    <string name="kernel_description">Com esta opção, você será capaz de flashear a partição de kernel que veio com seu dispositivo com um
         clique!</string>
     <string name="options">Opções</string>
     <string name="clear_cache_description">Deletar todas as imagens de Recovery/Kernel baixadas</string>
@@ -147,79 +146,72 @@
     <string name="reboot_recovery_description">Reinicie seu dispositivo no recovery instantaneamente</string>
     <string name="reboot_bootloader_description">Reinicie seu dispositivo no bootloader/modo download instantaneamente</string>
     <string name="shutdown_description">Desligue seu dispositivo instantaneamente</string>
-    <string name="cwm_description">ClockworkMod Recovery Custom Recovery mais conhecido para Android</string>
-    <string name="twrp_description">Team Winn Recovery Project (TWRP) é um Recovey totalmente controlável via toque</string>
+    <string name="cwm_description">ClockworkMod Recovery é o Custom Recovery mais conhecido para Android</string>
+    <string name="twrp_description">Team Win Recovery Project (TWRP) é um Recovery totalmente controlável via toque</string>
     <string name="philz_description">PhilZ Touch Recovery é uma versão avançada e melhorada do ClockworkMod</string>
     <string name="stock_recovery_description">Stock recoveries são os recoveries padrão, aqui você pode retornar para ele.</string>
     <string name="stock_kernel_description">Stock kernels são os kernels padrão, aqui você pode retornar para ele</string>
     <string name="delete_confirmation">Você realmente quer deletar todas as imagens baixadas?</string>
     <string name="other_storage_description">Esta opção permite flashear as imagens já baixadas e armazenadas no seu dispositivo.</string>
     <string name="reboot_confirmation">Reiniciar agora?</string>
-    <string name="shutdown_confirmation">Desligar now?</string>
-    <string name="history_description">Here you can find the last 5 flashed images</string>
-    <string name="reset_app">Reset App</string>
-    <string name="reset_app_description">Reset app settings with the standard</string>
-    <string name="files_deleted">Files deleted</string>
-    <string name="onlyLanguage">Please only write in Spanish, German or English</string>
-    <string name="flasher">Flasher</string>
-    <string name="history">History</string>
-    <string name="exit_app">Exit App?</string>
-    <string name="skip_md5">Skip MD5</string>
-    <string name="UseDarkUI">Use dark UI</string>
-    <string name="check_app_updates">Check updates on start</string>
-    <string name="failed_update">Check for updates failed</string>
-    <string name="update_available">Upadate available</string>
-    <string name="download_update">Please download the update to keep secure and get the latest features</string>
-    <string name="open_playstore">Open Play Store</string>
-    <string name="uptodate">Up to date :D</string>
-    <string name="update">Update</string>
-    <string name="lists_outdated">The list with available recoveries and kernels are outdated. To flash your device with the latest recoveries and kernels update.\nNot all devices are supported!</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="stock_recovery">Stock Recovery</string>
-    <string name="stock_kernel">Stock Kernel</string>
-    <string name="check_connection">Check your internet connection</string>
-    <string name="check_name">Please check the backup name. Some devices can\'t handle it if contains \':\' so change it with a File Explorer</string>
+    <string name="shutdown_confirmation">Desligar agora?</string>
+    <string name="history_description">Aqui você pode encontrar as últimas 5 imagens flasheadas</string>
+    <string name="reset_app">Resetar App</string>
+    <string name="reset_app_description">Redefinir as configurações do app</string>
+    <string name="files_deleted">Arquivos deletados</string>
+    <string name="onlyLanguage">Por favor, escreva somente em Espanhol, Alemão ou Inglês</string>
+    <string name="flasher">Flasheador</string>
+    <string name="history">Histórico</string>
+    <string name="exit_app">Sair do app?</string>
+    <string name="skip_md5">Pular MD5</string>
+    <string name="UseDarkUI">Usar interface escura</string>
+    <string name="check_app_updates">Procurar por atualizações ao iniciar</string>
+    <string name="failed_update">Procura por atualizações falhou</string>
+    <string name="update_available">Atualização disponível</string>
+    <string name="download_update">Por favor, faça download da atualização para se manter seguro e obter as últimas características</string>
+    <string name="open_playstore">Abrir a Play Store</string>
+    <string name="uptodate">Atualizado :D</string>
+    <string name="update">Atualizar</string>
+    <string name="lists_outdated">A lista com os recoveries e kernels disponíveis está atualizada. Para flashear o dispositivo com as últimas atualizações de recoveries e kernels.\nNem todos os dispositivos são suportados!</string>
+    <string name="hello_blank_fragment">Olá fragmento vazio</string>
+    <string name="stock_recovery">Recovery de fábrica</string>
+    <string name="stock_kernel">Kernel de fábrica</string>
+    <string name="check_connection">Verifique a sua conexão com a Internet</string>
+    <string name="check_name">Por favor, verifique o nome do backup. Alguns dispositivos não conseguem manuseá-lo se ele contiver \':\', então, mude-o com um Explorador de Arquivos</string>
     <string name="ok">OK</string>
-    <string name="logs_title">Logged Shell-Commands</string>
-    <string name="clear_logs">Clear Logs</string>
-    <string name="no_logs">No Logs</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
-    <string name="copy">Copy</string>
-    <string name="logs">Logs</string>
-    <string name="app_uptodate">App is up to date!</string>
-    <string name="hide_uptodate_hint">Hide up to date hints</string>
+    <string name="logs_title">Comandos shell registrados</string>
+    <string name="clear_logs">Limpar registros</string>
+    <string name="no_logs">Sem registros</string>
+    <string name="copied_to_clipboard">Copiado para a área de transferência</string>
+    <string name="copy">Copiar</string>
+    <string name="logs">Registros</string>
+    <string name="app_uptodate">O aplicativo está atualizado!</string>
+    <string name="hide_uptodate_hint">Esconder dicas de atualização</string>
     <string name="xzdualrecovery">XZDualRecovery</string>
-    <string name="xzdual_describtion">XZDualRecovery is created by XDA-Member [NUT] and contains TWRP CWM and PhilZ so you can choose which one you want to use</string>
-    <string name="xzdual_uninstall_alert">Do you want to uninstall XZDualRecovery?</string>
-    <string name="installing_xzdual">Installing XZDualRecovery</string>
-    <string name="uninstalling_xzdual">Uninstalling XZDualRecovery</string>
-    <string name="skip_size_check">Skip size cheking on Images (can cause damage)</string>
-    <string name="xzdual_uninstall_successfull">XZDualRecovery uninstalled successfully from your device</string>
-    <string name="xzdual_uninstall_failed">XZDualRecovery couldn\'t be uninstalled. Error:</string>
-    <string name="skip_validate_image">Skip Image header checking (can cause damage)</string>
-    <string name="information">Information</string>
-    <string name="total_images">Total images available</string>
-    <string name="recovery_type">Recovery Type</string>
-    <string name="licenses">Licenses</string>
-    <string name="install_xzdual_alert">Do you want to install XZDual on this device?</string>
-    <string name="yes">Yes</string>
+    <string name="xzdual_describtion">XZDualRecovery foi criado pelo XDA-Member [NUT] e contém o TWRP, CWM e o PhilZ para que você possa escolhar qual usar</string>
+    <string name="xzdual_uninstall_alert">Você quer desinstalar o XZDualRecovery?</string>
+    <string name="installing_xzdual">Instalando XZDualRecovery</string>
+    <string name="uninstalling_xzdual">Desinstalando XZDualRecovery</string>
+    <string name="skip_size_check">Ignorar verificação do tamanho da imagem (pode causar danos)</string>
+    <string name="xzdual_uninstall_successfull">XZDualRecovery foi desinstalado com sucesso</string>
+    <string name="xzdual_uninstall_failed">XZDualRecovery não pôde ser desinstalado. Erro:</string>
+    <string name="skip_validate_image">Ignorar a verificação do cabeçalho da imagem (pode causar danos)</string>
+    <string name="information">Informação</string>
+    <string name="total_images">Total de imagens disponíveis</string>
+    <string name="recovery_type">Tipo de recovery</string>
+    <string name="licenses">Licenças</string>
+    <string name="install_xzdual_alert">Você quer instalar o XZDual nesse dispositivo?</string>
+    <string name="yes">Sim</string>
     <string name="cm_recovery">CyanogenMod Recovery</string>
-    <string name="cm_recovery_description">CyanogenMod Recovery is used by CyanogenMod in their ROMs and are kept really near to stock recovery.</string>
-    <string name="op_not_supported">Operation not supported</string>
-    <string name="image_not_valid_message" formatted="false">This image hasn\'t been recognised as a valid Android-Image. If you are really sure that this Image (%s) is not corrupt you are able to disable the Validation in the settings and try it again. I\'ve warned you!</string>
-    <string name="image_to_big_message" formatted="false">The chosen image (%d MB) is to big for your device (partition %d MB). If you are sure that this image is the correct one you are able to skip size check before flashing. Checkout the Settings. I\'ve warned you!</string>
-    <string name="reboot_failed">Reboot failed</string>
-    <string name="google_plus" translatable="false">Google+</string>
-    <string name="github" translatable="false">GitHub</string>
-    <string name="description">Description</string>
-    <string name="dev_name_twrp" translatable="false">TeamWin</string>
-    <string name="dev_name_xzdual" translatable="false">[NUT]</string>
-    <string name="dev_name_philz" translatable="false">Phil3759</string>
-    <string name="dev_name_cwm" translatable="false">Clockwork</string>
-    <string name="dev_name_cm" translatable="false">Cyanogen</string>
-    <string name="flash_button">FLASH!</string>
-    <string name="close">CLOSE</string>
-    <string name="set_dev_name">Set custom Device name</string>
-    <string name="device_name">Device name</string>
-    <string name="reset">Reset</string>
+    <string name="cm_recovery_description">CyanogenMod Recovery é usado pela CyanogenMod nas suas ROMs e são mantidos realmente parecidos ao recovery padrão</string>
+    <string name="op_not_supported">Operação não suportada</string>
+    <string name="image_not_valid_message" formatted="false">Essa imagem não foi reconhecida como uma imagem Android válida. Se você está mesmo certo que esta imagem (%s) não está corrompida, você está apto a desativar a Validação nas configurações e tentar novamente. Você foi avisado!</string>
+    <string name="image_to_big_message" formatted="false">A imagem escolhida (%d MB) é muito grande para o seu dispositivo (partição %d MB). Se você tem certeza de que essa imagem é a correta, você está apto a ignorar a verificação do tamanho antes de flashear. Dê uma olhada nas configurações. Você foi avisado!</string>
+    <string name="reboot_failed">Reinício falhou</string>
+    <string name="description">Descrição</string>
+    <string name="flash_button">FLASHEAR!</string>
+    <string name="close">FECHAR</string>
+    <string name="set_dev_name">Definir nome personalizado</string>
+    <string name="device_name">Nome do dispositivo</string>
+    <string name="reset">Redefinir</string>
 </resources>
