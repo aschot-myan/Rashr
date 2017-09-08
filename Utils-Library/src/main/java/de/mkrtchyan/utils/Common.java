@@ -1,31 +1,9 @@
 package de.mkrtchyan.utils;
 
-/**
- * Copyright (c) 2015 Aschot Mkrtchyan
- * Permission is hereby granted, free of charge, to any person obtaining a copy 
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights 
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
- * copies of the Software, and to permit persons to whom the Software is 
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
 
 import java.io.BufferedReader;
@@ -38,7 +16,26 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
-
+/**
+ * Copyright (c) 2017 Aschot Mkrtchyan
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 public class Common {
 
     public static void pushFileFromRAW(Context context, File outputFile, int RAW, boolean Override) throws IOException {
@@ -61,59 +58,20 @@ public class Common {
         if (Folder.exists()
                 && Folder.isDirectory()) {
             File[] files = Folder.listFiles();
-            if (files != null) {
-                for (File i : files) {
-                    if (i.isDirectory()) {
-                        /** Recursive delete */
-                        failed = failed || !deleteFolder(i, AndFolder);
-                    } else {
-                        failed = failed || !i.delete();
-                    }
+            for (File i : files) {
+                if (i.isDirectory()) {
+                    /* Recursive delete */
+                    failed = !deleteFolder(i, AndFolder);
+                } else {
+                    failed = !i.delete();
                 }
+                if (failed) break;
             }
-            if (AndFolder) {
-                failed = failed || !Folder.delete();
-            }
+        }
+        if (AndFolder) {
+            failed = failed || !Folder.delete();
         }
         return !failed;
-    }
-
-    public static boolean getBooleanPref(Context context, String PREF_NAME, String PREF_KEY) {
-        try {
-            return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).getBoolean(PREF_KEY, false);
-        } catch (NullPointerException e) {
-            return false;
-        }
-    }
-
-    public static void setBooleanPref(Context context, String PREF_NAME, String PREF_KEY, Boolean value) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(PREF_KEY, value);
-        editor.apply();
-    }
-
-    public static void toggleBooleanPref(Context context, String PREF_NAME, String PREF_KEY) {
-        setBooleanPref(context, PREF_NAME, PREF_KEY, !getBooleanPref(context, PREF_NAME, PREF_KEY));
-    }
-
-    public static String getStringPref(Context context, String PrefName, String key) {
-        return context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).getString(key, "");
-    }
-
-    public static void setStringPref(Context context, String PrefName, String key, String value) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
-        editor.putString(key, value);
-        editor.apply();
-    }
-
-    public static Integer getIntegerPref(Context context, String PrefName, String key) {
-        return context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).getInt(key, 0);
-    }
-
-    public static void setIntegerPref(Context context, String PrefName, String key, int value) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(PrefName, Context.MODE_PRIVATE).edit();
-        editor.putInt(key, value);
-        editor.apply();
     }
 
     public static void copyFile(File src, File dst) throws IOException {
@@ -133,6 +91,7 @@ public class Common {
 		boolean endsWith = false;
 
 		for (String i : array) {
+            if (i.equals("")) continue;
 			endsWith = string.endsWith(i);
 			if (endsWith) break;
 		}

@@ -104,7 +104,7 @@
         <item>Holo Dark Style</item>
     </string-array>
 
-    <string name="flash_as">Flash %s as</string>
+    <string name="flash_as" formatted="false">Flash %s as</string>
     <string name="recovery">Recovery</string>
     <string name="kernel">Kernel</string>
     <string name="getting_root">Trying to get Root-Access</string>
@@ -223,4 +223,9 @@
     <string name="set_dev_name">Set custom Device name</string>
     <string name="device_name">Device name</string>
     <string name="reset">Reset</string>
+    <string name="choose_message">Choosing %s. Are you sure?</string>
+    <string name="retry">Retry</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://dslnexus.de\",\n  }\n}]</string>
+    <string name="permissions_denied">Please accept all permissions to use Rashr.\nAllow all denied permissions.</string>
+    <string name="requesting_permissions">Requesting permissions</string>
 </resources>

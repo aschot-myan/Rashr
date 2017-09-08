@@ -14,6 +14,17 @@
         <item name="actionBarStyle">@style/Rashr.ActionBar</item>
         <item name="actionMenuTextColor">?attr/colorAccent</item>
         <item name="buttonBarButtonStyle">@style/Rashr.Button.Primary</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="cardStyle">@style/CardView</item>
+    </style>
+
+    <style name="Rashr.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColorPrimary">@color/custom_white</item>
+        <item name="colorPrimary">@color/darker_blue</item>
+        <item name="colorPrimaryDark">@color/black_light</item>
+        <item name="android:windowBackground">@color/black_light</item>
+        <item name="dialogTheme">@style/Rashr.Dialog.Dark</item>
+        <item name="cardStyle">@style/CardView.Dark</item>
     </style>
 
     <style name="Rashr.Button" parent="Widget.AppCompat.Button">
@@ -28,12 +39,41 @@
         <item name="backgroundTint">?attr/colorAccent</item>
     </style>
 
-    <style name="Rashr.Dialog" parent="Theme.AppCompat.Dialog" />
+    <style name="Rashr.Dialog" parent="Theme.AppCompat.Light.Dialog"/>
+
+    <style name="Rashr.Dialog.Dark" parent="Theme.AppCompat.Dialog"/>
 
     <style name="Rashr.ActionBar" parent="Widget.AppCompat.ActionBar">
         <item name="android:textColorPrimary">?attr/colorAccent</item>
         <item name="android:colorBackground">?attr/colorPrimary</item>
         <item name="titleTextStyle">@color/custom_white</item>
+    </style>
+
+    <style name="CardText">
+        <item name="android:textSize">@dimen/card_small_text</item>
+        <item name="android:textColor">@color/card_text</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="CardLightText" parent="@style/CardText">
+        <item name="android:textColor">@color/card_light_text</item>
+    </style>
+
+    <style name="CardTitle" parent="@style/CardText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/card_large_text</item>
+        <item name="android:textColor">@color/card_title_text</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="CardTitleBold" parent="@style/CardText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/card_large_text</item>
+        <item name="android:textColor">@color/card_title_text</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Rashr">
+        <attr name="cardStyle" format="reference"/>
+    </declare-styleable>
+</resources>

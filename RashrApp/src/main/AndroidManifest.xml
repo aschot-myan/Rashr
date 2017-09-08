@@ -15,7 +15,11 @@
         android:allowClearUserData="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".App"
         android:theme="@style/Rashr">
+        <meta-data
+            android:name="asset_statements"
+            android:resource="@string/asset_statements" />
         <activity
             android:name=".RashrActivity"
             android:label="@string/app_name"

@@ -1,11 +1,15 @@
 package de.mkrtchyan.utils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.math.BigInteger;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -30,6 +34,28 @@ import java.security.NoSuchAlgorithmException;
  * SOFTWARE.
  */
 public class MD5 {
+
+    public static boolean verifyCheckSum(File file, URL checksum) {
+        try {
+            System.out.println(checksum);
+            URLConnection con = checksum.openConnection();
+            InputStream is = con.getInputStream();
+            byte buffer[] = new byte[1024];
+            String sum = "";
+            is.read(buffer);
+            for (byte b : buffer) {
+                if (sum.length() >= 32) break;
+                sum += String.valueOf((char) b);
+            }
+            is.close();
+            String checkSum = generateChecksum(file);
+            return sum.equals(checkSum);
+        } catch (NoSuchAlgorithmException | IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static boolean verifyCheckSum(File file, File checksum) {
         try {
             String checkSum = generateChecksum(file);

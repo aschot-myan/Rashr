@@ -18,7 +18,7 @@ import java.util.zip.ZipFile;
 import de.mkrtchyan.utils.Unzipper;
 
 /**
- * Copyright (c) 2016 Aschot Mkrtchyan
+ * Copyright (c) 2017 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -40,7 +40,6 @@ import de.mkrtchyan.utils.Unzipper;
 public class Device {
 
     public static final String EXT_IMG = ".img";
-    //public static final String EXT_TAR = ".tar";
     public static final String EXT_ZIP = ".zip";
     public static final String REC_SYS_CWM = "cwm";
     public static final String REC_SYS_TWRP = "twrp";
@@ -52,62 +51,27 @@ public class Device {
     public static final int PARTITION_TYPE_DD = 1;
     public static final int PARTITION_TYPE_MTD = 2;
     public static final int PARTITION_TYPE_RECOVERY = 3;
-    //public static final int PARTITION_TYPE_RECOVERY2 = 4;
-    //public static final int PARTITION_TYPE_SONY = 4;
     public static final int PARTITION_TYPE_NOT_SUPPORTED = 0;
-    private static final String RECOVERY_VERSION_NOT_RECONGNIZED = "Not recognized Recovery-Version";
-    /**
+    private static final String RECOVERY_VERSION_NOT_RECONGNIZED = "Recovery";
+    /*
      * Collection of known Recovery Partitions on some devices
      */
+    private final String[] RecoveryName = {
+            "recovery", "RECOVERY", "SOS", "USP", "SS", "UP", "nandg", "acta",
+            "Recovery", "FOTAKernel"
+    };
     private final File[] RecoveryList = {
-            new File("/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/recovery"),
-            new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/recovery"),
-            new File("/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/recovery"),
-            new File("/dev/block/platform/sdhci-pxav3.2/by-name/RECOVERY"),
-            new File("/dev/block/platform/msm_sdcc.1/by-name/FOTAKernel"),
-            new File("/dev/block/platform/15570000.ufs/by-name/RECOVERY"),
-            new File("/dev/block/platform/155a0000.ufs/by-name/RECOVERY"),
-            new File("/dev/block/platform/comip-mmc.1/by-name/recovery"),
-            new File("/dev/block/platform/msm_sdcc.1/by-name/recovery"),
-            new File("/dev/block/platform/mtk-msdc.0/by-name/recovery"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/SOS"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/USP"),
-            new File("/dev/block/platform/dw_mmc.0/by-name/recovery"),
-            new File("/dev/block/platform/dw_mmc.0/by-name/RECOVERY"),
-            new File("/dev/block/platform/hi_mci.1/by-name/recovery"),
-            new File("/dev/block/platform/hi_mci.0/by-name/recovery"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/UP"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/SS"),
-            new File("/dev/block/platform/sdhci.1/by-name/RECOVERY"),
-            new File("/dev/block/platform/sdhci.1/by-name/recovery"),
-            new File("/dev/block/platform/dw_mmc/by-name/recovery"),
-            new File("/dev/block/platform/dw_mmc/by-name/RECOVERY"),
-            new File("/dev/block/bootdevice/by-name/recovery"),
             new File("/dev/block/by-name/recovery"),
-            //new File("/system/bin/recovery.tar"),
-            new File("/dev/block/recovery"),
             new File("/dev/block/nandg"),
-            new File("/dev/block/acta"),
             new File("/dev/recovery")
     };
-    /**
+    /*
      * Collection of known Kernel Partitions on some devices
      */
+    private final String[] KernelName = {
+            "boot", "KERNEL", "LNX", "BOOT", "Kernel", "nandc"
+    };
     private final File[] KernelList = {
-            new File("/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/boot"),
-            new File("/dev/block/platform/omap/omap_hsmmc.0/by-name/boot"),
-            new File("/dev/block/platform/sprd-sdhci.3/by-name/KERNEL"),
-            new File("/dev/block/platform/sdhci-tegra.3/by-name/LNX"),
-            new File("/dev/block/platform/15570000.ufs/by-name/BOOT"),
-            new File("/dev/block/platform/155a0000.ufs/by-name/BOOT"),
-            new File("/dev/block/platform/msm_sdcc.1/by-name/Kernel"),
-            new File("/dev/block/platform/mtk-msdc.0/by-name/boot"),
-            new File("/dev/block/platform/msm_sdcc.1/by-name/boot"),
-            new File("/dev/block/platform/sdhci.1/by-name/KERNEL"),
-            new File("/dev/block/platform/hi_mci.0/by-name/boot"),
-            new File("/dev/block/platform/sdhci.1/by-name/boot"),
-            new File("/dev/block/bootdevice/by-name/boot"),
             new File("/dev/block/by-name/boot"),
             new File("/dev/block/nandc"),
             new File("/dev/boot")
@@ -116,7 +80,7 @@ public class Device {
     private final String mBoard = Build.BOARD.toLowerCase();
     private final String mKernelVersion = "Linux " + System.getProperty("os.version");
     private boolean isSetup = false;
-    /**
+    /*
      * This class contains all device specified information to provide
      * all information for all other classes for example:
      * What kind of partition and where is the recovery partition in the
@@ -126,11 +90,11 @@ public class Device {
     private int mRecoveryBlocksize = 0;
     private int mKernelType = PARTITION_TYPE_NOT_SUPPORTED;
     private int mKernelBlocksize = 0;
-    private String mName = Build.DEVICE.toLowerCase();
+    private String mName = App.Preferences.getString(App.PREF_KEY_DEVICE_NAME, Build.DEVICE.toLowerCase());
     private String mXZName = "";
-    private String mRecoveryPath = "";
+    private String mRecoveryPath = App.Preferences.getString(App.PREF_KEY_RECOVERY_PATH, "");
     private String mRecoveryVersion = RECOVERY_VERSION_NOT_RECONGNIZED;
-    private String mKernelPath = "";
+    private String mKernelPath = App.Preferences.getString(App.PREF_KEY_KERNEL_PATH, "");
     private String mRecoveryExt = EXT_IMG;
     private String mKernelExt = EXT_IMG;
     private ArrayList<String> mStockRecoveries = new ArrayList<>();
@@ -144,10 +108,7 @@ public class Device {
     private File flash_image = new File("/system/bin", "flash_image");
     private File dump_image = new File("/system/bin", "dump_image");
 
-    public void setup(String deviceName) {
-        if (!deviceName.equals("")) {
-            mName = deviceName;
-        }
+    public void setup() {
         setPredefinedOptions();
         loadRecoveryList();
         loadKernelList();
@@ -158,13 +119,16 @@ public class Device {
             mKernelBlocksize = getBlockSizeOf(mKernelPath);
         }
         isSetup = true;
+        App.Preferences.edit().putString(App.PREF_KEY_DEVICE_NAME, mName).apply();
+        App.Preferences.edit().putString(App.PREF_KEY_RECOVERY_PATH, mRecoveryPath).apply();
+        App.Preferences.edit().putString(App.PREF_KEY_KERNEL_PATH, mKernelPath).apply();
     }
 
     private void setPredefinedOptions() {
 
         String MODEL = Build.MODEL.toLowerCase();
 
-        /** Set Name and predefined options */
+        /* Set Name and predefined options */
 //      Unified Motorola CM Build
         if (mManufacture.equals("motorola") && mBoard.equals("msm8960")) mName = "moto_msm8960";
 
@@ -498,7 +462,7 @@ public class Device {
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(
-                    Const.RecoveryCollectionFile)));
+                    App.RecoveryCollectionFile)));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
@@ -566,7 +530,7 @@ public class Device {
             }
 
         } catch (IOException e) {
-            RashrApp.ERRORS.add(Const.DEVICE_TAG + " Could not read Recovery List: " + e);
+            App.ERRORS.add(App.TAG + " Could not read Recovery List: " + e);
         }
     }
 
@@ -583,7 +547,7 @@ public class Device {
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(new File(Const.FilesDir, Const.KERNEL_SUMS))));
+                    new FileInputStream(new File(App.FilesDir, App.KERNEL_SUMS))));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
@@ -598,99 +562,83 @@ public class Device {
 
             Collections.sort(StockKernel);
 
-            /**
+            /*
              * First clear list before adding items (to avoid double entry on reload by update)
              */
             mStockKernel.clear();
 
-            /** Sort newest version to first place */
+            /* Sort newest version to first place */
             for (String i : StockKernel) {
                 mStockKernel.add(0, i);
             }
 
         } catch (Exception e) {
-            RashrApp.ERRORS.add(Const.DEVICE_TAG + " Could not read Kernel List: " + e);
+            App.ERRORS.add(App.TAG + " Could not read Kernel List: " + e);
         }
     }
 
-/*    public boolean downloadUtils(final Context mContext) {
-
-        final File archive = new File(Const.PathToUtils, mName + EXT_ZIP);
-
-        final AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
-        mAlertDialog
-                .setTitle(R.string.warning)
-                .setMessage(R.string.download_utils);
-        if (mName.equals("montblanc") || mName.equals("c6602") || mName.equals("yuga")) {
-            if (!archive.exists()) {
-                mAlertDialog.setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            URL url = new URL(Const.UTILS_URL + "/" + archive.getName());
-                            DownloadDialog downloader = new DownloadDialog(mContext, url, archive);
-                            downloader.setOnDownloadListener(new DownloadDialog.OnDownloadListener() {
-                                @Override
-                                public void success(File file) {
-                                    Unzipper.unzip(archive, new File(Const.PathToUtils, mName));
-                                }
-
-                                @Override
-                                public void failed(Exception e) {
-
-                                }
-                            });
-                        } catch (MalformedURLException ignored) {}
-                    }
-                });
-                mAlertDialog.show();
-                return true;
-            } else {
-                Unzipper.unzip(archive, new File(Const.PathToUtils, mName));
-                return false;
-            }
-        }
-        return false;
-    }*/
-
-    private void readDeviceInfos() {
-        for (File i : KernelList) {
-            if (mKernelPath.equals("")) {
-                /**
+    private String findPartition(String[] names) {
+        String result = "";
+        for (String name : names) {
+            if (result.equals("")) {
+                /*
                  * Partition doesn't exist LOLLIPOP (File.exists() returns always
                  * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
                  * Check over RootShell (if throws exception partition not found check next
                  */
                 try {
-                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath(), true, false);
-                    mKernelPath = i.getAbsolutePath();
+                    result = App.Shell.execCommand("ls /dev/block/platform/*/by-name/"
+                            + name, true, false);
                     break;
                 } catch (FailedExecuteCommand ignore) {
                 }
             }
         }
-        for (File i : RecoveryList) {
-            if (mRecoveryPath.equals("")) {
+        return result;
+    }
+
+    private String findPartition(File[] names) {
+        String result = "";
+        for (File name : names) {
+            if (result.equals("")) {
+                /*
+                 * Partition doesn't exist LOLLIPOP (File.exists() returns always
+                 * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
+                 * Check over RootShell (if throws exception partition not found check next
+                 */
                 try {
-                    /**
-                     * Partition doesn't exist LOLLIPOP (File.exists() returns always
-                     * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
-                     * Check over RootShell (if throws exception partition not found check next
-                     */
-                    RashrApp.SHELL.execCommand("ls " + i.getAbsolutePath(), true, false);
-                    mRecoveryPath = i.getAbsolutePath();
-                    //if (mRecoveryPath.endsWith(EXT_TAR)) {
-                    //    mRecoveryExt = EXT_TAR;
-                    //    //mRecoveryType = PARTITION_TYPE_SONY;
-                    //}
+                    result = App.Shell.execCommand("ls " + name, true, false);
                     break;
                 } catch (FailedExecuteCommand ignore) {
                 }
+            }
+        }
+        return result;
+    }
+
+    private void readDeviceInfos() {
+        //if partition is not set (from settings or cached in settings)
+        if (mKernelPath.equals("")) {
+            // try to find
+            mKernelPath = findPartition(KernelName);
+            if (mKernelPath.equals("")) {
+                //not found try with other list
+                mKernelPath = findPartition(KernelList);
+            }
+        }
+        //EQ as kernel
+        if (mRecoveryPath.equals("")) {
+            mRecoveryPath = findPartition(RecoveryName);
+            if (mRecoveryPath.equals("")) {
+                mRecoveryPath = findPartition(RecoveryList);
             }
         }
 
-        if (RashrActivity.LastLogExists) {
-            readLastLog();
+        if (mRecoveryPath.equals("") || mKernelPath.equals("")
+                || mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
+            if (RashrActivity.LastLogExists) {
+                readLastLog();
+            }
         }
 
         if (mRecoveryPath.equals("")) {
@@ -846,11 +794,17 @@ public class Device {
             if (mRecoveryPath.contains("/dev/block")) {
                 mRecoveryType = PARTITION_TYPE_DD;
             }
+            if (mRecoveryPath.contains("mtd")) {
+                mRecoveryType = PARTITION_TYPE_MTD;
+            }
         }
 
         if (!isKernelSupported()) {
             if (mKernelPath.contains("/dev/block")) {
                 mKernelType = PARTITION_TYPE_DD;
+            }
+            if (mKernelPath.contains("mtd")) {
+                mKernelType = PARTITION_TYPE_MTD;
             }
         }
 
@@ -861,14 +815,14 @@ public class Device {
 
     public File getFlash_image() {
         if (!flash_image.exists()) {
-            flash_image = new File(Const.FilesDir, flash_image.getName());
+            flash_image = new File(App.FilesDir, flash_image.getName());
         }
         return flash_image;
     }
 
     public File getDump_image() {
         if (!dump_image.exists()) {
-            dump_image = new File(Const.FilesDir, dump_image.getName());
+            dump_image = new File(App.FilesDir, dump_image.getName());
         }
         return dump_image;
     }
@@ -949,6 +903,10 @@ public class Device {
         return mKernelExt;
     }
 
+    /**
+     *
+     * @return List of filenames containing the correct stock recoveries for device
+     */
     public ArrayList<String> getStockRecoveryVersions() {
         return mStockRecoveries;
     }
@@ -989,6 +947,10 @@ public class Device {
         return mName;
     }
 
+    /**
+     * Change device name
+     * @param Name device name to use
+     */
     public void setName(String Name) {
         this.mName = Name;
     }
@@ -1018,7 +980,7 @@ public class Device {
 
         try {
             String line;
-            File LogCopy = new File(Const.FilesDir, Const.LastLog.getName() + ".txt");
+            File LogCopy = new File(App.FilesDir, App.LastLog.getName() + ".txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
             while ((line = br.readLine()) != null) {
                 line = line.replace("\"", "");
@@ -1061,7 +1023,7 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev")) {
                                     try {
-                                        RashrApp.SHELL.execCommand("ls " + split, true, false);
+                                        App.Shell.execCommand("ls " + split, true, false);
                                         mKernelPath = split;
                                         break;
                                     } catch (FailedExecuteCommand e) {
@@ -1078,7 +1040,7 @@ public class Device {
                         }
                     }
                 }
-                /**
+                /*
                  * RecoveryPath not found so try it with this line
                  */
                 if (mRecoveryPath.equals("")) {
@@ -1089,12 +1051,11 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev") || split.startsWith("/system")) {
                                     try {
-                                        RashrApp.SHELL.execCommand("ls " + split, true, false);
+                                        App.Shell.execCommand("ls " + split, true, false);
                                         mRecoveryPath = split;
                                         break;
                                     } catch (FailedExecuteCommand ignore) {
-                                        /**
-                                         * Partition doesn't exist LOLLIPOP Workaround
+                                        /* Partition doesn't exist LOLLIPOP Workaround
                                          * File.exists() returns always false if file is in hidden FS
                                          * Lollipop marks /dev/.... as hidden
                                          */
@@ -1107,7 +1068,7 @@ public class Device {
             }
             br.close();
         } catch (Exception e) {
-            RashrApp.ERRORS.add(Const.DEVICE_TAG + " Could not read LastLog.txt: " + e);
+            App.ERRORS.add(App.TAG + " Could not read LastLog.txt: " + e);
         }
         /*
         if (mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
@@ -1133,21 +1094,21 @@ public class Device {
      * If some partition (Kernel or Recovery) can't be found so check if the partition layouts of
      */
     private void readPartLayouts() {
-        File PartLayout = new File(Const.FilesDir, Build.DEVICE);
+        File PartLayout = new File(App.FilesDir, Build.DEVICE);
         if (!PartLayout.exists()) {
             try {
-                ZipFile PartLayoutsZip = new ZipFile(new File(Const.FilesDir, "partlayouts.zip"));
+                ZipFile PartLayoutsZip = new ZipFile(new File(App.FilesDir, "partlayouts.zip"));
                 for (Enumeration e = PartLayoutsZip.entries(); e.hasMoreElements(); ) {
                     ZipEntry entry = (ZipEntry) e.nextElement();
-                    if (entry.getName().equals(Build.DEVICE)) {
-                        Unzipper.unzipEntry(PartLayoutsZip, entry, Const.FilesDir);
-                        if (new File(Const.FilesDir, entry.getName()).renameTo(PartLayout)) {
+                    if (entry.getName().equals(Build.DEVICE) || entry.getName().equals(mName)) {
+                        Unzipper.unzipEntry(PartLayoutsZip, entry, App.FilesDir);
+                        if (new File(App.FilesDir, entry.getName()).renameTo(PartLayout)) {
                             throw new IOException("Failed rename File into " + PartLayout);
                         }
                     }
                 }
             } catch (IOException e) {
-                RashrApp.ERRORS.add(Const.DEVICE_TAG + " PartLayouts could not be unzipped: " + e);
+                App.ERRORS.add(App.TAG + " PartLayouts could not be unzipped: " + e);
             }
         }
         if (PartLayout.exists()) {
@@ -1169,7 +1130,7 @@ public class Device {
                     }
                 }
             } catch (IOException e) {
-                RashrApp.ERRORS.add(Const.DEVICE_TAG + " Error while reading PartLayouts " + e);
+                App.ERRORS.add(App.TAG + " Error while reading PartLayouts " + e);
             }
         }
     }
@@ -1177,7 +1138,7 @@ public class Device {
     public boolean isUnified() {
         return mName.startsWith("d2lte") || mName.startsWith("hlte")
                 || mName.startsWith("jflte") || mName.equals("moto_msm8960")
-                || mName.startsWith("trlte");
+                || mName.startsWith("trlte") || mName.startsWith("herolte");
     }
 
     /**
@@ -1201,7 +1162,9 @@ public class Device {
 
     public boolean isXZDualInstalled() {
         try {
-            RashrApp.SHELL.execCommand("ls /system/bin/recovery.cwm.cpio.lzma");
+            App.Shell.execCommand("ls /system/bin/recovery.cwm.cpio.lzma");
+            App.Shell.execCommand("ls /system/bin/recovery.twrp.cpio.lzma");
+            App.Shell.execCommand("ls /system/bin/recovery.philz.cpio.lzma");
             return true;
         } catch (FailedExecuteCommand ignore) {
             return false;
@@ -1223,11 +1186,19 @@ public class Device {
      */
     private int getBlockSizeOf(String partitionPath) {
         try {
-            String tmp = RashrApp.SHELL.execCommand(Const.Busybox + " blockdev --getbsz " + partitionPath);
+            String tmp = App.Shell.execCommand(App.Busybox + " blockdev --getbsz " + partitionPath);
             tmp = tmp.replace("\n", "");
             return Integer.valueOf(tmp);
         } catch (FailedExecuteCommand ignore) {
         }
         return 0;
+    }
+
+    public boolean isRecoveryBackupPossible() {
+        return App.Device.isRecoveryDD() || App.Device.isRecoveryMTD();
+    }
+
+    public boolean isKernelBackupPossible() {
+        return App.Device.isKernelDD() || App.Device.isKernelMTD();
     }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Rashr</string>
     <string name="settings">Ayarlar</string>
     <string name="sCWM">CWM Recovery</string>
     <string name="sFlashRecovery">Recovery Yükle</string>
@@ -91,13 +90,6 @@ Geliştirici, cihazınıza gelebilecek zararlardan sorumlu değildir."</string>
     <string name="extract_failed">Uygulamadan gerekli dosyalar çıkartılamadı. Lütfen uygulamayı yeniden başlatın.</string>
     <string name="no_history">Geçmiş bulunamadı</string>
     <string name="styles">Stiller</string>
-
-    <string-array name="styles">
-        <item>Stiller</item>
-        <item>Holo Parlak Koyu Çubuk Stili</item>
-        <item>Holo Parlak Stili</item>
-        <item>Holo Koyu Stili</item>
-    </string-array>
 
     <string name="flash_as">%s gibi yükle</string>
     <string name="recovery">Recovery</string>
@@ -204,14 +196,7 @@ Tüm cihazlar desteklenmiyor!</string>
     <string name="image_not_valid_message" formatted="false">"Bu imaj geçerli bir Android-İmajı olarak algılanmadı. %s imajının bozuk olmadığından gerçekten eminseniz, ayarlardan doğrulamayı devre dışı bırakıp tekrar deneyebilirsiniz. Sizi uyardım!"</string>
     <string name="image_to_big_message" formatted="false">"Seçilen imaj (%d MB) cihazınız için (bölüm %d MB) büyük. Bu imajın doğru olduğundan eminseniz, yükleme yapmadan önce boyutu atlayabilirsiniz. Ayarları kontrol edin. Sizi uyardım!"</string>
     <string name="reboot_failed">Yeniden başlatılamıyor</string>
-    <string name="google_plus" translatable="false">Google+</string>
-    <string name="github" translatable="false">GitHub</string>
     <string name="description">Açıklama</string>
-    <string name="dev_name_twrp" translatable="false">TeamWin</string>
-    <string name="dev_name_xzdual" translatable="false">[NUT]</string>
-    <string name="dev_name_philz" translatable="false">Phil3759</string>
-    <string name="dev_name_cwm" translatable="false">Clockwork</string>
-    <string name="dev_name_cm" translatable="false">Cyanogen</string>
     <string name="flash_button">YÜKLE!</string>
     <string name="close">KAPAT</string>
     <string name="set_dev_name">Özel Cihaz adı ayarla</string>

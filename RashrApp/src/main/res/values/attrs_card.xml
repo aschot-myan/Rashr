@@ -1,0 +1,13 @@
+<resources>
+    <declare-styleable name="Card">
+        <attr name="style" format="reference" />
+        <attr name="title" format="string" />
+        <attr name="titleColor" format="reference|color" />
+        <attr name="description" format="string" />
+        <attr name="descriptionColor" format="reference|color" />
+        <attr name="backgroundColor" format="color|reference" />
+        <attr name="cardColor" format="color|reference" />
+        <attr name="drawable" format="reference" />
+        <attr name="data" format="string" />
+    </declare-styleable>
+</resources>

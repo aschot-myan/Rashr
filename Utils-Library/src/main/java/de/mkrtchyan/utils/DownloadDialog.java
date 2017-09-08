@@ -1,6 +1,6 @@
 package de.mkrtchyan.utils;
 
-/**
+/*
  * Copyright (c) 2016 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy 
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,10 +21,10 @@ package de.mkrtchyan.utils;
  * SOFTWARE.
  */
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 

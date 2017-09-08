@@ -200,7 +200,12 @@ public class Toolbox {
         try {
             shell.execCommand("toolbox chmod " + permissions + " \"" + file + "\"");
         } catch (FailedExecuteCommand e) {
-            shell.execCommand("busybox chmod " + permissions + " \"" + file + "\"");
+            try {
+                shell.execCommand("busybox chmod " + permissions + " \"" + file + "\"");
+            } catch (FailedExecuteCommand e1) {
+                shell.execCommand("chmod " + permissions + " \"" + file + "\"");
+            }
+
         }
     }
 

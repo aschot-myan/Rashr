@@ -17,13 +17,13 @@
 package org.sufficientlysecure.donations;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -166,7 +166,11 @@ public class DonationsFragment extends Fragment {
 
                 @Override
                 public void onClick(View v) {
-                    donateGoogleOnClick(v);
+                    try {
+                        donateGoogleOnClick(v);
+                    } catch (ClassNotFoundException ignore) {
+                        ignore.printStackTrace();
+                    }
                 }
             });
 
@@ -244,7 +248,7 @@ public class DonationsFragment extends Fragment {
     /**
      * Donate button executes donations based on selection in spinner
      */
-    public void donateGoogleOnClick(View view) {
+    public void donateGoogleOnClick(View view) throws ClassNotFoundException {
         final int index;
         index = mGoogleSpinner.getSelectedItemPosition();
         if (mDebug)

@@ -2,6 +2,7 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatEditText
@@ -14,6 +15,7 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/bGo"
+        android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

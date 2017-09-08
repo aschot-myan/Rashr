@@ -1,15 +1,119 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_updater"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".FlashFragment">
+    tools:context=".fragment.FlashFragment">
 
-    <com.fima.cardsui.views.CardUI
-        android:id="@+id/RashrCards"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/RashrCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/xzdual_card"
+                app:title="@string/xzdualrecovery"
+                app:description="@string/xzdual_describtion"
+                app:drawable="@drawable/ic_xzdual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="xzdual"/>
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/cwm_card"
+                app:title="@string/sCWM"
+                app:description="@string/cwm_description"
+                app:drawable="@drawable/ic_cwm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="cwm"/>
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/twrp_card"
+                app:title="@string/sTWRP"
+                app:description="@string/twrp_description"
+                app:drawable="@drawable/ic_twrp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="twrp"/>
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/philz_card"
+                app:title="@string/sPhilz"
+                app:description="@string/philz_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="philz"/>
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/cm_card"
+                app:title="@string/cm_recovery"
+                app:description="@string/cm_recovery_description"
+                app:drawable="@drawable/ic_cm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="cm"/>
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/stock_recovery_card"
+                app:title="@string/stock_recovery"
+                app:description="@string/stock_recovery_description"
+                app:drawable="@drawable/ic_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="stock"/>
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/other_recovery_card"
+                app:title="@string/other_recovery"
+                app:description="@string/other_storage_description"
+                app:drawable="@drawable/ic_folder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/stock_kernel_card"
+                app:title="@string/stock_kernel"
+                app:description="@string/stock_kernel_description"
+                app:drawable="@drawable/ic_stock_kernel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="stock" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/other_kernel_card"
+                app:title="@string/other_kernel"
+                app:description="@string/other_storage_description"
+                app:drawable="@drawable/ic_folder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/reboot_card"
+                app:title="@string/sReboot"
+                app:description="@string/reboot_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/reboot_recovery_card"
+                app:title="@string/sRebootRecovery"
+                app:description="@string/reboot_recovery_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/reboot_bootloader_card"
+                app:title="@string/sRebootBootloader"
+                app:description="@string/reboot_bootloader_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/shutdown_card"
+                app:title="@string/sRebootShutdown"
+                app:description="@string/shutdown_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/history_card"
+                app:title="@string/history"
+                app:description="@string/history_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.LinearLayoutCompat>
+    </ScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>

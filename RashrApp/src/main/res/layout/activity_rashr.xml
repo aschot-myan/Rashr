@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context="de.mkrtchyan.recoverytools.RashrActivity">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
@@ -23,22 +23,23 @@
             app:subtitleTextColor="?attr/colorAccent"
             app:titleTextColor="@color/custom_white" />
 
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
-            android:layout_weight="1" />
-
         <com.google.android.gms.ads.AdView
             android:id="@+id/ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
             app:adSize="SMART_BANNER"
             app:adUnitId="ca-app-pub-3591384811135190/6436276193" />
 
-    </android.support.v7.widget.LinearLayoutCompat>
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@id/ads"/>
+
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

@@ -1,30 +1,9 @@
 package de.mkrtchyan.utils;
 
-/**
- * Copyright (c) 2014 Ashot Mkrtchyan
- * Permission is hereby granted, free of charge, to any person obtaining a copy 
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights 
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
- * copies of the Software, and to permit persons to whom the Software is 
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,34 +14,53 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FileChooserDialog extends Dialog {
+/**
+ * Copyright (c) 2017 Ashot Mkrtchyan
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+public class FileChooserDialog extends AppCompatDialog {
 
     private File StartFolder = File.listRoots()[0];
     final private ListView lvFiles;
     private final Context mContext;
-    private File currentPath;
+    private File currentPath = StartFolder;
     private boolean showHidden = false;
     private File selectedFile;
-    private ArrayList<File> FileList = new ArrayList<File>();
+    private ArrayList<File> FileList = new ArrayList<>();
     private ArrayAdapter<String> FilesAdapter = null;
     private OnFileChooseListener onFileChooseListener = null;
-    private OnFolderChooseListener onFolderChooseListener = null;
     private String AllowedEXT[] = {""};
     private LinearLayout layout;
-    private boolean warn = true;
+    private String mWarning;
     private boolean BrowseUpAllowed = false;
 
     public FileChooserDialog(final Context mContext) {
         super(mContext);
         this.mContext = mContext;
-        lvFiles = new FileListView(mContext);
+        lvFiles = new ListView(mContext);
         setup();
     }
 
     private void setup() {
         this.setTitle(R.string.file_chooser_dialog_title);
         currentPath = StartFolder;
-        FilesAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1);
+        FilesAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1);
 
         layout = new LinearLayout(mContext);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -89,8 +87,7 @@ public class FileChooserDialog extends Dialog {
     }
 
     private void reload() {
-        ArrayList<String> tmp = new ArrayList<String>();
-        tmp.clear();
+        ArrayList<String> tmp = new ArrayList<>();
         FileList.clear();
         FilesAdapter.clear();
 
@@ -99,42 +96,38 @@ public class FileChooserDialog extends Dialog {
             FileList.add(currentPath.getParentFile());
         }
         File fileList[] = currentPath.listFiles();
-        if (fileList != null) {
-            for (File i : fileList) {
-                if (showHidden || !i.getName().startsWith(".")) {
-                    if (!AllowedEXT[0].equals("") || AllowedEXT.length > 1) {
-                        if (i.isDirectory()) {
-                            FileList.add(i);
-                        } else {
-	                        if (Common.stringEndsWithArray(i.getName(), AllowedEXT)) {
-		                        FileList.add(i);
-	                        }
-                        }
-                    } else {
-                        FileList.add(i);
-                    }
+        for (File i : fileList) {
+            if (showHidden || !i.getName().startsWith(".")) {
+                if (i.isDirectory()) {
+                    FileList.add(i);
+                } else {
+	                if (Common.stringEndsWithArray(i.getName(), AllowedEXT)) {
+		                FileList.add(i);
+	                }
                 }
             }
-            Collections.sort(FileList);
-	        lvFiles.post(new Runnable() {
+        }
+        Collections.sort(FileList);
+	    lvFiles.post(new Runnable() {
 		        @Override
 		        public void run() {
 			        lvFiles.smoothScrollToPosition(0);
 		        }
-	        });
-        }
+        });
 
-        boolean parent = currentPath.getParentFile() != null;
+
+        boolean hasParent = currentPath.getParentFile() != null;
 
         for (File i : FileList) {
             if (i.isDirectory()) {
-                if (parent) {
+                if (hasParent) {
+                    //i is not root to avoid '//' as root directory
                     if (!i.toString().equals("/")) {
                         tmp.add(i + "/");
                     } else {
                         tmp.add(i.getAbsolutePath());
                     }
-                    parent = false;
+                    hasParent = false;
                 } else {
                     tmp.add(i.getName() + "/");
                 }
@@ -150,11 +143,11 @@ public class FileChooserDialog extends Dialog {
 
     private void fileSelected() {
         if (onFileChooseListener != null) {
-            if (warn) {
+            if (mWarning != null) {
                 AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
                 mAlertDialog
                         .setTitle(R.string.warning)
-                        .setMessage(String.format(mContext.getString(R.string.choose_message), selectedFile.getName()))
+                        .setMessage(String.format(mWarning, selectedFile.getName()))
                         .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -197,8 +190,15 @@ public class FileChooserDialog extends Dialog {
         return layout;
     }
 
-    public void setWarn(boolean warn) {
-        this.warn = warn;
+    /**
+     * @param warning unformated string with containing %s
+     */
+    public void setWarning(String warning) {
+        if (warning.equals("")) {
+            mWarning = null;
+            return;
+        }
+        mWarning = warning;
     }
 
     public void setBrowseUpAllowed(boolean BrowseUpAllowed) {
@@ -232,9 +232,5 @@ public class FileChooserDialog extends Dialog {
 
     public interface OnFileChooseListener {
         void OnFileChoose(File file);
-    }
-
-    public interface OnFolderChooseListener {
-        void OnFolderChoose(File folder);
     }
 }
