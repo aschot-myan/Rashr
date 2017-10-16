@@ -70,6 +70,16 @@ public class App extends Application {
     public static final String PREF_KEY_RESET_APP = "reset_app";
     public static final String PREF_KEY_CLEAR_CACHE = "clear_cache";
 
+    //Device.java information contains found information to prevent search it again
+    //THIS ARE NOT SETTINGS OR PREFERENCES
+    public static final String PREF_KEY_RECOVERY_BLOCK_SIZE = "recovery_block_size";
+    public static final String PREF_KEY_KERNEL_BLOCK_SIZE = "kernel_block_size";
+    public static final String PREF_KEY_XZDUAL_NAME = "xzdual_name";
+    public static final String PREF_KEY_RECOVERY_TYPE = "recovery_type";
+    public static final String PREF_KEY_KERNEL_TYPE = "kernel_type";
+    public static final String PREF_KEY_RECOVERY_EXT = "recovery_ext";
+    public static final String PREF_KEY_KERNEL_EXT = "kernel_ext";
+
 
     /* Google in-app purchases */
     public static final String GOOGLE_PUBKEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhHa/9/sYU2dbF6nQqGzNktvxb+83Ed/inkK8cbiEkcRjw/t/Okge6UghlyYEXcZLJL9TDPAlraktUZZ/XH8+ZpgdNlO+UeQTD4Yl9ReZ/ujQ151g/RLrVNi7NF4SQ1jD20RmX2lCUhbl5cPi6UKL/bHFeZwjE0pOr48svW0nXbRfpgSSk3V/DaV1igTX66DuFUITKi0gQGD8XAVsrOcQRQtr4wHfdgyMQR9m0vPPzpFoDD8SZZFCp9UgvuzqdwYqY8kr7ZcyxuQhaNlcx74hpFQ9MJteRTII+ii/pHfWDh0hDMqcodm4UD9rISmPSvlLR3amfSg4Vm6ObWFiVe4qVwIDAQAB";
@@ -155,7 +165,7 @@ public class App extends Application {
         Device = new Device();
         /* Checking if version has changed */
         final int previous_version = App.Preferences.getInt(App.PREF_KEY_CUR_VER, 0);
-        isVersionChanged = BuildConfig.VERSION_CODE > previous_version;
+        isVersionChanged = BuildConfig.VERSION_CODE > previous_version | BuildConfig.DEBUG;
         App.Preferences.edit().putInt(App.PREF_KEY_CUR_VER, BuildConfig.VERSION_CODE).apply();
         FilesDir = context.getFilesDir();
         RashrLog = new File(FilesDir, AppLogs);
