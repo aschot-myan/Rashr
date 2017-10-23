@@ -24,6 +24,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -443,6 +444,7 @@ public class RashrActivity extends AppCompatActivity
 
                             try {
                                 mRoot = (DrawerLayout) View.inflate(mContext, R.layout.activity_rashr, null);
+
                                 setContentView(mRoot);
                                 ButterKnife.bind(mActivity);
                                 mRoot.startAnimation(AnimationUtils.loadAnimation(mContext,
@@ -466,7 +468,7 @@ public class RashrActivity extends AppCompatActivity
                                 if (mAds != null) {
                                     if (App.Preferences.getBoolean(App.PREF_KEY_ADS, true)) {
                                         mAds.loadAd(new AdRequest.Builder()
-                                                .addTestDevice("19BA0D7900ECD1B88062F01553291D7E")
+                                                .addTestDevice("BB1FFBF880370A581E6665C69C97D711")
                                                 .build());
                                     } else {
                                         mAds.setVisibility(View.GONE);
@@ -553,5 +555,30 @@ public class RashrActivity extends AppCompatActivity
             App.ERRORS.add(e.toString());
             return false;
         }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.BackupItem:
+                startActivity(new Intent(this, BackupActivity.class));
+                mActivity.switchTo(BackupRestoreFragment.newInstance(), true);
+                break;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /*
+         * Backups menu only accessible if backups are possible
+         */
+        if (App.Device.isRecoveryDD() || App.Device.isKernelDD()
+                || App.Device.isRecoveryMTD() || App.Device.isKernelMTD()) {
+            getMenuInflater().inflate(R.menu.flash_menu, menu);
+            return true;
+        }
+        return false;
     }
 }

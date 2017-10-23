@@ -22,8 +22,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -249,12 +247,6 @@ public class BackupRestoreFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.backup_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
     public void createBackup(final boolean RecoveryBackup) {
         String prefix;
         String CurrentName;
@@ -359,17 +351,6 @@ public class BackupRestoreFragment extends Fragment {
         });
         dialog.show();
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.FlashItem:
-                mActivity.switchTo(FlashFragment.newInstance(mActivity));
-                return true;
-        }
-        return false;
-    }
-
 
     public static class FileListFragment extends Fragment {
 

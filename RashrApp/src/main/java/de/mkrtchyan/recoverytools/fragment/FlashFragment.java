@@ -13,9 +13,6 @@ import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -76,8 +73,6 @@ public class FlashFragment extends Fragment {
     Card mXZDualCard;
     @BindView(R.id.twrp_card)
     Card mTWRPCard;
-    @BindView(R.id.cm_card)
-    Card mCMCard;
     @BindView(R.id.cwm_card)
     Card mCWMCard;
     @BindView(R.id.stock_recovery_card)
@@ -115,21 +110,6 @@ public class FlashFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        /*
-         * Backups menu only accessible if backups are possible
-         */
-        setHasOptionsMenu(App.Device.isRecoveryDD() || App.Device.isKernelDD()
-                || App.Device.isRecoveryMTD() || App.Device.isKernelMTD());
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.flash_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -161,16 +141,6 @@ public class FlashFragment extends Fragment {
             RashrActivity.FirstSession = false;
         }
         return mSwipeUpdater;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.BackupItem:
-                mActivity.switchTo(BackupRestoreFragment.newInstance(), true);
-                break;
-        }
-        return false;
     }
 
     /**
@@ -212,7 +182,7 @@ public class FlashFragment extends Fragment {
             path = App.PathToStockKernel;
             for (String i : Versions) {
                 try {
-                    String version = i.split("-")[3].replace(App.Device.getRecoveryExt(), "");
+                    String version = i.split("-")[3].replace(App.Device.getRecoveryExt(), "").replace("_", " ").toUpperCase();
                     String deviceName = i.split("-")[2];
                     /* Readable name for user */
                     VersionsAdapter.add("Stock Kernel " + version + " (" + deviceName + ")");
@@ -305,7 +275,7 @@ public class FlashFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if (HistoryFiles.get(which).exists()) {
                     mActivity.switchTo(FlashAsFragment.newInstance(mActivity,
-                            HistoryFiles.get(which)));
+                            HistoryFiles.get(which)), true);
                 }
             }
         });
@@ -461,6 +431,7 @@ public class FlashFragment extends Fragment {
             });
         }
 
+        //Some Samsung devices are unified
         if (App.Device.getManufacture().equals("samsung")) {
             String[] unifiedGalaxyS3 = {"d2lte", "d2att", "d2cri", "d2mtr",
                     "d2spr", "d2tmo", "d2usc", "d2vzw"};
@@ -483,6 +454,7 @@ public class FlashFragment extends Fragment {
             }
         }
 
+        //Some Motorola devices are unified
         if (App.Device.getManufacture().equals("motorola")) {
             String[] unifiedMsm8960 = {"moto_msm8960"};
             if (App.Device.getBOARD().equals("msm8960")) {
@@ -490,33 +462,33 @@ public class FlashFragment extends Fragment {
             }
         }
 
-        for (String i : DevName) {
-            if (i.contains("att")) {
-                DevNamesCarriers.add(i + " (AT&T Mobility)");
-            } else if (i.contains("can")) {
-                DevNamesCarriers.add(i + " (Canada)");
-            } else if (i.contains("cri")) {
-                DevNamesCarriers.add(i + " (Cricket Wireless)");
-            } else if (i.contains("csp")) {
-                DevNamesCarriers.add(i + " (C Spire Wireless)");
-            } else if (i.contains("mtr")) {
-                DevNamesCarriers.add(i + " (MetroPCS)");
-            } else if (i.contains("spr")) {
-                DevNamesCarriers.add(i + " (Sprint Corporation)");
-            } else if (i.contains("tmo")) {
-                DevNamesCarriers.add(i + " (T-Mobile US)");
-            } else if (i.contains("usc")) {
-                DevNamesCarriers.add(i + " (U.S. Cellular)");
-            } else if (i.contains("vzw")) {
-                DevNamesCarriers.add(i + " (Verizon Wireless)");
-            } else if (i.contains("xx")) {
-                DevNamesCarriers.add(i + " (International)");
-            } else if (i.contains("ged")) {
-                DevNamesCarriers.add(i + " (Google Play Edition)");
-            } else if (i.contains("dt")) {
-                DevNamesCarriers.add(i + " (India)");
+        for (String device : DevName) {
+            if (device.contains("att")) {
+                DevNamesCarriers.add(device + " (AT&T Mobility)");
+            } else if (device.contains("can")) {
+                DevNamesCarriers.add(device + " (Canada)");
+            } else if (device.contains("cri")) {
+                DevNamesCarriers.add(device + " (Cricket Wireless)");
+            } else if (device.contains("csp")) {
+                DevNamesCarriers.add(device + " (C Spire Wireless)");
+            } else if (device.contains("mtr")) {
+                DevNamesCarriers.add(device + " (MetroPCS)");
+            } else if (device.contains("spr")) {
+                DevNamesCarriers.add(device + " (Sprint Corporation)");
+            } else if (device.contains("tmo")) {
+                DevNamesCarriers.add(device + " (T-Mobile US)");
+            } else if (device.contains("usc")) {
+                DevNamesCarriers.add(device + " (U.S. Cellular)");
+            } else if (device.contains("vzw")) {
+                DevNamesCarriers.add(device + " (Verizon Wireless)");
+            } else if (device.contains("xx")) {
+                DevNamesCarriers.add(device + " (International)");
+            } else if (device.contains("ged")) {
+                DevNamesCarriers.add(device + " (Google Play Edition)");
+            } else if (device.contains("dt")) {
+                DevNamesCarriers.add(device + " (India)");
             } else {
-                DevNamesCarriers.add(i + " (Unified)");
+                DevNamesCarriers.add(device + " (Unified)");
             }
         }
         if (DevName.size() > 0) {
@@ -535,7 +507,7 @@ public class FlashFragment extends Fragment {
     }
 
     /**
-     * addRecoveryCards checks which recovery systems are supported by your device for example:
+     * setupCards checks which recovery systems are supported by your device for example:
      * Galaxy S6 (SM-G920F) supports TWRP but isn't supported by CWM so addRecoveryCards will add
      * TWRP Card and Recovery From Storage card.
      */
@@ -609,23 +581,6 @@ public class FlashFragment extends Fragment {
                 }
             });
         }
-        if (!App.Device.isCmRecoverySupported() && !BuildConfig.DEBUG) {
-            mRashrCards.removeView(mCMCard);
-        } else {
-            mCMCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(RecoverySystemFragment.PARAM_TITLE, mCMCard.getData());
-                    bundle.putString(RecoverySystemFragment.PARAM_DEV, getString(R.string.dev_name_cm));
-                    bundle.putString(RecoverySystemFragment.PARAM_DESC, getString(R.string.cm_recovery_description));
-                    bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, App.Device.getCmRecoveriyVersions());
-                    bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_cm);
-                    bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, App.PathToCM.toString());
-                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
-                }
-            });
-        }
         if (!App.Device.isStockRecoverySupported() && !BuildConfig.DEBUG) {
             mRashrCards.removeView(mStockRecoveryCard);
         } else {
@@ -639,7 +594,7 @@ public class FlashFragment extends Fragment {
                     bundle.putStringArrayList(RecoverySystemFragment.PARAM_VERSIONS, App.Device.getStockRecoveryVersions());
                     bundle.putInt(RecoverySystemFragment.PARAM_LOGO, R.drawable.ic_update);
                     bundle.putString(RecoverySystemFragment.PARAM_IMG_PATH, App.PathToStockRecovery.toString());
-                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle));
+                    mActivity.switchTo(RecoverySystemFragment.newInstance(bundle), true);
                 }
             });
         }
@@ -791,8 +746,7 @@ public class FlashFragment extends Fragment {
                                     + App.Device.getCwmRecoveryVersions().size()
                                     + App.Device.getTwrpRecoveryVersions().size()
                                     + App.Device.getPhilzRecoveryVersions().size()
-                                    + App.Device.getStockKernelVersions().size()
-                                    + App.Device.getCmRecoveriyVersions().size();
+                                    + App.Device.getStockKernelVersions().size();
                             final URL recoveryURL;
                             final URL kernelURL;
                             try {
@@ -823,7 +777,7 @@ public class FlashFragment extends Fragment {
                                                     + App.Device.getTwrpRecoveryVersions().size()
                                                     + App.Device.getPhilzRecoveryVersions().size()
                                                     + App.Device.getStockKernelVersions().size())
-                                                    + App.Device.getCmRecoveriyVersions().size() - img_count;
+                                                    - img_count;
                                             mActivity.runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
