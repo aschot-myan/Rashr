@@ -45,7 +45,6 @@ public class Device {
     public static final String REC_SYS_TWRP = "twrp";
     public static final String REC_SYS_PHILZ = "philz";
     public static final String REC_SYS_XZDUAL = "xzdual";
-    public static final String REC_SYS_CM = "cm";
     public static final String REC_SYS_STOCK = "stock";
     public static final String KER_SYS_STOCK = "stock";
     public static final int PARTITION_TYPE_DD = 1;
@@ -56,11 +55,11 @@ public class Device {
     /*
      * Collection of known Recovery Partitions on some devices
      */
-    private final String[] RecoveryName = {
+    private transient final String[] RecoveryNames = {
             "recovery", "RECOVERY", "SOS", "USP", "SS", "UP", "nandg", "acta",
             "Recovery", "FOTAKernel"
     };
-    private final File[] RecoveryList = {
+    private transient final File[] RecoveryList = {
             new File("/dev/block/by-name/recovery"),
             new File("/dev/block/nandg"),
             new File("/dev/recovery")
@@ -68,13 +67,22 @@ public class Device {
     /*
      * Collection of known Kernel Partitions on some devices
      */
-    private final String[] KernelName = {
+    private transient final String[] KernelNames = {
             "boot", "KERNEL", "LNX", "BOOT", "Kernel", "nandc"
     };
-    private final File[] KernelList = {
+    private transient final File[] KernelList = {
             new File("/dev/block/by-name/boot"),
             new File("/dev/block/nandc"),
             new File("/dev/boot")
+    };
+
+    private final static String[] UnifiedDevices = {
+            "d2lte",
+            "htle",
+            "jflte",
+            "moto_msm8960",
+            "trlte",
+            "herolte"
     };
     private final String mManufacture = Build.MANUFACTURER.toLowerCase();
     private final String mBoard = Build.BOARD.toLowerCase();
@@ -86,22 +94,24 @@ public class Device {
      * What kind of partition and where is the recovery partition in the
      * FileSystem an how to flash
      */
-    private int mRecoveryType = PARTITION_TYPE_NOT_SUPPORTED;
-    private int mRecoveryBlocksize = 0;
-    private int mKernelType = PARTITION_TYPE_NOT_SUPPORTED;
-    private int mKernelBlocksize = 0;
-    private String mName = App.Preferences.getString(App.PREF_KEY_DEVICE_NAME, Build.DEVICE.toLowerCase());
-    private String mXZName = "";
+    private int mRecoveryType = App.Preferences.getInt(App.PREF_KEY_RECOVERY_TYPE,
+            PARTITION_TYPE_NOT_SUPPORTED);
+    private int mRecoveryBlockSize = App.Preferences.getInt(App.PREF_KEY_RECOVERY_BLOCK_SIZE, 0);
+    private int mKernelType = App.Preferences.getInt(App.PREF_KEY_KERNEL_TYPE,
+            PARTITION_TYPE_NOT_SUPPORTED);
+    private int mKernelBlockSize = App.Preferences.getInt(App.PREF_KEY_KERNEL_BLOCK_SIZE, 0);
+    private String mName = App.Preferences.getString(App.PREF_KEY_DEVICE_NAME, "");
+    private String mXZName = App.Preferences.getString(App.PREF_KEY_XZDUAL_NAME, "");
     private String mRecoveryPath = App.Preferences.getString(App.PREF_KEY_RECOVERY_PATH, "");
     private String mRecoveryVersion = RECOVERY_VERSION_NOT_RECONGNIZED;
     private String mKernelPath = App.Preferences.getString(App.PREF_KEY_KERNEL_PATH, "");
-    private String mRecoveryExt = EXT_IMG;
-    private String mKernelExt = EXT_IMG;
+    private String mRecoveryExt = App.Preferences.getString(App.PREF_KEY_RECOVERY_EXT, EXT_IMG);
+    private String mKernelExt = App.Preferences.getString(App.PREF_KEY_KERNEL_EXT, EXT_IMG);
     private ArrayList<String> mStockRecoveries = new ArrayList<>();
     private ArrayList<String> mTwrpRecoveries = new ArrayList<>();
     private ArrayList<String> mCwmRecoveries = new ArrayList<>();
     private ArrayList<String> mPhilzRecoveries = new ArrayList<>();
-    private ArrayList<String> mCmRecoveries = new ArrayList<>();
+    //private ArrayList<String> mCmRecoveries = new ArrayList<>();
     private ArrayList<String> mStockKernel = new ArrayList<>();
     private ArrayList<String> mXZDualRecoveries = new ArrayList<>();
 
@@ -109,25 +119,41 @@ public class Device {
     private File dump_image = new File("/system/bin", "dump_image");
 
     public void setup() {
-        setPredefinedOptions();
+        if (isSetup) return;
+        if (App.isVersionChanged || !isRecoverySupported() || !isKernelSupported()) {
+            //Version changed so it could be there are bugfixes
+            //so we check again
+            //if recovery is not supported or kernel not supported rashr should check the device
+            //again
+
+            //device name cached already ? or new name setting routines ?
+            if (mName.equals("") || App.isVersionChanged) {
+                correctDeviceName();
+            }
+            if (isRecoveryDD()) {
+                mRecoveryBlockSize = getBlockSizeOf(mRecoveryPath);
+            }
+            if (isKernelDD()) {
+                mKernelBlockSize = getBlockSizeOf(mKernelPath);
+            }
+        }
         loadRecoveryList();
         loadKernelList();
-        if (isRecoveryDD()) {
-            mRecoveryBlocksize = getBlockSizeOf(mRecoveryPath);
-        }
-        if (isKernelDD()) {
-            mKernelBlocksize = getBlockSizeOf(mKernelPath);
-        }
+
         isSetup = true;
         App.Preferences.edit().putString(App.PREF_KEY_DEVICE_NAME, mName).apply();
         App.Preferences.edit().putString(App.PREF_KEY_RECOVERY_PATH, mRecoveryPath).apply();
         App.Preferences.edit().putString(App.PREF_KEY_KERNEL_PATH, mKernelPath).apply();
+        App.Preferences.edit().putInt(App.PREF_KEY_RECOVERY_BLOCK_SIZE, mRecoveryBlockSize).apply();
+        App.Preferences.edit().putInt(App.PREF_KEY_KERNEL_BLOCK_SIZE, mKernelBlockSize).apply();
+        App.Preferences.edit().putString(App.PREF_KEY_XZDUAL_NAME, mXZName).apply();
+        App.Preferences.edit().putInt(App.PREF_KEY_RECOVERY_TYPE, mRecoveryType).apply();
+        App.Preferences.edit().putInt(App.PREF_KEY_KERNEL_TYPE, mKernelType).apply();
     }
 
-    private void setPredefinedOptions() {
+    private void correctDeviceName() {
 
         String MODEL = Build.MODEL.toLowerCase();
-
         /* Set Name and predefined options */
 //      Unified Motorola CM Build
         if (mManufacture.equals("motorola") && mBoard.equals("msm8960")) mName = "moto_msm8960";
@@ -273,11 +299,6 @@ public class Device {
 
         if (mBoard.equals("gee") && mManufacture.equals("lge")) mName = "geeb";
 
-//		Sony Xperia Z (C6603)
-        //if (mName.equals("c6603")) mName = "yuga";
-//
-        //if (mName.equals("c6603") || mName.equals("c6602")) mRecoveryExt = EXT_TAR;
-
 //      HTC Desire HD
         if (mBoard.equals("ace")) mName = "ace";
 
@@ -317,18 +338,6 @@ public class Device {
 
 //      LG Optimus X2
         if (mName.equals("star")) mName = "p990";
-
-        if (mName.equals("droid2") || mName.equals("daytona") || mName.equals("captivate")
-                || mName.equals("galaxys") || mName.equals("droid2we")) {
-            mRecoveryType = PARTITION_TYPE_RECOVERY;
-            mRecoveryExt = EXT_ZIP;
-        }
-
-        if (mManufacture.equals("xiaomi") && mName.equals("libra")) {
-            mKernelPath = "/dev/block/mmcblk0p37";
-            mRecoveryPath = "/dev/block/mmcblk0p38";
-            mKernelType = mRecoveryType = PARTITION_TYPE_DD;
-        }
 
 //      XZDualRecovery
         if (mManufacture.equals("sony")) {
@@ -406,6 +415,12 @@ public class Device {
             }
         }
 
+        if (mManufacture.equals("xiaomi") && mName.equals("libra")) {
+            mKernelPath = "/dev/block/mmcblk0p37";
+            mRecoveryPath = "/dev/block/mmcblk0p38";
+            mKernelType = mRecoveryType = PARTITION_TYPE_DD;
+        }
+
         //Lenovo A7010
         if (mName.equals("a7010a48")) {
             mRecoveryPath = "/dev/block/mmcblk0p8";
@@ -417,8 +432,11 @@ public class Device {
             mRecoveryType = PARTITION_TYPE_DD;
         }
 
-//		Devices who kernel will be flashed to
-        //if (mName.equals("c6602") || mName.equals("yuga")) mRecoveryType = PARTITION_TYPE_SONY;
+        if (mName.equals("droid2") || mName.equals("daytona") || mName.equals("captivate")
+                || mName.equals("galaxys") || mName.equals("droid2we")) {
+            mRecoveryType = PARTITION_TYPE_RECOVERY;
+            mRecoveryExt = EXT_ZIP;
+        }
 
         if (new File("/dev/mtd/").exists()) {
             if (!isRecoveryDD()) {
@@ -456,8 +474,7 @@ public class Device {
         //TempArrayLists
         ArrayList<String> CWMList = new ArrayList<>(), TWRPList = new ArrayList<>(),
                 PHILZList = new ArrayList<>(), StockList = new ArrayList<>(),
-                XZDualList = new ArrayList<>(), CMList = new ArrayList<>();
-
+                XZDualList = new ArrayList<>();
         //Start reading file
         try {
             String Line;
@@ -470,6 +487,7 @@ public class Device {
                     if (lowLine.contains(mName.toLowerCase())
                             || lowLine.contains(Build.DEVICE.toLowerCase())) {
                         if (lowLine.contains(REC_SYS_STOCK)) {
+                            System.out.println(Line);
                             StockList.add(Line.substring(NameStartAt));
                         } else if (lowLine.contains("clockwork") || lowLine.contains(REC_SYS_CWM)) {
                             CWMList.add(Line.substring(NameStartAt));
@@ -478,8 +496,6 @@ public class Device {
                                 TWRPList.add(Line.split(" ")[1]);
                         } else if (lowLine.contains(REC_SYS_PHILZ)) {
                             PHILZList.add(Line.substring(NameStartAt));
-                        } else if (lowLine.contains("cm-")) {
-                            CMList.add(Line.split(" ")[1]);
                         }
                     }
                 }
@@ -497,7 +513,6 @@ public class Device {
             Collections.sort(TWRPList);
             Collections.sort(PHILZList);
             Collections.sort(XZDualList);
-            Collections.sort(CMList);
 
             /*
              * First clear list before adding items (to avoid double entry on reload by update)
@@ -507,7 +522,6 @@ public class Device {
             mTwrpRecoveries.clear();
             mPhilzRecoveries.clear();
             mXZDualRecoveries.clear();
-            mCmRecoveries.clear();
 
             /* Sort newest version to first place */
             for (Object i : StockList) {
@@ -525,9 +539,9 @@ public class Device {
             for (Object i : XZDualList) {
                 mXZDualRecoveries.add(0, i.toString());
             }
-            for (Object i : CMList) {
-                mCmRecoveries.add(0, i.toString());
-            }
+            //for (Object i : CMList) {
+            //    mCmRecoveries.add(0, i.toString());
+            //}
 
         } catch (IOException e) {
             App.ERRORS.add(App.TAG + " Could not read Recovery List: " + e);
@@ -547,7 +561,7 @@ public class Device {
         try {
             String Line;
             BufferedReader br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(new File(App.FilesDir, App.KERNEL_SUMS))));
+                    new FileInputStream(App.KernelCollectionFile)));
             while ((Line = br.readLine()) != null) {
                 String lowLine = Line.toLowerCase();
                 final int NameStartAt = Line.lastIndexOf("/") + 1;
@@ -578,49 +592,42 @@ public class Device {
     }
 
     private String findPartition(String[] names) {
-        String result = "";
         for (String name : names) {
-            if (result.equals("")) {
-                /*
-                 * Partition doesn't exist LOLLIPOP (File.exists() returns always
-                 * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
-                 * Check over RootShell (if throws exception partition not found check next
-                 */
-                try {
-                    result = App.Shell.execCommand("ls /dev/block/platform/*/by-name/"
-                            + name, true, false);
-                    break;
-                } catch (FailedExecuteCommand ignore) {
-                }
+            /*
+             * Partition doesn't exist LOLLIPOP (File.exists() returns always
+             * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
+             * Check over RootShell (if throws exception partition not found check next
+             */
+            try {
+                return App.Shell.execCommand("ls /dev/block/platform/*/by-name/"+ name, true, false)
+                        .replace("\n", "").replace(" ", "");
+            } catch (FailedExecuteCommand ignore) {
             }
         }
-        return result;
+        return "";
     }
 
     private String findPartition(File[] names) {
-        String result = "";
         for (File name : names) {
-            if (result.equals("")) {
-                /*
-                 * Partition doesn't exist LOLLIPOP (File.exists() returns always
-                 * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
-                 * Check over RootShell (if throws exception partition not found check next
-                 */
-                try {
-                    result = App.Shell.execCommand("ls " + name, true, false);
-                    break;
-                } catch (FailedExecuteCommand ignore) {
-                }
+            /*
+             * Partition doesn't exist LOLLIPOP (File.exists() returns always
+             * false if file is in hidden FS. Lollipop marks /dev/.... as hidden)
+             * Check over RootShell (if throws exception partition not found check next
+             */
+            try {
+                return App.Shell.execCommand("ls " + name, true, false).replace("\n", "")
+                        .replace(" ", "");
+            } catch (FailedExecuteCommand ignore) {
             }
         }
-        return result;
+        return "";
     }
 
     private void readDeviceInfos() {
         //if partition is not set (from settings or cached in settings)
         if (mKernelPath.equals("")) {
             // try to find
-            mKernelPath = findPartition(KernelName);
+            mKernelPath = findPartition(KernelNames);
             if (mKernelPath.equals("")) {
                 //not found try with other list
                 mKernelPath = findPartition(KernelList);
@@ -628,7 +635,7 @@ public class Device {
         }
         //EQ as kernel
         if (mRecoveryPath.equals("")) {
-            mRecoveryPath = findPartition(RecoveryName);
+            mRecoveryPath = findPartition(RecoveryNames);
             if (mRecoveryPath.equals("")) {
                 mRecoveryPath = findPartition(RecoveryList);
             }
@@ -637,7 +644,11 @@ public class Device {
         if (mRecoveryPath.equals("") || mKernelPath.equals("")
                 || mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
             if (RashrActivity.LastLogExists) {
-                readLastLog();
+                try {
+                    readLastLog();
+                } catch (IOException e) {
+                    App.ERRORS.add(App.TAG + " Could not read LastLog.txt: " + e);
+                }
             }
         }
 
@@ -843,9 +854,9 @@ public class Device {
         return mPhilzRecoveries.size() > 0 && isRecoverySupported();
     }
 
-    public boolean isCmRecoverySupported() {
-        return mCmRecoveries.size() > 0 && isRecoverySupported();
-    }
+    //public boolean isCmRecoverySupported() {
+    //    return mCmRecoveries.size() > 0 && isRecoverySupported();
+    //}
 
     public boolean isStockKernelSupported() {
         return mStockKernel.size() > 0 && isKernelSupported();
@@ -931,10 +942,6 @@ public class Device {
         return mXZDualRecoveries;
     }
 
-    public ArrayList<String> getCmRecoveriyVersions() {
-        return mCmRecoveries;
-    }
-
     public String getRecoveryVersion() {
         return mRecoveryVersion;
     }
@@ -976,9 +983,8 @@ public class Device {
      * Using the lastLogs we can find out which recovery system and version the user has
      * installed and the used boot (kernel partition) and recovery (recovery partition) paths.
      */
-    private void readLastLog() {
+    private void readLastLog() throws IOException {
 
-        try {
             String line;
             File LogCopy = new File(App.FilesDir, App.LastLog.getName() + ".txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(LogCopy)));
@@ -1023,6 +1029,7 @@ public class Device {
                             for (String split : line.split(" ")) {
                                 if (split.startsWith("/dev")) {
                                     try {
+                                        //path exists in filesystem? (checking over LS /dev is hidden)
                                         App.Shell.execCommand("ls " + split, true, false);
                                         mKernelPath = split;
                                         break;
@@ -1067,9 +1074,6 @@ public class Device {
                 }
             }
             br.close();
-        } catch (Exception e) {
-            App.ERRORS.add(App.TAG + " Could not read LastLog.txt: " + e);
-        }
         /*
         if (mRecoveryVersion.equals(RECOVERY_VERSION_NOT_RECONGNIZED)) {
             try {
@@ -1136,9 +1140,12 @@ public class Device {
     }
 
     public boolean isUnified() {
-        return mName.startsWith("d2lte") || mName.startsWith("hlte")
-                || mName.startsWith("jflte") || mName.equals("moto_msm8960")
-                || mName.startsWith("trlte") || mName.startsWith("herolte");
+        for (String device : UnifiedDevices) {
+            if (mName.startsWith(device)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -1149,11 +1156,11 @@ public class Device {
     }
 
     public int getRecoveryBlocksize() {
-        return mRecoveryBlocksize;
+        return mRecoveryBlockSize;
     }
 
     public int getKernelBlocksize() {
-        return mKernelBlocksize;
+        return mKernelBlockSize;
     }
 
     public String getXZDualName() {
@@ -1182,7 +1189,7 @@ public class Device {
 
     /**
      * @param partitionPath path of the partition
-     * @return blocksize of partitionPath 0 if failed
+     * @return block size of partitionPath 0 if failed
      */
     private int getBlockSizeOf(String partitionPath) {
         try {
