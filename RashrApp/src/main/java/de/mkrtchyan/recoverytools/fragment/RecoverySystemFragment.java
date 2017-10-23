@@ -268,22 +268,11 @@ public class RecoverySystemFragment extends Fragment {
                 case Device.REC_SYS_STOCK:
                     /*
                      * Finding better name for example:
-                     *      stock-recovery-hammerhead-6.0.1.img -> Stock Recovery 6.0.1 (hammerhead)
+                     *      stock-recovery-angler-7.0.0_nov2016_nbd91k.img -> Stock Recovery 7.0.0 NOV2016 NBD91K (angler)
                      */
-                    String sversion = fileName.split("-")[3].replace(App.Device.getRecoveryExt(), "");
+                    String sversion = fileName.split("-")[3].replace(App.Device.getRecoveryExt(), "").replace("_", " ").toUpperCase();
                     String deviceName = fileName.split("-")[2];
                     return "Stock Recovery " + sversion + " (" + deviceName + ")";
-                case Device.REC_SYS_CM:
-                    /*
-                     * Finding better name for example:
-                     *      cm-13-20160224-NIGHTLY-hammerhead ->
-                     *              CyanogenMod Recovery 13 nightly 20160224 (hammerhead)
-                     */
-                    String cmVersion = fileName.split("-")[1];
-                    String date = fileName.split("-")[2];
-                    String build = fileName.split("-")[3];
-                    deviceName = fileName.split("-")[4];
-                    return "CyanogenMod Recovery " + cmVersion + " " + build + " " + date + " (" + deviceName + ")";
             }
         } catch (ArrayIndexOutOfBoundsException ignore) {
         }
@@ -341,7 +330,7 @@ public class RecoverySystemFragment extends Fragment {
             }
         }
         String fileName = "";
-        if (system.equals(Device.REC_SYS_CM) || system.equals(Device.REC_SYS_TWRP)) {
+        if (system.equals(Device.REC_SYS_TWRP)) {
             fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
         }
         final File recovery = new File(mImagePath, fileName);
