@@ -326,7 +326,10 @@ public class FlashFragment extends Fragment {
                                 }
                             });
                         } else if (e instanceof FlashUtil.ImageToBigException) {
-                            d.setMessage(String.format(getString(R.string.image_to_big_message), ((FlashUtil.ImageToBigException) e).getCustomSize() / (1024 * 1024), ((FlashUtil.ImageToBigException) e).getPartitionSize() / (1024 * 1024)));
+                            //Size in MB
+                            int sizeOfImage = ((FlashUtil.ImageToBigException) e).getCustomSize() / (1024 * 1024);
+                            int sizeOfPart = ((FlashUtil.ImageToBigException) e).getPartitionSize() / (1024 * 1024);
+                            d.setMessage(String.format(getString(R.string.image_to_big_message), sizeOfImage, sizeOfPart));
                             d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -396,8 +399,8 @@ public class FlashFragment extends Fragment {
         ArrayList<String> DevNamesCarriers = new ArrayList<>();
 
         UnifiedBuildsDialog.setContentView(R.layout.dialog_unified_build);
-        ListView UnifiedList = (ListView) UnifiedBuildsDialog.findViewById(R.id.lvUnifiedList);
-        AppCompatButton KeepCurrent = (AppCompatButton) UnifiedBuildsDialog.findViewById(R.id.bKeepCurrent);
+        ListView UnifiedList = UnifiedBuildsDialog.findViewById(R.id.lvUnifiedList);
+        AppCompatButton KeepCurrent = UnifiedBuildsDialog.findViewById(R.id.bKeepCurrent);
         ArrayAdapter<String> UnifiedAdapter = new ArrayAdapter<>(mContext,
                 android.R.layout.simple_list_item_1, DevNamesCarriers);
         if (UnifiedList != null) {

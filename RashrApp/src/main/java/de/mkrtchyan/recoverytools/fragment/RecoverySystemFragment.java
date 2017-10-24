@@ -50,14 +50,6 @@ public class RecoverySystemFragment extends Fragment {
     public final static String PARAM_IMG_PATH = "img_path";
     public final static String PARAM_LOGO = "logo";
     public final static String PARAM_VERSIONS = "versions";
-    private String mTitle, mDesc, mDev, mScreenshotURL, mImagePath;
-    private int mLogo;
-    private ArrayList<String> mVersions;
-    private Context mContext;
-    private RashrActivity mActivity;
-
-
-
     @BindView(R.id.tvSysName)
     AppCompatTextView tvTitle;
     @BindView(R.id.tvRecSysDesc)
@@ -72,6 +64,11 @@ public class RecoverySystemFragment extends Fragment {
     AppCompatImageView imLogo;
     @BindView(R.id.tvDevName)
     AppCompatTextView tvDev;
+    private String mTitle, mDesc, mDev, mScreenshotURL, mImagePath;
+    private int mLogo;
+    private ArrayList<String> mVersions;
+    private Context mContext;
+    private RashrActivity mActivity;
 
 
     public RecoverySystemFragment() {
@@ -172,7 +169,7 @@ public class RecoverySystemFragment extends Fragment {
 
                                 //All others are filenames of screenshots
                                 AppCompatImageView iv = (AppCompatImageView)
-                                        inflater.inflate(R.layout.recovery_screenshot, null);
+                                        inflater.inflate(R.layout.recovery_screenshot, ScreenshotLayout, false);
                                 ScreenshotLayout.addView(iv);
                                 Picasso picasso = Picasso.with(mContext);
                                 picasso.setLoggingEnabled(BuildConfig.DEBUG);
@@ -413,7 +410,10 @@ public class RecoverySystemFragment extends Fragment {
                                     }
                                 });
                             } else if (e instanceof FlashUtil.ImageToBigException) {
-                                d.setMessage(String.format(getString(R.string.image_to_big_message), ((FlashUtil.ImageToBigException) e).getCustomSize() / (1024 * 1024), ((FlashUtil.ImageToBigException) e).getPartitionSize() / (1024 * 1024)));
+                                //Size in MB
+                                int sizeOfImage = ((FlashUtil.ImageToBigException) e).getCustomSize() / (1024 * 1024);
+                                int sizeOfPart = ((FlashUtil.ImageToBigException) e).getPartitionSize() / (1024 * 1024);
+                                d.setMessage(String.format(getString(R.string.image_to_big_message), sizeOfImage, sizeOfPart));
                                 d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

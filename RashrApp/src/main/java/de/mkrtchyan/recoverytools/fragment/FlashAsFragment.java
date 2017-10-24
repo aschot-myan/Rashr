@@ -42,15 +42,15 @@ import de.mkrtchyan.recoverytools.RashrActivity;
  */
 public class FlashAsFragment extends Fragment {
 
-    private Context mContext;
-    private File mImg;
-    private RashrActivity mActivity;
     @BindView(R.id.optAsKernel)
     AppCompatRadioButton mOptAsKernel;
     @BindView(R.id.optAsRecovery)
     AppCompatRadioButton mOptAsRecovery;
     @BindView(R.id.bFlashAs)
     AppCompatButton mButFlashAs;
+    private Context mContext;
+    private File mImg;
+    private RashrActivity mActivity;
 
     public FlashAsFragment() {
         // Required empty public constructor
@@ -123,7 +123,11 @@ public class FlashAsFragment extends Fragment {
                                     }
                                 });
                             } else if (e instanceof FlashUtil.ImageToBigException) {
-                                d.setMessage(String.format(getString(R.string.image_to_big_message), ((FlashUtil.ImageToBigException) e).getCustomSize() / (1024 * 1024), ((FlashUtil.ImageToBigException) e).getPartitionSize() / (1024 * 1024)));
+                                FlashUtil.ImageToBigException exception = (FlashUtil.ImageToBigException) e;
+                                //Size in MB
+                                int sizeOfImage = exception.getCustomSize() / (1024 * 1024);
+                                int sizeOfPart = exception.getPartitionSize() / (1024 * 1024);
+                                d.setMessage(String.format(getString(R.string.image_to_big_message), sizeOfImage, sizeOfPart));
                                 d.setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

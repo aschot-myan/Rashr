@@ -73,8 +73,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if (v == null) return true;
                 if (!newValue.toString().equals("")) {
                     Snackbar.make(v, R.string.please_restart, Snackbar.LENGTH_INDEFINITE).show();
-                } else {
-                    Snackbar.make(v, R.string.please_restart, Snackbar.LENGTH_INDEFINITE).show();
                 }
                 return true;
             }
@@ -120,7 +118,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 PreferenceManager.setDefaultValues(getActivity(), R.xml.preferences, true);
-                return false;
+                return true;
             }
         });
         Preference clearCache = findPreference(App.PREF_KEY_CLEAR_CACHE);

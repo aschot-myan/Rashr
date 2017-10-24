@@ -45,7 +45,6 @@ import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.mkrtchyan.recoverytools.fragment.BackupRestoreFragment;
 import de.mkrtchyan.recoverytools.fragment.FlashAsFragment;
 import de.mkrtchyan.recoverytools.fragment.FlashFragment;
 import de.mkrtchyan.recoverytools.fragment.InformationFragment;
@@ -77,9 +76,6 @@ import de.mkrtchyan.utils.Downloader;
 public class RashrActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //Read out settings if theme is dark
-    public static boolean FirstSession = true;
-    static boolean LastLogExists = false;
     private final static File Folder[] = {
             App.PathToRashr, App.PathToRecoveries, App.PathToKernel,
             App.PathToStockRecovery, App.PathToCWM, App.PathToTWRP,
@@ -87,6 +83,9 @@ public class RashrActivity extends AppCompatActivity
             App.PathToStockKernel, App.PathToRecoveryBackups, App.PathToKernelBackups,
             App.PathToUtils, App.PathToTmp
     };
+    //Read out settings if theme is dark
+    public static boolean FirstSession = true;
+    static boolean LastLogExists = false;
     private final RashrActivity mActivity = this;
     private final Context mContext = this;
     /* Declaring needed objects */
@@ -108,7 +107,7 @@ public class RashrActivity extends AppCompatActivity
             return;
         }
 
-        final TextView tvLoading = (TextView) findViewById(R.id.tvLoading);
+        final TextView tvLoading = findViewById(R.id.tvLoading);
         tvLoading.setText(R.string.requesting_permissions);
 
         ActivityCompat.requestPermissions(this, App.PERMISSIONS, 0);
@@ -126,7 +125,7 @@ public class RashrActivity extends AppCompatActivity
         WarningDialog.setPositiveButton(R.string.backup, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                switchTo(BackupRestoreFragment.newInstance());
+                startActivity(new Intent(mContext, BackupActivity.class));
                 App.Preferences.edit().putBoolean(App.PREF_KEY_FIRST_RUN, false).apply();
             }
         });
@@ -355,7 +354,7 @@ public class RashrActivity extends AppCompatActivity
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
-            final TextView tvLoading = (TextView) findViewById(R.id.tvLoading);
+            final TextView tvLoading = findViewById(R.id.tvLoading);
             final Thread StartThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -449,7 +448,7 @@ public class RashrActivity extends AppCompatActivity
                                 ButterKnife.bind(mActivity);
                                 mRoot.startAnimation(AnimationUtils.loadAnimation(mContext,
                                         R.anim.abc_fade_in));
-                                mToolbar = (Toolbar) findViewById(R.id.toolbar);
+                                mToolbar = findViewById(R.id.toolbar);
                                 setSupportActionBar(mToolbar);
                                 ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActivity, mRoot, mToolbar,
                                         R.string.app_name, R.string.app_name);
@@ -493,7 +492,7 @@ public class RashrActivity extends AppCompatActivity
                             } catch (NullPointerException e) {
                                 setContentView(R.layout.err_layout);
                                 App.ERRORS.add("Error while inflating layout:" + e);
-                                AppCompatTextView tv = (AppCompatTextView) findViewById(R.id.tvErr);
+                                AppCompatTextView tv = findViewById(R.id.tvErr);
                                 try {
                                     if (tv != null) {
                                         tv.setText(R.string.failed_setup_layout);
@@ -516,7 +515,7 @@ public class RashrActivity extends AppCompatActivity
         } else {
             //Permission not garanted
             setContentView(R.layout.err_layout);
-            AppCompatTextView tverr = (AppCompatTextView) findViewById(R.id.tvErr);
+            AppCompatTextView tverr = findViewById(R.id.tvErr);
             tverr.setText(R.string.permissions_denied);
         }
 
@@ -563,7 +562,6 @@ public class RashrActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.BackupItem:
                 startActivity(new Intent(this, BackupActivity.class));
-                mActivity.switchTo(BackupRestoreFragment.newInstance(), true);
                 break;
         }
         return false;
