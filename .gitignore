@@ -23,3 +23,4 @@ $RECYCLE.BIN/
 *.lnk
 local.properties
 *.iml
+.idea/workspace.xml
