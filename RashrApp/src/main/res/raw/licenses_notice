@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <notices>
     <notice>
-        <name>RootCommands</name>
+        <name>RootCommands (Customized)</name>
         <url>https://github.com/Free-Software-for-Android/RootCommands</url>
         <copyright>Copyright (C) 2012 Dominik Schürmann dominik@dominikschuermann.de,
             Copyright (c) 2012 Stephen Erickson,
@@ -10,15 +10,21 @@
         <license>Apache Software License 2.0</license>
     </notice>
     <notice>
-        <name>CardsUI for Android</name>
-        <url>https://github.com/Androguide/cardsui-for-android</url>
-        <copyright/>
+        <name>Android Donations Lib (Customized)</name>
+        <url>https://github.com/SufficientlySecure/donations</url>
+        <copyright>Copyright (C) 2011-2015 Dominik Schürmann dominik@dominikschuermann.de</copyright>
         <license>Apache Software License 2.0</license>
     </notice>
     <notice>
-        <name>Android Donations Lib</name>
-        <url>https://github.com/SufficientlySecure/donations</url>
-        <copyright>Copyright (C) 2011-2015 Dominik Schürmann dominik@dominikschuermann.de</copyright>
+        <name>Picasso</name>
+        <url>https://square.github.io/picasso/</url>
+        <copyright>Copyright 2013 Square, Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>ButterKnife</name>
+        <url>https://jakewharton.github.io/butterknife/</url>
+        <copyright>Copyright 2013 Jake Wharton</copyright>
         <license>Apache Software License 2.0</license>
     </notice>
 </notices>

@@ -1,22 +1,23 @@
 apply plugin: 'com.android.library'
 dependencies {
-    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.android.support:support-v4:26.1.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.1'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 26
         versionCode 6
         versionName '2.4'
     }
 
     // Workaround until translation issues are fixed
     lintOptions {
-        abortOnError false
+        disable 'MissingTranslation'
     }
 
 }

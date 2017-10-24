@@ -1,7 +1,7 @@
 package de.mkrtchyan.utils;
 
 /*
-* Copyright (c) 2013 Ashot Mkrtchyan
+* Copyright (c) 2017 Ashot Mkrtchyan
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
@@ -21,9 +21,9 @@ package de.mkrtchyan.utils;
 * SOFTWARE.
 */
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -77,7 +77,7 @@ public class FileListView extends ListView {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
                 if (FileList.get(arg2).isDirectory()) {
-                    /**
+                    /*
                      * If picked item is a directory browse into the directory and reload the
                      * ListView
                      */

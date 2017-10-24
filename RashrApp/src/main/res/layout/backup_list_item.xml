@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backup_list_view"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/last_edit"
+            android:textColor="?attr/colorAccent"
+            android:textIsSelectable="false"
+            tools:text="Backup Name" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/file_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/last_edit"
+            android:layout_marginTop="8dp"
+            android:textColor="?attr/colorAccent"
+            android:textIsSelectable="false"
+            tools:text="2 MB" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/last_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textColor="?attr/colorAccent"
+            android:textIsSelectable="false"
+            tools:text="30.03.2017" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/file_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/file_size"
+            android:layout_marginRight="8dp"
+            tools:text="/sdcard/Rashr/recovery-backups"
+            android:textColor="?attr/colorAccent"
+            android:layout_toStartOf="@+id/file_size"
+            android:layout_toLeftOf="@+id/file_size" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

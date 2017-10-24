@@ -4,22 +4,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDialog;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Map;
 
-import de.mkrtchyan.utils.Common;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
- * Copyright (c) 2016 Aschot Mkrtchyan
+ * Copyright (c) 2017 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -40,145 +45,143 @@ import de.mkrtchyan.utils.Common;
  */
 public class ReportDialog extends AppCompatDialog {
 
-    public ReportDialog(final RashrActivity activity, String message) {
-        super(activity);
+    @BindView(R.id.etComment)
+    AppCompatEditText mText;
+    @BindView(R.id.bGo)
+    AppCompatButton mGo;
+
+    public ReportDialog(final Context context, @Nullable String message) {
+        super(context);
         setTitle(R.string.comment);
         setContentView(R.layout.dialog_comment);
-        final EditText text = (EditText) findViewById(R.id.etComment);
-        if (!message.equals(""))
-            if (text != null)
-                text.setText(message);
+        ButterKnife.bind(this);
+        if (message != null)
+            mText.setText(message);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                /** Creates a report Email including a Comment and important device infos */
-                final Button bGo = (Button) findViewById(R.id.bGo);
-                if (bGo != null) {
-                    bGo.setOnClickListener(new View.OnClickListener() {
+                /* Creates a report Email including a Comment and important device infos */
+                mGo.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
 
-                            if (!Common.getBooleanPref(activity, Const.PREF_NAME,
-                                    Const.PREF_KEY_ADS)) {
-                                Toast
-                                        .makeText(activity, R.string.please_ads, Toast.LENGTH_SHORT)
-                                        .show();
-                            } else {
-                                Toast
-                                        .makeText(activity, R.string.donate_to_support, Toast.LENGTH_SHORT)
-                                        .show();
+                        if (!App.Preferences.getBoolean(App.PREF_KEY_ADS, false)) {
+                            Toast
+                                    .makeText(getContext(), R.string.please_ads, Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            Toast
+                                    .makeText(getContext(), R.string.donate_to_support, Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+
+                        ArrayList<File> files = new ArrayList<>();
+                        File TestResults = new File(App.FilesDir, "results.txt");
+                        try {
+                            if (TestResults.exists()) {
+                                if (TestResults.delete()) {
+                                    FileOutputStream fos = context.openFileOutput(
+                                            TestResults.getName(), Context.MODE_PRIVATE);
+                                    fos.write(("Rashr:\n\n" + App.Shell
+                                            .execCommand("ls -lR " + App.PathToRashr) +
+                                            "\nCache Tree:\n" + App.Shell
+                                            .execCommand("ls -lR /cache") + "\n" +
+                                            "\nMTD result:\n" + App.Shell
+                                            .execCommand("cat /proc/mtd") + "\n" +
+                                            "\nDevice Tree:\n\n" + App.Shell
+                                            .execCommand("ls -lR /dev")).getBytes());
+                                }
+                                files.add(TestResults);
                             }
-                            try {
-                                ArrayList<File> files = new ArrayList<>();
-                                File TestResults = new File(activity.getFilesDir(), "results.txt");
+                        } catch (Exception e) {
+                            App.ERRORS.add(App.TAG + " Failed to list files: " + e);
+                        }
+
+                        String comment = mText.getText().toString();
+                        Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{App.DEV_EMAIL});
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + BuildConfig.VERSION_CODE + " report");
+                        String message = "Package Infos:" +
+                                "\n\nName: " + BuildConfig.APPLICATION_ID +
+                                "\nVersion Name: " + BuildConfig.VERSION_NAME;
+                        message += "\n\n\nManufacture: " + Build.MANUFACTURER + " (" + App.Device.getManufacture() + ") " +
+                                "\nDevice: " + Build.DEVICE + " (" + App.Device.getName() + ")" +
+                                "\nBoard: " + Build.BOARD +
+                                "\nBrand: " + Build.BRAND +
+                                "\nModel: " + Build.MODEL +
+                                "\nFingerprint: " + Build.FINGERPRINT +
+                                "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")\n\n" +
+                                new Gson().toJson(App.Device)
+                                        //formatting text
+                                        .replace("\",\"", "\",\n\"").replace("{\"", "\n\"")
+                                        .replace("\"}", "\"\n").replace(",\"", ",\n\"")
+                                        .replace("\n,\n", "").replace("\":\n", "\":")
+                                        .replace("\":\"", ": ").replace("\"\"", "\n")
+                                        .replace("\"", "").replace(" path: ", " ");
+
+                        if (!comment.equals("")) {
+                            message += "\n\n\n===========COMMENT==========\n"
+                                    + comment +
+                                    "\n=========COMMENT END========\n";
+                        }
+                        message += "\n===========PREFS==========\n"
+                                + getAllPrefs() +
+                                "\n=========PREFS END========\n";
+                        files.add(new File(context.getFilesDir(), App.AppLogs));
+                        files.add(new File(context.getFilesDir(), App.LastLog.getName() + ".txt"));
+                        ArrayList<Uri> uris = new ArrayList<>();
+                        for (File file : files) {
+                            if (file.exists()) {
                                 try {
-                                    if (TestResults.exists()) {
-                                        if (TestResults.delete()) {
-                                            FileOutputStream fos = activity.openFileOutput(
-                                                    TestResults.getName(), Context.MODE_PRIVATE);
-                                            fos.write(("Rashr:\n\n" + RashrApp.SHELL
-                                                    .execCommand("ls -lR " + Const.PathToRashr.getAbsolutePath()) +
-                                                    "\nCache Tree:\n" + RashrApp.SHELL
-                                                    .execCommand("ls -lR /cache") + "\n" +
-                                                    "\nMTD result:\n" + RashrApp.SHELL
-                                                    .execCommand("cat /proc/mtd") + "\n" +
-                                                    "\nDevice Tree:\n\n" + RashrApp.SHELL
-                                                    .execCommand("ls -lR /dev")).getBytes());
-                                        }
-                                        files.add(TestResults);
-                                    }
-                                } catch (Exception e) {
-                                    RashrApp.ERRORS.add(Const.RASHR_TAG + " Failed to list files: " + e);
+                                    App.Shell.execCommand(App.Busybox + " chmod 777 " + file);
+                                    File tmpFile = new File(App.PathToTmp, file.getName());
+                                    App.Shell.execCommand(App.Busybox + " cp " + file + " " + tmpFile);
+                                    App.Shell.execCommand(App.Busybox + " chmod 777 " + tmpFile);
+                                    App.Shell.execCommand(App.Busybox + " chown root:root " + tmpFile);
+                                    uris.add(Uri.fromFile(tmpFile));
+                                } catch (FailedExecuteCommand e) {
+                                    App.ERRORS.add("Failed setting permissions to Attachment: " + e);
+                                    e.printStackTrace();
                                 }
-                                String comment = "";
-                                if (text != null) comment = text.getText().toString();
-                                Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                                intent.setType("text/plain");
-                                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ashotmkrtchyan1995@gmail.com"});
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Rashr " + BuildConfig.VERSION_CODE + " report");
-                                String message = "Package Infos:" +
-                                        "\n\nName: " + BuildConfig.APPLICATION_ID +
-                                        "\nVersion Name: " + BuildConfig.VERSION_NAME;
-                                message +=
-                                        "\n\n\nProduct Info: " +
-                                                "\n\nManufacture: " + Build.MANUFACTURER + " (" + RashrApp.DEVICE.getManufacture() + ") " +
-                                                "\nDevice: " + Build.DEVICE + " (" + RashrApp.DEVICE.getName() + ")" +
-                                                "\nBoard: " + Build.BOARD +
-                                                "\nBrand: " + Build.BRAND +
-                                                "\nModel: " + Build.MODEL +
-                                                (RashrApp.DEVICE.isXZDualRecoverySupported() ?
-                                                        "XZDualName: " + RashrApp.DEVICE.getXZDualName() + "\n" : "") +
-                                                "\nFingerprint: " + Build.FINGERPRINT +
-                                                "\nAndroid SDK Level: " + Build.VERSION.CODENAME + " (" + Build.VERSION.SDK_INT + ")";
-
-                                if (RashrApp.DEVICE.isRecoverySupported()) {
-                                    message += "\n\nRecovery Path: " + RashrApp.DEVICE.getRecoveryPath() +
-                                            "\nRecovery Version: " + RashrApp.DEVICE.getRecoveryVersion() +
-                                            "\nRecovery MTD: " + RashrApp.DEVICE.isRecoveryMTD() +
-                                            "\nRecovery DD: " + RashrApp.DEVICE.isRecoveryDD() +
-                                            "\nStock: " + RashrApp.DEVICE.isStockRecoverySupported() +
-                                            "\nCWM: " + RashrApp.DEVICE.isCwmRecoverySupported() +
-                                            "\nTWRP: " + RashrApp.DEVICE.isTwrpRecoverySupported() +
-                                            "\nPHILZ: " + RashrApp.DEVICE.isPhilzRecoverySupported() +
-                                            "\nXZDual: " + RashrApp.DEVICE.isXZDualRecoverySupported();
-                                }
-                                if (RashrApp.DEVICE.isKernelSupported()) {
-                                    message += "\n\nKernel Path: " + RashrApp.DEVICE.getKernelPath() +
-                                            "\nKernel Version: " + RashrApp.DEVICE.getKernelVersion() +
-                                            "\nKernel MTD: " + RashrApp.DEVICE.isKernelMTD() +
-                                            "\nKernel DD: " + RashrApp.DEVICE.isKernelDD();
-                                }
-                                if (!comment.equals("")) {
-                                    message +=
-                                            "\n\n\n===========COMMENT==========\n"
-                                                    + comment +
-                                                    "\n=========COMMENT END========\n";
-                                }
-                                message +=
-                                        "\n===========PREFS==========\n"
-                                                + activity.getAllPrefs() +
-                                                "\n=========PREFS END========\n";
-                                files.add(new File(activity.getFilesDir(), Const.Logs));
-                                files.add(new File(activity.getFilesDir(), Const.LastLog.getName() + ".txt"));
-                                ArrayList<Uri> uris = new ArrayList<>();
-                                for (File i : files) {
-                                    if (i.exists()) {
-                                        try {
-                                            RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + i);
-                                            File tmpFile = new File(Const.PathToTmp, i.getName());
-                                            RashrApp.SHELL.execCommand(Const.Busybox + " cp " + i + " " + tmpFile);
-                                            RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 " + tmpFile);
-                                            RashrApp.SHELL.execCommand(Const.Busybox + " chown root:root " + tmpFile);
-                                            uris.add(Uri.fromFile(tmpFile));
-                                        } catch (FailedExecuteCommand e) {
-                                            RashrApp.ERRORS.add("Failed setting permissions to Attachment: " + e);
-                                            e.printStackTrace();
-                                        }
-                                    } else {
-                                        RashrApp.ERRORS.add("Attachment dosn't exists");
-                                    }
-                                }
-                                if (RashrApp.ERRORS.size() > 0) {
-                                    message += "ERRORS:\n";
-                                    for (String error : RashrApp.ERRORS) {
-                                        message += error + "\n";
-                                    }
-                                }
-
-                                intent.putExtra(Intent.EXTRA_TEXT, message);
-                                intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-                                activity.startActivity(Intent.createChooser(intent, "Send over Gmail"));
-                                dismiss();
-
-                            } catch (Exception e) {
-                                dismiss();
-                                RashrApp.ERRORS.add(Const.RASHR_TAG + " Failed to create attachment: " + e);
+                            } else {
+                                App.ERRORS.add("Attachment dosn't exists");
                             }
                         }
-                    });
-                }
+                        if (App.ERRORS.size() > 0) {
+                            message += "ERRORS:\n";
+                            for (String error : App.ERRORS) {
+                                message += error + "\n";
+                            }
+                        }
+
+                        intent.putExtra(Intent.EXTRA_TEXT, message);
+                        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+                        context.startActivity(Intent.createChooser(intent, "Send over Gmail"));
+                        dismiss();
+                    }
+                });
             }
         }).start();
+    }
+
+    /**
+     * @return All Preferences as String
+     */
+    public String getAllPrefs() {
+        String Prefs = "";
+        Map<String, ?> prefsMap = App.Preferences.getAll();
+        for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {
+            /*
+             * Skip following Prefs (PREF_KEY_HISTORY, ...)
+             */
+            if (!entry.getKey().contains(App.PREF_KEY_HISTORY)
+                    && !entry.getKey().contains(App.PREF_KEY_FLASH_COUNTER)) {
+                Prefs += entry.getKey() + ": " + entry.getValue().toString() + "\n";
+            }
+        }
+
+        return Prefs;
     }
 }

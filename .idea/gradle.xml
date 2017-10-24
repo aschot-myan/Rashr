@@ -9,7 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/CardsUILib" />
             <option value="$PROJECT_DIR$/Donations" />
             <option value="$PROJECT_DIR$/RashrApp" />
             <option value="$PROJECT_DIR$/Utils-Library" />

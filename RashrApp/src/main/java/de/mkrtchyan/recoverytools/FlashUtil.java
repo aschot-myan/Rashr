@@ -1,11 +1,11 @@
 package de.mkrtchyan.recoverytools;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 
 import org.sufficientlysecure.rootcommands.Toolbox;
 import org.sufficientlysecure.rootcommands.util.FailedExecuteCommand;
@@ -19,7 +19,7 @@ import de.mkrtchyan.utils.Common;
 import de.mkrtchyan.utils.Unzipper;
 
 /**
- * Copyright (c) 2016 Aschot Mkrtchyan
+ * Copyright (c) 2017 Aschot Mkrtchyan
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -52,56 +52,71 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     private final File mCustomIMG, flash_image, dump_image;
     private ProgressDialog pDialog;
     private File tmpFile, mPartition;
-    private OnTaskDoneListener mOnTaskDoneListener;
+    private OnFlashListener mOnFlashListener;
     private Handler mHandler = new Handler();
     private Exception mException;
 
+    /**
+     * FlashUtil handles the flashing to the device in background using a AsyncTask
+     * and blocks the UI with a non-cancelable dialog
+     *
+     * @param context   AppContext
+     * @param CustomIMG if Job is Backup so backup-path if Job is Flash so recovery or kernel image path
+     * @param job       int describing what to do
+     */
     public FlashUtil(Context context, File CustomIMG, int job) {
         mContext = context;
         mJOB = job;
         mCustomIMG = CustomIMG;
-        flash_image = RashrApp.DEVICE.getFlash_image();
-        dump_image = RashrApp.DEVICE.getDump_image();
+        flash_image = App.Device.getFlash_image();
+        dump_image = App.Device.getDump_image();
         tmpFile = new File(mContext.getFilesDir(), CustomIMG.getName());
         if (isJobRecovery()) {
-            mPartition = new File(RashrApp.DEVICE.getRecoveryPath());
+            mPartition = new File(App.Device.getRecoveryPath());
         } else if (isJobKernel()) {
-            mPartition = new File(RashrApp.DEVICE.getKernelPath());
+            mPartition = new File(App.Device.getKernelPath());
         }
     }
 
+    /**
+     * Removes XZDual from System
+     *
+     * @throws FailedExecuteCommand error during removing files
+     */
     public static void uninstallXZDual() throws FailedExecuteCommand {
-        RashrApp.SHELL.execCommand("rm /system/bin/recovery.twrp.cpio*");
-        RashrApp.SHELL.execCommand("rm /system/bin/recovery.cwm.cpio*");
-        RashrApp.SHELL.execCommand("rm /system/bin/recovery.philz.cpio*");
-        RashrApp.SHELL.execCommand("rm /system/bin/charger");
-        RashrApp.SHELL.execCommand("rm /system/bin/ric");
-        RashrApp.SHELL.execCommand("rm /system/bin/chargermon");
-        RashrApp.SHELL.execCommand("rm /system/bin/dualrecovery.sh");
-        RashrApp.SHELL.execCommand("mv /system/bin/charger.stock /system/bin/charger");
-        RashrApp.SHELL.execCommand("mv /system/bin/ric.stock /system/bin/ric");
-        RashrApp.SHELL.execCommand("mv /system/bin/chargermon.stock /system/bin/chargermon");
-        RashrApp.SHELL.execCommand("chmod 755 /system/bin/charger");
-        RashrApp.SHELL.execCommand("chmod 755 /system/bin/ric");
-        RashrApp.SHELL.execCommand("chmod 755 /system/bin/chargermon");
+        App.Shell.execCommand("rm /system/bin/recovery.twrp.cpio*");
+        App.Shell.execCommand("rm /system/bin/recovery.cwm.cpio*");
+        App.Shell.execCommand("rm /system/bin/recovery.philz.cpio*");
+        App.Shell.execCommand("rm /system/bin/charger");
+        App.Shell.execCommand("rm /system/bin/ric");
+        App.Shell.execCommand("rm /system/bin/chargermon");
+        App.Shell.execCommand("rm /system/bin/dualrecovery.sh");
+        App.Shell.execCommand("mv /system/bin/charger.stock /system/bin/charger");
+        App.Shell.execCommand("mv /system/bin/ric.stock /system/bin/ric");
+        App.Shell.execCommand("mv /system/bin/chargermon.stock /system/bin/chargermon");
+        App.Shell.execCommand("chmod 755 /system/bin/charger");
+        App.Shell.execCommand("chmod 755 /system/bin/ric");
+        App.Shell.execCommand("chmod 755 /system/bin/chargermon");
     }
 
+    /**
+     * Preparing to flash
+     */
     protected void onPreExecute() {
         pDialog = new ProgressDialog(mContext);
-
         try {
-
-            RashrApp.TOOLBOX.remount("/system", "rw");
+            //Mounting System as read write
+            App.Toolbox.remount("/system", "rw");
             if (!isJobXZDual()) {
-                if ((isJobRecovery() && RashrApp.DEVICE.isRecoveryMTD())
-                        || isJobKernel() && RashrApp.DEVICE.isKernelMTD()) {
-                    RashrApp.SHELL.execCommand(Const.Busybox + " chmod 755 " + flash_image);
-                    RashrApp.SHELL.execCommand(Const.Busybox + " chmod 755 " + dump_image);
+                if ((isJobRecovery() && App.Device.isRecoveryMTD())
+                        || isJobKernel() && App.Device.isKernelMTD()) {
+                    //if partition is MTD so set execution mode to needed binary
+                    App.Shell.execCommand(App.Busybox + " chmod 755 " + flash_image);
+                    App.Shell.execCommand(App.Busybox + " chmod 755 " + dump_image);
                 }
             }
-
         } catch (FailedExecuteCommand e) {
-            RashrApp.ERRORS.add(Const.FLASH_UTIL_TAG +
+            App.ERRORS.add(App.TAG +
                     " Failed to set permissions to flash_image and dump_image before flashing: " + e);
         }
         if (isJobFlash()) {
@@ -112,8 +127,12 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             pDialog.setTitle(R.string.restoring);
         } else if (isJobXZDual()) {
             pDialog.setTitle(R.string.installing_xzdual);
+        } else {
+            //job not recognized
+            //Better throw a exception
+            mException = new RuntimeException("FlashJob not recognized");
         }
-        if (isJobBackup() && (isJobRecovery() ? RashrApp.DEVICE.isRecoveryDD() : RashrApp.DEVICE.isKernelDD())) {
+        if (isJobBackup() && (isJobRecovery() ? App.Device.isRecoveryDD() : App.Device.isKernelDD())) {
             pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             pDialog.setMax(getSizeOfFile(mPartition));
         } else {
@@ -127,7 +146,10 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_IMAGE_CHECK)) {
+        if (mException != null) {
+            return false;
+        }
+        if (!App.Preferences.getBoolean(App.PREF_KEY_SKIP_IMAGE_CHECK, false)) {
             if (!isJobBackup()) {
                 if (mCustomIMG.toString().endsWith(Device.EXT_IMG)) {
                     if (!isImageValid(mCustomIMG)) {
@@ -149,9 +171,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         }
         int PartitionType = 0;
         if (isJobRecovery()) {
-            PartitionType = RashrApp.DEVICE.getRecoveryType();
+            PartitionType = App.Device.getRecoveryType();
         } else if (isJobKernel()) {
-            PartitionType = RashrApp.DEVICE.getKernelType();
+            PartitionType = App.Device.getKernelType();
         }
         try {
             switch (PartitionType) {
@@ -161,44 +183,44 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 case Device.PARTITION_TYPE_DD:
                     DD();
                     break;
-                //case Device.PARTITION_TYPE_SONY:
-                //    SONY();
-                //    break;
                 default:
+                    mException = new Exception("Flash method unknown");
                     return false;
             }
         } catch (FailedExecuteCommand | IOException | ImageToBigException e) {
             mException = e;
         }
         saveHistory();
-        /** If there is not any exception everything was ok */
+        /* If there is not any exception everything was ok */
         return mException == null;
     }
 
     protected void onPostExecute(Boolean success) {
         pDialog.dismiss();
         tmpFile.delete();
-        RashrApp.TOOLBOX.remount("/system", "ro");
+        //Mount system partition as read only
+        App.Toolbox.remount("/system", "ro");
         if (success) {
             if (isJobFlash() || isJobRestore()) {
-                if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT)) {
+                //System changed let user choose if he wants to reboot
+                if (!App.Preferences.getBoolean(App.PREF_KEY_HIDE_REBOOT, false)) {
                     showRebootDialog();
                 }
             }
-            if (mOnTaskDoneListener != null) {
+            if (mOnFlashListener != null) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mOnTaskDoneListener.onSuccess();
+                        mOnFlashListener.onSuccess();
                     }
                 });
             }
         } else {
-            if (mOnTaskDoneListener != null) {
+            if (mOnFlashListener != null) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mOnTaskDoneListener.onFail(mException);
+                        mOnFlashListener.onFail(mException);
                     }
                 });
             }
@@ -208,7 +230,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public void DD() throws FailedExecuteCommand, IOException, ImageToBigException {
         Thread observer;
 
-        if (isJobBackup() && (isJobRecovery() ? RashrApp.DEVICE.isRecoveryDD() : RashrApp.DEVICE.isKernelDD())) {
+        if (isJobBackup() && (isJobRecovery() ? App.Device.isRecoveryDD() : App.Device.isKernelDD())) {
             observer = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -223,7 +245,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                             });
                             if (progress >= pDialog.getMax()) break;
                         } catch (IllegalArgumentException e) {
-                            RashrApp.ERRORS.add(Const.FLASH_UTIL_TAG +
+                            App.ERRORS.add(App.TAG +
                                     " Error in ObserverThread for progress display" +
                                     " while flashing or creating backup");
                             pDialog.setProgress(pDialog.getMax());
@@ -234,11 +256,11 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
             });
             observer.start();
         }
-        if (!Common.getBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_SKIP_SIZE_CHECK)) {
+        if (!App.Preferences.getBoolean(App.PREF_KEY_SKIP_SIZE_CHECK, false)) {
             if (isJobFlash()) {
                 int customSize = getSizeOfFile(mCustomIMG);
                 int partitionSize = getSizeOfFile(mPartition);
-                /** ERROR on some chinese devices. Partition size always 0 */
+                /* ERROR on some chinese devices. Partition size always 0 */
                 if (partitionSize != 0) {
                     if (customSize > partitionSize) {
                         throw new ImageToBigException(customSize, partitionSize);
@@ -249,58 +271,23 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
         String Command = "";
         if (isJobFlash() || isJobRestore()) {
-            if (RashrApp.DEVICE.isLoki() && isJobFlash()) {
+            if (App.Device.isLoki() && isJobFlash()) {
                 Command = lokiPatch();
             } else {
                 Common.copyFile(mCustomIMG, tmpFile);
-                Command = Const.Busybox + " dd if=\"" + tmpFile + "\" of=\"" + mPartition + "\"";
-                if ((isJobRecovery() ? RashrApp.DEVICE.getRecoveryBlocksize() : RashrApp.DEVICE.getKernelBlocksize()) > 0) {
+                Command = App.Busybox + " dd if=\"" + tmpFile + "\" of=\"" + mPartition.getAbsolutePath() + "\"";
+                if ((isJobRecovery() ? App.Device.getRecoveryBlocksize() : App.Device.getKernelBlocksize()) > 0) {
                     String bs = " bs="
-                            + (isJobRecovery() ? RashrApp.DEVICE.getRecoveryBlocksize() : RashrApp.DEVICE.getKernelBlocksize());
+                            + (isJobRecovery() ? App.Device.getRecoveryBlocksize() : App.Device.getKernelBlocksize());
                     Command += bs;
                 }
             }
         } else if (isJobBackup()) {
-            Command = Const.Busybox + " dd if=\"" + mPartition + "\" of=\"" + tmpFile + "\"";
+            Command = App.Busybox + " dd if=\"" + mPartition.getAbsolutePath() + "\" of=\"" + tmpFile + "\"";
         }
-        RashrApp.SHELL.execCommand(Command);
+        App.Shell.execCommand(Command);
         if (isJobBackup()) placeImgBack();
     }
-
-    /*public void SONY() throws FailedExecuteCommand, IOException {
-
-        String Command = "";
-        if (mDevice.getName().equals("yuga")
-                || mDevice.getName().equals("c6602")
-                || mDevice.getName().equals("montblanc")) {
-            if (isJobFlash() || isJobRestore()) {
-                File charger = new File(Const.PathToUtils, "charger");
-                File chargermon = new File(Const.PathToUtils, "chargermon");
-                File ric = new File(Const.PathToUtils, "ric");
-                mToolbox.remount(mPartition, "RW");
-                try {
-                    mToolbox.copyFile(charger, mPartition.getParentFile(), true, false);
-                    mToolbox.copyFile(chargermon, mPartition.getParentFile(), true, false);
-                    if (mDevice.getName().equals("yuga")
-                            || mDevice.getName().equals("c6602")) {
-                        mToolbox.copyFile(ric, mPartition.getParentFile(), true, false);
-                        mToolbox.setFilePermissions(ric, "755");
-                    }
-                } catch (Exception e) {
-                    mActivity.addError(Const.FLASH_UTIL_TAG, e, true);
-                }
-                mToolbox.setFilePermissions(charger, "755");
-                mToolbox.setFilePermissions(chargermon, "755");
-                mToolbox.setFilePermissions(mCustomIMG, "644");
-                mToolbox.remount(mPartition, "RO");
-                Command = "cat " + mCustomIMG.getAbsolutePath() + " >> " + mPartition.getAbsolutePath();
-            } else if (isJobBackup()) {
-                Command = "cat " + mPartition.getAbsolutePath() + " >> " + mCustomIMG.getAbsolutePath();
-            }
-        }
-        mShell.execCommand(Command, true);
-        if (isJobBackup()) placeImgBack();
-    }*/
 
     public void MTD() throws FailedExecuteCommand {
         String Command;
@@ -316,7 +303,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         } else if (isJobBackup()) {
             Command = dump_image.getAbsolutePath() + Command + "\"" + tmpFile + "\"";
         }
-        RashrApp.SHELL.execCommand(Command);
+        App.Shell.execCommand(Command);
         if (isJobBackup()) placeImgBack();
     }
 
@@ -339,9 +326,9 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         try {
-                            RashrApp.TOOLBOX.reboot(REBOOT_JOB);
+                            App.Toolbox.reboot(REBOOT_JOB);
                         } catch (FailedExecuteCommand e) {
-                            RashrApp.ERRORS.add(Const.FLASH_UTIL_TAG + " Device could not be rebooted: " + e);
+                            App.ERRORS.add(App.TAG + " Device could not be rebooted: " + e);
                         }
                     }
                 })
@@ -353,8 +340,7 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 .setNegativeButton(R.string.never_again, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Common.setBooleanPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HIDE_REBOOT,
-                                true);
+                        App.Preferences.edit().putBoolean(App.PREF_KEY_HIDE_REBOOT, true).apply();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -366,33 +352,15 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     }
 
     private void placeImgBack() throws FailedExecuteCommand {
-        RashrApp.SHELL.execCommand(Const.Busybox + " chmod 777 \"" + tmpFile + "\"");
-        RashrApp.SHELL.execCommand(Const.Busybox + " mv \"" + tmpFile + "\" \"" + mCustomIMG + "\"");
+        App.Shell.execCommand(App.Busybox + " chmod 777 \"" + tmpFile + "\"");
+        App.Shell.execCommand(App.Busybox + " mv \"" + tmpFile + "\" \"" + mCustomIMG + "\"");
     }
 
     public void saveHistory() {
         if (isJobFlash()) {
-            switch (Common.getIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER)) {
-                case 0:
-                    Common.setStringPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HISTORY +
-                                    String.valueOf(Common.getIntegerPref(mContext, Const.PREF_NAME,
-                                            Const.PREF_KEY_FLASH_COUNTER)),
-                            mCustomIMG.getAbsolutePath()
-                    );
-                    Common.setIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER, 1);
-                    return;
-                default:
-                    Common.setStringPref(mContext, Const.PREF_NAME, Const.PREF_KEY_HISTORY +
-                                    String.valueOf(Common.getIntegerPref(mContext, Const.PREF_NAME,
-                                            Const.PREF_KEY_FLASH_COUNTER)),
-                            mCustomIMG.getAbsolutePath()
-                    );
-                    Common.setIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER,
-                            Common.getIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER) + 1);
-                    if (Common.getIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER) == 5) {
-                        Common.setIntegerPref(mContext, Const.PREF_NAME, Const.PREF_KEY_FLASH_COUNTER, 0);
-                    }
-            }
+            int count = App.Preferences.getInt(App.PREF_KEY_FLASH_COUNTER, 0);
+            App.Preferences.edit().putString(App.PREF_KEY_HISTORY + count, mCustomIMG.toString()).apply();
+            App.Preferences.edit().putInt(App.PREF_KEY_FLASH_COUNTER, (count + 1) % 5).apply();
         }
     }
 
@@ -426,8 +394,8 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
         File patched_CustomIMG = new File(mContext.getFilesDir(), mCustomIMG.getName() + ".lok");
         File loki_patch = new File(mContext.getFilesDir(), "loki_patch");
         File loki_flash = new File(mContext.getFilesDir(), "loki_flash");
-        RashrApp.SHELL.execCommand("dd if=\"" + aboot + "\" of=\"" + extracted_aboot + "\"", true);
-        RashrApp.SHELL.execCommand(loki_patch + " recovery " + mCustomIMG + " " + patched_CustomIMG +
+        App.Shell.execCommand("dd if=\"" + aboot + "\" of=\"" + extracted_aboot + "\"", true);
+        App.Shell.execCommand(loki_patch + " recovery " + mCustomIMG + " " + patched_CustomIMG +
                 "  || exit 1", true);
         return loki_flash + " recovery " + patched_CustomIMG + " || exit 1";
     }
@@ -435,10 +403,14 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
     public int getSizeOfFile(File path) {
         try {
             String output;
-            output = RashrApp.SHELL.execCommand("wc -c \"" + path + "\"");
+            //Workaround on some devices
+            String command = "wc -c \"" + path.getAbsolutePath() + "\"";
+            command = command.substring(0, command.indexOf("\n")) + "\"";
+            output = App.Shell.execCommand(command);
             return Integer.valueOf(output.split(" ")[0]);
         } catch (Exception e) {
-            RashrApp.ERRORS.add(e.toString());
+            App.ERRORS.add("wc -c \"" + path + "\"");
+            App.ERRORS.add(e.toString());
             e.printStackTrace();
         }
         return -1;
@@ -446,33 +418,33 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
 
     private void installXZDual() throws FailedExecuteCommand {
         Unzipper.unzip(mCustomIMG, new File("/tmp"));
-        RashrApp.SHELL.execCommand("chmod 755 /tmp/backupstockbinaries.sh");
+        App.Shell.execCommand("chmod 755 /tmp/backupstockbinaries.sh");
         try {
-            RashrApp.SHELL.execCommand("./tmp/backupstockbinaries.sh");
+            App.Shell.execCommand("./tmp/backupstockbinaries.sh");
         } catch (FailedExecuteCommand ignore) {
 
         }
-        RashrApp.SHELL.execCommand("cp " + Const.Busybox + " /system/.XZDualRecovery/busybox");
-        RashrApp.SHELL.execCommand("chmod 755 /tmp/tmp/installstock.sh");
-        RashrApp.SHELL.execCommand("./tmp/tmp/installstock.sh");
-        RashrApp.SHELL.execCommand("chmod 755 /tmp/tmp/installdisableric.sh");
-        RashrApp.SHELL.execCommand("./tmp/tmp/installdisableric.sh");
-        RashrApp.SHELL.execCommand("chmod 755 /tmp/tmp/installndrutils.sh");
-        RashrApp.SHELL.execCommand("./tmp/tmp/installndrutils.sh");
-        RashrApp.SHELL.execCommand("chmod 755 /tmp/tmp/setversion.sh");
-        RashrApp.SHELL.execCommand("./tmp/tmp/setversion.sh");
-        RashrApp.SHELL.execCommand("chmod 644 /system/bin/recovery.cwm.cpio.lzma");
-        RashrApp.SHELL.execCommand("chmod 644 /system/bin/recovery.philz.cpio.lzma");
-        RashrApp.SHELL.execCommand("chmod 644 /system/bin/recovery.twrp.cpio.lzma");
-        RashrApp.SHELL.execCommand("chmod 755 /system/bin/mr");
-        RashrApp.SHELL.execCommand("chmod 755 /system/bin/chargemon");
-        RashrApp.SHELL.execCommand("chmod 755 /system/bin/dualrecovery.sh");
-        RashrApp.SHELL.execCommand("chmod 755 /system/bin/rickiller.sh");
-        RashrApp.SHELL.execCommand("chmod 755 /system/xbin/busybox");
+        App.Shell.execCommand("cp " + App.Busybox + " /system/.XZDualRecovery/busybox");
+        App.Shell.execCommand("chmod 755 /tmp/tmp/installstock.sh");
+        App.Shell.execCommand("./tmp/tmp/installstock.sh");
+        App.Shell.execCommand("chmod 755 /tmp/tmp/installdisableric.sh");
+        App.Shell.execCommand("./tmp/tmp/installdisableric.sh");
+        App.Shell.execCommand("chmod 755 /tmp/tmp/installndrutils.sh");
+        App.Shell.execCommand("./tmp/tmp/installndrutils.sh");
+        App.Shell.execCommand("chmod 755 /tmp/tmp/setversion.sh");
+        App.Shell.execCommand("./tmp/tmp/setversion.sh");
+        App.Shell.execCommand("chmod 644 /system/bin/recovery.cwm.cpio.lzma");
+        App.Shell.execCommand("chmod 644 /system/bin/recovery.philz.cpio.lzma");
+        App.Shell.execCommand("chmod 644 /system/bin/recovery.twrp.cpio.lzma");
+        App.Shell.execCommand("chmod 755 /system/bin/mr");
+        App.Shell.execCommand("chmod 755 /system/bin/chargemon");
+        App.Shell.execCommand("chmod 755 /system/bin/dualrecovery.sh");
+        App.Shell.execCommand("chmod 755 /system/bin/rickiller.sh");
+        App.Shell.execCommand("chmod 755 /system/xbin/busybox");
     }
 
-    public void setOnTaskDoneListener(OnTaskDoneListener onTaskDoneListener) {
-        mOnTaskDoneListener = onTaskDoneListener;
+    public void setOnFlashListener(OnFlashListener onFlashListener) {
+        mOnFlashListener = onFlashListener;
     }
 
     private boolean isImageValid(File img) {
@@ -486,13 +458,13 @@ public class FlashUtil extends AsyncTask<Void, Void, Boolean> {
                 return false;
             }
         } catch (IOException e) {
-            RashrApp.ERRORS.add(e.toString());
+            App.ERRORS.add(e.toString());
             e.printStackTrace();
         }
         return result;
     }
 
-    interface OnTaskDoneListener {
+    public interface OnFlashListener {
         void onSuccess();
 
         void onFail(Exception e);

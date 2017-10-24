@@ -1,26 +1,5 @@
 package de.mkrtchyan.utils;
 
-/**
- * Copyright (c) 2016 Aschot Mkrtchyan
- * Permission is hereby granted, free of charge, to any person obtaining a copy 
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights 
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
- * copies of the Software, and to permit persons to whom the Software is 
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 import android.os.Handler;
 import android.util.Log;
 
@@ -31,6 +10,26 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Copyright (c) 2017 Aschot Mkrtchyan
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 public class Downloader {
     private static final String TAG = "Downloader";
 
@@ -40,6 +39,7 @@ public class Downloader {
     private boolean mOverrideFile = false;
     private boolean mCancel = false;
     private File mChecksumFile = null;
+    private String mChecksumUrl = "";
     private OnDownloadListener onDownloadListener = null;
     private OnUpdateListener onUpdateListener = null;
     private OnCancelListener onCancelListener = null;
@@ -200,6 +200,9 @@ public class Downloader {
 
     public boolean isDownloadCorrupt() {
         try {
+            if (!mChecksumUrl.equals("")) {
+                return !MD5.verifyCheckSum(mOutputFile, new URL(mChecksumUrl));
+            }
             return !MD5.verifyCheckSum(mOutputFile, mChecksumFile) && !SHA1.verifyChecksum(mOutputFile, mChecksumFile);
         } catch (IOException | SHA1.SHA1SumNotFound e) {
             Log.d(TAG, e.getMessage());
@@ -209,9 +212,16 @@ public class Downloader {
         return true;
     }
 
+    public void setChecksumUrl(String checksumUrl) {
+        mChecksumUrl = checksumUrl;
+        mChecksumFile = null;
+        mCheckSum = true;
+    }
+
     public void setChecksumFile(File checksumFile) {
         mChecksumFile = checksumFile;
         mCheckSum = mChecksumFile != null;
+        mChecksumUrl = "";
     }
 
     public void setOverrideFile(boolean overrideFile) {

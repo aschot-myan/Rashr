@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Device">
+        <EditTextPreference
+            android:key="device_name"
+            android:summary="This option lets you to choose your own device name if Rashr dosnt recognize the right one. This can happen if you have a custom rom with unified sources."
+            android:title="Device Name" />
+        <EditTextPreference
+            android:key="recovery_path"
+            android:title="Recovery Path"
+            android:summary="Wich partiton to use as Recovery Partition"/>
+
+        <EditTextPreference
+            android:key="kernel_path"
+            android:title="Kernel Path"
+            android:summary="Wich partiton to use as Kernel Partition"/>
+    </PreferenceCategory>
+
+    <CheckBoxPreference
+        android:key="show_ads"
+        android:title="Show Ads"
+        android:summary="Showind ads suppots a developer without paying your self."
+        android:defaultValue="true" />
+    <PreferenceCategory android:title="Logging">
+        <CheckBoxPreference
+            android:key="log"
+            android:title="@string/log"
+            android:defaultValue="false"
+            android:summary="Let Rashr create a log of ALL executed Root commands"/>
+
+        <Preference
+            android:dependency="log"
+            android:key="showlogs"
+            android:title="@string/showlog" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="UI">
+
+        <CheckBoxPreference
+            android:title="@string/UseDarkUI"
+            android:key="use_dark_ui"
+            android:defaultValue="false"
+            android:summary="Use a dark Theme instead of original" />
+        <CheckBoxPreference
+            android:key="check_updates"
+            android:title="@string/check_app_updates"
+            android:summary="Check on every start of Rashr if there are a update for Rashr."/>
+
+        <CheckBoxPreference
+            android:key="hide_uptodate_hint"
+            android:defaultValue="false"
+            android:title="@string/hide_uptodate_hint"
+            android:summary="You will not be notified if there is a new recovery or kernel list available"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Security">
+        <CheckBoxPreference
+            android:key="skip_size_check"
+            android:title="@string/skip_size_check"
+            android:summary="One some Devices it could be that a image is bigger as a partition so Rashr will not allow to flash (can be recognized wrong). If you are sure flashing such a image enable this setting."
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="skip_image_check"
+            android:title="@string/skip_validate_image"
+            android:summary="Rashr checks the header of each image containing the right pattern of a Android Image. One some recovery systems or devices this patten can be changed). If you are sure flashing such an image enable this setting."
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+
+    <Preference
+        android:key="changelog"
+        android:title="@string/changelog"/>
+    <Preference
+        android:key="licenses"
+        android:title="@string/licenses" />
+    <Preference
+        android:key="report"
+        android:title="@string/report"/>
+    <Preference
+        android:key="clear_cache"
+        android:title="@string/sClearCache"/>
+    <Preference
+        android:key="reset_app"
+        android:title="@string/reset_app" />
+</PreferenceScreen>

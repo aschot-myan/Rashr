@@ -1,15 +1,111 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_updater"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".FlashFragment">
+    tools:context=".fragment.FlashFragment">
 
-    <com.fima.cardsui.views.CardUI
-        android:id="@+id/RashrCards"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/RashrCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/xzdual_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="xzdual"
+                app:description="@string/xzdual_describtion"
+                app:drawable="@drawable/ic_xzdual"
+                app:title="@string/xzdualrecovery" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/cwm_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="cwm"
+                app:description="@string/cwm_description"
+                app:drawable="@drawable/ic_cwm"
+                app:title="@string/sCWM" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/twrp_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="twrp"
+                app:description="@string/twrp_description"
+                app:drawable="@drawable/ic_twrp"
+                app:title="@string/sTWRP" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/philz_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="philz"
+                app:description="@string/philz_description"
+                app:title="@string/sPhilz" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/stock_recovery_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="stock"
+                app:description="@string/stock_recovery_description"
+                app:drawable="@drawable/ic_update"
+                app:title="@string/stock_recovery" /> <!-- needed for determining which recovery system is selected -->
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/other_recovery_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/other_storage_description"
+                app:drawable="@drawable/ic_folder"
+                app:title="@string/other_recovery" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/stock_kernel_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:data="stock"
+                app:description="@string/stock_kernel_description"
+                app:drawable="@drawable/ic_stock_kernel"
+                app:title="@string/stock_kernel" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/other_kernel_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/other_storage_description"
+                app:drawable="@drawable/ic_folder"
+                app:title="@string/other_kernel" />
 
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/reboot_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/reboot_description"
+                app:title="@string/sReboot" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/reboot_recovery_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/reboot_recovery_description"
+                app:title="@string/sRebootRecovery" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/reboot_bootloader_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/reboot_bootloader_description"
+                app:title="@string/sRebootBootloader" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/shutdown_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/shutdown_description"
+                app:title="@string/sRebootShutdown" />
+            <de.mkrtchyan.recoverytools.view.Card
+                android:id="@+id/history_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:description="@string/history_description"
+                app:title="@string/history" />
+        </android.support.v7.widget.LinearLayoutCompat>
+    </ScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>
