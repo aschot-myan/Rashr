@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/banner"
         android:foregroundGravity="top"
         android:scaleType="fitStart"
         app:srcCompat="@drawable/rashr_banner" />

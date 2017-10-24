@@ -228,4 +228,7 @@
     <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://dslnexus.de\",\n  }\n}]</string>
     <string name="permissions_denied">Please accept all permissions to use Rashr.\nAllow all denied permissions.</string>
     <string name="requesting_permissions">Requesting permissions</string>
+    <string name="title_activity_backup">BackupActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="banner">Rashr Banner</string>
 </resources>

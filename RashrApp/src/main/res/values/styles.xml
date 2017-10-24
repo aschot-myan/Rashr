@@ -39,9 +39,9 @@
         <item name="backgroundTint">?attr/colorAccent</item>
     </style>
 
-    <style name="Rashr.Dialog" parent="Theme.AppCompat.Light.Dialog"/>
+    <style name="Rashr.Dialog" parent="Theme.AppCompat.Light.Dialog" />
 
-    <style name="Rashr.Dialog.Dark" parent="Theme.AppCompat.Dialog"/>
+    <style name="Rashr.Dialog.Dark" parent="Theme.AppCompat.Dialog" />
 
     <style name="Rashr.ActionBar" parent="Widget.AppCompat.ActionBar">
         <item name="android:textColorPrimary">?attr/colorAccent</item>
@@ -75,5 +75,9 @@
         <item name="android:textColor">@color/card_title_text</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
+
+    <style name="Rashr.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Rashr.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

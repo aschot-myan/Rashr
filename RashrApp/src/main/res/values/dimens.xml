@@ -178,4 +178,5 @@
     <dimen name="histogram_bar_size">16.0dip</dimen>
     <dimen name="histogram_bar_padding">0.0dip</dimen>
     <dimen name="histogram_width">100.0dip</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

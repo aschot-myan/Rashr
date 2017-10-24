@@ -2,17 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/custom_blue"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/custom_blue">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/banner_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/banner"
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/banner_title"
