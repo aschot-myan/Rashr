@@ -427,6 +427,12 @@ public class Device {
             mKernelPath = "/dev/block/mmcblk0p7";
         }
 
+        //PANETCH
+        if (mName.equals("ef56") || mName.equals("ef60") || mName.equals("ef61") || mName.equals("ef62") || mName.equals("ef63")) {
+            mRecoveryPath = "/dev/block/mmcblk0p14";
+            mKernelPath = "/dev/block/mmcblk0p7";
+        }
+
         readDeviceInfos();
         if (!mRecoveryPath.equals("") && !isRecoveryOverRecovery()) {
             mRecoveryType = PARTITION_TYPE_DD;
